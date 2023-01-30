@@ -1,0 +1,242 @@
+/* Datatables, provided by https://github.com/babslgam*/
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+.wrapper {
+    padding: 30px 0;
+}
+
+.site>* {
+    width: 100%;
+}
+
+.site {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#wrapper-hero {
+    background-image: url('../images/thumbnail.jpg');
+    height: 759px;
+}
+
+.img-fluid {
+    width: 300px;
+}
+
+#wrapper-footer-full {
+    padding: 1em;
+    margin-top: auto;
+}
+
+.custom-logo-link {
+    margin-bottom: -2em;
+}
+
+div.dataTables_filter {
+  text-align:left !important;
+}
+
+.btn-link {
+  font-size:20px;
+}
+
+.exportbuttons {
+  text-align: right;
+}
+
+.navbar {
+    border-bottom: 5px solid #007bff !important;
+}
+
+.dataTables_info {
+  text-align: center;
+}
+
+.filters input {
+  width:100%;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
+.dataTables_wrapper table {
+  width:100%;
+}
+
+/**** Font Aweseome ***/
+.far {
+    font-family: "Font Awesome 5 Free" !important;
+}
+
+.img-fluid {
+    max-width: 160% !important;
+    max-height: 160% !important;
+}
+
+.card {
+    margin-top: 1em;
+    box-shadow: 4px 4px 9px 0 rgba(0, 0, 0, .1);
+}
+
+.index-card {
+    border-top: 5px solid #007bff; 
+    transition: transform .2s;
+}
+
+.index-card:hover {
+    transform: scale(1.05);
+}
+
+.index-link:hover {
+    text-decoration: none !important;
+}
+
+.btn-round {
+    border: 1px solid white;
+}
+
+.btn-round:hover {
+    background-color: #17a2b8 !important;
+}
+
+.btn-round a {
+    color: white;
+}
+
+p {
+    display: block;
+}
+
+.carousel-indicators {
+    cursor: pointer;
+}
+
+.container-fluid {
+    max-width: 1200px;
+}
+
+.noParNum {
+    display: inline-block;
+    width: 5em;
+    text-align: right;
+    padding-right: 1em;
+}
+
+.parNum {
+    display: inline-block;
+    width: 5em;
+    text-align: right;
+    padding-right: 1em;
+}
+
+.pb {
+    position: absolute;
+    right: 18%;
+    font-style: normal !important;
+}
+
+.pbnp {
+    position: absolute;
+    right: 20.3%;
+    font-style: normal !important;
+}
+
+.indentedP {
+    text-indent: -5em;
+}
+
+.section {
+    margin: 2em auto;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -150px;
+    visibility: hidden;
+}
+
+.section-div {
+    margin: 3em 0 0 0;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.titlePart {
+    font-weight: bold;
+    margin: .25em 0 .25em 0;
+    font-size: 18px;
+}
+
+.docbyline {
+    margin: 2em 0 0 0;
+}
+
+.byline {
+    margin: .25em 0 .25em 0;
+    font-size: 18px;
+}
+
+.docImprint {
+    margin: .25em 0 .25em 0;
+    font-size: 18px;
+}
+
+.docTitle {
+    text-align: center;
+    margin: 4em auto;
+}
+
+.footnote_link {
+    display: inline-block;
+    width: 2em;
+    text-align: right;
+    margin: 0 .7em 0 -2.7em;
+}
+
+.footnotes li {
+    list-style: none;
+    padding: .3em 0;
+}
+
+.nounderline {
+    text-decoration: none !important;
+}
+
+.footnotes {
+    padding: 0;
+}
+
+.figure {
+    display: inline-block;
+}
+
+#github-logo {
+    width: 10%;
+    height: auto;
+    padding: 10px 0 10px 0;
+    transition: transform .2s;
+    margin-left: 1em;
+}
+
+#github-logo:hover {
+    transform: scale(1.05);
+}
