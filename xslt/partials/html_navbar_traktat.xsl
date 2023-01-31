@@ -64,6 +64,7 @@
                                         <a class="dropdown-item" href="10_VMS_1902_TEI_AW_26-01-21-TEI-P5.html">Auflage 10 (1902)</a>
                                     </li>-->
                                     <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
+                                        <xsl:sort select="tokenize(document-uri(/), '/')[last()]" />
                                         <li>
                                             <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
                                                 title="">

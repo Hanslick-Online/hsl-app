@@ -99,7 +99,8 @@
                                 <h5>Fußnoten</h5>
                                 <ul class="footnotes">
                                     <xsl:for-each select=".//tei:body//tei:note[@place='foot']">
-                                        <li id="{@xml:id}">
+                                        <li>
+                                            <a class="anchorFoot" id="{@xml:id}"></a>
                                             <span class="footnote_link">
                                                 <a href="#{@xml:id}_inline" class="nounderline">
                                                     <xsl:value-of select="@n"/>
@@ -263,7 +264,8 @@
     <xsl:template match="tei:note">
         <xsl:choose>
             <xsl:when test="@place='foot'">
-                <span id="{@xml:id}_inline">
+                <span>
+                    <a class="anchorFoot" id="{@xml:id}_inline"></a>
                     <a href="#{@xml:id}" title="{.//text()}" class="nounderline">
                         <sup><xsl:value-of select="@n"/></sup>
                     </a>
