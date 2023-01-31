@@ -275,8 +275,11 @@
     </xsl:template>
     <xsl:template match="tei:notatedMusic">
         <figure class="figure">
-            <img src="{@url}" alt="Grafik eines Notenbeispiels"/>
+            <xsl:apply-templates/>
         </figure>
+    </xsl:template>
+    <xsl:template match="tei:graphic">
+        <img src="{@url}" alt="Grafik eines Notenbeispiels"/>
     </xsl:template>
     <xsl:template match="tei:lg">
         <span class="vrsgrp"><xsl:apply-templates/></span>
