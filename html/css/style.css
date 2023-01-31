@@ -510,3 +510,32 @@ input:checked + .i-slider:before {
 #github-logo:hover {
     transform: scale(1.05);
 }
+
+@media (max-width: 992px) {
+    .navbar .navbar-collapse {
+        border-top: 1px solid rgba(0,0,0,.075);
+        padding-top: 2rem;
+        margin-top: .5rem;
+    }
+    .img-fluid {
+        width: 200px;
+    }
+    .custom-logo-link {
+        margin-bottom: -1.6em;
+    }
+}
+
+@media (max-width: 578px) {
+    .navbar .navbar-collapse {
+        border-top: 1px solid rgba(0,0,0,.075);
+        padding-top: 2rem;
+        margin-top: .5rem;
+    }
+    .img-fluid {
+        width: 150px;
+    }
+    .custom-logo-link {
+        margin-bottom: -1.6em;
+    }
+}
+}
