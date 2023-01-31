@@ -123,6 +123,10 @@ a {
     text-decoration: none !important;
 }
 
+.figure {
+    display: block !important;
+}
+
 .index_text {
     padding: 2em 0;
 }
