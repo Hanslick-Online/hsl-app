@@ -280,6 +280,6 @@
         <span class="vrsgrp"><xsl:apply-templates/></span>
     </xsl:template>
     <xsl:template match="tei:l">
-        <span class="vrs"><xsl:apply-templates/><xsl:text> /</xsl:text></span>
+        <span class="vrs"><xsl:apply-templates/><span class="vrsSep"> / </span></span>
     </xsl:template>
 </xsl:stylesheet>

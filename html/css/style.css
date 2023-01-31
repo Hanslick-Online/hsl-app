@@ -229,6 +229,65 @@ a.anchor {
     display: inline-block;
 }
 
+.vrsSep {
+    color: #f1f1f1;
+}
+
+/* compare / diff */
+
+.sourceNav {
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+.prevLink {
+    position: absolute;
+    left: 0.2em;
+}
+
+.prevLink:before {
+    content: " ‹ ";
+}
+
+.nextlink {
+    position: absolute;
+    right: 0.2em;
+}
+
+.nextlink:after {
+    content: " › ";
+}
+
+.comp-card {
+    padding: 5em 0;
+}
+
+.diff-unchanged {
+    color: #cecece;
+}
+
+.diff-removed {
+    color: red;
+}
+
+.diff-added {
+    color: green;
+}
+
+.comp-card .card-header h2, .comp-card .card-footer {
+    padding: 1em 0;
+}
+
+.card-body .dropdown {
+    padding: .5em 0;
+}
+
+#selPar {
+    height: 200px;
+    overflow-y: auto;
+}
+
 #github-logo {
     width: 10%;
     height: auto;

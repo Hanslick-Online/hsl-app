@@ -19,86 +19,11 @@
                     </button>
                     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-2 mb-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Projekt
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="bedeutung-hanslick.html">
-                                            Hanslicks historische Bedeutung
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a class="dropdown-item" href="projektgeschichte.html">
-                                            Geschichte von "Hanslick im Kontext"
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="projektziele.html">
-                                            Projektziele von "Hanslick Online"
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Traktat
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="einfuehrung-vms.html"
-                                            title="Einführung VMS">
-                                            Hanslick Ästhetik: Entstehung und Einführung
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html"
-                                            title="Auflage 1">
-                                            Applikation und Digitalisate
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html"
-                                            title="Editionsrichtlinine">
-                                            Editionsrichtlinine und How to Cite
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Aktivitäten
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="publikationen.html"
-                                            title="Publikationen">
-                                            Publikationen
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="einzelvortraege.html"
-                                            title="Einzelvorträge">
-                                            Einzelvorträge
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="veranstaltungen.html"
-                                            title="Veranstaltungen">
-                                            Veranstaltungen
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            
+
                             <li class="nav-item">
-                                <a class="nav-link" href="team.html">Team</a>
+                                <a class="nav-link" href="index.html">Edition</a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link disabled">| Traktat: </a>
                             </li>
@@ -108,7 +33,7 @@
                                     Auflage
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
+                                    <!--<li>
                                         <a class="dropdown-item" href="01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">Auflage 1 (1854)</a>
                                     </li>
                                     <li>
@@ -137,15 +62,15 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="10_VMS_1902_TEI_AW_26-01-21-TEI-P5.html">Auflage 10 (1902)</a>
-                                    </li>
-                                    <!--<xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
+                                    </li>-->
+                                    <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
                                         <li>
                                             <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
                                                 title="">
                                                 <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                             </a>
                                         </li>
-                                    </xsl:for-each>-->
+                                    </xsl:for-each>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
