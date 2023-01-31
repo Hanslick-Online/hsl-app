@@ -119,6 +119,14 @@ p {
     display: block;
 }
 
+a {
+    text-decoration: none !important;
+}
+
+.index_text {
+    padding: 2em 0;
+}
+
 .carousel-indicators {
     cursor: pointer;
 }
@@ -162,9 +170,14 @@ p {
 }
 
 a.anchor {
-    display: block;
     position: relative;
-    top: -150px;
+    top: -120px;
+    visibility: hidden;
+}
+
+a.anchorFoot {
+    position: relative;
+    top: -110px;
     visibility: hidden;
 }
 
