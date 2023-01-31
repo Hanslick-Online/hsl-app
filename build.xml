@@ -7,6 +7,7 @@
     <property name="target" value="./html"/>
     <property name="xsl_editions" value="./xslt/editions.xsl"/>
     <property name="xsl_comp" value="./xslt/comp.xsl"/>
+    <property name="xsl_meta" value="./xslt/meta.xsl"/>
     <property name="xsl_index" value="./xslt/index.xsl"/>
     <property name="xsl_tox" value="./xslt/toc.xsl"/>
     <delete>
@@ -16,11 +17,18 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt in="${index}" out="${target}/index.html" style="${xsl_index}">
+    <xslt style="${xsl_comp}"  basedir="${comp}" destdir="${target}" includes="*.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt style="${xsl_comp}"  basedir="${comp}" destdir="${target}" includes="*.xml">
+    <xslt style="${xsl_meta}"  basedir="${meta}" destdir="${target}" includes="*.xml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <delete>
+        <fileset dir="${target}" includes="index.html"/>
+    </delete>
+    <xslt in="${index}" out="${target}/index.html" style="${xsl_index}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>

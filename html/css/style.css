@@ -123,8 +123,46 @@ a {
     text-decoration: none !important;
 }
 
+.main {
+    margin: 4em auto;
+}
+
 .figure {
     display: block !important;
+}
+
+.figure-inline {
+    padding: 0 .75em;
+}
+
+.seg-inline {
+    display: flex;
+    margin: auto;
+}
+
+.seg-block {
+    display: block;
+    margin: 1em auto;
+}
+
+.ref-figure {
+    width: 25%;
+    color: #212529;
+}
+
+.meta-p {
+    text-align: justify;
+    padding: 0 .75em;
+}
+
+.meta-h {
+    display: block !important;
+    text-align: center;
+    margin: 0 0 1em 0;
+}
+
+.seg-sub {
+    margin: 2em auto;
 }
 
 .index_text {
