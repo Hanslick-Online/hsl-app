@@ -9,8 +9,9 @@
     <xsl:import href="./partials/html_navbar_traktat.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
-    <xsl:import href="partials/osd-container.xsl"/>
-    <xsl:import href="partials/tei-facsimile.xsl"/>
+    <xsl:import href="partials/aot-options.xsl"/>
+    <!--<xsl:import href="partials/osd-container.xsl"/>-->
+    <!--<xsl:import href="partials/tei-facsimile.xsl"/>-->
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:title[@type='main'][1]/text()"/>
@@ -29,6 +30,7 @@
                     
                     <div class="container-fluid">                        
                         <div class="section">
+                            <xsl:call-template name="annotation-options"></xsl:call-template>
                             <div class="card-header">
                                 <div class="docTitle">
                                     <a class="anchor" id="index_xml-body.1_div.0"></a>
@@ -118,6 +120,8 @@
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
+                <script src="https://unpkg.com/de-micro-editor@0.2.6/dist/de-editor.min.js"></script>
+                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>
@@ -125,7 +129,7 @@
     <xsl:template match="tei:div/tei:head"/>
     
     <xsl:template match="tei:p">
-        <p id="{@xml:id}" class="indentedP">
+        <p id="{@xml:id}" class="indentedP yes-index">
             <a>
                 <xsl:choose>
                     <xsl:when test="@n">

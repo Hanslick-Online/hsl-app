@@ -81,7 +81,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="#index_xml-body.1_div.0">
-                                            [Titelseite]
+                                            [Deckblatt / Title Page]
                                         </a>
                                     </li>
                                     <xsl:for-each select=".//tei:body/tei:div/tei:head">
@@ -103,7 +103,7 @@
                                     </xsl:for-each>
                                     <li>
                                         <a class="dropdown-item" href="#index_xml-body.1_div.999">
-                                            [Fußnoten]
+                                            [Fußnoten / Footnotes]
                                         </a>
                                     </li>
                                 </ul>
