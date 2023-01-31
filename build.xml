@@ -43,6 +43,10 @@
     <xslt in="${paratexts}/index.xml" out="${indexes}/places.xml" style="${placenames_xsl}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${paratexts}/index.xml" out="${indexes}/works.xml" style="${works_xsl}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt> -->
     <replace dir="${target}" value="">
         <include name="*.html"/>

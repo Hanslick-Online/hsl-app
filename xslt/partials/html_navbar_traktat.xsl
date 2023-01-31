@@ -17,7 +17,7 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-2 mb-lg-0">
 
                             <li class="nav-item">
@@ -106,22 +106,6 @@
                                             [Fußnoten / Footnotes]
                                         </a>
                                     </li>
-                                </ul>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Indexes
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <xsl:for-each select="collection('../../data/traktat/indices')//tei:TEI">
-                                        <li>
-                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
-                                                title="">
-                                                <xsl:value-of select="//tei:titleStmt/tei:title"/>
-                                            </a>
-                                        </li>
-                                    </xsl:for-each>
                                 </ul>
                             </li>
                         </ul>

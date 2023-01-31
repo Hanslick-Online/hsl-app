@@ -70,6 +70,22 @@
                             </li>
                             
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Indexes
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <xsl:for-each select="collection('../../data/traktat/indices')//tei:TEI">
+                                        <li>
+                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                                title="">
+                                                <xsl:value-of select="//tei:titleStmt/tei:title"/>
+                                            </a>
+                                        </li>
+                                    </xsl:for-each>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Aktivitäten
                                 </a>
