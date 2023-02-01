@@ -278,12 +278,26 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:notatedMusic">
-        <figure class="figure">
-            <xsl:apply-templates/>
-        </figure>
+        <xsl:choose>
+            <xsl:when test="parent::tei:p">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <figure class="figure padding-20">
+                    <xsl:apply-templates/>
+                </figure>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:graphic">
-        <img src="{@url}" alt="Grafik eines Notenbeispiels"/>
+        <xsl:choose>
+            <xsl:when test="ancestor::tei:p">
+                <img class="figure padding-20" src="{@url}" alt="Grafik eines Notenbeispiels"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <img src="{@url}" alt="Grafik eines Notenbeispiels"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:lg">
         <span class="vrsgrp"><xsl:apply-templates/></span>
