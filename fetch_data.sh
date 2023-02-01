@@ -1,6 +1,8 @@
 # bin/bash
 
 rm -rf ./data
+
+# fetch edition traktat
 wget https://github.com/Hanslick-Online/hsl-vms-data/archive/refs/heads/master.zip
 unzip master
 mkdir ./data
@@ -14,6 +16,18 @@ mv hsl-vms-data-master/102_derived_tei/102_06_paratexts/*.xml ./data/traktat/met
 rm -rf hsl-vms-data-master
 rm master.zip
 
+# fetch edition critics
+wget https://github.com/Hanslick-Online/hsl-data-ct/archive/refs/heads/main.zip
+unzip main
+mkdir ./data/critics
+mkdir ./data/critics/editions
+mkdir ./data/critics/meta
+mv hsl-data-ct-main/data/editions/*.xml ./data/critics/editions
+mv hsl-data-ct-main/data/editions/*.xml ./data/critics/meta
+rm -rf hsl-data-ct-main
+rm main.zip
+
+# fetch edition entities all
 rm -rf ./data/traktat/indices
 mkdir ./data/traktat/indices
 rm -rf ./html/geo
