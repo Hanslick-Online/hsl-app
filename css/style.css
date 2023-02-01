@@ -3,6 +3,15 @@
 *, :after, :before {
     box-sizing: border-box;
 }
+
+body {
+    border-style: solid;
+    border-top-width: 0;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+}
+
 .wrapper {
     padding: 30px 0;
 }
@@ -32,16 +41,16 @@
     height: 759px;
 }
 
+.index_music {
+    width: 300px;
+}
+
 .img-fluid {
     width: 300px;
 }
 
 #wrapper-footer-full {
-  margin-top: auto !important;
-}
-
-#wrapper-footer-secondary {
-  margin-top: auto !important;
+  margin-top: auto;
 }
 
 .custom-logo-link {
