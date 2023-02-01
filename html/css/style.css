@@ -37,8 +37,11 @@
 }
 
 #wrapper-footer-full {
-    padding: 1em;
-    margin-top: auto;
+  margin-top: auto !important;
+}
+
+#wrapper-footer-secondary {
+  margin-top: auto !important;
 }
 
 .custom-logo-link {
@@ -189,6 +192,34 @@ a {
 
 .index-table {
     margin: 3em auto 0 auto;
+}
+
+.entity-table {
+    margin: 6em auto;
+}
+
+.entity-table ul li {
+    list-style: none;
+}
+
+.entity-table ul {
+    padding: 0;
+}
+
+#listbibl ul {
+    padding: 0;
+}
+
+#listbibl ul li {
+    list-style: none;
+}
+
+.table ul {
+    padding: 0;
+}
+
+.table ul li {
+    list-style: none;
 }
 
 .noParNum {
