@@ -35,7 +35,7 @@
                             <div class="card-body">                                
                                 <xsl:for-each select=".//tei:body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-8" style="margin:0 auto;">
                                             <xsl:apply-templates/>
                                         </div>
                                     </div>
