@@ -65,12 +65,25 @@
                                     </li>-->
                                     <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
                                         <xsl:sort select="tokenize(document-uri(/), '/')[last()]" />
-                                        <li>
-                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
-                                                title="">
-                                                <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
-                                            </a>
-                                        </li>
+                                        <xsl:choose>
+                                            <xsl:when test="position() = 1">
+                                                <li>
+                                                    <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                                        title="">
+                                                        <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
+                                                    </a>
+                                                </li>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <li>
+                                                    <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                                        title="">
+                                                        <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
+                                                    </a>
+                                                </li>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                        
                                     </xsl:for-each>
                                 </ul>
                             </li>
@@ -112,7 +125,12 @@
                     </div>
                 </div>
             </nav>
-            
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('li a.active').removeClass('active');
+                    $('a[href="' + location.pathname.replace('/', '') + '"]').addClass('active');
+;                });
+            </script>
             <!-- .site-navigation -->
         </div>
     </xsl:template>
