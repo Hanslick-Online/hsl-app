@@ -245,6 +245,22 @@ a {
     padding-right: 1em;
 }
 
+.card {
+    margin: 2em auto;
+}
+
+.linenumbersTransparent {
+    color: transparent;
+}
+
+.linenumbersVisible {
+    color: #444;
+}
+
+.linenumbers {
+    margin: 0 1.5em 0 0;
+}
+
 .pb {
     position: absolute;
     right: 18%;

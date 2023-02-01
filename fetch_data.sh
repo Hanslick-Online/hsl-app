@@ -9,10 +9,10 @@ mkdir ./data
 mkdir ./data/traktat
 mkdir ./data/traktat/editions
 mkdir ./data/traktat/comp
-mkdir ./data/traktat/meta
+mkdir ./data/meta
 mv hsl-vms-data-master/102_derived_tei/102_02_tei-simple_refactored/*.xml ./data/traktat/editions
 mv hsl-vms-data-master/102_derived_tei/102_05_comp_refactored/*.xml ./data/traktat/comp
-mv hsl-vms-data-master/102_derived_tei/102_06_paratexts/*.xml ./data/traktat/meta
+mv hsl-vms-data-master/102_derived_tei/102_06_paratexts/*.xml ./data/meta
 rm -rf hsl-vms-data-master
 rm master.zip
 
@@ -21,20 +21,19 @@ wget https://github.com/Hanslick-Online/hsl-data-ct/archive/refs/heads/main.zip
 unzip main
 mkdir ./data/critics
 mkdir ./data/critics/editions
-mkdir ./data/critics/meta
 mv hsl-data-ct-main/data/editions/*.xml ./data/critics/editions
-mv hsl-data-ct-main/data/editions/*.xml ./data/critics/meta
+mv hsl-data-ct-main/data/meta/*.xml ./data/meta
 rm -rf hsl-data-ct-main
 rm main.zip
 
 # fetch edition entities all
-rm -rf ./data/traktat/indices
-mkdir ./data/traktat/indices
+rm -rf ./data/indices
+mkdir ./data/indices
 rm -rf ./html/geo
 mkdir ./html/geo
 wget https://github.com/Hanslick-Online/hsl-entities/archive/refs/heads/main.zip
 unzip main
-mv hsl-entities-main/out/*.xml ./data/traktat/indices
+mv hsl-entities-main/out/*.xml ./data/indices
 mv hsl-entities-main/out/*.geojson ./html/geo
 rm -rf hsl-entities-main
 rm main.zip

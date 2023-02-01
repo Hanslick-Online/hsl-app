@@ -38,7 +38,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <xsl:for-each select="collection('../data/editions')//tei:TEI">
+                                        <xsl:for-each select="collection('../data/critics/editions')//tei:TEI">
                                             <xsl:variable name="full_path">
                                                 <xsl:value-of select="document-uri(/)"/>
                                             </xsl:variable>

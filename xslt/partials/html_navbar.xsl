@@ -71,10 +71,36 @@
                             
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Kritiken
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="einfuehrung-vms.html"
+                                            title="Einführung VMS">
+                                            Hanslick Ästhetik: Entstehung und Einführung
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="toc.html"
+                                            title="Übersicht">
+                                            Applikation und Digitalisate
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html"
+                                            title="Editionsrichtlinine">
+                                            Editionsrichtlinine und How to Cite
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Indexes
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <xsl:for-each select="collection('../../data/traktat/indices')//tei:TEI">
+                                    <xsl:for-each select="collection('../../data/indices')//tei:TEI">
                                         <li>
                                             <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
                                                 title="">

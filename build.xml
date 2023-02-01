@@ -2,21 +2,24 @@
 <project basedir="." name="tei2html">
     <property name="editions" value="./data/traktat/editions"/>
     <property name="comp" value="./data/traktat/comp"/>
-    <property name="index" value="./data/traktat/meta/index.xml"/>
-    <property name="meta" value="./data/traktat/meta"/>
-    <property name="indices" value="./data/traktat/indices"/>
+    <property name="index" value="./data/meta/index.xml"/>
+    <property name="meta" value="./data/meta"/>
+    <property name="indices" value="./data/indices"/>
+    <property name="editions_ct" value="./data/critics/editions"/>
     <property name="target" value="./html"/>
     <property name="xsl_editions" value="./xslt/editions.xsl"/>
+    <property name="xsl_editions_ct" value="./xslt/editions_ct.xsl"/>
     <property name="xsl_comp" value="./xslt/comp.xsl"/>
     <property name="xsl_meta" value="./xslt/meta.xsl"/>
     <property name="xsl_index" value="./xslt/index.xsl"/>
-    <property name="xsl_tox" value="./xslt/toc.xsl"/>
+    <property name="xsl_toc" value="./xslt/toc.xsl"/>
     <property name="xsl_indices" value="./xslt/indices.xsl"/>
     <property name="xsl_entities" value="./xslt/entities.xsl"/>
 
     <delete>
         <fileset dir="${target}" includes="*.html"/>
     </delete>
+    <!-- project traktat -->
     <xslt style="${xsl_editions}"  basedir="${editions}" destdir="${target}" includes="*.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
@@ -29,10 +32,20 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+    <!-- project critics -->
+    <xslt style="${xsl_editions_ct}"  basedir="${editions_ct}" destdir="${target}" includes="*.xml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <!-- common files -->
     <delete>
         <fileset dir="${target}" includes="index.html"/>
     </delete>
     <xslt in="${index}" out="${target}/index.html" style="${xsl_index}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${target}/toc.html" style="${xsl_toc}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
