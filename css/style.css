@@ -183,6 +183,14 @@ a {
     max-width: 1200px;
 }
 
+#tableReload-wrapper {
+    margin: 3em auto 0 auto;
+}
+
+.index-table {
+    margin: 3em auto 0 auto;
+}
+
 .noParNum {
     display: inline-block;
     width: 5em;
@@ -211,6 +219,10 @@ a {
     font-style: normal !important;
     margin: 0;
     padding: 0;
+}
+
+#leaflet-map-one {
+    height: 600px;
 }
 
 span {
