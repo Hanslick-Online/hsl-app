@@ -4,12 +4,14 @@
     <property name="comp" value="./data/traktat/comp"/>
     <property name="index" value="./data/traktat/meta/index.xml"/>
     <property name="meta" value="./data/traktat/meta"/>
+    <property name="indices" value="./data/traktat/indices"/>
     <property name="target" value="./html"/>
     <property name="xsl_editions" value="./xslt/editions.xsl"/>
     <property name="xsl_comp" value="./xslt/comp.xsl"/>
     <property name="xsl_meta" value="./xslt/meta.xsl"/>
     <property name="xsl_index" value="./xslt/index.xsl"/>
     <property name="xsl_tox" value="./xslt/toc.xsl"/>
+    <property name="xsl_indices" value="./xslt/indices.xsl"/>
     <delete>
         <fileset dir="${target}" includes="*.html"/>
     </delete>
@@ -32,22 +34,10 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <!-- <xslt in="${index}" out="${target}/toc.html" style="${xsl_tox}">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt> -->
-    <!-- <xslt in="${paratexts}/index.xml" out="${indexes}/persons.xml" style="${persons_xsl}">
+    <xslt style="${xsl_indices}"  basedir="${indices}" destdir="${target}" includes="*.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt in="${paratexts}/index.xml" out="${indexes}/places.xml" style="${placenames_xsl}">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
-    <xslt in="${paratexts}/index.xml" out="${indexes}/works.xml" style="${works_xsl}">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt> -->
     <replace dir="${target}" value="">
         <include name="*.html"/>
         <replacetoken> xmlns=""</replacetoken>
