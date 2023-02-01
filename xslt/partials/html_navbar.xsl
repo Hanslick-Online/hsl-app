@@ -78,7 +78,7 @@
                                         <li>
                                             <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
                                                 title="">
-                                                <xsl:value-of select="//tei:titleStmt/tei:title"/>
+                                                <xsl:value-of select="tokenize(//tei:titleStmt/tei:title, '\s')[1]"/>
                                             </a>
                                         </li>
                                     </xsl:for-each>
