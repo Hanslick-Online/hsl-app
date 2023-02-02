@@ -24,10 +24,28 @@
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
                     
-                    <div class="container-fluid" style="margin-top:1em;">
-                        <div class="wrapper" id="wrapper-hero">
-                            
+                    <div class="row" style="margin:0 auto;padding:0;">
+                        <div class="col-md-6 intro_colum" style="margin:0;padding:0;">
+                            <div class="intro_text">
+                                <h1>Digitale Editionen</h1>
+                                <button type="button" class="btn text-light">
+                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">Traktat</a>
+                                </button>
+                                <br/>
+                                <button type="button" class="btn text-light">
+                                    <a href="toc.html">Kritiken</a>
+                                </button>
+                            </div>
                         </div>
+                        <div class="col-md-6" style="margin:0;padding:0;">
+                            <div class="intro_image">
+                                <img src="images/thumbnail.jpg" alt="Hanslick Online Hintergrundbild"/>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container-fluid" style="margin-top:1em;">
+                        
                         <div class="row">
                             <div class="col-md-12">
                                <xsl:for-each select="//tei:body">

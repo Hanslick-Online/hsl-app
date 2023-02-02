@@ -12,6 +12,7 @@ body {
     overflow-x: hidden;
 }
 
+
 .wrapper {
     padding: 30px 0;
 }
@@ -44,13 +45,49 @@ body {
     border: none;
 }
 
-#wrapper-hero {
+/*#wrapper-hero {
     background-image: url('../images/thumbnail.jpg');
     height: 759px;
-}
+    max-width: 100%;
+}*/
 
 .index_music {
     width: 300px;
+}
+
+.btn {
+    background-color: #007bff;
+    font-size: 22px;
+    margin: 0 1em 1em 0 !important;
+}
+.btn:hover {
+    background-color: #212529;
+}
+
+.intro_text {
+    margin: 1em auto;
+}
+
+.intro_text button a {
+    color: #fff;
+}
+
+.intro_text button {
+    color: #fff;
+    width: 200px;
+    margin: 1em auto;
+}
+
+.intro_colum {
+    display: flex;
+    /* vertical-align: middle; */
+    align-items: center;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.intro_image img {
+    max-width: 100%;
 }
 
 .img-fluid {

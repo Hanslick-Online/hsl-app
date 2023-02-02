@@ -48,9 +48,6 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <delete>
-        <fileset dir="${target}" includes="imprint.html"/>
-    </delete>
     <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
