@@ -133,7 +133,7 @@
                     $(document).ready(function() {
                         $('li a.active').removeClass('active');
                         console.log('a[href="' + location.pathname + '"]');
-                        $('a[href="' + location.pathname + '"]').addClass('active');
+                        $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
                     });
                 </script>
             </body>
