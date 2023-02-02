@@ -23,12 +23,11 @@
             <body class="page">
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
-                
-                    <div class="wrapper" id="wrapper-hero">
-                        
-                    </div>
                     
                     <div class="container-fluid" style="margin-top:1em;">
+                        <div class="wrapper" id="wrapper-hero">
+                            
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                <xsl:for-each select="//tei:body">
