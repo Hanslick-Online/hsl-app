@@ -384,7 +384,7 @@ a.anchorFoot {
 
 #aot-navbarNavDropdown {
     position: fixed;
-    right: 2%;
+    right: 5%;
     z-index: 999;
 }
 
@@ -614,7 +614,7 @@ input:checked + .i-slider:before {
         right: 4%;
     }
     .section-traktat {
-        max-width: 70%;
+        max-width: 80%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
@@ -629,10 +629,6 @@ input:checked + .i-slider:before {
     }
     #aot-navbarNavDropdown {
         right: 5%;
-    }
-    .figure {
-        text-align: center;
-        padding: 1em 0;
     }
     .card-footer h5 {
         text-align: center;
@@ -652,7 +648,7 @@ input:checked + .i-slider:before {
         padding: 0;
     }
     .section-traktat {
-        max-width: 70%;
+        max-width: 80%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
@@ -664,13 +660,14 @@ input:checked + .i-slider:before {
     }
     .footnotes {
         margin: 0 auto;
+        max-width: 80%;
     }
     #aot-navbarNavDropdown {
         right: 5%;
     }
-    .figure {
+    img.figure, .figure > img {
         text-align: center;
-        padding: 1em 0;
+        max-width: 80%;
     }
     .card-footer h5 {
         text-align: center;
@@ -700,7 +697,7 @@ input:checked + .i-slider:before {
         padding: 0;
     }
     .section-traktat {
-        max-width: 70%;
+        max-width: 80%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
@@ -717,8 +714,9 @@ input:checked + .i-slider:before {
     #aot-navbarNavDropdown {
         right: 5%;
     }
-    .figure {
-        padding: 1em 0;
+    img.figure, .figure > img {
+        text-align: center;
+        max-width: 80%;
     }
     .card-footer h5 {
         text-align: center;
@@ -748,7 +746,7 @@ input:checked + .i-slider:before {
         padding: 0;
     }
     .section-traktat {
-        max-width: 70%;
+        max-width: 80%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
@@ -765,9 +763,9 @@ input:checked + .i-slider:before {
     #aot-navbarNavDropdown {
         right: 5%;
     }
-    .figure {
+    img.figure, .figure > img {
         text-align: center;
-        padding: 1em 0;
+        max-width: 80%;
     }
     .card-footer h5 {
         text-align: center;
@@ -824,9 +822,9 @@ input:checked + .i-slider:before {
     #aot-navbarNavDropdown {
         right: 5%;
     }
-    .figure {
+    img.figure, .figure > img {
         text-align: center;
-        padding: 1em 0;
+        max-width: 80%;
     }
     .card-footer h5 {
         text-align: center;
@@ -889,9 +887,9 @@ input:checked + .i-slider:before {
     #aot-navbarNavDropdown {
         right: 5%;
     }
-    .figure {
+    img.figure, .figure > img {
         text-align: center;
-        padding: 1em 0;
+        max-width: 80%;
     }
     .card-footer h5 {
         text-align: center;
