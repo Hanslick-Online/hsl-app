@@ -125,12 +125,6 @@
                     </div>
                 </div>
             </nav>
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('li a.active').removeClass('active');
-                    $('a[href="' + location.pathname + '"]').addClass('active');
-;                });
-            </script>
             <!-- .site-navigation -->
         </div>
     </xsl:template>

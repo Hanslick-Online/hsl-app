@@ -129,6 +129,13 @@
                 </div>
                 <script src="https://unpkg.com/de-micro-editor@0.2.6/dist/de-editor.min.js"></script>
                 <script type="text/javascript" src="js/run.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('li a.active').removeClass('active');
+                        console.log('a[href="' + location.pathname + '"]');
+                        $('a[href="' + location.pathname + '"]').addClass('active');
+                    });
+                </script>
             </body>
         </html>
     </xsl:template>
@@ -242,7 +249,6 @@
                 <span class="pbnp"><xsl:value-of select="@n"/></span>
             </xsl:otherwise>
         </xsl:choose>
-        
     </xsl:template>
     <xsl:template match="tei:cit">
         <span class="cit"><xsl:apply-templates/></span>
