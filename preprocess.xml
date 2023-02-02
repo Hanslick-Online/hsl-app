@@ -16,7 +16,7 @@
 
     <move todir="${editions_ct}">
         <fileset dir="${editions_ct}"/>
-        <mapper type="glob" from="*.xml" to="c__*.xml"/>
+        <mapper type="glob" from="*.xml" to="c__cd *.xml"/>
     </move>
 
 </project>
