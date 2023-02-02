@@ -28,7 +28,7 @@
                         
                     </div>
                     
-                    <div class="container" style="margin-top:1em;">
+                    <div class="container-fluid" style="margin-top:1em;">
                         <div class="row">
                             <div class="col-md-12">
                                <xsl:for-each select="//tei:body">

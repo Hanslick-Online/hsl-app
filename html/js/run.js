@@ -97,7 +97,7 @@ var editor = new LoadEditor({
         },
       ],
       active_class: "active",
-      html_class: "custom-select",
+      html_class: "form-select",
     },
     // fs: {
     //   name: "Create full size mode",
@@ -137,7 +137,7 @@ var editor = new LoadEditor({
         },
       ],
       active_class: "active",
-      html_class: "custom-select",
+      html_class: "form-select",
     },
     wr: false,
     up: true,
