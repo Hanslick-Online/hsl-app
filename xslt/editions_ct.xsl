@@ -32,7 +32,7 @@
                         <div class="section">
                             <xsl:call-template name="annotation-options"></xsl:call-template>
                             
-                            <div class="card-body">                                
+                            <div class="section-critics">                                
                                 <xsl:for-each select=".//tei:body">
                                     <div class="row">
                                         <div class="col-md-8" style="margin:0 auto;">

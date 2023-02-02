@@ -70,7 +70,7 @@
                                     <div class="row section">
                                         <div class="col-md-12">
                                             <xsl:for-each select="./tei:div">
-                                                <div class="section-div">
+                                                <div class="section-traktat">
                                                     <xsl:choose>
                                                         <xsl:when test="contains(./tei:head ,'a)')">
                                                             <xsl:variable name="chapter" select="tokenize(./tei:head, 'I')"/>

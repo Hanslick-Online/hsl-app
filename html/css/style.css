@@ -613,15 +613,15 @@ input:checked + .i-slider:before {
     .pbnp {
         right: 4%;
     }
-    .section-div {
-        max-width: 90%;
+    .section-traktat {
+        max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section-div h3 {
-        font-size: 22px;
+    .section-traktat h3 {
+        font-size: 18px;
     }
-    .section-div ul {
+    .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
@@ -651,15 +651,15 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .section-div {
-        max-width: 80%;
+    .section-traktat {
+        max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section-div h3 {
-        font-size: 22px;
+    .section-traktat h3 {
+        font-size: 18px;
     }
-    .section-div ul {
+    .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
@@ -699,15 +699,15 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .section-div {
-        max-width: 80%;
+    .section-traktat {
+        max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section-div h3 {
-        font-size: 20px;
+    .section-traktat h3 {
+        font-size: 18px;
     }
-    .section-div ul {
+    .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
@@ -747,15 +747,15 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .section-div {
-        max-width: 80%;
+    .section-traktat {
+        max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section-div h3 {
+    .section-traktat h3 {
         font-size: 18px;
     }
-    .section-div ul {
+    .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
@@ -799,21 +799,22 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .section-div {
+    .section-critics > div > div .indentedP {
+        text-indent: 0 !important;
+    }
+    .section-critics {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    .section-traktat {
         max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section {
-        max-width: 80%;
-    }
-    .section > div > div > div .indentedP {
-        text-indent: 0 !important;
-    }
-    .section-div h3 {
+    .section-traktat h3 {
         font-size: 18px;
     }
-    .section-div ul {
+    .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
@@ -863,21 +864,22 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .section {
-        max-width: 80%;
-    }
-    .section > div > div > div .indentedP {
+    .section-critics > div > div .indentedP {
         text-indent: 0 !important;
     }
-    .section-div {
+    .section-critics {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    .section-traktat {
         max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section-div h3 {
+    .section-traktat h3 {
         font-size: 18px;
     }
-    .section-div ul {
+    .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
