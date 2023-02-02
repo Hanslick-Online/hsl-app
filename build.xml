@@ -5,6 +5,7 @@
     <property name="index" value="./data/meta/index.xml"/>
     <property name="meta" value="./data/meta"/>
     <property name="indices" value="./data/indices"/>
+    <property name="imprint" value="./imprint.xml"/>
     <property name="editions_ct" value="./data/critics/editions"/>
     <property name="target" value="./html"/>
     <property name="xsl_editions" value="./xslt/editions.xsl"/>
@@ -15,6 +16,7 @@
     <property name="xsl_toc" value="./xslt/toc.xsl"/>
     <property name="xsl_indices" value="./xslt/indices.xsl"/>
     <property name="xsl_entities" value="./xslt/entities.xsl"/>
+    <property name="xsl_imprint" value="./xslt/imprint.xsl"/>
 
     <delete>
         <fileset dir="${target}" includes="*.html"/>
@@ -42,6 +44,10 @@
         <fileset dir="${target}" includes="index.html"/>
     </delete>
     <xslt in="${index}" out="${target}/index.html" style="${xsl_index}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
