@@ -21,6 +21,14 @@ jobs:
     - name: Fetch data
       run: |
         ./fetch_data.sh
+    - name: preprocess
+      run: |
+        ant -f preprocess.xml
+    - name: add attributes
+      run: |
+        pip install -r requirements.txt
+        ./attributes.sh
+        ./denormalize.sh
     - name: Build
       run: |
         ant

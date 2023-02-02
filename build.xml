@@ -20,7 +20,7 @@
         <fileset dir="${target}" includes="*.html"/>
     </delete>
     <!-- project traktat -->
-    <xslt style="${xsl_editions}"  basedir="${editions}" destdir="${target}" includes="*.xml">
+    <xslt style="${xsl_editions}"  basedir="${editions}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
@@ -33,7 +33,7 @@
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
     <!-- project critics -->
-    <xslt style="${xsl_editions_ct}"  basedir="${editions_ct}" destdir="${target}" includes="*.xml">
+    <xslt style="${xsl_editions_ct}"  basedir="${editions_ct}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>

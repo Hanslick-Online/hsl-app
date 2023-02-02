@@ -36,6 +36,14 @@ body {
     margin-left: auto;
 }
 
+.entity {
+    cursor: pointer;
+}
+
+.modal-body table tbody tr th, .modal-body table tbody tr td {
+    border: none;
+}
+
 #wrapper-hero {
     background-image: url('../images/thumbnail.jpg');
     height: 759px;

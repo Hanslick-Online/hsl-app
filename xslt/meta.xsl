@@ -34,6 +34,7 @@
                                </xsl:for-each>
                             </div>
                         </div>
+                        
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
@@ -93,4 +94,5 @@
     <xsl:template match="tei:graphic">
         <img src="{@url}" alt="{parent::tei:figure/tei:head}"></img>
     </xsl:template>
+    
 </xsl:stylesheet>

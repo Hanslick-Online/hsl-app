@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="tei2html">
+    <property name="editions" value="./data/traktat/editions"/>
+    <property name="target" value="./data/traktat/tmp"/>
+    <property name="editions_ct" value="./data/critics/editions"/>
+    <property name="target_ct" value="./data/critics/tmp"/>
+
+    <!-- project traktat -->
+
+    <move todir="${editions}">
+        <fileset dir="${editions}"/>
+        <mapper type="glob" from="*.xml" to="t__*.xml"/>
+    </move>
+
+    <!-- project critics -->
+
+    <move todir="${editions_ct}">
+        <fileset dir="${editions_ct}"/>
+        <mapper type="glob" from="*.xml" to="c__*.xml"/>
+    </move>
+
+</project>
