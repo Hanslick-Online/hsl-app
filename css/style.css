@@ -642,10 +642,14 @@ input:checked + .i-slider:before {
 @media (max-width: 1200px) {
 
     .pb {
-        right: -6%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .pbnp {
-        right: 3%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .section-div {
         max-width: 80%;
@@ -689,10 +693,14 @@ input:checked + .i-slider:before {
         margin-bottom: -2.5em;
     }
     .pb {
-        right: -6%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .pbnp {
-        right: 3%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .indentedP {
         text-indent: -5em;
@@ -711,16 +719,13 @@ input:checked + .i-slider:before {
     }
     .footnotes {
         margin: 0 auto;
+        max-width: 80%;
     }
     #aot-navbarNavDropdown {
         right: 2%;
     }
     .figure {
         padding: 1em 0;
-    }
-    img {
-        padding: 1em 0;
-        width: 80%;
     }
     .card-footer h5 {
         text-align: center;
@@ -740,10 +745,14 @@ input:checked + .i-slider:before {
         margin-bottom: -2.5em;
     }
     .pb {
-        right: -6%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .pbnp {
-        right: 3%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .section-div {
         max-width: 80%;
@@ -761,6 +770,7 @@ input:checked + .i-slider:before {
     }
     .footnotes {
         margin: 0 auto;
+        max-width: 80%;
     }
     #aot-navbarNavDropdown {
         right: 2%;
@@ -771,6 +781,9 @@ input:checked + .i-slider:before {
     }
     .card-footer h5 {
         text-align: center;
+    }
+    img.image{
+        max-width: 25% !important;
     }
 }
 
@@ -787,10 +800,14 @@ input:checked + .i-slider:before {
         margin-bottom: -2.5em;
     }
     .pb {
-        right: -7%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .pbnp {
-        right: 5%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .section-div {
         max-width: 70%;
@@ -808,6 +825,7 @@ input:checked + .i-slider:before {
     }
     .footnotes {
         margin: 0 auto;
+        max-width: 70%;
     }
     #aot-navbarNavDropdown {
         right: 2%;
@@ -818,6 +836,9 @@ input:checked + .i-slider:before {
     }
     .card-footer h5 {
         text-align: center;
+    }
+    img.image{
+        max-width: 25% !important;
     }
 }
 
@@ -834,10 +855,14 @@ input:checked + .i-slider:before {
         margin-bottom: -2.3em;
     }
     .pb {
-        right: -7%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .pbnp {
-        right: 5%;
+        right: 1%;
+        margin: 0;
+        padding: 0;
     }
     .section-div {
         max-width: 70%;
@@ -855,6 +880,7 @@ input:checked + .i-slider:before {
     }
     .footnotes {
         margin: 0 auto;
+        max-width: 70%;
     }
     #aot-navbarNavDropdown {
         right: 2%;
