@@ -384,8 +384,12 @@ a.anchorFoot {
 
 #aot-navbarNavDropdown {
     position: fixed;
-    right: 25%;
+    right: 2%;
     z-index: 999;
+}
+
+#aot-navbarNavDropdown ul li {
+    margin: .5em auto;
 }
 
 .badge-item {
@@ -603,7 +607,6 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 1920px) {
-
     .pb {
         right: 1%;
     }
@@ -615,9 +618,6 @@ input:checked + .i-slider:before {
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .indentedP {
-        text-indent: -5em;
-    }
     .section-div h3 {
         font-size: 22px;
     }
@@ -628,7 +628,7 @@ input:checked + .i-slider:before {
         margin: 0 auto;
     }
     #aot-navbarNavDropdown {
-        right: 2%;
+        right: 5%;
     }
     .figure {
         text-align: center;
@@ -656,9 +656,6 @@ input:checked + .i-slider:before {
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .indentedP {
-        text-indent: -5em;
-    }
     .section-div h3 {
         font-size: 22px;
     }
@@ -669,7 +666,7 @@ input:checked + .i-slider:before {
         margin: 0 auto;
     }
     #aot-navbarNavDropdown {
-        right: 2%;
+        right: 5%;
     }
     .figure {
         text-align: center;
@@ -702,10 +699,6 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .indentedP {
-        text-indent: -5em;
-        margin: 0 auto;
-    }
     .section-div {
         max-width: 80%;
         margin: 0 auto;
@@ -722,7 +715,7 @@ input:checked + .i-slider:before {
         max-width: 80%;
     }
     #aot-navbarNavDropdown {
-        right: 2%;
+        right: 5%;
     }
     .figure {
         padding: 1em 0;
@@ -759,9 +752,6 @@ input:checked + .i-slider:before {
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .indentedP {
-        text-indent: -5em;
-    }
     .section-div h3 {
         font-size: 18px;
     }
@@ -773,7 +763,7 @@ input:checked + .i-slider:before {
         max-width: 80%;
     }
     #aot-navbarNavDropdown {
-        right: 2%;
+        right: 5%;
     }
     .figure {
         text-align: center;
@@ -797,7 +787,7 @@ input:checked + .i-slider:before {
         width: 170px;
     }
     .custom-logo-link {
-        margin-bottom: -2.5em;
+        margin-bottom: -1.6em;
     }
     .pb {
         right: 1%;
@@ -814,8 +804,11 @@ input:checked + .i-slider:before {
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .indentedP {
-        text-indent: -5em;
+    .section {
+        max-width: 80%;
+    }
+    .section > div > div > div .indentedP {
+        text-indent: 0 !important;
     }
     .section-div h3 {
         font-size: 18px;
@@ -828,7 +821,7 @@ input:checked + .i-slider:before {
         max-width: 70%;
     }
     #aot-navbarNavDropdown {
-        right: 2%;
+        right: 5%;
     }
     .figure {
         text-align: center;
@@ -839,6 +832,12 @@ input:checked + .i-slider:before {
     }
     img.image{
         max-width: 25% !important;
+    }
+    .linenumbers {
+        display: none;
+    }
+    br {
+        display: none;
     }
 }
 
@@ -852,7 +851,7 @@ input:checked + .i-slider:before {
         width: 150px;
     }
     .custom-logo-link {
-        margin-bottom: -2.3em;
+        margin-bottom: -1.6em;
     }
     .pb {
         right: 1%;
@@ -864,13 +863,16 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
+    .section {
+        max-width: 80%;
+    }
+    .section > div > div > div .indentedP {
+        text-indent: 0 !important;
+    }
     .section-div {
         max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
-    }
-    .indentedP {
-        text-indent: -5em;
     }
     .section-div h3 {
         font-size: 18px;
@@ -883,7 +885,7 @@ input:checked + .i-slider:before {
         max-width: 70%;
     }
     #aot-navbarNavDropdown {
-        right: 2%;
+        right: 5%;
     }
     .figure {
         text-align: center;
@@ -894,5 +896,11 @@ input:checked + .i-slider:before {
     }
     img.image{
         max-width: 25% !important;
+    }
+    .linenumbers {
+        display: none;
+    }
+    br {
+        display: none;
     }
 }
