@@ -5,7 +5,7 @@
     <property name="index" value="./data/meta/index.xml"/>
     <property name="meta" value="./data/meta"/>
     <property name="indices" value="./data/indices"/>
-    <property name="imprint" value="./data/meta/imprint.xml"/>
+    <property name="imprint" value="./data/imprint.xml"/>
     <property name="editions_ct" value="./data/critics/editions"/>
     <property name="target" value="./html"/>
     <property name="xsl_editions" value="./xslt/editions.xsl"/>
@@ -69,14 +69,13 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <!-- <delete>
+    <delete>
         <fileset dir="${target}" includes="imprint.html"/>
     </delete>
     <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt> -->
-
+    </xslt>
     <replace dir="${target}" value="">
         <include name="*.html"/>
         <replacetoken> xmlns=""</replacetoken>
