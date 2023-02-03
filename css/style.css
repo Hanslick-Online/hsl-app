@@ -55,24 +55,37 @@ body {
     width: 300px;
 }
 
-.btn {
-    background-color: #007bff;
+.btn-index {
+    background-color: #222fa8;
     font-size: 22px;
     margin: 0 1em 1em 0 !important;
 }
-.btn:hover {
+.btn-index:hover {
     background-color: #212529;
 }
 
 .intro_text {
-    margin: 1em auto;
+    padding: 0 15%;
+    margin: 2em auto 0 auto;
 }
 
-.intro_text button a {
+.i_img_cl {
+    margin: 0 auto;
+    padding: 0;
+    vertical-align: middle;
+    align-items: center;
+    display: flex;
+}
+
+.hide {
+    display: none;
+}
+
+.intro_text .btn-index a {
     color: #fff;
 }
 
-.intro_text button {
+.intro_text .btn-index {
     color: #fff;
     width: 200px;
     margin: 1em auto;
@@ -228,8 +241,13 @@ a {
     margin: 2em auto;
 }
 
-.index_text {
-    padding: 2em 0;
+.fade {
+    display: none;
+}
+
+#show-text {
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .carousel-indicators {
