@@ -23,7 +23,6 @@ mkdir ./data/critics
 mkdir ./data/critics/editions
 mv hsl-data-ct-main/data/editions/*.xml ./data/critics/editions
 mv hsl-data-ct-main/data/meta/*.xml ./data/meta
-mv hsl-data-ct-main/data/imprint.xml ./data/imprint.xml
 rm -rf hsl-data-ct-main
 rm main.zip
 
