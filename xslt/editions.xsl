@@ -26,7 +26,7 @@
             
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <!--<xsl:call-template name="nav_bar"/>-->
                     
                     <div class="container-fluid">                        
                         <div class="section">
@@ -69,8 +69,9 @@
 
                                     <div class="row section">
                                         <div class="col-md-12">
-                                            <xsl:for-each select="./tei:div">
-                                                <div class="section-traktat">
+                                            <div class="section-traktat">
+                                                <xsl:for-each select="./tei:div">
+                                                    
                                                     <xsl:choose>
                                                         <xsl:when test="contains(./tei:head ,'a)')">
                                                             <xsl:variable name="chapter" select="tokenize(./tei:head, 'I')"/>
@@ -89,8 +90,9 @@
                                                         </xsl:otherwise>
                                                     </xsl:choose>
                                                     <xsl:apply-templates/>
-                                                </div>
-                                            </xsl:for-each>
+                                                    
+                                                </xsl:for-each>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -109,7 +111,7 @@
                                                 </a>
                                             </span>
                                             <span class="footnote_text">
-                                                <xsl:apply-templates/>
+                                                <xsl:apply-templates select="node() except tei:pb"/>
                                             </span>
                                         </li>
                                     </xsl:for-each>
@@ -141,6 +143,12 @@
     </xsl:template>
                    
     <xsl:template match="tei:div/tei:head"/>
+    
+    <xsl:template match="tei:byline">
+        <xsl:if test="ancestor::tei:body">
+            <p><xsl:apply-templates/></p>
+        </xsl:if>
+    </xsl:template>
     
     <xsl:template match="tei:p">
         <p id="{@xml:id}" class="indentedP yes-index">
@@ -239,14 +247,20 @@
     </xsl:template>
     <xsl:template match="tei:pb">
         <xsl:choose>
-            <xsl:when test="parent::tei:p and not(preceding-sibling::tei:list)">
+            <xsl:when test="ancestor::tei:p and not(preceding-sibling::tei:list)">
                 <span class="pb"><xsl:value-of select="@n"/></span>
             </xsl:when>
-            <xsl:when test="parent::tei:p and preceding-sibling::tei:list">
-                <span class="pbnp"><xsl:value-of select="@n"/></span>
+            <xsl:when test="ancestor::tei:p and preceding-sibling::tei:list">
+                <p class="indentedP"><span class="pb"><xsl:value-of select="@n"/></span></p>
+            </xsl:when>
+            <xsl:when test="ancestor::tei:list">
+                <span class="pbl"><xsl:value-of select="@n"/></span>
+            </xsl:when>
+            <xsl:when test="ancestor::tei:note">
+                <span class="pb"><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:otherwise>
-                <span class="pbnp"><xsl:value-of select="@n"/></span>
+                <p class="indentedP"><span class="pb"><xsl:value-of select="@n"/></span></p>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -287,6 +301,7 @@
                         <sup><xsl:value-of select="@n"/></sup>
                     </a>
                 </span>
+                <xsl:apply-templates select="tei:pb"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>

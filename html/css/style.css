@@ -12,6 +12,9 @@ body {
     overflow-x: hidden;
 }
 
+h3 {
+    margin-top: 1em;
+}
 
 .wrapper {
     padding: 30px 0;
@@ -326,18 +329,23 @@ a {
 
 .pb {
     position: absolute;
-    right: 18%;
+    right: 5%;
+    font-style: normal !important;
+    margin: 0;
+    padding: 0;
+    width: 25px;
+}
+
+.pbnp {
+    position: absolute;
+    right: 10%;
     font-style: normal !important;
     margin: 0;
     padding: 0;
 }
 
-.pbnp {
-    position: absolute;
-    right: 20.3%;
-    font-style: normal !important;
-    margin: 0;
-    padding: 0;
+.footnote_text .cit .quote .pb {
+    display: none;
 }
 
 #leaflet-map-one {
@@ -369,9 +377,14 @@ a.anchorFoot {
     visibility: hidden;
 }
 
-.section-div {
+/*.section-traktat {
     margin: 3em 0 0 0;
 }
+
+.section-critics {
+    margin: 3em 0 0 0;
+}*/
+
 
 .italic {
   font-style: italic;
@@ -439,7 +452,7 @@ a.anchorFoot {
 
 #aot-navbarNavDropdown {
     position: fixed;
-    right: 5%;
+    right: 10%;
     z-index: 999;
 }
 
@@ -662,12 +675,6 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 1920px) {
-    .pb {
-        right: 1%;
-    }
-    .pbnp {
-        right: 4%;
-    }
     .section-traktat {
         max-width: 80%;
         margin: 0 auto;
@@ -698,7 +705,7 @@ input:checked + .i-slider:before {
         padding: 0;
     }
     .pbnp {
-        right: 1%;
+        right: 5%;
         margin: 0;
         padding: 0;
     }
@@ -741,16 +748,6 @@ input:checked + .i-slider:before {
     .custom-logo-link {
         margin-bottom: -2.5em;
     }
-    .pb {
-        right: 1%;
-        margin: 0;
-        padding: 0;
-    }
-    .pbnp {
-        right: 1%;
-        margin: 0;
-        padding: 0;
-    }
     .section-traktat {
         max-width: 80%;
         margin: 0 auto;
@@ -789,16 +786,6 @@ input:checked + .i-slider:before {
     }
     .custom-logo-link {
         margin-bottom: -2.5em;
-    }
-    .pb {
-        right: 1%;
-        margin: 0;
-        padding: 0;
-    }
-    .pbnp {
-        right: 1%;
-        margin: 0;
-        padding: 0;
     }
     .section-traktat {
         max-width: 80%;
@@ -841,16 +828,6 @@ input:checked + .i-slider:before {
     }
     .custom-logo-link {
         margin-bottom: -1.6em;
-    }
-    .pb {
-        right: 1%;
-        margin: 0;
-        padding: 0;
-    }
-    .pbnp {
-        right: 1%;
-        margin: 0;
-        padding: 0;
     }
     .section-critics > div > div .indentedP {
         text-indent: 0 !important;
@@ -906,16 +883,6 @@ input:checked + .i-slider:before {
     }
     .custom-logo-link {
         margin-bottom: -1.6em;
-    }
-    .pb {
-        right: 1%;
-        margin: 0;
-        padding: 0;
-    }
-    .pbnp {
-        right: 1%;
-        margin: 0;
-        padding: 0;
     }
     .section-critics > div > div .indentedP {
         text-indent: 0 !important;

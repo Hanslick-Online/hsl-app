@@ -32,7 +32,7 @@
                             
                             <div class="col-md-12 comp-card">
                                 <div class="card-header">
-                                    <h2><xsl:value-of select="replace(replace(//tei:titleStmt/tei:title[1], '§ ', 'V'), '–', '')"/></h2>
+                                    <h2><xsl:value-of select="//tei:titleStmt/tei:title[1]"/></h2>
                                     <hr></hr>
                                 </div>
                                 <div class="card-body">
