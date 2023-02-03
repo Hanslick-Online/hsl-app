@@ -27,37 +27,49 @@
                     <div class="row" style="margin:0 auto;padding:0;">
                         <div class="col-md-6 intro_colum" style="margin:0;padding:0;">
                             <div class="intro_text">
-                                <h1>Digitale Editionen</h1>
-                                <button type="button" class="btn text-light">
+                                <h1>Digitale Edition</h1>
+                                <button type="button" class="btn text-light btn-index">
                                     <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">Traktat</a>
                                 </button>
-                                <br/>
-                                <button type="button" class="btn text-light">
+                                <button type="button" class="btn text-light btn-index">
                                     <a href="toc.html">Kritiken</a>
                                 </button>
+                                
+                                <xsl:for-each select="//tei:body">
+                                    <xsl:for-each select="./tei:div/tei:p">
+                                        <xsl:choose>
+                                            <xsl:when test="position() = 1">
+                                                <p class="index_text"><xsl:apply-templates/></p>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <p class="index_text about-text-hidden fade"><xsl:apply-templates/></p>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                        
+                                    </xsl:for-each>
+                                    <p id="show-text">mehr anzeigen</p>
+                                </xsl:for-each>
+                                
                             </div>
                         </div>
-                        <div class="col-md-6" style="margin:0;padding:0;">
+                        <div class="col-md-6 i_img_cl" style="margin:0;padding:0;">
                             <div class="intro_image">
                                 <img src="images/thumbnail.jpg" alt="Hanslick Online Hintergrundbild"/>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="container-fluid" style="margin-top:1em;">
+                    <!--<div class="container-fluid" style="margin-top:1em;">
                         
                         <div class="row">
                             <div class="col-md-12">
-                               <xsl:for-each select="//tei:body">
-                                   
-                                   <xsl:apply-templates/>
-                                   
-                               </xsl:for-each>
+                               
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <xsl:call-template name="html_footer"/>
                 </div>
+                <script src="js/hide-md.js"></script>
             </body>
         </html>
     </xsl:template>
@@ -65,12 +77,12 @@
         <h2 id="{generate-id()}"><xsl:apply-templates/></h2>
     </xsl:template>
     <xsl:template match="tei:div">
-        <div id="{generate-id()}" class="index_text"><xsl:apply-templates/></div>
+        <div id="{generate-id()}"><xsl:apply-templates/></div>
     </xsl:template>
     
-    <xsl:template match="tei:p">
+    <!--<xsl:template match="tei:p">
         <p id="{generate-id()}"><xsl:apply-templates/></p>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template match="tei:list">
         <ul id="{generate-id()}"><xsl:apply-templates/></ul>

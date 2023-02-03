@@ -3,8 +3,14 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="xsl xs">
+    version="2.0" exclude-result-prefixes="xs xsl">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
+    
+    <xsl:template match="node()|@*">
+        <xsl:copy>
+            <xsl:apply-templates select="node()|@*"/>
+        </xsl:copy>
+    </xsl:template>
     
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
@@ -26,11 +32,7 @@
                     <div class="container-fluid" style="margin: 3em auto;">
                         <h1><xsl:value-of select="$doc_title"/></h1>
 
-                        <xsl:for-each select="//div">
-                            <xsl:copy>
-                                <xsl:copy-of select="."/>
-                            </xsl:copy>
-                        </xsl:for-each>     
+                        <xsl:apply-templates select="//root"/>
                     </div>
                     
                     <xsl:call-template name="html_footer"/>
@@ -39,4 +41,10 @@
             </body>
         </html>
     </xsl:template>
+    
+    <xsl:template match="root">
+        
+         <xsl:apply-templates select="node()|@*"/>
+        
+    </xsl:template> 
 </xsl:stylesheet>

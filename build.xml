@@ -5,7 +5,7 @@
     <property name="index" value="./data/meta/index.xml"/>
     <property name="meta" value="./data/meta"/>
     <property name="indices" value="./data/indices"/>
-    <property name="imprint" value="./data/imprint.xml"/>
+    <property name="imprint" value="./data/meta/imprint.xml"/>
     <property name="editions_ct" value="./data/critics/editions"/>
     <property name="target" value="./html"/>
     <property name="xsl_editions" value="./xslt/editions.xsl"/>
@@ -21,7 +21,6 @@
     <delete>
         <fileset dir="${target}" includes="*.html"/>
     </delete>
-    <move file="imprint.xml" todir="./data/imprint.xml"/>
     <!-- project traktat -->
     <xslt style="${xsl_editions}"  basedir="${editions}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
@@ -48,10 +47,7 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
+    
     <xslt in="${index}" out="${target}/toc.html" style="${xsl_toc}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
@@ -73,6 +69,14 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+    <delete>
+        <fileset dir="${target}" includes="imprint.html"/>
+    </delete>
+    <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+
     <replace dir="${target}" value="">
         <include name="*.html"/>
         <replacetoken> xmlns=""</replacetoken>
