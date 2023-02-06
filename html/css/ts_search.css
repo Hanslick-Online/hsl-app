@@ -48,7 +48,7 @@
     color: #000;
 }
 
-.ais-Pagination-item--selected .ais-Pagination-link {
+/* .ais-Pagination-item--selected .ais-Pagination-link {
     background-color: #615a60;
     border-color: #615a60;
 }
@@ -57,7 +57,7 @@
     background-color: #615a60;
     border-color: #615a60;
     color: #fff;
-}
+} */
 
 .btn {
     background-color: lightgrey;
@@ -82,8 +82,6 @@
 }*/
 
 .btn:hover {
-    background-color: #615a60;
-    border-color: #615a60;
     color: #fff;
 
 }
@@ -100,4 +98,10 @@
 .badge {
     max-width: 100%;
     overflow: hidden;
+}
+
+.ais-RefinementList-labelText {
+    max-width: 290px;
+    overflow: hidden;
+    text-align: right;
 }

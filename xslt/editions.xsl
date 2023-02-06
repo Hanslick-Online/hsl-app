@@ -28,7 +28,17 @@
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
                     
-                    <div class="container-fluid">                        
+                    <div class="container-fluid">
+                        <div class="row" style="margin:2em auto;">
+                            <div class="col-md-8">
+                            </div>
+                            <div class="col-md-2" style="text-align:right;">
+                                <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
+                            </div>
+                            <div class="col-md-2" style="text-align:right;">
+                                <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
+                            </div>
+                        </div>
                         <div class="section">
                             <xsl:call-template name="annotation-options"></xsl:call-template>
                             <div class="card-header">
@@ -138,6 +148,8 @@
                         $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
                     });
                 </script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
+                <script type="text/javascript" src="js/mark.js"></script>
             </body>
         </html>
     </xsl:template>

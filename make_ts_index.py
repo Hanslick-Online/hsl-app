@@ -104,7 +104,7 @@ for x in tqdm(files, total=len(files)):
         r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@type="main"]/text()')).split())
         s_title = " ".join(" ".join(doc.any_xpath('.//tei:sourceDesc//tei:edition/text()')).split())
         title = f"{r_title} {s_title}"
-        record['title'] = f"{title} Chapter {str(pages)}"
+        record['title'] = f"{title} chapter {str(pages - 1)}"
         cfts_record['title'] = record['title']
         try:
             date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
