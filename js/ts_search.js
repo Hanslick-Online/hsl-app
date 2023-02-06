@@ -1,6 +1,6 @@
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   server: {
-    apiKey: "", // Be sure to use an API key that only allows searches, in production
+    apiKey: "dFQLGBzgcWlXNzL1XENqHFUaOHJvcSRr", // Be sure to use an API key that only allows searches, in production
     nodes: [
       {
         host: "typesense.acdh-dev.oeaw.ac.at",
