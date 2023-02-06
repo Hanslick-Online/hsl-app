@@ -132,6 +132,11 @@ div.dataTables_filter {
   font-size:20px;
 }
 
+mark {
+    background: orange;
+    color: black;
+}
+
 .exportbuttons {
   text-align: right;
 }
