@@ -5,6 +5,7 @@
     <property name="index" value="./data/meta/index.xml"/>
     <property name="meta" value="./data/meta"/>
     <property name="indices" value="./data/indices"/>
+    <property name="indices_static" value="./data/indices/listbibl_static.xml"/>
     <property name="imprint" value="./data/imprint.xml"/>
     <property name="editions_ct" value="./data/critics/editions"/>
     <property name="target" value="./html"/>
@@ -15,6 +16,7 @@
     <property name="xsl_index" value="./xslt/index.xsl"/>
     <property name="xsl_toc" value="./xslt/toc.xsl"/>
     <property name="xsl_indices" value="./xslt/indices.xsl"/>
+    <property name="xsl_indices_static" value="./xslt/indices_static.xsl"/>
     <property name="xsl_entities" value="./xslt/entities.xsl"/>
     <property name="xsl_imprint" value="./xslt/imprint.xsl"/>
     <property name="xsl_search" value="./xslt/search.xsl"/>
@@ -62,11 +64,8 @@
     </xslt>
     <delete>
         <fileset dir="${target}" includes="listbibl.html"/>
-    </delete>
-    <delete>
+        <fileset dir="${target}" includes="listbibl_static.html"/>
         <fileset dir="${target}" includes="listplace.html"/>
-    </delete>
-    <delete>
         <fileset dir="${target}" includes="listperson.html"/>
     </delete>
     <xslt style="${xsl_indices}"  basedir="${indices}" destdir="${target}" includes="*.xml">
@@ -74,8 +73,13 @@
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
     <delete>
+        <fileset dir="${target}" includes="listbibl_static.html"/>
         <fileset dir="${target}" includes="imprint.html"/>
     </delete>
+    <xslt in="${indices_static}" out="${target}/publikationen.html" style="${xsl_indices_static}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
     <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>

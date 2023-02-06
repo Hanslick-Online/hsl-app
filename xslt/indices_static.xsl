@@ -7,7 +7,7 @@
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
     
-    <!--<xsl:import href="./partials/html_navbar.xsl"/>-->
+    <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
 
@@ -46,6 +46,7 @@
             <h1>Publikationen</h1>
             <h5>January 21, 2023</h5>
             <xsl:for-each-group select="./tei:biblStruct" group-by="@type">
+                <xsl:sort select="current-grouping-key()" data-type="text"/>
                 <xsl:choose>
                     <xsl:when test="current-grouping-key() = 'bookSection'">
                         <h3>Buchkapitel</h3>
@@ -66,8 +67,8 @@
 
                 <ul class="publications {current-grouping-key()}">
                     <xsl:for-each select="current-group()[not(current-grouping-key() = 'presentation')]">
-                        <xsl:sort select=".//tei:imprint/tei:date" order="descending"/>
-                        <xsl:sort select=".//tei:author[1]/tei:surname" order="descending"/>
+                        <xsl:sort select=".//tei:imprint/tei:date" order="descending" data-type="number"/>
+                        <xsl:sort select=".//tei:author[1]/tei:surname" data-type="text"/>
                         <xsl:if test=".//tei:imprint/tei:date != 'forthcoming'">
                             <li class="list-item">
                                 <xsl:choose>
@@ -362,7 +363,7 @@
             </xsl:for-each-group>
             <h2>Bevorstehend</h2>
             <xsl:for-each-group select="./tei:biblStruct" group-by="@type">
-                
+                <xsl:sort select="current-grouping-key()" data-type="text"/>
                 <xsl:choose>
                     <xsl:when test="current-grouping-key() = 'bookSection'">
                         <h3>Buchkapitel</h3>
@@ -383,8 +384,8 @@
                 
                 <ul class="publications {current-grouping-key()}">
                     <xsl:for-each select="current-group()[not(current-grouping-key() = 'presentation')]">
-                        <xsl:sort select=".//tei:imprint/tei:date" order="descending"/>
-                        <xsl:sort select=".//tei:author[1]/tei:surname" order="descending"/>
+                        <xsl:sort select=".//tei:imprint/tei:date" order="descending" data-type="number"/>
+                        <xsl:sort select=".//tei:author[1]/tei:surname" data-type="text"/>
                         <xsl:if test=".//tei:imprint/tei:date = 'forthcoming'">
                             <li class="list-item">
                                 <xsl:choose>
