@@ -55,17 +55,17 @@ search.addWidgets([
               <div>
                   <div>
                       {{#persons}}
-                      <span class="badge badge-secondary">{{ . }}</span>
+                      <span class="badge bg-secondary">{{ . }}</span>
                       {{/persons}}
                   </div>
                   <div>
                       {{#works}}
-                      <span class="badge badge-success">{{ . }}</span>
+                      <span class="badge bg-success">{{ . }}</span>
                       {{/works}}
                   </div>
                   <div>
                       {{#places}}
-                      <span class="badge badge-info">{{ . }}</span>
+                      <span class="badge bg-info">{{ . }}</span>
                       {{/places}}
                   </div>
               </div>

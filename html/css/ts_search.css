@@ -91,3 +91,13 @@
 .search-panel {
     margin: 2em auto;
 }
+
+.ais-RefinementList-label span {
+    margin-left: .5em;
+    text-align: left;
+}
+
+.badge {
+    max-width: 100%;
+    overflow: hidden;
+}
