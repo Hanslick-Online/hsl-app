@@ -29,7 +29,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 const search = instantsearch({
   searchClient,
-  indexName: "amp",
+  indexName: "hsl",
 });
 
 search.addWidgets([
@@ -193,9 +193,9 @@ search.addWidgets([
   instantsearch.widgets.sortBy({
     container: "#sort-by",
     items: [
-      { label: "Default", value: "amp" },
-      { label: "Year (asc)", value: "amp/sort/year:asc" },
-      { label: "Year (desc)", value: "amp/sort/year:desc" },
+      { label: "Default", value: "hsl" },
+      { label: "Year (asc)", value: "hsl/sort/year:asc" },
+      { label: "Year (desc)", value: "hsl/sort/year:desc" },
     ],
   }),
 
