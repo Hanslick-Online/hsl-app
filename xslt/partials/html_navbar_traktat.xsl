@@ -63,7 +63,7 @@
                                     <li>
                                         <a class="dropdown-item" href="10_VMS_1902_TEI_AW_26-01-21-TEI-P5.html">Auflage 10 (1902)</a>
                                     </li>-->
-                                    <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
+                                    <!--<xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
                                         <xsl:sort select="tokenize(document-uri(/), '/')[last()]" />
                                         <xsl:choose>
                                             <xsl:when test="position() = 1">
@@ -84,7 +84,7 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                         
-                                    </xsl:for-each>
+                                    </xsl:for-each>-->
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -93,13 +93,13 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#index_xml-body.1_div.0">
+                                        <a class="dropdown-item" href="#index.xml-body.1_div.0">
                                             [Deckblatt / Title Page]
                                         </a>
                                     </li>
                                     <xsl:for-each select=".//tei:body/tei:div/tei:head">
                                         <li>
-                                            <a class="dropdown-item" href="#index_xml-body.1_div.{position()}">
+                                            <a class="dropdown-item" href="#index.xml-body.1_div.{position()}">
                                                 <xsl:choose>
                                                     <xsl:when test="contains(. ,'a)')">
                                                         <xsl:variable name="chapter" select="tokenize(., 'I')"/>
@@ -115,7 +115,7 @@
                                         </li>
                                     </xsl:for-each>
                                     <li>
-                                        <a class="dropdown-item" href="#index_xml-body.1_div.999">
+                                        <a class="dropdown-item" href="#index.xml-body.1_div.999">
                                             [Fußnoten / Footnotes]
                                         </a>
                                     </li>

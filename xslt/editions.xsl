@@ -33,7 +33,7 @@
                             <xsl:call-template name="annotation-options"></xsl:call-template>
                             <div class="card-header">
                                 <div class="docTitle">
-                                    <a class="anchor" id="index_xml-body.1_div.0"></a>
+                                    <a class="anchor" id="index.xml-body.1_div.0"></a>
                                     <div class="titlePart">
                                         <xsl:for-each select=".//tei:docTitle/tei:titlePart">
                                             <div class="titlePart {@type}">
@@ -75,7 +75,7 @@
                                                     <xsl:choose>
                                                         <xsl:when test="contains(./tei:head ,'a)')">
                                                             <xsl:variable name="chapter" select="tokenize(./tei:head, 'I')"/>
-                                                            <a class="anchor" id="index_xml-body.1_div.{position()}"></a>
+                                                            <a class="anchor" id="index.xml-body.1_div.{position()}"></a>
                                                             <h3>
                                                                 I. <xsl:value-of select="$chapter[2]"/>
                                                                 <br/>
@@ -83,7 +83,7 @@
                                                             </h3>
                                                         </xsl:when>
                                                         <xsl:otherwise>
-                                                            <a class="anchor" id="index_xml-body.1_div.{position()}"></a>
+                                                            <a class="anchor" id="index.xml-body.1_div.{position()}"></a>
                                                             <h3>
                                                                 <xsl:value-of select="./tei:head"/>
                                                             </h3>
@@ -99,7 +99,7 @@
                                 </xsl:for-each>
                             </div>
                             <div class="card-footer">
-                                <a class="anchor" id="index_xml-body.1_div.999"></a>
+                                <a class="anchor" id="index.xml-body.1_div.999"></a>
                                 <h5>Fußnoten</h5>
                                 <ul class="footnotes">
                                     <xsl:for-each select=".//tei:body//tei:note[@place='foot']">

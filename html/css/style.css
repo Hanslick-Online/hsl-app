@@ -112,6 +112,11 @@ h3 {
 
 #wrapper-footer-full {
   margin-top: auto;
+  display: flex;
+}
+
+.align-items-center {
+    align-items: center !important;
 }
 
 .custom-logo-link {
@@ -699,7 +704,7 @@ input:checked + .i-slider:before {
 @media (max-width: 1200px) {
 
     .pb {
-        right: 1%;
+        right: 1px;
         margin: 0;
         padding: 0;
     }
