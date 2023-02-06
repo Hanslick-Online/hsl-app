@@ -103,6 +103,7 @@ h3 {
 }
 
 .intro_image img {
+    width: 1500px;
     max-width: 100%;
 }
 

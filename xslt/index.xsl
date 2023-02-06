@@ -25,7 +25,7 @@
                     <xsl:call-template name="nav_bar"/>
                     
                     <div class="row" style="margin:0 auto;padding:0;">
-                        <div class="col-md-6 intro_colum" style="margin:0;padding:0;">
+                        <div class="col-md-5 intro_colum" style="margin:0;padding:0;">
                             <div class="intro_text">
                                 <h1>Digitale Edition</h1>
                                 <button type="button" class="btn text-light btn-index">
@@ -52,7 +52,7 @@
                                 
                             </div>
                         </div>
-                        <div class="col-md-6 i_img_cl" style="margin:0;padding:0;">
+                        <div class="col-md-7 i_img_cl" style="margin:0;padding:0;">
                             <div class="intro_image">
                                 <img src="images/thumbnail.jpg" alt="Hanslick Online Hintergrundbild"/>
                             </div>
