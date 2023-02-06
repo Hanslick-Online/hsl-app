@@ -140,6 +140,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="team.html">Team</a>
                             </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="search.html">Suche</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

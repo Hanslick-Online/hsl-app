@@ -17,6 +17,7 @@
     <property name="xsl_indices" value="./xslt/indices.xsl"/>
     <property name="xsl_entities" value="./xslt/entities.xsl"/>
     <property name="xsl_imprint" value="./xslt/imprint.xsl"/>
+    <property name="xsl_search" value="./xslt/search.xsl"/>
 
     <delete>
         <fileset dir="${target}" includes="*.html"/>
@@ -47,8 +48,11 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    
     <xslt in="${index}" out="${target}/toc.html" style="${xsl_toc}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${target}/search.html" style="${xsl_search}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
