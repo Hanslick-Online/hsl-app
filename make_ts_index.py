@@ -89,9 +89,9 @@ for x in tqdm(files, total=len(files)):
     facs = doc.any_xpath('.//tei:body/tei:div')
     pages = 0
     for v in facs:
-        p_group = f".//tei:head|.//tei:p"
-        body = doc.any_xpath(p_group)
         pages += 1
+        p_group = f".//tei:body/tei:div[{pages}]/tei:p"
+        body = doc.any_xpath(p_group)
         cfts_record = {
             'project': 'hsl',
         }
@@ -112,7 +112,7 @@ for x in tqdm(files, total=len(files)):
             try:
                 date_str = doc.any_xpath('//tei:sourceDesc//tei:date/text()')[0]
             except IndexError:
-                pass
+                date_str = "0"
         if len(date_str) > 3:
             date_str = date_str
         else:
