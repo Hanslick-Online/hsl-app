@@ -107,13 +107,16 @@ for x in tqdm(files, total=len(files)):
         record['title'] = f"{title} Chapter {str(pages)}"
         cfts_record['title'] = record['title']
         try:
-            date_str = doc.any_xpath('//tei:sourceDesc/tei:date/@when')[0]
+            date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
         except IndexError:
-            date_str = doc.any_xpath('//tei:sourceDesc/tei:date/text()')[0]
-            if len(date_str) > 3:
-                date_str = date_str
-            else:
-                date_str = "1854"
+            try:
+                date_str = doc.any_xpath('//tei:sourceDesc//tei:date/text()')[0]
+            except IndexError:
+                pass
+        if len(date_str) > 3:
+            date_str = date_str
+        else:
+            date_str = "1854"
 
         try:
             record['year'] = int(date_str[:4])
