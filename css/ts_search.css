@@ -1,0 +1,93 @@
+#hits {
+    padding: 1em 0;
+}
+
+.ais-Hits-item, 
+.ais-InfiniteHits-item, 
+.ais-InfiniteResults-item, 
+.ais-Results-item {
+    width: 100%;
+}
+
+.ais-SearchBox-form {
+    display: flex;
+}
+
+#stats-container, 
+#searchbox, 
+#current-refinements, 
+#clear-refinements, 
+#range-input {
+    padding: 1em 0 .5em 0;
+
+}
+#refinement-list-persons,
+#refinement-list-keywords,
+#refinement-list-works,
+#refinement-list-orgs, 
+#refinement-list-places {
+    padding: 1em .5em 2em .5em;
+    -webkit-box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);
+    -moz-box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);
+    box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);
+    background-color: #fff;
+    border-radius: .10rem;
+
+}
+
+.col-md-4 h4 {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.ais-Hits-item {
+    background-color: #fff;
+}
+
+.page-link {
+    color: #000;
+}
+
+.ais-Pagination-item--selected .ais-Pagination-link {
+    background-color: #615a60;
+    border-color: #615a60;
+}
+
+.ais-Pagination-item .ais-Pagination-link:hover {
+    background-color: #615a60;
+    border-color: #615a60;
+    color: #fff;
+}
+
+.btn {
+    background-color: lightgrey;
+    border-color: lightgrey;
+    color: #000;
+}
+
+.ais-SearchBox-submit {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.ais-SearchBox-submit:hover {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+/*.ais-SearchBox-submitIcon {
+    background-color: transparent;
+    border-color: transparent;
+    color: #000 !important;
+}*/
+
+.btn:hover {
+    background-color: #615a60;
+    border-color: #615a60;
+    color: #fff;
+
+}
+
+.search-panel {
+    margin: 2em auto;
+}
