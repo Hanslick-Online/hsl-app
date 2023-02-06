@@ -145,6 +145,22 @@ mark {
     border-bottom: 5px solid #007bff !important;
 }
 
+.publications {
+    margin: 2em auto;
+}
+
+.list-item {
+    margin: 1em auto;
+}
+
+.index-list h1, h2, h3, h5 {
+    text-align: center;
+}
+
+.index-list h1, h2, h3 {
+    margin: 2em auto 0 auto;
+}
+
 .dataTables_info {
   text-align: center;
 }
