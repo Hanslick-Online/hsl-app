@@ -116,7 +116,7 @@ for x in tqdm(files, total=len(files)):
         cfts_record['title'] = record['title']
         try:
             date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
-            date_seq = f"{date_str}-{s_title}-01"
+            date_seq = f"{date_str}-0{str(pages)}-01"
             date_seq = time.mktime(datetime.datetime.strptime(date_seq, "%Y-%m-%d").timetuple())
         except IndexError:
             try:
