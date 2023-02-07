@@ -47,7 +47,7 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: "#hits",
     templates: {
-      empty: "No results for <q>{{ query }}</q>",
+      empty: "Keine Resultate für <q>{{ query }}</q>",
       item: `
               <h5><a href="{{ id }}">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
@@ -82,17 +82,17 @@ search.addWidgets([
     templates: {
       text: `
             {{#areHitsSorted}}
-              {{#hasNoSortedResults}}no hits{{/hasNoSortedResults}}
-              {{#hasOneSortedResults}}1 hit{{/hasOneSortedResults}}
-              {{#hasManySortedResults}}{{#helpers.formatNumber}}{{nbSortedHits}}{{/helpers.formatNumber}} hits {{/hasManySortedResults}}
+              {{#hasNoSortedResults}}keine Treffer{{/hasNoSortedResults}}
+              {{#hasOneSortedResults}}1 Treffer{{/hasOneSortedResults}}
+              {{#hasManySortedResults}}{{#helpers.formatNumber}}{{nbSortedHits}}{{/helpers.formatNumber}} Treffer {{/hasManySortedResults}}
               aus {{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}}
             {{/areHitsSorted}}
             {{^areHitsSorted}}
-              {{#hasNoResults}}no hits{{/hasNoResults}}
-              {{#hasOneResult}}1 hit{{/hasOneResult}}
-              {{#hasManyResults}}{{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}} hits{{/hasManyResults}}
+              {{#hasNoResults}}keine Treffer{{/hasNoResults}}
+              {{#hasOneResult}}1 Treffer{{/hasOneResult}}
+              {{#hasManyResults}}{{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}} Treffer{{/hasManyResults}}
             {{/areHitsSorted}}
-            found in {{processingTimeMS}}ms
+            gefunden in {{processingTimeMS}}ms
           `,
     },
   }),
@@ -101,7 +101,7 @@ search.addWidgets([
     container: "#refinement-list-places",
     attribute: "places",
     searchable: true,
-    searchablePlaceholder: "Search",
+    searchablePlaceholder: "Suchen",
     cssClasses: {
       searchableInput: "form-control form-control-sm mb-2 border-light-2",
       searchableSubmit: "d-none",
@@ -118,7 +118,7 @@ search.addWidgets([
     container: "#refinement-list-persons",
     attribute: "persons",
     searchable: true,
-    searchablePlaceholder: "Search",
+    searchablePlaceholder: "Suchen",
     cssClasses: {
       searchableInput: "form-control form-control-sm mb-2 border-light-2",
       searchableSubmit: "d-none",
@@ -135,7 +135,7 @@ search.addWidgets([
     container: "#refinement-list-works",
     attribute: "works",
     searchable: true,
-    searchablePlaceholder: "Search",
+    searchablePlaceholder: "Suchen",
     cssClasses: {
       searchableInput: "form-control form-control-sm mb-2 border-light-2",
       searchableSubmit: "d-none",
@@ -153,7 +153,7 @@ search.addWidgets([
     attribute: "year",
     templates: {
       separatorText: "to",
-      submitText: "Search",
+      submitText: "Suchen",
     },
     cssClasses: {
       form: "form-inline",
@@ -175,7 +175,7 @@ search.addWidgets([
   instantsearch.widgets.clearRefinements({
     container: "#clear-refinements",
     templates: {
-      resetLabel: "reset filters",
+      resetLabel: "Filter zurücksetzen",
     },
     cssClasses: {
       button: "btn",
@@ -194,8 +194,8 @@ search.addWidgets([
     container: "#sort-by",
     items: [
       { label: "Default", value: "hsl" },
-      { label: "Year (asc)", value: "hsl/sort/date:asc" },
-      { label: "Year (desc)", value: "hsl/sort/date:desc" },
+      { label: "Jahr (asc)", value: "hsl/sort/date:asc" },
+      { label: "Jahr (desc)", value: "hsl/sort/date:desc" },
     ],
   }),
 

@@ -112,7 +112,11 @@ for x in tqdm(files, total=len(files)):
         r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@type="main"]/text()')).split())
         s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
         title = f"{r_title} {s_title}. Auflage"
-        record['title'] = f"{title} - Kapitel {str(pages)}"
+        if pages - 1 == 0:
+            cht = "Vorwort"
+        else:
+            cht = f"Kapitel {str(pages - 1)}"
+        record['title'] = f"{title} - {cht}"
         cfts_record['title'] = record['title']
         try:
             date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
