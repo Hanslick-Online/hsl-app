@@ -2,6 +2,7 @@
 <project basedir="." name="tei2html">
     <property name="editions" value="./data/traktat/editions"/>
     <property name="editions_ct" value="./data/critics/editions"/>
+    <property name="meta" value="./data/meta"/>
 
     <!-- project traktat -->
 
@@ -16,5 +17,7 @@
         <fileset dir="${editions_ct}"/>
         <mapper type="glob" from="*.xml" to="c__*.xml"/>
     </move>
+
+    <move file="./data/indices/listbibl_static.xml" tofile="${meta}/publikationen.xml"/>
 
 </project>

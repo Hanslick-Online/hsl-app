@@ -73,286 +73,57 @@
                             <li class="list-item">
                                 <xsl:choose>
                                     <xsl:when test="current-grouping-key() = 'bookSection'">
-                                        <xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:for-each select=".//tei:author">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:value-of select=".//tei:title[@level='a']"/>
-                                        <xsl:text>. In </xsl:text>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:text>, hg. </xsl:text>
-                                        <xsl:for-each select=".//tei:editor">
-                                            <xsl:value-of select="./tei:surname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select="./tei:forename"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:call-template name="date"/>
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'journalArticle'">
-                                        <xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:for-each select=".//tei:author">
-                                            <xsl:value-of select=".//tei:surname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:forename"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:value-of select=".//tei:title[@level='a']"/>
-                                        <xsl:text>. In </xsl:text>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='j']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='issue']">
-                                            <xsl:text>/</xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='issue']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:call-template name="date"/>
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="journalArticle"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'thesis'">
-                                        <xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:editor">
-                                            <xsl:for-each select=".//tei:editor">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:respStmt">
-                                            <xsl:for-each select=".//tei:respStmt">
-                                                <xsl:value-of select="./tei:persName/tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:persName/tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:for-each select=".//tei:author">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:call-template name="date"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'book'">
-                                        <xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:editor">
-                                            <xsl:for-each select=".//tei:editor">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:respStmt">
-                                            <xsl:for-each select=".//tei:respStmt">
-                                                <xsl:value-of select="./tei:persName/tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:persName/tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:for-each select=".//tei:author">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:call-template name="date"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
-                                        <xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:for-each select=".//tei:author">
-                                            <xsl:value-of select=".//tei:surname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:forename"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:value-of select=".//tei:title[@level='a']"/>
-                                        <xsl:text>. In </xsl:text>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='issue']">
-                                            <xsl:text>/</xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='issue']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:call-template name="date"/>
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:otherwise></xsl:otherwise>
                                 </xsl:choose>
@@ -390,286 +161,52 @@
                             <li class="list-item">
                                 <xsl:choose>
                                     <xsl:when test="current-grouping-key() = 'bookSection'">
-                                        <!--<xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>-->
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:for-each select=".//tei:author">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:value-of select=".//tei:title[@level='a']"/>
-                                        <xsl:text>. In </xsl:text>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:text>, hg. </xsl:text>
-                                        <xsl:for-each select=".//tei:editor">
-                                            <xsl:value-of select="./tei:surname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select="./tei:forename"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'journalArticle'">
-                                        <!--<xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>-->
-                                        <xsl:for-each select=".//tei:author">
-                                            <xsl:value-of select=".//tei:surname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:forename"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:value-of select=".//tei:title[@level='a']"/>
-                                        <xsl:text>. In </xsl:text>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='j']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='issue']">
-                                            <xsl:text>/</xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='issue']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="journalArticle"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'thesis'">
-                                        <!--<xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>-->
-                                        <xsl:if test=".//tei:editor">
-                                            <xsl:for-each select=".//tei:editor">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:respStmt">
-                                            <xsl:for-each select=".//tei:respStmt">
-                                                <xsl:value-of select="./tei:persName/tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:persName/tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:for-each select=".//tei:author">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'book'">
-                                        <!--<xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>-->
-                                        <xsl:if test=".//tei:editor">
-                                            <xsl:for-each select=".//tei:editor">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:respStmt">
-                                            <xsl:for-each select=".//tei:respStmt">
-                                                <xsl:value-of select="./tei:persName/tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:persName/tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:for-each select=".//tei:author">
-                                                <xsl:value-of select="./tei:surname"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="./tei:forename"/>
-                                                <xsl:if test="position() != last()">
-                                                    <xsl:text>, </xsl:text>
-                                                </xsl:if>
-                                            </xsl:for-each>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
-                                        <!--<xsl:value-of select=".//tei:imprint/tei:date"/>
-                                        <xsl:text>. </xsl:text>-->
-                                        <xsl:for-each select=".//tei:author">
-                                            <xsl:value-of select=".//tei:surname"/>
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:forename"/>
-                                            <xsl:if test="position() != last()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                        </xsl:for-each>
-                                        <xsl:if test=".//tei:author">
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
-                                        <xsl:value-of select=".//tei:title[@level='a']"/>
-                                        <xsl:text>. In </xsl:text>
-                                        <span class="italic"><xsl:value-of select=".//tei:title[@level='m']"/></span>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='volume']">
-                                            <xsl:text> </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='volume']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='issue']">
-                                            <xsl:text>/</xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='issue']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:biblScope[@unit='page']">
-                                            <xsl:text>, S. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:biblScope[@unit='page']"/>
-                                        </xsl:if>
-                                        <xsl:if test=".//tei:imprint/tei:publisher">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:pubPlace"/>
-                                            <xsl:text>: </xsl:text>
-                                            <xsl:value-of select=".//tei:imprint/tei:publisher"/>
-                                        </xsl:if>
+                                        
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
                                         <xsl:if test=".//tei:series">
-                                            <xsl:text>. </xsl:text>
-                                            <xsl:value-of select=".//tei:title[@level='s']"/>
-                                            <xsl:if test=".//tei:series/tei:biblScope[@unit='volume']">
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select=".//tei:series/tei:biblScope[@unit='volume']"/>
-                                            </xsl:if>
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
-                                        <xsl:text>. </xsl:text>
-                                        <xsl:if test=".//tei:note[@type='url']">
-                                            <a href="{.//tei:note[@type='url']}"><xsl:value-of select=".//tei:note[@type='url']"/></a>
-                                            <xsl:text>. </xsl:text>
-                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
                                     </xsl:when>
                                     <xsl:otherwise></xsl:otherwise>
                                 </xsl:choose>
@@ -679,6 +216,157 @@
                 </ul>
             </xsl:for-each-group>
         </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:analytic" mode="any">
+        <xsl:if test="./tei:author">
+            <xsl:for-each select="./tei:author">
+                <span class="author">
+                    <xsl:value-of select="./tei:surname"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="./tei:forename"/>
+                </span>
+                <xsl:if test="position() != last()">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:text>. </xsl:text>
+        </xsl:if>
+        <span class="title-a"><xsl:value-of select="./tei:title[@level='a']"/></span>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="tei:monogr" mode="bookSection">
+        <xsl:text>In </xsl:text>
+        <span class="italic title-m"><xsl:value-of select="./tei:title[@level='m']"/></span>
+        <xsl:text>, hg. </xsl:text>
+        <xsl:if test="./tei:editor">
+            <xsl:for-each select="./tei:editor">
+                <span class="author">
+                    <xsl:value-of select="./tei:surname"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="./tei:forename"/>
+                </span>
+                <xsl:if test="position() != last()">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:if>
+        <xsl:apply-templates select="tei:imprint"/>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="tei:monogr" mode="journalArticle">
+        <xsl:text>In </xsl:text>
+        <span class="italic title-j"><xsl:value-of select="./tei:title[@level='j']"/></span>
+        <xsl:apply-templates select="tei:imprint"/>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="tei:monogr" mode="book">
+        <xsl:if test="./tei:editor">
+            <xsl:for-each select="./tei:editor">
+                <span class="author">
+                    <xsl:value-of select="./tei:surname"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="./tei:forename"/>
+                </span>
+                <xsl:if test="position() != last()">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:text>. </xsl:text>
+        </xsl:if>
+        <xsl:if test="./tei:respStmt">
+            <xsl:for-each select="./tei:respStmt/tei:persName">
+                <xsl:value-of select="./tei:surname"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="./tei:forename"/>
+                <xsl:if test="position() != last()">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:text>. </xsl:text>
+        </xsl:if>
+        <xsl:if test="./tei:author">
+            <xsl:for-each select="./tei:author">
+                <span class="author">
+                    <xsl:value-of select="./tei:surname"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="./tei:forename"/>
+                </span>
+                <xsl:if test="position() != last()">
+                    <xsl:text>, </xsl:text>
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:text>. </xsl:text>
+        </xsl:if>
+        <span class="italic title-m"><xsl:value-of select="./tei:title[@level='m']"/></span>
+        <xsl:apply-templates select="tei:imprint"/>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="tei:series" mode="any">
+        <span class="title-s"><xsl:value-of select="./tei:title[@level='s']"/></span>
+        <xsl:if test="./tei:biblScope[@unit='volume']">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="./tei:biblScope[@unit='volume']"/>
+        </xsl:if>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
+    
+    <xsl:template name="url">
+        <xsl:for-each select=".//tei:imprint/tei:note[@type='url']">
+            <a class="url" href="{.}"><xsl:apply-templates/></a>
+            <xsl:text>. </xsl:text>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template name="date">
+        <xsl:for-each select=".//tei:imprint/tei:date">
+            <span class="date"><xsl:apply-templates/></span>
+            <xsl:text>. </xsl:text>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template match="tei:imprint">
+        <xsl:if test="./tei:biblScope[@unit='volume']">
+            <xsl:text>, </xsl:text>
+            <span class="bibl-vol">
+                <xsl:value-of select="./tei:biblScope[@unit='volume']"/>
+            </span>
+        </xsl:if>
+        <xsl:if test="./tei:biblScope[@unit='issue']">
+            <xsl:text>/</xsl:text>
+            <span class="bibl-issue">
+                <xsl:value-of select="./tei:biblScope[@unit='issue']"/>
+            </span>
+        </xsl:if>
+        <xsl:if test="./tei:biblScope[@unit='page']">
+            <xsl:text>, S. </xsl:text>
+            <span class="bibl-page">
+                <xsl:value-of select="./tei:biblScope[@unit='page']"/>
+            </span>
+        </xsl:if>
+        <xsl:if test="./tei:pubPlace">
+            <xsl:text>. </xsl:text>
+            <span class="bibl-pubPlace">
+                <xsl:value-of select="./tei:pubPlace"/>
+            </span>
+            <xsl:choose>
+                <xsl:when test="./tei:publisher">
+                    <xsl:text>: </xsl:text>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:if>
+        <xsl:if test="./tei:publisher">
+            <xsl:if test="not(./tei:pubPlace)">
+                <xsl:text>. </xsl:text>
+            </xsl:if>
+            <span class="bibl-pub">
+                <xsl:value-of select="./tei:publisher"/>
+            </span>
+        </xsl:if>
     </xsl:template>
     
 </xsl:stylesheet>

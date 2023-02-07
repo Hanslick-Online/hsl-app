@@ -5,7 +5,7 @@ var editor = new LoadEditor({
         {
           opt: "entities-features",
           opt_slider: "entities-features-slider",
-          title: "All Entities",
+          title: "Alle Inhalte",
           color: "grey",
           html_class: "undefined",
           css_class: "undefined",
@@ -22,7 +22,7 @@ var editor = new LoadEditor({
         {
           opt: "prs",
           color: "pink",
-          title: "Persons",
+          title: "Personen",
           html_class: "persons",
           css_class: "pers",
           hide: {
@@ -38,7 +38,7 @@ var editor = new LoadEditor({
         {
           opt: "plc",
           color: "gold",
-          title: "Places",
+          title: "Orte",
           html_class: "places",
           css_class: "plc",
           hide: {
@@ -54,7 +54,7 @@ var editor = new LoadEditor({
         {
           opt: "wrk",
           color: "turquoise",
-          title: "Literature",
+          title: "Werke",
           html_class: "works",
           css_class: "wrk",
           chg_citation: "citation-url",
@@ -82,7 +82,7 @@ var editor = new LoadEditor({
       variants: [
         {
           opt: "ff",
-          title: "Font family",
+          title: "Schriftart",
           urlparam: "ff",
           chg_citation: "citation-url",
           fonts: {
@@ -121,7 +121,7 @@ var editor = new LoadEditor({
       variants: [
         {
           opt: "fs",
-          title: "Font size",
+          title: "Schriftgröße",
           urlparam: "fs",
           chg_citation: "citation-url",
           sizes: {

@@ -153,12 +153,20 @@ mark {
     margin: 1em auto;
 }
 
-.index-list h1, h2, h3, h5 {
+.index-list h1, .index-list h2, .index-list h3, .index-list h5 {
     text-align: center;
 }
 
-.index-list h1, h2, h3 {
+.index-list h1, .index-list h2, .index-list h3 {
     margin: 2em auto 0 auto;
+}
+
+.publications {
+    padding-left: 0;
+}
+
+.publications li {
+    list-style: none;
 }
 
 .dataTables_info {
