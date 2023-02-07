@@ -25,6 +25,12 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
+                                        <a class="dropdown-item" href="einfuehrung-vms.html"
+                                            title="Einführung">
+                                            Hanslick Ästhetik: Entstehung und Einführung
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="bedeutung-hanslick.html">
                                             Hanslicks historische Bedeutung
                                         </a>
@@ -45,56 +51,29 @@
                             
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Traktat
+                                    Edition
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="einfuehrung-vms.html"
-                                            title="Einführung VMS">
-                                            Hanslick Ästhetik: Entstehung und Einführung
-                                        </a>
-                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html"
                                             title="Auflage 1">
-                                            Applikation und Digitalisate
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html"
-                                            title="Editionsrichtlinine">
-                                            Editionsrichtlinine und How to Cite
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Kritiken
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="einfuehrung-vms.html"
-                                            title="Einführung VMS">
-                                            Hanslick Ästhetik: Entstehung und Einführung
+                                            Traktat
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc.html"
                                             title="Übersicht">
-                                            Applikation und Digitalisate
+                                            Kritiken
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html"
                                             title="Editionsrichtlinine">
-                                            Editionsrichtlinine und How to Cite
+                                            Editionsrichtlinien und Zitiervorschlag
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Indexes
