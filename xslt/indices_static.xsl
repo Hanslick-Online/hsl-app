@@ -118,7 +118,7 @@
                                         
                                         <xsl:call-template name="date"/>
                                         <xsl:apply-templates select="tei:analytic" mode="any"/>
-                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
                                             <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
@@ -201,7 +201,7 @@
                                     <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
                                         
                                         <xsl:apply-templates select="tei:analytic" mode="any"/>
-                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
                                             <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
