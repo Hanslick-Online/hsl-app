@@ -45,7 +45,7 @@ current_schema = {
         },
         {
             'name': 'date',
-            'type': 'int64',
+            'type': 'int32',
             'optional': True,
             'facet': True,
         },
@@ -131,7 +131,7 @@ for x in tqdm(files, total=len(files)):
 
         try:
             record['year'] = int(date_str[:4])
-            record['date'] = date_seq
+            record['date'] = int(date_seq)
             cfts_record['year'] = int(date_str[:4])
         except ValueError:
             pass

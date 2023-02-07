@@ -194,8 +194,8 @@ search.addWidgets([
     container: "#sort-by",
     items: [
       { label: "Default", value: "hsl" },
-      { label: "Year (asc)", value: "hsl/sort/year:asc" },
-      { label: "Year (desc)", value: "hsl/sort/year:desc" },
+      { label: "Year (asc)", value: "hsl/sort/date:asc" },
+      { label: "Year (desc)", value: "hsl/sort/date:desc" },
     ],
   }),
 
