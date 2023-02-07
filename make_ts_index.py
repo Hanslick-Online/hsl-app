@@ -1,5 +1,7 @@
 import glob
 import os
+import time
+import datetime
 
 from typesense.api_call import ObjectNotFound
 from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
@@ -38,6 +40,12 @@ current_schema = {
         {
             'name': 'year',
             'type': 'int32',
+            'optional': True,
+            'facet': True,
+        },
+        {
+            'name': 'date',
+            'type': 'int64',
             'optional': True,
             'facet': True,
         },
@@ -102,12 +110,14 @@ for x in tqdm(files, total=len(files)):
         record['rec_id'] = os.path.split(x)[-1]
         cfts_record['rec_id'] = record['rec_id']
         r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@type="main"]/text()')).split())
-        s_title = " ".join(" ".join(doc.any_xpath('.//tei:sourceDesc//tei:edition/text()')).split())
-        title = f"{r_title} {s_title}"
+        s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0].replace("0", "")
+        title = f"{r_title} {s_title}. Auflage"
         record['title'] = f"{title} chapter {str(pages - 1)}"
         cfts_record['title'] = record['title']
         try:
             date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
+            date_seq = f"{date_str}-{s_title}-01"
+            date_seq = time.mktime(datetime.datetime.strptime(date_seq, "%Y-%m-%d").timetuple())
         except IndexError:
             try:
                 date_str = doc.any_xpath('//tei:sourceDesc//tei:date/text()')[0]
@@ -115,11 +125,13 @@ for x in tqdm(files, total=len(files)):
                 date_str = "0"
         if len(date_str) > 3:
             date_str = date_str
+            date_seq = date_seq
         else:
             date_str = "1854"
 
         try:
             record['year'] = int(date_str[:4])
+            record['date'] = date_seq
             cfts_record['year'] = int(date_str[:4])
         except ValueError:
             pass

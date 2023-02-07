@@ -76,7 +76,7 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Indexes
+                                    Indizes
                                 </a>
                                 <ul class="dropdown-menu">
                                     <xsl:for-each select="collection('../../data/indices')//tei:TEI">
