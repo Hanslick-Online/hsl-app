@@ -110,9 +110,9 @@ for x in tqdm(files, total=len(files)):
         record['rec_id'] = os.path.split(x)[-1]
         cfts_record['rec_id'] = record['rec_id']
         r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@type="main"]/text()')).split())
-        s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0].replace("0", "")
+        s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
         title = f"{r_title} {s_title}. Auflage"
-        record['title'] = f"{title} chapter {str(pages - 1)}"
+        record['title'] = f"{title} - Kapitel {str(pages)}"
         cfts_record['title'] = record['title']
         try:
             date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
