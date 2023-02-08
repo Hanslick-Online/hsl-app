@@ -77,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listperson', 'Search:', [2, 5, 6], [0, 1, 3, 4], false);
+                                createDataTable('listperson', 'Search:', [1, 4, 5], [0, 2, 3], false);
                             });
                         </script>
                     </xsl:when>
@@ -94,7 +94,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listbibl', 'Search:', [2, 4], [0, 1, 3], false);
+                                createDataTable('listbibl', 'Search:', [1, 3], [0, 2], false);
                             });
                         </script>
                     </xsl:when>
@@ -113,7 +113,6 @@
                  <thead>
                      <tr>
                          <th>Name</th>
-                         <th>Alternative Schreibweise</th>
                          <th>Typ</th>
                          <th>GND</th>
                          <th>Wikidata</th>
@@ -248,7 +247,6 @@
                 <thead>
                     <tr>
                         <th>Titel</th>
-                        <th>Alternativtitel</th>
                         <th>Autor</th>
                         <th>Wikidata ID</th>
                         <th>Erwähnt #</th>
