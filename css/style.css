@@ -44,6 +44,10 @@ h3 {
     cursor: pointer;
 }
 
+.yes-index {
+    text-align: justify;
+}
+
 .modal-body table tbody tr th, .modal-body table tbody tr td {
     border: none;
 }
