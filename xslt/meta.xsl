@@ -24,7 +24,7 @@
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
                     
-                    <div class="container" style="margin-top:1em;">
+                    <div class="container-fluid" style="margin-top:1em;">
                         <div class="row">
                             <div class="col-md-12">
                                <xsl:for-each select="//tei:body/tei:div[@type='main']">

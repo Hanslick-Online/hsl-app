@@ -138,9 +138,6 @@
                                 </a>
                             </td>
                             <td>
-                                <xsl:value-of select="./tei:persName[@type='alternative']"/>
-                            </td>
-                            <td>
                                 <xsl:value-of select="@role"/>
                             </td>
                             <td>
@@ -264,9 +261,6 @@
                                 <a href="{concat(@xml:id, '.html')}">
                                     <xsl:value-of select="./tei:title[@type='main']"/>
                                 </a>
-                            </td>
-                            <td>
-                                <xsl:value-of select="./tei:title[@type='alternative']"/>
                             </td>
                             <td>
                                 <ul>
