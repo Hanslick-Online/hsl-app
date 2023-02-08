@@ -60,16 +60,6 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:persName[@type='alternative']">
-                                                    <tr>
-                                                        <th>
-                                                            Alternativname
-                                                        </th>
-                                                        <td>
-                                                            <xsl:value-of select="./tei:persName/tei:forename"/>
-                                                        </td>
-                                                    </tr>
-                                                </xsl:if>
                                                 <xsl:if test="./tei:birth/tei:date">
                                                 <tr>
                                                     <th>
@@ -393,16 +383,6 @@
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:title[@type='main']"/>
-                                                        </td>
-                                                    </tr>
-                                                </xsl:if>
-                                                <xsl:if test="./tei:title">
-                                                    <tr>
-                                                        <th>
-                                                            Alternativtitel
-                                                        </th>
-                                                        <td>
-                                                            <xsl:value-of select="./tei:title[@type='alternative']"/>
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
