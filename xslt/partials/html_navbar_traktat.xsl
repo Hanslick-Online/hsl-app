@@ -63,7 +63,7 @@
                                     <li>
                                         <a class="dropdown-item" href="10_VMS_1902_TEI_AW_26-01-21-TEI-P5.html">Auflage 10 (1902)</a>
                                     </li>-->
-                                    <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
+                                    <!--<xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
                                         <xsl:sort select="tokenize(document-uri(/), '/')[last()]" />
                                         <xsl:choose>
                                             <xsl:when test="position() = 1">
@@ -84,7 +84,7 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                         
-                                    </xsl:for-each>
+                                    </xsl:for-each>-->
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -97,9 +97,9 @@
                                             [Deckblatt / Title Page]
                                         </a>
                                     </li>
-                                    <xsl:for-each select=".//tei:body/tei:div/tei:head">
+                                    <xsl:for-each select=".//tei:body/tei:div/tei:h2">
                                         <li>
-                                            <a class="dropdown-item" href="#index.xml-body.1_div.{position()}">
+                                            <a class="dropdown-item" href="#index.xml-body.1_div.{@xml:id}">
                                                 <xsl:choose>
                                                     <xsl:when test="contains(. ,'a)')">
                                                         <xsl:variable name="chapter" select="tokenize(., 'I')"/>

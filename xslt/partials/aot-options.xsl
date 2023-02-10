@@ -24,9 +24,9 @@
                 <!--<li class="dropdown-item">
                     <full-size opt="edition-fullsize"></full-size>
                 </li>-->
-                <!--<li class="dropdown-item">
+                <li class="dropdown-item">
                     <image-switch opt="edition-switch"></image-switch>
-                </li>-->
+                </li>
                 <li class="dropdown-item">
                     <font-size opt="fs"></font-size>
                 </li>
