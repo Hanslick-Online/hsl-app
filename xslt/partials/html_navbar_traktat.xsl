@@ -97,18 +97,18 @@
                                             [Deckblatt / Title Page]
                                         </a>
                                     </li>
-                                    <xsl:for-each select=".//tei:body/tei:div/tei:h2">
+                                    <xsl:for-each select=".//tei:body/tei:div">
                                         <li>
-                                            <a class="dropdown-item" href="#index.xml-body.1_div.{@xml:id}">
+                                            <a class="dropdown-item" href="#index.xml-body.1_div.{position()}">
                                                 <xsl:choose>
-                                                    <xsl:when test="contains(. ,'a)')">
-                                                        <xsl:variable name="chapter" select="tokenize(., 'I')"/>
+                                                    <xsl:when test="contains(.//text() ,'a)')">
+                                                        <xsl:variable name="chapter" select="tokenize(.//text(), 'I')"/>
                                                         I. <xsl:value-of select="$chapter[2]"/>
                                                         <br/>
                                                         I. <xsl:value-of select="$chapter[3]"/>
                                                     </xsl:when>
                                                     <xsl:otherwise>
-                                                        <xsl:value-of select="."/>
+                                                        <xsl:value-of select=".//text()"/>
                                                     </xsl:otherwise>
                                                 </xsl:choose>
                                             </a>
