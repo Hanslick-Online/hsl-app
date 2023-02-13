@@ -29,7 +29,7 @@
                             <div class="intro_text">
                                 <h1>Digitale Edition</h1>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">Traktat</a>
+                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?img=off">Traktat</a>
                                 </button>
                                 <button type="button" class="btn text-light btn-index">
                                     <a href="toc.html">Kritiken</a>

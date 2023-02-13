@@ -22,6 +22,7 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script>
             </head>
             
             <body class="page">
@@ -29,43 +30,39 @@
                     <xsl:call-template name="nav_bar"/>
                     
                     <div class="container-fluid">
-                        <div class="row" style="margin:2em auto;">
-                            <div class="col-md-8">
-                            </div>
-                            <div class="col-md-2" style="text-align:right;">
-                                <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
-                            </div>
-                            <div class="col-md-2" style="text-align:right;">
-                                <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
-                            </div>
-                        </div>
-                        <div class="section">
-                            <xsl:call-template name="annotation-options"></xsl:call-template>
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-md-6 facsimiles">
-                                        <xsl:variable name="facs_item" select="tokenize(//tei:front/tei:pb/@facs, '/')[5]"/> 
-                                        <xsl:variable name="osd_container_id" select="concat('container_', $facs_item)"/>
-                                        <xsl:variable name="osd_container_id2" select="concat('container2_', $facs_item)"/>
-                                        <div id="viewer-{position()}">
-                                            <div id="spinner_{$osd_container_id}" class="text-center">
-                                                <div class="loader"></div>
-                                            </div>
-                                            <div id="{$osd_container_id}" style="padding:.5em;">
-                                                <!-- image container accessed by OSD script -->                                           
-                                                <div id="{$osd_container_id2}">                                                                                        
-                                                    <span class="tei-xml-images" 
-                                                        dta-source="{$osd_container_id2}" 
-                                                        dta-target="{$osd_container_id}" 
-                                                        id="{$facs_item}" 
-                                                        dta-src="https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/{$facs_item}.jp2/full/max/0/default.jpg">
-                                                        LOADING IMG
-                                                    </span>
-                                                </div>                                
-                                            </div>  
-                                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 facsimiles">
+                                <div id="viewer-1" style="position:fixed;">
+                                    <div id="spinner_1" class="text-center">
+                                        <div class="loader"></div>
                                     </div>
-                                    <div class="col-md-6 text">
+                                    <div id="container_facs_1" style="padding:.5em;margin-top:4em;">
+                                        <!-- image container accessed by OSD script -->                                           
+                                        <div id="container_facs_2">                                                                                        
+                                            <xsl:for-each select="//tei:pb">
+                                                <xsl:variable name="facs_item" select="tokenize(@facs, '/')[last()]"/>
+                                                <span class="tei-xml-images"  
+                                                    dta-src="https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/{$facs_item}.jp2/full/max/0/default.jpg">
+                                                    LOADING IMG
+                                                </span>
+                                            </xsl:for-each>
+                                        </div>                                
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="col-md-6 text">
+                                <div class="row" style="margin:2em auto;">
+                                    <div class="col-md-6" style="text-align:right;">
+                                        <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
+                                    </div>
+                                    <div class="col-md-6" style="text-align:right;">
+                                        <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
+                                    </div>
+                                </div>
+                                <div class="section" id="section-1">
+                                    <xsl:call-template name="annotation-options"></xsl:call-template>
+                                    <div class="card-header">
                                         <div class="docTitle">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
                                             <div class="titlePart">
@@ -98,174 +95,44 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                            </div>
-                            <div class="card-body">                                
-                                <xsl:for-each select=".//tei:body/tei:div">
+                                    <div class="card-body">                                
+                                        <xsl:for-each select=".//tei:body/tei:div">
+                                            
+                                            <xsl:apply-templates/>
 
-                                    <div class="row section">
-                                        <div class="col-md-12">
-                                            <div class="section-traktat">
-                                                
-                                                <xsl:for-each-group select="*|./tei:p/*" group-ending-with="tei:pb">
-
-                                                    <div class="row">
-                                                        <div class="col-md-6 facsimiles">
-                                                            <div class="facsimiles-{position()}">
-                                                                <xsl:for-each select="current-group()[self::tei:pb]">
-                                                                <xsl:if test="name() = 'pb'">
-                                                                    <xsl:variable name="facs_item" select="tokenize(@facs, '/')[5]"/> 
-                                                                    <xsl:variable name="osd_container_id" select="concat('container_', $facs_item)"/>
-                                                                    <xsl:variable name="osd_container_id2" select="concat('container2_', $facs_item)"/>
-                                                                    <div id="viewer-{position()}">
-                                                                        <div id="spinner_{$osd_container_id}" class="text-center">
-                                                                            <div class="loader"></div>
-                                                                        </div>
-                                                                        <div id="{$osd_container_id}" style="padding:.5em;">
-                                                                            <!-- image container accessed by OSD script -->                                           
-                                                                            <div id="{$osd_container_id2}">                                                                                        
-                                                                                <span class="tei-xml-images" 
-                                                                                    dta-source="{$osd_container_id2}" 
-                                                                                    dta-target="{$osd_container_id}" 
-                                                                                    id="{$facs_item}"
-                                                                                    dta-src="https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/{$facs_item}.jp2/full/max/0/default.jpg">
-                                                                                    LOADING IMG
-                                                                                </span>
-                                                                            </div>                                
-                                                                        </div>  
-                                                                    </div>
-                                                                </xsl:if>
-                                                                <!--<xsl:if test="name() = 'p'">
-                                                                    <xsl:for-each select="./tei:pb">
-                                                                        <xsl:variable name="facs_item" select="tokenize(@facs, '/')[5]"/>
-                                                                        <xsl:variable name="osd_container_id" select="concat('container_', $facs_item)"/>
-                                                                        <xsl:variable name="osd_container_id2" select="concat('container2_', $facs_item)"/>
-                                                                        <div id="viewer-{position()}">
-                                                                            <div id="spinner_{$osd_container_id}" class="text-center">
-                                                                                <div class="loader"></div>
-                                                                            </div>
-                                                                            <div id="{$osd_container_id}" style="padding:.5em;">
-                                                                                <!-\- image container accessed by OSD script -\->                                           
-                                                                                <div id="{$osd_container_id2}">                                                                                        
-                                                                                    
-                                                                                    <span class="tei-xml-images" dta="{$osd_container_id2}" dtat="{$osd_container_id}" id="{$facs_item}" src="traktat-facs/00{//tei:sourceDesc//tei:edition/@n}/jpg/{$facs_item}.jpg">IMG</span>  
-                                                                                    
-                                                                                </div>                                
-                                                                            </div>  
-                                                                        </div>
-                                                                    </xsl:for-each>            
-                                                                </xsl:if>-->   
-                                                                </xsl:for-each>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 text">
-                                                            <div class="text-{position()}">
-                                                                <xsl:for-each select="current-group()[self::tei:p|self::tei:h2|self::tei:pb]">
-                                                                <xsl:if test="name() = 'h2'">
-                                                                    <xsl:variable name="div_pos" select="@xml:id"/>
-                                                                    <xsl:choose>
-                                                                        <xsl:when test="contains(. ,'a)')">
-                                                                            <xsl:variable name="chapter" select="tokenize(., 'I')"/>
-                                                                            <a class="anchor" id="index.xml-body.1_div.{$div_pos}"></a>
-                                                                            <h3>
-                                                                                I. <xsl:value-of select="$chapter[2]"/>
-                                                                                <br/>
-                                                                                I. <xsl:value-of select="$chapter[3]"/>
-                                                                            </h3>
-                                                                        </xsl:when>
-                                                                        <xsl:otherwise>
-                                                                            <a class="anchor" id="index.xml-body.1_div.{$div_pos}"></a>
-                                                                            <h3>
-                                                                                <xsl:value-of select="."/>
-                                                                            </h3>
-                                                                        </xsl:otherwise>
-                                                                    </xsl:choose>
-                                                                </xsl:if>
-                                                                <xsl:if test="name() = 'p'">
-                                                                    <p id="{@xml:id}" class="indentedP yes-index">
-                                                                        <a>
-                                                                            <xsl:choose>
-                                                                                <xsl:when test="@n">
-                                                                                    <xsl:attribute name="href">
-                                                                                        <xsl:value-of select="concat('diff_', @n, '.html')"/>
-                                                                                    </xsl:attribute>
-                                                                                    <xsl:attribute name="class">
-                                                                                        <xsl:text>parNum nounderline</xsl:text>
-                                                                                    </xsl:attribute>
-                                                                                </xsl:when>
-                                                                                <xsl:otherwise>
-                                                                                    <xsl:attribute name="class">
-                                                                                        <xsl:text>noParNum nounderline</xsl:text>
-                                                                                    </xsl:attribute>
-                                                                                </xsl:otherwise>
-                                                                            </xsl:choose>
-                                                                            <xsl:value-of select="replace(@n, 'xyz', '')"/>
-                                                                        </a>
-                                                                        <xsl:apply-templates/>
-                                                                    </p>
-                                                                </xsl:if>
-                                                                <xsl:if test="name() = 'pb' and parent::tei:div">
-                                                                    <xsl:choose>
-                                                                        <xsl:when test="ancestor::tei:p and not(preceding-sibling::tei:list)">
-                                                                            <span class="pb"><xsl:value-of select="@n"/></span>
-                                                                        </xsl:when>
-                                                                        <xsl:when test="ancestor::tei:p and preceding-sibling::tei:list">
-                                                                            <p class="indentedP"><span class="pb"><xsl:value-of select="@n"/></span></p>
-                                                                        </xsl:when>
-                                                                        <xsl:when test="ancestor::tei:list">
-                                                                            <span class="pbl"><xsl:value-of select="@n"/></span>
-                                                                        </xsl:when>
-                                                                        <xsl:when test="ancestor::tei:note">
-                                                                            <span class="pb"><xsl:value-of select="@n"/></span>
-                                                                        </xsl:when>
-                                                                        <xsl:otherwise>
-                                                                            <p class="indentedP"><span class="pb"><xsl:value-of select="@n"/></span></p>
-                                                                        </xsl:otherwise>
-                                                                    </xsl:choose>
-                                                                </xsl:if>
-                                                                </xsl:for-each>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                        
-                                                    
-                                                </xsl:for-each-group>
-                                                
-                                            </div>
-                                        </div>
+                                        </xsl:for-each>
                                     </div>
-                                    
+                                    <div class="card-footer">
+                                        <a class="anchor" id="index.xml-body.1_div.999"></a>
+                                        <h5>Fußnoten</h5>
+                                        <ul class="footnotes">
+                                            <xsl:for-each select=".//tei:body//tei:note[@place='foot']">
+                                                <li>
+                                                    <a class="anchorFoot" id="{@xml:id}"></a>
+                                                    <span class="footnote_link">
+                                                        <a href="#{@xml:id}_inline" class="nounderline">
+                                                            <xsl:value-of select="@n"/>
+                                                        </a>
+                                                    </span>
+                                                    <span class="footnote_text">
+                                                        <xsl:apply-templates select="node() except tei:pb"/>
+                                                    </span>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
+                                <xsl:for-each select="//tei:back">
+                                    <div class="tei-back">
+                                        
+                                        <xsl:apply-templates/>
+                                        
+                                    </div>
                                 </xsl:for-each>
                             </div>
-                            <div class="card-footer">
-                                <a class="anchor" id="index.xml-body.1_div.999"></a>
-                                <h5>Fußnoten</h5>
-                                <ul class="footnotes">
-                                    <xsl:for-each select=".//tei:body//tei:note[@place='foot']">
-                                        <li>
-                                            <a class="anchorFoot" id="{@xml:id}"></a>
-                                            <span class="footnote_link">
-                                                <a href="#{@xml:id}_inline" class="nounderline">
-                                                    <xsl:value-of select="@n"/>
-                                                </a>
-                                            </span>
-                                            <span class="footnote_text">
-                                                <xsl:apply-templates select="node() except tei:pb"/>
-                                            </span>
-                                        </li>
-                                    </xsl:for-each>
-                                </ul>
-                                
-                            </div>
                         </div>
-                        <xsl:for-each select="//tei:back">
-                            <div class="tei-back">
-                                
-                                <xsl:apply-templates/>
-                                
-                            </div>
-                        </xsl:for-each>
+                        
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
@@ -279,12 +146,28 @@
                 </script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
                 <script type="text/javascript" src="js/mark.js"></script>
-                <script type="text/javascript" src="js/osd_single.js"></script>
+                <script type="text/javascript" src="js/osd.js"></script>
             </body>
         </html>
     </xsl:template>
                    
-    <xsl:template match="tei:div/tei:head"/>
+    <xsl:template match="tei:head"/>
+    
+    <xsl:template match="tei:h2">
+        <h2>
+        <xsl:choose>
+            <xsl:when test="contains(. ,'a)')">
+                <xsl:variable name="chapter" select="tokenize(., 'I')"/>
+                I. <xsl:value-of select="$chapter[2]"/>
+                <br/>
+                I. <xsl:value-of select="$chapter[3]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+        </h2>
+    </xsl:template>
     
     <xsl:template match="tei:byline">
         <xsl:if test="ancestor::tei:body">
@@ -292,7 +175,7 @@
         </xsl:if>
     </xsl:template>
     
-    <!--<xsl:template match="tei:p">
+    <xsl:template match="tei:p">
         <p id="{@xml:id}" class="indentedP yes-index">
             <a>
                 <xsl:choose>
@@ -314,7 +197,7 @@
             </a>
             <xsl:apply-templates/>
         </p>
-    </xsl:template>-->
+    </xsl:template>
     <xsl:template match="tei:lb">
         <br/>
     </xsl:template>

@@ -1,25 +1,35 @@
 // change css styles to remove html images and set height for script repacement
-$('#non-OSD-images').css({
-    'display': 'none'
-});
-$('#OSD-images').css({
-    'height': '400px'
-});
+var container = document.getElementById("container_facs_2");
+container.style.display = "none";
 // OpenSeaDragon Image Viewer
-var tileSources =[];
-document.body.querySelectorAll('.tei-xml-images').forEach(function (node) {
-    var imageURL = node.getAttribute('src');
-    tileSources.push({
-        type: 'image', url: imageURL
-    });
-});
+var height = screen.height;
+// set osd container height
+var container = document.getElementById("container_facs_1");
+container.style.height = `${String(height - 400)}px`;
+// set osd wrapper container width
+var container = document.getElementById("section-1");
+if (container !== null) {
+    var width = container.clientWidth;
+}
+var container = document.getElementById("viewer-1");
+container.style.width = `${String(width)}px`;
+
+var tileSources = [];
+var img = document.getElementsByClassName("tei-xml-images");
+for (let i of img) {
+    var image = i.getAttribute("dta-src");
+    var imageURL = {type: 'image', url: image};
+    tileSources.push(imageURL);
+}
+
 var viewer = OpenSeadragon({
-    id: 'OSD-images',
+    id: 'container_facs_1',
     prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/images/',
     sequenceMode: true,
-    showReferenceStrip: true,
     showNavigator: true,
     imageLoaderLimit: 10,
     tileSources: tileSources
 });
-$('#non-OSD-images').remove();
+setTimeout(function() {
+    document.getElementById("container_facs_2").remove();
+}, 1000);

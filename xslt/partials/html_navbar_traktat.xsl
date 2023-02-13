@@ -63,12 +63,12 @@
                                     <li>
                                         <a class="dropdown-item" href="10_VMS_1902_TEI_AW_26-01-21-TEI-P5.html">Auflage 10 (1902)</a>
                                     </li>-->
-                                    <!--<xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
+                                    <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
                                         <xsl:sort select="tokenize(document-uri(/), '/')[last()]" />
                                         <xsl:choose>
                                             <xsl:when test="position() = 1">
                                                 <li>
-                                                    <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                                    <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}?img=off"
                                                         title="">
                                                         <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                                     </a>
@@ -76,7 +76,7 @@
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <li>
-                                                    <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                                    <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}?img=off"
                                                         title="">
                                                         <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                                     </a>
@@ -84,7 +84,7 @@
                                             </xsl:otherwise>
                                         </xsl:choose>
                                         
-                                    </xsl:for-each>-->
+                                    </xsl:for-each>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
