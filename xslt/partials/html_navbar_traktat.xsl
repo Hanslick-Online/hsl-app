@@ -101,14 +101,14 @@
                                         <li>
                                             <a class="dropdown-item" href="#index.xml-body.1_div.{position()}">
                                                 <xsl:choose>
-                                                    <xsl:when test="contains(.//text() ,'a)')">
-                                                        <xsl:variable name="chapter" select="tokenize(.//text(), 'I')"/>
+                                                    <xsl:when test="contains(. ,'a)')">
+                                                        <xsl:variable name="chapter" select="tokenize(., 'I')"/>
                                                         I. <xsl:value-of select="$chapter[2]"/>
                                                         <br/>
                                                         I. <xsl:value-of select="$chapter[3]"/>
                                                     </xsl:when>
                                                     <xsl:otherwise>
-                                                        <xsl:value-of select=".//text()"/>
+                                                        <xsl:value-of select="."/>
                                                     </xsl:otherwise>
                                                 </xsl:choose>
                                             </a>
