@@ -150,10 +150,9 @@
             </body>
         </html>
     </xsl:template>
-                   
-    <xsl:template match="tei:head"/>
+                  
     
-    <xsl:template match="tei:h2">
+    <xsl:template match="tei:head">
         <h2>
         <xsl:choose>
             <xsl:when test="contains(. ,'a)')">

@@ -21,15 +21,4 @@
 
     <move file="./data/indices/listbibl_static.xml" tofile="${meta}/publikationen.xml"/>
 
-    <mkdir dir="${editions}/tmp"/>
-
-    <xslt style="${preprocess}"  basedir="${editions}" destdir="${editions}/tmp" includes="*.xml" extension=".xml">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
-
-    <move todir="${editions}">
-        <fileset dir="${editions}/tmp"/>
-    </move>
-
 </project>
