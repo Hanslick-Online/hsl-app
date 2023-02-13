@@ -68,7 +68,7 @@
                                         <xsl:choose>
                                             <xsl:when test="position() = 1">
                                                 <li>
-                                                    <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}?img=off"
+                                                    <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
                                                         title="">
                                                         <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                                     </a>
@@ -76,7 +76,7 @@
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <li>
-                                                    <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}?img=off"
+                                                    <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
                                                         title="">
                                                         <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                                     </a>

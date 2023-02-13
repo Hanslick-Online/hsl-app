@@ -40,8 +40,8 @@
                                     <div id="container_facs_1" style="padding:.5em;margin-top:4em;">
                                         <!-- image container accessed by OSD script -->                                           
                                         <div id="container_facs_2">                                                                                        
-                                            <xsl:for-each select="//tei:pb">
-                                                <xsl:variable name="facs_item" select="tokenize(@facs, '/')[last()]"/>
+                                            <xsl:for-each select="//tei:surface/tei:graphic">
+                                                <xsl:variable name="facs_item" select="tokenize(@url, '/')[last()]"/>
                                                 <span class="tei-xml-images"  
                                                     dta-src="https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/{$facs_item}.jp2/full/max/0/default.jpg">
                                                     LOADING IMG
@@ -142,6 +142,7 @@
                     $(document).ready(function() {
                         $('li a.active').removeClass('active');
                         $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
+                        console.log('a[href="' + location.pathname.split("/").at(-1) + '"]');
                     });
                 </script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>

@@ -10,7 +10,7 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>test/t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.xml</String>
+                                    <String>data/traktat/editions/t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -30,11 +30,11 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>data/traktat/editions/t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.xml</String>
+                                    <String>test/t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>preprocess</String>
+                                        <String>editions</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
