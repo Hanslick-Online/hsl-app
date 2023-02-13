@@ -142,7 +142,6 @@
                     $(document).ready(function() {
                         $('li a.active').removeClass('active');
                         $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
-                        console.log('a[href="' + location.pathname.split("/").at(-1) + '"]');
                     });
                 </script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
