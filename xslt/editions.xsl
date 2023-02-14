@@ -65,6 +65,7 @@
                                     <div class="card-header">
                                         <div class="docTitle">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
+                                            <span class="pb"></span>
                                             <div class="titlePart">
                                                 <xsl:for-each select=".//tei:docTitle/tei:titlePart">
                                                     <div class="titlePart {@type}">

@@ -5,14 +5,27 @@ container.style.display = "none";
 var height = screen.height;
 // set osd container height
 var container = document.getElementById("container_facs_1");
-container.style.height = `${String(height - 400)}px`;
-// set osd wrapper container width
-var container = document.getElementById("section-1");
-if (container !== null) {
-    var width = container.clientWidth;
+var wrapper = document.getElementsByClassName("facsimiles")[0];
+
+if (!wrapper.classList.contains("fade")) {
+    container.style.height = `${String(height - 400)}px`;
+    // set osd wrapper container width
+    var container = document.getElementById("section-1");
+    if (container !== null) {
+        var width = container.clientWidth;
+    }
+    var container = document.getElementById("viewer-1");
+    container.style.width = `${String(width - 50)}px`;
+} else {
+    container.style.height = `${String(height - 400)}px`;
+    // set osd wrapper container width
+    var container = document.getElementById("section-1");
+    if (container !== null) {
+        var width = container.clientWidth;
+    }
+    var container = document.getElementById("viewer-1");
+    container.style.width = `${String(width - 600)}px`;
 }
-var container = document.getElementById("viewer-1");
-container.style.width = `${String(width - 50)}px`;
 
 var tileSources = [];
 var img = document.getElementsByClassName("tei-xml-images");
@@ -32,7 +45,7 @@ var viewer = OpenSeadragon({
 });
 setTimeout(function() {
     document.getElementById("container_facs_2").remove();
-}, 1000);
+}, 500);
 
 // Get the an HTML element
 var element = document.getElementsByClassName('pb');
@@ -66,11 +79,29 @@ window.addEventListener("scroll", function(event) {
     position = document.documentElement.scrollTop;
 }, false);
 
+var prev = document.querySelector("div[title='Previous page']");
+var next = document.querySelector("div[title='Next page']");
+prev.addEventListener("click", () => {
+    if (prev_idx >= 0) {
+        element[prev_idx].scrollIntoView();
+        idx -= 1;
+        prev_idx -= 1;
+    }
+});
+
+next.addEventListener("click", () => {
+    if(idx == 0) {
+        idx += 1;
+    }
+    element[idx].scrollIntoView();
+    idx += 1;
+    prev_idx += 1;
+});
+
 function isInViewport(element) {
     // Get the bounding client rectangle position in the viewport
     var bounding = element.getBoundingClientRect();
-    // Checking part. Here the code checks if it's *fully* visible
-    // Edit this part if you just want a partial visibility
+    // Checking part. Here the code checks if el is close to top of viewport.
     if (
         bounding.top <= 180 &&
         bounding.bottom <= 210 &&
