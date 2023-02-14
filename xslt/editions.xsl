@@ -154,7 +154,7 @@
                   
     
     <xsl:template match="tei:head">
-        <h2>
+        <h3>
         <xsl:choose>
             <xsl:when test="contains(. ,'a)')">
                 <xsl:variable name="chapter" select="tokenize(., 'I')"/>
@@ -166,7 +166,7 @@
                 <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
-        </h2>
+        </h3>
     </xsl:template>
     
     <xsl:template match="tei:byline">
