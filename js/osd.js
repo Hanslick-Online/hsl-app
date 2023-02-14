@@ -1,12 +1,28 @@
-// change css styles to remove html images and set height for script repacement
+/*
+##################################################################
+get container holding images urls as child elements
+get container for osd viewer
+get container wrapper of osd viewer
+##################################################################
+*/
 var container = document.getElementById("container_facs_2");
 container.style.display = "none";
-// OpenSeaDragon Image Viewer
+
+// container height base on screen height
 var height = screen.height;
-// set osd container height
+// container for osd viewer
 var container = document.getElementById("container_facs_1");
+// wrapper of images
 var wrapper = document.getElementsByClassName("facsimiles")[0];
 
+/*
+##################################################################
+check if osd viewer is visible or not
+if true get width from sibling container
+if false get with from sibling container divided by half
+height is always the screen height minus some offset
+##################################################################
+*/
 if (!wrapper.classList.contains("fade")) {
     container.style.height = `${String(height - 400)}px`;
     // set osd wrapper container width
@@ -24,9 +40,15 @@ if (!wrapper.classList.contains("fade")) {
         var width = container.clientWidth;
     }
     var container = document.getElementById("viewer-1");
-    container.style.width = `${String(width - 600)}px`;
+    container.style.width = `${String(width / 2)}px`;
 }
 
+/*
+##################################################################
+get all image urls stored in span el class tei-xml-images
+creates an arrow for for osd viewer with static images
+##################################################################
+*/
 var tileSources = [];
 var img = document.getElementsByClassName("tei-xml-images");
 for (let i of img) {
@@ -35,6 +57,11 @@ for (let i of img) {
     tileSources.push(imageURL);
 }
 
+/*
+##################################################################
+initialize osd
+##################################################################
+*/
 var viewer = OpenSeadragon({
     id: 'container_facs_1',
     prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/images/',
@@ -43,18 +70,28 @@ var viewer = OpenSeadragon({
     imageLoaderLimit: 20,
     tileSources: tileSources
 });
+/*
+##################################################################
+remove container holding the images url
+##################################################################
+*/
 setTimeout(function() {
     document.getElementById("container_facs_2").remove();
 }, 500);
 
-// Get the an HTML element
+
+/*
+##################################################################
+triggers on scroll and switches osd viewer image base on 
+viewport position of next and previous element with class pb
+pb = pagebreaks
+##################################################################
+*/
 var element = document.getElementsByClassName('pb');
 var idx = 0;
 var prev_idx = -1;
-
 var position = document.documentElement.scrollTop;
 
-// element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
 window.addEventListener("scroll", function(event) {
     var scroll = document.documentElement.scrollTop;
     // console.log("Position");
@@ -79,6 +116,12 @@ window.addEventListener("scroll", function(event) {
     position = document.documentElement.scrollTop;
 }, false);
 
+/*
+##################################################################
+accesses osd viewer prev and next button to switch image and
+scrolls to next or prev span element with class pb (pagebreak)
+##################################################################
+*/
 var prev = document.querySelector("div[title='Previous page']");
 var next = document.querySelector("div[title='Next page']");
 prev.addEventListener("click", () => {
@@ -88,7 +131,6 @@ prev.addEventListener("click", () => {
         prev_idx -= 1;
     }
 });
-
 next.addEventListener("click", () => {
     if(idx == 0) {
         idx += 1;
@@ -98,6 +140,11 @@ next.addEventListener("click", () => {
     prev_idx += 1;
 });
 
+/*
+##################################################################
+function to check if element is close to top of window viewport
+##################################################################
+*/
 function isInViewport(element) {
     // Get the bounding client rectangle position in the viewport
     var bounding = element.getBoundingClientRect();
