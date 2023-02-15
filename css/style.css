@@ -404,7 +404,7 @@ span {
     margin: 2em auto;
 }
 
-a.anchor {
+a.anchor, .anchor-pb {
     position: relative;
     top: -120px;
     visibility: hidden;
