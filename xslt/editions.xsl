@@ -33,7 +33,7 @@
                         
                         <div class="row">
                             <div class="col-md-6 facsimiles">
-                                <div id="viewer-1" style="position:fixed;">
+                                <div id="viewer-1">
                                     <div id="spinner_1" class="text-center">
                                         <div class="loader"></div>
                                     </div>
@@ -60,7 +60,7 @@
                                         <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
                                     </div>
                                 </div>
-                                <div class="section" id="section-1">
+                                <div class="section section-traktat" id="section-1">
                                     <xsl:call-template name="annotation-options"></xsl:call-template>
                                     <div class="card-header">
                                         <div class="docTitle">
