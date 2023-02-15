@@ -102,15 +102,45 @@ window.addEventListener("scroll", function(event) {
     // console.log(element[idx].offsetTop);
     if (scroll > position) {
         if (isInViewport(element[idx])) {
-            viewer.goToNextPage();
-            idx += 1;
-            prev_idx += 1;
+            if (idx == 0) {
+                idx += 1;
+                prev_idx += 1;
+            } else {
+                var source = element[idx - 1].getAttribute("source");
+                var current0 = viewer.world.getItemAt(0);
+                var current1 = current0.source.url;
+                var current2 = current0.source.url.split("/");
+                var current3 = current2[current2.length - 5].replace(".jp2", "");
+                if (source === current3) {
+                    viewer.goToNextPage();
+                    idx += 1;
+                    prev_idx += 1;
+                } else {
+                    var current = current1.replace(current3, source);
+                    viewer.world.getItemAt(0).source.url = current;
+                }
+            }
         }
     } else {
         if (prev_idx >= 0 && isInViewport(element[prev_idx])) {
-            viewer.goToPreviousPage();
-            idx -= 1;
-            prev_idx -= 1;
+            if (prev_idx == 0) {
+                idx -= 1;
+                prev_idx -= 1;
+            } else {
+                var source = element[idx - 1].getAttribute("source");
+                var current0 = viewer.world.getItemAt(0);
+                var current1 = current0.source.url;
+                var current2 = current0.source.url.split("/");
+                var current3 = current2[current2.length - 5].replace(".jp2", "");
+                if (source === current3) {
+                    viewer.goToPreviousPage();
+                    idx -= 1;
+                    prev_idx -= 1;
+                } else {
+                    var current = current1.replace(current3, source);
+                    viewer.world.getItemAt(0).source.url = current;
+                }
+            }
         } 
     }
     position = document.documentElement.scrollTop;
@@ -122,11 +152,12 @@ accesses osd viewer prev and next button to switch image and
 scrolls to next or prev span element with class pb (pagebreak)
 ##################################################################
 */
+var element_a = document.getElementsByClassName('anchor-pb');
 var prev = document.querySelector("div[title='Previous page']");
 var next = document.querySelector("div[title='Next page']");
 prev.addEventListener("click", () => {
     if (prev_idx >= 0) {
-        element[prev_idx].scrollIntoView();
+        element_a[prev_idx].scrollIntoView();
         idx -= 1;
         prev_idx -= 1;
     }
@@ -135,7 +166,7 @@ next.addEventListener("click", () => {
     if(idx == 0) {
         idx += 1;
     }
-    element[idx].scrollIntoView();
+    element_a[idx].scrollIntoView();
     idx += 1;
     prev_idx += 1;
 });
@@ -149,6 +180,10 @@ function isInViewport(element) {
     // Get the bounding client rectangle position in the viewport
     var bounding = element.getBoundingClientRect();
     // Checking part. Here the code checks if el is close to top of viewport.
+    // console.log("Top");
+    // console.log(bounding.top);
+    // console.log("Bottom");
+    // console.log(bounding.bottom);
     if (
         bounding.top <= 180 &&
         bounding.bottom <= 210 &&
@@ -161,10 +196,6 @@ function isInViewport(element) {
     ) {
         return true;
     } else {
-        // console.log("Top");
-        // console.log(bounding.top);
-        // console.log("Bottom");
-        // console.log(bounding.bottom);
         return false;
     }
 }
