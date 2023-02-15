@@ -486,6 +486,10 @@ a.anchorFoot {
     color: #f1f1f1;
 }
 
+.viewer-1 {
+    position: fixed;
+}
+
 /* micor editor */
 
 
@@ -742,35 +746,14 @@ input:checked + .i-slider:before {
         margin: 0;
         padding: 0;
     }
-    .pbnp {
-        right: 5%;
-        margin: 0;
-        padding: 0;
-    }
     .section-traktat {
         max-width: 80%;
         margin: 0 auto;
         padding-bottom: 1em;
     }
-    .section-traktat h3 {
-        font-size: 18px;
-    }
-    .section-traktat ul {
-        margin: 0 auto;
-    }
-    .footnotes {
-        margin: 0 auto;
-        max-width: 80%;
-    }
-    #aot-navbarNavDropdown {
-        right: 5%;
-    }
     img.figure, .figure > img {
         text-align: center;
         max-width: 80%;
-    }
-    .card-footer h5 {
-        text-align: center;
     }
 }
 
@@ -786,66 +769,20 @@ input:checked + .i-slider:before {
     .custom-logo-link {
         margin-bottom: -2.5em;
     }
-    .section-traktat {
-        max-width: 80%;
-        margin: 0 auto;
-        padding-bottom: 1em;
-    }
-    .section-traktat h3 {
-        font-size: 18px;
-    }
-    .section-traktat ul {
-        margin: 0 auto;
-    }
-    .footnotes {
-        margin: 0 auto;
-        max-width: 80%;
-    }
-    #aot-navbarNavDropdown {
-        right: 5%;
-    }
-    img.figure, .figure > img {
-        text-align: center;
-        max-width: 80%;
-    }
-    .card-footer h5 {
-        text-align: center;
-    }
 }
 
 @media (max-width: 768px) {
-    .navbar .navbar-collapse {
-        border-top: 1px solid rgba(0,0,0,.075);
-        padding-top: 2rem;
-        margin-top: .5rem;
-    }
     .img-fluid {
         width: 170px;
-    }
-    .custom-logo-link {
-        margin-bottom: -2.5em;
-    }
-    .section-traktat {
-        max-width: 80%;
-        margin: 0 auto;
-        padding-bottom: 1em;
-    }
-    .section-traktat h3 {
-        font-size: 18px;
     }
     .section-traktat ul {
         margin: 0 auto;
     }
     .footnotes {
         margin: 0 auto;
-        max-width: 80%;
     }
     #aot-navbarNavDropdown {
         right: 5%;
-    }
-    img.figure, .figure > img {
-        text-align: center;
-        max-width: 80%;
     }
     .card-footer h5 {
         text-align: center;
@@ -853,17 +790,21 @@ input:checked + .i-slider:before {
     img.image{
         max-width: 25% !important;
     }
+    .viewer-1 {
+        position: relative;
+    }
+    .facsimiles {
+        display: none;
+    }
+    .dropdown-menu li:nth-child(-n + 1) {
+        display: none !important;
+     }
+     .text {
+         padding-left: 0;
+     }
 }
 
 @media (max-width: 575px) {
-    .navbar .navbar-collapse {
-        border-top: 1px solid rgba(0,0,0,.075);
-        padding-top: 2rem;
-        margin-top: .5rem;
-    }
-    .img-fluid {
-        width: 170px;
-    }
     .custom-logo-link {
         margin-bottom: -1.6em;
     }
@@ -878,29 +819,6 @@ input:checked + .i-slider:before {
         max-width: 70%;
         margin: 0 auto;
         padding-bottom: 1em;
-    }
-    .section-traktat h3 {
-        font-size: 18px;
-    }
-    .section-traktat ul {
-        margin: 0 auto;
-    }
-    .footnotes {
-        margin: 0 auto;
-        max-width: 70%;
-    }
-    #aot-navbarNavDropdown {
-        right: 5%;
-    }
-    img.figure, .figure > img {
-        text-align: center;
-        max-width: 80%;
-    }
-    .card-footer h5 {
-        text-align: center;
-    }
-    img.image{
-        max-width: 25% !important;
     }
     .linenumbers {
         display: none;
@@ -919,57 +837,12 @@ input:checked + .i-slider:before {
         margin: 1em 0;
         font-size: 18px;
     }
+
 }
 
 @media (max-width: 480px) {
-    .navbar .navbar-collapse {
-        border-top: 1px solid rgba(0,0,0,.075);
-        padding-top: 2rem;
-        margin-top: .5rem;
-    }
     .img-fluid {
         width: 150px;
-    }
-    .custom-logo-link {
-        margin-bottom: -1.6em;
-    }
-    .section-critics > div > div .indentedP {
-        text-indent: 0 !important;
-    }
-    .section-critics {
-        max-width: 80%;
-        margin: 0 auto;
-    }
-    .section-traktat {
-        max-width: 70%;
-        margin: 0 auto;
-        padding-bottom: 1em;
-    }
-    .section-traktat h3 {
-        font-size: 18px;
-    }
-    .section-traktat ul {
-        margin: 0 auto;
-    }
-    .footnotes {
-        margin: 0 auto;
-        max-width: 70%;
-    }
-    #aot-navbarNavDropdown {
-        right: 5%;
-    }
-    img.figure, .figure > img {
-        text-align: center;
-        max-width: 80%;
-    }
-    .card-footer h5 {
-        text-align: center;
-    }
-    img.image{
-        max-width: 25% !important;
-    }
-    .linenumbers {
-        display: none;
     }
     .dropdown-menu li a {
         max-width: 400px;
