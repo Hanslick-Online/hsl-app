@@ -93,58 +93,120 @@ var prev_idx = -1;
 var position = document.documentElement.scrollTop;
 
 window.addEventListener("scroll", function(event) {
-    var scroll = document.documentElement.scrollTop;
-    // console.log("Position");
-    // console.log(position);
-    // console.log("Scroll");
-    // console.log(scroll);
-    // console.log("El offsettop");
-    // console.log(element[idx].offsetTop);
-    if (scroll > position) {
-        if (isInViewport(element[idx])) {
-            if (idx == 0) {
-                idx += 1;
-                prev_idx += 1;
-            } else {
-                var source = element[idx - 1].getAttribute("source");
-                var current0 = viewer.world.getItemAt(0);
-                var current1 = current0.source.url;
-                var current2 = current0.source.url.split("/");
-                var current3 = current2[current2.length - 5].replace(".jp2", "");
-                if (source === current3) {
-                    viewer.goToNextPage();
-                    idx += 1;
-                    prev_idx += 1;
-                } else {
-                    var current = current1.replace(current3, source);
-                    viewer.world.getItemAt(0).source.url = current;
-                }
-            }
+    // elements in view
+    var esiv = [];
+    for (let el of element) {
+        if (isInViewportAll(el)) {
+            esiv.push(el);
         }
-    } else {
-        if (prev_idx >= 0 && isInViewport(element[prev_idx])) {
-            if (prev_idx == 0) {
-                idx -= 1;
-                prev_idx -= 1;
-            } else {
-                var source = element[idx - 1].getAttribute("source");
-                var current0 = viewer.world.getItemAt(0);
-                var current1 = current0.source.url;
-                var current2 = current0.source.url.split("/");
-                var current3 = current2[current2.length - 5].replace(".jp2", "");
-                if (source === current3) {
-                    viewer.goToPreviousPage();
-                    idx -= 1;
-                    prev_idx -= 1;
+    }
+    if (esiv.length != 0) {
+        // first element in view
+        var eiv = esiv[0];
+        var source = esiv[0].getAttribute("source");
+        // get idx of eiv
+        var eiv_idx = Array.from(element).findIndex((el) => el === eiv);
+    
+        // get scrolltop after scrolling
+        var scroll = document.documentElement.scrollTop;
+        if (scroll > position) {
+            if (isInViewport(element[eiv_idx])) {
+                if (eiv_idx == 0) {
+                    // do not trigger on first image
                 } else {
-                    var current = current1.replace(current3, source);
-                    viewer.world.getItemAt(0).source.url = current;
+                    var src = element[eiv_idx - 1].getAttribute("source");
+                    var current0 = viewer.world.getItemAt(0);
+                    var current1 = current0.source.url;
+                    var current2 = current0.source.url.split("/");
+                    var current3 = current2[current2.length - 5].replace(".jp2", "");
+                    // console.log("src", src);
+                    // console.log("current", current3);
+                    if (src == current3) {
+                        viewer.goToNextPage();
+                        idx += 1;
+                        prev_idx += 1;
+                    }
                 }
             }
-        } 
+        } else {
+            if (isInViewport(element[eiv_idx])) {
+                if (eiv_idx == 0) {
+                    // do not trigger on first image
+                } else {
+                    var src = element[eiv_idx].getAttribute("source");
+                    var current0 = viewer.world.getItemAt(0);
+                    var current1 = current0.source.url;
+                    var current2 = current0.source.url.split("/");
+                    var current3 = current2[current2.length - 5].replace(".jp2", "");
+                    // console.log("src back", src);
+                    // console.log("current back", current3);
+                    if (src == current3) {
+                        viewer.goToPreviousPage();
+                        idx -= 1;
+                        prev_idx -= 1;
+                    } 
+                }
+            } 
+        }
+        position = document.documentElement.scrollTop;
     }
-    position = document.documentElement.scrollTop;
-}, false);
+});
+
+
+
+// window.addEventListener("scroll", function(event) {
+//     var scroll = document.documentElement.scrollTop;
+//     // console.log("Position");
+//     // console.log(position);
+//     // console.log("Scroll");
+//     // console.log(scroll);
+//     // console.log("El offsettop");
+//     // console.log(element[idx].offsetTop);
+//     if (scroll > position) {
+//         if (isInViewport(element[idx])) {
+//             if (idx == 0) {
+//                 idx += 1;
+//                 prev_idx += 1;
+//             } else {
+//                 var source = element[idx - 1].getAttribute("source");
+//                 var current0 = viewer.world.getItemAt(0);
+//                 var current1 = current0.source.url;
+//                 var current2 = current0.source.url.split("/");
+//                 var current3 = current2[current2.length - 5].replace(".jp2", "");
+//                 if (source === current3) {
+//                     viewer.goToNextPage();
+//                     idx += 1;
+//                     prev_idx += 1;
+//                 } else {
+//                     var current = current1.replace(current3, source);
+//                     viewer.world.getItemAt(0).source.url = current;
+//                 }
+//             }
+//         }
+//     } else {
+//         if (prev_idx >= 0 && isInViewport(element[prev_idx])) {
+//             if (prev_idx == 0) {
+//                 idx -= 1;
+//                 prev_idx -= 1;
+//             } else {
+//                 var source = element[idx - 1].getAttribute("source");
+//                 var current0 = viewer.world.getItemAt(0);
+//                 var current1 = current0.source.url;
+//                 var current2 = current0.source.url.split("/");
+//                 var current3 = current2[current2.length - 5].replace(".jp2", "");
+//                 if (source === current3) {
+//                     viewer.goToPreviousPage();
+//                     idx -= 1;
+//                     prev_idx -= 1;
+//                 } else {
+//                     var current = current1.replace(current3, source);
+//                     viewer.world.getItemAt(0).source.url = current;
+//                 }
+//             }
+//         } 
+//     }
+//     position = document.documentElement.scrollTop;
+// }, false);
 
 /*
 ##################################################################
@@ -156,19 +218,24 @@ var element_a = document.getElementsByClassName('anchor-pb');
 var prev = document.querySelector("div[title='Previous page']");
 var next = document.querySelector("div[title='Next page']");
 prev.addEventListener("click", () => {
-    if (prev_idx >= 0) {
+    if (idx == 0) {
+        element_a[idx].scrollIntoView();
+    } else {
         element_a[prev_idx].scrollIntoView();
         idx -= 1;
         prev_idx -= 1;
     }
 });
 next.addEventListener("click", () => {
-    if(idx == 0) {
+    if (idx == 0) {
         idx += 1;
+        prev_idx += 1;
+        element_a[idx].scrollIntoView();
+    } else {
+        idx += 1;
+        prev_idx += 1;
+        element_a[idx].scrollIntoView();
     }
-    element_a[idx].scrollIntoView();
-    idx += 1;
-    prev_idx += 1;
 });
 
 /*
@@ -193,6 +260,26 @@ function isInViewport(element) {
         // bounding.left >= 0 &&
         // bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
         // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isInViewportAll(element) {
+    // Get the bounding client rectangle position in the viewport
+    var bounding = element.getBoundingClientRect();
+    // Checking part. Here the code checks if el is close to top of viewport.
+    // console.log("Top");
+    // console.log(bounding.top);
+    // console.log("Bottom");
+    // console.log(bounding.bottom);
+    if (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
     ) {
         return true;
     } else {
