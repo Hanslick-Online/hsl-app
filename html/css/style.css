@@ -486,7 +486,7 @@ a.anchorFoot {
     color: #f1f1f1;
 }
 
-.viewer-1 {
+#viewer-1 {
     position: fixed;
 }
 
@@ -790,13 +790,13 @@ input:checked + .i-slider:before {
     img.image{
         max-width: 25% !important;
     }
-    .viewer-1 {
+    #viewer-1 {
         position: relative;
     }
     .facsimiles {
         display: none;
     }
-    .dropdown-menu li:nth-child(-n + 1) {
+    #aot-navbarNavDropdown .dropdown-menu li:nth-child(-n + 1) {
         display: none !important;
      }
      .text {
