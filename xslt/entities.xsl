@@ -13,7 +13,7 @@
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
-            <xsl:value-of select=".//tei:title[@type='main'][1]/text()"/>
+            <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="contains($doc_title, 'Personenregister')">
@@ -25,12 +25,7 @@
                             <head>
                                 <xsl:call-template name="html_head">
                                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
-                                </xsl:call-template>                
-                                <meta name="docTitle" class="staticSearch_docTitle">
-                                    <xsl:attribute name="content">
-                                        <xsl:value-of select="$doc_title"/>
-                                    </xsl:attribute>
-                                </meta>
+                                </xsl:call-template>
                             </head>
                             <body class="page">
                                 <div class="hfeed site" id="page">
@@ -196,12 +191,7 @@
                             <head>
                                 <xsl:call-template name="html_head">
                                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
-                                </xsl:call-template>                
-                                <meta name="docTitle" class="staticSearch_docTitle">
-                                    <xsl:attribute name="content">
-                                        <xsl:value-of select="$doc_title"/>
-                                    </xsl:attribute>
-                                </meta>
+                                </xsl:call-template>
                             </head>
                             <body class="page">
                                 <div class="hfeed site" id="page">
@@ -361,12 +351,7 @@
                             <head>
                                 <xsl:call-template name="html_head">
                                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
-                                </xsl:call-template>                
-                                <meta name="docTitle" class="staticSearch_docTitle">
-                                    <xsl:attribute name="content">
-                                        <xsl:value-of select="$doc_title"/>
-                                    </xsl:attribute>
-                                </meta>
+                                </xsl:call-template>
                             </head>
                             <body class="page">
                                 <div class="hfeed site" id="page">

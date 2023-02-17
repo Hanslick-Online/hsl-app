@@ -48,7 +48,7 @@
             </ul>                                                    
         </div>
         <script type="text/javascript">
-            $('.dropdown-menu .nav-item').click(function(e) {
+            $('#aot-navbarNavDropdown .dropdown-menu .nav-item').click(function(e) {
                 e.stopPropagation();
             });
         </script>

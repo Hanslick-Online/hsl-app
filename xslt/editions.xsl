@@ -6,15 +6,16 @@
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     
-    <xsl:import href="./partials/html_navbar_traktat.xsl"/>
+    <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
     <xsl:import href="partials/aot-options.xsl"/>
+    <xsl:import href="partials/chapters.xsl"/>
     <!--<xsl:import href="partials/osd-container.xsl"/>-->
     <!--<xsl:import href="partials/tei-facsimile.xsl"/>-->
     <xsl:template match="/">
         <xsl:variable name="doc_title">
-            <xsl:value-of select=".//tei:title[@type='main'][1]/text()"/>
+            <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
         </xsl:variable>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
         <html>
@@ -34,11 +35,11 @@
                         <div class="row">
                             <div class="col-md-6 facsimiles">
                                 <div id="viewer-1">
-                                    <div id="spinner_1" class="text-center">
+                                    <!--<div id="spinner_1" class="text-center">
                                         <div class="loader"></div>
-                                    </div>
+                                    </div>-->
                                     <div id="container_facs_1" style="padding:.5em;margin-top:4em;">
-                                        <!-- image container accessed by OSD script -->                            
+                                        <!-- image container accessed by OSD script -->                               
                                     </div>  
                                 </div>
                             </div>
@@ -53,6 +54,7 @@
                                 </div>
                                 <div class="section section-traktat" id="section-1">
                                     <xsl:call-template name="annotation-options"></xsl:call-template>
+                                    <xsl:call-template name="chapters"></xsl:call-template>
                                     <div class="card-header">
                                         <div class="docTitle">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
