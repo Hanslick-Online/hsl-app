@@ -38,16 +38,7 @@
                                         <div class="loader"></div>
                                     </div>
                                     <div id="container_facs_1" style="padding:.5em;margin-top:4em;">
-                                        <!-- image container accessed by OSD script -->                                           
-                                        <div id="container_facs_2">                                                                                        
-                                            <xsl:for-each select="//tei:surface/tei:graphic">
-                                                <xsl:variable name="facs_item" select="tokenize(@url, '/')[last()]"/>
-                                                <span class="tei-xml-images"  
-                                                    dta-src="https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/{$facs_item}.jp2/full/max/0/default.jpg">
-                                                    LOADING IMG
-                                                </span>
-                                            </xsl:for-each>
-                                        </div>                                
+                                        <!-- image container accessed by OSD script -->                            
                                     </div>  
                                 </div>
                             </div>
@@ -66,7 +57,7 @@
                                         <div class="docTitle">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
                                             <span class="anchor-pb"></span>
-                                            <span class="pb" source="{tokenize(//tei:front/tei:pb/@facs, '/')[last()]}"></span>
+                                            <span class="pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"></span>
                                             <div class="titlePart">
                                                 <xsl:for-each select=".//tei:docTitle/tei:titlePart">
                                                     <div class="titlePart {@type}">
