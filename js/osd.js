@@ -86,8 +86,6 @@ viewport position of next and previous element with class pb
 pb = pagebreaks
 ##################################################################
 */
-var idx = 0;
-var prev_idx = -1;
 var position = document.documentElement.scrollTop;
 
 window.addEventListener("scroll", function(event) {
@@ -248,6 +246,8 @@ var prev = document.querySelector("div[title='Previous page']");
 var next = document.querySelector("div[title='Next page']");
 prev.style.opacity = 1;
 next.style.opacity = 1;
+var idx = 0;
+var prev_idx = -1;
 prev.addEventListener("click", () => {
     if (idx == 0) {
         element_a[idx].scrollIntoView();
@@ -258,15 +258,9 @@ prev.addEventListener("click", () => {
     }
 });
 next.addEventListener("click", () => {
-    if (idx == 0) {
-        idx += 1;
-        prev_idx += 1;
-        element_a[idx].scrollIntoView();
-    } else {
-        idx += 1;
-        prev_idx += 1;
-        element_a[idx].scrollIntoView();
-    }
+    idx += 1;
+    prev_idx += 1;
+    element_a[idx].scrollIntoView();
 });
 
 /*
