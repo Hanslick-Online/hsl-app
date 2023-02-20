@@ -52,9 +52,9 @@
                                     </div>
                                 </div>
                                 <div class="section section-traktat" id="section-1">
+                                    <xsl:call-template name="annotation-options"></xsl:call-template>
                                     <xsl:call-template name="chapters"></xsl:call-template>
                                     <xsl:call-template name="editions"></xsl:call-template>
-                                    <xsl:call-template name="annotation-options"></xsl:call-template>
                                     <div class="card-header">
                                         <div class="docTitle">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
