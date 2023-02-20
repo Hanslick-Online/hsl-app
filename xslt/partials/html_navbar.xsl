@@ -55,20 +55,10 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="caret left"></span> Traktat
+                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html"
+                                            title="Traktat">
+                                            Traktat
                                         </a>
-                                        <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
-                                            <xsl:for-each select="collection('../../data/traktat/editions')//tei:TEI">
-                                                <xsl:sort select="tokenize(document-uri(/), '/')[last()]" />
-                                                <li>
-                                                    <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
-                                                        title="">
-                                                        <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
-                                                    </a>
-                                                </li>
-                                            </xsl:for-each>
-                                        </ul>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc.html"

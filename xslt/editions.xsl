@@ -11,8 +11,7 @@
     <xsl:import href="partials/html_footer.xsl"/>
     <xsl:import href="partials/aot-options.xsl"/>
     <xsl:import href="partials/chapters.xsl"/>
-    <!--<xsl:import href="partials/osd-container.xsl"/>-->
-    <!--<xsl:import href="partials/tei-facsimile.xsl"/>-->
+    <xsl:import href="partials/edition.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -53,8 +52,9 @@
                                     </div>
                                 </div>
                                 <div class="section section-traktat" id="section-1">
-                                    <xsl:call-template name="annotation-options"></xsl:call-template>
                                     <xsl:call-template name="chapters"></xsl:call-template>
+                                    <xsl:call-template name="editions"></xsl:call-template>
+                                    <xsl:call-template name="annotation-options"></xsl:call-template>
                                     <div class="card-header">
                                         <div class="docTitle">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
