@@ -507,10 +507,11 @@ a.anchorFoot {
 .navBarNavDropdown {
     position: fixed;
     right: 10%;
-    z-index: 10;
+    z-index: 11
+    ;
 }
 
-#chapter-navBarNavDropdown {
+#aot-navBarNavDropdown {
     top: 21%;
 }
 #aot-navBarNavDropdown {
@@ -519,12 +520,12 @@ a.anchorFoot {
 
 .navBarNavDropdown a {
     position: relative;
-    z-index: 11;
+    z-index: 10;
 }
 
 .navBarNavDropdown .dropdown-menu {
     position: relative;
-    z-index: 15;
+    z-index: 12;
 }
 
 .navBarNavDropdown ul li {
