@@ -125,7 +125,9 @@ window.addEventListener("scroll", function(event) {
                 // console.log(new_image);
                 // console.log(old_image);
                 viewer.addSimpleImage({
-                    url: new_image
+                    url: new_image,
+                    // replace: true,
+                    // index: 0
                 });
             }
         } else {
@@ -146,8 +148,10 @@ window.addEventListener("scroll", function(event) {
                     var new_image = current1.replace(current3, src);
                     // var old_image = current0;
                     viewer.addSimpleImage({
-                        url: new_image
-                    });
+                        url: new_image,
+                        // replace: true,
+                        // index: 0
+                    });               
                 }
             } else {
                 if (isInViewportUp(element[eiv_idx])) {
@@ -170,7 +174,9 @@ window.addEventListener("scroll", function(event) {
                     // console.log(new_image);
                     // console.log(old_image);
                     viewer.addSimpleImage({
-                        url: new_image
+                        url: new_image,
+                        // replace: true,
+                        // index: 0
                     });
                 }
             } 
