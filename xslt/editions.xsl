@@ -199,7 +199,9 @@
     </xsl:template>
     <xsl:template match="tei:emph">
         <xsl:choose>
-            <xsl:when test="starts-with(following-sibling::text()[1], ',')">
+            <xsl:when test="starts-with(following-sibling::text()[1], ',') or 
+                starts-with(following-sibling::text()[1], 'ʼ') or
+                starts-with(following-sibling::text()[1], '.')">
                 <em class="comma"><xsl:apply-templates/></em>
             </xsl:when>
             <xsl:when test="matches(preceding-sibling::text()[1], '\w+')">
