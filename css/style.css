@@ -457,7 +457,6 @@ a.anchorFoot {
 .titlePart {
     font-weight: bold;
     margin: .25em 0 .25em 0;
-    font-size: 18px;
 }
 
 .docbyline {
@@ -466,12 +465,10 @@ a.anchorFoot {
 
 .byline {
     margin: .25em 0 .25em 0;
-    font-size: 18px;
 }
 
 .docImprint {
     margin: .25em 0 .25em 0;
-    font-size: 18px;
 }
 
 .docTitle {
