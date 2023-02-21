@@ -195,10 +195,6 @@ function isInViewportDown(element) {
         bounding.bottom <= 210 &&
         bounding.top >= 0 &&
         bounding.bottom >= 0
-        // bounding.top >= 0 &&
-        // bounding.left >= 0 &&
-        // bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-        // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     ) {
         return true;
     } else {
@@ -219,10 +215,6 @@ function isInViewportUp(element) {
         bounding.bottom <= 320 &&
         bounding.top >= 250 &&
         bounding.bottom >= 250
-        // bounding.top >= 0 &&
-        // bounding.left >= 0 &&
-        // bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-        // bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     ) {
         return true;
     } else {
