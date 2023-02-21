@@ -183,8 +183,12 @@
             </div>
          </div>
          <div class="footer-imprint-bar bg-dark text-light" id="wrapper-footer-secondary" style="text-align:center; padding:0.4rem 0; font-size: 0.9rem;">
-            © Copyright OEAW | <a href="imprint.html">Impressum/Imprint</a></div>
-      </div>
+            © Copyright OEAW | <a href="imprint.html">Impressum/Imprint</a></div><script type="text/javascript">
+            $(document).ready(function() {
+                $('li a.active').removeClass('active');
+                $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
+            });
+        </script></div>
    </body>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css" />
    <link rel="stylesheet" href="css/ts_search.css" /><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0"></script><script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script><script src="js/ts_search.js"></script><script src="js/ts_update_url.js"></script></html>
