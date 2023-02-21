@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+span {
+    display: inline;
+}
+
+cite {
+    font-style: normal;
+}
+
 body {
     border-style: solid;
     border-top-width: 0;
@@ -46,10 +54,6 @@ h3 {
 
 .entity {
     cursor: pointer;
-}
-
-.yes-index {
-    text-align: justify;
 }
 
 .modal-body table tbody tr th, .modal-body table tbody tr td {
@@ -230,10 +234,23 @@ mark {
 
 p {
     display: block;
+    padding: 0 !important;
 }
 
 a {
     text-decoration: none !important;
+}
+
+.indentedP a + em {
+    margin-left: -4px;
+}
+
+.prev-text {
+    margin-left: 0 !important;
+}
+
+.comma {
+    margin-right: -4px;
 }
 
 .main {
@@ -270,7 +287,6 @@ a {
 }
 
 .meta-p {
-    text-align: justify;
     padding: 0 .75em;
 }
 

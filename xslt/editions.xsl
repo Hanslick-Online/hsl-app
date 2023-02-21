@@ -56,7 +56,7 @@
                                     <xsl:call-template name="chapters"></xsl:call-template>
                                     <xsl:call-template name="editions"></xsl:call-template>
                                     <div class="card-header">
-                                        <div class="docTitle">
+                                        <div class="docTitle yes-index">
                                             <a class="anchor" id="index.xml-body.1_div.0"></a>
                                             <span class="anchor-pb"></span>
                                             <span class="pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"></span>
@@ -149,24 +149,25 @@
                   
     
     <xsl:template match="tei:head">
-        <h3>
-        <xsl:choose>
-            <xsl:when test="contains(. ,'a)')">
-                <xsl:variable name="chapter" select="tokenize(., 'I')"/>
-                I. <xsl:value-of select="$chapter[2]"/>
-                <br/>
-                I. <xsl:value-of select="$chapter[3]"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="."/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <h3 class="yes-index">
+            <!--<xsl:choose>
+                <xsl:when test="contains(. ,'a)')">
+                    <xsl:variable name="chapter" select="tokenize(., 'I')"/>
+                    I. <xsl:value-of select="$chapter[2]"/>
+                    <br/>
+                    I. <xsl:value-of select="$chapter[3]"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>-->
+            <xsl:apply-templates/>
         </h3>
     </xsl:template>
     
     <xsl:template match="tei:byline">
         <xsl:if test="ancestor::tei:body">
-            <p><xsl:apply-templates/></p>
+            <p class="yes-index"><xsl:apply-templates/></p>
         </xsl:if>
     </xsl:template>
     
@@ -197,7 +198,17 @@
         <br/>
     </xsl:template>
     <xsl:template match="tei:emph">
-        <span class="italic"><xsl:apply-templates/></span>
+        <xsl:choose>
+            <xsl:when test="starts-with(following-sibling::text()[1], ',')">
+                <em class="comma"><xsl:apply-templates/></em>
+            </xsl:when>
+            <xsl:when test="matches(preceding-sibling::text()[1], '\w+')">
+                <em class="prev-text"><xsl:apply-templates/></em>
+            </xsl:when>
+            <xsl:otherwise>
+                <em><xsl:apply-templates/></em>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:rs">
         <xsl:choose>
@@ -289,15 +300,15 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:cit">
-        <span class="cit"><xsl:apply-templates/></span>
+        <cite><xsl:apply-templates/></cite>
     </xsl:template>
     <xsl:template match="tei:quote">
-        <span class="quote"><xsl:apply-templates/></span>
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="tei:list[@type='unordered']">
         <xsl:choose>
             <xsl:when test="parent::tei:p|ancestor::tei:body">
-                <ul>
+                <ul class="yes-index">
                     <xsl:apply-templates/>
                 </ul>
             </xsl:when>
@@ -314,18 +325,15 @@
         <span class="date"><xsl:apply-templates/></span>
     </xsl:template>
     <xsl:template match="tei:ref">
-        <span class="ref {@type}"><a href="{@target}"><xsl:apply-templates/></a></span>
+        <a class="ref {@type}" href="{@target}"><xsl:apply-templates/></a>
     </xsl:template>
     <xsl:template match="tei:note">
         <xsl:choose>
             <xsl:when test="@place='foot'">
-                <span>
-                    <a class="anchorFoot" id="{@xml:id}_inline"></a>
-                    <a href="#{@xml:id}" title="{.//text()}" class="nounderline">
-                        <sup><xsl:value-of select="@n"/></sup>
-                    </a>
-                </span>
-                <xsl:apply-templates select="tei:pb"/>
+                <a class="anchorFoot" id="{@xml:id}_inline"></a>
+                <a href="#{@xml:id}" title="Fußnote {@n}" class="nounderline">
+                    <sup><xsl:value-of select="@n"/></sup>
+                </a>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -352,10 +360,10 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:lg">
-        <span class="vrsgrp"><xsl:apply-templates/></span>
+        <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="tei:l">
-        <span class="vrs"><xsl:apply-templates/><span class="vrsSep"> / </span></span>
+        <xsl:apply-templates/><xsl:text> / </xsl:text>
     </xsl:template>
     <xsl:template match="tei:listPerson">
         <xsl:for-each select="./tei:person">
