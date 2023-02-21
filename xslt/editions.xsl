@@ -90,7 +90,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body">                                
+                                    <div class="card-body yes-index">                                
                                         <xsl:for-each select=".//tei:body/tei:div">
                                             
                                             <a class="anchor" id="index.xml-body.1_div.{position()}"></a>
@@ -98,7 +98,7 @@
 
                                         </xsl:for-each>
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer yes-index">
                                         <a class="anchor" id="index.xml-body.1_div.999"></a>
                                         <h5>Fußnoten</h5>
                                         <ul class="footnotes">
