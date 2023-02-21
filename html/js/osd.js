@@ -53,7 +53,10 @@ var element = document.getElementsByClassName('pb');
 var tileSources = [];
 var img = element[0].getAttribute("source");
 var img = `https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/${img}.jp2/full/max/0/default.jpg`;
-var imageURL = {type: 'image', url: img};
+var imageURL = {
+    type: 'image',
+    url: img
+};
 tileSources.push(imageURL);
 
 /*
@@ -63,10 +66,9 @@ initialize osd
 */
 var viewer = OpenSeadragon({
     id: 'container_facs_1',
-    prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.1/images/',
+    prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/images/',
     sequenceMode: true,
     showNavigator: true,
-    imageLoaderLimit: 20,
     tileSources: tileSources
 });
 /*
@@ -99,147 +101,53 @@ window.addEventListener("scroll", function(event) {
     if (esiv.length != 0) {
         // first element in view
         var eiv = esiv[0];
-        // get idx of eiv
+        // get idx of element
         var eiv_idx = Array.from(element).findIndex((el) => el === eiv);
-    
         // get scrolltop after scrolling
         var scroll = document.documentElement.scrollTop;
+        // depending if the user scrolls up or down other viewport positions are
+        // important
         if (scroll > position) {
+            // scroll down and change image in osd
             if (isInViewportDown(element[eiv_idx])) {
-                var src = element[eiv_idx].getAttribute("source");
-                var current0 = viewer.world.getItemAt(0);
-                if (current0) {
-                    var current1 = current0.source.url;
-                    var current2 = current0.source.url.split("/");
-                    var current3 = current2[current2.length - 5].replace(".jp2", "");
-                }
-                // console.log("src", src);
-                // console.log("current", current3);
-                // if (src === current3) {
-                //     viewer.goToNextPage();
-                //     idx += 1;
-                //     prev_idx += 1;
-                // } else {
-                var new_image = current1.replace(current3, src);
-                // var old_image = current0;
-                // console.log(new_image);
-                // console.log(old_image);
-                viewer.addSimpleImage({
-                    url: new_image,
-                    // replace: true,
-                    // index: 0
-                });
+                loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);
             }
         } else {
+            // scroll up and change image in osd
             if (eiv_idx === 0) {
+                // first image in index needs other viewport position
                 if (isInViewportDown(element[eiv_idx])) {
-                    var src = element[eiv_idx].getAttribute("source");
-                    var current0 = viewer.world.getItemAt(0);
-                    if (current0) {
-                        var current1 = current0.source.url;
-                        var current2 = current0.source.url.split("/");
-                        var current3 = current2[current2.length - 5].replace(".jp2", "");
-                    }
-                    // if (src == current3) {
-                    //     viewer.goToPreviousPage();
-                    //     idx -= 1;
-                    //     prev_idx -= 1;
-                    // } else {
-                    var new_image = current1.replace(current3, src);
-                    // var old_image = current0;
-                    viewer.addSimpleImage({
-                        url: new_image,
-                        // replace: true,
-                        // index: 0
-                    });               
+                    loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);           
                 }
             } else {
                 if (isInViewportUp(element[eiv_idx])) {
-                    var src = element[eiv_idx].getAttribute("source");
-                    var current0 = viewer.world.getItemAt(0);
-                    if (current0) {
-                        var current1 = current0.source.url;
-                        var current2 = current0.source.url.split("/");
-                        var current3 = current2[current2.length - 5].replace(".jp2", "");
-                    }
-                    // console.log("src back", src);
-                    // console.log("current back", current3);
-                    // if (src == current3) {
-                    //     viewer.goToPreviousPage();
-                    //     idx -= 1;
-                    //     prev_idx -= 1;
-                    // } else {
-                    var new_image = current1.replace(current3, src);
-                    // var old_image = current0;
-                    // console.log(new_image);
-                    // console.log(old_image);
-                    viewer.addSimpleImage({
-                        url: new_image,
-                        // replace: true,
-                        // index: 0
-                    });
+                    loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);
                 }
             } 
         }
+        // update scroll position to identify if user scrolls up
         position = document.documentElement.scrollTop;
     }
 });
 
-
-
-// window.addEventListener("scroll", function(event) {
-//     var scroll = document.documentElement.scrollTop;
-//     // console.log("Position");
-//     // console.log(position);
-//     // console.log("Scroll");
-//     // console.log(scroll);
-//     // console.log("El offsettop");
-//     // console.log(element[idx].offsetTop);
-//     if (scroll > position) {
-//         if (isInViewport(element[idx])) {
-//             if (idx == 0) {
-//                 idx += 1;
-//                 prev_idx += 1;
-//             } else {
-//                 var source = element[idx - 1].getAttribute("source");
-//                 var current0 = viewer.world.getItemAt(0);
-//                 var current1 = current0.source.url;
-//                 var current2 = current0.source.url.split("/");
-//                 var current3 = current2[current2.length - 5].replace(".jp2", "");
-//                 if (source === current3) {
-//                     viewer.goToNextPage();
-//                     idx += 1;
-//                     prev_idx += 1;
-//                 } else {
-//                     var current = current1.replace(current3, source);
-//                     viewer.world.getItemAt(0).source.url = current;
-//                 }
-//             }
-//         }
-//     } else {
-//         if (prev_idx >= 0 && isInViewport(element[prev_idx])) {
-//             if (prev_idx == 0) {
-//                 idx -= 1;
-//                 prev_idx -= 1;
-//             } else {
-//                 var source = element[idx - 1].getAttribute("source");
-//                 var current0 = viewer.world.getItemAt(0);
-//                 var current1 = current0.source.url;
-//                 var current2 = current0.source.url.split("/");
-//                 var current3 = current2[current2.length - 5].replace(".jp2", "");
-//                 if (source === current3) {
-//                     viewer.goToPreviousPage();
-//                     idx -= 1;
-//                     prev_idx -= 1;
-//                 } else {
-//                     var current = current1.replace(current3, source);
-//                     viewer.world.getItemAt(0).source.url = current;
-//                 }
-//             }
-//         } 
-//     }
-//     position = document.documentElement.scrollTop;
-// }, false);
+// function to trigger image load and remove events
+function loadNewImage(old_image, new_item) {
+    if (new_item) {
+        var new_image = new_item.getAttribute("source");
+        if (old_image) {
+            var current1 = old_image.source.url;
+            var current2 = old_image.source.url.split("/");
+            var current3 = current2[current2.length - 5].replace(".jp2", "");
+            var new_image = current1.replace(current3, new_image);
+            viewer.addSimpleImage({
+                url: new_image,
+                success: function(event) {
+                    viewer.world.removeItem(old_image);
+                }
+            });
+        }
+    }
+}
 
 /*
 ##################################################################
