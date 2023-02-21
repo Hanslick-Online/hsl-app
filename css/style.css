@@ -507,15 +507,17 @@ a.anchorFoot {
 .navBarNavDropdown {
     position: fixed;
     right: 10%;
-    z-index: 11
-    ;
+    z-index: 11;
 }
 
-#edition-navBarNavDropdown {
-    top: 21%;
+#aot-navBarNavDropdown {
+    top: 25%;
 }
 #chapter-navBarNavDropdown {
-    top: 25%;
+    top: 21%;
+}
+#edition-navBarNavDropdown {
+    top: 20%;
 }
 
 .navBarNavDropdown a {
