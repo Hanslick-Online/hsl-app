@@ -245,12 +245,17 @@ a {
     margin-left: -4px;
 }
 
+sup {
+    margin-left: -4px;
+}
+
 .prev-text {
     margin-left: 0 !important;
 }
 
 .comma {
     margin-right: -4px;
+    margin-left: 0 !important;
 }
 
 .main {
