@@ -134,12 +134,6 @@
                 </div>
                 <script src="https://unpkg.com/de-micro-editor@0.2.6/dist/de-editor.min.js"></script>
                 <script type="text/javascript" src="js/run.js"></script>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $('li a.active').removeClass('active');
-                        $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
-                    });
-                </script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
                 <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/osd.js"></script>

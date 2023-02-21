@@ -6,7 +6,6 @@
     exclude-result-prefixes="xsl xs"
     version="2.0">
     <xsl:template match="/" name="html_footer">
-        
         <div class="wrapper bg-light" id="wrapper-footer-full">
             <div class="container-fluid" id="footer-full-content" tabindex="-1">
                 <div class="footer-separator">
@@ -116,5 +115,11 @@
         <div class="footer-imprint-bar bg-dark text-light" id="wrapper-footer-secondary" style="text-align:center; padding:0.4rem 0; font-size: 0.9rem;" >
             © Copyright OEAW | <a href="imprint.html">Impressum/Imprint</a>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('li a.active').removeClass('active');
+                $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
+            });
+        </script>
     </xsl:template>
 </xsl:stylesheet>
