@@ -521,35 +521,35 @@ a.anchorFoot {
 
 /* micor editor */
 
+#editor-widget {
+    position: fixed;
+    max-width: 200px;
+    right: 10%;
+}
 
 .navBarNavDropdown {
-    position: fixed;
-    right: 10%;
-    z-index: 11;
-}
-
-#aot-navBarNavDropdown {
-    top: 25%;
-}
-#chapter-navBarNavDropdown {
-    top: 21%;
-}
-#edition-navBarNavDropdown {
-    top: 20%;
+    position: relative;
+    z-index: 999;
+    display: flex;
+    max-width: 33%;
+     padding: .5em 0;
 }
 
 .navBarNavDropdown a {
     position: relative;
-    z-index: 10;
+    display: block;
+    z-index: 0;
 }
 
-.navBarNavDropdown .dropdown-menu {
+.navBarNavDropdown {
     position: relative;
-    z-index: 12;
+    display: block;
+    z-index: 999;
 }
 
 .navBarNavDropdown ul li {
     margin: .5em auto;
+    z-index: 999;
 }
 
 .badge-item {
@@ -830,7 +830,7 @@ input:checked + .i-slider:before {
     .footnotes {
         margin: 0 auto;
     }
-    .navbarNavDropdown {
+    #editor-widget {
         right: 5%;
     }
     .card-footer h5 {
