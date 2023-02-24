@@ -53,8 +53,8 @@
                                 </div>
                                 <div class="section section-traktat" id="section-1">
                                     <div id="editor-widget">
-                                        <xsl:call-template name="chapters"></xsl:call-template>
                                         <xsl:call-template name="editions"></xsl:call-template>
+                                        <xsl:call-template name="chapters"></xsl:call-template>
                                         <xsl:call-template name="annotation-options"></xsl:call-template>
                                     </div>
                                     <div class="card-header">
@@ -323,7 +323,14 @@
         <span class="date"><xsl:apply-templates/></span>
     </xsl:template>
     <xsl:template match="tei:ref">
-        <a class="ref {@type}" href="{@target}"><xsl:apply-templates/></a>
+        <xsl:choose>
+            <xsl:when test="@type='edition'">
+                <a class="ref {@type}" href="t__{@target}"><xsl:apply-templates/></a>
+            </xsl:when>
+            <xsl:otherwise>
+                <a class="ref {@type}" href="{@target}"><xsl:apply-templates/></a>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:note">
         <xsl:choose>
