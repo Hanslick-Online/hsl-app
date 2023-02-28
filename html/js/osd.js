@@ -80,6 +80,14 @@ remove container holding the images url
 //     document.getElementById("container_facs_2").remove();
 // }, 500);
 
+/*
+##################################################################
+index and previous index for click navigation in osd viewer
+locate index of anchor element
+##################################################################
+*/
+var idx = 0;
+var prev_idx = -1;
 
 /*
 ##################################################################
@@ -88,8 +96,6 @@ viewport position of next and previous element with class pb
 pb = pagebreaks
 ##################################################################
 */
-var position = document.documentElement.scrollTop;
-
 window.addEventListener("scroll", function(event) {
     // elements in view
     var esiv = [];
@@ -103,30 +109,12 @@ window.addEventListener("scroll", function(event) {
         var eiv = esiv[0];
         // get idx of element
         var eiv_idx = Array.from(element).findIndex((el) => el === eiv);
-        // get scrolltop after scrolling
-        var scroll = document.documentElement.scrollTop;
-        // depending if the user scrolls up or down other viewport positions are
-        // important
-        if (scroll > position) {
-            // scroll down and change image in osd
-            if (isInViewportDown(element[eiv_idx])) {
-                loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);
-            }
-        } else {
-            // scroll up and change image in osd
-            if (eiv_idx === 0) {
-                // first image in index needs other viewport position
-                if (isInViewportDown(element[eiv_idx])) {
-                    loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);           
-                }
-            } else {
-                if (isInViewportUp(element[eiv_idx])) {
-                    loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);
-                }
-            } 
+        idx = eiv_idx + 1;
+        prev_idx = eiv_idx - 1
+        // test if element is in viewport position to load correct image
+        if (isInViewport(element[eiv_idx])) {
+            loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);
         }
-        // update scroll position to identify if user scrolls up
-        position = document.documentElement.scrollTop;
     }
 });
 
@@ -160,20 +148,14 @@ var prev = document.querySelector("div[title='Previous page']");
 var next = document.querySelector("div[title='Next page']");
 prev.style.opacity = 1;
 next.style.opacity = 1;
-var idx = 0;
-var prev_idx = -1;
 prev.addEventListener("click", () => {
     if (idx == 0) {
         element_a[idx].scrollIntoView();
     } else {
         element_a[prev_idx].scrollIntoView();
-        idx -= 1;
-        prev_idx -= 1;
     }
 });
 next.addEventListener("click", () => {
-    idx += 1;
-    prev_idx += 1;
     element_a[idx].scrollIntoView();
 });
 
@@ -182,7 +164,7 @@ next.addEventListener("click", () => {
 function to check if element is close to top of window viewport
 ##################################################################
 */
-function isInViewportDown(element) {
+function isInViewport(element) {
     // Get the bounding client rectangle position in the viewport
     var bounding = element.getBoundingClientRect();
     // Checking part. Here the code checks if el is close to top of viewport.
@@ -195,26 +177,6 @@ function isInViewportDown(element) {
         bounding.bottom <= 210 &&
         bounding.top >= 0 &&
         bounding.bottom >= 0
-    ) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function isInViewportUp(element) {
-    // Get the bounding client rectangle position in the viewport
-    var bounding = element.getBoundingClientRect();
-    // Checking part. Here the code checks if el is close to top of viewport.
-    // console.log("Top");
-    // console.log(bounding.top);
-    // console.log("Bottom");
-    // console.log(bounding.bottom);
-    if (
-        bounding.top <= 300 &&
-        bounding.bottom <= 320 &&
-        bounding.top >= 250 &&
-        bounding.bottom >= 250
     ) {
         return true;
     } else {
