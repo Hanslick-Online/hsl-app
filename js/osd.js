@@ -7,12 +7,8 @@ get container wrapper of osd viewer
 */
 // var container = document.getElementById("container_facs_2");
 // container.style.display = "none";
-
-// container height base on screen height
 var height = screen.height;
-// container for osd viewer
 var container = document.getElementById("container_facs_1");
-// wrapper of images
 var wrapper = document.getElementsByClassName("facsimiles")[0];
 
 /*
@@ -24,7 +20,7 @@ height is always the screen height minus some offset
 ##################################################################
 */
 if (!wrapper.classList.contains("fade")) {
-    container.style.height = `${String(height - 400)}px`;
+    container.style.height = `${String(height - 250)}px`;
     // set osd wrapper container width
     var container = document.getElementById("section-1");
     if (container !== null) {
@@ -33,7 +29,7 @@ if (!wrapper.classList.contains("fade")) {
     var container = document.getElementById("viewer-1");
     container.style.width = `${String(width - 50)}px`;
 } else {
-    container.style.height = `${String(height - 400)}px`;
+    container.style.height = `${String(height - 250)}px`;
     // set osd wrapper container width
     var container = document.getElementById("section-1");
     if (container !== null) {
@@ -46,7 +42,7 @@ if (!wrapper.classList.contains("fade")) {
 /*
 ##################################################################
 get all image urls stored in span el class tei-xml-images
-creates an arrow for for osd viewer with static images
+creates an array for osd viewer with static images
 ##################################################################
 */
 var element = document.getElementsByClassName('pb');
@@ -118,7 +114,11 @@ window.addEventListener("scroll", function(event) {
     }
 });
 
-// function to trigger image load and remove events
+/*
+##################################################################
+function to trigger image load and remove events
+##################################################################
+*/
 function loadNewImage(new_item) {
     if (new_item) {
         // source attribute hold image item id without url
@@ -200,6 +200,11 @@ function isInViewport(element) {
     }
 }
 
+/*
+##################################################################
+function to check if element is anywhere in window viewport
+##################################################################
+*/
 function isInViewportAll(element) {
     // Get the bounding client rectangle position in the viewport
     var bounding = element.getBoundingClientRect();
