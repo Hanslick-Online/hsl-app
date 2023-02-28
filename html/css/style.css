@@ -780,7 +780,7 @@ input:checked + .i-slider:before {
     .footnotes {
         margin: 0 auto;
     }
-    .navbarNavDropdown {
+    #editor-widget {
         right: 5%;
     }
     .card-footer h5 {
@@ -789,9 +789,11 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 1200px) {
-
+    #editor-widget {
+        right: 1%;
+    }
     .pb {
-        right: 1px;
+        left: 55%;
         margin: 0;
         padding: 0;
     }
@@ -821,6 +823,9 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 768px) {
+    .pb {
+        visibility: hidden;
+    }
     .img-fluid {
         width: 170px;
     }

@@ -37,7 +37,7 @@
                                     <!--<div id="spinner_1" class="text-center">
                                         <div class="loader"></div>
                                     </div>-->
-                                    <div id="container_facs_1" style="padding:.5em;margin-top:4em;">
+                                    <div id="container_facs_1" style="padding:.5em;margin-top:2em;">
                                         <!-- image container accessed by OSD script -->                               
                                     </div>  
                                 </div>
