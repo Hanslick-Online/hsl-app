@@ -113,24 +113,40 @@ window.addEventListener("scroll", function(event) {
         prev_idx = eiv_idx - 1
         // test if element is in viewport position to load correct image
         if (isInViewport(element[eiv_idx])) {
-            loadNewImage(viewer.world.getItemAt(0), element[eiv_idx]);
+            loadNewImage(element[eiv_idx]);
         }
     }
 });
 
 // function to trigger image load and remove events
-function loadNewImage(old_image, new_item) {
+function loadNewImage(new_item) {
     if (new_item) {
+        // source attribute hold image item id without url
         var new_image = new_item.getAttribute("source");
+        var old_image = viewer.world.getItemAt(0);
         if (old_image) {
+            // get url from current/old image and replace the image id with
+            // new id of image to be loaded
             var current1 = old_image.source.url;
             var current2 = old_image.source.url.split("/");
             var current3 = current2[current2.length - 5].replace(".jp2", "");
             var new_image = current1.replace(current3, new_image);
+            // access osd viewer and add simple image and remove current image
             viewer.addSimpleImage({
                 url: new_image,
                 success: function(event) {
-                    viewer.world.removeItem(old_image);
+                    function ready() {
+                        setTimeout(() => {
+                            viewer.world.removeItem(viewer.world.getItemAt(0));
+                        }, 200)
+                    }
+                    // test if item was loaded and trigger function to remove previous item
+                    if (event.item) {
+                        // .getFullyLoaded()
+                        ready();
+                    } else {
+                        event.item.addOnceHandler('fully-loaded-change', ready());
+                    }
                 }
             });
         }
