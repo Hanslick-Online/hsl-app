@@ -26,7 +26,7 @@ var editor = new LoadEditor({
           html_class: "persons",
           css_class: "pers",
           hide: {
-            hidden: true,
+            hidden: false,
             class: "persons .entity",
           },
           chg_citation: "citation-url",
@@ -42,7 +42,7 @@ var editor = new LoadEditor({
           html_class: "places",
           css_class: "plc",
           hide: {
-            hidden: true,
+            hidden: false,
             class: "places .entity",
           },
           chg_citation: "citation-url",
@@ -59,7 +59,7 @@ var editor = new LoadEditor({
           css_class: "wrk",
           chg_citation: "citation-url",
           hide: {
-            hidden: true,
+            hidden: false,
             class: "wrk .entity",
           },
           features: {

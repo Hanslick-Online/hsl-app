@@ -20,16 +20,16 @@ height is always the screen height minus some offset
 ##################################################################
 */
 if (!wrapper.classList.contains("fade")) {
-    container.style.height = `${String(height - 250)}px`;
+    container.style.height = `${String(height - 200)}px`;
     // set osd wrapper container width
     var container = document.getElementById("section-1");
     if (container !== null) {
         var width = container.clientWidth;
     }
     var container = document.getElementById("viewer-1");
-    container.style.width = `${String(width - 50)}px`;
+    container.style.width = `${String(width - 25)}px`;
 } else {
-    container.style.height = `${String(height - 250)}px`;
+    container.style.height = `${String(height - 200)}px`;
     // set osd wrapper container width
     var container = document.getElementById("section-1");
     if (container !== null) {
