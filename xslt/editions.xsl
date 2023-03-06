@@ -495,14 +495,6 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            Alternativtitel
-                                        </th>
-                                        <td>
-                                            <xsl:value-of select="./tei:title[@type='alternative']"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
                                             Wikidata ID
                                         </th>
                                         <td>

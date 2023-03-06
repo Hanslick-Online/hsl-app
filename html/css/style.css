@@ -505,7 +505,8 @@ a.anchorFoot {
 }
 
 #viewer-1 {
-    position: fixed;
+    position: sticky;
+    top: 1%;
 }
 
 .caret {
