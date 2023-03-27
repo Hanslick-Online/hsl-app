@@ -48,42 +48,52 @@
             <xsl:for-each-group select="./tei:biblStruct" group-by="@type">
                 <xsl:sort select="current-grouping-key()" data-type="text"/>
                 <xsl:choose>
-                    <xsl:when test="current-grouping-key() = 'bookSection'">
-                        <h3>Buchkapitel</h3>
-                    </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'journalArticle'">
-                        <h3>Artikel</h3>
-                    </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'book'">
+                    <xsl:when test="current-grouping-key() = '01_book'">
                         <h3>Bücher</h3>
-                    </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
-                        <h3>Enzyklopädie Artikel</h3>
-                    </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'thesis'">
+                    </xsl:when>                  
+                    <xsl:when test="current-grouping-key() = '02_thesis'">
                         <h3>Thesis</h3>
                     </xsl:when>
+                    <xsl:when test="current-grouping-key() = '03_journalArticle'">
+                        <h3>Artikel</h3>
+                    </xsl:when>
+                    <xsl:when test="current-grouping-key() = '04_bookSection'">
+                        <h3>Buchkapitel</h3>
+                    </xsl:when>
+                    <xsl:when test="current-grouping-key() = '05_encyclopediaArticle'">
+                        <h3>Lexikon Artikel</h3>
+                    </xsl:when>
+                    <xsl:otherwise></xsl:otherwise>
                 </xsl:choose>
 
                 <ul class="publications {current-grouping-key()}">
-                    <xsl:for-each select="current-group()[not(current-grouping-key() = 'presentation')]">
+                    <xsl:for-each select="current-group()[not(current-grouping-key() = '06_presentation')]">
                         <xsl:sort select=".//tei:imprint/tei:date" order="descending" data-type="number"/>
                         <xsl:sort select=".//tei:author[1]/tei:surname" data-type="text"/>
                         <xsl:if test=".//tei:imprint/tei:date != 'forthcoming'">
                             <li class="list-item">
                                 <xsl:choose>
-                                    <xsl:when test="current-grouping-key() = 'bookSection'">
+                                    <xsl:when test="current-grouping-key() = '01_book'">
                                         
                                         <xsl:call-template name="date"/>
-                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
-                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
                                             <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
                                         <xsl:call-template name="url"/>
                                         
                                     </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'journalArticle'">
+                                    <xsl:when test="current-grouping-key() = '02_thesis'">
+                                        
+                                        <xsl:call-template name="date"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
+                                        <xsl:if test=".//tei:series">
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
+                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
+                                    </xsl:when>
+                                    <xsl:when test="current-grouping-key() = '03_journalArticle'">
                                         
                                         <xsl:call-template name="date"/>
                                         <xsl:apply-templates select="tei:analytic" mode="any"/>
@@ -94,27 +104,18 @@
                                         <xsl:call-template name="url"/>
                                         
                                     </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'thesis'">
+                                    <xsl:when test="current-grouping-key() = '04_bookSection'">
                                         
                                         <xsl:call-template name="date"/>
-                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
                                         <xsl:if test=".//tei:series">
                                             <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
                                         <xsl:call-template name="url"/>
                                         
                                     </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'book'">
-                                        
-                                        <xsl:call-template name="date"/>
-                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
-                                        <xsl:if test=".//tei:series">
-                                            <xsl:apply-templates select="tei:series" mode="any"/>
-                                        </xsl:if>
-                                        <xsl:call-template name="url"/>
-                                        
-                                    </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
+                                    <xsl:when test="current-grouping-key() = '05_encyclopediaArticle'">
                                         
                                         <xsl:call-template name="date"/>
                                         <xsl:apply-templates select="tei:analytic" mode="any"/>
@@ -136,21 +137,23 @@
             <xsl:for-each-group select="./tei:biblStruct" group-by="@type">
                 <xsl:sort select="current-grouping-key()" data-type="text"/>
                 <xsl:choose>
-                    <xsl:when test="current-grouping-key() = 'bookSection'">
+                    <xsl:when test="current-grouping-key() = '01_book'">
+                        <h3>Bücher</h3>
+                    </xsl:when>                  
+                    <xsl:when test="current-grouping-key() = '02_thesis'">
+                        <!--<h3>Thesis</h3>-->
+                    </xsl:when>
+                    <xsl:when test="current-grouping-key() = '03_journalArticle'">
+                        <!--<h3>Artikel</h3>-->
+                    </xsl:when>
+                    <xsl:when test="current-grouping-key() = '04_bookSection'">
                         <h3>Buchkapitel</h3>
                     </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'journalArticle'">
-                        <h3>Artikel</h3>
+                    <xsl:when test="current-grouping-key() = '05_encyclopediaArticle'">
+                        <!--<h3>Lexikon Artikel</h3>-->
                     </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'book'">
-                        <h3>Bücher</h3>
-                    </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
-                        
-                    </xsl:when>
-                    <xsl:when test="current-grouping-key() = 'thesis'">
-                        
-                    </xsl:when>
+                    <xsl:otherwise></xsl:otherwise>
+                    
                 </xsl:choose>
                 
                 <ul class="publications {current-grouping-key()}">
@@ -160,17 +163,25 @@
                         <xsl:if test=".//tei:imprint/tei:date = 'forthcoming'">
                             <li class="list-item">
                                 <xsl:choose>
-                                    <xsl:when test="current-grouping-key() = 'bookSection'">
+                                    <xsl:when test="current-grouping-key() = '01_book'">
                                         
-                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
-                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
                                         <xsl:if test=".//tei:series">
                                             <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
                                         <xsl:call-template name="url"/>
                                         
                                     </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'journalArticle'">
+                                    <xsl:when test="current-grouping-key() = '02_thesis'">
+                                        
+                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
+                                        <xsl:if test=".//tei:series">
+                                            <xsl:apply-templates select="tei:series" mode="any"/>
+                                        </xsl:if>
+                                        <xsl:call-template name="url"/>
+                                        
+                                    </xsl:when>
+                                    <xsl:when test="current-grouping-key() = '03_journalArticle'">
                                         
                                         <xsl:apply-templates select="tei:analytic" mode="any"/>
                                         <xsl:apply-templates select="tei:monogr" mode="journalArticle"/>
@@ -180,25 +191,17 @@
                                         <xsl:call-template name="url"/>
                                         
                                     </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'thesis'">
+                                    <xsl:when test="current-grouping-key() = '04_bookSection'">
                                         
-                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
-                                        <xsl:if test=".//tei:series">
-                                            <xsl:apply-templates select="tei:series" mode="any"/>
-                                        </xsl:if>
-                                        <xsl:call-template name="url"/>
-
-                                    </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'book'">
-                                        
-                                        <xsl:apply-templates select="tei:monogr" mode="book"/>
+                                        <xsl:apply-templates select="tei:analytic" mode="any"/>
+                                        <xsl:apply-templates select="tei:monogr" mode="bookSection"/>
                                         <xsl:if test=".//tei:series">
                                             <xsl:apply-templates select="tei:series" mode="any"/>
                                         </xsl:if>
                                         <xsl:call-template name="url"/>
                                         
                                     </xsl:when>
-                                    <xsl:when test="current-grouping-key() = 'encyclopediaArticle'">
+                                    <xsl:when test="current-grouping-key() = '05_encyclopediaArticle'">
                                         
                                         <xsl:apply-templates select="tei:analytic" mode="any"/>
                                         <xsl:apply-templates select="tei:monogr" mode="book"/>

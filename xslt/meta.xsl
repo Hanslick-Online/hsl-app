@@ -73,13 +73,13 @@
     <xsl:template match="tei:ref">
         <xsl:choose>
             <xsl:when test="child::tei:figure">
-                <a class="ref-figure">
+                <a class="ref-figure" target="_blank">
                     <xsl:attribute name="href"><xsl:value-of select="@target"/></xsl:attribute>
                     <xsl:apply-templates/>
                 </a>
             </xsl:when>
             <xsl:otherwise>
-                <a>
+                <a target="_blank">
                     <xsl:attribute name="href"><xsl:value-of select="@target"/></xsl:attribute>
                     <xsl:apply-templates/>
                 </a>

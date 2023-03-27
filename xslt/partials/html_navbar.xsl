@@ -25,12 +25,6 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="einfuehrung-vms.html"
-                                            title="Einführung">
-                                            Hanslick Ästhetik: Entstehung und Einführung
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a class="dropdown-item" href="bedeutung-hanslick.html">
                                             Hanslicks historische Bedeutung
                                         </a>

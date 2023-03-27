@@ -48,21 +48,14 @@
             <xsl:for-each-group select="./tei:biblStruct" group-by="@type">
 
                 <ul class="publications {current-grouping-key()}">
-                    <xsl:for-each select="current-group()[current-grouping-key() = 'presentation']">
+                    <xsl:for-each select="current-group()[current-grouping-key() = '06_presentation']">
                         <xsl:sort select=".//tei:imprint/tei:date" order="descending" data-type="number"/>
                         <xsl:sort select=".//tei:respStmt[1]/tei:persName[1]/tei:surname" data-type="text"/>
 
                         <li class="list-item">
-                            <xsl:choose>
-                                <xsl:when test="current-grouping-key() = 'presentation'">
-                                    
-                                    <xsl:call-template name="date"/>
-                                    <xsl:apply-templates select="tei:monogr" mode="book"/>
-                                    <xsl:call-template name="url"/>
-                                    
-                                </xsl:when>
-                                <xsl:otherwise></xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:call-template name="date"/>
+                            <xsl:apply-templates select="tei:monogr" mode="book"/>
+                            <xsl:call-template name="url"/>
                         </li>
                     </xsl:for-each>
                 </ul>

@@ -287,7 +287,6 @@ sup {
 }
 
 .ref-figure {
-    width: 25%;
     color: #212529;
 }
 
@@ -810,6 +809,23 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 1024px) {
+    .seg-inline {
+        display: block;
+    }
+    .seg-inline p, .seg-inline a {
+        width: 100%;
+    }
+    .figure-inline {
+        margin: 0 auto;
+    }
+    .figure-inline, .figure-inline img {
+        display: block;
+        text-align: center;
+        margin: 2em auto .5em auto;
+    }
+    .figure_text {
+        width: 100%;
+    }
     .navbar .navbar-collapse {
         border-top: 1px solid rgba(0,0,0,.075);
         padding-top: 2rem;
