@@ -7,7 +7,7 @@
     version="2.0">
     <xsl:template match="/" name="html_footer">
         <div class="wrapper bg-light" id="wrapper-footer-full">
-            <div class="container-fluid" id="footer-full-content" tabindex="-1">
+            <div class="container" id="footer-full-content" tabindex="-1">
                 <div class="footer-separator">
                     KONTAKT
                     <hr></hr>

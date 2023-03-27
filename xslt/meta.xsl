@@ -41,7 +41,9 @@
             </body>
         </html>
     </xsl:template>
-    <xsl:template match="tei:div[@type='main']/tei:head"/>    
+    <xsl:template match="tei:div[@type='main']/tei:head">
+        <h1 id="{generate-id()}" class="py-4 meta-h"><xsl:apply-templates/></h1>
+    </xsl:template>    
     <xsl:template match="tei:div[@type='block']/tei:head">
         <h2 id="{generate-id()}" class="py-4 meta-h"><xsl:apply-templates/></h2>
     </xsl:template>
