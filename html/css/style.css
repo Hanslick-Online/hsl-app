@@ -389,7 +389,7 @@ sup {
 
 .pb {
     position: absolute;
-    right: -2em;
+    right: 1px;
     font-style: normal !important;
     margin: 0;
     padding: 0;
@@ -397,7 +397,7 @@ sup {
 
 .pbnp {
     position: absolute;
-    right: -2em;
+    right: 1px;
     font-style: normal !important;
     margin: 0;
     padding: 0;
@@ -463,24 +463,36 @@ a.anchorFoot {
 
 .titlePart {
     font-weight: bold;
-    margin: .25em 0 .25em 0;
-}
-
-.docbyline {
-    margin: 2em 0 0 0;
+    margin: 2em 0 ;
 }
 
 .byline {
-    margin: .25em 0 .25em 0;
+    margin: 2em 0;
+    text-align: center;
+}
+
+.docEdition {
+    margin: 2em 0;
+    text-align: center;
+}
+
+.milestone {
+    text-align: center;
+    margin: 2em 0;
 }
 
 .docImprint {
-    margin: .25em 0 .25em 0;
+    margin: 2em 0;
+    text-align: center;
 }
 
 .docTitle {
     text-align: center;
     margin: 4em auto;
+}
+
+.vh {
+    min-height: 75vh;
 }
 
 .footnote_link {

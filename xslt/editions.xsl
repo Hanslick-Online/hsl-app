@@ -58,39 +58,7 @@
                                         <xsl:call-template name="annotation-options"></xsl:call-template>
                                     </div>
                                     <div class="card-header">
-                                        <div class="docTitle yes-index">
-                                            <a class="anchor" id="index.xml-body.1_div.0"></a>
-                                            <span class="anchor-pb"></span>
-                                            <span class="pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"></span>
-                                            <div class="titlePart">
-                                                <xsl:for-each select=".//tei:docTitle/tei:titlePart">
-                                                    <div class="titlePart {@type}">
-                                                        <xsl:apply-templates/>
-                                                    </div>
-                                                </xsl:for-each>
-                                            </div>
-                                            <div class="docbyline">
-                                                <xsl:for-each select=".//tei:titlePage/tei:byline">
-                                                    <div class="byline">
-                                                        <xsl:apply-templates/>
-                                                    </div>
-                                                </xsl:for-each>
-                                            </div>
-                                            <div class="imprint">
-                                                <xsl:for-each select=".//tei:titlePage/tei:docImprint">
-                                                    <div class="docImprint">
-                                                        <xsl:apply-templates/>
-                                                    </div>
-                                                </xsl:for-each>
-                                            </div>
-                                            <div class="milestone">
-                                                <xsl:for-each select="//tei:titlePage/tei:milestone">
-                                                    <div class="milestone">
-                                                        <xsl:text>***</xsl:text>
-                                                    </div>
-                                                </xsl:for-each>
-                                            </div>
-                                        </div>
+                                        <xsl:apply-templates select="//tei:titlePage"/>
                                     </div>
                                     <div class="card-body yes-index">                                
                                         <xsl:for-each select=".//tei:body/tei:div">
@@ -142,8 +110,67 @@
             </body>
         </html>
     </xsl:template>
-                  
     
+    <!--    
+        TEI FRONT
+    -->
+    <xsl:template match="tei:titlePage">
+        <div class="vh"><xsl:apply-templates/></div>
+    </xsl:template>
+    
+    <xsl:template match="tei:docTitle">
+        <div class="docTitle yes-index">
+            <a class="anchor" id="index.xml-body.1_div.0"></a>
+            <span class="anchor-pb"></span>
+            <span class="pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"></span>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:titlePart">
+        <div class="titlePart {@type}">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:docAuthor">
+        <span class="docAuthor">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+    
+    <xsl:template match="tei:docEdition">
+        <div class="docEdition">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:docImprint">
+        <div class="docImprint">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="tei:milestone">
+        <div class="milestone">
+            <xsl:text>***</xsl:text>
+        </div>
+    </xsl:template>
+    
+    <!--    
+        TEI BODY
+    -->
+    <xsl:template match="tei:byline">
+        <xsl:if test="ancestor::tei:body">
+            <p class="yes-index"><xsl:apply-templates/></p>
+        </xsl:if>
+        <xsl:if test="ancestor::tei:front">
+            <div class="byline">
+                <xsl:apply-templates/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template match="tei:head">
         <h3 class="yes-index">
             <!--<xsl:choose>
@@ -159,13 +186,7 @@
             </xsl:choose>-->
             <xsl:apply-templates/>
         </h3>
-    </xsl:template>
-    
-    <xsl:template match="tei:byline">
-        <xsl:if test="ancestor::tei:body">
-            <p class="yes-index"><xsl:apply-templates/></p>
-        </xsl:if>
-    </xsl:template>
+    </xsl:template>   
     
     <xsl:template match="tei:p">
         <p id="{@xml:id}" class="indentedP yes-index">
