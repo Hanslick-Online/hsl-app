@@ -326,7 +326,7 @@ sup {
 }
 
 .index-table {
-    margin: 3em auto 0 auto;
+    margin: 3em auto;
 }
 
 .entity-table {
@@ -389,7 +389,7 @@ sup {
 
 .pb {
     position: absolute;
-    right: 5%;
+    right: -2em;
     font-style: normal !important;
     margin: 0;
     padding: 0;
@@ -397,7 +397,7 @@ sup {
 
 .pbnp {
     position: absolute;
-    right: 10%;
+    right: -2em;
     font-style: normal !important;
     margin: 0;
     padding: 0;
@@ -418,6 +418,10 @@ span {
 
 .indentedP {
     text-indent: -5em;
+}
+
+.w-100 {
+    max-width: 100%;
 }
 
 .section {
@@ -451,6 +455,10 @@ a.anchorFoot {
 
 .bold {
     font-weight: bold;
+}
+
+.pad-4 {
+    padding-bottom: 3em;
 }
 
 .titlePart {

@@ -357,10 +357,10 @@
     <xsl:template match="tei:graphic">
         <xsl:choose>
             <xsl:when test="ancestor::tei:p">
-                <img class="figure padding-20" src="{@url}" alt="Grafik eines Notenbeispiels"/>
+                <img class="figure padding-20 w-100" src="{@url}" alt="Grafik eines Notenbeispiels"/>
             </xsl:when>
             <xsl:otherwise>
-                <img src="{@url}" alt="Grafik eines Notenbeispiels"/>
+                <img class="w-100" src="{@url}" alt="Grafik eines Notenbeispiels"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

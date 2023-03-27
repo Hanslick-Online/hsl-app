@@ -41,8 +41,9 @@
             </body>
         </html>
     </xsl:template>
-    <xsl:template match="tei:div/tei:head">
-        <h2 id="{generate-id()}" class="meta-h"><xsl:apply-templates/></h2>
+    <xsl:template match="tei:div[@type='main']/tei:head"/>    
+    <xsl:template match="tei:div[@type='block']/tei:head">
+        <h2 id="{generate-id()}" class="py-4 meta-h"><xsl:apply-templates/></h2>
     </xsl:template>
     <xsl:template match="tei:byline">
         <h5 class="meta-h"><xsl:apply-templates/></h5>
@@ -62,16 +63,26 @@
     <xsl:template match="tei:p">
         <p id="{generate-id()}" class="meta-p"><xsl:apply-templates/></p>
     </xsl:template>
-    
     <xsl:template match="tei:list">
-        <ul id="{generate-id()}" class="meta-l"><xsl:apply-templates/></ul>
+        <ul id="{generate-id()}" class="meta-l pad-4"><xsl:apply-templates/></ul>
     </xsl:template>
-    
+    <xsl:template match="tei:hi">
+        <span class="{@rend}"><xsl:apply-templates/></span>
+    </xsl:template>
+    <xsl:template match="tei:emph">
+        <span class="italic"><xsl:apply-templates/></span>
+    </xsl:template>
     <xsl:template match="tei:item">
         <li id="{generate-id()}"><xsl:apply-templates/></li>
     </xsl:template>
     <xsl:template match="tei:ref">
         <xsl:choose>
+            <xsl:when test="@type='mail'">
+                <a>
+                    <xsl:attribute name="href"><xsl:value-of select="concat('mailto:', @target)"/></xsl:attribute>
+                    <xsl:apply-templates/>
+                </a>
+            </xsl:when>
             <xsl:when test="child::tei:figure">
                 <a class="ref-figure" target="_blank">
                     <xsl:attribute name="href"><xsl:value-of select="@target"/></xsl:attribute>

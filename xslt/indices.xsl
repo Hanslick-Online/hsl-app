@@ -77,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listperson', 'Search:', [1, 4, 5], [0, 2, 3], false);
+                            createDataTable('listperson', 'Suche:', [1, 4, 5], [0, 2, 3], [6]);
                             });
                         </script>
                     </xsl:when>
@@ -94,7 +94,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listbibl', 'Search:', [1, 3], [0, 2], false);
+                                createDataTable('listbibl', 'Suche:', [1, 3], [0, 2], false);
                             });
                         </script>
                     </xsl:when>
@@ -126,19 +126,26 @@
                             <tr>
                                 <td>
                                     <a href="{concat(@xml:id, '.html')}">
-                                        <xsl:if test="./tei:persName[@type='main']/tei:surname">
+                                        <xsl:if test="./tei:persName[@type='main']/tei:surname/text()">
                                             <xsl:value-of select="./tei:persName[@type='main']/tei:surname"/>
                                         </xsl:if>
-                                        <xsl:if test="./tei:persName[@type='main']/tei:surname and ./tei:persName/tei:forename">
+                                        <xsl:if test="./tei:persName[@type='main']/tei:surname/text() and ./tei:persName/tei:forename/text()">
                                         <xsl:text>, </xsl:text>
                                         </xsl:if>
-                                        <xsl:if test="./tei:persName[@type='main']/tei:forename">
+                                        <xsl:if test="./tei:persName[@type='main']/tei:forename/text()">
                                             <xsl:value-of select="./tei:persName[@type='main']/tei:forename"/>
                                         </xsl:if>
                                     </a>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="@role"/>
+                                    <xsl:choose>
+                                        <xsl:when test="@role">
+                                            <xsl:value-of select="@role"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:text>non fictional</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>                                    
                                 </td>
                                 <td>
                                     <a href="{./tei:idno[@type='GND']}" target="_blank">
@@ -155,6 +162,9 @@
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:listEvent/tei:event)"/>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="substring(./tei:persName[@type='main']/tei:surname, 1, 1)"/>
                                 </td>
                             </tr>
                          </xsl:if>
