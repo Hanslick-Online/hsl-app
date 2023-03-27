@@ -254,7 +254,7 @@ sup {
 }
 
 .comma {
-    margin-right: -4px;
+    margin-right: -2px;
     margin-left: 0 !important;
 }
 
@@ -844,6 +844,9 @@ input:checked + .i-slider:before {
     }
     .custom-logo-link {
         margin-bottom: -2.5em;
+    }
+    .comp-card .card-body .table-wrapper table tbody tr th, td {
+        display: block;
     }
 }
 
