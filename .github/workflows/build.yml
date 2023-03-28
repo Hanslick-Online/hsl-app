@@ -35,7 +35,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         ./attributes.sh
-        ./denormalize.sh
+        python denormalize_indices.py
     - name: Build
       run: |
         ant

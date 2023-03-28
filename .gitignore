@@ -5,9 +5,6 @@
 /data
 /traktat-facs
 *.html
-utils.py
-add_facs_tei.py
-rename_list_img.py
 /test
 
 
