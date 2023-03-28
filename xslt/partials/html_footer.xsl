@@ -42,41 +42,39 @@
                     </div>
                     <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
                         <h6 class="font-weight-bold">PROJEKTPARTNER</h6>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="flex-md-row mb-4 align-items-center">
-                                        <a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="images/fwf-logo_var2.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a>
-                                        <!--<div class="card-body d-flex flex-column align-items-start">
-                                            <p class="card-text mb-auto">Project partner</p>
-                                        </div>-->
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="flex-md-row mb-4 align-items-center">
-                                        <a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a>
-                                        <!--<div class="card-body d-flex flex-column align-items-start">
-                                            <p class="card-text mb-auto">Project partner</p>
-                                        </div>-->
-                                    </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center">
+                                    <a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="images/fwf-logo_var2.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a>
+                                    <!--<div class="card-body d-flex flex-column align-items-start">
+                                        <p class="card-text mb-auto">Project partner</p>
+                                    </div>-->
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <div class="flex-md-row mb-4 align-items-center">
-                                        
-                                        <!--<div class="card-body d-flex flex-column align-items-start">
-                                            <p class="card-text mb-auto">Project partner</p>
-                                        </div>-->
-                                    </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center">
+                                    <a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a>
+                                    <!--<div class="card-body d-flex flex-column align-items-start">
+                                        <p class="card-text mb-auto">Project partner</p>
+                                    </div>-->
                                 </div>
-                                <div class="col-lg-8 col-md-8 col-sm-12">
-                                    <div class="flex-md-row mb-4 align-items-center">
-                                        <a href="https://www.oenb.at"><img class="card-img-right flex-auto d-md-block" src="images/Oesterreichische_Nationalbank_Logo.svg" alt="Österreichische Nationalbank Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="Österreichische Nationalbank" /></a>
-                                        <!--<div class="card-body d-flex flex-column align-items-start">
-                                            <p class="card-text mb-auto">Project partner</p>
-                                        </div>-->
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center">
+                                    
+                                    <!--<div class="card-body d-flex flex-column align-items-start">
+                                        <p class="card-text mb-auto">Project partner</p>
+                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center">
+                                    <a href="https://www.oenb.at"><img class="card-img-right flex-auto d-md-block" src="images/Oesterreichische_Nationalbank_Logo.svg" alt="Österreichische Nationalbank Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="Österreichische Nationalbank" /></a>
+                                    <!--<div class="card-body d-flex flex-column align-items-start">
+                                        <p class="card-text mb-auto">Project partner</p>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>

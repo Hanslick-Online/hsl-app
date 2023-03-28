@@ -242,14 +242,15 @@ a {
 }
 
 .indentedP a + em {
-    margin-left: -4px;
+    margin-left: -2px;
 }
 
 sup {
-    margin-left: -4px;
+    margin-left: -2px;
 }
 
 .prev-text {
+    margin-right: -2px;
     margin-left: 0 !important;
 }
 
