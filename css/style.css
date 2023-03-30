@@ -389,19 +389,12 @@ sup {
 }
 
 .pb {
-    position: absolute;
+    color: lightgrey;
+    /*position: absolute;
     right: 1px;
     font-style: normal !important;
     margin: 0;
-    padding: 0;
-}
-
-.pbnp {
-    position: absolute;
-    right: 1px;
-    font-style: normal !important;
-    margin: 0;
-    padding: 0;
+    padding: 0;*/
 }
 
 .footnote_text .cit .quote .pb, .footnote_text li span .pb {
@@ -813,11 +806,6 @@ input:checked + .i-slider:before {
     #editor-widget {
         right: 1%;
     }
-    .pb {
-        left: 55%;
-        margin: 0;
-        padding: 0;
-    }
     .section-traktat {
         max-width: 80%;
         margin: 0 auto;
@@ -864,9 +852,6 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 768px) {
-    .pb {
-        visibility: hidden;
-    }
     .img-fluid {
         width: 170px;
     }
