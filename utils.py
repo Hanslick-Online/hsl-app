@@ -58,7 +58,7 @@ def create_mention_list(mentions, event_title="erwähnt in"):
         :type event_title: str
         :return: a etree.element
         """
-        tei_ns = f"http://www.tei-c.org/ns/1.0"
+        tei_ns = NS["tei"]
         node_root = ET.Element(f"{{{tei_ns}}}listEvent")
         for x in mentions:
             event_node = ET.Element(f"{{{tei_ns}}}event")

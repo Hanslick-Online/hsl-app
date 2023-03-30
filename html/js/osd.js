@@ -27,7 +27,7 @@ if (!wrapper.classList.contains("fade")) {
         var width = container.clientWidth;
     }
     var container = document.getElementById("viewer-1");
-    container.style.width = `${String(width)}px`;
+    container.style.width = `${String(width - 50)}px`;
 } else {
     container.style.height = `${String(height - 300)}px`;
     // set osd wrapper container width
@@ -45,7 +45,7 @@ get all image urls stored in span el class tei-xml-images
 creates an array for osd viewer with static images
 ##################################################################
 */
-var element = document.getElementsByClassName('pb');
+var element = document.getElementsByClassName('anchor-pb');
 var tileSources = [];
 var img = element[0].getAttribute("source");
 var img = `https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/${img}.jp2/full/max/0/default.jpg`;

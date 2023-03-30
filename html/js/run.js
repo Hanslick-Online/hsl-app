@@ -66,6 +66,22 @@ var editor = new LoadEditor({
             all: false,
             class: "features-2",
           },
+        },
+        {
+          opt: "pbs",
+          color: "none",
+          title: "Seitenumbrüche",
+          html_class: "pb",
+          css_class: "pbs",
+          chg_citation: "citation-url",
+          hide: {
+            hidden: true,
+            class: "pb",
+          },
+          features: {
+            all: false,
+            class: "features-2",
+          },
         }
       ],
       span_element: {
