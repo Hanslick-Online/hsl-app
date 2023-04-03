@@ -51,35 +51,36 @@ def facs_to_tei(fpath=None,fnames=None):
 
 
 def create_mention_list(mentions, event_title="erwähnt in"):
-        """ creates a tei elemen with list of mentions
-        :param mentions: a list of dicts with keys `doc_uri` and `doc_title`
-        :type mentions: list
-        :param event_title: short description of the event, defaults to "erwähnt in"
-        :type event_title: str
-        :return: a etree.element
-        """
-        tei_ns = NS["tei"]
-        node_root = ET.Element(f"{{{tei_ns}}}listEvent")
-        for x in mentions:
-            event_node = ET.Element(f"{{{tei_ns}}}event")
-            event_node.set('type', 'mentioned')
-            event_p_node = ET.Element(f"{{{tei_ns}}}p")
-            event_p_node.text = event_title
-            title_node = ET.Element(f"{{{tei_ns}}}title")
-            if x['doc_title_sub']:
-                title_node.text = f"{x['doc_title']} ({x['doc_title_sub']})"
-            else:
-                title_node.text = x['doc_title']
-            event_p_node.append(title_node)
-            event_node.append(event_p_node)
-            lnkgrp_node = ET.Element(f"{{{tei_ns}}}linkGrp")
-            lnk_node = ET.Element(f"{{{tei_ns}}}link")
-            lnk_node.set('type', 'ARCHE')
-            lnk_node.set('target', x['doc_uri'])
-            lnkgrp_node.append(lnk_node)
-            event_node.append(lnkgrp_node)
-            node_root.append(event_node)
-        return node_root
+    """ creates a tei elemen with list of mentions
+    :param mentions: a list of dicts with keys `doc_uri` and `doc_title`
+    :type mentions: list
+    :param event_title: short description of the event, defaults to "erwähnt in"
+    :type event_title: str
+    :return: a etree.element
+    """
+
+    tei_ns = NS["tei"]
+    node_root = ET.Element(f"{{{tei_ns}}}listEvent")
+    for x in mentions:
+        event_node = ET.Element(f"{{{tei_ns}}}event")
+        event_node.set('type', 'mentioned')
+        event_p_node = ET.Element(f"{{{tei_ns}}}p")
+        event_p_node.text = event_title
+        title_node = ET.Element(f"{{{tei_ns}}}title")
+        if x['doc_title_sub']:
+            title_node.text = f"{x['doc_title']} ({x['doc_title_sub']})"
+        else:
+            title_node.text = x['doc_title']
+        event_p_node.append(title_node)
+        event_node.append(event_p_node)
+        lnkgrp_node = ET.Element(f"{{{tei_ns}}}linkGrp")
+        lnk_node = ET.Element(f"{{{tei_ns}}}link")
+        lnk_node.set('type', 'ARCHE')
+        lnk_node.set('target', x['doc_uri'])
+        lnkgrp_node.append(lnk_node)
+        event_node.append(lnkgrp_node)
+        node_root.append(event_node)
+    return node_root
 
 
 def denormalize_indices(

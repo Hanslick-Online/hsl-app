@@ -298,25 +298,25 @@
     <xsl:template match="tei:pb">
         <xsl:choose>
             <xsl:when test="ancestor::tei:p and not(preceding-sibling::tei:list)">
-                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"><br/><br/></span>
-                <span class="pb"><xsl:value-of select="@n"/></span>
+                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
+                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:when test="ancestor::tei:p and preceding-sibling::tei:list">
-                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"><br/><br/></span>
-                <p class="indentedP"><span class="pb"><xsl:value-of select="@n"/></span></p>
+                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
+                <p class="indentedP"><span class="pb"><br/><br/><xsl:value-of select="@n"/></span></p>
             </xsl:when>
             <xsl:when test="ancestor::tei:list">
-                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"><br/><br/></span>
-                <span class="pb"><xsl:value-of select="@n"/></span>
+                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
+                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:when test="ancestor::tei:note">
-                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"><br/><br/></span>
-                <span class="pb"><xsl:value-of select="@n"/></span>
+                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
+                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:otherwise>
                 <p class="indentedP">
-                    <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"><br/><br/></span>
-                    <span class="pb"><xsl:value-of select="@n"/></span>
+                    <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
+                    <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
                 </p>
             </xsl:otherwise>
         </xsl:choose>
