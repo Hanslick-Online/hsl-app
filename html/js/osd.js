@@ -27,7 +27,7 @@ if (!wrapper.classList.contains("fade")) {
         var width = container.clientWidth;
     }
     var container = document.getElementById("viewer-1");
-    container.style.width = `${String(width - 50)}px`;
+    container.style.width = `${String(width - 75)}px`;
 } else {
     container.style.height = `${String(height - 300)}px`;
     // set osd wrapper container width

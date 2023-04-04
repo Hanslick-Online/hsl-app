@@ -77,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                            createDataTable('listperson', 'Suche:', [1, 4, 5], [0, 2, 3], [6]);
+                            createDataTable('listperson', 'Suche:', [1, 4], [0, 2, 3], [5]);
                             });
                         </script>
                     </xsl:when>
@@ -94,7 +94,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listbibl', 'Suche:', [1, 3], [0, 2], false);
+                            createDataTable('listbibl', 'Suche:', [1, 3], [0, 2], [4]);
                             });
                         </script>
                     </xsl:when>
@@ -116,8 +116,8 @@
                          <th>Typ</th>
                          <th>GND</th>
                          <th>Wikidata</th>
-                         <th>Werke #</th>
                          <th>Erwähnt #</th>
+                         <th>Initial</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -156,9 +156,6 @@
                                     <a href="{./tei:idno[@type='WIKIDATA']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
                                     </a>
-                                </td>
-                                <td>
-                                    <xsl:value-of select="count(./tei:listBibl/tei:bibl)"/>
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:listEvent/tei:event)"/>
@@ -264,6 +261,7 @@
                         <th>Autor</th>
                         <th>Wikidata ID</th>
                         <th>Erwähnt #</th>
+                        <th>Initial</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -279,9 +277,7 @@
                                     <ul>
                                         <xsl:for-each select="./tei:author">
                                             <li>
-                                                <a href="{substring-after(@ref, '#')}.html">
-                                                    <xsl:value-of select="./tei:persName"/>
-                                                </a>
+                                                <xsl:value-of select="./tei:persName"/>
                                             </li>
                                         </xsl:for-each>    
                                     </ul>
@@ -291,6 +287,9 @@
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:listEvent/tei:event)"/>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="substring(./tei:title[@type='main'], 1, 1)"/>
                                 </td>
                             </tr>
                         </xsl:if>

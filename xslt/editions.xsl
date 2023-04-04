@@ -57,7 +57,7 @@
                                         <xsl:call-template name="chapters"></xsl:call-template>
                                         <xsl:call-template name="annotation-options"></xsl:call-template>
                                     </div>
-                                    <div class="card-header">
+                                    <div class="card-header yes-index">
                                         <xsl:apply-templates select="//tei:titlePage"/>
                                     </div>
                                     <div class="card-body yes-index">                                
@@ -119,7 +119,7 @@
     </xsl:template>
     
     <xsl:template match="tei:docTitle">
-        <div class="docTitle yes-index">
+        <div class="docTitle">
             <a class="anchor" id="index.xml-body.1_div.0"></a>
             <span class="anchor-pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"><br/><br/></span>
             <span class="pb"></span>
@@ -215,7 +215,7 @@
         <br/>
     </xsl:template>
     <xsl:template match="tei:emph">
-        <xsl:choose>
+        <!--<xsl:choose>
             <xsl:when test="starts-with(following-sibling::text()[1], ',') or 
                 starts-with(following-sibling::text()[1], '’') or
                 starts-with(following-sibling::text()[1], '.')">
@@ -227,7 +227,8 @@
             <xsl:otherwise>
                 <em><xsl:apply-templates/></em>
             </xsl:otherwise>
-        </xsl:choose>
+        </xsl:choose>-->
+        <em><xsl:apply-templates/></em>
     </xsl:template>
     <xsl:template match="tei:rs">
         <xsl:choose>

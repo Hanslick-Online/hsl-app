@@ -47,6 +47,9 @@
     <xsl:template match="tei:div[@type='block']/tei:head">
         <h2 id="{generate-id()}" class="py-4 meta-h"><xsl:apply-templates/></h2>
     </xsl:template>
+    <xsl:template match="tei:div[@type='sub']/tei:head">
+        <h2 id="{generate-id()}" class="py-4 meta-h"><xsl:apply-templates/></h2>
+    </xsl:template>
     <xsl:template match="tei:byline">
         <h5 class="meta-h"><xsl:apply-templates/></h5>
     </xsl:template>
@@ -66,7 +69,7 @@
         <p id="{generate-id()}" class="meta-p"><xsl:apply-templates/></p>
     </xsl:template>
     <xsl:template match="tei:list">
-        <ul id="{generate-id()}" class="meta-l pad-4"><xsl:apply-templates/></ul>
+        <ul id="{generate-id()}" class="meta-l {if(parent::tei:item) then('') else('pad-4')}"><xsl:apply-templates/></ul>
     </xsl:template>
     <xsl:template match="tei:hi">
         <span class="{@rend}"><xsl:apply-templates/></span>
