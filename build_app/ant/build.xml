@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." name="tei2html">
-    <property name="editions" value="./data/traktat/editions"/>
-    <property name="comp" value="./data/traktat/comp"/>
-    <property name="index" value="./data/meta/index.xml"/>
-    <property name="meta" value="./data/meta"/>
-    <property name="indices" value="./data/indices"/>
-    <property name="indices_static" value="./data/meta/publikationen.xml"/>
-    <property name="imprint" value="./data/imprint.xml"/>
-    <property name="editions_ct" value="./data/critics/editions"/>
-    <property name="target" value="./html"/>
-    <property name="xsl_editions" value="./xslt/editions.xsl"/>
-    <property name="xsl_editions_ct" value="./xslt/editions_ct.xsl"/>
-    <property name="xsl_comp" value="./xslt/comp.xsl"/>
-    <property name="xsl_meta" value="./xslt/meta.xsl"/>
-    <property name="xsl_index" value="./xslt/index.xsl"/>
-    <property name="xsl_toc" value="./xslt/toc.xsl"/>
-    <property name="xsl_indices" value="./xslt/indices.xsl"/>
-    <property name="xsl_indices_static" value="./xslt/indices_static.xsl"/>
-    <property name="xsl_indices_static_pres" value="./xslt/indices_static_pres.xsl"/>
-    <property name="xsl_entities" value="./xslt/entities.xsl"/>
-    <property name="xsl_imprint" value="./xslt/imprint.xsl"/>
-    <property name="xsl_search" value="./xslt/search.xsl"/>
+<project basedir="../.." name="tei2html">
+    <property name="editions" value="${basedir}/data/traktat/editions"/>
+    <property name="comp" value="${basedir}/data/traktat/comp"/>
+    <property name="index" value="${basedir}/data/meta/index.xml"/>
+    <property name="meta" value="${basedir}/data/meta"/>
+    <property name="indices" value="${basedir}/data/indices"/>
+    <property name="imprint" value="${basedir}/data/imprint.xml"/>
+    <property name="editions_ct" value="${basedir}/data/critics/editions"/>
+    <property name="target" value="${basedir}/html"/>
+    <property name="xsl_editions" value="${basedir}/xslt/editions.xsl"/>
+    <property name="xsl_editions_ct" value="${basedir}/xslt/editions_ct.xsl"/>
+    <property name="xsl_comp" value="${basedir}/xslt/comp.xsl"/>
+    <property name="xsl_meta" value="${basedir}/xslt/meta.xsl"/>
+    <property name="xsl_index" value="${basedir}/xslt/index.xsl"/>
+    <property name="xsl_toc" value="${basedir}/xslt/toc.xsl"/>
+    <property name="xsl_indices" value="${basedir}/xslt/indices.xsl"/>
+    <property name="xsl_entities" value="${basedir}/xslt/entities.xsl"/>
+    <property name="xsl_imprint" value="${basedir}/xslt/imprint.xsl"/>
+    <property name="xsl_search" value="${basedir}/xslt/search.xsl"/>
 
     <delete>
         <fileset dir="${target}" includes="*.html"/>
@@ -65,9 +62,9 @@
     </xslt>
     <delete>
         <fileset dir="${target}" includes="listbibl.html"/>
-        <fileset dir="${target}" includes="publikationen.html"/>
         <fileset dir="${target}" includes="listplace.html"/>
         <fileset dir="${target}" includes="listperson.html"/>
+        <fileset dir="${target}" includes="listbibl_static.html"/>
     </delete>
     <xslt style="${xsl_indices}"  basedir="${indices}" destdir="${target}" includes="*.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
@@ -76,14 +73,6 @@
     <delete>
         <fileset dir="${target}" includes="imprint.html"/>
     </delete>
-    <xslt in="${indices_static}" out="${target}/publikationen.html" style="${xsl_indices_static}">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
-    <xslt in="${indices_static}" out="${target}/einzelvortraege.html" style="${xsl_indices_static_pres}">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-        <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
     <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>

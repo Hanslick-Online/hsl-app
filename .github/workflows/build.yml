@@ -19,29 +19,30 @@ jobs:
       uses: actions/checkout@v3
     - name: Fetch data
       run: |
-        ./fetch_data.sh
+        ./build_app/shell/fetch_data.sh
     - name: Install Saxon, Ant and Fundament
       run: |
         apt-get update && apt-get install openjdk-11-jre-headless ant -y --no-install-recommend
-        ./script.sh
+        ./build_app/shell/script.sh
     - name: Install Ant-Contrib
       run: |
         wget https://repo1.maven.org/maven2/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar
         mv ant-contrib-1.0b3.jar /usr/share/ant/lib
     - name: preprocess
       run: |
-        ant -f preprocess.xml
+        ant -f build_app/ant/preprocess.xml
     - name: add attributes and denormalize indices
       run: |
-        pip install -r requirements.txt
-        ./attributes.sh
-        python denormalize_indices.py
+        pip install -U pip
+        pip install -r build_app/python/requirements.txt
+        ./build_app/shell/attributes.sh
+        python build_app/python/denormalize_indices.py
     - name: Build
       run: |
-        ant
+        ant -f build_app/ant/build.xml
     - name: Build Typesense Index
       run: |
-        python make_ts_index.py
+        python build_app/python/make_ts_index.py
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
