@@ -126,7 +126,7 @@ h3 {
 }
 
 .custom-logo-link {
-    margin-bottom: -2em;
+    margin: 0 0 -2em 0;
 }
 
 div.dataTables_filter {
@@ -730,7 +730,7 @@ input:checked + .i-slider:before {
 }
 
 .prevLink:before {
-    content: " ‹ ";
+    content: " < ";
 }
 
 .nextlink {
@@ -739,7 +739,7 @@ input:checked + .i-slider:before {
 }
 
 .nextlink:after {
-    content: " › ";
+    content: " > ";
 }
 
 .comp-card {
@@ -885,6 +885,16 @@ input:checked + .i-slider:before {
      .text {
          padding-left: 0;
      }
+     /* navbar autohide on scroll */
+    .scrolled-down{
+      transform:translateY(-100%); transition: all 0.3s ease-in-out;
+    }
+    .scrolled-up{
+      transform:translateY(0); transition: all 0.3s ease-in-out;
+    }
+    a.anchor, .anchor-pb a.anchorFoot {
+        top: 0;
+    }
 }
 
 @media (max-width: 575px) {

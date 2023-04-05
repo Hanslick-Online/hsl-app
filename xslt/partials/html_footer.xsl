@@ -119,5 +119,6 @@
                 $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
             });
         </script>
+        <script src="js/navbar-autohide.js"></script>
     </xsl:template>
 </xsl:stylesheet>
