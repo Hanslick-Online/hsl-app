@@ -58,7 +58,11 @@
                                         <xsl:call-template name="annotation-options"></xsl:call-template>
                                     </div>
                                     <div class="card-header yes-index">
-                                        <xsl:apply-templates select="//tei:titlePage"/>
+                                        <xsl:for-each select=".//tei:front/tei:titlePage">
+                                            
+                                            <div class="vh"><xsl:apply-templates/></div>
+                                            
+                                        </xsl:for-each>
                                     </div>
                                     <div class="card-body yes-index">                                
                                         <xsl:for-each select=".//tei:body/tei:div">
@@ -114,15 +118,12 @@
     <!--    
         TEI FRONT
     -->
-    <xsl:template match="tei:titlePage">
-        <div class="vh"><xsl:apply-templates/></div>
-    </xsl:template>
     
     <xsl:template match="tei:docTitle">
         <div class="docTitle">
             <a class="anchor" id="index.xml-body.1_div.0"></a>
-            <span class="anchor-pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"><br/><br/></span>
-            <span class="pb"></span>
+            <!--<span class="anchor-pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"><br/><br/></span>-->
+            <!--<span class="pb"></span>-->
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -311,6 +312,10 @@
                 <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:when test="ancestor::tei:note">
+                <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
+                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
+            </xsl:when>
+            <xsl:when test="ancestor::tei:front">
                 <span class="anchor-pb" source="{tokenize(@facs, '/')[last()]}"></span>
                 <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
