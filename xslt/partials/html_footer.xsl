@@ -113,12 +113,23 @@
         <div class="footer-imprint-bar bg-dark text-light" id="wrapper-footer-secondary" style="text-align:center; padding:0.4rem 0; font-size: 0.9rem;" >
             © Copyright OEAW | <a href="imprint.html">Impressum/Imprint</a>
         </div>
+        <div id="cookie-overlay">
+            <div class="container">
+                <div class="cookie-message">This website uses cookies to ensure you get the best experience on our website. <a href="/browser/imprint">More info</a><br/></div>  
+                <div class="cookie-buttons">
+                    <div class="cookie-accept-btn">Accept All Cookies (functional and tracking)</div>
+                    <div class="cookie-accept-necessary-btn">Accept Necessary Cookies Only</div>
+                </div>
+            </div>
+        </div>
         <script type="text/javascript">
             $(document).ready(function() {
                 $('li a.active').removeClass('active');
                 $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
             });
         </script>
+        <script src="js/language.js"></script>
         <script src="js/navbar-autohide.js"></script>
+        <!--<script src="js/cookie-consent.js"></script>-->
     </xsl:template>
 </xsl:stylesheet>
