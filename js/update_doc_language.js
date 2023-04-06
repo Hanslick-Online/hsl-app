@@ -16,8 +16,9 @@
         var lang = urlParam.get("lang");
 
         let path = location.pathname.split("/")[2];
-        console.log(path);
-        let newPath = jsonData[lang][path];
+        let newPath = path.length > 0 ? jsonData[lang][path]
+                    : lang == "en" ? jsonData[lang]["index.html"]
+                    : jsonData[lang]["index-en.html"];
 
         if (newPath) {
             window.history.replaceState({}, "", `${newPath}?${urlParam}`);
