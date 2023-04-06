@@ -3,8 +3,8 @@
     based on url search parameters
 */
 (async function getMappingJson() {
-    // let file = "https://raw.githubusercontent.com/Hanslick-Online/hsl-app/main/html/json";
-    let file = "http://0.0.0.0:8000/json";
+    let file = "https://raw.githubusercontent.com/Hanslick-Online/hsl-app/main/html/json";
+    // let file = "http://0.0.0.0:8000/json";
     const response = await fetch(`${file}/lang-mapping.json`);
     const jsonData = await response.json();
 
