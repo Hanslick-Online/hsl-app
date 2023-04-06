@@ -27,12 +27,32 @@
                     <div class="row" style="margin:0 auto;padding:0;">
                         <div class="col-md-5 intro_colum" style="margin:0;padding:0;">
                             <div class="intro_text">
-                                <h1>Digitale Edition</h1>
+                                <xsl:variable name="h1" select="
+                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    then('Digitale Edition') 
+                                    else('Digital Edition')"/>
+                                <xsl:variable name="treatise" select="
+                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    then('Traktat') 
+                                    else('Treatise')"/>
+                                <xsl:variable name="critics" select="
+                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    then('Kritiken') 
+                                    else('Critics')"/>
+                                <xsl:variable name="more" select="
+                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    then('mehr anzeigen') 
+                                    else('show more')"/>
+                                <h1><xsl:value-of select="$h1"/></h1>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">Traktat</a>
+                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">
+                                        <xsl:value-of select="$treatise"/>
+                                    </a>
                                 </button>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="toc.html">Kritiken</a>
+                                    <a href="toc.html">
+                                        <xsl:value-of select="$critics"/>
+                                    </a>
                                 </button>
                                 
                                 <xsl:for-each select="//tei:body">
@@ -47,7 +67,7 @@
                                         </xsl:choose>
                                         
                                     </xsl:for-each>
-                                    <p id="show-text">mehr anzeigen</p>
+                                    <p id="show-text"><xsl:value-of select="$more"/></p>
                                 </xsl:for-each>
                                 
                             </div>

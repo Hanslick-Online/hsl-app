@@ -3,6 +3,7 @@
     <property name="editions" value="${basedir}/data/traktat/editions"/>
     <property name="comp" value="${basedir}/data/traktat/comp"/>
     <property name="index" value="${basedir}/data/meta/index.xml"/>
+    <property name="index-en" value="${basedir}/data/meta/index-engl.xml"/>
     <property name="meta" value="${basedir}/data/meta"/>
     <property name="indices" value="${basedir}/data/indices"/>
     <property name="imprint" value="${basedir}/data/imprint.xml"/>
@@ -43,8 +44,13 @@
     <!-- common files -->
     <delete>
         <fileset dir="${target}" includes="index.html"/>
+        <fileset dir="${target}" includes="index-engl.html"/>
     </delete>
     <xslt in="${index}" out="${target}/index.html" style="${xsl_index}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index-en}" out="${target}/index-en.html" style="${xsl_index}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>

@@ -11,7 +11,7 @@
             <nav class="autohide navbar navbar-expand-lg bg-light">
                 <div class="container">
                     <!-- Your site title as branding in the menu -->
-                    <a href="index.html" class="navbar-brand custom-logo-link" rel="home" itemprop="url"><img src="{$project_logo}" class="img-fluid" title="{$project_short_title}" alt="{$project_short_title}" itemprop="logo" /></a><!-- end custom logo -->
+                    <a href="index.html?lang=de" class="navbar-brand custom-logo-link" rel="home" itemprop="url"><img src="{$project_logo}" class="img-fluid" title="{$project_short_title}" alt="{$project_short_title}" itemprop="logo" /></a><!-- end custom logo -->
                     <!--<a class="navbar-brand site-title-with-logo" rel="home" href="index.html" title="{$project_short_title}" itemprop="url"><xsl:value-of select="$project_short_title"/></a>-->
                     <span class="badge bg-light text-dark">in development</span>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,25 +20,25 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         
                         <!--  GERMAN navigation list  -->
-                        <ul class="navbar-nav mb-2 mb-lg-0 navbar-nav-de fade">
+                        <ul class="navbar-nav mb-2 mb-lg-0 translate-de fade">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Projekt
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="bedeutung-hanslick.html">
+                                        <a class="dropdown-item" href="bedeutung-hanslick.html?lang=de">
                                             Hanslicks historische Bedeutung
                                         </a>
                                     </li>
                                     
                                     <li>
-                                        <a class="dropdown-item" href="projektgeschichte.html">
+                                        <a class="dropdown-item" href="projektgeschichte.html?lang=de">
                                             Geschichte von "Hanslick im Kontext"
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="projektziele.html">
+                                        <a class="dropdown-item" href="projektziele.html?lang=de">
                                             Projektziele von "Hanslick Online"
                                         </a>
                                     </li>
@@ -51,19 +51,19 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html"
+                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=de"
                                             title="Traktat">
                                             Traktat
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc.html"
+                                        <a class="dropdown-item" href="toc.html?lang=de"
                                             title="Übersicht">
                                             Kritiken
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html"
+                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"
                                             title="Editionsrichtlinine">
                                             Editionsrichtlinien und Zitiervorschlag
                                         </a>
@@ -77,7 +77,7 @@
                                 <ul class="dropdown-menu">
                                     <xsl:for-each select="collection('../../data/indices')//tei:TEI">
                                         <li>
-                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html?lang=de')}"
                                                 title="">
                                                 <xsl:value-of select="tokenize(//tei:titleStmt/tei:title, '\s')[1]"/>
                                             </a>
@@ -92,19 +92,19 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="publikationen.html"
+                                        <a class="dropdown-item" href="publikationen.html?lang=de"
                                             title="Publikationen">
                                             Publikationen
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="einzelvortraege.html"
+                                        <a class="dropdown-item" href="einzelvortraege.html?lang=de"
                                             title="Einzelvorträge">
                                             Einzelvorträge
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="veranstaltungen.html"
+                                        <a class="dropdown-item" href="veranstaltungen.html?lang=de"
                                             title="Veranstaltungen">
                                             Veranstaltungen
                                         </a>
@@ -113,11 +113,11 @@
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="team.html">Team</a>
+                                <a class="nav-link" href="team.html?lang=de">Team</a>
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="search.html">Suche</a>
+                                <a class="nav-link" href="search.html?lang=de">Suche</a>
                             </li>
                             
                             <li class="nav-item dropdown">
@@ -136,25 +136,25 @@
                         </ul>
                         
                         <!--  ENGLISH navigation list -->
-                        <ul class="navbar-nav mb-2 mb-lg-0 navbar-nav-en fade">
+                        <ul class="navbar-nav mb-2 mb-lg-0 translate-en fade">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Project
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="bedeutung-hanslick-engl.html">
+                                        <a class="dropdown-item" href="bedeutung-hanslick-engl.html?lang=en">
                                             Hanslick’s Historical Relevance
                                         </a>
                                     </li>
                                     
                                     <li>
-                                        <a class="dropdown-item" href="projektgeschichte-engl.html">
+                                        <a class="dropdown-item" href="projektgeschichte-engl.html?lang=en">
                                             History of "Hanslick in Context"
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="projektziele-engl.html">
+                                        <a class="dropdown-item" href="projektziele-engl.html?lang=en">
                                             Project Targets
                                         </a>
                                     </li>
@@ -167,20 +167,20 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html"
-                                            title="Traktat">
-                                            Traktat
+                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=en"
+                                            title="Treatise">
+                                            Treatise
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc.html"
+                                        <a class="dropdown-item" href="toc.html?lang=en"
                                             title="Critics">
                                             Critics
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html"
-                                            title="Editionsrichtlinine">
+                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html?lang=en"
+                                            title="Editorial Conventions">
                                             Editorial Conventions and How to Cite
                                         </a>
                                     </li>
@@ -193,7 +193,7 @@
                                 <ul class="dropdown-menu">
                                     <xsl:for-each select="collection('../../data/indices')//tei:TEI">
                                         <li>
-                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html?lang=en')}"
                                                 title="">
                                                 <xsl:value-of select="tokenize(//tei:titleStmt/tei:title, '\s')[1]"/>
                                             </a>
@@ -208,19 +208,19 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="publikationen.html"
+                                        <a class="dropdown-item" href="publikationen.html?lang=en"
                                             title="Publications">
                                             Publications
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="einzelvortraege.html"
+                                        <a class="dropdown-item" href="einzelvortraege.html?lang=en"
                                             title="Lectures">
                                             Lectures
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="veranstaltungen.html"
+                                        <a class="dropdown-item" href="veranstaltungen.html?lang=en"
                                             title="Events">
                                             Events
                                         </a>
@@ -229,16 +229,16 @@
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="team.html">Team</a>
+                                <a class="nav-link" href="team.html?lang=en">Team</a>
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="search.html">Search</a>
+                                <a class="nav-link" href="search.html?lang=en">Search</a>
                             </li>
                             
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sprache
+                                    Language
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
