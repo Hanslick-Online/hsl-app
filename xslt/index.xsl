@@ -28,19 +28,19 @@
                         <div class="col-md-5 intro_colum" style="margin:0;padding:0;">
                             <div class="intro_text">
                                 <xsl:variable name="h1" select="
-                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    if(//tei:body/@xml:lang = 'de-AT') 
                                     then('Digitale Edition') 
                                     else('Digital Edition')"/>
                                 <xsl:variable name="treatise" select="
-                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    if(//tei:body/@xml:lang = 'de-AT') 
                                     then('Traktat') 
                                     else('Treatise')"/>
                                 <xsl:variable name="critics" select="
-                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    if(//tei:body/@xml:lang = 'de-AT') 
                                     then('Kritiken') 
                                     else('Critics')"/>
                                 <xsl:variable name="more" select="
-                                    if(//tei:body/@xml:lang = 'de-DE') 
+                                    if(//tei:body/@xml:lang = 'de-AT') 
                                     then('mehr anzeigen') 
                                     else('show more')"/>
                                 <h1><xsl:value-of select="$h1"/></h1>
