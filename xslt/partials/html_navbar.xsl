@@ -75,14 +75,24 @@
                                     Indizes
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <xsl:for-each select="collection('../../data/indices')//tei:TEI">
-                                        <li>
-                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html?lang=de')}"
-                                                title="">
-                                                <xsl:value-of select="tokenize(//tei:titleStmt/tei:title, '\s')[1]"/>
-                                            </a>
-                                        </li>
-                                    </xsl:for-each>
+                                    <li>
+                                        <a class="dropdown-item" href="listplace.html?lang=de"
+                                            title="">
+                                            Ortsregister
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="listperson.html?lang=de"
+                                            title="">
+                                            Personenregister
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="listbibl.html?lang=de"
+                                            title="">
+                                            Werkregister
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             
@@ -191,14 +201,24 @@
                                     Indexes
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <xsl:for-each select="collection('../../data/indices')//tei:TEI">
-                                        <li>
-                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html?lang=en')}"
-                                                title="">
-                                                <xsl:value-of select="tokenize(//tei:titleStmt/tei:title, '\s')[1]"/>
-                                            </a>
-                                        </li>
-                                    </xsl:for-each>
+                                    <li>
+                                        <a class="dropdown-item" href="listplace.html?lang=en"
+                                            title="">
+                                            Places
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="listperson.html?lang=en"
+                                            title="">
+                                            Persons
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="listbibl.html?lang=en"
+                                            title="">
+                                            Works
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             
