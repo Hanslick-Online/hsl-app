@@ -85,7 +85,7 @@
                         <div class="row">
                             <div class="textwidget custom-html-widget">
                                 <h6 class="font-weight-bold">HELPDESK</h6>
-                                <p>ACDH-CH bietet betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
+                                <p>ACDH-CH betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
                                 <p>
                                     <a class="helpdesk-button" href="mailto:acdh-helpdesk@oeaw.ac.at">FRAG UNS!</a>
                                 </p>
