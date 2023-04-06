@@ -52,6 +52,10 @@ h3 {
     cursor: pointer;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .modal-body table tbody tr th, .modal-body table tbody tr td {
     border: none;
 }

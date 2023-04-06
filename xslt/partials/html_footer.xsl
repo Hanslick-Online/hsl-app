@@ -128,7 +128,8 @@
                 $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
             });
         </script>
-        <script src="js/language.js"></script>
+        <script src="js/detect_language_set_params.js"></script>
+        <script src="js/update_doc_language.js"></script>
         <script src="js/navbar-autohide.js"></script>
         <!--<script src="js/cookie-consent.js"></script>-->
     </xsl:template>

@@ -18,7 +18,9 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-2 mb-lg-0">
+                        
+                        <!--  GERMAN navigation list  -->
+                        <ul class="navbar-nav mb-2 mb-lg-0 navbar-nav-de fade">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Projekt
@@ -116,6 +118,136 @@
                             
                             <li class="nav-item">
                                 <a class="nav-link" href="search.html">Suche</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sprache
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="nav-link lang_change_de pointer">Deutsch</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link lang_change_en pointer">English</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <!--  ENGLISH navigation list -->
+                        <ul class="navbar-nav mb-2 mb-lg-0 navbar-nav-en fade">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Project
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="bedeutung-hanslick-engl.html">
+                                            Hanslick’s Historical Relevance
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a class="dropdown-item" href="projektgeschichte-engl.html">
+                                            History of "Hanslick in Context"
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="projektziele-engl.html">
+                                            Project Targets
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Edition
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html"
+                                            title="Traktat">
+                                            Traktat
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="toc.html"
+                                            title="Critics">
+                                            Critics
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html"
+                                            title="Editionsrichtlinine">
+                                            Editorial Conventions and How to Cite
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Indexes
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <xsl:for-each select="collection('../../data/indices')//tei:TEI">
+                                        <li>
+                                            <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                                title="">
+                                                <xsl:value-of select="tokenize(//tei:titleStmt/tei:title, '\s')[1]"/>
+                                            </a>
+                                        </li>
+                                    </xsl:for-each>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Activities
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="publikationen.html"
+                                            title="Publications">
+                                            Publications
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="einzelvortraege.html"
+                                            title="Lectures">
+                                            Lectures
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="veranstaltungen.html"
+                                            title="Events">
+                                            Events
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="team.html">Team</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="search.html">Search</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sprache
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="nav-link lang_change_de pointer">Deutsch</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link lang_change_en pointer">English</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
