@@ -1,0 +1,16 @@
+{
+    "en": {
+        "index.html": "index-en.html",
+        "bedeutung-hanslick.html": "bedeutung-hanslick-engl.html",
+        "projektgeschichte.html": "projektgeschichte-engl.html",
+        "projektziele.html": "projektziele-engl.html",
+        "editionsrichtlinien-und-how-to-cite.html": "editionsrichtlinien-und-how-to-cite-engl.html"
+    },
+    "de": {
+        "index-en.html": "index.html",
+        "bedeutung-hanslick-engl.html": "bedeutung-hanslick.html",
+        "projektgeschichte-engl.html": "projektgeschichte.html",
+        "projektziele-engl.html": "projektziele.html",
+        "editionsrichtlinien-und-how-to-cite-engl.html": "editionsrichtlinien-und-how-to-cite.html"
+    }
+}

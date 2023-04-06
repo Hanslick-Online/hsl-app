@@ -25,4 +25,10 @@
 
     /* replace state to change url with new urlparam */
     window.history.replaceState({}, "", `${location.pathname}?${urlParam}`);
+
+    var logo = document.getElementsByClassName("custom-logo-link")[0];
+    if (logo) {
+        logo.setAttribute('href', `index.html?${urlParam}`);
+    }
+    
 })();
