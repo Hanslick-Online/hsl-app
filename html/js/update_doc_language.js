@@ -15,7 +15,8 @@
         var urlParam = new URLSearchParams(url.search);
         var lang = urlParam.get("lang");
 
-        let path = location.pathname.replace("/", "");
+        let path = location.pathname.split("/")[2];
+        console.log(path);
         let newPath = jsonData[lang][path];
 
         if (newPath) {
