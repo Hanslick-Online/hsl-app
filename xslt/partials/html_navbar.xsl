@@ -228,19 +228,19 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="publikationen.html?lang=en"
+                                        <a class="dropdown-item" href="publikationen-engl.html?lang=en"
                                             title="Publications">
                                             Publications
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="einzelvortraege.html?lang=en"
+                                        <a class="dropdown-item" href="einzelvortraege-engl.html?lang=en"
                                             title="Lectures">
                                             Lectures
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="veranstaltungen.html?lang=en"
+                                        <a class="dropdown-item" href="veranstaltungen-engl.html?lang=en"
                                             title="Events">
                                             Events
                                         </a>
@@ -249,11 +249,11 @@
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="team.html?lang=en">Team</a>
+                                <a class="nav-link" href="team-engl.html?lang=en">Team</a>
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="search.html?lang=en">Search</a>
+                                <a class="nav-link" href="search-engl.html?lang=en">Search</a>
                             </li>
                             
                             <li class="nav-item dropdown">

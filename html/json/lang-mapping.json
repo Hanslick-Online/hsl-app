@@ -4,13 +4,23 @@
         "bedeutung-hanslick.html": "bedeutung-hanslick-engl.html",
         "projektgeschichte.html": "projektgeschichte-engl.html",
         "projektziele.html": "projektziele-engl.html",
-        "editionsrichtlinien-und-how-to-cite.html": "editionsrichtlinien-und-how-to-cite-engl.html"
+        "editionsrichtlinien-und-how-to-cite.html": "editionsrichtlinien-und-how-to-cite-engl.html",
+        "einzelvortraege.html": "einzelvortraege-engl.html",
+        "publikationen.html": "publikationen-engl.html",
+        "team.html": "team-engl.html",
+        "veranstaltungen.html": "veranstaltungen-engl.html",
+        "search.html": "search-engl.html"
     },
     "de": {
         "index-en.html": "index.html",
         "bedeutung-hanslick-engl.html": "bedeutung-hanslick.html",
         "projektgeschichte-engl.html": "projektgeschichte.html",
         "projektziele-engl.html": "projektziele.html",
-        "editionsrichtlinien-und-how-to-cite-engl.html": "editionsrichtlinien-und-how-to-cite.html"
+        "editionsrichtlinien-und-how-to-cite-engl.html": "editionsrichtlinien-und-how-to-cite.html",
+        "einzelvortraege-engl.html": "einzelvortraege.html",
+        "publikationen-engl.html": "publikationen.html",
+        "team-engl.html": "team.html",
+        "veranstaltungen-engl.html": "veranstaltungen.html",
+        "search-engl.html": "search.html"
     }
 }

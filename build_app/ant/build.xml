@@ -19,6 +19,7 @@
     <property name="xsl_entities" value="${basedir}/xslt/entities.xsl"/>
     <property name="xsl_imprint" value="${basedir}/xslt/imprint.xsl"/>
     <property name="xsl_search" value="${basedir}/xslt/search.xsl"/>
+    <property name="xsl_search_en" value="${basedir}/xslt/search-engl.xsl"/>
 
     <delete>
         <fileset dir="${target}" includes="*.html"/>
@@ -59,6 +60,10 @@
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
     <xslt in="${index}" out="${target}/search.html" style="${xsl_search}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${target}/search-engl.html" style="${xsl_search_en}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
