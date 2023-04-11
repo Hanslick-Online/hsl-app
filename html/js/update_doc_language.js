@@ -24,8 +24,9 @@
         get pathname and specific filename
         set new path based on mappings from mappings json
         key in mappings = filename */
-        let path = location.pathname.split("/")[2];
-        let newPath = path.length > 0 ? jsonData[lang][path]
+        let path = location.pathname.split("/");
+        let newPath = path.length > 2 && path[2].length > 0 ? jsonData[lang][path[2]]
+                    : path.length > 1 && path[1].length > 0 ? jsonData[lang][path[1]]
                     : lang == "en" ? jsonData[lang]["index.html"]
                     : jsonData[lang]["index-en.html"];
 
@@ -91,8 +92,9 @@
                 get pathname and specific filename
                 set new path based on mappings from mappings json
                 key in mappings = filename */
-                let path = location.pathname.split("/")[2];
-                let newPath = path.length > 0 ? jsonData.de[path]
+                let path = location.pathname.split("/");
+                let newPath = path.length > 2 && path[2].length > 0 ? jsonData.de[path[2]]
+                    : path.length > 1 && path[1].length > 0 ? jsonData.de[path[1]]
                     : jsonData.de["index-en.html"];
                 urlParam.set("lang", "de");
 
@@ -125,8 +127,9 @@
                 get pathname and specific filename
                 set new path based on mappings from mappings json
                 key in mappings = filename */
-                let path = location.pathname.split("/")[2];
-                let newPath = path.length > 0 ? jsonData.en[path]
+                let path = location.pathname.split("/");
+                let newPath = path.length > 2 && path[2].length > 0 ? jsonData.en[path[2]]
+                    : path.length > 1 && path[1].length > 0 ? jsonData.en[path[1]]
                     : jsonData.en["index.html"];
                 urlParam.set("lang", "en");
 
