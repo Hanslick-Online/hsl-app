@@ -25,26 +25,5 @@
 
     /* replace state to change url with new urlparam */
     window.history.replaceState({}, "", `${location.pathname}?${urlParam}`);
-
-    var logo = document.getElementsByClassName("custom-logo-link")[0];
-    if (logo) {
-        logo.setAttribute('href', `index.html?${urlParam}`);
-    }
-
-    if (urlParam.get("lang") == "de") {
-        [].forEach.call(
-            document.getElementsByClassName("lang_change_de"), 
-            function(opt) {
-                opt.classList.add("active");
-        });
-    }
-
-    if (urlParam.get("lang") == "en") {
-        [].forEach.call(
-            document.getElementsByClassName("lang_change_en"), 
-            function(opt) {
-                opt.classList.add("active");
-        });
-    }
     
 })();
