@@ -996,8 +996,9 @@ input:checked + .i-slider:before {
     a.anchor, .anchor-pb a.anchorFoot {
         top: 0;
     }
-    #chapter-navBarNavDropdown ul li a {
-        font-size: small;
+    #chapter-navBarNavDropdown ul li {
+        max-width: 100% !important;
+        word-break: break-word !important;
     }
 }
 
