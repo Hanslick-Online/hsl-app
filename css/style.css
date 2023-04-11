@@ -95,12 +95,24 @@ h3 {
     color: #fff;
 }
 
+.btn-secondary {
+    width: 300px;
+    font-size: 22px;
+    margin: 1em 1em 1em 0;
+    cursor: default;
+}
+
+.btn-secondary a {
+    cursor: default;
+}
+
 .btn-index {
     color: #fff;
-    width: 200px;
+    width: 300px;
     background-color: #222fa8;
     font-size: 22px;
     margin: 1em 1em 1em 0;
+    ;
 }
 
 .intro_colum {
@@ -958,6 +970,9 @@ input:checked + .i-slider:before {
     }
     a.anchor, .anchor-pb a.anchorFoot {
         top: 0;
+    }
+    #chapter-navBarNavDropdown ul li a {
+        font-size: small;
     }
 }
 
