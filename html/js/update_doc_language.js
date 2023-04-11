@@ -81,17 +81,17 @@
         var translate_en = document.getElementsByClassName("translate-en");
         if (urlParam.get("lang") == "de") {
             [].forEach.call(translate_de, function(opt) {
-                opt.classList.remove("fade");
+                opt.classList.remove("fade-lang");
             });
             [].forEach.call(translate_en, function(opt) {
-                opt.classList.add("fade");
+                opt.classList.add("fade-lang");
             });
         } else {
             [].forEach.call(translate_en, function(opt) {
-                opt.classList.remove("fade");
+                opt.classList.remove("fade-lang");
             });
             [].forEach.call(translate_de, function(opt) {
-                opt.classList.add("fade");
+                opt.classList.add("fade-lang");
             });
         }
 

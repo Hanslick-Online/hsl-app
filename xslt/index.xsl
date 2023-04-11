@@ -62,7 +62,7 @@
                                                 <p class="index_text"><xsl:apply-templates/></p>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <p class="index_text about-text-hidden fade"><xsl:apply-templates/></p>
+                                                <p class="index_text about-text-hidden fade-lang"><xsl:apply-templates/></p>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                         

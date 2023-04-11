@@ -7,7 +7,7 @@
     version="2.0">
     <xsl:template match="/" name="html_footer">
         <!-- GERMAN verison-->
-        <div class="wrapper bg-light translate-de fade" id="wrapper-footer-full">
+        <div class="wrapper bg-light translate-de fade-lang" id="wrapper-footer-full">
             <div class="container" id="footer-full-content" tabindex="-1">
                 <div class="footer-separator">
                     KONTAKT
@@ -111,7 +111,7 @@
             </div>
         </div>
         <!-- ENGLISH version -->
-        <div class="wrapper bg-light translate-en fade" id="wrapper-footer-full">
+        <div class="wrapper bg-light translate-en fade-lang" id="wrapper-footer-full">
             <div class="container" id="footer-full-content" tabindex="-1">
                 <div class="footer-separator">
                     CONTACT

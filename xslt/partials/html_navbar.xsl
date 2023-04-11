@@ -20,7 +20,7 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         
                         <!--  GERMAN navigation list  -->
-                        <ul class="navbar-nav mb-2 mb-lg-0 translate-de fade">
+                        <ul class="navbar-nav mb-2 mb-lg-0 translate-de fade-lang">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Projekt
@@ -136,7 +136,7 @@
                         </ul>
                         
                         <!--  ENGLISH navigation list -->
-                        <ul class="navbar-nav mb-2 mb-lg-0 translate-en fade">
+                        <ul class="navbar-nav mb-2 mb-lg-0 translate-en fade-lang">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Project
