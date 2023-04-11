@@ -129,19 +129,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="search.html?lang=de">Suche</a>
                             </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sprache
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="nav-link lang_change_de pointer">Deutsch</a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link lang_change_en pointer">English</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item" style="display:inline!important;margin:.4em auto;">
+                                <a class="nav-link lang_change_de pointer">DE</a>
+                                <a class="nav-link lang_change_en pointer">EN</a>
                             </li>
                         </ul>
                         
@@ -256,18 +246,9 @@
                                 <a class="nav-link" href="search-engl.html?lang=en">Search</a>
                             </li>
                             
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Language
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="nav-link lang_change_de pointer">Deutsch</a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link lang_change_en pointer">English</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item" style="display:inline!important;margin:.4em auto;">
+                                <a class="nav-link lang_change_de pointer">DE</a>
+                                <a class="nav-link lang_change_en pointer">EN</a>
                             </li>
                         </ul>
                     </div>

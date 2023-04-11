@@ -82,6 +82,11 @@
             opt.addEventListener("click", function(event) {
                 event.preventDefault();
 
+                if (opt.classList.contains("active")) {
+                    opt.classList.remove("active");
+                } else {
+                    opt.classList.add("active");
+                }
                 /* must be replaced in production
                 get pathname and specific filename
                 set new path based on mappings from mappings json
@@ -111,6 +116,11 @@
             opt.addEventListener("click", function(event) {
                 event.preventDefault();
 
+                if (opt.classList.contains("active")) {
+                    opt.classList.remove("active");
+                } else {
+                    opt.classList.add("active");
+                }
                 /* must be replaced in production
                 get pathname and specific filename
                 set new path based on mappings from mappings json

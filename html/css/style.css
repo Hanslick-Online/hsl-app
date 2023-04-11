@@ -56,6 +56,32 @@ h3 {
     cursor: pointer;
 }
 
+.lang_change_de {
+    display: inline;
+    background-color: #f1f1f1;
+    border-radius: .5rem;
+    vertical-align: middle;
+    padding: .2em;
+}
+
+.lang_change_en {
+    display: inline;
+    background-color: #f1f1f1;
+    border-radius: .5rem;
+    vertical-align: middle;
+    padding: .2em;
+}
+
+.lang_change_de.active {
+    background-color: #222fa8;
+    color: #fff !important;
+}
+
+.lang_change_en.active {
+    background-color: #222fa8;
+    color: #fff !important;
+}
+
 .modal-body table tbody tr th, .modal-body table tbody tr td {
     border: none;
 }

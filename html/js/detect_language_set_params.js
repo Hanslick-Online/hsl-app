@@ -23,6 +23,24 @@
         urlParam.set("lang", langUpdate);
     }
 
+    if (langUpdate == "de") {
+        [].forEach.call(
+            document.getElementsByClassName("lang_change_de"), 
+            function(opt) {
+                console.log(opt.classList);
+                opt.classList.add("active");
+        });
+    }
+
+    if (langUpdate == "en") {
+        [].forEach.call(
+            document.getElementsByClassName("lang_change_en"), 
+            function(opt) {
+                console.log(opt.classList);
+                opt.classList.add("active");
+        });
+    }
+
     /* replace state to change url with new urlparam */
     window.history.replaceState({}, "", `${location.pathname}?${urlParam}`);
 
