@@ -27,7 +27,7 @@
                         <xsl:when test="position() = 1">
                             <li>
                                 <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
-                                    title="">
+                                    title="Auflage 1-10">
                                     <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                 </a>
                             </li>
@@ -35,7 +35,7 @@
                         <xsl:otherwise>
                             <li>
                                 <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
-                                    title="">
+                                    title="Auflage 1-10">
                                     <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                 </a>
                             </li>

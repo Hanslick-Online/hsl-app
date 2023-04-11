@@ -57,9 +57,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc.html?lang=de"
+                                        <a class="dropdown-item disabled" href="toc.html?lang=de"
                                             title="Übersicht">
-                                            Kritiken
+                                            Kritiken <small>(in Arbeit)</small>
                                         </a>
                                     </li>
                                     <li>
@@ -183,9 +183,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc.html?lang=en"
+                                        <a class="dropdown-item disabled" href="toc.html?lang=en"
                                             title="Critics">
-                                            Critics
+                                            Critics <small>(in progress)</small>
                                         </a>
                                     </li>
                                     <li>

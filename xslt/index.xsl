@@ -37,8 +37,8 @@
                                     else('Treatise')"/>
                                 <xsl:variable name="critics" select="
                                     if(//tei:body/@xml:lang = 'de-AT') 
-                                    then('Kritiken') 
-                                    else('Critics')"/>
+                                    then('Kritiken (in Arbeit)') 
+                                    else('Critics (in progress)')"/>
                                 <xsl:variable name="more" select="
                                     if(//tei:body/@xml:lang = 'de-AT') 
                                     then('mehr anzeigen') 
@@ -49,8 +49,8 @@
                                         <xsl:value-of select="$treatise"/>
                                     </a>
                                 </button>
-                                <button type="button" class="btn text-light btn-index">
-                                    <a href="toc.html">
+                                <button type="button" class="btn btn-secondary text-light">
+                                    <a>
                                         <xsl:value-of select="$critics"/>
                                     </a>
                                 </button>
