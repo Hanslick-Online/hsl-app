@@ -40,6 +40,27 @@
         } else {
             window.history.replaceState({}, "", `${location.pathname}?${urlParam}`);
         }
+
+        var logo = document.getElementsByClassName("custom-logo-link")[0];
+        if (logo) {
+            logo.setAttribute('href', `index.html?${urlParam}`);
+        }
+
+        if (urlParam.get("lang") == "de") {
+            [].forEach.call(
+                document.getElementsByClassName("lang_change_de"), 
+                function(opt) {
+                    opt.classList.add("active");
+            });
+        }
+    
+        if (urlParam.get("lang") == "en") {
+            [].forEach.call(
+                document.getElementsByClassName("lang_change_en"), 
+                function(opt) {
+                    opt.classList.add("active");
+            });
+        }
         
     }
 
@@ -83,11 +104,6 @@
             opt.addEventListener("click", function(event) {
                 event.preventDefault();
 
-                if (opt.classList.contains("active")) {
-                    opt.classList.remove("active");
-                } else {
-                    opt.classList.add("active");
-                }
                 /* must be replaced in production
                 get pathname and specific filename
                 set new path based on mappings from mappings json
@@ -118,11 +134,6 @@
             opt.addEventListener("click", function(event) {
                 event.preventDefault();
 
-                if (opt.classList.contains("active")) {
-                    opt.classList.remove("active");
-                } else {
-                    opt.classList.add("active");
-                }
                 /* must be replaced in production
                 get pathname and specific filename
                 set new path based on mappings from mappings json
