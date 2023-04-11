@@ -5,6 +5,5 @@
     <xsl:param name="project_title">Digital Scholarly Edition Hanslick</xsl:param>
     <xsl:param name="project_short_title">Hanslick - Digitale Edition</xsl:param>
     <xsl:param name="github_url">https://github.com/Hanslick-Online</xsl:param>
-    <xsl:param name="html_title">Hanslick Online</xsl:param>
     <xsl:param name="project_logo">images/logo_font_blau.svg</xsl:param>
 </xsl:stylesheet>
