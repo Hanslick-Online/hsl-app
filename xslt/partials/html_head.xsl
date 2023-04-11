@@ -16,6 +16,12 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="{$project_short_title}" />
         <link rel="profile" href="http://gmpg.org/xfn/11"></link>
+        <link rel="shortcut icon" href="images/favicon.png" sizes="96x70"/>
+        <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x23"/>
+        <link rel="icon" type="image/png" href="images/favicon.png" sizes="96x70"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png"/>
+        <meta name="msapplication-TileColor" content="#ffffff"/>
+        <meta name="msapplication-TileImage" content="images/Auden_Musulin_Papers_Logo_rechteckig_favicon_144.png"/>
         <title><xsl:value-of select="$project_short_title"/></title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></link>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"/>
