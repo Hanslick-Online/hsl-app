@@ -79,14 +79,6 @@
                         </div>
                     </div>
                     
-                    <!--<div class="container-fluid" style="margin-top:1em;">
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                               
-                            </div>
-                        </div>
-                    </div>-->
                     <xsl:call-template name="html_footer"/>
                 </div>
                 <script src="js/hide-md.js"></script>
@@ -99,11 +91,9 @@
     <xsl:template match="tei:div">
         <div id="{generate-id()}"><xsl:apply-templates/></div>
     </xsl:template>
-    
-    <!--<xsl:template match="tei:p">
-        <p id="{generate-id()}"><xsl:apply-templates/></p>
-    </xsl:template>-->
-    
+    <xsl:template match="tei:emph">
+        <em><xsl:apply-templates/></em>
+    </xsl:template> 
     <xsl:template match="tei:list">
         <ul id="{generate-id()}"><xsl:apply-templates/></ul>
     </xsl:template>
@@ -112,8 +102,7 @@
         <li id="{generate-id()}"><xsl:apply-templates/></li>
     </xsl:template>
     <xsl:template match="tei:ref">
-        <a>
-            <xsl:attribute name="href"><xsl:value-of select="@target"/></xsl:attribute>
+        <a target="_blank" href="{@target}">
             <xsl:value-of select="."/>
         </a>
     </xsl:template>
