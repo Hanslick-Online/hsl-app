@@ -163,7 +163,7 @@ var editor = new LoadEditor({
           title: "Faksimiles ein/aus",
           urlparam: "img",
           chg_citation: "citation-url",
-          fade: "fade",
+          fade: "fade-lang",
           column_small: {
             class: "col-md-6",
             percent: "50",
