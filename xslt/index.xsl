@@ -49,8 +49,8 @@
                                         <xsl:value-of select="$treatise"/>
                                     </a>
                                 </button>
-                                <button type="button" class="btn btn-index-secondary text-light">
-                                    <a>
+                                <button type="button" class="btn text-light btn-index">
+                                    <a href="toc.html">
                                         <xsl:value-of select="$critics"/>
                                     </a>
                                 </button>
