@@ -126,6 +126,12 @@ h3 {
     font-size: 22px;
     margin: 1em 1em 1em 0;
     cursor: default;
+    background-color: lightgrey;
+}
+
+.btn-index-secondary:hover {
+    background-color: lightgrey;
+    color: #fff;
 }
 
 .btn-index-secondary a {
