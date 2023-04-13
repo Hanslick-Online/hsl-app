@@ -49,7 +49,7 @@
                                         <xsl:value-of select="$treatise"/>
                                     </a>
                                 </button>
-                                <button type="button" class="btn btn-secondary text-light">
+                                <button type="button" class="btn btn-index-secondary text-light">
                                     <a>
                                         <xsl:value-of select="$critics"/>
                                     </a>
@@ -103,7 +103,7 @@
     </xsl:template>
     <xsl:template match="tei:ref">
         <a target="_blank" href="{@target}">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates/>
         </a>
     </xsl:template>
 </xsl:stylesheet>
