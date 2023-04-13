@@ -121,14 +121,14 @@ h3 {
     color: #fff;
 }
 
-.btn-secondary {
+.btn-index-secondary {
     width: 250px;
     font-size: 22px;
     margin: 1em 1em 1em 0;
     cursor: default;
 }
 
-.btn-secondary a {
+.btn-index-secondary a {
     cursor: default;
 }
 
@@ -997,7 +997,7 @@ input:checked + .i-slider:before {
         top: 0;
     }
     #chapter-navBarNavDropdown ul li {
-        max-width: 100% !important;
+        max-width: 420px;
         word-break: break-word !important;
     }
 }
@@ -1035,7 +1035,7 @@ input:checked + .i-slider:before {
         margin: 1em 0;
         font-size: 18px;
     }
-    .btn-secondary {
+    .btn-index-secondary {
         margin: 1em 0;
         font-size: 18px;
     }
