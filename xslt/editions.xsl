@@ -106,8 +106,6 @@
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
-                <script src="https://unpkg.com/de-micro-editor@0.2.6/dist/de-editor.min.js"></script>
-                <script type="text/javascript" src="js/run.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
                 <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/osd.js"></script>

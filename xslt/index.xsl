@@ -8,6 +8,8 @@
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="./partials/html_footer.xsl"/>
+    <xsl:import href="./partials/html_navbar_en.xsl"/>
+    <xsl:import href="./partials/html_footer_en.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -22,7 +24,14 @@
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:choose>
+                        <xsl:when test="//tei:body[@xml:lang = 'de-AT']">
+                            <xsl:call-template name="nav_bar"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="nav_bar_en"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     
                     <div class="row" style="margin:0 auto;padding:0;">
                         <div class="col-md-5 intro_colum" style="margin:0;padding:0;">
@@ -43,14 +52,18 @@
                                     if(//tei:body/@xml:lang = 'de-AT') 
                                     then('mehr anzeigen') 
                                     else('show more')"/>
+                                <xsl:variable name="lang" select="
+                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    then('?lang=de') 
+                                    else('?lang=en')"/>
                                 <h1><xsl:value-of select="$h1"/></h1>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html">
+                                    <a href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html{$lang}">
                                         <xsl:value-of select="$treatise"/>
                                     </a>
                                 </button>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="toc.html">
+                                    <a href="toc.html{$lang}">
                                         <xsl:value-of select="$critics"/>
                                     </a>
                                 </button>
@@ -79,7 +92,14 @@
                         </div>
                     </div>
                     
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:choose>
+                        <xsl:when test="//tei:body[@xml:lang = 'de-AT']">
+                            <xsl:call-template name="html_footer"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="html_footer_en"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </div>
                 <script src="js/hide-md.js"></script>
             </body>
