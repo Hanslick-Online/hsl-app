@@ -54,6 +54,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
+                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>

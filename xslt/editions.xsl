@@ -106,6 +106,7 @@
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
+                <script type="text/javascript" src="js/run_editions.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
                 <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/osd.js"></script>

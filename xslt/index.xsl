@@ -101,6 +101,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
+                <script type="text/javascript" src="js/run.js"></script>
                 <script src="js/hide-md.js"></script>
             </body>
         </html>

@@ -53,8 +53,7 @@
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
-                <script src="https://unpkg.com/de-micro-editor@0.2.6/dist/de-editor.min.js"></script>
-                <script type="text/javascript" src="js/run.js"></script>
+                <script type="text/javascript" src="js/run_editions.js"></script>
             </body>
         </html>
     </xsl:template>
@@ -107,8 +106,11 @@
     </xsl:template>
     <xsl:template match="tei:hi">
         <xsl:choose>
-            <xsl:when test="@rendition='italic'">
+            <xsl:when test="@rendition='#em'">
                 <span class="italic"><xsl:apply-templates/></span>
+            </xsl:when>
+            <xsl:when test="@rendition='#bold'">
+                <span class="bold"><xsl:apply-templates/></span>
             </xsl:when>
         </xsl:choose>
     </xsl:template>

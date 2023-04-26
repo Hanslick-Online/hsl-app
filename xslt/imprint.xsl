@@ -34,6 +34,7 @@
                     <xsl:call-template name="html_footer"/>
                     
                 </div>
+                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>

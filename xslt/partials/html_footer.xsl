@@ -144,7 +144,6 @@
         <script src="js/update_doc_language.js"></script>-->
         <script src="https://unpkg.com/de-micro-editor@0.2.8/dist/de-editor.min.js"></script>
         <!--<script type="text/javascript" src="dist/de-editor.min.js"></script>-->
-        <script type="text/javascript" src="js/run.js"></script>
         <script src="js/navbar-autohide.js"></script>
         <script src="js/cookie-consent.js"></script>
     </xsl:template>

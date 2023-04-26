@@ -99,6 +99,7 @@
                         </script>
                     </xsl:when>
                 </xsl:choose>
+                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>

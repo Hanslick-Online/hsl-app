@@ -237,7 +237,9 @@ var editor = new LoadEditor({
             "search-engl.html": "search.html",
             "search.html": "search.html",
             "imprint.html": "imprint.html",
-            "imprint_en.html": "imprint.html"
+            "imprint_en.html": "imprint.html",
+            "toc.html": "toc.html",
+            "toc_en.html": "toc.html"
           },
         },
         {
@@ -266,7 +268,9 @@ var editor = new LoadEditor({
             "search.html": "search-engl.html",
             "search-engl.html": "search-engl.html",
             "imprint.html": "imprint_en.html",
-            "imprint_en.html": "imprint_en.html"
+            "imprint_en.html": "imprint_en.html",
+            "toc.html": "toc_en.html",
+            "toc_en.html": "toc_en.html"
           },
         },
       ],
