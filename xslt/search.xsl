@@ -17,8 +17,8 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
-                <link rel="stylesheet" type="text/css" href="css/ts_search.css"/>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
+                <link rel="stylesheet" type="text/css" href="css/ts_search.css"/>
             </head>
             
             
