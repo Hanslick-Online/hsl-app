@@ -96,7 +96,7 @@ for x in tqdm(files, total=len(files)):
     doc = TeiReader(xml=x)
     facs = doc.any_xpath('.//tei:body/tei:div')
     # index for critics edition
-    if x.contains('traktat'):
+    if 'traktat' in x:
         pages = 0
         for v in facs:
             pages += 1
@@ -164,7 +164,7 @@ for x in tqdm(files, total=len(files)):
                     cfts_record['full_text'] = record['full_text']
                     cfts_records.append(cfts_record)
     # index for critics edition
-    if x.contains('critics'):
+    if 'critics' in x:
         pages = 0
         for v in facs:
             pages += 1
