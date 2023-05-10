@@ -95,72 +95,132 @@ cfts_records = []
 for x in tqdm(files, total=len(files)):
     doc = TeiReader(xml=x)
     facs = doc.any_xpath('.//tei:body/tei:div')
-    pages = 0
-    for v in facs:
-        pages += 1
-        p_group = f".//tei:body/tei:div[{pages}]/tei:p"
-        body = doc.any_xpath(p_group)
-        cfts_record = {
-            'project': 'hsl',
-        }
-        record = {}
-        record['id'] = os.path.split(x)[-1].replace('.xml', f".html#index.xml-body.1_div.{str(pages)}")
-        cfts_record['id'] = record['id']
-        cfts_record['resolver'] = f"https://hanslick-online.github.io/hsl-app/{record['id']}"
-        record['rec_id'] = os.path.split(x)[-1]
-        cfts_record['rec_id'] = record['rec_id']
-        r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@type="main"]/text()')).split())
-        s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
-        title = f"{r_title} {s_title}. Auflage"
-        if pages - 1 == 0:
-            cht = "Vorwort"
-        else:
-            cht = f"Kapitel {str(pages - 1)}"
-        record['title'] = f"{title} - {cht}"
-        cfts_record['title'] = record['title']
-        try:
-            date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
-            date_seq = f"{date_str}-0{str(pages)}-01"
-            date_seq = time.mktime(datetime.datetime.strptime(date_seq, "%Y-%m-%d").timetuple())
-        except IndexError:
+    # index for critics edition
+    if x.contains('traktat'):
+        pages = 0
+        for v in facs:
+            pages += 1
+            p_group = f".//tei:body/tei:div[{pages}]/tei:p"
+            body = doc.any_xpath(p_group)
+            cfts_record = {
+                'project': 'hsl',
+            }
+            record = {}
+            record['id'] = os.path.split(x)[-1].replace('.xml', f".html#index.xml-body.1_div.{str(pages)}")
+            cfts_record['id'] = record['id']
+            cfts_record['resolver'] = f"https://hanslick.acdh.oeaw.ac.at/{record['id']}"
+            record['rec_id'] = os.path.split(x)[-1]
+            cfts_record['rec_id'] = record['rec_id']
+            r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@type="main"]/text()')).split())
+            s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
+            title = f"{r_title} {s_title}. Auflage"
+            if pages - 1 == 0:
+                cht = "Vorwort"
+            else:
+                cht = f"Kapitel {str(pages - 1)}"
+            record['title'] = f"{title} - {cht}"
+            cfts_record['title'] = record['title']
             try:
-                date_str = doc.any_xpath('//tei:sourceDesc//tei:date/text()')[0]
+                date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
+                date_seq = f"{date_str}-0{str(pages)}-01"
+                date_seq = time.mktime(datetime.datetime.strptime(date_seq, "%Y-%m-%d").timetuple())
             except IndexError:
-                date_str = "0"
-        if len(date_str) > 3:
-            date_str = date_str
-            date_seq = date_seq
-        else:
-            date_str = "1854"
+                try:
+                    date_str = doc.any_xpath('//tei:sourceDesc//tei:date/text()')[0]
+                except IndexError:
+                    date_str = "0"
+            if len(date_str) > 3:
+                date_str = date_str
+                date_seq = date_seq
+            else:
+                date_str = "1854"
 
-        try:
-            record['year'] = int(date_str[:4])
-            record['date'] = int(date_seq)
-            cfts_record['year'] = int(date_str[:4])
-        except ValueError:
-            pass
+            try:
+                record['year'] = int(date_str[:4])
+                record['date'] = int(date_seq)
+                cfts_record['year'] = int(date_str[:4])
+            except ValueError:
+                pass
 
-        if len(body) > 0:
-            # get unique persons per page
-            ent_type = "person"
-            ent_name = "persName"
-            record['persons'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
-            cfts_record['persons'] = record['persons']
-            # get unique places per page
-            ent_type = "place"
-            ent_name = "placeName"
-            record['places'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
-            cfts_record['places'] = record['places']
-            # get unique bibls per page
-            ent_type = "bibl"
-            ent_name = "title"
-            record['works'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
-            cfts_record['works'] = record['works']
-            record['full_text'] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
-            if len(record['full_text']) > 0:
-                records.append(record)
-                cfts_record['full_text'] = record['full_text']
-                cfts_records.append(cfts_record)
+            if len(body) > 0:
+                # get unique persons per page
+                ent_type = "person"
+                ent_name = "persName"
+                record['persons'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                cfts_record['persons'] = record['persons']
+                # get unique places per page
+                ent_type = "place"
+                ent_name = "placeName"
+                record['places'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                cfts_record['places'] = record['places']
+                # get unique bibls per page
+                ent_type = "bibl"
+                ent_name = "title"
+                record['works'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                cfts_record['works'] = record['works']
+                record['full_text'] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
+                if len(record['full_text']) > 0:
+                    records.append(record)
+                    cfts_record['full_text'] = record['full_text']
+                    cfts_records.append(cfts_record)
+    # index for critics edition
+    if x.contains('critics'):
+        pages = 0
+        for v in facs:
+            pages += 1
+            p_group = f".//tei:body/tei:div[{pages}]/tei:p"
+            body = doc.any_xpath(p_group)
+            cfts_record = {
+                'project': 'hsl',
+            }
+            record = {}
+            record['id'] = os.path.split(x)[-1].replace('.xml', f".html")
+            cfts_record['id'] = record['id']
+            cfts_record['resolver'] = f"https://hanslick-online.github.io/hsl-app-dev/{record['id']}"
+            record['rec_id'] = os.path.split(x)[-1]
+            cfts_record['rec_id'] = record['rec_id']
+            r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:title[@level="a"]/text()')).split())
+            s_title = doc.any_xpath('.//tei:titleStmt/tei:title[@level="s"]/text()')[0]
+            title = f"{r_title} {s_title}"
+            record['title'] = title
+            cfts_record['title'] = record['title']
+            try:
+                date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
+                if len(date_str) == 4:
+                    date_str = f"{date_str}-01-01"
+                date_seq = time.mktime(datetime.datetime.strptime(date_str, "%Y-%m-%d").timetuple())
+            except IndexError:
+                date_str = "0000-00-00"
+                date_seq = "0000-00-00"
+
+            try:
+                record['year'] = int(date_str[:4])
+                record['date'] = int(date_seq)
+                cfts_record['year'] = int(date_str[:4])
+            except ValueError:
+                pass
+
+            if len(body) > 0:
+                # get unique persons per page
+                ent_type = "person"
+                ent_name = "persName"
+                record['persons'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                cfts_record['persons'] = record['persons']
+                # get unique places per page
+                ent_type = "place"
+                ent_name = "placeName"
+                record['places'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                cfts_record['places'] = record['places']
+                # get unique bibls per page
+                ent_type = "bibl"
+                ent_name = "title"
+                record['works'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                cfts_record['works'] = record['works']
+                record['full_text'] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
+                if len(record['full_text']) > 0:
+                    records.append(record)
+                    cfts_record['full_text'] = record['full_text']
+                    cfts_records.append(cfts_record)
 
 make_index = client.collections['hsl'].documents.import_(records)
 print(make_index)
