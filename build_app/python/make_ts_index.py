@@ -10,7 +10,7 @@ from acdh_tei_pyutils.tei import TeiReader
 from tqdm import tqdm
 
 
-files = glob.glob('./data/traktat/editions/*.xml')
+files = glob.glob('./data/*/editions/*.xml')
 
 
 try:

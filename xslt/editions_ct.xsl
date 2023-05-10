@@ -30,9 +30,19 @@
                     
                     <div class="container-fluid">                        
                         <div class="section">
-                            <xsl:call-template name="annotation-options"></xsl:call-template>
+                            <div id="editor-widget">
+                                <xsl:call-template name="annotation-options"></xsl:call-template>
+                            </div>
                             
-                            <div class="section-critics">                                
+                            <div class="section-critics">
+                                <div class="row" style="margin:2em auto;">
+                                    <div class="col-md-6" style="text-align:right;">
+                                        <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
+                                    </div>
+                                    <div class="col-md-6" style="text-align:right;">
+                                        <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
+                                    </div>
+                                </div>
                                 <xsl:for-each select=".//tei:body">
                                     <div class="row">
                                         <div class="col-md-8" style="margin:0 auto;">
@@ -43,6 +53,26 @@
                                 </xsl:for-each>
                             </div>
                         </div>
+                        <xsl:if test=".//tei:body//tei:note[@type='footnote']">
+                            <div class="card-footer yes-index">
+                                <h5>Fußnoten</h5>
+                                <ul class="footnotes">
+                                    <xsl:for-each select=".//tei:body//tei:note[@type='footnote']">
+                                        <li>
+                                            <a class="anchorFoot" id="{@xml:id}"></a>
+                                            <span class="footnote_link">
+                                                <a href="#{@xml:id}_inline" class="nounderline">
+                                                    <xsl:value-of select="@n"/>
+                                                </a>
+                                            </span>
+                                            <span class="footnote_text">
+                                                <xsl:apply-templates select="node() except tei:pb"/>
+                                            </span>
+                                        </li>
+                                    </xsl:for-each>
+                                </ul>
+                            </div>
+                        </xsl:if>
                         <xsl:for-each select="//tei:back">
                             <div class="tei-back">
                                 
@@ -53,21 +83,39 @@
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
+                <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/run_editions.js"></script>
             </body>
         </html>
     </xsl:template>
     
     <xsl:template match="tei:p">
-        <p class="indentedP yes-index">
+        <p class="yes-index">
             <xsl:apply-templates/>
         </p>
+    </xsl:template>
+    <xsl:template match="tei:head[ancestor::tei:body]">
+        <xsl:choose>
+            <xsl:when test="@type='h1'">
+                <h1 class="yes-index"><xsl:apply-templates/></h1>
+            </xsl:when>
+            <xsl:when test="@type='h2'">
+                <h2 class="yes-index"><xsl:apply-templates/></h2>
+            </xsl:when>
+            <xsl:when test="@type='h3'">
+                <h3 class="yes-index"><xsl:apply-templates/></h3>
+            </xsl:when>
+            <xsl:when test="@type='h4'">
+                <h4 class="yes-index"><xsl:apply-templates/></h4>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:choice">
         <span class="choice" title="{./tei:corr}"><xsl:value-of select="./tei:sic"/></span>
     </xsl:template>
     <xsl:template match="tei:lb">
-        <br/>
+        <br class="pb"/>
         <xsl:if test="ancestor::tei:p">
             <a>
                 <xsl:variable name="para" as="xs:int">
@@ -88,7 +136,7 @@
                 <xsl:choose>
                     <xsl:when test="($lines mod 5) = 0">
                         <xsl:attribute name="class">
-                            <xsl:text>linenumbersVisible linenumbers yes-index</xsl:text>
+                            <xsl:text>linenumbersVisible linenumbers pb</xsl:text>
                         </xsl:attribute>
                         <xsl:attribute name="data-lbnr">
                             <xsl:value-of select="$lines"/>
@@ -96,7 +144,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="class">
-                            <xsl:text>linenumbersTransparent linenumbers yes-index</xsl:text>
+                            <xsl:text>linenumbersTransparent linenumbers pb</xsl:text>
                         </xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -213,7 +261,7 @@
     </xsl:template>
     <xsl:template match="tei:note">
         <xsl:choose>
-            <xsl:when test="@place='foot'">
+            <xsl:when test="@type='footnote'">
                 <span>
                     <a class="anchorFoot" id="{@xml:id}_inline"></a>
                     <a href="#{@xml:id}" title="{.//text()}" class="nounderline">

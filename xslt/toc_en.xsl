@@ -33,7 +33,10 @@
                                 <table class="table table-striped display" id="tocTable" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Newspaper</th>
+                                            <th scope="col">Issue</th>
                                             <th scope="col">Title</th>
+                                            <th scope="col">Date</th>
                                             <th scope="col">Filename</th>
                                         </tr>
                                     </thead>
@@ -43,13 +46,22 @@
                                                 <xsl:value-of select="document-uri(/)"/>
                                             </xsl:variable>
                                             <tr>
+                                                <td>
+                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/>
+                                                </td>
+                                                <td>
+                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='sub']/text()"/>
+                                                </td>
                                                 <td>                                        
                                                     <a>
                                                         <xsl:attribute name="href">                                                
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:value-of select=".//tei:title[@type='main'][1]/text()"/>
+                                                        <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title[1]/text()"/>
                                                     </a>
+                                                </td>
+                                                <td>
+                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:imprint/tei:date/@when"/>
                                                 </td>
                                                 <td>
                                                     <xsl:value-of select="tokenize($full_path, '/')[last()]"/>
