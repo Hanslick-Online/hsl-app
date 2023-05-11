@@ -48,7 +48,7 @@ creates an array for osd viewer with static images
 var element = document.getElementsByClassName('anchor-pb');
 var tileSources = [];
 var img = element[0].getAttribute("source");
-var img = `https://iiif.acdh.oeaw.ac.at/iiif/images/hsl-vms/${img}.jp2/full/max/0/default.jpg`;
+var img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/max/0/default.jpg`;
 var imageURL = {
     type: 'image',
     url: img
@@ -122,7 +122,7 @@ function to trigger image load and remove events
 function loadNewImage(new_item) {
     if (new_item) {
         // source attribute hold image item id without url
-        var new_image = new_item.getAttribute("source");
+        var new_image = new_item.getAttribute("source").split("/")[1];
         var old_image = viewer.world.getItemAt(0);
         if (old_image) {
             // get url from current/old image and replace the image id with

@@ -22,19 +22,26 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script>
             </head>
             
             <body class="page">
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
                     
-                    <div class="container-fluid">                        
-                        <div class="section">
-                            <div id="editor-widget">
-                                <xsl:call-template name="annotation-options"></xsl:call-template>
+                    <div class="container-fluid" style="max-width:60%;">
+                        <div class="row">
+                            <div class="col-md-6 facsimiles">
+                                <div id="viewer-1">
+                                    <!--<div id="spinner_1" class="text-center">
+                                        <div class="loader"></div>
+                                    </div>-->
+                                    <div id="container_facs_1" style="padding:.5em;margin-top:2em;">
+                                        <!-- image container accessed by OSD script -->                               
+                                    </div>  
+                                </div>
                             </div>
-                            
-                            <div class="section-critics">
+                            <div class="col-md-6 text">
                                 <div class="row" style="margin:2em auto;">
                                     <div class="col-md-6" style="text-align:right;">
                                         <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
@@ -43,49 +50,54 @@
                                         <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
                                     </div>
                                 </div>
-                                <xsl:for-each select=".//tei:body">
-                                    <div class="row">
-                                        <div class="col-md-8" style="margin:0 auto;">
+                                <div class="section section-critics" id="section-1">
+                                    <div id="editor-widget">
+                                        <xsl:call-template name="annotation-options"></xsl:call-template>
+                                    </div>
+
+                                    <xsl:for-each select=".//tei:body">
+                                        <div class="card-body">
                                             <xsl:apply-templates/>
                                         </div>
+                                        
+                                    </xsl:for-each>
+                                </div>
+                                <xsl:if test=".//tei:body//tei:note[@type='footnote']">
+                                    <div class="card-footer yes-index">
+                                        <h5>Fußnoten</h5>
+                                        <ul class="footnotes">
+                                            <xsl:for-each select=".//tei:body//tei:note[@type='footnote']">
+                                                <li>
+                                                    <a class="anchorFoot" id="{@xml:id}"></a>
+                                                    <span class="footnote_link">
+                                                        <a href="#{@xml:id}_inline" class="nounderline">
+                                                            <xsl:value-of select="@n"/>
+                                                        </a>
+                                                    </span>
+                                                    <span class="footnote_text">
+                                                        <xsl:apply-templates select="node() except tei:pb"/>
+                                                    </span>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
                                     </div>
-                                    
+                                </xsl:if>
+                                <xsl:for-each select="//tei:back">
+                                    <div class="tei-back">
+                                        
+                                        <xsl:apply-templates/>
+                                        
+                                    </div>
                                 </xsl:for-each>
                             </div>
                         </div>
-                        <xsl:if test=".//tei:body//tei:note[@type='footnote']">
-                            <div class="card-footer yes-index">
-                                <h5>Fußnoten</h5>
-                                <ul class="footnotes">
-                                    <xsl:for-each select=".//tei:body//tei:note[@type='footnote']">
-                                        <li>
-                                            <a class="anchorFoot" id="{@xml:id}"></a>
-                                            <span class="footnote_link">
-                                                <a href="#{@xml:id}_inline" class="nounderline">
-                                                    <xsl:value-of select="@n"/>
-                                                </a>
-                                            </span>
-                                            <span class="footnote_text">
-                                                <xsl:apply-templates select="node() except tei:pb"/>
-                                            </span>
-                                        </li>
-                                    </xsl:for-each>
-                                </ul>
-                            </div>
-                        </xsl:if>
-                        <xsl:for-each select="//tei:back">
-                            <div class="tei-back">
-                                
-                                <xsl:apply-templates/>
-                                
-                            </div>
-                        </xsl:for-each>
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
                 <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/run_editions.js"></script>
+                <script type="text/javascript" src="js/osd.js"></script>
             </body>
         </html>
     </xsl:template>
@@ -248,6 +260,8 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:pb">
+        <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
+        <span class="anchor-pb" source="hsl-nfp/{$graphic-url}">[<xsl:value-of select="@n"/>]</span>
         <span class="pb">[<xsl:value-of select="@n"/>]</span>
     </xsl:template>
     <xsl:template match="tei:cit">

@@ -415,18 +415,6 @@ sup {
     margin: 2em auto;
 }
 
-.linenumbersTransparent {
-    color: transparent !important;
-}
-
-.linenumbersVisible {
-    color: #444;
-}
-
-.linenumbers {
-    margin: 0 1.5em 0 0;
-}
-
 .pb {
     color: lightgrey;
     /*position: absolute;
@@ -434,6 +422,22 @@ sup {
     font-style: normal !important;
     margin: 0;
     padding: 0;*/
+}
+
+.linenumbersTransparent {
+    color: transparent !important;
+}
+
+.linenumbersTransparent:hover {
+    color: lightgrey !important;
+}
+
+.linenumbersVisible {
+    color: lightgrey !important;
+}
+
+.linenumbers {
+    margin: 0 1.5em 0 0;
 }
 
 .wrdbreak {
@@ -566,7 +570,7 @@ a.anchorFoot {
 
 #viewer-1 {
     position: sticky;
-    top: 15%;
+    top: 10%;
 }
 
 .caret {
