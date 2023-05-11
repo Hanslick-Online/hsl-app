@@ -90,11 +90,27 @@
         </html>
     </xsl:template>
     
-    <xsl:template match="tei:p">
+    <xsl:template match="tei:p[not(@prev)]">
         <p class="yes-index">
             <xsl:apply-templates/>
+            <xsl:if test="following-sibling::tei:p[1]/@prev = 'true' and not(following-sibling::tei:p[2]/@prev = 'true')">
+                <xsl:for-each select="following-sibling::tei:p[1]">
+                    <xsl:apply-templates/>
+                </xsl:for-each>
+            </xsl:if>
+            <xsl:if test="following-sibling::tei:p[1]/@prev = 'true' and following-sibling::tei:p[2]/@prev = 'true'">
+                <xsl:for-each select="following-sibling::tei:p[1]">
+                    <xsl:apply-templates/>
+                </xsl:for-each>
+                <xsl:for-each select="following-sibling::tei:p[2]">
+                    <xsl:apply-templates/>
+                </xsl:for-each>
+            </xsl:if>
         </p>
     </xsl:template>
+    <xsl:template match="tei:p[@prev='true']">
+        <!--  do not display independently -->
+    </xsl:template>    
     <xsl:template match="tei:head[ancestor::tei:body]">
         <xsl:choose>
             <xsl:when test="@type='h1'">
@@ -115,6 +131,9 @@
         <span class="choice" title="{./tei:corr}"><xsl:value-of select="./tei:sic"/></span>
     </xsl:template>
     <xsl:template match="tei:lb">
+        <xsl:if test="@break='no'">
+            <span class="pb wrdbreak">-</span>
+        </xsl:if>
         <br class="pb"/>
         <xsl:if test="ancestor::tei:p">
             <a>
