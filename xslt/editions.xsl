@@ -401,7 +401,7 @@
     </xsl:template>
     <xsl:template match="tei:listPerson">
         <xsl:for-each select="./tei:person">
-            <div class="modal fade" id="{@xml:id}" tabindex="-1" data-bs-toggle="modal" aria-labelledby="{concat(./tei:persName/tei:surname, ', ', ./tei:persName/tei:forename)}" aria-hidden="true">
+            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{concat(./tei:persName/tei:surname, ', ', ./tei:persName/tei:forename)}" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -409,7 +409,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <table class="table">
+                            <table>
                                 <tbody>
                                     <tr>
                                         <th>
@@ -444,7 +444,7 @@
     </xsl:template>
     <xsl:template match="tei:listPlace">
         <xsl:for-each select="./tei:place">
-            <div class="modal fade" id="{@xml:id}" tabindex="-1" data-bs-toggle="modal" aria-labelledby="{if(./tei:settlement) then(./tei:settlement/tei:placeName) else (./tei:placeName)}" aria-hidden="true">
+            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{if(./tei:settlement) then(./tei:settlement/tei:placeName) else (./tei:placeName)}" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -452,7 +452,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <table class="table">
+                            <table>
                                 <tbody>
                                     <tr>
                                         <th>
