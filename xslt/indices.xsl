@@ -123,7 +123,7 @@
                  </thead>
                  <tbody>
                      <xsl:for-each select="./tei:person">
-                         <xsl:if test="count(./tei:listEvent/tei:event) gt 0">
+                         <xsl:if test="count(./tei:noteGrp/tei:note) gt 0">
                             <tr>
                                 <td>
                                     <a href="{concat(@xml:id, '.html')}">
@@ -159,7 +159,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="count(./tei:listEvent/tei:event)"/>
+                                    <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
                                 </td>
                                 <td>
                                     <xsl:value-of select="substring(./tei:persName[@type='main']/tei:surname, 1, 1)"/>
@@ -188,7 +188,7 @@
                 </thead>
                 <tbody>
                     <xsl:for-each select="./tei:place">
-                        <xsl:if test="count(./tei:listEvent/tei:event) gt 0">
+                        <xsl:if test="count(./tei:noteGrp/tei:note) gt 0">
                         <xsl:variable name="count" select="count(./tei:listEvent/tei:event)"/>
                         <xsl:variable name="coords" select="tokenize(./tei:location[@type='coords']/tei:geo, ', ')"/>
                             <tr>
@@ -244,7 +244,7 @@
                                     <xsl:value-of select="./tei:country"/>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="count(./tei:listEvent/tei:event)"/>
+                                    <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
                                 </td>
                             </tr>
                         </xsl:if>
@@ -267,7 +267,7 @@
                 </thead>
                 <tbody>
                     <xsl:for-each select="./tei:bibl">
-                        <xsl:if test="count(./tei:listEvent/tei:event) gt 0">
+                        <xsl:if test="count(./tei:noteGrp/tei:note) gt 0">
                             <tr>
                                 <td>
                                     <a href="{concat(@xml:id, '.html')}">
@@ -287,7 +287,7 @@
                                     <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="count(./tei:listEvent/tei:event)"/>
+                                    <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
                                 </td>
                                 <td>
                                     <xsl:value-of select="substring(./tei:title[@type='main'], 1, 1)"/>
