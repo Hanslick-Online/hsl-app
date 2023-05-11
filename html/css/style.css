@@ -24,6 +24,10 @@ h3 {
     margin-top: 1em;
 }*/
 
+.section-critics {
+    display: table;
+}
+
 .section-critics p {
     margin-bottom: 0 !important;
 }
