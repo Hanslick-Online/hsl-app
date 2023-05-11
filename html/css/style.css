@@ -928,6 +928,9 @@ input:checked + .i-slider:before {
 }
 
 @media (max-width: 1024px) {
+    .container-fluid {
+        max-width: 100%;
+    }
     .seg-inline {
         display: block;
     }
