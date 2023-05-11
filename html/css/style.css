@@ -921,6 +921,11 @@ input:checked + .i-slider:before {
         margin: 0 auto;
         padding-bottom: 1em;
     }
+    .section-critics {
+        max-width: 80%;
+        margin: 0 auto;
+        padding-bottom: 1em;
+    }
     img.figure, .figure > img {
         text-align: center;
         max-width: 80%;
@@ -929,7 +934,7 @@ input:checked + .i-slider:before {
 
 @media (max-width: 1024px) {
     .container-fluid {
-        max-width: 100%;
+        max-width: 100% !important;
     }
     .seg-inline {
         display: block;
