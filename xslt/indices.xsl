@@ -94,7 +94,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                            createDataTable('listbibl', 'Suche:', [1, 3], [0, 2], [4]);
+                            createDataTable('listbibl', 'Suche:', [2, 3, 5, 6], [0, 1, 4], [6]);
                             });
                         </script>
                     </xsl:when>
@@ -259,7 +259,9 @@
                 <thead>
                     <tr>
                         <th>Titel</th>
+                        <th>Titel (alt)</th>
                         <th>Autor</th>
+                        <th>Figur</th>
                         <th>Wikidata ID</th>
                         <th>Erwähnt #</th>
                         <th>Initial</th>
@@ -275,10 +277,22 @@
                                     </a>
                                 </td>
                                 <td>
+                                    <xsl:value-of select="./tei:title[@type='alternative']"/>
+                                </td>
+                                <td>
                                     <ul>
                                         <xsl:for-each select="./tei:author">
                                             <li>
                                                 <xsl:value-of select="./tei:persName"/>
+                                            </li>
+                                        </xsl:for-each>    
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <xsl:for-each select="./tei:name[@type='character']">
+                                            <li>
+                                                <xsl:value-of select="."/>
                                             </li>
                                         </xsl:for-each>    
                                     </ul>

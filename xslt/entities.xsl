@@ -55,6 +55,16 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
+                                                <xsl:if test="@role">
+                                                    <tr>
+                                                        <th>
+                                                            Funktion
+                                                        </th>
+                                                        <td>
+                                                            Figur
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                                 <xsl:if test="./tei:birth/tei:date">
                                                 <tr>
                                                     <th>
@@ -135,10 +145,10 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:listBibl">
+                                                <xsl:if test="./tei:listBibl[@type='authorOf']">
                                                 <tr>
                                                     <th>
-                                                        Werke
+                                                        Werke (Schöpfer)
                                                     </th>
                                                     <td>
                                                         <ul>
@@ -152,6 +162,24 @@
                                                         </ul>
                                                     </td>
                                                 </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:listBibl[@type='characterOf']">
+                                                    <tr>
+                                                        <th>
+                                                            Werke (Figur)
+                                                        </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                                    <li>
+                                                                        <a href="{concat(@n, '.html')}">
+                                                                            <xsl:value-of select="."/>
+                                                                        </a>
+                                                                    </li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
                                                 </xsl:if>
                                                 <xsl:if test="./tei:noteGrp">
                                                 <tr>
@@ -382,6 +410,24 @@
                                                                     <li>
                                                                         <a href="{substring-after(@ref, '#')}.html">
                                                                             <xsl:value-of select="./tei:persName"/>
+                                                                        </a>        
+                                                                    </li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>    
+                                                </xsl:if>
+                                                <xsl:if test="./tei:name">
+                                                    <tr>
+                                                        <th>
+                                                            Figur(en)
+                                                        </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:name[@type='character']">
+                                                                    <li>
+                                                                        <a href="{substring-after(@ref, '#')}.html">
+                                                                            <xsl:value-of select="."/>
                                                                         </a>        
                                                                     </li>
                                                                 </xsl:for-each>
