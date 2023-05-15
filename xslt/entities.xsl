@@ -248,7 +248,7 @@
                                                 <xsl:if test="//tei:placeName[@type='alternative']">
                                                     <tr>
                                                         <th>
-                                                            Alternativname
+                                                            Ortsname (alt)
                                                         </th>
                                                         <td>
                                                             <xsl:choose>
@@ -419,7 +419,7 @@
                                                 <xsl:if test="./tei:title[@type='alternative']">
                                                     <tr>
                                                         <th>
-                                                            Titel
+                                                            Titel (alt)
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:title[@type='alternative']"/>
