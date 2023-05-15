@@ -195,14 +195,24 @@
                                 <td>
                                     <a href="{concat(@xml:id, '.html')}">
                                         <xsl:choose>
-                                            <xsl:when test="./tei:settlement/tei:placeName">
-                                                <xsl:value-of select="./tei:settlement/tei:placeName"/>
+                                            <xsl:when test="./tei:settlement/tei:placeName[@type='main']">
+                                                <xsl:value-of select="./tei:settlement/tei:placeName[@type='main']"/>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:value-of select="./tei:placeName"/>
+                                                <xsl:value-of select="./tei:placeName[@type='main']"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </a>
+                                </td>
+                                <td>
+                                    <xsl:choose>
+                                        <xsl:when test="./tei:settlement/tei:placeName[@type='alternative']">
+                                            <xsl:value-of select="./tei:settlement/tei:placeName[@type='alternative']"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="./tei:placeName[@type='alternative']"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </td>
                                 <td>
                                     <a href="{./tei:idno[@type='GEONAMES']}" target="_blank">

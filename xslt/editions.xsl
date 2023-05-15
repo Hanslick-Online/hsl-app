@@ -444,16 +444,24 @@
     </xsl:template>
     <xsl:template match="tei:listPlace">
         <xsl:for-each select="./tei:place">
-            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{if(./tei:settlement) then(./tei:settlement/tei:placeName) else (./tei:placeName)}" aria-hidden="true">
+            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{if(./tei:settlement) then(./tei:settlement/tei:placeName[@type='main']) else (./tei:placeName[@type='main'])}" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="if(./tei:settlement) then(./tei:settlement/tei:placeName) else (./tei:placeName)"/></h1>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="if(./tei:settlement) then(./tei:settlement/tei:placeName[@type='main']) else (./tei:placeName[@type='main'])"/></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <table>
                                 <tbody>
+                                    <tr>
+                                        <th>
+                                            Alternativtitel
+                                        </th>
+                                        <td>
+                                            <xsl:value-of select="if(./tei:settlement) then(./tei:settlement/tei:placeName[@type='alternative']) else (./tei:placeName[@type='alternative'])"/>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th>
                                             Land
@@ -499,7 +507,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="./tei:title"/></h1>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="./tei:title[@type='main']"/></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -520,6 +528,14 @@
                                                     </li>
                                                 </xsl:for-each>
                                             </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            Alternativtitel
+                                        </th>
+                                        <td>
+                                            <xsl:value-of select="./tei:title[@type='alternative']"/>
                                         </td>
                                     </tr>
                                     <tr>

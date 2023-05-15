@@ -48,7 +48,7 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: "#hits",
     templates: {
-      empty: "Keine Resultate für <q>{{ query }}</q>",
+      empty: "Keine Treffer für <q>{{ query }}</q>",
       item: `
               <h5><a href="{{ id }}">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>

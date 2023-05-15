@@ -80,6 +80,7 @@ h3 {
 
 .modal-body table tbody tr th, .modal-body table tbody tr td {
     border: none;
+    padding-right: 2em;
 }
 
 /*#wrapper-hero {

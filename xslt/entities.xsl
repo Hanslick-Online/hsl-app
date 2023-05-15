@@ -236,15 +236,32 @@
                                                     </th>
                                                     <td>
                                                         <xsl:choose>
-                                                            <xsl:when test="./tei:settlement/tei:placeName">
-                                                                <xsl:value-of select="./tei:settlement/tei:placeName"/>
+                                                            <xsl:when test="./tei:settlement/tei:placeName[@type='main']">
+                                                                <xsl:value-of select="./tei:settlement/tei:placeName[@type='main']"/>
                                                             </xsl:when>
                                                             <xsl:otherwise>
-                                                                <xsl:value-of select="./tei:placeName"/>
+                                                                <xsl:value-of select="./tei:placeName[@type='main']"/>
                                                             </xsl:otherwise>
                                                         </xsl:choose>
                                                     </td>
                                                 </tr>
+                                                <xsl:if test="//tei:placeName[@type='alternative']">
+                                                    <tr>
+                                                        <th>
+                                                            Alternativname
+                                                        </th>
+                                                        <td>
+                                                            <xsl:choose>
+                                                                <xsl:when test="./tei:settlement/tei:placeName[@type='alternative']">
+                                                                    <xsl:value-of select="./tei:settlement/tei:placeName[@type='alternative']"/>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:value-of select="./tei:placeName[@type='alternative']"/>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                                 <xsl:if test="./tei:location[@type='located_in_place']">
                                                     <tr>
                                                         <th>
@@ -389,13 +406,23 @@
                                         
                                         <table class="table entity-table">
                                             <tbody>
-                                                <xsl:if test="./tei:title">
+                                                <xsl:if test="./tei:title[@type='main']">
                                                     <tr>
                                                         <th>
                                                             Titel
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:title[@type='main']"/>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:title[@type='alternative']">
+                                                    <tr>
+                                                        <th>
+                                                            Titel
+                                                        </th>
+                                                        <td>
+                                                            <xsl:value-of select="./tei:title[@type='alternative']"/>
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
