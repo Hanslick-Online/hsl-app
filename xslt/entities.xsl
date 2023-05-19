@@ -55,6 +55,25 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
+                                                <xsl:if test="./tei:persName[@type='alternative']">
+                                                    <tr>
+                                                        <th>
+                                                            Name (alt)
+                                                        </th>
+                                                        <td>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
+                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
+                                                            </xsl:if>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() and 
+                                                                ./tei:persName[@type='alternative']/tei:forename/text()">
+                                                                <xsl:text>, </xsl:text>
+                                                            </xsl:if>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
+                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
+                                                            </xsl:if>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                                 <xsl:if test="@role">
                                                     <tr>
                                                         <th>
@@ -153,6 +172,7 @@
                                                     <td>
                                                         <ul>
                                                             <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                                <xsl:sort select="." data-type="text"/>
                                                                 <li>
                                                                     <a href="{concat(@n, '.html')}">
                                                                         <xsl:value-of select="."/>
@@ -171,6 +191,7 @@
                                                         <td>
                                                             <ul>
                                                                 <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                                    <xsl:sort select="." data-type="text"/>
                                                                     <li>
                                                                         <a href="{concat(@n, '.html')}">
                                                                             <xsl:value-of select="."/>

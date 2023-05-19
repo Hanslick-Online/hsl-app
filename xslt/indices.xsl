@@ -77,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                            createDataTable('listperson', 'Suche:', [1, 4], [0, 2, 3], [5]);
+                            createDataTable('listperson', 'Suche:', [2, 5, 6], [0, 1, 3, 4], [6]);
                             });
                         </script>
                     </xsl:when>
@@ -86,7 +86,7 @@
                         <script src="js/leaflet.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                leafletDatatable('listplace', [5, 6, 7], [0, 1, 2, 3, 4]);
+                                leafletDatatable('listplace', [6, 7, 8], [0, 1, 2, 3, 4, 5]);
                             });
                         </script>
                     </xsl:when>
@@ -114,6 +114,7 @@
                  <thead>
                      <tr>
                          <th>Name</th>
+                         <th>Name (alt)</th>
                          <th>Typ</th>
                          <th>GND</th>
                          <th>Wikidata</th>
@@ -130,13 +131,25 @@
                                         <xsl:if test="./tei:persName[@type='main']/tei:surname/text()">
                                             <xsl:value-of select="./tei:persName[@type='main']/tei:surname"/>
                                         </xsl:if>
-                                        <xsl:if test="./tei:persName[@type='main']/tei:surname/text() and ./tei:persName/tei:forename/text()">
+                                        <xsl:if test="./tei:persName[@type='main']/tei:surname/text() and ./tei:persName[@type='main']/tei:forename/text()">
                                         <xsl:text>, </xsl:text>
                                         </xsl:if>
                                         <xsl:if test="./tei:persName[@type='main']/tei:forename/text()">
                                             <xsl:value-of select="./tei:persName[@type='main']/tei:forename"/>
                                         </xsl:if>
                                     </a>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
+                                        <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() and 
+                                                  ./tei:persName[@type='alternative']/tei:forename/text()">
+                                        <xsl:text>, </xsl:text>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
+                                        <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <xsl:choose>
@@ -177,6 +190,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Name (alt)</th>
                         <th>Geonames ID</th>
                         <th>Wikidata ID</th>
                         <th>GND ID</th>

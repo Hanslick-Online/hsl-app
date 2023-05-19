@@ -401,16 +401,33 @@
     </xsl:template>
     <xsl:template match="tei:listPerson">
         <xsl:for-each select="./tei:person">
-            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{concat(./tei:persName/tei:surname, ', ', ./tei:persName/tei:forename)}" aria-hidden="true">
+            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{concat(./tei:persName[@type='main']/tei:surname, ', ', ./tei:persName[@type='main']/tei:forename)}" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="concat(./tei:persName/tei:surname, ', ', ./tei:persName/tei:forename)"/></h1>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="concat(./tei:persName[@type='main']/tei:surname, ', ', ./tei:persName[@type='main']/tei:forename)"/></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <table>
                                 <tbody>
+                                    <tr>
+                                        <th>
+                                            Name (alt)
+                                        </th>
+                                        <td>
+                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
+                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
+                                            </xsl:if>
+                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() and 
+                                                ./tei:persName[@type='alternative']/tei:forename/text()">
+                                                <xsl:text>, </xsl:text>
+                                            </xsl:if>
+                                            <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
+                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
+                                            </xsl:if>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th>
                                             GND
