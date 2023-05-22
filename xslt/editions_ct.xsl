@@ -30,7 +30,7 @@
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
                     
-                    <div class="container-fluid" style="max-width:75%;">
+                    <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <div class="row">
                             <div class="col-md-6 facsimiles">
                                 <div id="viewer-1">
@@ -74,14 +74,11 @@
                                     <div class="card-footer yes-index">
                                         <h5>Fußnoten</h5>
                                         <ul class="footnotes">
-                                            <xsl:for-each select=".//tei:body//tei:note[@type='footnote']">
+                                            <xsl:for-each select="//tei:note[@type='footnote']">
                                                 <li>
-                                                    <a class="anchorFoot" id="{@xml:id}"></a>
-                                                    <span class="footnote_link">
-                                                        <a href="#{@xml:id}_inline" class="nounderline">
-                                                            <xsl:value-of select="@n"/>
-                                                        </a>
-                                                    </span>
+                                                    <xsl:call-template name="footnote">
+                                                        <xsl:with-param name="inline" select="'false'"/>
+                                                    </xsl:call-template>
                                                     <span class="footnote_text">
                                                         <xsl:apply-templates select="node() except tei:pb"/>
                                                     </span>
@@ -133,9 +130,9 @@
     <xsl:template match="tei:p[@prev='true']">
         <!--  do not display independently -->
     </xsl:template>
-    <xsl:template match="text()[following-sibling::tei:lb[1]/@break = 'no']">
+    <!--<xsl:template match="text()[following-sibling::tei:*[1]/@break = 'no']">
         <span class="wrd-brk-txt"><xsl:value-of select="normalize-space(.)"/></span>
-    </xsl:template>
+    </xsl:template>-->
     <xsl:template match="tei:space">
         <span class="space">
             <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
@@ -165,13 +162,13 @@
             <span class="pb wrdbreak">-</span>
         </xsl:if>
         <br class="pb"/>
-        <xsl:if test="ancestor::tei:p">
+        <xsl:if test="ancestor::tei:p and not(ancestor::tei:note)">
             <a>
                 <xsl:variable name="para" as="xs:int">
                     <xsl:number level="any" from="tei:body" count="tei:p"/>
                 </xsl:variable>
                 <xsl:variable name="lines" as="xs:int">
-                    <xsl:number level="any" from="tei:body"/>
+                    <xsl:number level="any" from="tei:body" count="tei:lb"/>
                 </xsl:variable>
                 <xsl:attribute name="href">
                     <xsl:text>#</xsl:text><xsl:value-of select="ancestor::tei:div/@xml:id"/><xsl:text>__p</xsl:text><xsl:value-of select="$para"/><xsl:text>__lb</xsl:text><xsl:value-of select="$lines"/>
@@ -310,17 +307,32 @@
     <xsl:template match="tei:ref">
         <span class="ref {@type}"><a href="{@target}"><xsl:apply-templates/></a></span>
     </xsl:template>
-    <xsl:template match="tei:note">
+    <xsl:template match="tei:note" name="footnote">
+        <xsl:param name="inline" select="'true'"/>
+        <xsl:variable name="id" select="generate-id()"/>
         <xsl:choose>
-            <xsl:when test="@type='footnote'">
-                <span>
-                    <a class="anchorFoot" id="{@xml:id}_inline"></a>
-                    <a href="#{@xml:id}" title="{.//text()}" class="nounderline">
-                        <sup><xsl:value-of select="@n"/></sup>
+            <xsl:when test="$inline = 'true'">
+                <xsl:choose>
+                    <xsl:when test="@type='footnote'">
+                        <span>
+                            <a class="anchorFoot" id="{$id}_inline"></a>
+                            <a href="#{$id}" title="{.//text()}" class="nounderline">
+                                <sup><xsl:value-of select="@n"/></sup>
+                            </a>
+                        </span>
+                    </xsl:when>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <a class="anchorFoot" id="{$id}"></a>
+                <span class="footnote_link">
+                    <a href="#{$id}_inline" class="nounderline">
+                        <xsl:value-of select="@n"/>
                     </a>
                 </span>
-            </xsl:when>
+            </xsl:otherwise>
         </xsl:choose>
+        
     </xsl:template>
     <xsl:template match="tei:lg">
         <span class="vrsgrp"><xsl:apply-templates/></span>

@@ -447,6 +447,7 @@ sup {
 
 .wrdbreak {
     color: #000;
+    margin-left: -4px;
 }
 
 .footnote_text .cit .quote .pb, .footnote_text li span .pb {
