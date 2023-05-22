@@ -5,6 +5,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
+    <xsl:strip-space elements="*"/>
     
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
@@ -29,7 +30,7 @@
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
                     
-                    <div class="container-fluid" style="max-width:60%;">
+                    <div class="container-fluid" style="max-width:75%;">
                         <div class="row">
                             <div class="col-md-6 facsimiles">
                                 <div id="viewer-1">
@@ -112,12 +113,14 @@
     <xsl:template match="tei:p[not(@prev)]">
         <p class="yes-index">
             <xsl:apply-templates/>
-            <xsl:if test="following-sibling::tei:p[1]/@prev = 'true' and not(following-sibling::tei:p[2]/@prev = 'true')">
+            <xsl:if test="following-sibling::tei:p[1]/@prev = 'true' and 
+                          not(following-sibling::tei:p[2]/@prev = 'true')">
                 <xsl:for-each select="following-sibling::tei:p[1]">
                     <xsl:apply-templates/>
                 </xsl:for-each>
             </xsl:if>
-            <xsl:if test="following-sibling::tei:p[1]/@prev = 'true' and following-sibling::tei:p[2]/@prev = 'true'">
+            <xsl:if test="following-sibling::tei:p[1]/@prev = 'true' and 
+                          following-sibling::tei:p[2]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">
                     <xsl:apply-templates/>
                 </xsl:for-each>
@@ -129,7 +132,15 @@
     </xsl:template>
     <xsl:template match="tei:p[@prev='true']">
         <!--  do not display independently -->
-    </xsl:template>    
+    </xsl:template>
+    <xsl:template match="text()[following-sibling::tei:lb[1]/@break = 'no']">
+        <span class="wrd-brk-txt"><xsl:value-of select="normalize-space(.)"/></span>
+    </xsl:template>
+    <xsl:template match="tei:space">
+        <span class="space">
+            <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
+        </span>
+    </xsl:template>
     <xsl:template match="tei:head[ancestor::tei:body]">
         <xsl:choose>
             <xsl:when test="@type='h1'">
