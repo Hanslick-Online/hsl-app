@@ -77,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                            createDataTable('listperson', 'Suche:', [2, 5, 6], [0, 1, 3, 4], [6]);
+                            createDataTable('listperson', 'Suche:', [2, 3, 6, 7], [0, 1, 4, 5], [7]);
                             });
                         </script>
                     </xsl:when>
@@ -115,6 +115,7 @@
                      <tr>
                          <th>Name</th>
                          <th>Name (alt)</th>
+                         <th>Werke</th>
                          <th>Typ</th>
                          <th>GND</th>
                          <th>Wikidata</th>
@@ -149,6 +150,14 @@
                                     </xsl:if>
                                     <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
                                         <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:listBibl[@type='characterOf']">
+                                        <!--<a href="{./tei:bibl/@n}.html" alt="{./tei:listBibl[@type='characterOf']/tei:bibl/text()}">
+                                            <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
+                                        </a>-->
+                                        <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
                                     </xsl:if>
                                 </td>
                                 <td>
