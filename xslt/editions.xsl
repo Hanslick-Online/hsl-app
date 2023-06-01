@@ -11,7 +11,10 @@
     <xsl:import href="partials/html_footer.xsl"/>
     <xsl:import href="partials/aot-options.xsl"/>
     <xsl:import href="partials/chapters.xsl"/>
-    <xsl:import href="partials/edition.xsl"/>
+    <xsl:import href="partials/book-edition.xsl"/>
+    <xsl:import href="partials/view-type.xsl"/>
+    <xsl:import href="partials/view-type-content.xsl"/>
+    <xsl:import href="partials/entities-modal.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -30,79 +33,22 @@
                     <xsl:call-template name="nav_bar"/>
                     
                     <div class="container-fluid">
-                        
-                        <div class="row">
-                            <div class="col-md-6 facsimiles">
-                                <div id="viewer-1">
-                                    <!--<div id="spinner_1" class="text-center">
-                                        <div class="loader"></div>
-                                    </div>-->
-                                    <div id="container_facs_1" style="padding:.5em;margin-top:2em;">
-                                        <!-- image container accessed by OSD script -->                               
-                                    </div>  
-                                </div>
-                            </div>
-                            <div class="col-md-6 text">
-                                <div class="row" style="margin:2em auto;">
-                                    <div class="col-md-6" style="text-align:right;">
-                                        <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
-                                    </div>
-                                    <div class="col-md-6" style="text-align:right;">
-                                        <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
-                                    </div>
-                                </div>
-                                <div class="section section-traktat" id="section-1">
-                                    <div id="editor-widget">
-                                        <xsl:call-template name="editions"></xsl:call-template>
-                                        <xsl:call-template name="chapters"></xsl:call-template>
-                                        <xsl:call-template name="annotation-options"></xsl:call-template>
-                                    </div>
-                                    <div class="card-header yes-index">
-                                        <xsl:for-each select=".//tei:front/tei:titlePage">
-                                            
-                                            <div class="vh"><xsl:apply-templates/></div>
-                                            
-                                        </xsl:for-each>
-                                    </div>
-                                    <div class="card-body yes-index">                                
-                                        <xsl:for-each select=".//tei:body/tei:div">
-                                            
-                                            <a class="anchor" id="index.xml-body.1_div.{position()}"></a>
-                                            <xsl:apply-templates/>
-
-                                        </xsl:for-each>
-                                    </div>
-                                    <div class="card-footer yes-index">
-                                        <a class="anchor" id="index.xml-body.1_div.999"></a>
-                                        <h5>Fußnoten</h5>
-                                        <ul class="footnotes">
-                                            <xsl:for-each select=".//tei:body//tei:note[@place='foot']">
-                                                <li>
-                                                    <a class="anchorFoot" id="{@xml:id}"></a>
-                                                    <span class="footnote_link">
-                                                        <a href="#{@xml:id}_inline" class="nounderline">
-                                                            <xsl:value-of select="@n"/>
-                                                        </a>
-                                                    </span>
-                                                    <span class="footnote_text">
-                                                        <xsl:apply-templates select="node() except tei:pb"/>
-                                                    </span>
-                                                </li>
-                                            </xsl:for-each>
-                                        </ul>
-                                        
-                                    </div>
-                                </div>
-                                <xsl:for-each select="//tei:back">
-                                    <div class="tei-back">
-                                        
-                                        <xsl:apply-templates/>
-                                        
-                                    </div>
-                                </xsl:for-each>
-                            </div>
-                        </div>
-                        
+                        <xsl:call-template name="view-type">
+                            <xsl:with-param name="anotation-options" select="'true'"/>
+                            <xsl:with-param name="book-chapters" select="'true'"/>
+                            <xsl:with-param name="book-editions" select="'true'"/>
+                            <xsl:with-param name="editor-widget" select="'true'"/>
+                            <xsl:with-param name="body-xpath" as="item()*" select="//tei:body//tei:div"/>
+                            <xsl:with-param name="edition-project-class">
+                                <xsl:text>section-traktat</xsl:text>
+                            </xsl:with-param>
+                            <xsl:with-param name="front-page" select="'true'"/>
+                            <xsl:with-param name="footnotes" select="'true'"/>
+                            <xsl:with-param name="footnotes-xpath"
+                                    as="item()*"
+                                    select="//tei:body//tei:note[@place='foot']"/>
+                            <xsl:with-param name="back-page" select="'true'"/>
+                        </xsl:call-template>
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
@@ -361,14 +307,30 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="tei:note">
+    <xsl:template match="tei:note" name="footnote">
+        <xsl:param name="inline" select="'true'"/>
+        <xsl:variable name="id" select="generate-id()"/>
         <xsl:choose>
-            <xsl:when test="@place='foot'">
-                <a class="anchorFoot" id="{@xml:id}_inline"></a>
-                <a href="#{@xml:id}" title="Fußnote {@n}" class="nounderline">
-                    <sup><xsl:value-of select="@n"/></sup>
-                </a>
+            <xsl:when test="$inline = 'true'">
+                <xsl:choose>
+                    <xsl:when test="@place='foot'">
+                        <span>
+                            <a class="anchorFoot" id="{$id}_inline"></a>
+                            <a href="#{$id}" title="{.//text()}" class="nounderline">
+                                <sup><xsl:value-of select="@n"/></sup>
+                            </a>
+                        </span>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:when>
+            <xsl:otherwise>
+                <a class="anchorFoot" id="{$id}"></a>
+                <span class="footnote_link">
+                    <a href="#{$id}_inline" class="nounderline">
+                        <xsl:value-of select="@n"/>
+                    </a>
+                </span>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:notatedMusic">
@@ -398,192 +360,5 @@
     </xsl:template>
     <xsl:template match="tei:l">
         <xsl:apply-templates/><xsl:text> / </xsl:text>
-    </xsl:template>
-    <xsl:template match="tei:listPerson">
-        <xsl:for-each select="./tei:person">
-            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{concat(./tei:persName[@type='main']/tei:surname, ', ', ./tei:persName[@type='main']/tei:forename)}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="concat(./tei:persName[@type='main']/tei:surname, ', ', ./tei:persName[@type='main']/tei:forename)"/></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            Name (alt)
-                                        </th>
-                                        <td>
-                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
-                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
-                                            </xsl:if>
-                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() and 
-                                                ./tei:persName[@type='alternative']/tei:forename/text()">
-                                                <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                            <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
-                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
-                                            </xsl:if>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            GND
-                                        </th>
-                                        <td>
-                                            <a href="{./tei:idno[@type='GND']}" target="_blank">
-                                                <xsl:value-of select="./tei:idno[@type='GND']"/>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Weiterlesen
-                                        </th>
-                                        <td>
-                                            <a href="{concat(@xml:id, '.html')}">
-                                                Details
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </xsl:for-each>
-    </xsl:template>
-    <xsl:template match="tei:listPlace">
-        <xsl:for-each select="./tei:place">
-            <div class="modal fade" id="{@xml:id}" data-bs-toggle="modal" tabindex="-1" aria-labelledby="{if(./tei:settlement) then(./tei:settlement/tei:placeName[@type='main']) else (./tei:placeName[@type='main'])}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="if(./tei:settlement) then(./tei:settlement/tei:placeName[@type='main']) else (./tei:placeName[@type='main'])"/></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th>
-                                            Alternativtitel
-                                        </th>
-                                        <td>
-                                            <xsl:value-of select="if(./tei:settlement) then(./tei:settlement/tei:placeName[@type='alternative']) else (./tei:placeName[@type='alternative'])"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Land
-                                        </th>
-                                        <td>
-                                            <xsl:value-of select="./tei:country"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Geonames ID
-                                        </th>
-                                        <td>
-                                            <a href="{./tei:idno[@type='GEONAMES']}" target="_blank">
-                                                <xsl:value-of select="tokenize(./tei:idno[@type='GEONAMES'], '/')[4]"/>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Weiterlesen
-                                        </th>
-                                        <td>
-                                            <a href="{concat(@xml:id, '.html')}">
-                                                Details
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </xsl:for-each>
-    </xsl:template>
-    <xsl:template match="tei:listBibl">
-        <xsl:for-each select="./tei:bibl">
-            <div class="modal fade" id="{@xml:id}" tabindex="-1" data-bs-toggle="modal" aria-labelledby="{./tei:title[@type='main']}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel"><xsl:value-of select="./tei:title[@type='main']"/></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table">
-                                <tbody>
-                                    
-                                    <tr>
-                                        <th>
-                                            Autor(en)
-                                        </th>
-                                        <td>
-                                            <ul>
-                                                <xsl:for-each select="./tei:author">
-                                                    <li>
-                                                        <a href="{substring-after(@ref, '#')}.html">
-                                                            <xsl:value-of select="./tei:persName"/>
-                                                        </a>
-                                                    </li>
-                                                </xsl:for-each>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Alternativtitel
-                                        </th>
-                                        <td>
-                                            <xsl:value-of select="./tei:title[@type='alternative']"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Wikidata ID
-                                        </th>
-                                        <td>
-                                            <a href="{./tei:idno[@type='WIKIDATA']}" target="_blank">
-                                                <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            Weiterlesen
-                                        </th>
-                                        <td>
-                                            <a href="{concat(@xml:id, '.html')}">
-                                                Details
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

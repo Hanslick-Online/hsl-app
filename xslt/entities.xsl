@@ -61,15 +61,15 @@
                                                             Name (alt)
                                                         </th>
                                                         <td>
-                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
-                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
+                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
                                                             </xsl:if>
                                                             <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() and 
                                                                 ./tei:persName[@type='alternative']/tei:forename/text()">
                                                                 <xsl:text>, </xsl:text>
                                                             </xsl:if>
-                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
-                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
+                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
                                                             </xsl:if>
                                                         </td>
                                                     </tr>

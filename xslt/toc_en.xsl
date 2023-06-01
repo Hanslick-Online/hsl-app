@@ -35,9 +35,10 @@
                                         <tr>
                                             <th scope="col">Newspaper</th>
                                             <th scope="col">Issue</th>
+                                            <th scope="col">No. / Date</th>
                                             <th scope="col">Title</th>
+                                            <th scope="col">Subtitle</th>
                                             <th scope="col">Date</th>
-                                            <th scope="col">Filename</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,11 +62,24 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:imprint/tei:date/@when"/>
+                                                    <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
+                                                        <xsl:value-of select="."/>
+                                                        <xsl:if test="position() != last()">
+                                                            <br/>
+                                                        </xsl:if>
+                                                    </xsl:for-each>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select="tokenize($full_path, '/')[last()]"/>
-                                                </td>  
+                                                    <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
+                                                        <xsl:value-of select="."/>
+                                                        <xsl:if test="position() != last()">
+                                                            <br/>
+                                                        </xsl:if>
+                                                    </xsl:for-each>
+                                                </td>
+                                                <td>
+                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
+                                                </td>
                                             </tr>
                                         </xsl:for-each>
                                     </tbody>

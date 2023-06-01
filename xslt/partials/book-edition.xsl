@@ -11,7 +11,7 @@
         </desc>    
     </doc>
     
-    <xsl:template name="editions">
+    <xsl:template name="book-editions">
         <div id="edtion-navBarNavDropdown" class="dropstart navBarNavDropdown">
             <!-- Your menu goes here -->
             <a title="Auflage" href="#" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" role="button">
