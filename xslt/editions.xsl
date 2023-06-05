@@ -36,6 +36,7 @@
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="book-chapters" select="'true'"/>
+                            <xsl:with-param name="back-btn" select="'false'"/>
                             <xsl:with-param name="book-editions" select="'true'"/>
                             <xsl:with-param name="editor-widget" select="'true'"/>
                             <xsl:with-param name="body-xpath" as="item()*" select="//tei:body//tei:div"/>

@@ -39,6 +39,7 @@
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="editor-widget" select="'true'"/>
+                            <xsl:with-param name="back-btn" select="'true'"/>
                             <xsl:with-param name="book-chapters" select="'false'"/>
                             <xsl:with-param name="book-editions" select="'false'"/>
                             <xsl:with-param name="footnotes" select="'true'"/>

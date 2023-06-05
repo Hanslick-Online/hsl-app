@@ -471,6 +471,16 @@ span {
     max-width: 100%;
 }
 
+.btn-backlink {
+    color: var(--bs-blue);
+    margin-bottom: 1em;
+}
+
+.btn-backlink:hover {
+    background-color: transparent !important;
+    color: var(--bs-primary);
+}
+
 .section {
     margin: 2em auto;
 }
