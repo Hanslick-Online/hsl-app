@@ -20,7 +20,7 @@
                 <xsl:value-of select="
                         if (./tei:persName[@type = 'main']/tei:forename/text() and ./tei:persName[@type = 'main']/tei:surname/text())
                         then
-                        (concat(./tei:persName[@type = 'main']/tei:forename, ', ', ./tei:persName[@type = 'main']/tei:surname))
+                        (concat(./tei:persName[@type = 'main']/tei:surname, ', ', ./tei:persName[@type = 'main']/tei:forename))
                         else
                             (./tei:persName[@type = 'main'])
                         "/>
