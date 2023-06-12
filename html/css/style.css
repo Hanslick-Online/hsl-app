@@ -24,12 +24,20 @@ h3 {
     margin-top: 1em;
 }*/
 
+h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
+    font-weight: 600;
+}
+
+.meta-head {
+    margin-bottom: 1em !important;
+}
+
 .section-critics {
     display: table;
 }
 
 .section-critics p {
-    margin-bottom: 0 !important;
+    margin-bottom: 0;
 }
 
 
@@ -422,11 +430,13 @@ sup {
 
 .pb {
     color: lightgrey;
-    /*position: absolute;
-    right: 1px;
-    font-style: normal !important;
-    margin: 0;
-    padding: 0;*/
+    
+}
+
+.pb-prev {
+    overflow: visible;
+    width: 0;
+    height: 0;
 }
 
 .linenumbersTransparent {
@@ -447,7 +457,6 @@ sup {
 
 .wrdbreak {
     color: #000;
-    margin-left: -4px;
 }
 
 .footnote_text .cit .quote .pb, .footnote_text li span .pb {

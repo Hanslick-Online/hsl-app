@@ -62,6 +62,12 @@
                                             </xsl:if>
                                         </td>
                                     </tr>
+                                    <xsl:if test="./tei:listBibl[@type = 'characterOf']/tei:bibl/text()">
+                                        <tr>
+                                            <th>Werk</th>
+                                            <td><xsl:value-of select="./tei:listBibl/tei:bibl/text()"/></td>
+                                        </tr>
+                                    </xsl:if>
                                     <tr>
                                         <th> GND </th>
                                         <td>

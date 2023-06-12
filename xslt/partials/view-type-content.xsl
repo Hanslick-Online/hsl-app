@@ -13,22 +13,24 @@
     
     <xsl:template name="footnotes">
         <xsl:param name="node_xpath" as="item()*"/>
-        <div class="card-footer yes-index">
-            <a class="anchor" id="index.xml-body.1_div.999"></a>
-            <h5>Fußnoten</h5>
-            <ul class="footnotes">
-                <xsl:for-each select="$node_xpath">
-                    <li>
-                        <!-- in main edition.xsl -->
-                        <xsl:call-template name="footnote">
-                            <xsl:with-param name="inline" select="'false'"/>
-                        </xsl:call-template>
-                        <span class="footnote_text">
-                            <xsl:apply-templates select="node() except tei:pb"/>
-                        </span>
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </div>
+        <xsl:if test="$node_xpath">
+            <div class="card-footer yes-index my-4">
+                <a class="anchor" id="index.xml-body.1_div.999"></a>
+                <h5>Fußnoten</h5>
+                <ul class="footnotes">
+                    <xsl:for-each select="$node_xpath">
+                        <li>
+                            <!-- in main edition.xsl -->
+                            <xsl:call-template name="footnote">
+                                <xsl:with-param name="inline" select="'false'"/>
+                            </xsl:call-template>
+                            <span class="footnote_text">
+                                <xsl:apply-templates select="node() except tei:pb"/>
+                            </span>
+                        </li>
+                    </xsl:for-each>
+                </ul>
+            </div>
+        </xsl:if>
     </xsl:template>
 </xsl:stylesheet>
