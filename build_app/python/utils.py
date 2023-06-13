@@ -102,7 +102,11 @@ def denormalize_indices(
         doc_id = doc.any_xpath("./@xml:id")[0]
         doc_uri = f"{doc_base}/{doc_id}"
         doc_title = doc.any_xpath(title_xpath)[0]
-        doc_title_sub = doc.any_xpath(title_xpath_sub)[0]
+        try:
+            doc_title_sub = doc.any_xpath(title_xpath_sub)[0]
+        except Exception as err:
+            doc_title_sub = ""
+            print(err)
         refs = doc.any_xpath(mention_xpath)
         for ref in set(refs):
             if ref.startswith("#") and len(ref.split(" ")) == 1:

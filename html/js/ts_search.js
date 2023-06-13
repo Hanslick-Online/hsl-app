@@ -30,6 +30,7 @@ const searchClient = typesenseInstantsearchAdapter.searchClient;
 const search = instantsearch({
   searchClient,
   indexName: "hsl",
+  routing: true,
 });
 
 search.addWidgets([
@@ -47,7 +48,7 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: "#hits",
     templates: {
-      empty: "Keine Resultate für <q>{{ query }}</q>",
+      empty: "Keine Treffer für <q>{{ query }}</q>",
       item: `
               <h5><a href="{{ id }}">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
@@ -101,7 +102,12 @@ search.addWidgets([
     container: "#refinement-list-places",
     attribute: "places",
     searchable: true,
-    searchablePlaceholder: "Suchen",
+    searchablePlaceholder: "Search for places",
+    sortBy: ["isRefined", "count:desc", "name:asc"], // testing
+    showMore: true,
+    limit: 10,
+    showMoreLimit: 50,
+    operator: "and",
     cssClasses: {
       searchableInput: "form-control form-control-sm mb-2 border-light-2",
       searchableSubmit: "d-none",
@@ -118,7 +124,12 @@ search.addWidgets([
     container: "#refinement-list-persons",
     attribute: "persons",
     searchable: true,
-    searchablePlaceholder: "Suchen",
+    searchablePlaceholder: "Search for persons",
+    sortBy: ["isRefined", "count:desc", "name:asc"], // testing
+    showMore: true,
+    limit: 10,
+    showMoreLimit: 50,
+    operator: "and",
     cssClasses: {
       searchableInput: "form-control form-control-sm mb-2 border-light-2",
       searchableSubmit: "d-none",
@@ -135,7 +146,12 @@ search.addWidgets([
     container: "#refinement-list-works",
     attribute: "works",
     searchable: true,
-    searchablePlaceholder: "Suchen",
+    searchablePlaceholder: "Search for works",
+    sortBy: ["isRefined", "count:desc", "name:asc"], // testing
+    showMore: true,
+    limit: 10,
+    showMoreLimit: 50,
+    operator: "and",
     cssClasses: {
       searchableInput: "form-control form-control-sm mb-2 border-light-2",
       searchableSubmit: "d-none",
@@ -153,7 +169,7 @@ search.addWidgets([
     attribute: "year",
     templates: {
       separatorText: "to",
-      submitText: "Suchen",
+      submitText: "Search",
     },
     cssClasses: {
       form: "form-inline",

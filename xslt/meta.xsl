@@ -6,8 +6,10 @@
     version="2.0" exclude-result-prefixes="tei xsl xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_navbar_en.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="./partials/html_footer.xsl"/>
+    <xsl:import href="./partials/html_footer_en.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:title[1]/text()"/>
@@ -22,7 +24,14 @@
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:choose>
+                        <xsl:when test="//tei:body[@xml:lang='de-AT']">
+                            <xsl:call-template name="nav_bar"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="nav_bar_en"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     
                     <div class="container-fluid" style="margin-top:1em;">
                         <div class="row">
@@ -34,10 +43,18 @@
                                </xsl:for-each>
                             </div>
                         </div>
-                        
                     </div>
-                    <xsl:call-template name="html_footer"/>
+                    
+                    <xsl:choose>
+                        <xsl:when test="//tei:body[@xml:lang='de-AT']">
+                            <xsl:call-template name="html_footer"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="html_footer_en"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </div>
+                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>

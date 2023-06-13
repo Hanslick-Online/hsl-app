@@ -6,9 +6,9 @@
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     
-    <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_navbar_en.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer.xsl"/>
+    <xsl:import href="partials/html_footer_en.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title" select="'Inhaltsverzeichnis'"/>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
@@ -22,23 +22,23 @@
             
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:call-template name="nav_bar_en"/>
                     
                     <div class="container-fluid">
                         <div class="card">
                             <div class="card-header">
-                                <h1>Inhaltsverzeichnis</h1>
+                                <h1>Table of Contents</h1>
                             </div>
                             <div class="card-body">
                                 <table class="table table-striped display" id="tocTable" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Zeitschrift</th>
-                                            <th scope="col">Ausgabe</th>
-                                            <th scope="col">Nr. / Datum</th>
-                                            <th scope="col">Titel</th>
-                                            <th scope="col">Untertitel</th>
-                                            <th scope="col">Datum</th>
+                                            <th scope="col">Newspaper</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">No. / Date</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Subtitle</th>
+                                            <th scope="col">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:call-template name="html_footer_en"/>
                     <script>
                         $(document).ready(function () {
                             createDataTable('tocTable');

@@ -6,9 +6,9 @@
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     
-    <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_navbar_en.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="./partials/html_footer.xsl"/>
+    <xsl:import href="./partials/html_footer_en.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title" select="'Volltextsuche'"/>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
@@ -17,13 +17,14 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
                 <link rel="stylesheet" type="text/css" href="css/ts_search.css"/>
             </head>
             
             
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:call-template name="nav_bar_en"/>
                     
                     <div class="container-fluid">
                         <div class="search-panel">
@@ -54,16 +55,16 @@
                         </div>
                     </div>
                     
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:call-template name="html_footer_en"/>
                     
                 </div>
             </body>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
-            <link rel="stylesheet" href="css/ts_search.css"/>
+            
             <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0"></script>
             <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
             <script src="js/ts_search.js"></script>
             <script src="js/ts_update_url.js"></script>
+            <script type="text/javascript" src="js/run.js"></script>
         </html>
     </xsl:template>
 </xsl:stylesheet>

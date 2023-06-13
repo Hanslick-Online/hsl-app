@@ -35,7 +35,7 @@ jobs:
         pip install -U pip
         pip install -r build_app/python/requirements.txt
         ./build_app/shell/attributes.sh
-        python build_app/python/denormalize_indices.py
+        ./build_app/shell/denormalize.sh
     - name: Build
       run: |
         ant -f build_app/ant/build.xml

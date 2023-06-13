@@ -17,6 +17,7 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
                 <link rel="stylesheet" type="text/css" href="css/ts_search.css"/>
             </head>
             
@@ -57,13 +58,14 @@
                     <xsl:call-template name="html_footer"/>
                     
                 </div>
+                
+                <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0"></script>
+                <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
+                <script src="js/ts_search.js"></script>
+                <script src="js/ts_update_url.js"></script>
+                <script type="text/javascript" src="js/run.js"></script>
             </body>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
-            <link rel="stylesheet" href="css/ts_search.css"/>
-            <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0"></script>
-            <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
-            <script src="js/ts_search.js"></script>
-            <script src="js/ts_update_url.js"></script>
+            
         </html>
     </xsl:template>
 </xsl:stylesheet>

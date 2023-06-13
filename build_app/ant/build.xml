@@ -15,9 +15,11 @@
     <property name="xsl_meta" value="${basedir}/xslt/meta.xsl"/>
     <property name="xsl_index" value="${basedir}/xslt/index.xsl"/>
     <property name="xsl_toc" value="${basedir}/xslt/toc.xsl"/>
+    <property name="xsl_toc_en" value="${basedir}/xslt/toc_en.xsl"/>
     <property name="xsl_indices" value="${basedir}/xslt/indices.xsl"/>
     <property name="xsl_entities" value="${basedir}/xslt/entities.xsl"/>
     <property name="xsl_imprint" value="${basedir}/xslt/imprint.xsl"/>
+    <property name="xsl_imprint_en" value="${basedir}/xslt/imprint_en.xsl"/>
     <property name="xsl_search" value="${basedir}/xslt/search.xsl"/>
     <property name="xsl_search_en" value="${basedir}/xslt/search-engl.xsl"/>
 
@@ -59,6 +61,10 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+    <xslt in="${index}" out="${target}/toc_en.html" style="${xsl_toc_en}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
     <xslt in="${index}" out="${target}/search.html" style="${xsl_search}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
@@ -83,8 +89,13 @@
     </xslt>
     <delete>
         <fileset dir="${target}" includes="imprint.html"/>
+        <fileset dir="${target}" includes="imprint_en.html"/>
     </delete>
     <xslt in="${imprint}" out="${target}/imprint.html" style="${xsl_imprint}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${imprint}" out="${target}/imprint_en.html" style="${xsl_imprint_en}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>

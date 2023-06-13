@@ -55,6 +55,35 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
+                                                <xsl:if test="./tei:persName[@type='alternative']">
+                                                    <tr>
+                                                        <th>
+                                                            Name (alt)
+                                                        </th>
+                                                        <td>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
+                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:surname"/>
+                                                            </xsl:if>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() and 
+                                                                ./tei:persName[@type='alternative']/tei:forename/text()">
+                                                                <xsl:text>, </xsl:text>
+                                                            </xsl:if>
+                                                            <xsl:if test="./tei:persName[@type='alternative']/tei:forename/text()">
+                                                                <xsl:value-of select="./tei:persName[@type='alternative']/tei:forename"/>
+                                                            </xsl:if>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="@role">
+                                                    <tr>
+                                                        <th>
+                                                            Funktion
+                                                        </th>
+                                                        <td>
+                                                            Figur
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                                 <xsl:if test="./tei:birth/tei:date">
                                                 <tr>
                                                     <th>
@@ -135,14 +164,15 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:listBibl">
+                                                <xsl:if test="./tei:listBibl[@type='authorOf']">
                                                 <tr>
                                                     <th>
-                                                        Werke
+                                                        Werke (Schöpfer)
                                                     </th>
                                                     <td>
                                                         <ul>
                                                             <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                                <xsl:sort select="." data-type="text"/>
                                                                 <li>
                                                                     <a href="{concat(@n, '.html')}">
                                                                         <xsl:value-of select="."/>
@@ -153,17 +183,36 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:listEvent">
+                                                <xsl:if test="./tei:listBibl[@type='characterOf']">
+                                                    <tr>
+                                                        <th>
+                                                            Werke (Figur)
+                                                        </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                                    <xsl:sort select="." data-type="text"/>
+                                                                    <li>
+                                                                        <a href="{concat(@n, '.html')}">
+                                                                            <xsl:value-of select="."/>
+                                                                        </a>
+                                                                    </li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:noteGrp">
                                                 <tr>
                                                     <th>
                                                         Erwähnt in
                                                     </th>
                                                     <td>
                                                         <ul>
-                                                            <xsl:for-each select="./tei:listEvent/tei:event">
+                                                            <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                 <li>
-                                                                    <a href="{replace(replace(./tei:linkGrp/tei:link/@target, '/amp-app/', '/amp-app-dev/'), '.xml', '.html')}">
-                                                                        <xsl:value-of select="./tei:p/tei:title"/>
+                                                                    <a href="{replace(@target, '.xml', '.html')}">
+                                                                        <xsl:value-of select="./text()"/>
                                                                     </a>
                                                                 </li>
                                                             </xsl:for-each>
@@ -208,15 +257,32 @@
                                                     </th>
                                                     <td>
                                                         <xsl:choose>
-                                                            <xsl:when test="./tei:settlement/tei:placeName">
-                                                                <xsl:value-of select="./tei:settlement/tei:placeName"/>
+                                                            <xsl:when test="./tei:settlement/tei:placeName[@type='main']">
+                                                                <xsl:value-of select="./tei:settlement/tei:placeName[@type='main']"/>
                                                             </xsl:when>
                                                             <xsl:otherwise>
-                                                                <xsl:value-of select="./tei:placeName"/>
+                                                                <xsl:value-of select="./tei:placeName[@type='main']"/>
                                                             </xsl:otherwise>
                                                         </xsl:choose>
                                                     </td>
                                                 </tr>
+                                                <xsl:if test="//tei:placeName[@type='alternative']">
+                                                    <tr>
+                                                        <th>
+                                                            Ortsname (alt)
+                                                        </th>
+                                                        <td>
+                                                            <xsl:choose>
+                                                                <xsl:when test="./tei:settlement/tei:placeName[@type='alternative']">
+                                                                    <xsl:value-of select="./tei:settlement/tei:placeName[@type='alternative']"/>
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    <xsl:value-of select="./tei:placeName[@type='alternative']"/>
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                                 <xsl:if test="./tei:location[@type='located_in_place']">
                                                     <tr>
                                                         <th>
@@ -313,23 +379,23 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:listEvent">
-                                                <tr>
-                                                    <th>
-                                                        Erwähnt in
-                                                    </th>
-                                                    <td>
-                                                        <ul>
-                                                            <xsl:for-each select="./tei:listEvent/tei:event">
-                                                                <li>
-                                                                    <a href="{replace(replace(./tei:linkGrp/tei:link/@target, '/amp-app/', '/amp-app-dev/'), '.xml', '.html')}">
-                                                                        <xsl:value-of select="./tei:p/tei:title"/>
-                                                                    </a>
-                                                                </li>
-                                                            </xsl:for-each>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
+                                                <xsl:if test="./tei:noteGrp">
+                                                    <tr>
+                                                        <th>
+                                                            Erwähnt in
+                                                        </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:noteGrp/tei:note">
+                                                                    <li>
+                                                                        <a href="{replace(@target, '.xml', '.html')}">
+                                                                            <xsl:value-of select="./text()"/>
+                                                                        </a>
+                                                                    </li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
                                                 </xsl:if>
                                             </tbody>
                                         </table>
@@ -361,13 +427,23 @@
                                         
                                         <table class="table entity-table">
                                             <tbody>
-                                                <xsl:if test="./tei:title">
+                                                <xsl:if test="./tei:title[@type='main']">
                                                     <tr>
                                                         <th>
                                                             Titel
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:title[@type='main']"/>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:title[@type='alternative']">
+                                                    <tr>
+                                                        <th>
+                                                            Titel (alt)
+                                                        </th>
+                                                        <td>
+                                                            <xsl:value-of select="./tei:title[@type='alternative']"/>
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
@@ -382,6 +458,24 @@
                                                                     <li>
                                                                         <a href="{substring-after(@ref, '#')}.html">
                                                                             <xsl:value-of select="./tei:persName"/>
+                                                                        </a>        
+                                                                    </li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>    
+                                                </xsl:if>
+                                                <xsl:if test="./tei:name">
+                                                    <tr>
+                                                        <th>
+                                                            Figur(en)
+                                                        </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:name[@type='character']">
+                                                                    <li>
+                                                                        <a href="{substring-after(@ref, '#')}.html">
+                                                                            <xsl:value-of select="."/>
                                                                         </a>        
                                                                     </li>
                                                                 </xsl:for-each>
@@ -453,17 +547,17 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:listEvent">
+                                                <xsl:if test="./tei:noteGrp">
                                                     <tr>
                                                         <th>
                                                             Erwähnt in
                                                         </th>
                                                         <td>
                                                             <ul>
-                                                                <xsl:for-each select="./tei:listEvent/tei:event">
+                                                                <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                     <li>
-                                                                        <a href="{replace(replace(./tei:linkGrp/tei:link/@target, '/amp-app/', '/amp-app-dev/'), '.xml', '.html')}">
-                                                                            <xsl:value-of select="./tei:p/tei:title"/>
+                                                                        <a href="{replace(@target, '.xml', '.html')}">
+                                                                            <xsl:value-of select="./text()"/>
                                                                         </a>
                                                                     </li>
                                                                 </xsl:for-each>
