@@ -106,11 +106,15 @@
                                 <div class="row">                         
                                     <div class="custom-html-widget col-12 py-2">   
                                         <label>App: </label>
-                                        <a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/595061840"><img src="https://zenodo.org/badge/595061840.svg" alt="DOI"/></a>
+                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033499"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033499.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2">   
-                                        <label>Data: </label>
+                                        <label>Data: Vom musikalisch Schönen</label>
                                         <a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI"/></a>
+                                    </div>
+                                    <div class="custom-html-widget col-12 py-2">   
+                                        <label>Data: Neue Freie Presse</label>
+                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033447"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033447.svg" alt="DOI"/></a>
                                     </div>
                                 </div>                                
                             </div>
