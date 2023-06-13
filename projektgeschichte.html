@@ -17,12 +17,12 @@
       <title>Hanslick - Digitale Edition</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script></head>
+      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script></head>
    <body class="page">
       <div class="hfeed site" id="page">
          <div class="wrapper-fluid wrapper-navbar sticky-top" id="wrapper-navbar"><a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a><nav class="autohide navbar navbar-expand-lg bg-light">
                <div class="container"><a href="index.html?lang=de" class="navbar-brand custom-logo-link" rel="home" itemprop="url"><img src="images/logo_font_blau.svg" class="img-fluid" title="Hanslick - Digitale Edition" alt="Hanslick - Digitale Edition" itemprop="logo" /></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                     <ul class="navbar-nav mb-2 mb-lg-0 translate-de fade-lang">
+                     <ul class="navbar-nav mb-2 mb-lg-0 translate-de">
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Projekt
                               </a><ul class="dropdown-menu">
@@ -43,8 +43,9 @@
                               <li><a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=de" title="Traktat">
                                     Traktat
                                     </a></li>
-                              <li><a class="dropdown-item disabled" href="toc.html?lang=de" title="Übersicht">
-                                    Kritiken <small>(in Arbeit)</small></a></li>
+                              <li><a class="dropdown-item" href="toc.html?lang=de" title="Übersicht">
+                                    Kritiken
+                                    </a></li>
                               <li><a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de" title="Editionsrichtlinine">
                                     Editionsrichtlinien und Zitiervorschlag
                                     </a></li>
@@ -80,67 +81,10 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="team.html?lang=de">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="search.html?lang=de">Suche</a></li>
-                        <li class="nav-item" style="display:inline!important;margin:.4em auto;"><a class="nav-link lang_change_de pointer">DE</a><a class="nav-link lang_change_en pointer">EN</a></li>
-                     </ul>
-                     <ul class="navbar-nav mb-2 mb-lg-0 translate-en fade-lang">
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Project
-                              </a><ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="bedeutung-hanslick-engl.html?lang=en">
-                                    Hanslick’s Historical Relevance
-                                    </a></li>
-                              <li><a class="dropdown-item" href="projektgeschichte-engl.html?lang=en">
-                                    History of "Hanslick in Context"
-                                    </a></li>
-                              <li><a class="dropdown-item" href="projektziele-engl.html?lang=en">
-                                    Project Targets
-                                    </a></li>
-                           </ul>
+                        <li class="nav-item" style="display:inline!important;margin:.4em auto;">
+                           <multi-language opt="de"></multi-language>
+                           <multi-language opt="en"></multi-language>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Edition
-                              </a><ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=en" title="Treatise">
-                                    Treatise
-                                    </a></li>
-                              <li><a class="dropdown-item disabled" href="toc.html?lang=en" title="Critics">
-                                    Critics <small>(in progress)</small></a></li>
-                              <li><a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html?lang=en" title="Editorial Conventions">
-                                    Editorial Conventions and How to Cite
-                                    </a></li>
-                           </ul>
-                        </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Indexes
-                              </a><ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="listplace.html?lang=en" title="">
-                                    Places
-                                    </a></li>
-                              <li><a class="dropdown-item" href="listperson.html?lang=en" title="">
-                                    Persons
-                                    </a></li>
-                              <li><a class="dropdown-item" href="listbibl.html?lang=en" title="">
-                                    Works
-                                    </a></li>
-                           </ul>
-                        </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Activities
-                              </a><ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="publikationen-engl.html?lang=en" title="Publications">
-                                    Publications
-                                    </a></li>
-                              <li><a class="dropdown-item" href="einzelvortraege-engl.html?lang=en" title="Lectures">
-                                    Lectures
-                                    </a></li>
-                              <li><a class="dropdown-item" href="veranstaltungen-engl.html?lang=en" title="Events">
-                                    Events
-                                    </a></li>
-                           </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="team-engl.html?lang=en">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="search-engl.html?lang=en">Search</a></li>
-                        <li class="nav-item" style="display:inline!important;margin:.4em auto;"><a class="nav-link lang_change_de pointer">DE</a><a class="nav-link lang_change_en pointer">EN</a></li>
                      </ul>
                   </div>
                </div>
@@ -151,13 +95,13 @@
                <div class="col-md-12">
                   <div class="main">
                      
-                     <h1 id="d16e54" class="py-4 meta-h">Geschichte von „Hanslick im Kontext“</h1>
+                     <h1 id="d18e54" class="py-4 meta-h">Geschichte von „Hanslick im Kontext“</h1>
                      
                      <h5 class="meta-h">Alexander Wilfing, 2023</h5>
                      
                      <div class="seg-inline">
                         
-                        <p id="d16e60" class="meta-p">„Hanslick im Kontext“ ist ein Langzeitprojekt, das <a target="_blank" href="https://orcid.org/0000-0002-7568-3737">Christoph Landerer</a> und
+                        <p id="d18e60" class="meta-p">„Hanslick im Kontext“ ist ein Langzeitprojekt, das <a target="_blank" href="https://orcid.org/0000-0002-7568-3737">Christoph Landerer</a> und
                            <a target="_blank" href="https://orcid.org/0000-0002-0117-3574">Alexander Wilfing</a>
                            seit 2014 im Rahmen von mehreren einzelnen Projekten an der <a target="_blank" href="https://www.oeaw.ac.at/">Österreichischen Akademie der
                               Wissenschaften</a> durchführen, ursprünglich am <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/die-abteilung/geschichte-der-vorgaengerinstitutionen">Institut für kunst- und musikhistorische Forschungen</a> (2014–2019), seit
@@ -204,22 +148,22 @@
                      
                      <div class="seg-block">
                         
-                        <ul id="d16e132" class="meta-l pad-4">
+                        <ul id="d18e132" class="meta-l pad-4">
                            
-                           <li id="d16e134">2014–2017, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/projektarchiv/hanslick-im-kontext">Hanslick in Context: Hanslick’s Aesthetic Ideas, Their Genesis, and Their
+                           <li id="d18e134">2014–2017, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/projektarchiv/hanslick-im-kontext">Hanslick in Context: Hanslick’s Aesthetic Ideas, Their Genesis, and Their
                                  Place in the History of Ideas</a> (Einzelprojekt, gefördert vom
                               Wissenschaftsfond FWF, <a target="_blank" href="https://pf.fwf.ac.at/de/wissenschaft-konkret/project-finder/31904">P26610</a>, Leitung Christoph Landerer)</li>
                            
-                           <li id="d16e143">2017–2018, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/projektarchiv/hanslick-im-kontext">Studies in the Genesis of Hanslick’s <span class="italic">Vom Musikalisch-Schönen</span>:
+                           <li id="d18e143">2017–2018, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/projektarchiv/hanslick-im-kontext">Studies in the Genesis of Hanslick’s <span class="italic">Vom Musikalisch-Schönen</span>:
                                  Textual and Contextual Analysis</a> (Einzelprojekt, gefördert vom
                               Jubiläumsfonds der Österreichischen Nationalbank, 17508, Leitung Christoph
                               Landerer)</li>
                            
-                           <li id="d16e151">2018–2021, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/projektarchiv/hanslick-im-kontext">Eduard Hanslick’s <span class="italic">Vom Musikalisch-Schönen</span>: An Analysis of the
+                           <li id="d18e151">2018–2021, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/projektarchiv/hanslick-im-kontext">Eduard Hanslick’s <span class="italic">Vom Musikalisch-Schönen</span>: An Analysis of the
                                  Dynamic Features of the Text and Its Contexts</a> (Einzelprojekt,
                               gefördert vom Wissenschaftsfond FWF, <a target="_blank" href="https://pf.fwf.ac.at/de/wissenschaft-konkret/project-finder/41634">P30554</a>, Leitung Christoph Landerer)</li>
                            
-                           <li id="d16e162">2022–2025, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/musikwissenschaft-im-kontext-/-lexikographie/hanslicks-kritiken">Eduard Hanslick’s Criticism Between Aesthetics, Journalism, and Scholarship</a>
+                           <li id="d18e162">2022–2025, <a target="_blank" href="https://www.oeaw.ac.at/acdh/musikwissenschaft/forschung/musikwissenschaft-im-kontext-/-lexikographie/hanslicks-kritiken">Eduard Hanslick’s Criticism Between Aesthetics, Journalism, and Scholarship</a>
                               (Einzelprojekt, gefördert vom Wissenschaftsfond FWF, <a target="_blank" href="https://pf.fwf.ac.at/de/wissenschaft-konkret/project-finder?search%5Bwhat%5D=P+35379+Einzelprojekte&amp;search%5Bpromotion_category_id%5D%5B%5D=&amp;search%5Bcall%5D=&amp;search%5Bproject_number%5D=&amp;search%5Bdecision_board_ids%5D=&amp;search%5Bproject_title%5D=&amp;search%5Blead_firstname%5D=&amp;search%5Blead_lastname%5D=&amp;search%5Bresearch_place_kind%5D%5B%5D=&amp;search%5Binstitute_name%5D=&amp;search%5Bstart_date%5D=&amp;search%5Bend_date%5D=&amp;search%5Bgrant_years%5D%5B%5D=&amp;search%5Bstatus_id%5D=&amp;search%5Bscience_discipline_id%5D=&amp;search%5Bper_page%5D=10#search-results">P35379</a>, Leitung Alexander Wilfing)</li>
                            </ul>
                         </div>
@@ -231,7 +175,7 @@
                            <span class="figure_text"><small>Collage von Bildern von <a target="_blank" href="https://de.wikipedia.org/wiki/Bernard_Bolzano#/media/Datei:Bernard_Bolzano_Kriehuber.jpg">Bolzano</a>, <a target="_blank" href="https://de.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel#/media/Datei:1831_Schlesinger_Philosoph_Georg_Friedrich_Wilhelm_Hegel_anagoria.JPG">Hegel</a>, <a target="_blank" href="https://de.wikipedia.org/wiki/Johann_Friedrich_Herbart#/media/Datei:Johann_F_Herbart.jpg">Herbart</a> und <a target="_blank" href="https://de.wikipedia.org/wiki/Kritik_der_Urteilskraft#/media/Datei:Immanuel_Kant_(painted_portrait).jpg">Kant</a> (Wikipedia Creative Commons)</small></span>
                            </figure>
                         
-                        <p id="d16e195" class="meta-p">Das Projekt „Hanslick im Kontext“, das den Grundstein für spätere Arbeiten
+                        <p id="d18e195" class="meta-p">Das Projekt „Hanslick im Kontext“, das den Grundstein für spätere Arbeiten
                            bildete, zielte auf die kritische Analyse der „eklektischen“ intellektuellen
                            Hintergründe von Hanslicks Ästhetik, deren genetische Faktoren übergreifend
                            erschlossen wurden. Im Zentrum stand dabei für uns die Erfassung von Hanslicks
@@ -272,7 +216,7 @@
                      
                      <div class="seg-inline">
                         
-                        <p id="d16e208" class="meta-p">Das Projekt „Studies in the Genesis of Hanslick’s <span class="italic">Vom
+                        <p id="d18e208" class="meta-p">Das Projekt „Studies in the Genesis of Hanslick’s <span class="italic">Vom
                               Musikalisch-Schönen</span>” setzte diese Arbeiten fort und erweiterte die
                            früheren Analysen um die Dimension der historischen Entwicklung des Texts, die nun
                            systematisch aufgeschlüsselt wurden. <span class="italic">Vom Musikalisch-Schönen</span> wurde
@@ -319,7 +263,7 @@
                            <span class="figure_text"><small><a target="_blank" href="https://archive.org/details/VomMusikalischSchnen1tea1854/mode/2up">Auflage 1 (1854)</a> und <a target="_blank" href="https://archive.org/details/VomMusikalischSchnen10tea1902/mode/2up">Auflage 10 (1902)</a> von <span class="italic">Vom Musikalisch-Schönen</span></small></span>
                            </figure>
                         
-                        <p id="d16e248" class="meta-p">Das Projekt „Eduard Hanslick’s <span class="italic">Vom Musikalisch-Schönen</span>: An Analysis of the Dynamic
+                        <p id="d18e248" class="meta-p">Das Projekt „Eduard Hanslick’s <span class="italic">Vom Musikalisch-Schönen</span>: An Analysis of the Dynamic
                            Features of the Text and Its Contexts“ schloss an unsere Betrachtung von Hanslicks
                            ästhetischer Abhandlung als <span class="italic">dynamisches</span> Textkorpus an, wobei unsere betreffende
                            Untersuchung wesentlich ausgeweitet wurde. Der Zeitraum der Analysen erstreckte
@@ -354,7 +298,7 @@
                      
                      <div class="seg-inline">
                         
-                        <p id="d16e273" class="meta-p">Das Projekt „Eduard Hanslick’s Criticism Between Aesthetics, Journalism, and
+                        <p id="d18e273" class="meta-p">Das Projekt „Eduard Hanslick’s Criticism Between Aesthetics, Journalism, and
                            Scholarship“ verlegt den Schwerpunkt unserer Forschungen nun auf Hanslicks
                            Musikkritk, ohne aber den Fokus auf textanalytische Fragestellungen zu
                            vernachlässigen. Während die Literatur bisher vor allem Hanslicks Ästhetik
@@ -385,7 +329,7 @@
                            basiert hierbei auf der digitalen Edition von <span class="italic">Vom Musikalisch-Schönen
                               </span> (2023) und der Transkription und TEI-Annotation von Hanslicks Schriften
                            für die <span class="italic">Neue Freie Presse</span> (1864–1904) sowie seiner 12 Anthologien,
-                           welche in einem laufenden Verfahren online gestellt werden (aktuell in Arbeit). </p>
+                           welche in einem laufenden Verfahren online gestellt werden. </p>
                         
                         <figure class="figure-inline">
                            <img src="images/Projektgeschichte_Hanslick_Karikatur.jpg" alt="Eduard Hanslick und Richard Wagner, Schattenbild von Otto Böhler; mit Genehmigung der Österreichischen Nationalbibliothek" />
@@ -397,7 +341,7 @@
                </div>
             </div>
          </div>
-         <div class="wrapper bg-light translate-de fade-lang" id="wrapper-footer-full">
+         <div class="wrapper bg-light translate-de" id="wrapper-footer-full">
             <div class="container" id="footer-full-content" tabindex="-1">
                <div class="footer-separator">
                   KONTAKT
@@ -466,86 +410,9 @@
                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z"></path></svg></a></div>
                            </div>
                            <div class="row">
-                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/595061840"><img src="https://zenodo.org/badge/595061840.svg" alt="DOI" /></a></div>
-                              <div class="custom-html-widget col-12 py-2"><label>Daten: </label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="wrapper bg-light translate-en fade-lang" id="wrapper-footer-full">
-            <div class="container" id="footer-full-content" tabindex="-1">
-               <div class="footer-separator">
-                  CONTACT
-                  
-                  <hr />
-               </div>
-               <div class="row">
-                  <div class="footer-widget col-lg-1 col-md-2 col-sm-2 col-xs-6  ml-auto text-center ">
-                     <div class="textwidget custom-html-widget"><a href="https://www.oeaw.ac.at/acdh"><img src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg" class="image" alt="ACDH Logo" style="max-width: 100%; height: auto;" title="ACDH Logo" /></a></div>
-                  </div>
-                  <div class="footer-widget col-lg-4 col-md-3 col-sm-3">
-                     <div class="textwidget custom-html-widget">
-                        <p>
-                           ACDH-CH OEAW
-                           <br />
-                           Austrian Centre for Digital Humanities and Cultural Heritage
-                           <br />
-                           Austrian Academy of Sciences
-                           </p>
-                        <p>
-                           Bäckerstraße 13
-                           <br />
-                           1010 Vienna
-                           </p>
-                        <p>
-                           T: +43 1 51581-2200
-                           <br />
-                           E: <a href="mailto:acdh-ch-helpdesk@oeaw.ac.at">acdh-ch-helpdesk@oeaw.ac.at</a></p>
-                     </div>
-                  </div>
-                  <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
-                     <h6 class="font-weight-bold">PROJECT PARTNERS</h6>
-                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="images/fwf-logo_var2.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a></div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"></div>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.oenb.at"><img class="card-img-right flex-auto d-md-block" src="images/Oesterreichische_Nationalbank_Logo.svg" alt="Österreichische Nationalbank Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="Österreichische Nationalbank" /></a></div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="footer-widget col-lg-3 col-md-4 col-sm-3 ml-auto">
-                     <div class="row">
-                        <div class="textwidget custom-html-widget">
-                           <h6 class="font-weight-bold">HELPDESK</h6>
-                           <p>ACDH-CH runs a helpdesk offering advice for questions related to various digital humanities
-                              topics.</p>
-                           <p><a class="helpdesk-button" href="mailto:acdh-helpdesk@oeaw.ac.at">ASK US!</a></p>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="footer-widget col-lg-3 col-md-4 col-sm-3 ml-auto" style="margin-left:0 !important;">
-                           <div class="textwidget custom-html-widget">
-                              <p style="margin-bottom:0 !important;">Social: </p>
-                           </div>
-                           <div class="row">
-                              <div class="textwidget custom-html-widget col-md-4"><a id="github-logo" title="GitHub" href="https://github.com/Hanslick-Online" class="nav-link" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                       <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z"></path></svg></a></div>
-                           </div>
-                           <div class="row">
-                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/595061840"><img src="https://zenodo.org/badge/595061840.svg" alt="DOI" /></a></div>
-                              <div class="custom-html-widget col-12 py-2"><label>Data: </label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033499"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033499.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>Daten: Vom musikalisch Schönen</label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>Daten: Neue Freie Presse</label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033447"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033447.svg" alt="DOI" /></a></div>
                            </div>
                         </div>
                      </div>
@@ -554,7 +421,7 @@
             </div>
          </div>
          <div class="footer-imprint-bar bg-dark text-light" id="wrapper-footer-secondary" style="text-align:center; padding:0.4rem 0; font-size: 0.9rem;">
-            © Copyright OEAW | <a href="imprint.html">Impressum/Imprint</a></div>
+            © Copyright OEAW | <a href="imprint.html?lang=de">Impressum/Imprint</a></div>
          <div id="cookie-overlay">
             <div class="container">
                <div class="cookie-message">This website uses cookies to ensure you get the best experience on our website. <a href="/browser/imprint">More info</a><br /></div>
@@ -568,6 +435,5 @@
                 $('li a.active').removeClass('active');
                 $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
             });
-        </script><script src="js/detect_language_set_params.js"></script><script src="js/update_doc_language.js"></script><script src="js/navbar-autohide.js"></script><script src="js/cookie-consent.js"></script></div>
-   </body>
+        </script><script src="https://unpkg.com/de-micro-editor@0.2.85/dist/de-editor.min.js"></script><script src="js/navbar-autohide.js"></script><script src="js/cookie-consent.js"></script></div><script type="text/javascript" src="js/run.js"></script></body>
 </html>
