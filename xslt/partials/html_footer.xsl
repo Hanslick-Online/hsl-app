@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="footer-widget col-lg-3 col-md-4 col-sm-3 ml-auto" style="margin-left:0 !important;">
+                            <div class="footer-widget col-lg-12 col-md-12 col-sm-12 ml-auto" style="margin-left:0 !important;">
                                 <div class="textwidget custom-html-widget">
                                     <p style="margin-bottom:0 !important;">Social: </p>                                    
                                 </div>
@@ -109,11 +109,11 @@
                                         <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033499"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033499.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2">   
-                                        <label>Daten: Vom musikalisch Schönen</label>
+                                        <label>Daten (VMS):</label>
                                         <a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2">   
-                                        <label>Daten: Neue Freie Presse</label>
+                                        <label>Daten (NFP):</label>
                                         <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033447"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033447.svg" alt="DOI"/></a>
                                     </div>
                                 </div>
