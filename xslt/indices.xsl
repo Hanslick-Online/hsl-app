@@ -77,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                            createDataTable('listperson', 'Suche:', [2, 3, 6, 7], [0, 1, 4, 5], [7]);
+                                createDataTable('listperson', 'Suche:', [2, 3, 6, 7], [0, 1, 4, 5], [7]);
                             });
                         </script>
                     </xsl:when>
@@ -94,7 +94,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                            createDataTable('listbibl', 'Suche:', [2, 3, 5, 6], [0, 1, 4], [6]);
+                                createDataTable('listbibl', 'Suche:', [2, 3, 5, 6], [0, 1, 4], [6]);
                             });
                         </script>
                     </xsl:when>
