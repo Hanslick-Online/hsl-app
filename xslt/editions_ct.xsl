@@ -80,7 +80,7 @@
                 <xsl:for-each select="following-sibling::tei:p[1]">
                     <xsl:call-template name="pb-prev"/>
                     <xsl:apply-templates/>
-                    <xsl:call-template name="prev-true"/> 
+                    <xsl:call-template name="prev-true"/>
                 </xsl:for-each>
             </xsl:if>
         </p>
@@ -91,6 +91,7 @@
                 <xsl:if test="preceding-sibling::tei:p[1]/@prev ='true'">
                     <xsl:call-template name="pb-prev"/>
                     <xsl:apply-templates/>
+                    <xsl:call-template name="prev-true"/>
                 </xsl:if>
             </xsl:for-each>
         </xsl:if>
