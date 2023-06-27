@@ -78,49 +78,32 @@
             <xsl:apply-templates/>
             <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">
-                    <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
-                        <xsl:for-each select="preceding-sibling::tei:*[2]">
-                            <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
-                            <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
-                            <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
-                        </xsl:for-each>
-                    </xsl:if>
+                    <xsl:call-template name="pb-prev"/>
                     <xsl:apply-templates/>
-                </xsl:for-each>
-            </xsl:if>
-            <xsl:if test="following-sibling::tei:p[2]/@prev = 'true'">
-                <xsl:for-each select="following-sibling::tei:p[2]">
-                    <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
-                        <xsl:for-each select="preceding-sibling::tei:*[2]">
-                            <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
-                            <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
-                            <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
-                        </xsl:for-each>
-                    </xsl:if>
-                    <xsl:apply-templates/>
+                    <xsl:for-each select="following-sibling::tei:p">
+                        <xsl:if test="@prev = 'true' and preceding-sibling::tei:p[1]/@prev ='true'">
+                            <xsl:call-template name="prev-true"/>
+                        </xsl:if>
+                    </xsl:for-each>
                 </xsl:for-each>
             </xsl:if>
         </p>
     </xsl:template>
+    <xsl:template name="prev-true">
+        <xsl:call-template name="pb-prev"/>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template name="pb-prev">
+        <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
+            <xsl:for-each select="preceding-sibling::tei:*[2]">
+                <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
+                <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
+                <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
+            </xsl:for-each>
+        </xsl:if>
+    </xsl:template>
     <xsl:template match="tei:p[@prev]">
         <!--  do not display independently -->
-        <!--<xsl:if test="preceding-sibling::tei:p[1]/@prev = 'true'">
-            <p class="yes-index">
-                <xsl:apply-templates/>
-                <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
-                    <xsl:for-each select="following-sibling::tei:p[1]">
-                        <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
-                            <xsl:for-each select="preceding-sibling::tei:*[2]">
-                                <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
-                                <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
-                                <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
-                            </xsl:for-each>
-                        </xsl:if>
-                        <xsl:apply-templates/>
-                    </xsl:for-each>
-                </xsl:if>
-            </p>
-        </xsl:if>-->
     </xsl:template>
     <!--<xsl:template match="text()[following-sibling::tei:*[1]/@break = 'no']">
         <span class="wrd-brk-txt"><xsl:value-of select="normalize-space(.)"/></span>
