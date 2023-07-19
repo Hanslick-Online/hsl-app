@@ -7,7 +7,7 @@
     <property name="meta" value="${basedir}/data/meta"/>
     <property name="indices" value="${basedir}/data/indices"/>
     <property name="imprint" value="${basedir}/data/imprint.xml"/>
-    <property name="editions_ct" value="${basedir}/data/critics/editions"/>
+    <!-- <property name="editions_ct" value="${basedir}/data/critics/editions"/> -->
     <property name="target" value="${basedir}/html"/>
     <property name="xsl_editions" value="${basedir}/xslt/editions.xsl"/>
     <property name="xsl_editions_ct" value="${basedir}/xslt/editions_ct.xsl"/>
@@ -40,10 +40,10 @@
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
     <!-- project critics -->
-    <xslt style="${xsl_editions_ct}"  basedir="${editions_ct}" destdir="${target}" includes="*.xml" filenameparameter="filename">
+    <!-- <xslt style="${xsl_editions_ct}"  basedir="${editions_ct}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
+    </xslt> -->
     <!-- common files -->
     <delete>
         <fileset dir="${target}" includes="index.html"/>
@@ -57,14 +57,14 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt in="${index}" out="${target}/toc.html" style="${xsl_toc}">
+    <!-- <xslt in="${index}" out="${target}/toc.html" style="${xsl_toc}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
     <xslt in="${index}" out="${target}/toc_en.html" style="${xsl_toc_en}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
-    </xslt>
+    </xslt> -->
     <xslt in="${index}" out="${target}/search.html" style="${xsl_search}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>

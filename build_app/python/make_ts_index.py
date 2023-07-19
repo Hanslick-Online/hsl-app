@@ -72,6 +72,7 @@ current_schema = {
 
 client.collections.create(current_schema)
 
+
 def get_entities(ent_type, ent_node, ent_name):
     entities = []
     e_path = f'.//tei:rs[@type="{ent_type}"]/@ref'
@@ -89,6 +90,7 @@ def get_entities(ent_type, ent_node, ent_name):
                     with open("log-entities.txt", "a") as f:
                         f.write(f"{r} in {record['id']}\n")
     return [ent for ent in sorted(set(entities))]
+
 
 records = []
 cfts_records = []
@@ -204,17 +206,23 @@ for x in tqdm(files, total=len(files)):
                 # get unique persons per page
                 ent_type = "person"
                 ent_name = "persName"
-                record['persons'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                record['persons'] = get_entities(ent_type=ent_type,
+                                                 ent_node=ent_type,
+                                                 ent_name=ent_name)
                 cfts_record['persons'] = record['persons']
                 # get unique places per page
                 ent_type = "place"
                 ent_name = "placeName"
-                record['places'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                record['places'] = get_entities(ent_type=ent_type,
+                                                ent_node=ent_type,
+                                                ent_name=ent_name)
                 cfts_record['places'] = record['places']
                 # get unique bibls per page
                 ent_type = "bibl"
                 ent_name = "title"
-                record['works'] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+                record['works'] = get_entities(ent_type=ent_type,
+                                               ent_node=ent_type,
+                                               ent_name=ent_name)
                 cfts_record['works'] = record['works']
                 record['full_text'] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
                 if len(record['full_text']) > 0:

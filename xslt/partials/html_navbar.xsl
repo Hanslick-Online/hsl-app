@@ -54,12 +54,12 @@
                                             Traktat
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a class="dropdown-item" href="toc.html?lang=de"
                                             title="Übersicht">
                                             Kritiken
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"
                                             title="Editionsrichtlinine">

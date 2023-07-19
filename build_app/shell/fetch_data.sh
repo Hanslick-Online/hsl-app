@@ -16,15 +16,15 @@ mv hsl-vms-data-master/102_derived_tei/102_06_paratexts/*.xml ./data/meta
 rm -rf hsl-vms-data-master
 rm master.zip
 
-# fetch edition critics
-wget https://github.com/Hanslick-Online/hsl-data-ct/archive/refs/heads/main.zip
-unzip main
-mkdir ./data/critics
-mkdir ./data/critics/editions
-mv hsl-data-ct-main/data/editions/*.xml ./data/critics/editions
-mv hsl-data-ct-main/data/meta/*.xml ./data/meta
-rm -rf hsl-data-ct-main
-rm main.zip
+# # fetch edition critics
+# wget https://github.com/Hanslick-Online/hsl-data-ct/archive/refs/heads/main.zip
+# unzip main
+# mkdir ./data/critics
+# mkdir ./data/critics/editions
+# mv hsl-data-ct-main/data/editions/*.xml ./data/critics/editions
+# mv hsl-data-ct-main/data/meta/*.xml ./data/meta
+# rm -rf hsl-data-ct-main
+# rm main.zip
 
 # fetch edition entities all
 rm -rf ./data/indices

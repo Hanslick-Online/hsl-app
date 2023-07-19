@@ -54,12 +54,12 @@
                                             Treatise
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a class="dropdown-item" href="toc.html?lang=en"
                                             title="Critics">
                                             Critics
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html?lang=en"
                                             title="Editorial Conventions">
