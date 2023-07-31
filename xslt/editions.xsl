@@ -246,28 +246,28 @@
     <xsl:template match="tei:pb">
         <xsl:choose>
             <xsl:when test="ancestor::tei:p and not(preceding-sibling::tei:list)">
-                <span class="anchor-pb" source="hsl-vms/{tokenize(@facs, '/')[last()]}"></span>
+                <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:when test="ancestor::tei:p and preceding-sibling::tei:list">
-                <span class="anchor-pb" source="hsl-vms/{tokenize(@facs, '/')[last()]}"></span>
+                <span class="anchor-pb" source="{@facs}"></span>
                 <p class="indentedP"><span class="pb"><br/><br/><xsl:value-of select="@n"/></span></p>
             </xsl:when>
             <xsl:when test="ancestor::tei:list">
-                <span class="anchor-pb" source="hsl-vms/{tokenize(@facs, '/')[last()]}"></span>
+                <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:when test="ancestor::tei:note">
-                <span class="anchor-pb" source="hsl-vms/{tokenize(@facs, '/')[last()]}"></span>
+                <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:when test="ancestor::tei:front">
-                <span class="anchor-pb" source="hsl-vms/{tokenize(@facs, '/')[last()]}"></span>
+                <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
             </xsl:when>
             <xsl:otherwise>
                 <p class="indentedP">
-                    <span class="anchor-pb" source="hsl-vms/{tokenize(@facs, '/')[last()]}"></span>
+                    <span class="anchor-pb" source="{@facs}"></span>
                     <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
                 </p>
             </xsl:otherwise>

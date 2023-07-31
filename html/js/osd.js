@@ -48,7 +48,11 @@ creates an array for osd viewer with static images
 var element = document.getElementsByClassName('anchor-pb');
 var tileSources = [];
 var img = element[0].getAttribute("source");
-var img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/max/0/default.jpg`;
+if (img.includes("api.digitale-sammlungen.de")) {
+    img = `${img}/full/full/0/default.jpg`;
+} else {
+    var img = `${img}?format=iiif`;
+}
 var imageURL = {
     type: 'image',
     url: img
@@ -122,15 +126,14 @@ function to trigger image load and remove events
 function loadNewImage(new_item) {
     if (new_item) {
         // source attribute hold image item id without url
-        var new_image = new_item.getAttribute("source").split("/")[1];
+        var new_image = new_item.getAttribute("source");
+        if (new_image.includes("api.digitale-sammlungen.de")) {
+            new_image = `${new_image}/full/full/0/default.jpg`;
+        } else {
+            var new_image = `${new_image}?format=iiif`;
+        }
         var old_image = viewer.world.getItemAt(0);
         if (old_image) {
-            // get url from current/old image and replace the image id with
-            // new id of image to be loaded
-            var current1 = old_image.source.url;
-            var current2 = old_image.source.url.split("/");
-            var current3 = current2[current2.length - 5].replace(".jp2", "");
-            var new_image = current1.replace(current3, new_image);
             // access osd viewer and add simple image and remove current image
             viewer.addSimpleImage({
                 url: new_image,
