@@ -106,7 +106,7 @@
                                 <div class="row">                         
                                     <div class="custom-html-widget col-12 py-2">   
                                         <label>App: </label>
-                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033499"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033499.svg" alt="DOI"/></a>
+                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8272623"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8272623.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2">   
                                         <label>Daten (VMS):</label>
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="custom-html-widget col-12 py-2">   
                                         <label>Daten (NFP):</label>
-                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033447"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033447.svg" alt="DOI"/></a>
+                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8272601"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8272601.svg" alt="DOI"/></a>
                                     </div>
                                 </div>
                             </div>
