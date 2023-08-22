@@ -20,18 +20,18 @@ height is always the screen height minus some offset
 ##################################################################
 */
 if (!wrapper.classList.contains("fade")) {
-    container.style.height = `${String(height - 300)}px`;
+    container.style.height = `${String(height - 400)}px`;
     // set osd wrapper container width
-    var container = document.getElementById("section-1");
+    var container = document.getElementById("text");
     if (container !== null) {
         var width = container.clientWidth;
     }
     var container = document.getElementById("viewer-1");
-    container.style.width = `${String(width - 75)}px`;
+    container.style.width = `${String(width - 150)}px`;
 } else {
-    container.style.height = `${String(height - 300)}px`;
+    container.style.height = `${String(height - 400)}px`;
     // set osd wrapper container width
-    var container = document.getElementById("section-1");
+    var container = document.getElementById("text");
     if (container !== null) {
         var width = container.clientWidth;
     }
@@ -48,7 +48,13 @@ creates an array for osd viewer with static images
 var element = document.getElementsByClassName('anchor-pb');
 var tileSources = [];
 var img = element[0].getAttribute("source");
-var img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/max/0/default.jpg`;
+if (img.includes("api.digitale-sammlungen.de")) {
+    img = `${img}/full/full/0/default.jpg`;
+} else if (img.includes("hsl-nfp")) {
+    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
+} else {
+    var img = `${img}?format=iiif`;
+}
 var imageURL = {
     type: 'image',
     url: img
@@ -122,15 +128,16 @@ function to trigger image load and remove events
 function loadNewImage(new_item) {
     if (new_item) {
         // source attribute hold image item id without url
-        var new_image = new_item.getAttribute("source").split("/")[1];
+        var new_image = new_item.getAttribute("source");
+        if (new_image.includes("api.digitale-sammlungen.de")) {
+            new_image = `${new_image}/full/full/0/default.jpg`;
+        } else if (new_image.includes("hsl-nfp")) {
+            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
+        } else {
+            var new_image = `${new_image}?format=iiif`;
+        }
         var old_image = viewer.world.getItemAt(0);
         if (old_image) {
-            // get url from current/old image and replace the image id with
-            // new id of image to be loaded
-            var current1 = old_image.source.url;
-            var current2 = old_image.source.url.split("/");
-            var current3 = current2[current2.length - 5].replace(".jp2", "");
-            var new_image = current1.replace(current3, new_image);
             // access osd viewer and add simple image and remove current image
             viewer.addSimpleImage({
                 url: new_image,
