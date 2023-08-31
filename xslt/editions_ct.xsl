@@ -5,7 +5,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
-    <xsl:strip-space elements="*"/>
+    <!--<xsl:strip-space elements="*"/>-->
     
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
@@ -84,6 +84,16 @@
                 </xsl:for-each>
             </xsl:if>
         </p>
+    </xsl:template>
+    <xsl:template match="//text()[ancestor::tei:body]">
+        <xsl:choose>
+            <xsl:when test="following-sibling::tei:lb[1]/@break='no'">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template name="prev-true">
         <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
