@@ -253,8 +253,7 @@ for x in tqdm(files, total=len(files)):
                                                ent_name=ent_name)
                 cfts_record['works'] = record['works']
                 record['full_text'] = "\n".join(" ".join(
-                                                p.split())
-                                                for p in body_str.split("\n"))
+                    "".join(p).split()) for p in body_str)
                 if len(record['full_text']) > 0:
                     records.append(record)
                     cfts_record['full_text'] = record['full_text']
