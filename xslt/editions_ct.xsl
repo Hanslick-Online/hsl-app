@@ -87,7 +87,7 @@
     </xsl:template>
     <xsl:template match="//text()[ancestor::tei:body]">
         <xsl:choose>
-            <xsl:when test="following-sibling::tei:lb[1]/@break='no'">
+            <xsl:when test="following-sibling::tei:*[1]/@break='no'">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:when>
             <xsl:otherwise>
