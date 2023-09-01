@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="../.." name="tei2html">
+    <property name="editions_ct" value="${basedir}/data/critics/editions"/>
+    <property name="target" value="${basedir}/data/critics/tmp"/>
+    <property name="fixtures" value="${basedir}/xslt/fixtures.xsl"/>
+
+    <mkdir dir="${target}"/>
+
+    <xslt style="${fixtures}"
+          basedir="${editions_ct}"
+          destdir="${target}"
+          includes="*.xml"
+          extension=".xml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+
+    <move todir="${editions_ct}">
+        <fileset dir="${target}"/>
+    </move>
+
+    <delete>
+        <fileset dir="${target}" includes="*.xml"/>
+    </delete>
+
+</project>
