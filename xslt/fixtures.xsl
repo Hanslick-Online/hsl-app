@@ -30,7 +30,7 @@
     <xsl:template match="//text()[ancestor::tei:body]">
         <xsl:choose>
             <xsl:when test="following-sibling::tei:*[1]/@break='no'">
-                <xsl:value-of select="replace(., '\s+$', '')"/>
+                <xsl:value-of select="replace(replace(., '\n', ''), '\s+$', '')"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
