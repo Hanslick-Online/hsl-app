@@ -19,8 +19,4 @@
         <fileset dir="${target}"/>
     </move>
 
-    <delete>
-        <fileset dir="${target}" includes="*.xml"/>
-    </delete>
-
 </project>
