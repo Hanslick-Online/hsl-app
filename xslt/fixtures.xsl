@@ -61,5 +61,8 @@
     <xsl:template match="tei:space">
         <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
     </xsl:template>
+    <xsl:template match="tei:pb[following-sibling::tei:p[1]/@prev = 'true']">
+        <!--  do not display independently -->
+    </xsl:template>
     
 </xsl:stylesheet>
