@@ -65,7 +65,13 @@
                                     <xsl:if test="./tei:listBibl[@type = 'characterOf']/tei:bibl/text()">
                                         <tr>
                                             <th>Werk</th>
-                                            <td><xsl:value-of select="./tei:listBibl/tei:bibl/text()"/></td>
+                                            <td>
+                                                <ul>
+                                                    <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                     <li><xsl:value-of select="./text()"/></li>
+                                                    </xsl:for-each>
+                                                </ul>
+                                            </td>
                                         </tr>
                                     </xsl:if>
                                     <tr>
