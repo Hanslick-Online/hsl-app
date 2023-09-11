@@ -152,8 +152,8 @@
         <xsl:if test="@break='no'">
             <span class="pb wrdbreak">-</span>
         </xsl:if>
-        <br class="pb"/>
         <xsl:if test="ancestor::tei:p and not(ancestor::tei:note)">
+            <br class="pb"/>
             <a>
                 <xsl:variable name="para" as="xs:int">
                     <xsl:number level="any" from="tei:body" count="tei:p"/>
@@ -187,6 +187,9 @@
                 </xsl:choose>
                 <xsl:value-of select="format-number($lines, '0000')"/>
             </a>  
+        </xsl:if>
+        <xsl:if test="ancestor::tei:note and position() = 1">
+            
         </xsl:if>
     </xsl:template>
     <xsl:template match="tei:hi">
