@@ -9,7 +9,12 @@ function performMark() {
   var keyword = keywordInput.value;
 
   // Determine selected options
-  var options = {};
+  var options = {
+    "ignoreJoiners": true,
+    "acrossElements": false,
+    "wildcards": "enabled",
+    "ignorePunctuation": [",", ".", ":", ";", "!", "?", "(", ")", "[", "]", "{", "}", "'"]
+  };
   [].forEach.call(optionInputs, function (opt) {
     options[opt.value] = opt.checked;
   });
@@ -25,7 +30,12 @@ function performMark() {
 
 function performMarkUrl() {
   // Determine selected options
-  var options = {};
+  var options = {
+    "ignoreJoiners": true,
+    "acrossElements": false,
+    "wildcards": "enabled",
+    "ignorePunctuation": [",", ".", ":", ";", "!", "?", "(", ")", "[", "]", "{", "}", "'"]
+  };
   [].forEach.call(optionInputs, function (opt) {
     options[opt.value] = opt.checked;
   });
