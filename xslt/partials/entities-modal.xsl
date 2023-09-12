@@ -186,11 +186,12 @@
                                         <td>
                                             <ul>
                                               <xsl:for-each select="./tei:author">
-                                              <li>
-                                              <a href="{@xml:id}.html">
-                                              <xsl:value-of select="./tei:persName"/>
-                                              </a>
-                                              </li>
+                                                  <xsl:sort select="./tei:persName" order="ascending"/>
+                                                  <li>
+                                                    <a href="{@xml:id}.html">
+                                                       <xsl:value-of select="./tei:persName"/>
+                                                    </a>
+                                                 </li>
                                               </xsl:for-each>
                                             </ul>
                                         </td>

@@ -93,6 +93,9 @@
             <xsl:when test="matches(., '-\s')">
                 <xsl:value-of select="replace(., '\s+$', '')"/>
             </xsl:when>
+            <xsl:when test="following-sibling::tei:*[1]/@type='footnote'">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
             </xsl:otherwise>
