@@ -616,6 +616,26 @@ a.anchorFoot {
     right: 10%;
 }
 
+#mark-scroll {
+    position: fixed;
+    max-width: 200px;
+    right: 6%;
+    top: 13%;
+}
+
+button[data-search] {
+    border: 2px solid var(--bs-blue);
+    background-color: transparent;
+    padding: .1em;
+    margin: 0 .1em;
+    min-width: 40px;
+    font-size: 1.1em;
+}
+
+button[data-search]:hover {
+    background-color: var(--bs-blue);
+}
+
 .navBarNavDropdown {
     position: relative;
     z-index: 999;
@@ -634,6 +654,14 @@ a.anchorFoot {
 .navBarNavDropdown ul li {
     margin: .5em auto;
     z-index: 999;
+}
+
+nav {
+    transition: .2s;
+}
+
+nav.hiddenNav {
+    transform: translate3d(0, -100%, 0);
 }
 
 .badge-item {

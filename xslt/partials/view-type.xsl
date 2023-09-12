@@ -35,12 +35,13 @@
                 </div>
             </div>
             <div class="col-md-6 text">
-                <div class="row" style="margin:2em auto;">
+                <div class="row" style="margin: 2em auto;">
                     <div class="col-md-6" style="text-align:right;">
                         <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
                     </div>
                     <div class="col-md-6" style="text-align:right;">
                         <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
+                        
                     </div>
                 </div>
                 <div class="section {$edition-project-class}" id="section-1">
@@ -67,6 +68,11 @@
                             </xsl:if>
                         </div>
                     </xsl:if>
+                    <div id="mark-scroll">
+                        <button data-search="next">&#x2193;</button>
+                        <button data-search="prev">&#x2191;</button>
+                        <button data-search="clear">✖</button>
+                    </div>
                     <xsl:if test="$front-page = 'true'">
                         <div class="card-header yes-index">
                             <xsl:for-each select=".//tei:front/tei:titlePage">
