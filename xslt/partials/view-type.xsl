@@ -69,9 +69,9 @@
                         </div>
                     </xsl:if>
                     <div id="mark-scroll">
-                        <button data-search="next">&#x2193;</button>
-                        <button data-search="prev">&#x2191;</button>
-                        <button data-search="clear">✖</button>
+                        <button data-search="next" disabled="disabled">&#x2193;</button>
+                        <button data-search="prev" disabled="disabled">&#x2191;</button>
+                        <button data-search="clear" disabled="disabled">✖</button>
                     </div>
                     <xsl:if test="$front-page = 'true'">
                         <div class="card-header yes-index">

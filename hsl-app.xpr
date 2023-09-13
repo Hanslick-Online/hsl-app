@@ -10,7 +10,7 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>home/daniel/Documents/hans-lick/hsl-app/data/critics/editions/c__1899.06.28.xml</String>
+                                    <String>data/critics/editions/c__1899.06.28.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -30,11 +30,11 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>data/critics/editions/c__1899.06.28.xml</String>
+                                    <String>home/daniel/Documents/hans-lick/hsl-app/data/critics/editions/c__1899.06.28.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>fixtures</String>
+                                        <String>editions ct</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">

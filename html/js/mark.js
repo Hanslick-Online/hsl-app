@@ -12,14 +12,17 @@ var input = document.querySelectorAll(".card-body.yes-index"),
   // offsetTop = 50,
   currentIndex = 0;
 
-function jumpTo() {
+function jumpTo(trigger) {
   if (results.length) {
     var position,
       current = results[currentIndex];
     [].forEach.call(results, function (el) {
       el.classList.remove(currentClass);
     });
-    if (current) {
+    clearBtn.removeAttribute("disabled");
+    nextBtn.removeAttribute("disabled");
+    prevBtn.removeAttribute("disabled");
+    if (current && trigger) {
       current.classList.add(currentClass);
       current.scrollIntoView({
         block: "start",
@@ -32,7 +35,13 @@ function jumpTo() {
 
 function performMarkUrl() {
   // Determine selected options
-  var options = {};
+  var options = {
+    done: function() {
+      results = input[0].querySelectorAll("mark");
+      currentIndex = 0;
+      jumpTo(true);
+    }
+  };
   [].forEach.call(optionInputs, function (opt) {
     options[opt.value] = opt.checked;
   });
@@ -48,7 +57,9 @@ function performMarkUrl() {
     var params = urlParam.get("mark");
     markInstance.unmark({
       done: function () {
-        markInstance.mark(params, options);
+        if (params.length >= 3) {
+          markInstance.mark(params, options);
+        }
       },
     });
   }
@@ -57,26 +68,35 @@ function performMarkUrl() {
 function performMark() {
   // Read the keyword
   var keyword = keywordInput.value;
+  var pattern = keyword;
+  var flags = "gmi";
+  if (pattern[pattern.length - 1] !== "\\") {
+    var regex = new RegExp(pattern, flags);
 
-  // Determine selected options
-  var options = {
-    done: function() {
-      results = input[0].querySelectorAll("mark");
-      currentIndex = 0;
-      jumpTo();
-    }
+    // Determine selected options
+    var options = {
+      accrossElements: true,
+      done: function() {
+        results = input[0].querySelectorAll("mark");
+        currentIndex = 0;
+        jumpTo(false);
+      }
+    };
+
+    [].forEach.call(optionInputs, function (opt) {
+      options[opt.value] = opt.checked;
+    });
+
+    // Remove previous marked elements and mark
+    // the new keyword inside the context
+    markInstance.unmark({
+      done: function () {
+        if (pattern.length >= 3) {
+          markInstance.markRegExp(regex, options);
+        }
+      },
+    })
   };
-  [].forEach.call(optionInputs, function (opt) {
-    options[opt.value] = opt.checked;
-  });
-
-  // Remove previous marked elements and mark
-  // the new keyword inside the context
-  markInstance.unmark({
-    done: function () {
-      markInstance.mark(keyword, options);
-    },
-  });
 }
 
 clearBtn.addEventListener("click", function() {
@@ -87,6 +107,9 @@ clearBtn.addEventListener("click", function() {
     inline: "nearest",
     smooth: "true"
   });
+  clearBtn.setAttribute("disabled", "disabled");
+  nextBtn.setAttribute("disabled", "disabled");
+  prevBtn.setAttribute("disabled", "disabled");
 });
 
 nextBtn.addEventListener("click", function() {
@@ -98,7 +121,7 @@ nextBtn.addEventListener("click", function() {
     if (currentIndex > results.length - 1) {
       currentIndex = 0;
     }
-    jumpTo();
+    jumpTo(true);
   }
 });
 
@@ -111,7 +134,7 @@ prevBtn.addEventListener("click", function() {
     if (currentIndex > results.length - 1) {
       currentIndex = 0;
     }
-    jumpTo();
+    jumpTo(true);
   }
 });
 
