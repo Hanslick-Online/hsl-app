@@ -116,7 +116,7 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
-            record["edition"] = ["traktat"]
+            record["edition"] = ["Treatise/Traktat"]
             anchor_id_1 = os.path.split(x)[-1]
             anchor_id_2 = ".html#index.xml-body.1_div."
             record['id'] = anchor_id_1.replace('.xml',
@@ -202,7 +202,7 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
-            record["edition"] = ["kritiken"]
+            record["edition"] = ["Critics/Kritiken"]
             record['id'] = os.path.split(x)[-1].replace('.xml', ".html")
             cfts_record['id'] = record['id']
             hsl_url_dev = "https://hanslick-online.github.io/hsl-app-dev"
