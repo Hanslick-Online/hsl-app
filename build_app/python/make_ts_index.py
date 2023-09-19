@@ -34,10 +34,6 @@ current_schema = {
             'type': 'string'
         },
         {
-            'name': 'edition',
-            'type': 'string'
-        },
-        {
             'name': 'full_text',
             'type': 'string'
         },
@@ -114,25 +110,19 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
+            record["edition"] = "traktat"
             anchor_id_1 = os.path.split(x)[-1]
-            if anchor_id_1.startswith('t__'):
-                anchor_id_2 = ".html#index.xml-body.1_div."
-                record['id'] = anchor_id_1.replace('.xml',
-                                                   f"{anchor_id_2}{str(pages)}")
-                record['edition'] = "traktat"
-            else:
-                record['id'] = anchor_id_1.replace('.xml', ".html")
-                record['edition'] = "kritiken"
+            anchor_id_2 = ".html#index.xml-body.1_div."
+            record['id'] = anchor_id_1.replace('.xml',
+                                               f"{anchor_id_2}{str(pages)}")
             cfts_record['id'] = record['id']
-            cfts_record['edition'] = record['edition']
             hsl_url = "https://hanslick.acdh.oeaw.ac.at"
             cfts_record['resolver'] = f"{hsl_url}/{record['id']}"
             record['rec_id'] = os.path.split(x)[-1]
             cfts_record['rec_id'] = record['rec_id']
             r_title = " ".join(
                 " ".join(doc.any_xpath(
-                        './/tei:titleStmt/tei:title[@type="main"]/text()')
-                        ).split())
+                    './/tei:titleStmt/tei:title[@type="main"]/text()')).split())
             s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
             title = f"{r_title} {s_title}. Auflage"
             if pages - 1 == 0:
@@ -206,6 +196,7 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
+            record["edition"] = "kritiken"
             record['id'] = os.path.split(x)[-1].replace('.xml', ".html")
             cfts_record['id'] = record['id']
             hsl_url_dev = "https://hanslick-online.github.io/hsl-app-dev"
