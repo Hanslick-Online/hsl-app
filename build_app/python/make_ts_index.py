@@ -34,6 +34,10 @@ current_schema = {
             'type': 'string'
         },
         {
+            'name': 'edition',
+            'type': 'string'
+        },
+        {
             'name': 'full_text',
             'type': 'string'
         },
@@ -111,10 +115,16 @@ for x in tqdm(files, total=len(files)):
             }
             record = {}
             anchor_id_1 = os.path.split(x)[-1]
-            anchor_id_2 = ".html#index.xml-body.1_div."
-            record['id'] = anchor_id_1.replace('.xml',
-                                               f"{anchor_id_2}{str(pages)}")
+            if anchor_id_1.startswith('t__'):
+                anchor_id_2 = ".html#index.xml-body.1_div."
+                record['id'] = anchor_id_1.replace('.xml',
+                                                   f"{anchor_id_2}{str(pages)}")
+                record['edition'] = "traktat"
+            else:
+                record['id'] = anchor_id_1.replace('.xml', ".html")
+                record['edition'] = "kritiken"
             cfts_record['id'] = record['id']
+            cfts_record['edition'] = record['edition']
             hsl_url = "https://hanslick.acdh.oeaw.ac.at"
             cfts_record['resolver'] = f"{hsl_url}/{record['id']}"
             record['rec_id'] = os.path.split(x)[-1]
