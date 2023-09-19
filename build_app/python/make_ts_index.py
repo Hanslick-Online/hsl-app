@@ -202,7 +202,7 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
-            record["edition"] = ["Critics/Kritiken"]
+            record["edition"] = ["Reviews/Kritiken"]
             record['id'] = os.path.split(x)[-1].replace('.xml', ".html")
             cfts_record['id'] = record['id']
             hsl_url_dev = "https://hanslick-online.github.io/hsl-app-dev"
