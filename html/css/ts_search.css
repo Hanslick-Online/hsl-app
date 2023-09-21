@@ -105,3 +105,21 @@
     overflow: hidden;
     text-align: right;
 }
+
+#menu-edition {
+    padding: 1em .5em .5em .5em;
+    background-color: #fff;
+    border-radius: .10rem;
+}
+
+.ais-Menu-list {
+    padding: .5em;
+}
+
+.ais-Menu-item {
+    padding: .5em;
+}
+
+.ais-Menu-count {
+    margin-left: .5em;
+}

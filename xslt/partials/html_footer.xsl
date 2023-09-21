@@ -150,5 +150,6 @@
         <!--<script type="text/javascript" src="dist/de-editor.min.js"></script>-->
         <script src="js/navbar-autohide.js"></script>
         <script src="js/cookie-consent.js"></script>
+        <script src="js/nav-show-hide.js"></script>
     </xsl:template>
 </xsl:stylesheet>

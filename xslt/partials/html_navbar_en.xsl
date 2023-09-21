@@ -56,8 +56,8 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc.html?lang=en"
-                                            title="Critics">
-                                            Critics
+                                            title="Reviews">
+                                            Reviews
                                         </a>
                                     </li>
                                     <li>

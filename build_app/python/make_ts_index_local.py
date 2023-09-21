@@ -3,20 +3,11 @@ import os
 import time
 import datetime
 
-from typesense.api_call import ObjectNotFound
-from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
-from acdh_cfts_pyutils import CFTS_COLLECTION
 from acdh_tei_pyutils.tei import TeiReader
 from tqdm import tqdm
 
 
 files = glob.glob('./data/*/editions/*.xml')
-
-
-try:
-    client.collections['hsl'].delete()
-except ObjectNotFound:
-    pass
 
 current_schema = {
     'name': 'hsl',
@@ -36,12 +27,6 @@ current_schema = {
         {
             'name': 'full_text',
             'type': 'string'
-        },
-        {
-            'name': 'edition',
-            'type': 'string[]',
-            'optional': True,
-            'facet': True,
         },
         {
             'name': 'year',
@@ -75,8 +60,6 @@ current_schema = {
         }
     ]
 }
-
-client.collections.create(current_schema)
 
 
 def get_entities(ent_type, ent_node, ent_name):
@@ -116,7 +99,6 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
-            record["edition"] = ["Treatise/Traktat"]
             anchor_id_1 = os.path.split(x)[-1]
             anchor_id_2 = ".html#index.xml-body.1_div."
             record['id'] = anchor_id_1.replace('.xml',
@@ -128,7 +110,8 @@ for x in tqdm(files, total=len(files)):
             cfts_record['rec_id'] = record['rec_id']
             r_title = " ".join(
                 " ".join(doc.any_xpath(
-                    './/tei:titleStmt/tei:title[@type="main"]/text()')).split())
+                        './/tei:titleStmt/tei:title[@type="main"]/text()')
+                        ).split())
             s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
             title = f"{r_title} {s_title}. Auflage"
             if pages - 1 == 0:
@@ -202,7 +185,6 @@ for x in tqdm(files, total=len(files)):
                 'project': 'hsl',
             }
             record = {}
-            record["edition"] = ["Reviews/Kritiken"]
             record['id'] = os.path.split(x)[-1].replace('.xml', ".html")
             cfts_record['id'] = record['id']
             hsl_url_dev = "https://hanslick-online.github.io/hsl-app-dev"
@@ -265,11 +247,7 @@ for x in tqdm(files, total=len(files)):
                     cfts_record['full_text'] = record['full_text']
                     cfts_records.append(cfts_record)
 
-make_index = client.collections['hsl'].documents.import_(records)
-print(make_index)
+print(records[1]['id'])
+print(records[1]['title'])
+print(records[1]['full_text'])
 print('done with indexing hsl')
-
-make_index = CFTS_COLLECTION.documents.import_(cfts_records,
-                                               {'action': 'upsert'})
-print(make_index)
-print('done with cfts-index hsl')

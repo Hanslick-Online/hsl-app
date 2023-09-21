@@ -65,7 +65,13 @@
                                     <xsl:if test="./tei:listBibl[@type = 'characterOf']/tei:bibl/text()">
                                         <tr>
                                             <th>Werk</th>
-                                            <td><xsl:value-of select="./tei:listBibl/tei:bibl/text()"/></td>
+                                            <td>
+                                                <ul>
+                                                    <xsl:for-each select="./tei:listBibl/tei:bibl">
+                                                     <li><xsl:value-of select="./text()"/></li>
+                                                    </xsl:for-each>
+                                                </ul>
+                                            </td>
                                         </tr>
                                     </xsl:if>
                                     <tr>
@@ -180,11 +186,12 @@
                                         <td>
                                             <ul>
                                               <xsl:for-each select="./tei:author">
-                                              <li>
-                                              <a href="{@xml:id}.html">
-                                              <xsl:value-of select="./tei:persName"/>
-                                              </a>
-                                              </li>
+                                                  <xsl:sort select="./tei:persName" order="ascending"/>
+                                                  <li>
+                                                    <a href="{@xml:id}.html">
+                                                       <xsl:value-of select="./tei:persName"/>
+                                                    </a>
+                                                 </li>
                                               </xsl:for-each>
                                             </ul>
                                         </td>

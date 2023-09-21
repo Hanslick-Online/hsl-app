@@ -18,6 +18,7 @@
     <!--<xsl:import href="partials/osd-container.xsl"/>-->
     <!--<xsl:import href="partials/tei-facsimile.xsl"/>-->
     <xsl:import href="partials/entities-modal.xsl"/>
+    <xsl:import href="partials/next-prev-page.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -52,6 +53,7 @@
                             </xsl:with-param>
                             <xsl:with-param name="front-page" select="'false'"/>
                             <xsl:with-param name="back-page" select="'true'"/>
+                            <xsl:with-param name="next-prev-page" select="'true'"/>
                         </xsl:call-template>
                     </div>
                     <xsl:call-template name="html_footer"/>
@@ -84,6 +86,22 @@
                 </xsl:for-each>
             </xsl:if>
         </p>
+    </xsl:template>
+    <xsl:template match="//text()[ancestor::tei:body]">
+        <xsl:choose>
+            <xsl:when test="following-sibling::tei:*[1]/@break='no'">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <xsl:when test="matches(., '-$', 'm')">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <xsl:when test="following-sibling::tei:*[1]/@type='footnote'">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template name="prev-true">
         <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
@@ -139,8 +157,8 @@
         <xsl:if test="@break='no'">
             <span class="pb wrdbreak">-</span>
         </xsl:if>
-        <br class="pb"/>
         <xsl:if test="ancestor::tei:p and not(ancestor::tei:note)">
+            <br class="pb"/>
             <a>
                 <xsl:variable name="para" as="xs:int">
                     <xsl:number level="any" from="tei:body" count="tei:p"/>
@@ -174,6 +192,9 @@
                 </xsl:choose>
                 <xsl:value-of select="format-number($lines, '0000')"/>
             </a>  
+        </xsl:if>
+        <xsl:if test="ancestor::tei:note and position() = 1">
+            
         </xsl:if>
     </xsl:template>
     <xsl:template match="tei:hi">

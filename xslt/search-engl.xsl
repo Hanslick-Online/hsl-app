@@ -35,6 +35,8 @@
                                         <h4>Full Text Search</h4>
                                         <div id="searchbox"></div>
                                         <div id="clear-refinements"></div>
+                                        <h4>Edition</h4>
+                                        <div id="menu-edition"></div>
                                         <h4>Persons</h4>
                                         <div id="refinement-list-persons"></div>
                                         <h4>Places</h4>

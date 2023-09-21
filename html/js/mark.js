@@ -1,31 +1,47 @@
 // the DOM object of the context (where to search for matches)
-var markInstance = new Mark(document.querySelectorAll("p.yes-index"));
-// Cache DOM elements
-var keywordInput = document.querySelector("input[name='keyword']");
-var optionInputs = document.querySelectorAll("input[name='opt[]']");
+var input = document.querySelectorAll(".card-body.yes-index"),
+  markInstance = new Mark(input),
+  // Cache DOM elements
+  keywordInput = document.querySelector("input[name='keyword']"),
+  optionInputs = document.querySelectorAll("input[name='opt[]']"),
+  clearBtn = document.querySelector("button[data-search='clear']"),
+  prevBtn = document.querySelector("button[data-search='prev']"),
+  nextBtn = document.querySelector("button[data-search='next']"),
+  results = [],
+  currentClass = "current",
+  // offsetTop = 50,
+  currentIndex = 0;
 
-function performMark() {
-  // Read the keyword
-  var keyword = keywordInput.value;
-
-  // Determine selected options
-  var options = {};
-  [].forEach.call(optionInputs, function (opt) {
-    options[opt.value] = opt.checked;
-  });
-
-  // Remove previous marked elements and mark
-  // the new keyword inside the context
-  markInstance.unmark({
-    done: function () {
-      markInstance.mark(keyword, options);
-    },
-  });
+function jumpTo(trigger) {
+  if (results.length) {
+    var position,
+      current = results[currentIndex];
+    [].forEach.call(results, function (el) {
+      el.classList.remove(currentClass);
+    });
+    clearBtn.removeAttribute("disabled");
+    nextBtn.removeAttribute("disabled");
+    prevBtn.removeAttribute("disabled");
+    if (current && trigger) {
+      current.classList.add(currentClass);
+      current.scrollIntoView({
+        block: "start",
+        inline: "nearest",
+        smooth: "true"
+      });
+    }
+  }
 }
 
 function performMarkUrl() {
   // Determine selected options
-  var options = {};
+  var options = {
+    done: function() {
+      results = input[0].querySelectorAll("mark");
+      currentIndex = 0;
+      jumpTo(true);
+    }
+  };
   [].forEach.call(optionInputs, function (opt) {
     options[opt.value] = opt.checked;
   });
@@ -41,11 +57,86 @@ function performMarkUrl() {
     var params = urlParam.get("mark");
     markInstance.unmark({
       done: function () {
-        markInstance.mark(params, options);
+        if (params.length >= 3) {
+          markInstance.mark(params, options);
+        }
       },
     });
   }
 }
+
+function performMark() {
+  // Read the keyword
+  var keyword = keywordInput.value;
+  var pattern = keyword;
+  var flags = "gmi";
+  if (pattern[pattern.length - 1] !== "\\") {
+    var regex = new RegExp(pattern, flags);
+
+    // Determine selected options
+    var options = {
+      accrossElements: true,
+      done: function() {
+        results = input[0].querySelectorAll("mark");
+        currentIndex = 0;
+        jumpTo(false);
+      }
+    };
+
+    [].forEach.call(optionInputs, function (opt) {
+      options[opt.value] = opt.checked;
+    });
+
+    // Remove previous marked elements and mark
+    // the new keyword inside the context
+    markInstance.unmark({
+      done: function () {
+        if (pattern.length >= 3) {
+          markInstance.markRegExp(regex, options);
+        }
+      },
+    })
+  };
+}
+
+clearBtn.addEventListener("click", function() {
+  markInstance.unmark();
+  keywordInput.value = "";
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth"
+  });
+  clearBtn.setAttribute("disabled", "disabled");
+  nextBtn.setAttribute("disabled", "disabled");
+  prevBtn.setAttribute("disabled", "disabled");
+});
+
+nextBtn.addEventListener("click", function() {
+  if (results.length) {
+    currentIndex += this === nextBtn ? 1 : -1;
+    if (currentIndex < 0) {
+      currentIndex = results.length - 1;
+    }
+    if (currentIndex > results.length - 1) {
+      currentIndex = 0;
+    }
+    jumpTo(true);
+  }
+});
+
+prevBtn.addEventListener("click", function() {
+  if (results.length) {
+    currentIndex += this === prevBtn ? -1 : 1;
+    if (currentIndex < 0) {
+      currentIndex = results.length - 1;
+    }
+    if (currentIndex > results.length - 1) {
+      currentIndex = 0;
+    }
+    jumpTo(true);
+  }
+});
 
 // Listen to input and option changes
 keywordInput.addEventListener("input", performMark);

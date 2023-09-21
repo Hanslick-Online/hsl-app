@@ -91,7 +91,7 @@
                     <xsl:call-template name="html_footer"/>
                     <script>
                         $(document).ready(function () {
-                            createDataTable('tocTable');
+                            createDataTable('tocTable', [[5, 'desc']], 50);
                         });
                     </script>
                 </div>

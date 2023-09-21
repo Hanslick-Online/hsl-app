@@ -34,7 +34,6 @@
                 
                 <!-- ############### datatable ############### -->
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/fc-4.2.1/fh-3.3.1/r-2.4.0/sp-2.1.0/sl-1.5.0/datatables.min.css"/>
-                
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
@@ -293,8 +292,8 @@
                     <tr>
                         <th>Titel</th>
                         <th>Titel (alt)</th>
-                        <th>Autor</th>
-                        <th>Figur</th>
+                        <th style="min-width: 200px;">Autor</th>
+                        <th style="min-width: 200px;">Figur</th>
                         <th>Wikidata ID</th>
                         <th>Erwähnt #</th>
                         <th>Initial</th>
@@ -315,8 +314,12 @@
                                 <td>
                                     <ul>
                                         <xsl:for-each select="./tei:author">
+                                            <xsl:sort select="./tei:persName/text()" order="ascending"/>
                                             <li>
                                                 <xsl:value-of select="./tei:persName"/>
+                                                <xsl:if test="position() != last()">
+                                                    <xsl:text>;</xsl:text>
+                                                </xsl:if>
                                             </li>
                                         </xsl:for-each>    
                                     </ul>
@@ -324,8 +327,12 @@
                                 <td>
                                     <ul>
                                         <xsl:for-each select="./tei:name[@type='character']">
+                                            <xsl:sort select="." order="ascending"/>
                                             <li>
                                                 <xsl:value-of select="."/>
+                                                <xsl:if test="position() != last()">
+                                                    <xsl:text>;</xsl:text>
+                                                </xsl:if>
                                             </li>
                                         </xsl:for-each>    
                                     </ul>

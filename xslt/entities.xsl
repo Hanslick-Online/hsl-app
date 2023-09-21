@@ -455,6 +455,7 @@
                                                         <td>
                                                             <ul>
                                                                 <xsl:for-each select="./tei:author">
+                                                                    <xsl:sort select="./tei:persName" data-type="text" order="ascending"/>
                                                                     <li>
                                                                         <a href="{substring-after(@ref, '#')}.html">
                                                                             <xsl:value-of select="./tei:persName"/>
@@ -473,6 +474,7 @@
                                                         <td>
                                                             <ul>
                                                                 <xsl:for-each select="./tei:name[@type='character']">
+                                                                    <xsl:sort select="." data-type="text" order="ascending"/>
                                                                     <li>
                                                                         <a href="{substring-after(@ref, '#')}.html">
                                                                             <xsl:value-of select="."/>

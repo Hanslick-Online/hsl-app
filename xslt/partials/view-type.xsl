@@ -23,6 +23,7 @@
         <xsl:param name="footnotes-xpath" as="item()*"/>
         <xsl:param name="back-page" />
         <xsl:param name="edition-project-class" />
+        <xsl:param name="next-prev-page" />
         <div class="row">
             <div class="col-md-6 facsimiles">
                 <div id="viewer-1">
@@ -35,12 +36,13 @@
                 </div>
             </div>
             <div class="col-md-6 text">
-                <div class="row" style="margin:2em auto;">
+                <div class="row" style="margin: 2em auto;">
                     <div class="col-md-6" style="text-align:right;">
                         <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
                     </div>
                     <div class="col-md-6" style="text-align:right;">
                         <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
+                        
                     </div>
                 </div>
                 <div class="section {$edition-project-class}" id="section-1">
@@ -65,8 +67,17 @@
                                 <xsl:call-template name="book-editions"/>
                                 <!-- loaded in main editions.xls -->
                             </xsl:if>
+                            <xsl:if test="$next-prev-page = 'true'">
+                                <xsl:call-template name="next-prev-page"/>
+                                <!-- loaded in main editions.xls -->
+                            </xsl:if>
                         </div>
                     </xsl:if>
+                    <div id="mark-scroll">
+                        <button data-search="next" disabled="disabled">&#x2193;</button>
+                        <button data-search="prev" disabled="disabled">&#x2191;</button>
+                        <button data-search="clear" disabled="disabled">✖</button>
+                    </div>
                     <xsl:if test="$front-page = 'true'">
                         <div class="card-header yes-index">
                             <xsl:for-each select=".//tei:front/tei:titlePage">
