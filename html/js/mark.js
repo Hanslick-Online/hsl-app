@@ -102,10 +102,10 @@ function performMark() {
 clearBtn.addEventListener("click", function() {
   markInstance.unmark();
   keywordInput.value = "";
-  keywordInput.scrollIntoView({
-    block: "start",
-    inline: "nearest",
-    smooth: "true"
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth"
   });
   clearBtn.setAttribute("disabled", "disabled");
   nextBtn.setAttribute("disabled", "disabled");
