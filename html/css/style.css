@@ -937,6 +937,22 @@ input:checked + .i-slider:before {
     background-color: #d2b33d;
 }
 
+#prev, #next {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#next-prev-btns {
+    margin-top: 1em;
+}
+
+#next-prev-btns > hr {
+  margin-top: .5rem !important;
+  margin-bottom: .5rem !important;
+  border: 0 !important;
+  border-top: 2px solid var(--bs-link-color) !important;
+  opacity: 1 !important;
+}
 
 @media (max-width: 1920px) {
     .section-traktat {

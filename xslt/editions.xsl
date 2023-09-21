@@ -15,6 +15,7 @@
     <xsl:import href="partials/view-type.xsl"/>
     <xsl:import href="partials/view-type-content.xsl"/>
     <xsl:import href="partials/entities-modal.xsl"/>
+    <xsl:import href="partials/next-prev-page.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -49,6 +50,7 @@
                                     as="item()*"
                                     select="//tei:body//tei:note[@place='foot']"/>
                             <xsl:with-param name="back-page" select="'true'"/>
+                            <xsl:with-param name="next-prev-page" select="'false'"/>
                         </xsl:call-template>
                     </div>
                     <xsl:call-template name="html_footer"/>
