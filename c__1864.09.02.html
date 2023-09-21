@@ -98,7 +98,7 @@
                   </div>
                </div>
                <div class="col-md-6 text">
-                  <div class="row" style="margin:2em auto;">
+                  <div class="row" style="margin: 2em auto;">
                      <div class="col-md-6" style="text-align:right;"><input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked" /> Wörter einzeln suchen
                         </div>
                      <div class="col-md-6" style="text-align:right;"><input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..." /></div>
@@ -137,11 +137,19 @@
             $('#aot-navBarNavDropdown .dropdown-menu .nav-item').click(function(e) {
                 e.stopPropagation();
             });
-        </script></div>
+        </script><div id="next-prev-btns">
+                           <div id="prev"></div>
+                           <hr />
+                           <div id="next"><a id="next-doc" alt="link to next document / Link zum nächsten Dokument" href="c__1864.09.10.html"><svg xmlns="http://www.w3.org/2000/svg" class="arrow svg-inline--fa fa-chevron-right fa-w-10" title="next" aria-labelledby="svg-inline--fa-title-2" data-prefix="fas" data-icon="chevron-right" role="img" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <title id="svg-inline--fa-title-2">next document/nächstes Dokument</title>
+                                    <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg></a></div>
+                        </div>
+                     </div>
+                     <div id="mark-scroll"><button data-search="next" disabled="disabled">↓</button><button data-search="prev" disabled="disabled">↑</button><button data-search="clear" disabled="disabled">✖</button></div>
                      <div class="card-body yes-index">
-                        <p class="yes-index meta-head">Neue Freie Presse<br />Morgenblatt<br />No. 2. Wien, Freitag den 2. September. 1864<br /></p><span class="anchor-pb" source="hsl-nfp/1864.09.02-0001"></span><span class="pb">[1]</span><br class="pb" /><h1 class="yes-index">Musikalische Briefe. I.</h1><br class="pb" /><h2 class="yes-index">(Neue Errungenschaften: die kaiserliche Opernschule.)</h2>
-                        <p class="yes-index"><br class="pb" /><a href="#__p1__lb3" name="__p1__lb3" id="__p1__lb3" class="linenumbersTransparent linenumbers pb">0003</a>Ed H. Sie haben sich mehr als einmal mit mir der Fort
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb4" name="__p1__lb4" id="__p1__lb4" class="linenumbersTransparent linenumbers pb">0004</a>schritte erfreut, welche das öffentliche Musikleben <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oesterreich</span>s in den
+                        <p class="yes-index meta-head">Neue Freie Presse<br />Morgenblatt<br />No. 2. Wien, Freitag den 2. September 1864<br /></p><span class="anchor-pb" source="hsl-nfp/1864.09.02-0001"></span><span class="pb">[1]</span><h1 class="yes-index">Musikalische Briefe. I.</h1>
+                        <h2 class="yes-index">(Neue Errungenschaften: die kaiserliche Opernschule.)</h2>
+                        <p class="yes-index"><br class="pb" /><a href="#__p1__lb3" name="__p1__lb3" id="__p1__lb3" class="linenumbersTransparent linenumbers pb">0003</a>Ed H. Sie haben sich mehr als einmal mit mir der Fort<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb4" name="__p1__lb4" id="__p1__lb4" class="linenumbersTransparent linenumbers pb">0004</a>schritte erfreut, welche das öffentliche Musikleben <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oesterreich</span>s in den
                            <br class="pb" /><a href="#__p1__lb5" name="__p1__lb5" id="__p1__lb5" class="linenumbersVisible linenumbers pb" data-lbnr="5">0005</a>letzten zehn Jahren gemacht hat. Auch weiß ich Sie einverstanden,
                            <br class="pb" /><a href="#__p1__lb6" name="__p1__lb6" id="__p1__lb6" class="linenumbersTransparent linenumbers pb">0006</a>wenn mein Essay über die Geschichte des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Concertlebens (in
                            <br class="pb" /><a href="#__p1__lb7" name="__p1__lb7" id="__p1__lb7" class="linenumbersTransparent linenumbers pb">0007</a>den drei letzten Bänden der „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_77">Oesterreichischen Revue</span>“) das Jahr
@@ -149,51 +157,35 @@
                            <br class="pb" /><a href="#__p1__lb9" name="__p1__lb9" id="__p1__lb9" class="linenumbersTransparent linenumbers pb">0009</a>im musikalischen Gemeinwesen eine neue Aera datirt. <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> hatte bei
                            <br class="pb" /><a href="#__p1__lb10" name="__p1__lb10" id="__p1__lb10" class="linenumbersVisible linenumbers pb" data-lbnr="10">0010</a>all’ seinem Tonreichthum doch auch auf diesem Gebiet „vormärzliche“
                            <br class="pb" /><a href="#__p1__lb11" name="__p1__lb11" id="__p1__lb11" class="linenumbersTransparent linenumbers pb">0011</a>Zustände, die zum großen Theil in dem allgemeinen Charakter unserer
-                           <br class="pb" /><a href="#__p1__lb12" name="__p1__lb12" id="__p1__lb12" class="linenumbersTransparent linenumbers pb">0012</a>damaligen Bildung, namentlich in der Isolirtheit derselben ihre Er
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb13" name="__p1__lb13" id="__p1__lb13" class="linenumbersTransparent linenumbers pb">0013</a>klärung finden. Der Gedanke des geistigen Zusammengehens <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oester
-                              <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb14" name="__p1__lb14" id="__p1__lb14" class="linenumbersTransparent linenumbers pb">0014</a>eich</span>s mit <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutschland</span>, welcher in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> die ganze Märzbewegung
+                           <br class="pb" /><a href="#__p1__lb12" name="__p1__lb12" id="__p1__lb12" class="linenumbersTransparent linenumbers pb">0012</a>damaligen Bildung, namentlich in der Isolirtheit derselben ihre Er<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb13" name="__p1__lb13" id="__p1__lb13" class="linenumbersTransparent linenumbers pb">0013</a>klärung finden. Der Gedanke des geistigen Zusammengehens <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oester<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb14" name="__p1__lb14" id="__p1__lb14" class="linenumbersTransparent linenumbers pb">0014</a>eich</span>s mit <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutschland</span>, welcher in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> die ganze Märzbewegung
                            <br class="pb" /><a href="#__p1__lb15" name="__p1__lb15" id="__p1__lb15" class="linenumbersVisible linenumbers pb" data-lbnr="15">0015</a>durchdrang, machte sich sofort auch auf musikalischem Gebiete geltend.
-                           <br class="pb" /><a href="#__p1__lb16" name="__p1__lb16" id="__p1__lb16" class="linenumbersTransparent linenumbers pb">0016</a>Man wandte sich mit Heftigkeit von der allzulang bevorzugten <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">ita
-                              <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb17" name="__p1__lb17" id="__p1__lb17" class="linenumbersTransparent linenumbers pb">0017</a>lienisch</span>en Musik ab und der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">deutsch</span>en zu; man brach mit dem ein
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb18" name="__p1__lb18" id="__p1__lb18" class="linenumbersTransparent linenumbers pb">0018</a>seitigen Cultus der Vergangenheit und öffnete den Fahnenträgern
+                           <br class="pb" /><a href="#__p1__lb16" name="__p1__lb16" id="__p1__lb16" class="linenumbersTransparent linenumbers pb">0016</a>Man wandte sich mit Heftigkeit von der allzulang bevorzugten <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">ita<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb17" name="__p1__lb17" id="__p1__lb17" class="linenumbersTransparent linenumbers pb">0017</a>lienisch</span>en Musik ab und der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">deutsch</span>en zu; man brach mit dem ein<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb18" name="__p1__lb18" id="__p1__lb18" class="linenumbersTransparent linenumbers pb">0018</a>seitigen Cultus der Vergangenheit und öffnete den Fahnenträgern
                            <br class="pb" /><a href="#__p1__lb19" name="__p1__lb19" id="__p1__lb19" class="linenumbersTransparent linenumbers pb">0019</a>der modernen Ideen die Pforten. Nachträglich beeilte man sich, von
-                           <br class="pb" /><a href="#__p1__lb20" name="__p1__lb20" id="__p1__lb20" class="linenumbersVisible linenumbers pb" data-lbnr="20">0020</a>den geistigen Processen Kenntniß zu nehmen, welche sich in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutsch
-                              <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb21" name="__p1__lb21" id="__p1__lb21" class="linenumbersTransparent linenumbers pb">0021</a>land</span> auch in musikalischen Dingen vollzogen hatten. Auf Grund
+                           <br class="pb" /><a href="#__p1__lb20" name="__p1__lb20" id="__p1__lb20" class="linenumbersVisible linenumbers pb" data-lbnr="20">0020</a>den geistigen Processen Kenntniß zu nehmen, welche sich in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutsch<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb21" name="__p1__lb21" id="__p1__lb21" class="linenumbersTransparent linenumbers pb">0021</a>land</span> auch in musikalischen Dingen vollzogen hatten. Auf Grund
                            <br class="pb" /><a href="#__p1__lb22" name="__p1__lb22" id="__p1__lb22" class="linenumbersTransparent linenumbers pb">0022</a>dieser Anschauungen trachtete man, endlich das Concertwesen, welches
                            <br class="pb" /><a href="#__p1__lb23" name="__p1__lb23" id="__p1__lb23" class="linenumbersTransparent linenumbers pb">0023</a>bei uns doch nur die zweite Rolle neben dem Theater gespielt, in
-                           <br class="pb" /><a href="#__p1__lb24" name="__p1__lb24" id="__p1__lb24" class="linenumbersTransparent linenumbers pb">0024</a>größerem Styl zu organisiren, zu befestigen und nach allen Dimen
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb25" name="__p1__lb25" id="__p1__lb25" class="linenumbersVisible linenumbers pb" data-lbnr="25">0025</a>sionen zu erweitern. Die Keime von <span class="date">1848</span> gingen allerdings nicht
+                           <br class="pb" /><a href="#__p1__lb24" name="__p1__lb24" id="__p1__lb24" class="linenumbersTransparent linenumbers pb">0024</a>größerem Styl zu organisiren, zu befestigen und nach allen Dimen<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb25" name="__p1__lb25" id="__p1__lb25" class="linenumbersVisible linenumbers pb" data-lbnr="25">0025</a>sionen zu erweitern. Die Keime von <span class="date">1848</span> gingen allerdings nicht
                            <br class="pb" /><a href="#__p1__lb26" name="__p1__lb26" id="__p1__lb26" class="linenumbersTransparent linenumbers pb">0026</a>so schnell auf, sehr allmälig folgte den revolutionirenden Ideen die
                            <br class="pb" /><a href="#__p1__lb27" name="__p1__lb27" id="__p1__lb27" class="linenumbersTransparent linenumbers pb">0027</a>reformirende That. Die nächsten Jahre waren eine Periode mühsam
                            <br class="pb" /><a href="#__p1__lb28" name="__p1__lb28" id="__p1__lb28" class="linenumbersTransparent linenumbers pb">0028</a>vorbereitenden, mitunter lästig zögernden Uebergangs. Allein in<span class="space"> </span><br class="pb" /><a href="#__p2__lb29" name="__p2__lb29" id="__p2__lb29" class="linenumbersTransparent linenumbers pb">0029</a>stetigem Fortschritt traten nach einander die Errungenschaften unsers
-                           <br class="pb" /><a href="#__p2__lb30" name="__p2__lb30" id="__p2__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>Musiklebens hervor, auf deren Besitz wir jetzt stolz sind: die Reorga
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb31" name="__p2__lb31" id="__p2__lb31" class="linenumbersTransparent linenumbers pb">0031</a>nisation des Conservatoriums und die glänzende Reform der „Ge
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb32" name="__p2__lb32" id="__p2__lb32" class="linenumbersTransparent linenumbers pb">0032</a>sellschaftsconcerte,“ <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_120">Hellmesberger</span></span>’s Quartettsoiréen, die Wieder
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb33" name="__p2__lb33" id="__p2__lb33" class="linenumbersTransparent linenumbers pb">0033</a>aufnahme der „Philharmonischen Concerte“, die neuen Pflegestätten
-                           <br class="pb" /><a href="#__p2__lb34" name="__p2__lb34" id="__p2__lb34" class="linenumbersTransparent linenumbers pb">0034</a>des Chorgesangs und der geistlichen Musik „Singverein“ und „Sing
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb35" name="__p2__lb35" id="__p2__lb35" class="linenumbersVisible linenumbers pb" data-lbnr="35">0035</a>akademie“ etc. etc. Das sind Resultate, die nicht nur offen vorliegen,
+                           <br class="pb" /><a href="#__p2__lb30" name="__p2__lb30" id="__p2__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>Musiklebens hervor, auf deren Besitz wir jetzt stolz sind: die Reorga<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb31" name="__p2__lb31" id="__p2__lb31" class="linenumbersTransparent linenumbers pb">0031</a>nisation des Conservatoriums und die glänzende Reform der „Ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb32" name="__p2__lb32" id="__p2__lb32" class="linenumbersTransparent linenumbers pb">0032</a>sellschaftsconcerte,“ <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_120">Hellmesberger</span></span>’s Quartettsoiréen, die Wieder<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb33" name="__p2__lb33" id="__p2__lb33" class="linenumbersTransparent linenumbers pb">0033</a>aufnahme der „Philharmonischen Concerte“, die neuen Pflegestätten
+                           <br class="pb" /><a href="#__p2__lb34" name="__p2__lb34" id="__p2__lb34" class="linenumbersTransparent linenumbers pb">0034</a>des Chorgesangs und der geistlichen Musik „Singverein“ und „Sing<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb35" name="__p2__lb35" id="__p2__lb35" class="linenumbersVisible linenumbers pb" data-lbnr="35">0035</a>akademie“ etc. etc. Das sind Resultate, die nicht nur offen vorliegen,
                            <br class="pb" /><a href="#__p2__lb36" name="__p2__lb36" id="__p2__lb36" class="linenumbersTransparent linenumbers pb">0036</a>sondern sich alljährlich immer wieder neu in Scene setzen.
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p3__lb37" name="__p3__lb37" id="__p3__lb37" class="linenumbersTransparent linenumbers pb">0037</a>Neben und nach diesen Errungenschaften ist auch die allerneueste
-                           <br class="pb" /><a href="#__p3__lb38" name="__p3__lb38" id="__p3__lb38" class="linenumbersTransparent linenumbers pb">0038</a>Zeit nicht unthätig stehen geblieben. Seit Kurzem sind wir im Be
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb39" name="__p3__lb39" id="__p3__lb39" class="linenumbersTransparent linenumbers pb">0039</a>sitz einiger Einrichtungen, die allerdings nicht so augenfällig, sondern
-                           <br class="pb" /><a href="#__p3__lb40" name="__p3__lb40" id="__p3__lb40" class="linenumbersVisible linenumbers pb" data-lbnr="40">0040</a>mehr aus dem Hintergrund, aus zweiter Hand wirken, die aber trotz
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb41" name="__p3__lb41" id="__p3__lb41" class="linenumbersTransparent linenumbers pb">0041</a>dem volle Beachtung verdienen. Der musikalische Geschichtschreiber
-                           <br class="pb" /><a href="#__p3__lb42" name="__p3__lb42" id="__p3__lb42" class="linenumbersTransparent linenumbers pb">0042</a>der Jahre <span class="date">1862</span>, <span class="date">1863</span> und <span class="date">1864</span> wird namentlich drei bleibende In
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb43" name="__p3__lb43" id="__p3__lb43" class="linenumbersTransparent linenumbers pb">0043</a>stitutionen hervorheben, welche, verschieden in ihrer Tendenz und
+                           <br class="pb" /><a href="#__p3__lb38" name="__p3__lb38" id="__p3__lb38" class="linenumbersTransparent linenumbers pb">0038</a>Zeit nicht unthätig stehen geblieben. Seit Kurzem sind wir im Be<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb39" name="__p3__lb39" id="__p3__lb39" class="linenumbersTransparent linenumbers pb">0039</a>sitz einiger Einrichtungen, die allerdings nicht so augenfällig, sondern
+                           <br class="pb" /><a href="#__p3__lb40" name="__p3__lb40" id="__p3__lb40" class="linenumbersVisible linenumbers pb" data-lbnr="40">0040</a>mehr aus dem Hintergrund, aus zweiter Hand wirken, die aber trotz<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb41" name="__p3__lb41" id="__p3__lb41" class="linenumbersTransparent linenumbers pb">0041</a>dem volle Beachtung verdienen. Der musikalische Geschichtschreiber
+                           <br class="pb" /><a href="#__p3__lb42" name="__p3__lb42" id="__p3__lb42" class="linenumbersTransparent linenumbers pb">0042</a>der Jahre <span class="date">1862</span>, <span class="date">1863</span> und <span class="date">1864</span> wird namentlich drei bleibende In<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb43" name="__p3__lb43" id="__p3__lb43" class="linenumbersTransparent linenumbers pb">0043</a>stitutionen hervorheben, welche, verschieden in ihrer Tendenz und
                            <br class="pb" /><a href="#__p3__lb44" name="__p3__lb44" id="__p3__lb44" class="linenumbersTransparent linenumbers pb">0044</a>Tragweite, doch Merksteine unserer künstlerischen Entwicklung bilden:
                            <br class="pb" /><a href="#__p3__lb45" name="__p3__lb45" id="__p3__lb45" class="linenumbersVisible linenumbers pb" data-lbnr="45">0045</a>die Gründung einer kaiserlichen <span class="italic">Opernschule</span>, die Einführung der
-                           <br class="pb" /><a href="#__p3__lb46" name="__p3__lb46" id="__p3__lb46" class="linenumbersTransparent linenumbers pb">0046</a><span class="italic">Normalstimmung</span> und die Systemisirung jährlicher <span class="italic">Künstler
-                              <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb47" name="__p3__lb47" id="__p3__lb47" class="linenumbersTransparent linenumbers pb">0047</a>stipendien</span>. Eine vierte neue Einrichtung pädagogischer Tendenz
+                           <br class="pb" /><a href="#__p3__lb46" name="__p3__lb46" id="__p3__lb46" class="linenumbersTransparent linenumbers pb">0046</a><span class="italic">Normalstimmung</span> und die Systemisirung jährlicher <span class="italic">Künstler<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb47" name="__p3__lb47" id="__p3__lb47" class="linenumbersTransparent linenumbers pb">0047</a>stipendien</span>. Eine vierte neue Einrichtung pädagogischer Tendenz
                            <br class="pb" /><a href="#__p3__lb48" name="__p3__lb48" id="__p3__lb48" class="linenumbersTransparent linenumbers pb">0048</a>dürfte in Kurzem hinzutreten: die Einführung <span class="italic">musikalischer</span><span class="space"> </span><br class="pb" /><a href="#__p3__lb49" name="__p3__lb49" id="__p3__lb49" class="linenumbersTransparent linenumbers pb">0049</a><span class="italic">Prüfungscommissionen</span> für Inhaber öffentlicher Musikschulen
                            <br class="pb" /><a href="#__p3__lb50" name="__p3__lb50" id="__p3__lb50" class="linenumbersVisible linenumbers pb" data-lbnr="50">0050</a>und Musiklehrer an Staatslehranstalten.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p4__lb51" name="__p4__lb51" id="__p4__lb51" class="linenumbersTransparent linenumbers pb">0051</a>Ich sehe Sie bedenklich lächeln, indem ich mit unserer „Opern
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p4__lb52" name="__p4__lb52" id="__p4__lb52" class="linenumbersTransparent linenumbers pb">0052</a>schule“ anhebe und diese geheimnißvolle Sphynx in die Reihe unserer
+                        <p class="yes-index"><br class="pb" /><a href="#__p4__lb51" name="__p4__lb51" id="__p4__lb51" class="linenumbersTransparent linenumbers pb">0051</a>Ich sehe Sie bedenklich lächeln, indem ich mit unserer „Opern<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p4__lb52" name="__p4__lb52" id="__p4__lb52" class="linenumbersTransparent linenumbers pb">0052</a>schule“ anhebe und diese geheimnißvolle Sphynx in die Reihe unserer
                            <br class="pb" /><a href="#__p4__lb53" name="__p4__lb53" id="__p4__lb53" class="linenumbersTransparent linenumbers pb">0053</a>„Errungenschaften“ rücke. In Wahrheit kann ich mich so wenig als
                            <br class="pb" /><a href="#__p4__lb54" name="__p4__lb54" id="__p4__lb54" class="linenumbersTransparent linenumbers pb">0054</a>Sie rühmen, Resultate der „Opernschule“ gesehen zu haben. Die
-                           <br class="pb" /><a href="#__p4__lb55" name="__p4__lb55" id="__p4__lb55" class="linenumbersVisible linenumbers pb" data-lbnr="55">0055</a>gegenwärtige Einrichtung und Leitung derselben flößt mir wenig Ver
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p4__lb56" name="__p4__lb56" id="__p4__lb56" class="linenumbersTransparent linenumbers pb">0056</a>trauen ein. Dies Institut wird unter den obwaltenden Verhältnissen
+                           <br class="pb" /><a href="#__p4__lb55" name="__p4__lb55" id="__p4__lb55" class="linenumbersVisible linenumbers pb" data-lbnr="55">0055</a>gegenwärtige Einrichtung und Leitung derselben flößt mir wenig Ver<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p4__lb56" name="__p4__lb56" id="__p4__lb56" class="linenumbersTransparent linenumbers pb">0056</a>trauen ein. Dies Institut wird unter den obwaltenden Verhältnissen
                            <br class="pb" /><a href="#__p4__lb57" name="__p4__lb57" id="__p4__lb57" class="linenumbersTransparent linenumbers pb">0057</a>vielleicht für lange Zeit nicht dasjenige leisten, was man davon
                            <br class="pb" /><a href="#__p4__lb58" name="__p4__lb58" id="__p4__lb58" class="linenumbersTransparent linenumbers pb">0058</a>gewünscht und gehofft. Allein die Thatsache, <span class="italic">daß</span> wir eine von
                            <br class="pb" /><a href="#__p4__lb59" name="__p4__lb59" id="__p4__lb59" class="linenumbersTransparent linenumbers pb">0059</a>Privatinteressen unabhängige kaiserliche Opernschule besitzen, bleibt bei
@@ -204,25 +196,19 @@
                         <p class="yes-index"><br class="pb" /><a href="#__p6__lb64" name="__p6__lb64" id="__p6__lb64" class="linenumbersTransparent linenumbers pb">0064</a>Als <span class="italic">Eduard <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_58">Devrient</span></span> im Jahre <span class="date">1839</span> das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er
                            <br class="pb" /><a href="#__p6__lb65" name="__p6__lb65" id="__p6__lb65" class="linenumbersVisible linenumbers pb" data-lbnr="65">0065</a>Conservatorium besichtigte, hatte er Gelegenheit, auch dem Unterricht
                            <br class="pb" /><a href="#__p6__lb66" name="__p6__lb66" id="__p6__lb66" class="linenumbersTransparent linenumbers pb">0066</a>der obersten Classe „für dramatischen Gesang“ beizuwohnen. Er fand
-                           <br class="pb" /><a href="#__p6__lb67" name="__p6__lb67" id="__p6__lb67" class="linenumbersTransparent linenumbers pb">0067</a>in einem großen Saal ein allerliebstes Theater hergerichtet, auf wel
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb68" name="__p6__lb68" id="__p6__lb68" class="linenumbersTransparent linenumbers pb">0068</a>chem die Eleven unter der Leitung der berühmten Sänger <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_196">Nourrit</span></span><span class="space"> </span><br class="pb" /><a href="#__p6__lb69" name="__p6__lb69" id="__p6__lb69" class="linenumbersTransparent linenumbers pb">0069</a>und <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_54">Derivis</span></span> ihre Uebungen hielten. „Wie glücklich“, ruft er aus,
-                           <br class="pb" /><a href="#__p6__lb70" name="__p6__lb70" id="__p6__lb70" class="linenumbersVisible linenumbers pb" data-lbnr="70">0070</a>„sind diese jungen Talente in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_21">Frankreich</span>, daß ihnen eine solche Gele
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb71" name="__p6__lb71" id="__p6__lb71" class="linenumbersTransparent linenumbers pb">0071</a>genheit zur Vorbereitung für die schwere Kunst der Bühne geboten
+                           <br class="pb" /><a href="#__p6__lb67" name="__p6__lb67" id="__p6__lb67" class="linenumbersTransparent linenumbers pb">0067</a>in einem großen Saal ein allerliebstes Theater hergerichtet, auf wel<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb68" name="__p6__lb68" id="__p6__lb68" class="linenumbersTransparent linenumbers pb">0068</a>chem die Eleven unter der Leitung der berühmten Sänger <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_196">Nourrit</span></span><span class="space"> </span><br class="pb" /><a href="#__p6__lb69" name="__p6__lb69" id="__p6__lb69" class="linenumbersTransparent linenumbers pb">0069</a>und <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_54">Derivis</span></span> ihre Uebungen hielten. „Wie glücklich“, ruft er aus,
+                           <br class="pb" /><a href="#__p6__lb70" name="__p6__lb70" id="__p6__lb70" class="linenumbersVisible linenumbers pb" data-lbnr="70">0070</a>„sind diese jungen Talente in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_21">Frankreich</span>, daß ihnen eine solche Gele<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb71" name="__p6__lb71" id="__p6__lb71" class="linenumbersTransparent linenumbers pb">0071</a>genheit zur Vorbereitung für die schwere Kunst der Bühne geboten
                            <br class="pb" /><a href="#__p6__lb72" name="__p6__lb72" id="__p6__lb72" class="linenumbersTransparent linenumbers pb">0072</a>wird! In ganz <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutschland</span> müssen die jungen Leute durch Errathen,
                            <br class="pb" /><a href="#__p6__lb73" name="__p6__lb73" id="__p6__lb73" class="linenumbersTransparent linenumbers pb">0073</a>Versuche und gelegentliches Ablernen bei erfahrenen Künstlern das in
                            <br class="pb" /><a href="#__p6__lb74" name="__p6__lb74" id="__p6__lb74" class="linenumbersTransparent linenumbers pb">0074</a>vielen Jahren zu erlernen suchen, was dem Begünstigten hier in
                            <br class="pb" /><a href="#__p6__lb75" name="__p6__lb75" id="__p6__lb75" class="linenumbersVisible linenumbers pb" data-lbnr="75">0075</a>einem Halbjahre beizubringen ist.“ Dieser Klageruf des berühmten
                            <br class="pb" /><a href="#__p6__lb76" name="__p6__lb76" id="__p6__lb76" class="linenumbersTransparent linenumbers pb">0076</a>Dramaturgen fiel uns lebhaft ein, als die erste Kunde von unserer
                            <br class="pb" /><a href="#__p6__lb77" name="__p6__lb77" id="__p6__lb77" class="linenumbersTransparent linenumbers pb">0077</a>„Opernschule“ wie eine rettende Verheißung auftauchte. Allerdings
-                           <br class="pb" /><a href="#__p6__lb78" name="__p6__lb78" id="__p6__lb78" class="linenumbersTransparent linenumbers pb">0078</a>nur für die Oper. In einem vollständigen Institut soll die Opern
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb79" name="__p6__lb79" id="__p6__lb79" class="linenumbersTransparent linenumbers pb">0079</a>schule nur eine eigene Classe bilden; diese Stellung ist ihr auch in
-                           <br class="pb" /><a href="#__p6__lb80" name="__p6__lb80" id="__p6__lb80" class="linenumbersVisible linenumbers pb" data-lbnr="80">0080</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span> angewiesen, wo die Theaterschule mit dem Conservatorium ver
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb81" name="__p6__lb81" id="__p6__lb81" class="linenumbersTransparent linenumbers pb">0081</a>bunden ist. An die Großartigkeit des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Instituts darf man
+                           <br class="pb" /><a href="#__p6__lb78" name="__p6__lb78" id="__p6__lb78" class="linenumbersTransparent linenumbers pb">0078</a>nur für die Oper. In einem vollständigen Institut soll die Opern<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb79" name="__p6__lb79" id="__p6__lb79" class="linenumbersTransparent linenumbers pb">0079</a>schule nur eine eigene Classe bilden; diese Stellung ist ihr auch in
+                           <br class="pb" /><a href="#__p6__lb80" name="__p6__lb80" id="__p6__lb80" class="linenumbersVisible linenumbers pb" data-lbnr="80">0080</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span> angewiesen, wo die Theaterschule mit dem Conservatorium ver<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb81" name="__p6__lb81" id="__p6__lb81" class="linenumbersTransparent linenumbers pb">0081</a>bunden ist. An die Großartigkeit des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Instituts darf man
                            <br class="pb" /><a href="#__p6__lb82" name="__p6__lb82" id="__p6__lb82" class="linenumbersTransparent linenumbers pb">0082</a>nicht denken, wenn von der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Opernschule die Rede ist.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p7__lb83" name="__p7__lb83" id="__p7__lb83" class="linenumbersTransparent linenumbers pb">0083</a>Das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Conservatorium, bekanntlich eine großartige Schö
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb84" name="__p7__lb84" id="__p7__lb84" class="linenumbersTransparent linenumbers pb">0084</a>pfung der Revolution, besitzt ein weitläufiges, für 500 Zöglinge ein
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb85" name="__p7__lb85" id="__p7__lb85" class="linenumbersVisible linenumbers pb" data-lbnr="85">0085</a>gerichtetes Gebäude. Bis zur Juli-Revolution, nach welcher erhebliche
+                        <p class="yes-index"><br class="pb" /><a href="#__p7__lb83" name="__p7__lb83" id="__p7__lb83" class="linenumbersTransparent linenumbers pb">0083</a>Das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Conservatorium, bekanntlich eine großartige Schö<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb84" name="__p7__lb84" id="__p7__lb84" class="linenumbersTransparent linenumbers pb">0084</a>pfung der Revolution, besitzt ein weitläufiges, für 500 Zöglinge ein<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb85" name="__p7__lb85" id="__p7__lb85" class="linenumbersVisible linenumbers pb" data-lbnr="85">0085</a>gerichtetes Gebäude. Bis zur Juli-Revolution, nach welcher erhebliche
                            <br class="pb" /><a href="#__p7__lb86" name="__p7__lb86" id="__p7__lb86" class="linenumbersTransparent linenumbers pb">0086</a>Einschränkungen eintraten, ertheilten 72 Professoren den Unterricht
                            <br class="pb" /><a href="#__p7__lb87" name="__p7__lb87" id="__p7__lb87" class="linenumbersTransparent linenumbers pb">0087</a>in ebenso viel Classen, deren keine mehr als 8 Zöglinge enthalten
                            <br class="pb" /><a href="#__p7__lb88" name="__p7__lb88" id="__p7__lb88" class="linenumbersTransparent linenumbers pb">0088</a>durfte. Die Eleven für die <span class="italic">Bühne</span> werden in 4 Classen unterrichtet,
@@ -237,28 +223,23 @@
                            <br class="pb" /><a href="#__p8__lb98" name="__p8__lb98" id="__p8__lb98" class="linenumbersTransparent linenumbers pb">0098</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> durchaus nicht beabsichtigt. Ja, man schien jeder Rücksicht auf
                            <br class="pb" /><a href="#__p8__lb99" name="__p8__lb99" id="__p8__lb99" class="linenumbersTransparent linenumbers pb">0099</a>das recitirende Drama absichtlich aus dem Wege zu gehen, wie schon
                            <br class="pb" /><a href="#__p8__lb100" name="__p8__lb100" id="__p8__lb100" class="linenumbersVisible linenumbers pb" data-lbnr="100">0100</a>aus der Thatsache hervorleuchtet, daß eine dramaturgische Autorität,
-                           <br class="pb" /><a href="#__p8__lb101" name="__p8__lb101" id="__p8__lb101" class="linenumbersTransparent linenumbers pb">0101</a>wie <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_153">Laube</span></span>, die Errichtung der Hofopernschule erst durch die Zeitun
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb102" name="__p8__lb102" id="__p8__lb102" class="linenumbersTransparent linenumbers pb">0102</a>gen erfahren haben soll. Die Entbehrung des vollständigen Ganzen
+                           <br class="pb" /><a href="#__p8__lb101" name="__p8__lb101" id="__p8__lb101" class="linenumbersTransparent linenumbers pb">0101</a>wie <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_153">Laube</span></span>, die Errichtung der Hofopernschule erst durch die Zeitun<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb102" name="__p8__lb102" id="__p8__lb102" class="linenumbersTransparent linenumbers pb">0102</a>gen erfahren haben soll. Die Entbehrung des vollständigen Ganzen
                            <br class="pb" /><a href="#__p8__lb103" name="__p8__lb103" id="__p8__lb103" class="linenumbersTransparent linenumbers pb">0103</a>soll uns deshalb nicht ungerecht machen gegen das nützliche Fragment.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p9__lb104" name="__p9__lb104" id="__p9__lb104" class="linenumbersTransparent linenumbers pb">0104</a>Stellen wir uns auf den praktischen Standpunkt der Hofopern
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb105" name="__p9__lb105" id="__p9__lb105" class="linenumbersVisible linenumbers pb" data-lbnr="105">0105</a>direction und gestehen, daß die Sorge für die Zukunft <span class="italic">ihrer</span> Bühne
+                        <p class="yes-index"><br class="pb" /><a href="#__p9__lb104" name="__p9__lb104" id="__p9__lb104" class="linenumbersTransparent linenumbers pb">0104</a>Stellen wir uns auf den praktischen Standpunkt der Hofopern<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb105" name="__p9__lb105" id="__p9__lb105" class="linenumbersVisible linenumbers pb" data-lbnr="105">0105</a>direction und gestehen, daß die Sorge für die Zukunft <span class="italic">ihrer</span> Bühne
                            <br class="pb" /><a href="#__p9__lb106" name="__p9__lb106" id="__p9__lb106" class="linenumbersTransparent linenumbers pb">0106</a>ihr vorderhand als die dringendste erscheinen mußte. Die Klage über
                            <br class="pb" /><a href="#__p9__lb107" name="__p9__lb107" id="__p9__lb107" class="linenumbersTransparent linenumbers pb">0107</a>den zunehmenden Verfall des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">deutsch</span>en Opernwesens, namentlich der
                            <br class="pb" /><a href="#__p9__lb108" name="__p9__lb108" id="__p9__lb108" class="linenumbersTransparent linenumbers pb">0108</a>Gesangskräfte, ist eine allgemeine und begründete. Und doch möchte
                            <br class="pb" /><a href="#__p9__lb109" name="__p9__lb109" id="__p9__lb109" class="linenumbersTransparent linenumbers pb">0109</a>man leidenschaftlichen Tadlern oft antworten, wie jener Theaterhabitué,
-                           <br class="pb" /><a href="#__p9__lb110" name="__p9__lb110" id="__p9__lb110" class="linenumbersVisible linenumbers pb" data-lbnr="110">0110</a>der auf die herausfordernde Frage: „Und wie gefällt denn Ihnen un
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb111" name="__p9__lb111" id="__p9__lb111" class="linenumbersTransparent linenumbers pb">0111</a>sere jetzige miserable Oper?“ erwiderte: „Besser als im nächsten
+                           <br class="pb" /><a href="#__p9__lb110" name="__p9__lb110" id="__p9__lb110" class="linenumbersVisible linenumbers pb" data-lbnr="110">0110</a>der auf die herausfordernde Frage: „Und wie gefällt denn Ihnen un<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb111" name="__p9__lb111" id="__p9__lb111" class="linenumbersTransparent linenumbers pb">0111</a>sere jetzige miserable Oper?“ erwiderte: „Besser als im nächsten
                            <br class="pb" /><a href="#__p9__lb112" name="__p9__lb112" id="__p9__lb112" class="linenumbersTransparent linenumbers pb">0112</a>Jahr!“ Der Gedanke, durch eine planmäßige Vorsorge die nächste
                            <br class="pb" /><a href="#__p9__lb113" name="__p9__lb113" id="__p9__lb113" class="linenumbersTransparent linenumbers pb">0113</a>Zukunft des Operntheaters dem bloßen Zufall zu entreißen, liegt nahe
                            <br class="pb" /><a href="#__p9__lb114" name="__p9__lb114" id="__p9__lb114" class="linenumbersTransparent linenumbers pb">0114</a>genug. Wir sehen die Himmelsgabe schöner Stimmen selten werden,
                            <br class="pb" /><a href="#__p9__lb115" name="__p9__lb115" id="__p9__lb115" class="linenumbersVisible linenumbers pb" data-lbnr="115">0115</a>und noch seltener deren vollendete Ausbildung. „Unsere heutigen
                            <br class="pb" /><a href="#__p9__lb116" name="__p9__lb116" id="__p9__lb116" class="linenumbersTransparent linenumbers pb">0116</a>Sängerinnen haben meistens mit 30 Jahren keine Stimme mehr,“
                            <br class="pb" /><a href="#__p9__lb117" name="__p9__lb117" id="__p9__lb117" class="linenumbersTransparent linenumbers pb">0117</a>hörte ich einmal in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_34">London</span><span class="space"> </span><span class="italic">Jenny <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_163">Lind</span></span> äußern, — „das ist die
-                           <br class="pb" /><a href="#__p9__lb118" name="__p9__lb118" id="__p9__lb118" class="linenumbersTransparent linenumbers pb">0118</a>Schuld mangelhafter und verkehrter Schulung. Die schönsten Stim
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb119" name="__p9__lb119" id="__p9__lb119" class="linenumbersTransparent linenumbers pb">0119</a>men gehen durch Verwahrlosung zu Grunde. Ich singe noch mit
-                           <br class="pb" /><a href="#__p9__lb120" name="__p9__lb120" id="__p9__lb120" class="linenumbersVisible linenumbers pb" data-lbnr="120">0120</a>Leichtigkeit,“ fügte sie nach einer Pause hinzu, „und hatte doch nie
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb121" name="__p9__lb121" id="__p9__lb121" class="linenumbersTransparent linenumbers pb">0121</a>mals viel Stimme.“
+                           <br class="pb" /><a href="#__p9__lb118" name="__p9__lb118" id="__p9__lb118" class="linenumbersTransparent linenumbers pb">0118</a>Schuld mangelhafter und verkehrter Schulung. Die schönsten Stim<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb119" name="__p9__lb119" id="__p9__lb119" class="linenumbersTransparent linenumbers pb">0119</a>men gehen durch Verwahrlosung zu Grunde. Ich singe noch mit
+                           <br class="pb" /><a href="#__p9__lb120" name="__p9__lb120" id="__p9__lb120" class="linenumbersVisible linenumbers pb" data-lbnr="120">0120</a>Leichtigkeit,“ fügte sie nach einer Pause hinzu, „und hatte doch nie<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb121" name="__p9__lb121" id="__p9__lb121" class="linenumbersTransparent linenumbers pb">0121</a>mals viel Stimme.“
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p10__lb122" name="__p10__lb122" id="__p10__lb122" class="linenumbersTransparent linenumbers pb">0122</a>Durch ein eigenes Institut für’s Erste schöne Stimmen zur
                            <br class="pb" /><a href="#__p10__lb123" name="__p10__lb123" id="__p10__lb123" class="linenumbersTransparent linenumbers pb">0123</a>Oper heranzulocken, sodann sie methodisch für die Bühne auszubilden,
@@ -270,8 +251,7 @@
                            <br class="pb" /><a href="#__p11__lb131" name="__p11__lb131" id="__p11__lb131" class="linenumbersTransparent linenumbers pb">0131</a>Andere konnte nur in der Theaterkanzlei eingesehen werden, während
                            <br class="pb" /><a href="#__p11__lb132" name="__p11__lb132" id="__p11__lb132" class="linenumbersTransparent linenumbers pb">0132</a>doch in Allem und Jedem die größte Publicität angezeigt war. Die
                            <br class="pb" /><a href="#__p11__lb133" name="__p11__lb133" id="__p11__lb133" class="linenumbersTransparent linenumbers pb">0133</a>Hauptbestimmungen (wenn sie nicht seither wieder verändert wurden),
-                           <br class="pb" /><a href="#__p11__lb134" name="__p11__lb134" id="__p11__lb134" class="linenumbersTransparent linenumbers pb">0134</a>sind, soweit sie uns hier interessiren, folgende: Die k. k. Hofopern
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb135" name="__p11__lb135" id="__p11__lb135" class="linenumbersVisible linenumbers pb" data-lbnr="135">0135</a>schule ist eine „vom Theater vollständig unabhängige“ (?) Hofanstalt,
+                           <br class="pb" /><a href="#__p11__lb134" name="__p11__lb134" id="__p11__lb134" class="linenumbersTransparent linenumbers pb">0134</a>sind, soweit sie uns hier interessiren, folgende: Die k. k. Hofopern<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb135" name="__p11__lb135" id="__p11__lb135" class="linenumbersVisible linenumbers pb" data-lbnr="135">0135</a>schule ist eine „vom Theater vollständig unabhängige“ (?) Hofanstalt,
                            <br class="pb" /><a href="#__p11__lb136" name="__p11__lb136" id="__p11__lb136" class="linenumbersTransparent linenumbers pb">0136</a>unter der Oberleitung des Oberstkämmerer-Amtes. Sie hat für die
                            <br class="pb" /><a href="#__p11__lb137" name="__p11__lb137" id="__p11__lb137" class="linenumbersTransparent linenumbers pb">0137</a>Heranbildung eines „kräftigen Nachwuchses an Gesangskünstlern“ für
                            <br class="pb" /><a href="#__p11__lb138" name="__p11__lb138" id="__p11__lb138" class="linenumbersTransparent linenumbers pb">0138</a>das Hofoperntheater zu sorgen. Die Mädchen und Jünglinge, welche
@@ -279,42 +259,32 @@
                            <br class="pb" /><a href="#__p11__lb140" name="__p11__lb140" id="__p11__lb140" class="linenumbersVisible linenumbers pb" data-lbnr="140">0140</a>nach einer Aufnahmsprüfung in den „niederen Curs“ eingereiht,
                            <br class="pb" /><a href="#__p11__lb141" name="__p11__lb141" id="__p11__lb141" class="linenumbersTransparent linenumbers pb">0141</a>welcher drei Jahrgänge umfaßt. Diejenigen Eleven, deren Fleiß und
                            <br class="pb" /><a href="#__p11__lb142" name="__p11__lb142" id="__p11__lb142" class="linenumbersTransparent linenumbers pb">0142</a>Talent nach Ablauf dieser Zeit zu höhern Erwartungen berechtigt,
-                           <br class="pb" /><a href="#__p11__lb143" name="__p11__lb143" id="__p11__lb143" class="linenumbersTransparent linenumbers pb">0143</a>treten ein in die eigentlichen Ausbildungsclassen, den fünf Jahre um
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb144" name="__p11__lb144" id="__p11__lb144" class="linenumbersTransparent linenumbers pb">0144</a>fassenden „höhern Curs“. Für diese Zeit von <span class="italic">acht Jahren</span> muß
+                           <br class="pb" /><a href="#__p11__lb143" name="__p11__lb143" id="__p11__lb143" class="linenumbersTransparent linenumbers pb">0143</a>treten ein in die eigentlichen Ausbildungsclassen, den fünf Jahre um<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb144" name="__p11__lb144" id="__p11__lb144" class="linenumbersTransparent linenumbers pb">0144</a>fassenden „höhern Curs“. Für diese Zeit von <span class="italic">acht Jahren</span> muß
                            <br class="pb" /><a href="#__p11__lb145" name="__p11__lb145" id="__p11__lb145" class="linenumbersVisible linenumbers pb" data-lbnr="145">0145</a>jeder Eintretende sich verpflichten. Er erhält unentgeltlichen Unterricht
                            <br class="pb" /><a href="#__p11__lb146" name="__p11__lb146" id="__p11__lb146" class="linenumbersTransparent linenumbers pb">0146</a>im Gesang, Clavierspiel, den Anfangsgründen des Generalbaßes, in
                            <br class="pb" /><a href="#__p11__lb147" name="__p11__lb147" id="__p11__lb147" class="linenumbersTransparent linenumbers pb">0147</a>Mimik und Declamation. In den ersten Jahren haben die Eleven
                            <br class="pb" /><a href="#__p11__lb148" name="__p11__lb148" id="__p11__lb148" class="linenumbersTransparent linenumbers pb">0148</a>nur ihrer Ausbildung obzuliegen und beziehen keinerlei Remuneration.
                            <br class="pb" /><a href="#__p11__lb149" name="__p11__lb149" id="__p11__lb149" class="linenumbersTransparent linenumbers pb">0149</a>„Vom <span class="italic">vierten</span> Jahrgang an,“ werden sie im Chor oder in kleinen
                            <br class="pb" /><a href="#__p11__lb150" name="__p11__lb150" id="__p11__lb150" class="linenumbersVisible linenumbers pb" data-lbnr="150">0150</a>Rollen nach dem Maß ihrer Eignung bei den Opernvorstellungen
-                           <br class="pb" /><a href="#__p11__lb151" name="__p11__lb151" id="__p11__lb151" class="linenumbersTransparent linenumbers pb">0151</a>verwendet und beziehen dafür Remunerationen, welche Anfangs zwi
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb152" name="__p11__lb152" id="__p11__lb152" class="linenumbersTransparent linenumbers pb">0152</a>schen 25 und 60 fl., in den letzten Jahren zwischen 150 und 120 fl.
+                           <br class="pb" /><a href="#__p11__lb151" name="__p11__lb151" id="__p11__lb151" class="linenumbersTransparent linenumbers pb">0151</a>verwendet und beziehen dafür Remunerationen, welche Anfangs zwi<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb152" name="__p11__lb152" id="__p11__lb152" class="linenumbersTransparent linenumbers pb">0152</a>schen 25 und 60 fl., in den letzten Jahren zwischen 150 und 120 fl.
                            <br class="pb" /><a href="#__p11__lb153" name="__p11__lb153" id="__p11__lb153" class="linenumbersTransparent linenumbers pb">0153</a>monatlich betragen. Die Zöglinge, — welche ein förmliches Decret
-                           <br class="pb" /><a href="#__p11__lb154" name="__p11__lb154" id="__p11__lb154" class="linenumbersTransparent linenumbers pb">0154</a>als „Eleven der k. k. Hofopernschule“ erhalten, — dürfen ohne Zu
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb155" name="__p11__lb155" id="__p11__lb155" class="linenumbersVisible linenumbers pb" data-lbnr="155">0155</a>stimmung bei keinerlei öffentlichen Productionen mitwirken, sich außer
-                           <br class="pb" /><a href="#__p11__lb156" name="__p11__lb156" id="__p11__lb156" class="linenumbersTransparent linenumbers pb">0156</a>den (einmonatlichen) Ferien von <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> nicht entfernen und vor Ab
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb157" name="__p11__lb157" id="__p11__lb157" class="linenumbersTransparent linenumbers pb">0157</a>lauf der acht Jahre kein Engagement eingehen.
+                           <br class="pb" /><a href="#__p11__lb154" name="__p11__lb154" id="__p11__lb154" class="linenumbersTransparent linenumbers pb">0154</a>als „Eleven der k. k. Hofopernschule“ erhalten, — dürfen ohne Zu<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb155" name="__p11__lb155" id="__p11__lb155" class="linenumbersVisible linenumbers pb" data-lbnr="155">0155</a>stimmung bei keinerlei öffentlichen Productionen mitwirken, sich außer
+                           <br class="pb" /><a href="#__p11__lb156" name="__p11__lb156" id="__p11__lb156" class="linenumbersTransparent linenumbers pb">0156</a>den (einmonatlichen) Ferien von <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> nicht entfernen und vor Ab<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb157" name="__p11__lb157" id="__p11__lb157" class="linenumbersTransparent linenumbers pb">0157</a>lauf der acht Jahre kein Engagement eingehen.
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p12__lb158" name="__p12__lb158" id="__p12__lb158" class="linenumbersTransparent linenumbers pb">0158</a>Das wichtigste Bedenken gegen diese Bestimmungen, betrifft die
-                           <br class="pb" /><a href="#__p12__lb159" name="__p12__lb159" id="__p12__lb159" class="linenumbersTransparent linenumbers pb">0159</a>Verwendung der Eleven im Theaterchor. Diese Verwendung ist that
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p12__lb160" name="__p12__lb160" id="__p12__lb160" class="linenumbersVisible linenumbers pb" data-lbnr="160">0160</a>sächlich noch in weit größerem als dem statutenmäßigen Umfang vor<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb161" name="__p13__lb161" id="__p13__lb161" class="linenumbersTransparent linenumbers pb">0161</a>genommen worden; die Eleven wurden nicht erst im vierten, sondern
+                           <br class="pb" /><a href="#__p12__lb159" name="__p12__lb159" id="__p12__lb159" class="linenumbersTransparent linenumbers pb">0159</a>Verwendung der Eleven im Theaterchor. Diese Verwendung ist that<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p12__lb160" name="__p12__lb160" id="__p12__lb160" class="linenumbersVisible linenumbers pb" data-lbnr="160">0160</a>sächlich noch in weit größerem als dem statutenmäßigen Umfang vor<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb161" name="__p13__lb161" id="__p13__lb161" class="linenumbersTransparent linenumbers pb">0161</a>genommen worden; die Eleven wurden nicht erst im vierten, sondern
                            <br class="pb" /><a href="#__p13__lb162" name="__p13__lb162" id="__p13__lb162" class="linenumbersTransparent linenumbers pb">0162</a>bereits im ersten Jahrgang der Opernschule auf das Ausgiebigste im
                            <br class="pb" /><a href="#__p13__lb163" name="__p13__lb163" id="__p13__lb163" class="linenumbersTransparent linenumbers pb">0163</a>Opernchor verwendet. <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_202">Offenbach</span>’s „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_107">Rheinnixe</span>“ und die zweimonatliche
                            <br class="pb" /><a href="#__p13__lb164" name="__p13__lb164" id="__p13__lb164" class="linenumbersTransparent linenumbers pb">0164</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">italienisch</span>e Saison haben die Eleven bedenklich in Athem erhalten:
                            <br class="pb" /><a href="#__p13__lb165" name="__p13__lb165" id="__p13__lb165" class="linenumbersVisible linenumbers pb" data-lbnr="165">0165</a>den ganzen Winter und Frühling hindurch war das Auswendiglernen
-                           <br class="pb" /><a href="#__p13__lb166" name="__p13__lb166" id="__p13__lb166" class="linenumbersTransparent linenumbers pb">0166</a>nichtsnutziger Chöre fast der einzige Lehrstoff, Theaterproben und Vor
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb167" name="__p13__lb167" id="__p13__lb167" class="linenumbersTransparent linenumbers pb">0167</a>stellungen die überwiegende Beschäftigung der Eleven. Am Schluß
+                           <br class="pb" /><a href="#__p13__lb166" name="__p13__lb166" id="__p13__lb166" class="linenumbersTransparent linenumbers pb">0166</a>nichtsnutziger Chöre fast der einzige Lehrstoff, Theaterproben und Vor<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb167" name="__p13__lb167" id="__p13__lb167" class="linenumbersTransparent linenumbers pb">0167</a>stellungen die überwiegende Beschäftigung der Eleven. Am Schluß
                            <br class="pb" /><a href="#__p13__lb168" name="__p13__lb168" id="__p13__lb168" class="linenumbersTransparent linenumbers pb">0168</a>der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">italienisch</span>en Saison habe ich mich ausführlich über diesen Punkt
                            <br class="pb" /><a href="#__p13__lb169" name="__p13__lb169" id="__p13__lb169" class="linenumbersTransparent linenumbers pb">0169</a>und die falsche Richtung, in welche die Operschule damit geräth,
                            <br class="pb" /><a href="#__p13__lb170" name="__p13__lb170" id="__p13__lb170" class="linenumbersVisible linenumbers pb" data-lbnr="170">0170</a>ausgesprochen und kann nur wiederholen, daß dieses Institut zu etwas
-                           <br class="pb" /><a href="#__p13__lb171" name="__p13__lb171" id="__p13__lb171" class="linenumbersTransparent linenumbers pb">0171</a>ganz anderem bestimmt war und bestimmt ist, als zu einer Wind
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb172" name="__p13__lb172" id="__p13__lb172" class="linenumbersTransparent linenumbers pb">0172</a>lade, welche lediglich unsern athemlosen Theaterchor mit Luft zu
-                           <br class="pb" /><a href="#__p13__lb173" name="__p13__lb173" id="__p13__lb173" class="linenumbersTransparent linenumbers pb">0173</a>speisen hat. Im Detail hat die Organisation ihre guten und bedenk
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb174" name="__p13__lb174" id="__p13__lb174" class="linenumbersTransparent linenumbers pb">0174</a>lichen Seiten. In der Hauptsache wird — (von der oben gerügten
+                           <br class="pb" /><a href="#__p13__lb171" name="__p13__lb171" id="__p13__lb171" class="linenumbersTransparent linenumbers pb">0171</a>ganz anderem bestimmt war und bestimmt ist, als zu einer Wind<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb172" name="__p13__lb172" id="__p13__lb172" class="linenumbersTransparent linenumbers pb">0172</a>lade, welche lediglich unsern athemlosen Theaterchor mit Luft zu
+                           <br class="pb" /><a href="#__p13__lb173" name="__p13__lb173" id="__p13__lb173" class="linenumbersTransparent linenumbers pb">0173</a>speisen hat. Im Detail hat die Organisation ihre guten und bedenk<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb174" name="__p13__lb174" id="__p13__lb174" class="linenumbersTransparent linenumbers pb">0174</a>lichen Seiten. In der Hauptsache wird — (von der oben gerügten
                            <br class="pb" /><a href="#__p13__lb175" name="__p13__lb175" id="__p13__lb175" class="linenumbersVisible linenumbers pb" data-lbnr="175">0175</a>Verwendung abgesehen) — das Gedeihen der Opernschule, wie aller
-                           <br class="pb" /><a href="#__p13__lb176" name="__p13__lb176" id="__p13__lb176" class="linenumbersTransparent linenumbers pb">0176</a>ähnlichen Institute, wesentlich von den leitenden und lehrenden Per
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb177" name="__p13__lb177" id="__p13__lb177" class="linenumbersTransparent linenumbers pb">0177</a>sönlichkeiten abhängen. Die künstlerische Richtung und wissenschaft
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb178" name="__p13__lb178" id="__p13__lb178" class="linenumbersTransparent linenumbers pb">0178</a>liche Bildung des <span class="italic">Directors</span> der Opernschule sind hiebei um so
+                           <br class="pb" /><a href="#__p13__lb176" name="__p13__lb176" id="__p13__lb176" class="linenumbersTransparent linenumbers pb">0176</a>ähnlichen Institute, wesentlich von den leitenden und lehrenden Per<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb177" name="__p13__lb177" id="__p13__lb177" class="linenumbersTransparent linenumbers pb">0177</a>sönlichkeiten abhängen. Die künstlerische Richtung und wissenschaft<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb178" name="__p13__lb178" id="__p13__lb178" class="linenumbersTransparent linenumbers pb">0178</a>liche Bildung des <span class="italic">Directors</span> der Opernschule sind hiebei um so
                            <br class="pb" /><a href="#__p13__lb179" name="__p13__lb179" id="__p13__lb179" class="linenumbersTransparent linenumbers pb">0179</a>wichtigere Erfordernisse, als er statutenmäßig den Lehrgang und die
                            <br class="pb" /><a href="#__p13__lb180" name="__p13__lb180" id="__p13__lb180" class="linenumbersVisible linenumbers pb" data-lbnr="180">0180</a>Methode bestimmt, so daß die einzelnen Fachlehrer pädagogisch und
                            <br class="pb" /><a href="#__p13__lb181" name="__p13__lb181" id="__p13__lb181" class="linenumbersTransparent linenumbers pb">0181</a>ästhetisch nicht selbständig sind. Was wieder diese Lehrer betrifft,
@@ -322,69 +292,12 @@
                            <br class="pb" /><a href="#__p13__lb183" name="__p13__lb183" id="__p13__lb183" class="linenumbersTransparent linenumbers pb">0183</a>wichtig genug hält, um sie aus den ersten dramatischen Künstlern
                            <br class="pb" /><a href="#__p13__lb184" name="__p13__lb184" id="__p13__lb184" class="linenumbersTransparent linenumbers pb">0184</a>der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Bühnen zu wählen. In welchem Maße die leitenden und
                            <br class="pb" /><a href="#__p13__lb185" name="__p13__lb185" id="__p13__lb185" class="linenumbersVisible linenumbers pb" data-lbnr="185">0185</a>lehrenden Kräfte an unserer Hofopernschule ihrer Aufgabe gewachsen
-                           <br class="pb" /><a href="#__p13__lb186" name="__p13__lb186" id="__p13__lb186" class="linenumbersTransparent linenumbers pb">0186</a>sind, werden wol in nicht allzulanger Zeit die Resultate dieses In
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb187" name="__p13__lb187" id="__p13__lb187" class="linenumbersTransparent linenumbers pb">0187</a>stitutes darthun. Wir wollen nicht verzagen, wenn gegenwärtig
-                           <br class="pb" /><a href="#__p13__lb188" name="__p13__lb188" id="__p13__lb188" class="linenumbersTransparent linenumbers pb">0188</a>manche Stelle mittelmäßig besetzt erscheint: die Persönlichkeiten wech
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb189" name="__p13__lb189" id="__p13__lb189" class="linenumbersTransparent linenumbers pb">0189</a>seln, das Institut bleibt. Und diese, die Opernschule, wie sie sein
+                           <br class="pb" /><a href="#__p13__lb186" name="__p13__lb186" id="__p13__lb186" class="linenumbersTransparent linenumbers pb">0186</a>sind, werden wol in nicht allzulanger Zeit die Resultate dieses In<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb187" name="__p13__lb187" id="__p13__lb187" class="linenumbersTransparent linenumbers pb">0187</a>stitutes darthun. Wir wollen nicht verzagen, wenn gegenwärtig
+                           <br class="pb" /><a href="#__p13__lb188" name="__p13__lb188" id="__p13__lb188" class="linenumbersTransparent linenumbers pb">0188</a>manche Stelle mittelmäßig besetzt erscheint: die Persönlichkeiten wech<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb189" name="__p13__lb189" id="__p13__lb189" class="linenumbersTransparent linenumbers pb">0189</a>seln, das Institut bleibt. Und diese, die Opernschule, wie sie sein
                            <br class="pb" /><a href="#__p13__lb190" name="__p13__lb190" id="__p13__lb190" class="linenumbersVisible linenumbers pb" data-lbnr="190">0190</a>kann und soll, ist immerhin eine Thatsache, die der Musikhistoriker
-                           <br class="pb" /><a href="#__p13__lb191" name="__p13__lb191" id="__p13__lb191" class="linenumbersTransparent linenumbers pb">0191</a>unter den <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Kunst-Errungenschaften dieses Decenniums auf
-                           <span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb192" name="__p13__lb192" id="__p13__lb192" class="linenumbersTransparent linenumbers pb">0192</a>zählen wird.</p>
+                           <br class="pb" /><a href="#__p13__lb191" name="__p13__lb191" id="__p13__lb191" class="linenumbersTransparent linenumbers pb">0191</a>unter den <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Kunst-Errungenschaften dieses Decenniums auf<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb192" name="__p13__lb192" id="__p13__lb192" class="linenumbersTransparent linenumbers pb">0192</a>zählen wird.</p>
                      </div>
                      <div class="tei-back">
-                        <div class="modal fade" id="hsl_person_id_163" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Lind, Jenny" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Lind, Jenny</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/118780026" target="_blank">https://d-nb.info/gnd/118780026</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_163.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_120" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Hellmesberger, Joseph" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Hellmesberger, Joseph</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td>Hellmesberger senior, Joseph</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/103787038" target="_blank">https://d-nb.info/gnd/103787038</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_120.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
                         <div class="modal fade" id="hsl_person_id_54" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dérivis, Henri-Étienne" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -404,60 +317,6 @@
                                           <tr>
                                              <th> Weiterlesen </th>
                                              <td><a href="hsl_person_id_54.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_153" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Laube, Heinrich" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Laube, Heinrich</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/118570080" target="_blank">https://d-nb.info/gnd/118570080</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_153.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_196" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Nourrit, Adolphe" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nourrit, Adolphe</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/119335131" target="_blank">https://d-nb.info/gnd/119335131</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_196.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -493,6 +352,33 @@
                               </div>
                            </div>
                         </div>
+                        <div class="modal fade" id="hsl_person_id_153" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Laube, Heinrich" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Laube, Heinrich</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/118570080" target="_blank">https://d-nb.info/gnd/118570080</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_person_id_153.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
                         <div class="modal fade" id="hsl_person_id_202" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Offenbach, Jacques" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -520,29 +406,25 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_73" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Milano" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_120" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Hellmesberger, Joseph" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Milano</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Hellmesberger, Joseph</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
-                                             <td>Mailand</td>
+                                             <th> Name (alt) </th>
+                                             <td>Hellmesberger senior, Joseph</td>
                                           </tr>
                                           <tr>
-                                             <th> Land </th>
-                                             <td>IT, Italy</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/3173435/" target="_blank">3173435</a></td>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/103787038" target="_blank">https://d-nb.info/gnd/103787038</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_73.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_120.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -551,29 +433,25 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_14" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Deutschland" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_196" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Nourrit, Adolphe" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Deutschland</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nourrit, Adolphe</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
+                                             <th> Name (alt) </th>
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Land </th>
-                                             <td>DE, Germany</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2921044/" target="_blank">2921044</a></td>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/119335131" target="_blank">https://d-nb.info/gnd/119335131</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_14.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_196.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -582,91 +460,25 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_44" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Paris" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_163" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Lind, Jenny" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Paris</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Lind, Jenny</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
+                                             <th> Name (alt) </th>
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Land </th>
-                                             <td>FR, France</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2988507/" target="_blank">2988507</a></td>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/118780026" target="_blank">https://d-nb.info/gnd/118780026</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_44.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_place_id_21" data-bs-toggle="modal" tabindex="-1" aria-labelledby="France" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">France</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Alternativname </th>
-                                             <td>Frankreich</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Land </th>
-                                             <td>FR, France</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/3017382/" target="_blank">3017382</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_21.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_place_id_34" data-bs-toggle="modal" tabindex="-1" aria-labelledby="London" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">London</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Alternativname </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Land </th>
-                                             <td>GB, United Kingdom</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2643743/" target="_blank">2643743</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_34.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_163.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -706,6 +518,130 @@
                               </div>
                            </div>
                         </div>
+                        <div class="modal fade" id="hsl_place_id_28" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Italia" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Italia</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td>Italien</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>IT, Italy</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/3175395/" target="_blank">3175395</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_28.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_44" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Paris" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Paris</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>FR, France</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2988507/" target="_blank">2988507</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_44.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_73" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Milano" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Milano</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td>Mailand</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>IT, Italy</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/3173435/" target="_blank">3173435</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_73.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_34" data-bs-toggle="modal" tabindex="-1" aria-labelledby="London" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">London</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>GB, United Kingdom</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2643743/" target="_blank">2643743</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_34.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
                         <div class="modal fade" id="hsl_place_id_43" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Österreich" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -737,29 +673,96 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_28" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Italia" aria-hidden="true">
+                        <div class="modal fade" id="hsl_place_id_21" data-bs-toggle="modal" tabindex="-1" aria-labelledby="France" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Italia</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">France</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
                                              <th> Alternativname </th>
-                                             <td>Italien</td>
+                                             <td>Frankreich</td>
                                           </tr>
                                           <tr>
                                              <th> Land </th>
-                                             <td>IT, Italy</td>
+                                             <td>FR, France</td>
                                           </tr>
                                           <tr>
                                              <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/3175395/" target="_blank">3175395</a></td>
+                                             <td><a href="https://sws.geonames.org/3017382/" target="_blank">3017382</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_28.html"> Details </a></td>
+                                             <td><a href="hsl_place_id_21.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_14" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Deutschland" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Deutschland</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>DE, Germany</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2921044/" target="_blank">2921044</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_14.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_107" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Les fées du Rhin" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Les fées du Rhin</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Nuitter, Charles</a></li>
+                                                   <li><a href=".html">Offenbach, Jacques</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td>Die Rheinnixen</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_work_id_107.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -801,26 +804,23 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_work_id_107" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Les fées du Rhin" aria-hidden="true">
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Les fées du Rhin</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
                                              <th> Autor(en) </th>
                                              <td>
-                                                <ul>
-                                                   <li><a href=".html">Offenbach, Jacques</a></li>
-                                                   <li><a href=".html">Nuitter, Charles</a></li>
-                                                </ul>
+                                                <ul></ul>
                                              </td>
                                           </tr>
                                           <tr>
                                              <th> Alternativtitel </th>
-                                             <td>Die Rheinnixen</td>
+                                             <td></td>
                                           </tr>
                                           <tr>
                                              <th> Wikidata ID </th>
@@ -828,7 +828,271 @@
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_107.html"> Details </a></td>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Wikidata ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1332,5 +1596,5 @@
                 $('li a.active').removeClass('active');
                 $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
             });
-        </script><script src="https://unpkg.com/de-micro-editor@0.2.85/dist/de-editor.min.js"></script><script src="js/navbar-autohide.js"></script><script src="js/cookie-consent.js"></script></div><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><script type="text/javascript" src="js/mark.js"></script><script type="text/javascript" src="js/run_editions.js"></script><script type="text/javascript" src="js/osd.js"></script></body>
+        </script><script src="https://unpkg.com/de-micro-editor@0.2.85/dist/de-editor.min.js"></script><script src="js/navbar-autohide.js"></script><script src="js/cookie-consent.js"></script><script src="js/nav-show-hide.js"></script></div><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><script type="text/javascript" src="js/mark.js"></script><script type="text/javascript" src="js/run_editions.js"></script><script type="text/javascript" src="js/osd.js"></script></body>
 </html>
