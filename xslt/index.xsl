@@ -67,6 +67,11 @@
                                         <xsl:value-of select="$reviews"/>
                                     </a>
                                 </button>
+                                <button type="button" class="btn text-light btn-index">
+                                    <a href="search.html">
+                                        Volltextsuche
+                                    </a>
+                                </button>
                                 
                                 <xsl:for-each select="//tei:body">
                                     <xsl:for-each select="./tei:div/tei:p">

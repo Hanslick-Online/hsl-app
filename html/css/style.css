@@ -126,6 +126,28 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     color: #fff;
 }
 
+.navbar-search-icon {
+  background-color: transparent;
+  margin-left: -45px;
+  margin-top: 4px;
+  border: none;
+}
+
+.form-inline {
+    display: flex !important;
+    padding: 0 .5em;
+}
+
+.navbar-search-item {
+    vertical-align: middle;
+    display: contents;
+}
+
+.navbar-search-icon {
+    position: relative!Important;
+    margin: 0 0 .2em -2em;
+}
+
 .btn-index-secondary {
     width: 250px;
     font-size: 22px;
