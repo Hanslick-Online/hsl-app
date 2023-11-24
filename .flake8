@@ -9,3 +9,5 @@ exclude =
     env
     html
     data
+    saxon
+    test
