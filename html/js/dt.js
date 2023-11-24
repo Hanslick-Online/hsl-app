@@ -21,6 +21,7 @@ function createDataTable(containerElement, order, pageLength) {
 
     var table = $(`#${containerElement}`).DataTable({
         dom: "'<'row controlwrapper'<'col-sm-4'f><'col-sm-4'i><'col-sm-4 exportbuttons'Br>>'" +
+            "'<'row'<'col-sm-6 offset-sm-6'p>>'" +
             "'<'row'<'col-sm-12't>>'" +
             "'<'row'<'col-sm-6 offset-sm-6'p>>'",
         responsive: true,
