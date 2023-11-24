@@ -204,12 +204,12 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th> Wikidata ID </th>
+                                        <th> GND ID </th>
                                         <td>
-                                            <a href="{./tei:idno[@type='WIKIDATA']}"
+                                            <a href="{./tei:idno[@type='GND']}"
                                               target="_blank">
                                               <xsl:value-of
-                                              select="tokenize(./tei:idno[@type = 'WIKIDATA'], '/')[last()]"
+                                                  select="tokenize(./tei:idno[@type = 'GND'], '/')[last()]"
                                               />
                                             </a>
                                         </td>

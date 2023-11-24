@@ -527,7 +527,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@type='WIKIDATA']">
+                                                <!--<xsl:if test="./tei:idno[@type='WIKIDATA']">
                                                     <tr>
                                                         <th>
                                                             Wikidata
@@ -538,7 +538,7 @@
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                </xsl:if>
+                                                </xsl:if>-->
                                                 <xsl:if test="./tei:lang">
                                                     <tr>
                                                         <th>
