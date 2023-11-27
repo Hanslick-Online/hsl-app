@@ -74,10 +74,6 @@ search.addWidgets([
     },
   }),
 
-  instantsearch.widgets.pagination({
-    container: "#pagination",
-  }),
-
   instantsearch.widgets.stats({
     container: "#stats-container",
     templates: {
@@ -184,7 +180,17 @@ search.addWidgets([
   }),
 
   instantsearch.widgets.pagination({
-    container: "#pagination",
+    container: "#pagination-top",
+    padding: 2,
+    cssClasses: {
+      list: "pagination",
+      item: "page-item",
+      link: "page-link",
+    },
+  }),
+
+  instantsearch.widgets.pagination({
+    container: "#pagination-bottom",
     padding: 2,
     cssClasses: {
       list: "pagination",
