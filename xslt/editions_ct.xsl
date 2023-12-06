@@ -196,6 +196,9 @@
         <xsl:if test="ancestor::tei:note and position() = 1">
             
         </xsl:if>
+        <xsl:if test="ancestor::tei:note and position() != 1">
+            <br class="pb"/>
+        </xsl:if>
     </xsl:template>
     <xsl:template match="tei:hi">
         <xsl:choose>
