@@ -89,6 +89,7 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
 .modal-body table tbody tr th, .modal-body table tbody tr td {
     border: none;
     padding-right: 2em;
+    vertical-align: top;
 }
 
 /*#wrapper-hero {
