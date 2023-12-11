@@ -790,6 +790,11 @@ input:checked + .i-slider:before {
   font-weight: bold;
 }
 
+.figr {
+  font-weight: bold;
+}
+
+
 .plc {
   font-weight: bold;
 }
@@ -828,6 +833,10 @@ input:checked + .i-slider:before {
 
 .lila {
   background-color: #daa4fd;
+}
+
+.orange {
+   background-color: #fdd2a4;
 }
 
 .lime {

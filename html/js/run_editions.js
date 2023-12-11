@@ -36,6 +36,22 @@ var editor = new LoadEditor({
           },
         },
         {
+          opt: "prsf",
+          color: "orange",
+          title: "Figuren",
+          html_class: "figures",
+          css_class: "figr",
+          hide: {
+            hidden: false,
+            class: "figure .entity",
+          },
+          chg_citation: "citation-url",
+          features: {
+            all: false,
+            class: "features-2",
+          },
+        },
+        {
           opt: "plc",
           color: "gold",
           title: "Orte",

@@ -40,6 +40,9 @@
                     <annotation-slider opt="prs"></annotation-slider>
                 </li>
                 <li class="dropdown-item">
+                    <annotation-slider opt="prsf"></annotation-slider>
+                </li>
+                <li class="dropdown-item">
                     <annotation-slider opt="plc"></annotation-slider>
                 </li>
                 <li class="dropdown-item">

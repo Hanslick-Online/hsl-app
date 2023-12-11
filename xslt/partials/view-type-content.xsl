@@ -11,7 +11,7 @@
         </desc>    
     </doc>
     
-    <xsl:template name="footnotes">
+    <xsl:template name="view-type-content">
         <xsl:param name="node_xpath" as="item()*"/>
         <xsl:if test="$node_xpath">
             <div class="card-body yes-index my-4">
