@@ -170,13 +170,13 @@
                                     </xsl:choose>                                    
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@type='GND']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@type='GND'], '/')[last()]"/>
+                                    <a href="{./tei:idno[@subtype='GND']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@type='WIKIDATA']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
+                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
                                     </a>
                                 </td>
                                 <td>
@@ -237,18 +237,18 @@
                                     </xsl:choose>
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@type='GEONAMES']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@type='GEONAMES'], '/')[4]"/>
+                                    <a href="{./tei:idno[@subtype='GEONAMES']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='GEONAMES'], '/')[4]"/>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@type='WIKIDATA']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
+                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@type='GND']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@type='GND'], '/')[last()]"/>
+                                    <a href="{./tei:idno[@subtype='GND']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
                                 </td>
                                 <xsl:choose>
@@ -294,7 +294,7 @@
                         <th>Titel (alt)</th>
                         <th style="min-width: 200px;">Autor</th>
                         <th style="min-width: 200px;">Figur</th>
-                        <th>Wikidata ID</th>
+                        <th>GND ID</th>
                         <th>Erwähnt #</th>
                         <th>Initial</th>
                     </tr>
@@ -338,7 +338,9 @@
                                     </ul>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
+                                    <a href="{./tei:idno[@subtype='GND']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
+                                    </a>
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>

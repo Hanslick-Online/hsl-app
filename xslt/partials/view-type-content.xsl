@@ -11,10 +11,10 @@
         </desc>    
     </doc>
     
-    <xsl:template name="footnotes">
+    <xsl:template name="view-type-content">
         <xsl:param name="node_xpath" as="item()*"/>
         <xsl:if test="$node_xpath">
-            <div class="card-footer yes-index my-4">
+            <div class="card-body yes-index my-4">
                 <a class="anchor" id="index.xml-body.1_div.999"></a>
                 <h5>Fußnoten</h5>
                 <ul class="footnotes">

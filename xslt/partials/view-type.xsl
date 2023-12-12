@@ -96,7 +96,7 @@
                         </div>
                     </xsl:if>
                     <xsl:if test="$footnotes ='true'">
-                        <xsl:call-template name="footnotes">
+                        <xsl:call-template name="view-type-content">
                             <xsl:with-param name="node_xpath" as="item()*" select="$footnotes-xpath"/>
                         </xsl:call-template>
                     </xsl:if>
