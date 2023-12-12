@@ -77,8 +77,8 @@
                                     <tr>
                                         <th> GND </th>
                                         <td>
-                                            <a href="{./tei:idno[@type='GND']}" target="_blank">
-                                              <xsl:value-of select="./tei:idno[@type = 'GND']"/>
+                                            <a href="{./tei:idno[@subtype='GND']}" target="_blank">
+                                                <xsl:value-of select="./tei:idno[@subtype = 'GND']"/>
                                             </a>
                                         </td>
                                     </tr>
@@ -140,10 +140,10 @@
                                     <tr>
                                         <th> Geonames ID </th>
                                         <td>
-                                            <a href="{./tei:idno[@type='GEONAMES']}"
+                                            <a href="{./tei:idno[@subtype='GEONAMES']}"
                                               target="_blank">
                                               <xsl:value-of
-                                              select="tokenize(./tei:idno[@type = 'GEONAMES'], '/')[4]"
+                                                  select="tokenize(./tei:idno[@subtype = 'GEONAMES'], '/')[4]"
                                               />
                                             </a>
                                         </td>
@@ -206,10 +206,10 @@
                                     <tr>
                                         <th> GND ID </th>
                                         <td>
-                                            <a href="{./tei:idno[@type='GND']}"
+                                            <a href="{./tei:idno[@subtype='GND']}"
                                               target="_blank">
                                               <xsl:value-of
-                                                  select="tokenize(./tei:idno[@type = 'GND'], '/')[last()]"
+                                                  select="tokenize(./tei:idno[@subtype = 'GND'], '/')[last()]"
                                               />
                                             </a>
                                         </td>
