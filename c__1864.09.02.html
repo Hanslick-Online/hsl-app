@@ -17,7 +17,7 @@
       <title>Hanslick - Digitale Edition</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script></head>
+      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><link rel="stylesheet" href="css/de-micro-editor.css" /><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script></head>
    <body class="page">
       <div class="hfeed site" id="page">
          <div class="wrapper-fluid wrapper-navbar sticky-top" id="wrapper-navbar"><a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a><nav class="autohide navbar navbar-expand-lg bg-light">
@@ -80,7 +80,10 @@
                            </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="team.html?lang=de">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="search.html?lang=de">Suche</a></li>
+                        <li class="nav-item">
+                           <form class="form-inline my-3 my-lg-0" method="get" action="search.html?hsl[query]&amp;lang=de" role="search"><input class="form-control navbar-search" id="s" name="hsl[query]" type="text" placeholder="Suche" value="" autocomplete="off" /><button type="submit" class="navbar-search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path></svg></button></form>
+                        </li>
                         <li class="nav-item" style="display:inline!important;margin:.4em auto;">
                            <multi-language opt="de"></multi-language>
                            <multi-language opt="en"></multi-language>
@@ -124,6 +127,9 @@
                                  <annotation-slider opt="prs"></annotation-slider>
                               </li>
                               <li class="dropdown-item">
+                                 <annotation-slider opt="prsf"></annotation-slider>
+                              </li>
+                              <li class="dropdown-item">
                                  <annotation-slider opt="plc"></annotation-slider>
                               </li>
                               <li class="dropdown-item">
@@ -149,26 +155,26 @@
                      <div class="card-body yes-index">
                         <p class="yes-index meta-head">Neue Freie Presse<br />Morgenblatt<br />No. 2. Wien, Freitag den 2. September 1864<br /></p><span class="anchor-pb" source="hsl-nfp/1864.09.02-0001"></span><span class="pb">[1]</span><h1 class="yes-index">Musikalische Briefe. I.</h1>
                         <h2 class="yes-index">(Neue Errungenschaften: die kaiserliche Opernschule.)</h2>
-                        <p class="yes-index"><br class="pb" /><a href="#__p1__lb3" name="__p1__lb3" id="__p1__lb3" class="linenumbersTransparent linenumbers pb">0003</a>Ed H. Sie haben sich mehr als einmal mit mir der Fort<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb4" name="__p1__lb4" id="__p1__lb4" class="linenumbersTransparent linenumbers pb">0004</a>schritte erfreut, welche das öffentliche Musikleben <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oesterreich</span>s in den
+                        <p class="yes-index"><br class="pb" /><a href="#__p1__lb3" name="__p1__lb3" id="__p1__lb3" class="linenumbersTransparent linenumbers pb">0003</a>Ed H. Sie haben sich mehr als einmal mit mir der Fort<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb4" name="__p1__lb4" id="__p1__lb4" class="linenumbersTransparent linenumbers pb">0004</a>schritte erfreut, welche das öffentliche Musikleben <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43"></span>Oesterreichs in den
                            <br class="pb" /><a href="#__p1__lb5" name="__p1__lb5" id="__p1__lb5" class="linenumbersVisible linenumbers pb" data-lbnr="5">0005</a>letzten zehn Jahren gemacht hat. Auch weiß ich Sie einverstanden,
-                           <br class="pb" /><a href="#__p1__lb6" name="__p1__lb6" id="__p1__lb6" class="linenumbersTransparent linenumbers pb">0006</a>wenn mein Essay über die Geschichte des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Concertlebens (in
-                           <br class="pb" /><a href="#__p1__lb7" name="__p1__lb7" id="__p1__lb7" class="linenumbersTransparent linenumbers pb">0007</a>den drei letzten Bänden der „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_77">Oesterreichischen Revue</span>“) das Jahr
+                           <br class="pb" /><a href="#__p1__lb6" name="__p1__lb6" id="__p1__lb6" class="linenumbersTransparent linenumbers pb">0006</a>wenn mein Essay über die Geschichte des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wiener Concertlebens (in
+                           <br class="pb" /><a href="#__p1__lb7" name="__p1__lb7" id="__p1__lb7" class="linenumbersTransparent linenumbers pb">0007</a>den drei letzten Bänden der „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_77"></span>Oesterreichischen Revue“) das Jahr
                            <br class="pb" /><a href="#__p1__lb8" name="__p1__lb8" id="__p1__lb8" class="linenumbersTransparent linenumbers pb">0008</a>Achtundvierzig als den Punkt bezeichnet, von welchem bei uns auch
-                           <br class="pb" /><a href="#__p1__lb9" name="__p1__lb9" id="__p1__lb9" class="linenumbersTransparent linenumbers pb">0009</a>im musikalischen Gemeinwesen eine neue Aera datirt. <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> hatte bei
+                           <br class="pb" /><a href="#__p1__lb9" name="__p1__lb9" id="__p1__lb9" class="linenumbersTransparent linenumbers pb">0009</a>im musikalischen Gemeinwesen eine neue Aera datirt. <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wien hatte bei
                            <br class="pb" /><a href="#__p1__lb10" name="__p1__lb10" id="__p1__lb10" class="linenumbersVisible linenumbers pb" data-lbnr="10">0010</a>all’ seinem Tonreichthum doch auch auf diesem Gebiet „vormärzliche“
                            <br class="pb" /><a href="#__p1__lb11" name="__p1__lb11" id="__p1__lb11" class="linenumbersTransparent linenumbers pb">0011</a>Zustände, die zum großen Theil in dem allgemeinen Charakter unserer
-                           <br class="pb" /><a href="#__p1__lb12" name="__p1__lb12" id="__p1__lb12" class="linenumbersTransparent linenumbers pb">0012</a>damaligen Bildung, namentlich in der Isolirtheit derselben ihre Er<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb13" name="__p1__lb13" id="__p1__lb13" class="linenumbersTransparent linenumbers pb">0013</a>klärung finden. Der Gedanke des geistigen Zusammengehens <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oester<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb14" name="__p1__lb14" id="__p1__lb14" class="linenumbersTransparent linenumbers pb">0014</a>eich</span>s mit <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutschland</span>, welcher in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> die ganze Märzbewegung
+                           <br class="pb" /><a href="#__p1__lb12" name="__p1__lb12" id="__p1__lb12" class="linenumbersTransparent linenumbers pb">0012</a>damaligen Bildung, namentlich in der Isolirtheit derselben ihre Er<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb13" name="__p1__lb13" id="__p1__lb13" class="linenumbersTransparent linenumbers pb">0013</a>klärung finden. Der Gedanke des geistigen Zusammengehens <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43"></span>Oester<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb14" name="__p1__lb14" id="__p1__lb14" class="linenumbersTransparent linenumbers pb">0014</a>eichs mit <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14"></span>Deutschland, welcher in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wien die ganze Märzbewegung
                            <br class="pb" /><a href="#__p1__lb15" name="__p1__lb15" id="__p1__lb15" class="linenumbersVisible linenumbers pb" data-lbnr="15">0015</a>durchdrang, machte sich sofort auch auf musikalischem Gebiete geltend.
-                           <br class="pb" /><a href="#__p1__lb16" name="__p1__lb16" id="__p1__lb16" class="linenumbersTransparent linenumbers pb">0016</a>Man wandte sich mit Heftigkeit von der allzulang bevorzugten <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">ita<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb17" name="__p1__lb17" id="__p1__lb17" class="linenumbersTransparent linenumbers pb">0017</a>lienisch</span>en Musik ab und der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">deutsch</span>en zu; man brach mit dem ein<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb18" name="__p1__lb18" id="__p1__lb18" class="linenumbersTransparent linenumbers pb">0018</a>seitigen Cultus der Vergangenheit und öffnete den Fahnenträgern
+                           <br class="pb" /><a href="#__p1__lb16" name="__p1__lb16" id="__p1__lb16" class="linenumbersTransparent linenumbers pb">0016</a>Man wandte sich mit Heftigkeit von der allzulang bevorzugten <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28"></span>ita<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb17" name="__p1__lb17" id="__p1__lb17" class="linenumbersTransparent linenumbers pb">0017</a>lienischen Musik ab und der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14"></span>deutschen zu; man brach mit dem ein<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb18" name="__p1__lb18" id="__p1__lb18" class="linenumbersTransparent linenumbers pb">0018</a>seitigen Cultus der Vergangenheit und öffnete den Fahnenträgern
                            <br class="pb" /><a href="#__p1__lb19" name="__p1__lb19" id="__p1__lb19" class="linenumbersTransparent linenumbers pb">0019</a>der modernen Ideen die Pforten. Nachträglich beeilte man sich, von
-                           <br class="pb" /><a href="#__p1__lb20" name="__p1__lb20" id="__p1__lb20" class="linenumbersVisible linenumbers pb" data-lbnr="20">0020</a>den geistigen Processen Kenntniß zu nehmen, welche sich in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutsch<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb21" name="__p1__lb21" id="__p1__lb21" class="linenumbersTransparent linenumbers pb">0021</a>land</span> auch in musikalischen Dingen vollzogen hatten. Auf Grund
+                           <br class="pb" /><a href="#__p1__lb20" name="__p1__lb20" id="__p1__lb20" class="linenumbersVisible linenumbers pb" data-lbnr="20">0020</a>den geistigen Processen Kenntniß zu nehmen, welche sich in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14"></span>Deutsch<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb21" name="__p1__lb21" id="__p1__lb21" class="linenumbersTransparent linenumbers pb">0021</a>land auch in musikalischen Dingen vollzogen hatten. Auf Grund
                            <br class="pb" /><a href="#__p1__lb22" name="__p1__lb22" id="__p1__lb22" class="linenumbersTransparent linenumbers pb">0022</a>dieser Anschauungen trachtete man, endlich das Concertwesen, welches
                            <br class="pb" /><a href="#__p1__lb23" name="__p1__lb23" id="__p1__lb23" class="linenumbersTransparent linenumbers pb">0023</a>bei uns doch nur die zweite Rolle neben dem Theater gespielt, in
                            <br class="pb" /><a href="#__p1__lb24" name="__p1__lb24" id="__p1__lb24" class="linenumbersTransparent linenumbers pb">0024</a>größerem Styl zu organisiren, zu befestigen und nach allen Dimen<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb25" name="__p1__lb25" id="__p1__lb25" class="linenumbersVisible linenumbers pb" data-lbnr="25">0025</a>sionen zu erweitern. Die Keime von <span class="date">1848</span> gingen allerdings nicht
                            <br class="pb" /><a href="#__p1__lb26" name="__p1__lb26" id="__p1__lb26" class="linenumbersTransparent linenumbers pb">0026</a>so schnell auf, sehr allmälig folgte den revolutionirenden Ideen die
                            <br class="pb" /><a href="#__p1__lb27" name="__p1__lb27" id="__p1__lb27" class="linenumbersTransparent linenumbers pb">0027</a>reformirende That. Die nächsten Jahre waren eine Periode mühsam
                            <br class="pb" /><a href="#__p1__lb28" name="__p1__lb28" id="__p1__lb28" class="linenumbersTransparent linenumbers pb">0028</a>vorbereitenden, mitunter lästig zögernden Uebergangs. Allein in<span class="space"> </span><br class="pb" /><a href="#__p2__lb29" name="__p2__lb29" id="__p2__lb29" class="linenumbersTransparent linenumbers pb">0029</a>stetigem Fortschritt traten nach einander die Errungenschaften unsers
-                           <br class="pb" /><a href="#__p2__lb30" name="__p2__lb30" id="__p2__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>Musiklebens hervor, auf deren Besitz wir jetzt stolz sind: die Reorga<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb31" name="__p2__lb31" id="__p2__lb31" class="linenumbersTransparent linenumbers pb">0031</a>nisation des Conservatoriums und die glänzende Reform der „Ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb32" name="__p2__lb32" id="__p2__lb32" class="linenumbersTransparent linenumbers pb">0032</a>sellschaftsconcerte,“ <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_120">Hellmesberger</span></span>’s Quartettsoiréen, die Wieder<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb33" name="__p2__lb33" id="__p2__lb33" class="linenumbersTransparent linenumbers pb">0033</a>aufnahme der „Philharmonischen Concerte“, die neuen Pflegestätten
+                           <br class="pb" /><a href="#__p2__lb30" name="__p2__lb30" id="__p2__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>Musiklebens hervor, auf deren Besitz wir jetzt stolz sind: die Reorga<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb31" name="__p2__lb31" id="__p2__lb31" class="linenumbersTransparent linenumbers pb">0031</a>nisation des Conservatoriums und die glänzende Reform der „Ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb32" name="__p2__lb32" id="__p2__lb32" class="linenumbersTransparent linenumbers pb">0032</a>sellschaftsconcerte,“ <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_120"></span>Hellmesberger</span>’s Quartettsoiréen, die Wieder<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb33" name="__p2__lb33" id="__p2__lb33" class="linenumbersTransparent linenumbers pb">0033</a>aufnahme der „Philharmonischen Concerte“, die neuen Pflegestätten
                            <br class="pb" /><a href="#__p2__lb34" name="__p2__lb34" id="__p2__lb34" class="linenumbersTransparent linenumbers pb">0034</a>des Chorgesangs und der geistlichen Musik „Singverein“ und „Sing<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb35" name="__p2__lb35" id="__p2__lb35" class="linenumbersVisible linenumbers pb" data-lbnr="35">0035</a>akademie“ etc. etc. Das sind Resultate, die nicht nur offen vorliegen,
                            <br class="pb" /><a href="#__p2__lb36" name="__p2__lb36" id="__p2__lb36" class="linenumbersTransparent linenumbers pb">0036</a>sondern sich alljährlich immer wieder neu in Scene setzen.
                            </p>
@@ -190,25 +196,25 @@
                            <br class="pb" /><a href="#__p4__lb58" name="__p4__lb58" id="__p4__lb58" class="linenumbersTransparent linenumbers pb">0058</a>gewünscht und gehofft. Allein die Thatsache, <span class="italic">daß</span> wir eine von
                            <br class="pb" /><a href="#__p4__lb59" name="__p4__lb59" id="__p4__lb59" class="linenumbersTransparent linenumbers pb">0059</a>Privatinteressen unabhängige kaiserliche Opernschule besitzen, bleibt bei
                            <br class="pb" /><a href="#__p4__lb60" name="__p4__lb60" id="__p4__lb60" class="linenumbersVisible linenumbers pb" data-lbnr="60">0060</a>alledem erheblich genug. Sie ganz zu würdigen, muß man sich erin<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p5__lb61" name="__p5__lb61" id="__p5__lb61" class="linenumbersTransparent linenumbers pb">0061</a>nern, wie lange wir ein Institut der Art herbeigesehnt und wie drin
-                           <br class="pb" /><a href="#__p5__lb62" name="__p5__lb62" id="__p5__lb62" class="linenumbersTransparent linenumbers pb">0062</a>gend die ersten Dramatungen <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutschland</span>s für die Errichtung von
+                           <br class="pb" /><a href="#__p5__lb62" name="__p5__lb62" id="__p5__lb62" class="linenumbersTransparent linenumbers pb">0062</a>gend die ersten Dramatungen <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14"></span>Deutschlands für die Errichtung von
                            <br class="pb" /><a href="#__p5__lb63" name="__p5__lb63" id="__p5__lb63" class="linenumbersTransparent linenumbers pb">0063</a>Theaterschulen geschrieben und — vergebens geschrieben haben.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p6__lb64" name="__p6__lb64" id="__p6__lb64" class="linenumbersTransparent linenumbers pb">0064</a>Als <span class="italic">Eduard <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_58">Devrient</span></span> im Jahre <span class="date">1839</span> das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er
+                        <p class="yes-index"><br class="pb" /><a href="#__p6__lb64" name="__p6__lb64" id="__p6__lb64" class="linenumbersTransparent linenumbers pb">0064</a>Als <span class="italic">Eduard <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_58"></span>Devrient</span> im Jahre <span class="date">1839</span> das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44"></span>Pariser
                            <br class="pb" /><a href="#__p6__lb65" name="__p6__lb65" id="__p6__lb65" class="linenumbersVisible linenumbers pb" data-lbnr="65">0065</a>Conservatorium besichtigte, hatte er Gelegenheit, auch dem Unterricht
                            <br class="pb" /><a href="#__p6__lb66" name="__p6__lb66" id="__p6__lb66" class="linenumbersTransparent linenumbers pb">0066</a>der obersten Classe „für dramatischen Gesang“ beizuwohnen. Er fand
-                           <br class="pb" /><a href="#__p6__lb67" name="__p6__lb67" id="__p6__lb67" class="linenumbersTransparent linenumbers pb">0067</a>in einem großen Saal ein allerliebstes Theater hergerichtet, auf wel<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb68" name="__p6__lb68" id="__p6__lb68" class="linenumbersTransparent linenumbers pb">0068</a>chem die Eleven unter der Leitung der berühmten Sänger <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_196">Nourrit</span></span><span class="space"> </span><br class="pb" /><a href="#__p6__lb69" name="__p6__lb69" id="__p6__lb69" class="linenumbersTransparent linenumbers pb">0069</a>und <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_54">Derivis</span></span> ihre Uebungen hielten. „Wie glücklich“, ruft er aus,
-                           <br class="pb" /><a href="#__p6__lb70" name="__p6__lb70" id="__p6__lb70" class="linenumbersVisible linenumbers pb" data-lbnr="70">0070</a>„sind diese jungen Talente in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_21">Frankreich</span>, daß ihnen eine solche Gele<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb71" name="__p6__lb71" id="__p6__lb71" class="linenumbersTransparent linenumbers pb">0071</a>genheit zur Vorbereitung für die schwere Kunst der Bühne geboten
-                           <br class="pb" /><a href="#__p6__lb72" name="__p6__lb72" id="__p6__lb72" class="linenumbersTransparent linenumbers pb">0072</a>wird! In ganz <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">Deutschland</span> müssen die jungen Leute durch Errathen,
+                           <br class="pb" /><a href="#__p6__lb67" name="__p6__lb67" id="__p6__lb67" class="linenumbersTransparent linenumbers pb">0067</a>in einem großen Saal ein allerliebstes Theater hergerichtet, auf wel<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb68" name="__p6__lb68" id="__p6__lb68" class="linenumbersTransparent linenumbers pb">0068</a>chem die Eleven unter der Leitung der berühmten Sänger <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_196"></span>Nourrit</span><span class="space"> </span><br class="pb" /><a href="#__p6__lb69" name="__p6__lb69" id="__p6__lb69" class="linenumbersTransparent linenumbers pb">0069</a>und <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_54"></span>Derivis</span> ihre Uebungen hielten. „Wie glücklich“, ruft er aus,
+                           <br class="pb" /><a href="#__p6__lb70" name="__p6__lb70" id="__p6__lb70" class="linenumbersVisible linenumbers pb" data-lbnr="70">0070</a>„sind diese jungen Talente in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_21"></span>Frankreich, daß ihnen eine solche Gele<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb71" name="__p6__lb71" id="__p6__lb71" class="linenumbersTransparent linenumbers pb">0071</a>genheit zur Vorbereitung für die schwere Kunst der Bühne geboten
+                           <br class="pb" /><a href="#__p6__lb72" name="__p6__lb72" id="__p6__lb72" class="linenumbersTransparent linenumbers pb">0072</a>wird! In ganz <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14"></span>Deutschland müssen die jungen Leute durch Errathen,
                            <br class="pb" /><a href="#__p6__lb73" name="__p6__lb73" id="__p6__lb73" class="linenumbersTransparent linenumbers pb">0073</a>Versuche und gelegentliches Ablernen bei erfahrenen Künstlern das in
                            <br class="pb" /><a href="#__p6__lb74" name="__p6__lb74" id="__p6__lb74" class="linenumbersTransparent linenumbers pb">0074</a>vielen Jahren zu erlernen suchen, was dem Begünstigten hier in
                            <br class="pb" /><a href="#__p6__lb75" name="__p6__lb75" id="__p6__lb75" class="linenumbersVisible linenumbers pb" data-lbnr="75">0075</a>einem Halbjahre beizubringen ist.“ Dieser Klageruf des berühmten
                            <br class="pb" /><a href="#__p6__lb76" name="__p6__lb76" id="__p6__lb76" class="linenumbersTransparent linenumbers pb">0076</a>Dramaturgen fiel uns lebhaft ein, als die erste Kunde von unserer
                            <br class="pb" /><a href="#__p6__lb77" name="__p6__lb77" id="__p6__lb77" class="linenumbersTransparent linenumbers pb">0077</a>„Opernschule“ wie eine rettende Verheißung auftauchte. Allerdings
                            <br class="pb" /><a href="#__p6__lb78" name="__p6__lb78" id="__p6__lb78" class="linenumbersTransparent linenumbers pb">0078</a>nur für die Oper. In einem vollständigen Institut soll die Opern<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb79" name="__p6__lb79" id="__p6__lb79" class="linenumbersTransparent linenumbers pb">0079</a>schule nur eine eigene Classe bilden; diese Stellung ist ihr auch in
-                           <br class="pb" /><a href="#__p6__lb80" name="__p6__lb80" id="__p6__lb80" class="linenumbersVisible linenumbers pb" data-lbnr="80">0080</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span> angewiesen, wo die Theaterschule mit dem Conservatorium ver<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb81" name="__p6__lb81" id="__p6__lb81" class="linenumbersTransparent linenumbers pb">0081</a>bunden ist. An die Großartigkeit des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Instituts darf man
-                           <br class="pb" /><a href="#__p6__lb82" name="__p6__lb82" id="__p6__lb82" class="linenumbersTransparent linenumbers pb">0082</a>nicht denken, wenn von der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Opernschule die Rede ist.
+                           <br class="pb" /><a href="#__p6__lb80" name="__p6__lb80" id="__p6__lb80" class="linenumbersVisible linenumbers pb" data-lbnr="80">0080</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44"></span>Paris angewiesen, wo die Theaterschule mit dem Conservatorium ver<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb81" name="__p6__lb81" id="__p6__lb81" class="linenumbersTransparent linenumbers pb">0081</a>bunden ist. An die Großartigkeit des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44"></span>Pariser Instituts darf man
+                           <br class="pb" /><a href="#__p6__lb82" name="__p6__lb82" id="__p6__lb82" class="linenumbersTransparent linenumbers pb">0082</a>nicht denken, wenn von der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wiener Opernschule die Rede ist.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p7__lb83" name="__p7__lb83" id="__p7__lb83" class="linenumbersTransparent linenumbers pb">0083</a>Das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Conservatorium, bekanntlich eine großartige Schö<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb84" name="__p7__lb84" id="__p7__lb84" class="linenumbersTransparent linenumbers pb">0084</a>pfung der Revolution, besitzt ein weitläufiges, für 500 Zöglinge ein<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb85" name="__p7__lb85" id="__p7__lb85" class="linenumbersVisible linenumbers pb" data-lbnr="85">0085</a>gerichtetes Gebäude. Bis zur Juli-Revolution, nach welcher erhebliche
+                        <p class="yes-index"><br class="pb" /><a href="#__p7__lb83" name="__p7__lb83" id="__p7__lb83" class="linenumbersTransparent linenumbers pb">0083</a>Das <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44"></span>Pariser Conservatorium, bekanntlich eine großartige Schö<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb84" name="__p7__lb84" id="__p7__lb84" class="linenumbersTransparent linenumbers pb">0084</a>pfung der Revolution, besitzt ein weitläufiges, für 500 Zöglinge ein<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb85" name="__p7__lb85" id="__p7__lb85" class="linenumbersVisible linenumbers pb" data-lbnr="85">0085</a>gerichtetes Gebäude. Bis zur Juli-Revolution, nach welcher erhebliche
                            <br class="pb" /><a href="#__p7__lb86" name="__p7__lb86" id="__p7__lb86" class="linenumbersTransparent linenumbers pb">0086</a>Einschränkungen eintraten, ertheilten 72 Professoren den Unterricht
                            <br class="pb" /><a href="#__p7__lb87" name="__p7__lb87" id="__p7__lb87" class="linenumbersTransparent linenumbers pb">0087</a>in ebenso viel Classen, deren keine mehr als 8 Zöglinge enthalten
                            <br class="pb" /><a href="#__p7__lb88" name="__p7__lb88" id="__p7__lb88" class="linenumbersTransparent linenumbers pb">0088</a>durfte. Die Eleven für die <span class="italic">Bühne</span> werden in 4 Classen unterrichtet,
@@ -220,15 +226,15 @@
                            <br class="pb" /><a href="#__p8__lb95" name="__p8__lb95" id="__p8__lb95" class="linenumbersVisible linenumbers pb" data-lbnr="95">0095</a>Unterweisung zugetheilt sind. Diese Professoren sind (oder waren) die
                            <br class="pb" /><a href="#__p8__lb96" name="__p8__lb96" id="__p8__lb96" class="linenumbersTransparent linenumbers pb">0096</a>erprobtesten, gebildetsten Künstler vom Théâtre français und der
                            <br class="pb" /><a href="#__p8__lb97" name="__p8__lb97" id="__p8__lb97" class="linenumbersTransparent linenumbers pb">0097</a>Großen Oper. Eine Theaterschule von solcher Vollständigkeit war in
-                           <br class="pb" /><a href="#__p8__lb98" name="__p8__lb98" id="__p8__lb98" class="linenumbersTransparent linenumbers pb">0098</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> durchaus nicht beabsichtigt. Ja, man schien jeder Rücksicht auf
+                           <br class="pb" /><a href="#__p8__lb98" name="__p8__lb98" id="__p8__lb98" class="linenumbersTransparent linenumbers pb">0098</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wien durchaus nicht beabsichtigt. Ja, man schien jeder Rücksicht auf
                            <br class="pb" /><a href="#__p8__lb99" name="__p8__lb99" id="__p8__lb99" class="linenumbersTransparent linenumbers pb">0099</a>das recitirende Drama absichtlich aus dem Wege zu gehen, wie schon
                            <br class="pb" /><a href="#__p8__lb100" name="__p8__lb100" id="__p8__lb100" class="linenumbersVisible linenumbers pb" data-lbnr="100">0100</a>aus der Thatsache hervorleuchtet, daß eine dramaturgische Autorität,
-                           <br class="pb" /><a href="#__p8__lb101" name="__p8__lb101" id="__p8__lb101" class="linenumbersTransparent linenumbers pb">0101</a>wie <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_153">Laube</span></span>, die Errichtung der Hofopernschule erst durch die Zeitun<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb102" name="__p8__lb102" id="__p8__lb102" class="linenumbersTransparent linenumbers pb">0102</a>gen erfahren haben soll. Die Entbehrung des vollständigen Ganzen
+                           <br class="pb" /><a href="#__p8__lb101" name="__p8__lb101" id="__p8__lb101" class="linenumbersTransparent linenumbers pb">0101</a>wie <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_153"></span>Laube</span>, die Errichtung der Hofopernschule erst durch die Zeitun<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb102" name="__p8__lb102" id="__p8__lb102" class="linenumbersTransparent linenumbers pb">0102</a>gen erfahren haben soll. Die Entbehrung des vollständigen Ganzen
                            <br class="pb" /><a href="#__p8__lb103" name="__p8__lb103" id="__p8__lb103" class="linenumbersTransparent linenumbers pb">0103</a>soll uns deshalb nicht ungerecht machen gegen das nützliche Fragment.
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p9__lb104" name="__p9__lb104" id="__p9__lb104" class="linenumbersTransparent linenumbers pb">0104</a>Stellen wir uns auf den praktischen Standpunkt der Hofopern<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb105" name="__p9__lb105" id="__p9__lb105" class="linenumbersVisible linenumbers pb" data-lbnr="105">0105</a>direction und gestehen, daß die Sorge für die Zukunft <span class="italic">ihrer</span> Bühne
                            <br class="pb" /><a href="#__p9__lb106" name="__p9__lb106" id="__p9__lb106" class="linenumbersTransparent linenumbers pb">0106</a>ihr vorderhand als die dringendste erscheinen mußte. Die Klage über
-                           <br class="pb" /><a href="#__p9__lb107" name="__p9__lb107" id="__p9__lb107" class="linenumbersTransparent linenumbers pb">0107</a>den zunehmenden Verfall des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14">deutsch</span>en Opernwesens, namentlich der
+                           <br class="pb" /><a href="#__p9__lb107" name="__p9__lb107" id="__p9__lb107" class="linenumbersTransparent linenumbers pb">0107</a>den zunehmenden Verfall des <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_14"></span>deutschen Opernwesens, namentlich der
                            <br class="pb" /><a href="#__p9__lb108" name="__p9__lb108" id="__p9__lb108" class="linenumbersTransparent linenumbers pb">0108</a>Gesangskräfte, ist eine allgemeine und begründete. Und doch möchte
                            <br class="pb" /><a href="#__p9__lb109" name="__p9__lb109" id="__p9__lb109" class="linenumbersTransparent linenumbers pb">0109</a>man leidenschaftlichen Tadlern oft antworten, wie jener Theaterhabitué,
                            <br class="pb" /><a href="#__p9__lb110" name="__p9__lb110" id="__p9__lb110" class="linenumbersVisible linenumbers pb" data-lbnr="110">0110</a>der auf die herausfordernde Frage: „Und wie gefällt denn Ihnen un<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb111" name="__p9__lb111" id="__p9__lb111" class="linenumbersTransparent linenumbers pb">0111</a>sere jetzige miserable Oper?“ erwiderte: „Besser als im nächsten
@@ -237,7 +243,7 @@
                            <br class="pb" /><a href="#__p9__lb114" name="__p9__lb114" id="__p9__lb114" class="linenumbersTransparent linenumbers pb">0114</a>genug. Wir sehen die Himmelsgabe schöner Stimmen selten werden,
                            <br class="pb" /><a href="#__p9__lb115" name="__p9__lb115" id="__p9__lb115" class="linenumbersVisible linenumbers pb" data-lbnr="115">0115</a>und noch seltener deren vollendete Ausbildung. „Unsere heutigen
                            <br class="pb" /><a href="#__p9__lb116" name="__p9__lb116" id="__p9__lb116" class="linenumbersTransparent linenumbers pb">0116</a>Sängerinnen haben meistens mit 30 Jahren keine Stimme mehr,“
-                           <br class="pb" /><a href="#__p9__lb117" name="__p9__lb117" id="__p9__lb117" class="linenumbersTransparent linenumbers pb">0117</a>hörte ich einmal in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_34">London</span><span class="space"> </span><span class="italic">Jenny <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_163">Lind</span></span> äußern, — „das ist die
+                           <br class="pb" /><a href="#__p9__lb117" name="__p9__lb117" id="__p9__lb117" class="linenumbersTransparent linenumbers pb">0117</a>hörte ich einmal in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_34"></span>London<span class="space"> </span><span class="italic">Jenny <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_163"></span>Lind</span> äußern, — „das ist die
                            <br class="pb" /><a href="#__p9__lb118" name="__p9__lb118" id="__p9__lb118" class="linenumbersTransparent linenumbers pb">0118</a>Schuld mangelhafter und verkehrter Schulung. Die schönsten Stim<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb119" name="__p9__lb119" id="__p9__lb119" class="linenumbersTransparent linenumbers pb">0119</a>men gehen durch Verwahrlosung zu Grunde. Ich singe noch mit
                            <br class="pb" /><a href="#__p9__lb120" name="__p9__lb120" id="__p9__lb120" class="linenumbersVisible linenumbers pb" data-lbnr="120">0120</a>Leichtigkeit,“ fügte sie nach einer Pause hinzu, „und hatte doch nie<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p9__lb121" name="__p9__lb121" id="__p9__lb121" class="linenumbersTransparent linenumbers pb">0121</a>mals viel Stimme.“
                            </p>
@@ -245,7 +251,7 @@
                            <br class="pb" /><a href="#__p10__lb123" name="__p10__lb123" id="__p10__lb123" class="linenumbersTransparent linenumbers pb">0123</a>Oper heranzulocken, sodann sie methodisch für die Bühne auszubilden,
                            <br class="pb" /><a href="#__p10__lb124" name="__p10__lb124" id="__p10__lb124" class="linenumbersTransparent linenumbers pb">0124</a>und drittens durch die Wohlthat dieser Ausbildung ein natürliches
                            <br class="pb" /><a href="#__p10__lb125" name="__p10__lb125" id="__p10__lb125" class="linenumbersVisible linenumbers pb" data-lbnr="125">0125</a>Vorrecht auf ihre dauernde Verwendung zu erwerben — das mochten
-                           <br class="pb" /><a href="#__p10__lb126" name="__p10__lb126" id="__p10__lb126" class="linenumbersTransparent linenumbers pb">0126</a>die leitenden Gesichtspunkte bei der Gründung der Hofopernschule<span class="space"> </span><br class="pb" /><a href="#__p11__lb127" name="__p11__lb127" id="__p11__lb127" class="linenumbersTransparent linenumbers pb">0127</a>sein. Die innere Organisation dieses Institutes, das in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43">Oesterreich</span><span class="space"> </span><br class="pb" /><a href="#__p11__lb128" name="__p11__lb128" id="__p11__lb128" class="linenumbersTransparent linenumbers pb">0128</a>nur an dem <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_73">Mailänd</span>er Conservatorium eine Analogie besaß, blieb, so
+                           <br class="pb" /><a href="#__p10__lb126" name="__p10__lb126" id="__p10__lb126" class="linenumbersTransparent linenumbers pb">0126</a>die leitenden Gesichtspunkte bei der Gründung der Hofopernschule<span class="space"> </span><br class="pb" /><a href="#__p11__lb127" name="__p11__lb127" id="__p11__lb127" class="linenumbersTransparent linenumbers pb">0127</a>sein. Die innere Organisation dieses Institutes, das in <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_43"></span>Oesterreich<span class="space"> </span><br class="pb" /><a href="#__p11__lb128" name="__p11__lb128" id="__p11__lb128" class="linenumbersTransparent linenumbers pb">0128</a>nur an dem <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_73"></span>Mailänder Conservatorium eine Analogie besaß, blieb, so
                            <br class="pb" /><a href="#__p11__lb129" name="__p11__lb129" id="__p11__lb129" class="linenumbersTransparent linenumbers pb">0129</a>interessant sie jedem Theaterfreund sein mußte, in eigenthümliches
                            <br class="pb" /><a href="#__p11__lb130" name="__p11__lb130" id="__p11__lb130" class="linenumbersVisible linenumbers pb" data-lbnr="130">0130</a>Halbdunkel gehüllt. Blos die Grundzüge wurden veröffentlicht, vieles
                            <br class="pb" /><a href="#__p11__lb131" name="__p11__lb131" id="__p11__lb131" class="linenumbersTransparent linenumbers pb">0131</a>Andere konnte nur in der Theaterkanzlei eingesehen werden, während
@@ -269,16 +275,16 @@
                            <br class="pb" /><a href="#__p11__lb151" name="__p11__lb151" id="__p11__lb151" class="linenumbersTransparent linenumbers pb">0151</a>verwendet und beziehen dafür Remunerationen, welche Anfangs zwi<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb152" name="__p11__lb152" id="__p11__lb152" class="linenumbersTransparent linenumbers pb">0152</a>schen 25 und 60 fl., in den letzten Jahren zwischen 150 und 120 fl.
                            <br class="pb" /><a href="#__p11__lb153" name="__p11__lb153" id="__p11__lb153" class="linenumbersTransparent linenumbers pb">0153</a>monatlich betragen. Die Zöglinge, — welche ein förmliches Decret
                            <br class="pb" /><a href="#__p11__lb154" name="__p11__lb154" id="__p11__lb154" class="linenumbersTransparent linenumbers pb">0154</a>als „Eleven der k. k. Hofopernschule“ erhalten, — dürfen ohne Zu<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb155" name="__p11__lb155" id="__p11__lb155" class="linenumbersVisible linenumbers pb" data-lbnr="155">0155</a>stimmung bei keinerlei öffentlichen Productionen mitwirken, sich außer
-                           <br class="pb" /><a href="#__p11__lb156" name="__p11__lb156" id="__p11__lb156" class="linenumbersTransparent linenumbers pb">0156</a>den (einmonatlichen) Ferien von <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span> nicht entfernen und vor Ab<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb157" name="__p11__lb157" id="__p11__lb157" class="linenumbersTransparent linenumbers pb">0157</a>lauf der acht Jahre kein Engagement eingehen.
+                           <br class="pb" /><a href="#__p11__lb156" name="__p11__lb156" id="__p11__lb156" class="linenumbersTransparent linenumbers pb">0156</a>den (einmonatlichen) Ferien von <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wien nicht entfernen und vor Ab<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb157" name="__p11__lb157" id="__p11__lb157" class="linenumbersTransparent linenumbers pb">0157</a>lauf der acht Jahre kein Engagement eingehen.
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p12__lb158" name="__p12__lb158" id="__p12__lb158" class="linenumbersTransparent linenumbers pb">0158</a>Das wichtigste Bedenken gegen diese Bestimmungen, betrifft die
                            <br class="pb" /><a href="#__p12__lb159" name="__p12__lb159" id="__p12__lb159" class="linenumbersTransparent linenumbers pb">0159</a>Verwendung der Eleven im Theaterchor. Diese Verwendung ist that<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p12__lb160" name="__p12__lb160" id="__p12__lb160" class="linenumbersVisible linenumbers pb" data-lbnr="160">0160</a>sächlich noch in weit größerem als dem statutenmäßigen Umfang vor<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb161" name="__p13__lb161" id="__p13__lb161" class="linenumbersTransparent linenumbers pb">0161</a>genommen worden; die Eleven wurden nicht erst im vierten, sondern
                            <br class="pb" /><a href="#__p13__lb162" name="__p13__lb162" id="__p13__lb162" class="linenumbersTransparent linenumbers pb">0162</a>bereits im ersten Jahrgang der Opernschule auf das Ausgiebigste im
-                           <br class="pb" /><a href="#__p13__lb163" name="__p13__lb163" id="__p13__lb163" class="linenumbersTransparent linenumbers pb">0163</a>Opernchor verwendet. <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_202">Offenbach</span>’s „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_107">Rheinnixe</span>“ und die zweimonatliche
-                           <br class="pb" /><a href="#__p13__lb164" name="__p13__lb164" id="__p13__lb164" class="linenumbersTransparent linenumbers pb">0164</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">italienisch</span>e Saison haben die Eleven bedenklich in Athem erhalten:
+                           <br class="pb" /><a href="#__p13__lb163" name="__p13__lb163" id="__p13__lb163" class="linenumbersTransparent linenumbers pb">0163</a>Opernchor verwendet. <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_202"></span>Offenbach’s „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_107"></span>Rheinnixe“ und die zweimonatliche
+                           <br class="pb" /><a href="#__p13__lb164" name="__p13__lb164" id="__p13__lb164" class="linenumbersTransparent linenumbers pb">0164</a><span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28"></span>italienische Saison haben die Eleven bedenklich in Athem erhalten:
                            <br class="pb" /><a href="#__p13__lb165" name="__p13__lb165" id="__p13__lb165" class="linenumbersVisible linenumbers pb" data-lbnr="165">0165</a>den ganzen Winter und Frühling hindurch war das Auswendiglernen
                            <br class="pb" /><a href="#__p13__lb166" name="__p13__lb166" id="__p13__lb166" class="linenumbersTransparent linenumbers pb">0166</a>nichtsnutziger Chöre fast der einzige Lehrstoff, Theaterproben und Vor<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb167" name="__p13__lb167" id="__p13__lb167" class="linenumbersTransparent linenumbers pb">0167</a>stellungen die überwiegende Beschäftigung der Eleven. Am Schluß
-                           <br class="pb" /><a href="#__p13__lb168" name="__p13__lb168" id="__p13__lb168" class="linenumbersTransparent linenumbers pb">0168</a>der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28">italienisch</span>en Saison habe ich mich ausführlich über diesen Punkt
+                           <br class="pb" /><a href="#__p13__lb168" name="__p13__lb168" id="__p13__lb168" class="linenumbersTransparent linenumbers pb">0168</a>der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_28"></span>italienischen Saison habe ich mich ausführlich über diesen Punkt
                            <br class="pb" /><a href="#__p13__lb169" name="__p13__lb169" id="__p13__lb169" class="linenumbersTransparent linenumbers pb">0169</a>und die falsche Richtung, in welche die Operschule damit geräth,
                            <br class="pb" /><a href="#__p13__lb170" name="__p13__lb170" id="__p13__lb170" class="linenumbersVisible linenumbers pb" data-lbnr="170">0170</a>ausgesprochen und kann nur wiederholen, daß dieses Institut zu etwas
                            <br class="pb" /><a href="#__p13__lb171" name="__p13__lb171" id="__p13__lb171" class="linenumbersTransparent linenumbers pb">0171</a>ganz anderem bestimmt war und bestimmt ist, als zu einer Wind<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb172" name="__p13__lb172" id="__p13__lb172" class="linenumbersTransparent linenumbers pb">0172</a>lade, welche lediglich unsern athemlosen Theaterchor mit Luft zu
@@ -288,97 +294,16 @@
                            <br class="pb" /><a href="#__p13__lb179" name="__p13__lb179" id="__p13__lb179" class="linenumbersTransparent linenumbers pb">0179</a>wichtigere Erfordernisse, als er statutenmäßig den Lehrgang und die
                            <br class="pb" /><a href="#__p13__lb180" name="__p13__lb180" id="__p13__lb180" class="linenumbersVisible linenumbers pb" data-lbnr="180">0180</a>Methode bestimmt, so daß die einzelnen Fachlehrer pädagogisch und
                            <br class="pb" /><a href="#__p13__lb181" name="__p13__lb181" id="__p13__lb181" class="linenumbersTransparent linenumbers pb">0181</a>ästhetisch nicht selbständig sind. Was wieder diese Lehrer betrifft,
-                           <br class="pb" /><a href="#__p13__lb182" name="__p13__lb182" id="__p13__lb182" class="linenumbersTransparent linenumbers pb">0182</a>so hat uns das Beispiel <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_21">Frankreich</span>s gezeigt, daß man sie dort für
+                           <br class="pb" /><a href="#__p13__lb182" name="__p13__lb182" id="__p13__lb182" class="linenumbersTransparent linenumbers pb">0182</a>so hat uns das Beispiel <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_21"></span>Frankreichs gezeigt, daß man sie dort für
                            <br class="pb" /><a href="#__p13__lb183" name="__p13__lb183" id="__p13__lb183" class="linenumbersTransparent linenumbers pb">0183</a>wichtig genug hält, um sie aus den ersten dramatischen Künstlern
-                           <br class="pb" /><a href="#__p13__lb184" name="__p13__lb184" id="__p13__lb184" class="linenumbersTransparent linenumbers pb">0184</a>der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44">Paris</span>er Bühnen zu wählen. In welchem Maße die leitenden und
+                           <br class="pb" /><a href="#__p13__lb184" name="__p13__lb184" id="__p13__lb184" class="linenumbersTransparent linenumbers pb">0184</a>der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_44"></span>Pariser Bühnen zu wählen. In welchem Maße die leitenden und
                            <br class="pb" /><a href="#__p13__lb185" name="__p13__lb185" id="__p13__lb185" class="linenumbersVisible linenumbers pb" data-lbnr="185">0185</a>lehrenden Kräfte an unserer Hofopernschule ihrer Aufgabe gewachsen
                            <br class="pb" /><a href="#__p13__lb186" name="__p13__lb186" id="__p13__lb186" class="linenumbersTransparent linenumbers pb">0186</a>sind, werden wol in nicht allzulanger Zeit die Resultate dieses In<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb187" name="__p13__lb187" id="__p13__lb187" class="linenumbersTransparent linenumbers pb">0187</a>stitutes darthun. Wir wollen nicht verzagen, wenn gegenwärtig
                            <br class="pb" /><a href="#__p13__lb188" name="__p13__lb188" id="__p13__lb188" class="linenumbersTransparent linenumbers pb">0188</a>manche Stelle mittelmäßig besetzt erscheint: die Persönlichkeiten wech<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb189" name="__p13__lb189" id="__p13__lb189" class="linenumbersTransparent linenumbers pb">0189</a>seln, das Institut bleibt. Und diese, die Opernschule, wie sie sein
                            <br class="pb" /><a href="#__p13__lb190" name="__p13__lb190" id="__p13__lb190" class="linenumbersVisible linenumbers pb" data-lbnr="190">0190</a>kann und soll, ist immerhin eine Thatsache, die der Musikhistoriker
-                           <br class="pb" /><a href="#__p13__lb191" name="__p13__lb191" id="__p13__lb191" class="linenumbersTransparent linenumbers pb">0191</a>unter den <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55">Wien</span>er Kunst-Errungenschaften dieses Decenniums auf<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb192" name="__p13__lb192" id="__p13__lb192" class="linenumbersTransparent linenumbers pb">0192</a>zählen wird.</p>
+                           <br class="pb" /><a href="#__p13__lb191" name="__p13__lb191" id="__p13__lb191" class="linenumbersTransparent linenumbers pb">0191</a>unter den <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_55"></span>Wiener Kunst-Errungenschaften dieses Decenniums auf<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p13__lb192" name="__p13__lb192" id="__p13__lb192" class="linenumbersTransparent linenumbers pb">0192</a>zählen wird.</p>
                      </div>
                      <div class="tei-back">
-                        <div class="modal fade" id="hsl_person_id_202" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Offenbach, Jacques" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Offenbach, Jacques</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/118589598" target="_blank">https://d-nb.info/gnd/118589598</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_202.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_196" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Nourrit, Adolphe" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nourrit, Adolphe</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/119335131" target="_blank">https://d-nb.info/gnd/119335131</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_196.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_163" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Lind, Jenny" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Lind, Jenny</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/118780026" target="_blank">https://d-nb.info/gnd/118780026</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_163.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
                         <div class="modal fade" id="hsl_person_id_120" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Hellmesberger, Joseph" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -398,33 +323,6 @@
                                           <tr>
                                              <th> Weiterlesen </th>
                                              <td><a href="hsl_person_id_120.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_58" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Devrient, Eduard" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Devrient, Eduard</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/118525042" target="_blank">https://d-nb.info/gnd/118525042</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_58.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -487,29 +385,106 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_34" data-bs-toggle="modal" tabindex="-1" aria-labelledby="London" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_202" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Offenbach, Jacques" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">London</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Offenbach, Jacques</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
+                                             <th> Name (alt) </th>
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Land </th>
-                                             <td>GB, United Kingdom</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2643743/" target="_blank">2643743</a></td>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/118589598" target="_blank">https://d-nb.info/gnd/118589598</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_34.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_202.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_163" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Lind, Jenny" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Lind, Jenny</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/118780026" target="_blank">https://d-nb.info/gnd/118780026</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_person_id_163.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_58" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Devrient, Eduard" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Devrient, Eduard</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/118525042" target="_blank">https://d-nb.info/gnd/118525042</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_person_id_58.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_196" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Nourrit, Adolphe" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Nourrit, Adolphe</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/119335131" target="_blank">https://d-nb.info/gnd/119335131</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_person_id_196.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -549,6 +524,68 @@
                               </div>
                            </div>
                         </div>
+                        <div class="modal fade" id="hsl_place_id_55" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Wien" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Wien</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>AT, Austria</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2761369/" target="_blank">2761369</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_55.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_43" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Österreich" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Österreich</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td>Oesterreich</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>AT, Austria</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2782113/" target="_blank">2782113</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_43.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
                         <div class="modal fade" id="hsl_place_id_28" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Italia" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -572,6 +609,68 @@
                                           <tr>
                                              <th> Weiterlesen </th>
                                              <td><a href="hsl_place_id_28.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_34" data-bs-toggle="modal" tabindex="-1" aria-labelledby="London" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">London</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>GB, United Kingdom</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2643743/" target="_blank">2643743</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_34.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_place_id_21" data-bs-toggle="modal" tabindex="-1" aria-labelledby="France" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">France</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Alternativname </th>
+                                             <td>Frankreich</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Land </th>
+                                             <td>FR, France</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/3017382/" target="_blank">3017382</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_place_id_21.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -642,784 +741,34 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_43" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Österreich" aria-hidden="true">
+                        <div class="modal fade" id="hsl_work_id_107" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Les fées du Rhin" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Österreich</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Alternativname </th>
-                                             <td>Oesterreich</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Land </th>
-                                             <td>AT, Austria</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2782113/" target="_blank">2782113</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_43.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_place_id_21" data-bs-toggle="modal" tabindex="-1" aria-labelledby="France" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">France</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Alternativname </th>
-                                             <td>Frankreich</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Land </th>
-                                             <td>FR, France</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/3017382/" target="_blank">3017382</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_21.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_place_id_55" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Wien" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Wien</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Alternativname </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Land </th>
-                                             <td>AT, Austria</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2761369/" target="_blank">2761369</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_55.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Les fées du Rhin</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
                                              <th> Autor(en) </th>
                                              <td>
-                                                <ul></ul>
+                                                <ul>
+                                                   <li><a href=".html">Nuitter, Charles</a></li>
+                                                   <li><a href=".html">Offenbach, Jacques</a></li>
+                                                </ul>
                                              </td>
                                           </tr>
                                           <tr>
                                              <th> Alternativtitel </th>
-                                             <td></td>
+                                             <td>Die Rheinnixen</td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/4842212-5" target="_blank">4842212-5</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <td><a href="hsl_work_id_107.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1447,7 +796,7 @@
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
+                                             <th> GND ID </th>
                                              <td><a href="" target="_blank"></a></td>
                                           </tr>
                                           <tr>
@@ -1461,34 +810,724 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_work_id_107" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Les fées du Rhin" aria-hidden="true">
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Les fées du Rhin</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
                                              <th> Autor(en) </th>
                                              <td>
-                                                <ul>
-                                                   <li><a href=".html">Nuitter, Charles</a></li>
-                                                   <li><a href=".html">Offenbach, Jacques</a></li>
-                                                </ul>
+                                                <ul></ul>
                                              </td>
                                           </tr>
                                           <tr>
                                              <th> Alternativtitel </th>
-                                             <td>Die Rheinnixen</td>
+                                             <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
+                                             <th> GND ID </th>
                                              <td><a href="" target="_blank"></a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_107.html"> Details </a></td>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1537,7 +1576,7 @@
                      <h6 class="font-weight-bold">PROJEKTPARTNER</h6>
                      <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="images/fwf-logo_var2.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
+                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="https://www.fwf.ac.at/fileadmin/Website/Logos/FWF_Logo.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 180px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                            <div class="flex-md-row mb-4 align-items-center"><a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a></div>
@@ -1571,9 +1610,9 @@
                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z"></path></svg></a></div>
                            </div>
                            <div class="row">
-                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8366294"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8366294.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.10362122"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10362122.svg" alt="DOI" /></a></div>
                               <div class="custom-html-widget col-12 py-2"><label>Daten (VMS):</label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
-                              <div class="custom-html-widget col-12 py-2"><label>Daten (NFP):</label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>Daten (NFP):</label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.10362003"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10362003.svg" alt="DOI" /></a></div>
                            </div>
                         </div>
                      </div>

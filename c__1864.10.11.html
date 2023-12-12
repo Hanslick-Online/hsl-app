@@ -17,7 +17,7 @@
       <title>Hanslick - Digitale Edition</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script></head>
+      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><link rel="stylesheet" href="css/de-micro-editor.css" /><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script></head>
    <body class="page">
       <div class="hfeed site" id="page">
          <div class="wrapper-fluid wrapper-navbar sticky-top" id="wrapper-navbar"><a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a><nav class="autohide navbar navbar-expand-lg bg-light">
@@ -80,7 +80,10 @@
                            </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="team.html?lang=de">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="search.html?lang=de">Suche</a></li>
+                        <li class="nav-item">
+                           <form class="form-inline my-3 my-lg-0" method="get" action="search.html?hsl[query]&amp;lang=de" role="search"><input class="form-control navbar-search" id="s" name="hsl[query]" type="text" placeholder="Suche" value="" autocomplete="off" /><button type="submit" class="navbar-search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path></svg></button></form>
+                        </li>
                         <li class="nav-item" style="display:inline!important;margin:.4em auto;">
                            <multi-language opt="de"></multi-language>
                            <multi-language opt="en"></multi-language>
@@ -124,6 +127,9 @@
                                  <annotation-slider opt="prs"></annotation-slider>
                               </li>
                               <li class="dropdown-item">
+                                 <annotation-slider opt="prsf"></annotation-slider>
+                              </li>
+                              <li class="dropdown-item">
                                  <annotation-slider opt="plc"></annotation-slider>
                               </li>
                               <li class="dropdown-item">
@@ -150,24 +156,24 @@
                      <div id="mark-scroll"><button data-search="next" disabled="disabled">↓</button><button data-search="prev" disabled="disabled">↑</button><button data-search="clear" disabled="disabled">✖</button></div>
                      <div class="card-body yes-index">
                         <p class="yes-index meta-head">Neue Freie Presse<br />Morgenblatt<br />No. 41. Wien, Dienstag den 11. October 1864<br /></p><span class="anchor-pb" source="hsl-nfp/1864.10.11-0001"></span><span class="pb">[1]</span><h1 class="yes-index">Hofoperntheater.</h1>
-                        <h2 class="yes-index">(„<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_30">Waldfräulein</span>,“ Ballet von <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206">Pallerini</span></span>)</h2>
-                        <p class="yes-index"><br class="pb" /><a href="#__p1__lb3" name="__p1__lb3" id="__p1__lb3" class="linenumbersTransparent linenumbers pb">0003</a>Ed. H. Wenn man in <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_332">Zedlitz</span></span>’ „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_682">Waldfräulein</span>“ sich etwa tau<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb4" name="__p1__lb4" id="__p1__lb4" class="linenumbersTransparent linenumbers pb">0004</a>send Verse tief hineingelesen und mit Herrn <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430">Aechter</span> v. Möspelbrunn
+                        <h2 class="yes-index">(„<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_30"></span>Waldfräulein,“ Ballet von <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206"></span>Pallerini</span>)</h2>
+                        <p class="yes-index"><br class="pb" /><a href="#__p1__lb3" name="__p1__lb3" id="__p1__lb3" class="linenumbersTransparent linenumbers pb">0003</a>Ed. H. Wenn man in <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_332"></span>Zedlitz</span>’ „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_682"></span>Waldfräulein“ sich etwa tau<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb4" name="__p1__lb4" id="__p1__lb4" class="linenumbersTransparent linenumbers pb">0004</a>send Verse tief hineingelesen und mit Herrn <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430"></span>Aechter v. Möspelbrunn
                            <br class="pb" /><a href="#__p1__lb5" name="__p1__lb5" id="__p1__lb5" class="linenumbersVisible linenumbers pb" data-lbnr="5">0005</a>das erste Dutzend „Versuchungen“ bestanden hat, gelangt man an ein
-                           <br class="pb" /><a href="#__p1__lb6" name="__p1__lb6" id="__p1__lb6" class="linenumbersTransparent linenumbers pb">0006</a>mondbeglänztes, lauschiges Plätzchen, allwo <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span> lieblich aus<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb7" name="__p1__lb7" id="__p1__lb7" class="linenumbersTransparent linenumbers pb">0007</a>gestreckt liegt und schläft. Vor ihr steht in Anschauen versunken ein
+                           <br class="pb" /><a href="#__p1__lb6" name="__p1__lb6" id="__p1__lb6" class="linenumbersTransparent linenumbers pb">0006</a>mondbeglänztes, lauschiges Plätzchen, allwo <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein lieblich aus<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p1__lb7" name="__p1__lb7" id="__p1__lb7" class="linenumbersTransparent linenumbers pb">0007</a>gestreckt liegt und schläft. Vor ihr steht in Anschauen versunken ein
                            <br class="pb" /><a href="#__p1__lb8" name="__p1__lb8" id="__p1__lb8" class="linenumbersTransparent linenumbers pb">0008</a>junger „Einsiedel,“ der entzückte Betrachtungen darüber anstellt,
                            <br class="pb" /><a href="#__p1__lb9" name="__p1__lb9" id="__p1__lb9" class="linenumbersTransparent linenumbers pb">0009</a><span class="vrs">„wie zierlich doch des Herren Gnade<span class="vrsSep"> / </span></span><br class="pb" /><a href="#__p1__lb10" name="__p1__lb10" id="__p1__lb10" class="linenumbersVisible linenumbers pb" data-lbnr="10">0010</a><span class="vrs">geformt hat dieser Jungfrau Wade!“<span class="vrsSep"> / </span></span></p>
                         <p class="yes-index"><br class="pb" /><a href="#__p2__lb11" name="__p2__lb11" id="__p2__lb11" class="linenumbersTransparent linenumbers pb">0011</a>Dieser Vers muß es gewesen sein, der mit der Kraft eines
-                           <br class="pb" /><a href="#__p2__lb12" name="__p2__lb12" id="__p2__lb12" class="linenumbersTransparent linenumbers pb">0012</a>Stichworts Herrn <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206">Pallerini</span></span> bei der Lectüre erfaßte und ihm die
-                           <br class="pb" /><a href="#__p2__lb13" name="__p2__lb13" id="__p2__lb13" class="linenumbersTransparent linenumbers pb">0013</a>Idee einer Verballetirung „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_682">Waldfräuleins</span>“ aufdrang. Denn von dem
+                           <br class="pb" /><a href="#__p2__lb12" name="__p2__lb12" id="__p2__lb12" class="linenumbersTransparent linenumbers pb">0012</a>Stichworts Herrn <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206"></span>Pallerini</span> bei der Lectüre erfaßte und ihm die
+                           <br class="pb" /><a href="#__p2__lb13" name="__p2__lb13" id="__p2__lb13" class="linenumbersTransparent linenumbers pb">0013</a>Idee einer Verballetirung „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_682"></span>Waldfräuleins“ aufdrang. Denn von dem
                            <br class="pb" /><a href="#__p2__lb14" name="__p2__lb14" id="__p2__lb14" class="linenumbersTransparent linenumbers pb">0014</a>Stimmungszauber, der Waldespoesie, von den sinnigen Gedanken
-                           <br class="pb" /><a href="#__p2__lb15" name="__p2__lb15" id="__p2__lb15" class="linenumbersVisible linenumbers pb" data-lbnr="15">0015</a>und süßen Empfindungen des <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_332">Zedlitz</span>’schen Märchens finden wir in
-                           <br class="pb" /><a href="#__p2__lb16" name="__p2__lb16" id="__p2__lb16" class="linenumbersTransparent linenumbers pb">0016</a>Herrn <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206">Pallerini</span>’s Ballet gar nichts wieder; „des Herren Gnade“ hat
+                           <br class="pb" /><a href="#__p2__lb15" name="__p2__lb15" id="__p2__lb15" class="linenumbersVisible linenumbers pb" data-lbnr="15">0015</a>und süßen Empfindungen des <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_332"></span>Zedlitz’schen Märchens finden wir in
+                           <br class="pb" /><a href="#__p2__lb16" name="__p2__lb16" id="__p2__lb16" class="linenumbersTransparent linenumbers pb">0016</a>Herrn <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206"></span>Pallerini’s Ballet gar nichts wieder; „des Herren Gnade“ hat
                            <br class="pb" /><a href="#__p2__lb17" name="__p2__lb17" id="__p2__lb17" class="linenumbersTransparent linenumbers pb">0017</a>sich darin ausschließlich auf obigen Reim zurückgezogen.
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p3__lb18" name="__p3__lb18" id="__p3__lb18" class="linenumbersTransparent linenumbers pb">0018</a>In unserem zweifelhaften Berufe als Balletreferent wagten
                            <br class="pb" /><a href="#__p3__lb19" name="__p3__lb19" id="__p3__lb19" class="linenumbersTransparent linenumbers pb">0019</a>wir einigemal die Meinung auszusprechen, es wären aus dem Schacht
                            <br class="pb" /><a href="#__p3__lb20" name="__p3__lb20" id="__p3__lb20" class="linenumbersVisible linenumbers pb" data-lbnr="20">0020</a>der Volksmärchen noch köstliche Balletstoffe zu holen. Nur müßte der
-                           <br class="pb" /><a href="#__p3__lb21" name="__p3__lb21" id="__p3__lb21" class="linenumbersTransparent linenumbers pb">0021</a>Balletmeister mehr als ein geschulter Handwerker, er müßte ein Stück<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb22" name="__p3__lb22" id="__p3__lb22" class="linenumbersTransparent linenumbers pb">0022</a>chen „Tanzpoet“ sein. Ein solcher hätte aus <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_332">Zedlitz</span>’ <span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_682">Waldfräulein</span><span class="space"> </span><br class="pb" /><a href="#__p3__lb23" name="__p3__lb23" id="__p3__lb23" class="linenumbersTransparent linenumbers pb">0023</a>ohne Zweifel eine Reihe anmuthigster Situationen gewonnen. Unser
+                           <br class="pb" /><a href="#__p3__lb21" name="__p3__lb21" id="__p3__lb21" class="linenumbersTransparent linenumbers pb">0021</a>Balletmeister mehr als ein geschulter Handwerker, er müßte ein Stück<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb22" name="__p3__lb22" id="__p3__lb22" class="linenumbersTransparent linenumbers pb">0022</a>chen „Tanzpoet“ sein. Ein solcher hätte aus <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_332"></span>Zedlitz’ <span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_682"></span>Waldfräulein<span class="space"> </span><br class="pb" /><a href="#__p3__lb23" name="__p3__lb23" id="__p3__lb23" class="linenumbersTransparent linenumbers pb">0023</a>ohne Zweifel eine Reihe anmuthigster Situationen gewonnen. Unser
                            <br class="pb" /><a href="#__p3__lb24" name="__p3__lb24" id="__p3__lb24" class="linenumbersTransparent linenumbers pb">0024</a>Bearbeiter hat vielmehr das entgegengesetzte Talent, nämlich eine
                            <br class="pb" /><a href="#__p3__lb25" name="__p3__lb25" id="__p3__lb25" class="linenumbersVisible linenumbers pb" data-lbnr="25">0025</a>erstaunliche Fähigkeit bewiesen, dem Gedicht allen poetischen Duft
                            <br class="pb" /><a href="#__p3__lb26" name="__p3__lb26" id="__p3__lb26" class="linenumbersTransparent linenumbers pb">0026</a>vollständig auszutreiben. Die Charaktere und Situationen sind sämmt<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb27" name="__p3__lb27" id="__p3__lb27" class="linenumbersTransparent linenumbers pb">0027</a>lich zur gewöhnlichsten Balletschablone verallgemeint, die eigentlich
@@ -175,10 +181,10 @@
                            <br class="pb" /><a href="#__p3__lb29" name="__p3__lb29" id="__p3__lb29" class="linenumbersTransparent linenumbers pb">0029</a>Gruppen nicht das mindeste Neue oder Malerisch-Effectvolle. Mit
                            <br class="pb" /><a href="#__p3__lb30" name="__p3__lb30" id="__p3__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>dem dramatischen Theil hat es noch schlimmere Wege. Gleich das
                            <br class="pb" /><a href="#__p3__lb31" name="__p3__lb31" id="__p3__lb31" class="linenumbersTransparent linenumbers pb">0031</a>lange „Vorspiel in zwei Bildern“ dünkt uns eine unglückliche Idee.
-                           <br class="pb" /><a href="#__p3__lb32" name="__p3__lb32" id="__p3__lb32" class="linenumbersTransparent linenumbers pb">0032</a>Die halbfürstliche Abkunft <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span>s mag immerhin wichtig ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb33" name="__p3__lb33" id="__p3__lb33" class="linenumbersTransparent linenumbers pb">0033</a>nug sein, um eine glänzende Ueberraschungs- und Erkennungsscene
+                           <br class="pb" /><a href="#__p3__lb32" name="__p3__lb32" id="__p3__lb32" class="linenumbersTransparent linenumbers pb">0032</a>Die halbfürstliche Abkunft <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräuleins mag immerhin wichtig ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb33" name="__p3__lb33" id="__p3__lb33" class="linenumbersTransparent linenumbers pb">0033</a>nug sein, um eine glänzende Ueberraschungs- und Erkennungsscene
                            <br class="pb" /><a href="#__p3__lb34" name="__p3__lb34" id="__p3__lb34" class="linenumbersTransparent linenumbers pb">0034</a>am Schluß des Ballets zu motiviren. Allein mehr bedarf der Zu<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb35" name="__p3__lb35" id="__p3__lb35" class="linenumbersVisible linenumbers pb" data-lbnr="35">0035</a>schauer nicht, zum wenigsten, daß er in einem eigenen Vorspiel
-                           <br class="pb" /><a href="#__p3__lb36" name="__p3__lb36" id="__p3__lb36" class="linenumbersTransparent linenumbers pb">0036</a><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span>s Eltern und deren ganze Liebesgeschichte persönlich ken<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb37" name="__p3__lb37" id="__p3__lb37" class="linenumbersTransparent linenumbers pb">0037</a>nen lerne und bei dem kleinen Kind förmlich Gevatter stehe. Auch
-                           <br class="pb" /><a href="#__p3__lb38" name="__p3__lb38" id="__p3__lb38" class="linenumbersTransparent linenumbers pb">0038</a><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_606">Käthchen</span> von Heilbronn entpuppt sich schließlich als Kaiserstochter,<span class="space"> </span><br class="pb" /><a href="#__p4__lb39" name="__p4__lb39" id="__p4__lb39" class="linenumbersTransparent linenumbers pb">0039</a>aber welchem Bearbeiter würde es einfallen, uns die ganze Geschichte
+                           <br class="pb" /><a href="#__p3__lb36" name="__p3__lb36" id="__p3__lb36" class="linenumbersTransparent linenumbers pb">0036</a><span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräuleins Eltern und deren ganze Liebesgeschichte persönlich ken<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb37" name="__p3__lb37" id="__p3__lb37" class="linenumbersTransparent linenumbers pb">0037</a>nen lerne und bei dem kleinen Kind förmlich Gevatter stehe. Auch
+                           <br class="pb" /><a href="#__p3__lb38" name="__p3__lb38" id="__p3__lb38" class="linenumbersTransparent linenumbers pb">0038</a><span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_606"></span>Käthchen von Heilbronn entpuppt sich schließlich als Kaiserstochter,<span class="space"> </span><br class="pb" /><a href="#__p4__lb39" name="__p4__lb39" id="__p4__lb39" class="linenumbersTransparent linenumbers pb">0039</a>aber welchem Bearbeiter würde es einfallen, uns die ganze Geschichte
                            <br class="pb" /><a href="#__p4__lb40" name="__p4__lb40" id="__p4__lb40" class="linenumbersVisible linenumbers pb" data-lbnr="40">0040</a>ihrer Herkunft als Vorspiel zu credenzen?
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p5__lb41" name="__p5__lb41" id="__p5__lb41" class="linenumbersTransparent linenumbers pb">0041</a>Ein Uebelstand, der aus dieser fatalen Doppelgeschichte fließt,
@@ -186,39 +192,39 @@
                            <br class="pb" /><a href="#__p5__lb43" name="__p5__lb43" id="__p5__lb43" class="linenumbersTransparent linenumbers pb">0043</a>Mutter mit dem Kind an der Hand erscheint, in den folgenden Acten
                            <br class="pb" /><a href="#__p5__lb44" name="__p5__lb44" id="__p5__lb44" class="linenumbersTransparent linenumbers pb">0044</a>ihre eigene Tochter geben muß. Der Vorhang geht nach den hiezu
                            <br class="pb" /><a href="#__p5__lb45" name="__p5__lb45" id="__p5__lb45" class="linenumbersVisible linenumbers pb" data-lbnr="45">0045</a>erforderlichen 15 Jahren in die Höhe, wir sollen nun das erwachsene
-                           <br class="pb" /><a href="#__p5__lb46" name="__p5__lb46" id="__p5__lb46" class="linenumbersTransparent linenumbers pb">0046</a>„<span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span>“ in ihrem grünen Versteck belauschen.
-                           <br class="pb" /><a href="#__p5__lb47" name="__p5__lb47" id="__p5__lb47" class="linenumbersTransparent linenumbers pb">0047</a><span class="vrs">„O <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_134">Spessart</span>, edler Forst, du bist<span class="vrsSep"> / </span></span><br class="pb" /><a href="#__p5__lb48" name="__p5__lb48" id="__p5__lb48" class="linenumbersTransparent linenumbers pb">0048</a><span class="vrs">Der Wälder Preis zu jeder Frist!“<span class="vrsSep"> / </span></span><br class="pb" /><a href="#__p5__lb49" name="__p5__lb49" id="__p5__lb49" class="linenumbersTransparent linenumbers pb">0049</a>recitiren wir, gleichsam innerlich präludirend. Welche Enttäuschung!
-                           <br class="pb" /><a href="#__p5__lb50" name="__p5__lb50" id="__p5__lb50" class="linenumbersVisible linenumbers pb" data-lbnr="50">0050</a>Das der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_134">Spessart</span>? Das ein <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span>? Eine gezierte „Ideal<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p5__lb51" name="__p5__lb51" id="__p5__lb51" class="linenumbersTransparent linenumbers pb">0051</a>landschaft“ wie nach einem schlechten Watteau auf Porcelan gemalt,
+                           <br class="pb" /><a href="#__p5__lb46" name="__p5__lb46" id="__p5__lb46" class="linenumbersTransparent linenumbers pb">0046</a>„<span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein“ in ihrem grünen Versteck belauschen.
+                           <br class="pb" /><a href="#__p5__lb47" name="__p5__lb47" id="__p5__lb47" class="linenumbersTransparent linenumbers pb">0047</a><span class="vrs">„O <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_134"></span>Spessart, edler Forst, du bist<span class="vrsSep"> / </span></span><br class="pb" /><a href="#__p5__lb48" name="__p5__lb48" id="__p5__lb48" class="linenumbersTransparent linenumbers pb">0048</a><span class="vrs">Der Wälder Preis zu jeder Frist!“<span class="vrsSep"> / </span></span><br class="pb" /><a href="#__p5__lb49" name="__p5__lb49" id="__p5__lb49" class="linenumbersTransparent linenumbers pb">0049</a>recitiren wir, gleichsam innerlich präludirend. Welche Enttäuschung!
+                           <br class="pb" /><a href="#__p5__lb50" name="__p5__lb50" id="__p5__lb50" class="linenumbersVisible linenumbers pb" data-lbnr="50">0050</a>Das der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_134"></span>Spessart? Das ein <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein? Eine gezierte „Ideal<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p5__lb51" name="__p5__lb51" id="__p5__lb51" class="linenumbersTransparent linenumbers pb">0051</a>landschaft“ wie nach einem schlechten Watteau auf Porcelan gemalt,
                            <br class="pb" /><a href="#__p5__lb52" name="__p5__lb52" id="__p5__lb52" class="linenumbersTransparent linenumbers pb">0052</a>flimmert in Gold und Rosa vor uns, der Ausblick auf eine heitere
                            <br class="pb" /><a href="#__p5__lb53" name="__p5__lb53" id="__p5__lb53" class="linenumbersTransparent linenumbers pb">0053</a>(aber gar nicht waldmäßige) Fernsicht wird uns durch häßliche riesen<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p5__lb54" name="__p5__lb54" id="__p5__lb54" class="linenumbersTransparent linenumbers pb">0054</a>große <span class="italic">Pfauenfedern</span> verhüllt, welche den Vordergrund bedachen.
-                           <br class="pb" /><a href="#__p5__lb55" name="__p5__lb55" id="__p5__lb55" class="linenumbersVisible linenumbers pb" data-lbnr="55">0055</a>Der „<span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_134">Spessart</span>,“ ist förmlich parfümirt und frisirt. „<span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span>“ 
+                           <br class="pb" /><a href="#__p5__lb55" name="__p5__lb55" id="__p5__lb55" class="linenumbersVisible linenumbers pb" data-lbnr="55">0055</a>Der „<span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_134"></span>Spessart,“ ist förmlich parfümirt und frisirt. „<span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein“ 
                            <br class="pb" /><a href="#__p5__lb56" name="__p5__lb56" id="__p5__lb56" class="linenumbersTransparent linenumbers pb">0056</a>erscheint: bin weder Fräulein, weder Wald.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p6__lb57" name="__p6__lb57" id="__p6__lb57" class="linenumbersTransparent linenumbers pb">0057</a>Fräulein <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_52">Couqui</span></span> spielt diese Rolle so anmuthig, fein und
+                        <p class="yes-index"><br class="pb" /><a href="#__p6__lb57" name="__p6__lb57" id="__p6__lb57" class="linenumbersTransparent linenumbers pb">0057</a>Fräulein <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_52"></span>Couqui</span> spielt diese Rolle so anmuthig, fein und
                            <br class="pb" /><a href="#__p6__lb58" name="__p6__lb58" id="__p6__lb58" class="linenumbersTransparent linenumbers pb">0058</a>virtuos, wie jede andere, aber leider in keinem Punkte <span class="italic">anders</span>.
                            <br class="pb" /><a href="#__p6__lb59" name="__p6__lb59" id="__p6__lb59" class="linenumbersTransparent linenumbers pb">0059</a>Etwas in Maske, Mimik und Tanz schärfer Individualisirendes, die
                            <br class="pb" /><a href="#__p6__lb60" name="__p6__lb60" id="__p6__lb60" class="linenumbersVisible linenumbers pb" data-lbnr="60">0060</a>reizende Wildheit dieses Naturkindes besonders Charakterisirendes
-                           <br class="pb" /><a href="#__p6__lb61" name="__p6__lb61" id="__p6__lb61" class="linenumbersTransparent linenumbers pb">0061</a>konnten wir nicht wahrnehmen. <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span> spielt mit ihren Nixen
+                           <br class="pb" /><a href="#__p6__lb61" name="__p6__lb61" id="__p6__lb61" class="linenumbersTransparent linenumbers pb">0061</a>konnten wir nicht wahrnehmen. <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein spielt mit ihren Nixen
                            <br class="pb" /><a href="#__p6__lb62" name="__p6__lb62" id="__p6__lb62" class="linenumbersTransparent linenumbers pb">0062</a>„blinde Kuh,“ — was man, beiläufig gesagt, selbst sein müßte, um
                            <br class="pb" /><a href="#__p6__lb63" name="__p6__lb63" id="__p6__lb63" class="linenumbersTransparent linenumbers pb">0063</a>die in gelben Tunicas, rothen Schärpen und breiten Lorbeerkränzen
                            <br class="pb" /><a href="#__p6__lb64" name="__p6__lb64" id="__p6__lb64" class="linenumbersTransparent linenumbers pb">0064</a>herumspringenden Herren vom Ballet ruhig anzusehen, — mitten im
-                           <br class="pb" /><a href="#__p6__lb65" name="__p6__lb65" id="__p6__lb65" class="linenumbersVisible linenumbers pb" data-lbnr="65">0065</a>Spiele erscheint der langerwartete Märchenprinz, „Herr <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430">Aechter</span> von
-                           <br class="pb" /><a href="#__p6__lb66" name="__p6__lb66" id="__p6__lb66" class="linenumbersTransparent linenumbers pb">0066</a>Möspelbrunn.“ Er beginnt mit „<span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span>“ sofort ein sehr künst<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb67" name="__p6__lb67" id="__p6__lb67" class="linenumbersTransparent linenumbers pb">0067</a>liches Pas de deux, in Gegenwart des ganzen sich ringsum postiren<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb68" name="__p6__lb68" id="__p6__lb68" class="linenumbersTransparent linenumbers pb">0068</a>den Balletcorps! Haben wir zu viel gesagt, wenn wir Herrn <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206">Pallerini</span><span class="space"> </span><br class="pb" /><a href="#__p6__lb69" name="__p6__lb69" id="__p6__lb69" class="linenumbersTransparent linenumbers pb">0069</a>eine specifische Poesie-Auspumpungskraft nachrühmten?
+                           <br class="pb" /><a href="#__p6__lb65" name="__p6__lb65" id="__p6__lb65" class="linenumbersVisible linenumbers pb" data-lbnr="65">0065</a>Spiele erscheint der langerwartete Märchenprinz, „Herr <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430"></span>Aechter von
+                           <br class="pb" /><a href="#__p6__lb66" name="__p6__lb66" id="__p6__lb66" class="linenumbersTransparent linenumbers pb">0066</a>Möspelbrunn.“ Er beginnt mit „<span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein“ sofort ein sehr künst<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb67" name="__p6__lb67" id="__p6__lb67" class="linenumbersTransparent linenumbers pb">0067</a>liches Pas de deux, in Gegenwart des ganzen sich ringsum postiren<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p6__lb68" name="__p6__lb68" id="__p6__lb68" class="linenumbersTransparent linenumbers pb">0068</a>den Balletcorps! Haben wir zu viel gesagt, wenn wir Herrn <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_206"></span>Pallerini<span class="space"> </span><br class="pb" /><a href="#__p6__lb69" name="__p6__lb69" id="__p6__lb69" class="linenumbersTransparent linenumbers pb">0069</a>eine specifische Poesie-Auspumpungskraft nachrühmten?
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p7__lb70" name="__p7__lb70" id="__p7__lb70" class="linenumbersVisible linenumbers pb" data-lbnr="70">0070</a>Der dritte Act bringt uns in <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_460">Caprus</span></span>’ Hütte. Wir hofften
+                        <p class="yes-index"><br class="pb" /><a href="#__p7__lb70" name="__p7__lb70" id="__p7__lb70" class="linenumbersVisible linenumbers pb" data-lbnr="70">0070</a>Der dritte Act bringt uns in <span class="italic"><span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_460"></span>Caprus</span>’ Hütte. Wir hofften
                            <br class="pb" /><a href="#__p7__lb71" name="__p7__lb71" id="__p7__lb71" class="linenumbersTransparent linenumbers pb">0071</a>viel Gutes von dem Erscheinen des wackern Ziegenhirten; allein auch
                            <br class="pb" /><a href="#__p7__lb72" name="__p7__lb72" id="__p7__lb72" class="linenumbersTransparent linenumbers pb">0072</a>er vermochte keine rechte Heiterkeit zu erzeugen, sondern drehte sich
-                           <br class="pb" /><a href="#__p7__lb73" name="__p7__lb73" id="__p7__lb73" class="linenumbersTransparent linenumbers pb">0073</a>selbst mißvergnügt im Kreise alltäglicher Komik. Mit großer Ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb74" name="__p7__lb74" id="__p7__lb74" class="linenumbersTransparent linenumbers pb">0074</a>müthsruhe sehen wir ihn gegen „<span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_548">Grauweiblein</span>“ den Kürzern ziehen
-                           <br class="pb" /><a href="#__p7__lb75" name="__p7__lb75" id="__p7__lb75" class="linenumbersVisible linenumbers pb" data-lbnr="75">0075</a>und verwundern uns lediglich darüber, daß das <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_548">Grauweiblein</span></span><span class="space"> </span><br class="pb" /><a href="#__p7__lb76" name="__p7__lb76" id="__p7__lb76" class="linenumbersTransparent linenumbers pb">0076</a>hier eine braun und hellroth gekleidete junge, hübsche Dame ist! Den
+                           <br class="pb" /><a href="#__p7__lb73" name="__p7__lb73" id="__p7__lb73" class="linenumbersTransparent linenumbers pb">0073</a>selbst mißvergnügt im Kreise alltäglicher Komik. Mit großer Ge<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p7__lb74" name="__p7__lb74" id="__p7__lb74" class="linenumbersTransparent linenumbers pb">0074</a>müthsruhe sehen wir ihn gegen „<span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_548"></span>Grauweiblein“ den Kürzern ziehen
+                           <br class="pb" /><a href="#__p7__lb75" name="__p7__lb75" id="__p7__lb75" class="linenumbersVisible linenumbers pb" data-lbnr="75">0075</a>und verwundern uns lediglich darüber, daß das <span class="italic"><span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_548"></span>Grauweiblein</span><span class="space"> </span><br class="pb" /><a href="#__p7__lb76" name="__p7__lb76" id="__p7__lb76" class="linenumbersTransparent linenumbers pb">0076</a>hier eine braun und hellroth gekleidete junge, hübsche Dame ist! Den
                            <br class="pb" /><a href="#__p7__lb77" name="__p7__lb77" id="__p7__lb77" class="linenumbersTransparent linenumbers pb">0077</a>Schluß dieses Actes (aber noch lange nicht der Prüfungen des Zu
-                           <br class="pb" /><a href="#__p7__lb78" name="__p7__lb78" id="__p7__lb78" class="linenumbersTransparent linenumbers pb">0078</a>schauers) bildet <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430">Aechter</span>’s Abenteuer mit den <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_245">Rhein</span>-Nixen. Die
-                           <br class="pb" /><a href="#__p7__lb79" name="__p7__lb79" id="__p7__lb79" class="linenumbersTransparent linenumbers pb">0079</a>Decoration zeigt uns, wie das gedruckte Textbuch versichert, „<span class="italic">das</span><span class="space"> </span><br class="pb" /><a href="#__p8__lb80" name="__p8__lb80" id="__p8__lb80" class="linenumbersVisible linenumbers pb" data-lbnr="80">0080</a><span class="italic">Innere der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_245">Rhein</span>fluthen</span>.“ Wir sehen <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430">Aechter</span>’s Schiff her<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb81" name="__p8__lb81" id="__p8__lb81" class="linenumbersTransparent linenumbers pb">0081</a>absinken und den Ritter sammt Gefolge das übliche „Verfüh<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb82" name="__p8__lb82" id="__p8__lb82" class="linenumbersTransparent linenumbers pb">0082</a>rungsballet“ mannhaft ausstehen. Die decorative Ausstattung
+                           <br class="pb" /><a href="#__p7__lb78" name="__p7__lb78" id="__p7__lb78" class="linenumbersTransparent linenumbers pb">0078</a>schauers) bildet <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430"></span>Aechter’s Abenteuer mit den <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_245"></span>Rhein-Nixen. Die
+                           <br class="pb" /><a href="#__p7__lb79" name="__p7__lb79" id="__p7__lb79" class="linenumbersTransparent linenumbers pb">0079</a>Decoration zeigt uns, wie das gedruckte Textbuch versichert, „<span class="italic">das</span><span class="space"> </span><br class="pb" /><a href="#__p8__lb80" name="__p8__lb80" id="__p8__lb80" class="linenumbersVisible linenumbers pb" data-lbnr="80">0080</a><span class="italic">Innere der <span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_245"></span>Rheinfluthen</span>.“ Wir sehen <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430"></span>Aechter’s Schiff her<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb81" name="__p8__lb81" id="__p8__lb81" class="linenumbersTransparent linenumbers pb">0081</a>absinken und den Ritter sammt Gefolge das übliche „Verfüh<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb82" name="__p8__lb82" id="__p8__lb82" class="linenumbersTransparent linenumbers pb">0082</a>rungsballet“ mannhaft ausstehen. Die decorative Ausstattung
                            <br class="pb" /><a href="#__p8__lb83" name="__p8__lb83" id="__p8__lb83" class="linenumbersTransparent linenumbers pb">0083</a>dieser Scene bietet jedem Theater ungemeine Schwierigkeiten, und
                            <br class="pb" /><a href="#__p8__lb84" name="__p8__lb84" id="__p8__lb84" class="linenumbersTransparent linenumbers pb">0084</a>selbst der anspruchsvollste Zuseher kann hier seine Phantasie von
                            <br class="pb" /><a href="#__p8__lb85" name="__p8__lb85" id="__p8__lb85" class="linenumbersVisible linenumbers pb" data-lbnr="85">0085</a>der Pflicht, ein bischen mitzuwirken, nicht ganz dispensiren.
                            <br class="pb" /><a href="#__p8__lb86" name="__p8__lb86" id="__p8__lb86" class="linenumbersTransparent linenumbers pb">0086</a>Im Hofoperntheater hatten sich aber Maschinist und Maler vereinigt,
                            <br class="pb" /><a href="#__p8__lb87" name="__p8__lb87" id="__p8__lb87" class="linenumbersTransparent linenumbers pb">0087</a>ein Bild von so grotesker Geschmacklosigkeit zu schaffen, daß die gut<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb88" name="__p8__lb88" id="__p8__lb88" class="linenumbersTransparent linenumbers pb">0088</a>müthigste und bereitwilligste Illusion davor entsetzt zurückweicht.
-                           <br class="pb" /><a href="#__p8__lb89" name="__p8__lb89" id="__p8__lb89" class="linenumbersTransparent linenumbers pb">0089</a>Rechts und links „<span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_2">spanisch</span>e Wand“ von leichtem Silberstoff, dahinter
+                           <br class="pb" /><a href="#__p8__lb89" name="__p8__lb89" id="__p8__lb89" class="linenumbersTransparent linenumbers pb">0089</a>Rechts und links „<span class="places entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_place_id_2"></span>spanische Wand“ von leichtem Silberstoff, dahinter
                            <br class="pb" /><a href="#__p8__lb90" name="__p8__lb90" id="__p8__lb90" class="linenumbersVisible linenumbers pb" data-lbnr="90">0090</a>scheußlich geformte Felsenriffe, welche Korallenzweige wie rothe Zungen
                            <br class="pb" /><a href="#__p8__lb91" name="__p8__lb91" id="__p8__lb91" class="linenumbersTransparent linenumbers pb">0091</a>herausstrecken, oben Alles beklebt mit abgeschmackt bunten Muscheln und
                            <br class="pb" /><a href="#__p8__lb92" name="__p8__lb92" id="__p8__lb92" class="linenumbersTransparent linenumbers pb">0092</a>Schnecken, unten riesige Schildkröten, um die Nixen <span class="italic">herumkrie</span><span class="space"> </span><span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p8__lb93" name="__p8__lb93" id="__p8__lb93" class="linenumbersTransparent linenumbers pb">0093</a><span class="italic">chend</span> — welcher Anblick! Es wäre uns rühmlicher erschienen,
@@ -229,52 +235,25 @@
                            <br class="pb" /><a href="#__p9__lb97" name="__p9__lb97" id="__p9__lb97" class="linenumbersTransparent linenumbers pb">0097</a>der Zuschauer sich entschloß, auf den vierten zu verzichten. Letzterer
                            <br class="pb" /><a href="#__p9__lb98" name="__p9__lb98" id="__p9__lb98" class="linenumbersTransparent linenumbers pb">0098</a>beginnt ganz unmotivirt mit einem Zigeunerballet — „wo Begriffe
                            <br class="pb" /><a href="#__p9__lb99" name="__p9__lb99" id="__p9__lb99" class="linenumbersTransparent linenumbers pb">0099</a>fehlen“, da stellen sich Zigeuner zu rechter Zeit stets ein. Es folgt
-                           <br class="pb" /><a href="#__p9__lb100" name="__p9__lb100" id="__p9__lb100" class="linenumbersVisible linenumbers pb" data-lbnr="100">0100</a>das Turnier, bei welchem <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668">Waldfräulein</span> vom alten König erkannt
-                           <br class="pb" /><a href="#__p9__lb101" name="__p9__lb101" id="__p9__lb101" class="linenumbersTransparent linenumbers pb">0101</a>und mit <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430">Aechter</span> vermält wird — hierauf Tänze, Evolutionen und
+                           <br class="pb" /><a href="#__p9__lb100" name="__p9__lb100" id="__p9__lb100" class="linenumbersVisible linenumbers pb" data-lbnr="100">0100</a>das Turnier, bei welchem <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_668"></span>Waldfräulein vom alten König erkannt
+                           <br class="pb" /><a href="#__p9__lb101" name="__p9__lb101" id="__p9__lb101" class="linenumbersTransparent linenumbers pb">0101</a>und mit <span class="figures entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_430"></span>Aechter vermält wird — hierauf Tänze, Evolutionen und
                            <br class="pb" /><a href="#__p9__lb102" name="__p9__lb102" id="__p9__lb102" class="linenumbersTransparent linenumbers pb">0102</a>Wolkenschluß-Spectakel.
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p10__lb103" name="__p10__lb103" id="__p10__lb103" class="linenumbersTransparent linenumbers pb">0103</a>Dies also war das lang vorbereitete, mächtig ausposaunte
-                           <br class="pb" /><a href="#__p10__lb104" name="__p10__lb104" id="__p10__lb104" class="linenumbersTransparent linenumbers pb">0104</a>neue Ballet, dessen Libretto die k. k. <span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_156">Wiener Zeitung</span> eine zwei Num<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p10__lb105" name="__p10__lb105" id="__p10__lb105" class="linenumbersVisible linenumbers pb" data-lbnr="105">0105</a>mern lange andächtig vorbereitende Analyse gewidmet hatte! Ein
+                           <br class="pb" /><a href="#__p10__lb104" name="__p10__lb104" id="__p10__lb104" class="linenumbersTransparent linenumbers pb">0104</a>neue Ballet, dessen Libretto die k. k. <span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_156"></span>Wiener Zeitung eine zwei Num<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p10__lb105" name="__p10__lb105" id="__p10__lb105" class="linenumbersVisible linenumbers pb" data-lbnr="105">0105</a>mern lange andächtig vorbereitende Analyse gewidmet hatte! Ein
                            <br class="pb" /><a href="#__p10__lb106" name="__p10__lb106" id="__p10__lb106" class="linenumbersTransparent linenumbers pb">0106</a>langweiliges Ungeheuer, zu nichts Anderem gut, als die Geduld des
                            <br class="pb" /><a href="#__p10__lb107" name="__p10__lb107" id="__p10__lb107" class="linenumbersTransparent linenumbers pb">0107</a>Publicums zu erproben. Das Publicum war liebenswürdig genug,
-                           <br class="pb" /><a href="#__p10__lb108" name="__p10__lb108" id="__p10__lb108" class="linenumbersTransparent linenumbers pb">0108</a>die ausgestandene Langweile den Künstlern nicht entgelten zu las<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p10__lb109" name="__p10__lb109" id="__p10__lb109" class="linenumbersTransparent linenumbers pb">0109</a>sen; insbesondere Fräulein <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_52">Couqui</span></span> erfreute sich schmeichelhafter Aus<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p10__lb110" name="__p10__lb110" id="__p10__lb110" class="linenumbersVisible linenumbers pb" data-lbnr="110">0110</a>zeichnung.
+                           <br class="pb" /><a href="#__p10__lb108" name="__p10__lb108" id="__p10__lb108" class="linenumbersTransparent linenumbers pb">0108</a>die ausgestandene Langweile den Künstlern nicht entgelten zu las<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p10__lb109" name="__p10__lb109" id="__p10__lb109" class="linenumbersTransparent linenumbers pb">0109</a>sen; insbesondere Fräulein <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_52"></span>Couqui</span> erfreute sich schmeichelhafter Aus<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p10__lb110" name="__p10__lb110" id="__p10__lb110" class="linenumbersVisible linenumbers pb" data-lbnr="110">0110</a>zeichnung.
                            </p>
-                        <p class="yes-index"><br class="pb" /><a href="#__p11__lb111" name="__p11__lb111" id="__p11__lb111" class="linenumbersTransparent linenumbers pb">0111</a>Die Musik zum „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_30">Waldfräulein</span>“ hat Herr Franz <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_64">Doppler</span></span><span class="space"> </span><br class="pb" /><a href="#__p11__lb112" name="__p11__lb112" id="__p11__lb112" class="linenumbersTransparent linenumbers pb">0112</a>geschrieben. Der bewährte Balletcomponist hat diesmal ebensowenig
-                           <br class="pb" /><a href="#__p11__lb113" name="__p11__lb113" id="__p11__lb113" class="linenumbersTransparent linenumbers pb">0113</a>sein Bestes geleistet, als der tüchtige <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_42">Brioschi</span></span> im Decorationsfach.
+                        <p class="yes-index"><br class="pb" /><a href="#__p11__lb111" name="__p11__lb111" id="__p11__lb111" class="linenumbersTransparent linenumbers pb">0111</a>Die Musik zum „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_30"></span>Waldfräulein“ hat Herr Franz <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_64"></span>Doppler</span><span class="space"> </span><br class="pb" /><a href="#__p11__lb112" name="__p11__lb112" id="__p11__lb112" class="linenumbersTransparent linenumbers pb">0112</a>geschrieben. Der bewährte Balletcomponist hat diesmal ebensowenig
+                           <br class="pb" /><a href="#__p11__lb113" name="__p11__lb113" id="__p11__lb113" class="linenumbersTransparent linenumbers pb">0113</a>sein Bestes geleistet, als der tüchtige <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_42"></span>Brioschi</span> im Decorationsfach.
                            <br class="pb" /><a href="#__p11__lb114" name="__p11__lb114" id="__p11__lb114" class="linenumbersTransparent linenumbers pb">0114</a>Es ist als hätte die anhaltende Beschäftigung mit diesem Ballet alle
                            <br class="pb" /><a href="#__p11__lb115" name="__p11__lb115" id="__p11__lb115" class="linenumbersVisible linenumbers pb" data-lbnr="115">0115</a>Künstler gleichsam gelähmt. Auf die Decorationen wie auf die
-                           <br class="pb" /><a href="#__p11__lb116" name="__p11__lb116" id="__p11__lb116" class="linenumbersTransparent linenumbers pb">0116</a>Musik, so fleißig beide ausgeführt sind, drückt die Langweile die<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb117" name="__p11__lb117" id="__p11__lb117" class="linenumbersTransparent linenumbers pb">0117</a>ser ganzen <span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_30">Waldfräulein</span>wirthschaft — eine Empfindung, welcher
-                           <br class="pb" /><a href="#__p11__lb118" name="__p11__lb118" id="__p11__lb118" class="linenumbersTransparent linenumbers pb">0118</a><span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_42">Brioschi</span></span> in den gedachten Pfauenfedern, <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_64">Doppler</span></span> hingegen
+                           <br class="pb" /><a href="#__p11__lb116" name="__p11__lb116" id="__p11__lb116" class="linenumbersTransparent linenumbers pb">0116</a>Musik, so fleißig beide ausgeführt sind, drückt die Langweile die<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb117" name="__p11__lb117" id="__p11__lb117" class="linenumbersTransparent linenumbers pb">0117</a>ser ganzen <span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_30"></span>Waldfräuleinwirthschaft — eine Empfindung, welcher
+                           <br class="pb" /><a href="#__p11__lb118" name="__p11__lb118" id="__p11__lb118" class="linenumbersTransparent linenumbers pb">0118</a><span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_42"></span>Brioschi</span> in den gedachten Pfauenfedern, <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_64"></span>Doppler</span> hingegen
                            <br class="pb" /><a href="#__p11__lb119" name="__p11__lb119" id="__p11__lb119" class="linenumbersTransparent linenumbers pb">0119</a>in einigen längeren Harfensolos den treffendsten Ausdruck verlie<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p11__lb120" name="__p11__lb120" id="__p11__lb120" class="linenumbersVisible linenumbers pb" data-lbnr="120">0120</a>hen hat.</p>
                      </div>
                      <div class="tei-back">
-                        <div class="modal fade" id="hsl_person_id_52" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Cucchi, Claudina" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Cucchi, Claudina</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td>Couqui</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/116696605" target="_blank">https://d-nb.info/gnd/116696605</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_52.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
                         <div class="modal fade" id="hsl_person_id_332" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Zedlitz, Joseph Christian von" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -337,33 +316,25 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_person_id_430" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Aechter von Möspelbrunn" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_52" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Cucchi, Claudina" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Aechter von Möspelbrunn</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Cucchi, Claudina</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
                                              <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th>Werk</th>
-                                             <td>
-                                                <ul>
-                                                   <li>Waldfräulein</li>
-                                                </ul>
-                                             </td>
+                                             <td>Couqui</td>
                                           </tr>
                                           <tr>
                                              <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
+                                             <td><a href="https://d-nb.info/gnd/116696605" target="_blank">https://d-nb.info/gnd/116696605</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_430.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_52.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -372,11 +343,11 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_person_id_460" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Caprus" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_206" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Pallerini, Antonio" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Caprus</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pallerini, Antonio</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
@@ -385,20 +356,39 @@
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th>Werk</th>
-                                             <td>
-                                                <ul>
-                                                   <li>Waldfräulein</li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
                                              <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
+                                             <td><a href="https://d-nb.info/gnd/120407434" target="_blank">https://d-nb.info/gnd/120407434</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_460.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_206.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_64" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Doppler, Franz" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Doppler, Franz</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/116180064" target="_blank">https://d-nb.info/gnd/116180064</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_person_id_64.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -442,6 +432,41 @@
                               </div>
                            </div>
                         </div>
+                        <div class="modal fade" id="hsl_person_id_430" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Aechter von Möspelbrunn" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Aechter von Möspelbrunn</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th>Werk</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Waldfräulein</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href="hsl_person_id_430.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
                         <div class="modal fade" id="hsl_person_id_42" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Brioschi, Carlo" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -461,60 +486,6 @@
                                           <tr>
                                              <th> Weiterlesen </th>
                                              <td><a href="hsl_person_id_42.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_64" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Doppler, Franz" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Doppler, Franz</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/116180064" target="_blank">https://d-nb.info/gnd/116180064</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_64.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_206" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Pallerini, Antonio" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pallerini, Antonio</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/120407434" target="_blank">https://d-nb.info/gnd/120407434</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_206.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -558,29 +529,33 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_place_id_245" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Rhein / Rhin / Rijn" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_460" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Caprus" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Rhein / Rhin / Rijn</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Caprus</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
+                                             <th> Name (alt) </th>
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Land </th>
-                                             <td>NL, Netherlands</td>
+                                             <th>Werk</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Waldfräulein</li>
+                                                </ul>
+                                             </td>
                                           </tr>
                                           <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2748179/" target="_blank">2748179</a></td>
+                                             <th> GND </th>
+                                             <td><a href="" target="_blank"></a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_245.html"> Details </a></td>
+                                             <td><a href="hsl_person_id_460.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -651,31 +626,29 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                        <div class="modal fade" id="hsl_place_id_245" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Rhein / Rhin / Rijn" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Rhein / Rhin / Rijn</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
+                                             <th> Alternativname </th>
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
+                                             <th> Land </th>
+                                             <td>NL, Netherlands</td>
+                                          </tr>
+                                          <tr>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2748179/" target="_blank">2748179</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <td><a href="hsl_place_id_245.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -684,11 +657,11 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                        <div class="modal fade" id="hsl_work_id_156" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Wiener Zeitung" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Wiener Zeitung</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
@@ -703,243 +676,12 @@
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/4747423-3" target="_blank">4747423-3</a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <td><a href="hsl_work_id_156.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -970,45 +712,12 @@
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
+                                             <th> GND ID </th>
                                              <td><a href="" target="_blank"></a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
                                              <td><a href="hsl_work_id_30.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_156" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Wiener Zeitung" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Wiener Zeitung</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Wikidata ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_156.html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1038,12 +747,375 @@
                                              <td></td>
                                           </tr>
                                           <tr>
-                                             <th> Wikidata ID </th>
+                                             <th> GND ID </th>
                                              <td><a href="" target="_blank"></a></td>
                                           </tr>
                                           <tr>
                                              <th> Weiterlesen </th>
                                              <td><a href="hsl_work_id_682.html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul></ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td></td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="" target="_blank"></a></td>
+                                          </tr>
+                                          <tr>
+                                             <th> Weiterlesen </th>
+                                             <td><a href=".html"> Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1092,7 +1164,7 @@
                      <h6 class="font-weight-bold">PROJEKTPARTNER</h6>
                      <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="images/fwf-logo_var2.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
+                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="https://www.fwf.ac.at/fileadmin/Website/Logos/FWF_Logo.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 180px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                            <div class="flex-md-row mb-4 align-items-center"><a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a></div>
@@ -1126,9 +1198,9 @@
                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z"></path></svg></a></div>
                            </div>
                            <div class="row">
-                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8366294"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8366294.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.10362122"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10362122.svg" alt="DOI" /></a></div>
                               <div class="custom-html-widget col-12 py-2"><label>Daten (VMS):</label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
-                              <div class="custom-html-widget col-12 py-2"><label>Daten (NFP):</label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2"><label>Daten (NFP):</label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.10362003"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10362003.svg" alt="DOI" /></a></div>
                            </div>
                         </div>
                      </div>
