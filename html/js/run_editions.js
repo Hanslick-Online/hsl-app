@@ -37,7 +37,7 @@ var editor = new LoadEditor({
         },
         {
           opt: "prsf",
-          color: "orange",
+          color: "green",
           title: "Figuren",
           html_class: "figures",
           css_class: "figr",
