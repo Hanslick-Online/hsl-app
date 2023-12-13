@@ -181,68 +181,68 @@
         <em><xsl:apply-templates/></em>
     </xsl:template>
     <xsl:template match="tei:rs">
+        <xsl:variable name="id" select="@xml:id"/>
+        <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
+        <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
         <xsl:choose>
-            <xsl:when test="count(tokenize(@ref, ' ')) > 1">
+            <xsl:when test="count($tokens) > 1">
+                <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
+                <xsl:apply-templates/>
                 <xsl:choose>
                     <xsl:when test="@type='person'">
-                        <span class="persons {substring-after(@rendition, '#')}" id="{@xml:id}">
-                            <xsl:apply-templates/>
-                            <xsl:for-each select="tokenize(@ref, ' ')">
-                                <sup class="entity" data-bs-toggle="modal" data-bs-target="{.}">
-                                    <xsl:value-of select="position()"/>
-                                </sup>
-                                <xsl:if test="position() != last()">
-                                    <sup class="entity">/</sup>
-                                </xsl:if>
-                            </xsl:for-each>
-                        </span>
+                        <xsl:for-each select="$tokens">
+                            <xsl:choose>
+                                <xsl:when test="$role = 'fictional'">
+                                    <sup class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                    </sup>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <sup class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                    </sup>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="@type='place'">
-                        <span class="places {substring-after(@rendition, '#')}" id="{@xml:id}">
-                            <xsl:apply-templates/>
-                            <xsl:for-each select="tokenize(@ref, ' ')">
-                                <sup class="entity" data-bs-toggle="modal" data-bs-target="{.}">
-                                    <xsl:value-of select="position()"/>
-                                </sup>
-                                <xsl:if test="position() != last()">
-                                    <sup class="entity">/</sup>
-                                </xsl:if>
-                            </xsl:for-each>
-                        </span>
+                        <xsl:for-each select="$tokens">
+                            <sup class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                            </sup>
+                        </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="@type='bibl'">
-                        <span class="works {substring-after(@rendition, '#')}" id="{@xml:id}">
-                            <xsl:apply-templates/>
-                            <xsl:for-each select="tokenize(@ref, ' ')">
-                                <sup class="entity" data-bs-toggle="modal" data-bs-target="{.}">
-                                    <xsl:value-of select="position()"/>
-                                </sup>
-                                <xsl:if test="position() != last()">
-                                    <sup class="entity">/</sup>
-                                </xsl:if>
-                            </xsl:for-each>
-                        </span>
+                        <xsl:for-each select="$tokens">
+                            <sup class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                <xsl:value-of select="position()"/>
+                            </sup>
+                        </xsl:for-each>
                     </xsl:when>
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
                     <xsl:when test="@type='person'">
-                        <span class="persons entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                            <xsl:apply-templates/>
-                        </span>
+                        <xsl:variable name="role" select="id(data(substring-after(@ref, '#')))/@role"/>
+                        <xsl:choose>
+                            <xsl:when test="$role = 'fictional'">
+                                <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
+                                </span>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
+                                </span>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                     <xsl:when test="@type='place'">
-                        <span class="places entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                            <xsl:apply-templates/>
+                        <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
                         </span>
                     </xsl:when>
                     <xsl:when test="@type='bibl'">
-                        <span class="works entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                            <xsl:apply-templates/>
+                        <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
                         </span>
                     </xsl:when>
                 </xsl:choose>
+                <xsl:apply-templates/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
