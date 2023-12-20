@@ -156,7 +156,16 @@
                                         <!--<a href="{./tei:bibl/@n}.html" alt="{./tei:listBibl[@type='characterOf']/tei:bibl/text()}">
                                             <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
                                         </a>-->
-                                        <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
+                                        <ul>
+                                            <xsl:for-each select="./tei:listBibl[@type='characterOf']/tei:bibl">
+                                                <li>
+                                                    <xsl:value-of select="./text()"/>
+                                                    <xsl:if test="position() != last()">
+                                                        <xsl:text>;</xsl:text>
+                                                    </xsl:if>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
                                     </xsl:if>
                                 </td>
                                 <td>
