@@ -76,7 +76,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listperson', 'Suche:', [2, 3, 6, 7], [0, 1, 4, 5], [7]);
+                                createDataTable('listperson', 'Suche:', [2, 3, 6], [0, 1, 4, 5, 7], [8]);
                             });
                         </script>
                     </xsl:when>
@@ -119,6 +119,7 @@
                          <th>GND</th>
                          <th>Wikidata</th>
                          <th>Erwähnt #</th>
+                         <th>Beruf</th>
                          <th>Initial</th>
                      </tr>
                  </thead>
@@ -190,6 +191,17 @@
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:occupation">
+                                        <ul>
+                                            <xsl:for-each select="./tei:occupation">
+                                                <li class="{substring-before(substring-after(@style, 'background-color: '), ';')}">
+                                                    <xsl:value-of select="./text()"/>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <xsl:value-of select="substring(./tei:persName[@type='main']/tei:surname, 1, 1)"/>

@@ -84,61 +84,29 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:birth/tei:date">
+                                                <xsl:if test="./tei:birth">
                                                 <tr>
                                                     <th>
-                                                        Geburtstag
+                                                        Lebensdaten
                                                     </th>
                                                     <td>
-                                                        <xsl:value-of select="./tei:birth/tei:date/@when-iso"/>
+                                                        <xsl:value-of select="./tei:birth"/>
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:birth/tei:settlement">
-                                                <tr>
-                                                    <th>
-                                                        Geburtsorg
-                                                    </th>
-                                                    <td>
-                                                        <ul>
-                                                            <xsl:for-each select="./tei:birth/tei:settlement">
-                                                                <li>
-                                                                    <a href="{@key}.html">
-                                                                        <xsl:value-of select="./tei:placeName"/>
-                                                                    </a>    
-                                                                </li>
-                                                            </xsl:for-each>    
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                </xsl:if>
-                                                <xsl:if test="./tei:death/tei:date">
-                                                <tr>
-                                                    <th>
-                                                        Todestag
-                                                    </th>
-                                                    <td>
-                                                        <xsl:value-of select="./tei:death/tei:date/@when-iso"/>
-                                                    </td>
-                                                </tr>
-                                                </xsl:if>
-                                                <xsl:if test="./tei:death/tei:settlement">
-                                                <tr>
-                                                    <th>
-                                                        Todesort
-                                                    </th>
-                                                    <td>
-                                                        <ul>
-                                                            <xsl:for-each select="./tei:death/tei:settlement">
-                                                                <li>
-                                                                    <a href="{@key}.html">
-                                                                        <xsl:value-of select="./tei:placeName"/>
-                                                                    </a>            
-                                                                </li>   
-                                                            </xsl:for-each>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
+                                                <xsl:if test="./tei:occupation">
+                                                    <tr>
+                                                        <th>
+                                                            Beruf(e)
+                                                        </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:occupation">
+                                                                    <li><xsl:value-of select="./text()"/></li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
                                                 </xsl:if>
                                                 <xsl:if test="./tei:idno[@subtype='GND']">
                                                 <tr>
