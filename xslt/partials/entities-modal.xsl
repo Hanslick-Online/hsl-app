@@ -39,29 +39,51 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <th> Name (alt) </th>
-                                        <td>
-                                            <xsl:if
-                                              test="./tei:persName[@type = 'alternative']/tei:surname/text()">
-                                              <xsl:value-of
-                                              select="./tei:persName[@type = 'alternative']/tei:surname"
-                                              />
-                                            </xsl:if>
-
-                                            <xsl:if test="
-                                                    ./tei:persName[@type = 'alternative']/tei:surname/text() and
-                                                    ./tei:persName[@type = 'alternative']/tei:forename/text()">
-                                              <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                            <xsl:if
-                                              test="./tei:persName[@type = 'alternative']/tei:forename/text()">
-                                              <xsl:value-of
-                                              select="./tei:persName[@type = 'alternative']/tei:forename"
-                                              />
-                                            </xsl:if>
-                                        </td>
-                                    </tr>
+                                    <xsl:if test="./tei:persName[@type='alternative']">
+                                        <tr>
+                                            <th> Name (alt) </th>
+                                            <td>
+                                                <xsl:if
+                                                  test="./tei:persName[@type = 'alternative']/tei:surname/text()">
+                                                  <xsl:value-of
+                                                  select="./tei:persName[@type = 'alternative']/tei:surname"
+                                                  />
+                                                </xsl:if>
+    
+                                                <xsl:if test="
+                                                        ./tei:persName[@type = 'alternative']/tei:surname/text() and
+                                                        ./tei:persName[@type = 'alternative']/tei:forename/text()">
+                                                  <xsl:text>, </xsl:text>
+                                                </xsl:if>
+                                                <xsl:if
+                                                  test="./tei:persName[@type = 'alternative']/tei:forename/text()">
+                                                  <xsl:value-of
+                                                  select="./tei:persName[@type = 'alternative']/tei:forename"
+                                                  />
+                                                </xsl:if>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:birth">
+                                        <tr>
+                                            <th>Lebensdaten</th>
+                                            <td><xsl:value-of select="./tei:birth/text()"/></td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:occupation">
+                                        <tr>
+                                            <th>Lebensdaten</th>
+                                            <td>
+                                                <ul>
+                                                    <xsl:for-each select="./tei:occupation">
+                                                        <xsl:if test="position() lt 4">
+                                                            <li><xsl:value-of select="./text()"/></li>
+                                                        </xsl:if>
+                                                    </xsl:for-each>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <xsl:if test="./tei:listBibl[@type = 'characterOf']/tei:bibl/text()">
                                         <tr>
                                             <th>Werk</th>
