@@ -131,7 +131,7 @@
         </div>
         <div id="cookie-overlay">
             <div class="container">
-                <div class="cookie-message">This website uses cookies to ensure you get the best experience on our website. <a href="/browser/imprint">More info</a><br/></div>  
+                <div class="cookie-message">This website uses cookies to ensure you get the best experience on our website. <a href="imprint.html?lang=de">More info</a><br/></div>  
                 <div class="cookie-buttons">
                     <div class="cookie-accept-btn">Accept All Cookies (functional and tracking)</div>
                     <div class="cookie-accept-necessary-btn">Accept Necessary Cookies Only</div>
