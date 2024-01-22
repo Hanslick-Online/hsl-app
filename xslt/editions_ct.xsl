@@ -19,6 +19,7 @@
     <!--<xsl:import href="partials/tei-facsimile.xsl"/>-->
     <xsl:import href="partials/entities-modal.xsl"/>
     <xsl:import href="partials/next-prev-page.xsl"/>
+    <xsl:import href="partials/document-download.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -55,6 +56,8 @@
                             <xsl:with-param name="front-page" select="'false'"/>
                             <xsl:with-param name="back-page" select="'true'"/>
                             <xsl:with-param name="next-prev-page" select="'true'"/>
+                            <xsl:with-param name="document-download" select="'true'"/>
+                            <xsl:with-param name="document-download-edition" select="'kritiken'"/>
                         </xsl:call-template>
                     </div>
                     <xsl:call-template name="html_footer"/>

@@ -24,6 +24,8 @@
         <xsl:param name="back-page" />
         <xsl:param name="edition-project-class" />
         <xsl:param name="next-prev-page" />
+        <xsl:param name="document-download"/>
+        <xsl:param name="document-download-edition"/>
         <div class="row">
             <div class="col-md-6 facsimiles">
                 <div id="viewer-1">
@@ -66,6 +68,11 @@
                             <xsl:if test="$book-chapters = 'true'">
                                 <xsl:call-template name="book-editions"/>
                                 <!-- loaded in main editions.xls -->
+                            </xsl:if>
+                            <xsl:if test="$document-download = 'true'">
+                                <xsl:call-template name="document-download">
+                                    <xsl:with-param name="edition" select="$document-download-edition"/>
+                                </xsl:call-template>
                             </xsl:if>
                             <xsl:if test="$next-prev-page = 'true'">
                                 <xsl:call-template name="next-prev-page"/>
