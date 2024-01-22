@@ -130,6 +130,7 @@ input:checked + .i-slider:before {
   border-radius: 0.5rem;
   padding: 0.05em;
   content: url("../images/icons/book.svg");
+  vertical-align: text-top;
 }
 
 .pers:before {
@@ -137,6 +138,7 @@ input:checked + .i-slider:before {
   border-radius: 0.5rem;
   padding: 0.05em;
   content: url("../images/icons/person-fill.svg");
+  vertical-align: text-top;
 }
 
 .figr:before {
@@ -144,6 +146,7 @@ input:checked + .i-slider:before {
   border-radius: 0.5rem;
   padding: 0.05em;
   content: url("../images/icons/person-fill.svg");
+  vertical-align: text-top;
 }
 
 .plc:before {
@@ -151,6 +154,7 @@ input:checked + .i-slider:before {
   border-radius: 0.5rem;
   padding: 0.05em;
   content: url("../images/icons/geo-alt-fill.svg");
+  vertical-align: text-top;
 }
 
 .slider-number::after {

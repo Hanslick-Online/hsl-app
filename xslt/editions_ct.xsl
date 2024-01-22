@@ -221,35 +221,35 @@
         <xsl:choose>
             <xsl:when test="count($tokens) > 1">
                 <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
-                <xsl:apply-templates/>
                 <xsl:choose>
                     <xsl:when test="@type='person'">
                         <xsl:for-each select="$tokens">
                             <xsl:choose>
                                 <xsl:when test="$role = 'fictional'">
-                                    <sup class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                    </sup>
+                                    <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                    </span>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <sup class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                    </sup>
+                                    <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                    </span>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="@type='place'">
                         <xsl:for-each select="$tokens">
-                            <sup class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                            </sup>
+                            <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                            </span>
                         </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="@type='bibl'">
                         <xsl:for-each select="$tokens">
-                            <sup class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                            </sup>
+                            <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                            </span>
                         </xsl:for-each>
                     </xsl:when>
                 </xsl:choose>
+                <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
