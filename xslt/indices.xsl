@@ -76,7 +76,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listperson', 'Suche:', [2, 3, 6], [0, 1, 4, 5, 7], [8]);
+                                createDataTable('listperson', 'Suche:', [2, 3, 5], [0, 1, 4, 6, 7], [8]);
                             });
                         </script>
                     </xsl:when>
@@ -114,12 +114,12 @@
                      <tr>
                          <th>Name</th>
                          <th>Name (alt)</th>
-                         <th>Werke</th>
                          <th>Typ</th>
-                         <th>GND</th>
-                         <th>Wikidata</th>
-                         <th>Erwähnt #</th>
+                         <th>Lebensdaten</th>
                          <th>Beruf</th>
+                         <th>Werke</th>
+                         <th>GND</th>
+                         <th>Erwähnt #</th>
                          <th>Initial</th>
                      </tr>
                  </thead>
@@ -153,6 +153,30 @@
                                     </xsl:if>
                                 </td>
                                 <td>
+                                    <xsl:choose>
+                                        <xsl:when test="@role">
+                                            <xsl:value-of select="@role"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:text>non fictional</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>                                    
+                                </td>
+                                <td>
+                                    <xsl:value-of select="./tei:birth"/>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:occupation">
+                                        <ul>
+                                            <xsl:for-each select="./tei:occupation">
+                                                <li class="{substring-before(substring-after(@style, 'background-color: '), ';')}">
+                                                    <xsl:value-of select="./text()"/>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                    </xsl:if>
+                                </td>
+                                <td>
                                     <xsl:if test="./tei:listBibl[@type='characterOf']">
                                         <!--<a href="{./tei:bibl/@n}.html" alt="{./tei:listBibl[@type='characterOf']/tei:bibl/text()}">
                                             <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
@@ -170,39 +194,14 @@
                                     </xsl:if>
                                 </td>
                                 <td>
-                                    <xsl:choose>
-                                        <xsl:when test="@role">
-                                            <xsl:value-of select="@role"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:text>non fictional</xsl:text>
-                                        </xsl:otherwise>
-                                    </xsl:choose>                                    
-                                </td>
-                                <td>
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
-                                    </a>
-                                </td>
-                                <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
                                 </td>
-                                <td>
-                                    <xsl:if test="./tei:occupation">
-                                        <ul>
-                                            <xsl:for-each select="./tei:occupation">
-                                                <li class="{substring-before(substring-after(@style, 'background-color: '), ';')}">
-                                                    <xsl:value-of select="./text()"/>
-                                                </li>
-                                            </xsl:for-each>
-                                        </ul>
-                                    </xsl:if>
-                                </td>
+                                
                                 <td>
                                     <xsl:value-of select="substring(./tei:persName[@type='main']/tei:surname, 1, 1)"/>
                                 </td>
