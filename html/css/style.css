@@ -115,7 +115,7 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     margin: 0 auto;
     padding: 0;
     vertical-align: middle;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
 }
 
