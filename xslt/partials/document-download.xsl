@@ -26,16 +26,16 @@
                     <li class="dropdown-item">
                         <xsl:choose>
                             <xsl:when test="$edition = 'traktat'">
-                                <a target="_blank" 
-                                    href="{concat('https://id.acdh.oeaw.ac.at/hanslick-vms/', //tei:TEI/@xml:id, '?format=raw')}"
-                                    title="TEI/XML Document Download" alt="Download the viewed Document as TEI/XML file">
+                                <a href="{concat('https://id.acdh.oeaw.ac.at/hanslick-vms/', //tei:TEI/@xml:id, '?format=raw')}"
+                                    aria-label="TEI/XML Document Download">
                                     TEI/XML 
                                 </a>
                             </xsl:when>
                             <xsl:when test="$edition = 'kritiken'">
-                                <a target="_blank" 
+                                <a target="_blank"
                                     href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-ct/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'c__'))}"
-                                    title="TEI/XML Document Download" alt="Download the viewed Document as TEI/XML file">
+                                    aria-label="TEI/XML Document Download"
+                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a>
                             </xsl:when>
