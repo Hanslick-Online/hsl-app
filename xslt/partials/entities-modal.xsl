@@ -72,7 +72,7 @@
                                     </xsl:if>
                                     <xsl:if test="./tei:occupation">
                                         <tr>
-                                            <th>Profession</th>
+                                            <th>Beschreibung</th>
                                             <td>
                                                 <ul>
                                                     <xsl:for-each select="./tei:occupation">

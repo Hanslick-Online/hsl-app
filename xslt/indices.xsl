@@ -116,7 +116,7 @@
                          <th>Name (alt)</th>
                          <th>Typ</th>
                          <th>Lebensdaten</th>
-                         <th>Beruf</th>
+                         <th>Beschreibung</th>
                          <th>Werke</th>
                          <th>GND</th>
                          <th>Erwähnt #</th>

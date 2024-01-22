@@ -97,7 +97,7 @@
                                                 <xsl:if test="./tei:occupation">
                                                     <tr>
                                                         <th>
-                                                            Beruf(e)
+                                                            Beschreibung
                                                         </th>
                                                         <td>
                                                             <ul>
