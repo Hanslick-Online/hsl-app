@@ -54,17 +54,18 @@ search.addWidgets([
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
               <h5><span class="badge badge-primary">{{ project }}</span></h5>
               <div>
-                  <div>
+                  <p class="show-entities">mehr anzeigen</p>
+                  <div style="display: none;">
                       {{#persons}}
                       <span class="badge bg-secondary">{{ . }}</span>
                       {{/persons}}
                   </div>
-                  <div>
+                  <div style="display: none;">
                       {{#works}}
                       <span class="badge bg-success">{{ . }}</span>
                       {{/works}}
                   </div>
-                  <div>
+                  <div style="display: none;">
                       {{#places}}
                       <span class="badge bg-info">{{ . }}</span>
                       {{/places}}
@@ -239,3 +240,22 @@ search.addWidgets([
 // ]);
 
 search.start();
+setTimeout(() => {
+  var show_entities = document.getElementsByClassName("show-entities");
+  [...show_entities].forEach((el) => {
+    el.style.cursor = "pointer";
+    el.style.color = "#007bff";
+    el.addEventListener("click", function () {
+      var siblings = el.parentElement.querySelectorAll("div");
+      [...siblings].forEach((sibling) => {
+        if (sibling.style.display === "none") {
+          sibling.style.display = "block";
+          el.innerHTML = "weniger anzeigen";
+        } else {
+          sibling.style.display = "none";
+          el.innerHTML = "mehr anzeigen";
+        }
+      });
+    });
+  });
+}, 500);
