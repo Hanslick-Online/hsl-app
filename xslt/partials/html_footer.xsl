@@ -7,7 +7,7 @@
     version="2.0">
     <xsl:template match="/" name="html_footer">
         <!-- GERMAN verison-->
-        <div class="wrapper bg-light translate-de" id="wrapper-footer-full">
+        <div class="wrapper translate-de" id="wrapper-footer-full">
             <div class="container" id="footer-full-content" tabindex="-1">
                 <div class="footer-separator">
                     KONTAKT
@@ -44,34 +44,24 @@
                     <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
                         <h6 class="font-weight-bold">PROJEKTPARTNER</h6>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="flex-md-row mb-4 align-items-center">
-                                    <a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="https://www.fwf.ac.at/fileadmin/Website/Logos/FWF_Logo.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 180px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center">
+                                    <a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="https://www.fwf.ac.at/fileadmin/Website/Logos/FWF_Logo.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a>
                                     <!--<div class="card-body d-flex flex-column align-items-start">
                                         <p class="card-text mb-auto">Project partner</p>
                                     </div>-->
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="flex-md-row mb-4 align-items-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center">
                                     <a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a>
                                     <!--<div class="card-body d-flex flex-column align-items-start">
                                         <p class="card-text mb-auto">Project partner</p>
                                     </div>-->
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="flex-md-row mb-4 align-items-center">
-                                    
-                                    <!--<div class="card-body d-flex flex-column align-items-start">
-                                        <p class="card-text mb-auto">Project partner</p>
-                                    </div>-->
-                                </div>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-12">
-                                <div class="flex-md-row mb-4 align-items-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center">
                                     <a href="https://www.oenb.at"><img class="card-img-right flex-auto d-md-block" src="images/Oesterreichische_Nationalbank_Logo.svg" alt="Österreichische Nationalbank Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="Österreichische Nationalbank" /></a>
                                     <!--<div class="card-body d-flex flex-column align-items-start">
                                         <p class="card-text mb-auto">Project partner</p>
@@ -104,17 +94,17 @@
                                     </div>                                                                        
                                 </div>   
                                 <div class="row">                         
-                                    <div class="custom-html-widget col-12 py-2">   
+                                    <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>App: </label>
-                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8366294"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8366294.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.8366294"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8366294.svg" alt="DOI"/></a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2">   
+                                    <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>Daten (VMS):</label>
-                                        <a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI"/></a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2">   
+                                    <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>Daten (NFP):</label>
-                                        <a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/></a>
                                     </div>
                                 </div>
                             </div>
