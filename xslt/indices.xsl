@@ -40,6 +40,7 @@
                     <xsl:call-template name="nav_bar"/>
                     
                     <div class="container-fluid">
+                        <h1 style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title"/></h1>
                         
                         <xsl:if test="contains($doc_title, 'Ortsregister')">
                             <div id="tableReload-wrapper">
