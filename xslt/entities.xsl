@@ -203,7 +203,7 @@
                                                         <ul>
                                                             <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                 <li>
-                                                                    <a href="{replace(@target, '.xml', '.html')}">
+                                                                    <a href="{replace(@target, '.xml', '.html')}?mark={ancestor::tei:person//tei:persName[@type='main']/tei:surname/text()}">
                                                                         <xsl:value-of select="./text()"/>
                                                                     </a>
                                                                 </li>
@@ -380,7 +380,7 @@
                                                             <ul>
                                                                 <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                     <li>
-                                                                        <a href="{replace(@target, '.xml', '.html')}">
+                                                                        <a href="{replace(@target, '.xml', '.html')}?mark={ancestor::tei:place//tei:placeName[@type='main']/text()}">
                                                                             <xsl:value-of select="./text()"/>
                                                                         </a>
                                                                     </li>
@@ -550,7 +550,7 @@
                                                             <ul>
                                                                 <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                     <li>
-                                                                        <a href="{replace(@target, '.xml', '.html')}">
+                                                                        <a href="{replace(@target, '.xml', '.html')}?mark={ancestor::tei:bibl//tei:title[@type='main']/text()}">
                                                                             <xsl:value-of select="./text()"/>
                                                                         </a>
                                                                     </li>
