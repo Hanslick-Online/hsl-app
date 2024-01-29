@@ -219,7 +219,7 @@
         <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
         <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
         <xsl:choose>
-            <xsl:when test="count($tokens) > 1">
+            <xsl:when test="count($tokens) > 1 and not(@prev)">
                 <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
                 <xsl:choose>
                     <xsl:when test="@type='person'">
@@ -251,7 +251,7 @@
                 </xsl:choose>
                 <xsl:apply-templates/>
             </xsl:when>
-            <xsl:otherwise>
+            <xsl:when test="count($tokens) = 1 and not(@prev)">
                 <xsl:choose>
                     <xsl:when test="@type='person'">
                         <xsl:variable name="role" select="id(data(substring-after(@ref, '#')))/@role"/>
@@ -276,7 +276,7 @@
                     </xsl:when>
                 </xsl:choose>
                 <xsl:apply-templates/>
-            </xsl:otherwise>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:pb[following-sibling::tei:p[1]/@prev = 'true']">
