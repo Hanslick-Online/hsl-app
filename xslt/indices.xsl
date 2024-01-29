@@ -332,6 +332,7 @@
                                     <xsl:value-of select="./tei:title[@type='alternative']"/>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:author">
                                     <ul>
                                         <xsl:for-each select="./tei:author">
                                             <xsl:sort select="./tei:persName/text()" order="ascending"/>
@@ -343,8 +344,10 @@
                                             </li>
                                         </xsl:for-each>    
                                     </ul>
+                                    </xsl:if>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:name[@type='character']">
                                     <ul>
                                         <xsl:for-each select="./tei:name[@type='character']">
                                             <xsl:sort select="." order="ascending"/>
@@ -356,6 +359,7 @@
                                             </li>
                                         </xsl:for-each>    
                                     </ul>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
