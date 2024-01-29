@@ -399,6 +399,11 @@ sup {
     max-width: 1200px;
 }
 
+#results-div {
+    display: block;
+    font-size: 16px;
+}
+
 #tableReload-wrapper {
     margin: 3em auto 0 auto;
 }

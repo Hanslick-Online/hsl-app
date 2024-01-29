@@ -4,12 +4,14 @@ var input = document.querySelectorAll(".card-body.yes-index"),
   // Cache DOM elements
   keywordInput = document.querySelector("input[name='keyword']"),
   optionInputs = document.querySelectorAll("input[name='opt[]']"),
+  btns = document.getElementById("mark-scroll"),
   clearBtn = document.querySelector("button[data-search='clear']"),
   prevBtn = document.querySelector("button[data-search='prev']"),
   nextBtn = document.querySelector("button[data-search='next']"),
   results = [],
   currentClass = "current",
   // offsetTop = 50,
+  resultDiv = document.getElementById("results-div"),
   currentIndex = 0;
 
 function jumpTo(trigger) {
@@ -66,6 +68,7 @@ function performMarkUrl() {
 }
 
 function performMark() {
+  btns.classList.remove("fade-lang");
   // Read the keyword
   var keyword = keywordInput.value;
   var pattern = keyword;
@@ -80,6 +83,9 @@ function performMark() {
         results = input[0].querySelectorAll("mark");
         currentIndex = 0;
         jumpTo(false);
+        setTimeout(() => {
+          resultDiv.innerHTML = "Hits: " + results.length;
+        }, 500);
       }
     };
 
@@ -110,6 +116,7 @@ clearBtn.addEventListener("click", function() {
   clearBtn.setAttribute("disabled", "disabled");
   nextBtn.setAttribute("disabled", "disabled");
   prevBtn.setAttribute("disabled", "disabled");
+  btns.classList.add("fade-lang");
 });
 
 nextBtn.addEventListener("click", function() {

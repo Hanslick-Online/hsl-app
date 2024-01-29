@@ -44,7 +44,6 @@
                     </div>
                     <div class="col-md-6" style="text-align:right;">
                         <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
-                        
                     </div>
                 </div>
                 <div class="section {$edition-project-class}" id="section-1">
@@ -80,10 +79,11 @@
                             </xsl:if>
                         </div>
                     </xsl:if>
-                    <div id="mark-scroll">
+                    <div id="mark-scroll" class="fade-lang">
                         <button data-search="next" disabled="disabled">&#x2193;</button>
                         <button data-search="prev" disabled="disabled">&#x2191;</button>
                         <button data-search="clear" disabled="disabled">✖</button>
+                        <div id="results-div"></div>
                     </div>
                     <xsl:if test="$front-page = 'true'">
                         <div class="card-header yes-index">
