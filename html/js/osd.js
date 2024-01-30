@@ -45,7 +45,14 @@ get all image urls stored in span el class tei-xml-images
 creates an array for osd viewer with static images
 ##################################################################
 */
+// var element_json = {};
 var element = document.getElementsByClassName('anchor-pb');
+// for (el in element) {
+//     if (element[el].getAttribute) {
+//         element_json[el] = element[el].getAttribute("source");
+//     }
+// };
+// sessionStorage.setItem("hsl-images", JSON.stringify(element_json));
 var tileSources = [];
 var img = element[0].getAttribute("source");
 if (img.includes("api.digitale-sammlungen.de")) {
@@ -71,7 +78,8 @@ var viewer = OpenSeadragon({
     prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/images/',
     sequenceMode: true,
     showNavigator: true,
-    tileSources: tileSources
+    tileSources: tileSources,
+    showFullPageControl: false
 });
 /*
 ##################################################################
@@ -122,11 +130,35 @@ window.addEventListener("scroll", function(event) {
 
 /*
 ##################################################################
+accesses osd viewer prev and next button to switch image and
+scrolls to next or prev span element with class pb (pagebreak)
+##################################################################
+*/
+var element_a = document.getElementsByClassName('anchor-pb');
+var prev = document.querySelector("div[title='Previous page']");
+var next = document.querySelector("div[title='Next page']");
+prev.style.opacity = 1;
+next.style.opacity = 1;
+prev.addEventListener("click", () => {
+    if (idx <= 0) {
+        element_a[0].scrollIntoView();
+    } else {
+        element_a[prev_idx].scrollIntoView();
+    }
+});
+next.addEventListener("click", () => {
+    element_a[idx].scrollIntoView();
+});
+
+
+
+/*
+##################################################################
 function to trigger image load and remove events
 ##################################################################
 */
 function loadNewImage(new_item) {
-    if (new_item) {
+    if (new_item instanceof Element) {
         // source attribute hold image item id without url
         var new_image = new_item.getAttribute("source");
         if (new_image.includes("api.digitale-sammlungen.de")) {
@@ -159,28 +191,6 @@ function loadNewImage(new_item) {
         }
     }
 }
-
-/*
-##################################################################
-accesses osd viewer prev and next button to switch image and
-scrolls to next or prev span element with class pb (pagebreak)
-##################################################################
-*/
-var element_a = document.getElementsByClassName('anchor-pb');
-var prev = document.querySelector("div[title='Previous page']");
-var next = document.querySelector("div[title='Next page']");
-prev.style.opacity = 1;
-next.style.opacity = 1;
-prev.addEventListener("click", () => {
-    if (idx == 0) {
-        element_a[idx].scrollIntoView();
-    } else {
-        element_a[prev_idx].scrollIntoView();
-    }
-});
-next.addEventListener("click", () => {
-    element_a[idx].scrollIntoView();
-});
 
 /*
 ##################################################################
