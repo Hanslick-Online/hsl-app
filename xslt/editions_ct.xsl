@@ -277,6 +277,9 @@
                 </xsl:choose>
                 <xsl:apply-templates/>
             </xsl:when>
+            <xsl:when test="@prev">
+                <xsl:apply-templates/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:pb[following-sibling::tei:p[1]/@prev = 'true']">
