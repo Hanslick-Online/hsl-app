@@ -12,7 +12,7 @@
     <xsl:template match="/">
         <xsl:variable name="doc_title" select="'Volltextsuche'"/>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
             <head>
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -65,7 +65,7 @@
             
             <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0"></script>
             <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
-            <script src="js/ts_search.js"></script>
+            <script src="js/ts_search_en.js"></script>
             <script src="js/ts_update_url.js"></script>
             <script type="text/javascript" src="js/run.js"></script>
         </html>
