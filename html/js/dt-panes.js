@@ -11,8 +11,24 @@ function createDataTable(containerElement, title, panesShow, panesHide, hide) {
         searchPanes: {
             initCollapsed: false
         },
-        buttons: [
-            'copy', 'excel', 'pdf'
+        buttons: [{
+            extend: 'copyHtml5',
+            text: '<i class="far fa-copy"/>',
+            titleAttr: 'Copy',
+            className: 'btn-link',
+            init: function (api, node, config) {
+                $(node).removeClass('btn-secondary')
+            }
+        }
+        // {
+        //     extend: 'excelHtml5',
+        //     text: '<i class="far fa-file-excel"/>',
+        //     titleAttr: 'Excel',
+        //     className: 'btn-link',
+        //     init: function (api, node, config) {
+        //         $(node).removeClass('btn-secondary')
+        //     }
+        // }
         ],
         columnDefs: [
             {
