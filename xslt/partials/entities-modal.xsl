@@ -39,7 +39,8 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-                                    <xsl:if test="./tei:persName[@type='alternative']/text()">
+                                    <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() or 
+                                                    ./tei:persName[@type = 'alternative']/tei:surname/text()">
                                         <tr>
                                             <th> Name (alt) </th>
                                             <td>
@@ -101,7 +102,7 @@
                                             <th> GND </th>
                                             <td>
                                                 <a href="{./tei:idno[@subtype='GND']}" target="_blank">
-                                                    <xsl:value-of select="./tei:idno[@subtype = 'GND']"/>
+                                                    <xsl:value-of select="tokenize(./tei:idno[@subtype = 'GND'], '/')[last()]"/>
                                                 </a>
                                             </td>
                                         </tr>
@@ -144,7 +145,7 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-                                    <xsl:if test="//tei:placeName[@type='alternative']/text()">
+                                    <xsl:if test=".//tei:placeName[@type='alternative']/text()">
                                         <tr>
                                             <th> Alternativname </th>
                                             <td>
