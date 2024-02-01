@@ -35,7 +35,7 @@
                                             
                                         <table class="table entity-table">
                                             <tbody>
-                                                <xsl:if test="./tei:persName[@type='main']/tei:surname">
+                                                <xsl:if test="./tei:persName[@type='main']/tei:surname/text()">
                                                 <tr>
                                                     <th>
                                                         Name
@@ -45,7 +45,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:persName[@type='main']/tei:forename">
+                                                <xsl:if test="./tei:persName[@type='main']/tei:forename/text()">
                                                 <tr>
                                                     <th>
                                                         Vorname
@@ -55,7 +55,8 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:persName[@type='alternative']">
+                                                <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() or
+                                                    .           /tei:persName[@type='alternative']/tei:forename/text()">
                                                     <tr>
                                                         <th>
                                                             Name (alt)
@@ -84,7 +85,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:birth">
+                                                <xsl:if test="./tei:birth/text()">
                                                 <tr>
                                                     <th>
                                                         Lebensdaten
@@ -94,7 +95,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:occupation">
+                                                <xsl:if test="./tei:occupation/text()">
                                                     <tr>
                                                         <th>
                                                             Beschreibung
@@ -108,7 +109,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='GND']">
+                                                <xsl:if test="./tei:idno[@subtype='GND']/text()">
                                                 <tr>
                                                     <th>
                                                         GND
@@ -120,7 +121,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
+                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']/text()">
                                                 <tr>
                                                     <th>
                                                         Wikidata
@@ -132,7 +133,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='OEML']">
+                                                <xsl:if test="./tei:idno[@subtype='OEML']/text()">
                                                     <tr>
                                                         <th>
                                                             Österreichisches Musiklexikon
@@ -144,7 +145,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='OEBL']">
+                                                <xsl:if test="./tei:idno[@subtype='OEBL']/text()">
                                                     <tr>
                                                         <th>
                                                             Österreichisches Biographisches Lexikon
@@ -258,7 +259,7 @@
                                                         </xsl:choose>
                                                     </td>
                                                 </tr>
-                                                <xsl:if test="//tei:placeName[@type='alternative']">
+                                                <xsl:if test="//tei:placeName[@type='alternative']/text()">
                                                     <tr>
                                                         <th>
                                                             Ortsname (alt)
@@ -275,7 +276,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:location[@type='located_in_place']">
+                                                <xsl:if test="./tei:location[@type='located_in_place']/text()">
                                                     <tr>
                                                         <th>
                                                             Teil von
@@ -295,7 +296,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if> 
-                                                <xsl:if test="./tei:country">
+                                                <xsl:if test="./tei:country/text()">
                                                 <tr>
                                                     <th>
                                                         Land
@@ -305,7 +306,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:settlement">
+                                                <xsl:if test="./tei:settlement/text()">
                                                 <tr>
                                                     <th>
                                                         Typ
@@ -315,7 +316,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='GEONAMES']">
+                                                <xsl:if test="./tei:idno[@subtype='GEONAMES']/text()">
                                                 <tr>
                                                     <th>
                                                         Geonames ID
@@ -327,7 +328,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
+                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']/text()">
                                                 <tr>
                                                     <th>
                                                         Wikidata ID
@@ -339,7 +340,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='GND']">
+                                                <xsl:if test="./tei:idno[@subtype='GND']/text()">
                                                 <tr>
                                                     <th>
                                                         GND ID
@@ -351,7 +352,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:location">
+                                                <xsl:if test="./tei:location/tei:geo/text()">
                                                 <tr>
                                                     <th>
                                                         Latitude
@@ -361,7 +362,7 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:location">
+                                                <xsl:if test="./tei:location/tei:geo/text()">
                                                 <tr>
                                                     <th>
                                                         Longitude
@@ -419,7 +420,7 @@
                                         
                                         <table class="table entity-table">
                                             <tbody>
-                                                <xsl:if test="./tei:title[@type='main']">
+                                                <xsl:if test="./tei:title[@type='main']/text()">
                                                     <tr>
                                                         <th>
                                                             Titel
@@ -429,7 +430,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:title[@type='alternative']">
+                                                <xsl:if test="./tei:title[@type='alternative']/text()">
                                                     <tr>
                                                         <th>
                                                             Titel (alt)
@@ -458,7 +459,7 @@
                                                         </td>
                                                     </tr>    
                                                 </xsl:if>
-                                                <xsl:if test="./tei:name">
+                                                <xsl:if test="./tei:name[@type='character']/text()">
                                                     <tr>
                                                         <th>
                                                             Figur(en)
@@ -477,7 +478,7 @@
                                                         </td>
                                                     </tr>    
                                                 </xsl:if>
-                                                <xsl:if test="./tei:date">
+                                                <xsl:if test="./tei:date/text()">
                                                     <tr>
                                                         <th>
                                                             Datum
@@ -487,7 +488,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:biblScope[@type='volume']">
+                                                <xsl:if test="./tei:biblScope[@type='volume']/text()">
                                                     <tr>
                                                         <th>
                                                             Band
@@ -497,7 +498,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:biblScope[@type='chapter']">
+                                                <xsl:if test="./tei:biblScope[@type='chapter']/text()">
                                                     <tr>
                                                         <th>
                                                             Kapitel
@@ -507,7 +508,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='GND']">
+                                                <xsl:if test="./tei:idno[@subtype='GND']/text()">
                                                     <tr>
                                                         <th>
                                                             GND
@@ -531,7 +532,7 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>-->
-                                                <xsl:if test="./tei:lang">
+                                                <xsl:if test="./tei:lang/text()">
                                                     <tr>
                                                         <th>
                                                             Sprache
