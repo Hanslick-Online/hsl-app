@@ -85,7 +85,7 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
-                                    <xsl:if test="./tei:listBibl[@type = 'characterOf']/tei:bibl/text()">
+                                    <xsl:if test="./tei:listBibl[@type = 'characterOf']">
                                         <tr>
                                             <th>Werk</th>
                                             <td>
@@ -211,7 +211,7 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-                                    <xsl:if test="./tei:author/text()">
+                                    <xsl:if test="./tei:author">
                                         <tr>
                                             <th> Autor(en) </th>
                                             <td>

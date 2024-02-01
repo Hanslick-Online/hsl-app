@@ -459,7 +459,7 @@
                                                         </td>
                                                     </tr>    
                                                 </xsl:if>
-                                                <xsl:if test="./tei:name[@type='character']/text()">
+                                                <xsl:if test="./tei:name[@type='character']">
                                                     <tr>
                                                         <th>
                                                             Figur(en)
