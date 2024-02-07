@@ -17,10 +17,11 @@
       <title>Hanslick - Digitale Edition</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><link rel="stylesheet" href="css/de-micro-editor.css" /><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script></head>
+      <link rel="stylesheet" href="css/style.css" type="text/css" /><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><link rel="stylesheet" href="css/de-micro-editor.css" />
+   </head>
    <body class="page">
       <div class="hfeed site" id="page">
-         <div class="wrapper-fluid wrapper-navbar sticky-top" id="wrapper-navbar"><a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a><nav class="autohide navbar navbar-expand-lg bg-light">
+         <div class="wrapper-fluid wrapper-navbar sticky-top" id="wrapper-navbar"><a class="skip-link screen-reader-text sr-only" href="#content">Skip to content</a><nav class="autohide navbar navbar-expand-lg">
                <div class="container"><a href="index.html?lang=de" class="navbar-brand custom-logo-link" rel="home" itemprop="url"><img src="images/logo_font_blau.svg" class="img-fluid" title="Hanslick - Digitale Edition" alt="Hanslick - Digitale Edition" itemprop="logo" /></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                      <ul class="navbar-nav mb-2 mb-lg-0 translate-de">
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -143,7 +144,17 @@
             $('#aot-navBarNavDropdown .dropdown-menu .nav-item').click(function(e) {
                 e.stopPropagation();
             });
-        </script><div id="next-prev-btns">
+        </script><div id="document-download">
+                           <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart"><a aria-label="Downloads" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"></path>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"></path></svg></a><ul class="dropdown-menu">
+                                 <li class="dropdown-item"><a target="_blank" href="https://raw.githubusercontent.com/Hanslick-Online/hsl-data-ct/main/data/editions/1865.03.14.xml" aria-label="TEI/XML Document Download" download="c__1865.03.14">
+                                       TEI/XML 
+                                       </a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div id="next-prev-btns">
                            <div id="prev"><a id="prev-doc" alt="link to previous document / Link zum vorheringen Dokument" href="c__1865.03.12.html"><svg xmlns="http://www.w3.org/2000/svg" class="arrow svg-inline--fa fa-chevron-left fa-w-10" title="previous" aria-labelledby="svg-inline--fa-title-1" data-prefix="fas" data-icon="chevron-left" role="img" viewBox="0 0 320 512" data-fa-i2svg="">
                                     <title id="svg-inline--fa-title-1">previous document/vorheriges Dokument</title>
                                     <path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path></svg></a></div>
@@ -153,7 +164,8 @@
                                     <path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg></a></div>
                         </div>
                      </div>
-                     <div id="mark-scroll"><button data-search="next" disabled="disabled">↓</button><button data-search="prev" disabled="disabled">↑</button><button data-search="clear" disabled="disabled">✖</button></div>
+                     <div id="mark-scroll" class="fade-lang"><button data-search="next" disabled="disabled">↓</button><button data-search="prev" disabled="disabled">↑</button><button data-search="clear" disabled="disabled">✖</button><div id="results-div"></div>
+                     </div>
                      <div class="card-body yes-index">
                         <p class="yes-index meta-head">Neue Freie Presse<br />Morgenblatt<br />No. 194. Wien, Dienstag den 14. März 1865<br /></p><span class="anchor-pb" source="hsl-nfp/1865.03.14-0001"></span><span class="pb">[1]</span><h1 class="yes-index">„<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_211"></span>Dinorah“ oder „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_211"></span>Die Wallfahrt nach Ploërmel“.</h1>
                         <h2 class="yes-index">Komische Oper in drei Acten von M. <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_84"></span><span class="italic">Carré</span> und J. <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_90"></span><span class="italic">Barbier</span>. Musik von <span class="italic"><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_182"></span>Meyerbeer</span>. II.</h2>
@@ -177,7 +189,7 @@
                            </p>
                         <p class="yes-index"><br class="pb" /><a href="#__p2__lb26" name="__p2__lb26" id="__p2__lb26" class="linenumbersTransparent linenumbers pb">0026</a>Die Oper beginnt mit einem <span class="italic">Hirtenchor</span> von graciöser,
                            <br class="pb" /><a href="#__p2__lb27" name="__p2__lb27" id="__p2__lb27" class="linenumbersTransparent linenumbers pb">0027</a>polonaisenartiger Melodie. Wie fast alle lyrischen, nicht in
-                           <br class="pb" /><a href="#__p2__lb28" name="__p2__lb28" id="__p2__lb28" class="linenumbersTransparent linenumbers pb">0028</a>die Handlung eingreifenden Chöre <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_182"></span>Meyerbeer’s, hat auch die<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb29" name="__p2__lb29" id="__p2__lb29" class="linenumbersTransparent linenumbers pb">0029</a>ser keinen chormäßigen, ein Allgemeingefühl ausdrückenden Cha<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb30" name="__p3__lb30" id="__p3__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>rakter, die kokette Melodie und die nervös bewegliche Modula<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb31" name="__p3__lb31" id="__p3__lb31" class="linenumbersTransparent linenumbers pb">0031</a>tion sind ganz individuellen Ausdrucks, genau wie der Einlei<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb32" name="__p3__lb32" id="__p3__lb32" class="linenumbersTransparent linenumbers pb">0032</a>tungschor zum „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_113"></span>Propheten“.<span><a class="anchorFoot" id="d52e587_inline"></a><a href="#d52e587" title="footnote: *)" class="nounderline"><sup>*)</sup></a></span>
+                           <br class="pb" /><a href="#__p2__lb28" name="__p2__lb28" id="__p2__lb28" class="linenumbersTransparent linenumbers pb">0028</a>die Handlung eingreifenden Chöre <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_182"></span>Meyerbeer’s, hat auch die<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p2__lb29" name="__p2__lb29" id="__p2__lb29" class="linenumbersTransparent linenumbers pb">0029</a>ser keinen chormäßigen, ein Allgemeingefühl ausdrückenden Cha<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb30" name="__p3__lb30" id="__p3__lb30" class="linenumbersVisible linenumbers pb" data-lbnr="30">0030</a>rakter, die kokette Melodie und die nervös bewegliche Modula<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb31" name="__p3__lb31" id="__p3__lb31" class="linenumbersTransparent linenumbers pb">0031</a>tion sind ganz individuellen Ausdrucks, genau wie der Einlei<span class="pb wrdbreak">-</span><br class="pb" /><a href="#__p3__lb32" name="__p3__lb32" id="__p3__lb32" class="linenumbersTransparent linenumbers pb">0032</a>tungschor zum „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_113"></span>Propheten“.<span><a class="anchorFoot" id="d53e587_inline"></a><a href="#d53e587" title="footnote: *)" class="nounderline"><sup>*)</sup></a></span>
                            Als Mittelsatz erscheint ein
                            <br class="pb" /><a href="#__p3__lb36" name="__p3__lb36" id="__p3__lb36" class="linenumbersTransparent linenumbers pb">0036</a>zweistimmiger Gesang (zwei Hirtenknaben), dessen rhythmische
                            <br class="pb" /><a href="#__p3__lb37" name="__p3__lb37" id="__p3__lb37" class="linenumbersTransparent linenumbers pb">0037</a>Einschnitte der Chor „Stark in die Hände schlagen“ markirt.
@@ -282,7 +294,7 @@
                            <br class="pb" /><a href="#__p13__lb165" name="__p13__lb165" id="__p13__lb165" class="linenumbersVisible linenumbers pb" data-lbnr="165">0165</a><span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_182"></span>Meyerbeer’schen Phrasen, gerade mit ihren unangenehmsten
                            <br class="pb" /><a href="#__p13__lb166" name="__p13__lb166" id="__p13__lb166" class="linenumbersTransparent linenumbers pb">0166</a>Kennzeichen, dem zerhackten Rhythmus, der gekünstelten und
                            <br class="pb" /><a href="#__p13__lb167" name="__p13__lb167" id="__p13__lb167" class="linenumbersTransparent linenumbers pb">0167</a>überladenen Melodie, den grellen (nicht durch Wort oder<span class="space"> </span><br class="pb" /><a href="#__p14__lb168" name="__p14__lb168" id="__p14__lb168" class="linenumbersTransparent linenumbers pb">0168</a>Scene gerechtfertigten) Uebergängen, finden sich in der „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_211"></span>Dinorah“
-                           <br class="pb" /><a href="#__p14__lb169" name="__p14__lb169" id="__p14__lb169" class="linenumbersTransparent linenumbers pb">0169</a>auf Schritt und Tritt.<span><a class="anchorFoot" id="d52e1097_inline"></a><a href="#d52e1097" title="footnote: **)" class="nounderline"><sup>**)</sup></a></span>
+                           <br class="pb" /><a href="#__p14__lb169" name="__p14__lb169" id="__p14__lb169" class="linenumbersTransparent linenumbers pb">0169</a>auf Schritt und Tritt.<span><a class="anchorFoot" id="d53e1097_inline"></a><a href="#d53e1097" title="footnote: **)" class="nounderline"><sup>**)</sup></a></span>
                            Aeußerlich elegant und glanzvoll, ist
                            <br class="pb" /><a href="#__p14__lb181" name="__p14__lb181" id="__p14__lb181" class="linenumbersTransparent linenumbers pb">0181</a>diese Musik innerlich dürftig und unwahr. Das blendende Licht,
                            <br class="pb" /><a href="#__p14__lb182" name="__p14__lb182" id="__p14__lb182" class="linenumbersTransparent linenumbers pb">0182</a>das sie ausströmt, ist der gefühllose Glanz von Edelsteinen,
@@ -384,11 +396,11 @@
                      </div>
                      <div class="card-body yes-index my-4"><a class="anchor" id="index.xml-body.1_div.999"></a><h5>Fußnoten</h5>
                         <ul class="footnotes">
-                           <li><a class="anchorFoot" id="d52e587"></a><span class="footnote_link"><a href="#d52e587_inline" class="nounderline">*)</a></span><span class="footnote_text">Charakteristisch für das Unchormäßige dieser Stücke sind
+                           <li><a class="anchorFoot" id="d53e587"></a><span class="footnote_link"><a href="#d53e587_inline" class="nounderline">*)</a></span><span class="footnote_text">Charakteristisch für das Unchormäßige dieser Stücke sind
                                  <br class="pb" />nebenbei die zahllosen Vortragszeichen in <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_182"></span>Meyerbeer’s Chören; dies
                                  <br class="pb" />„portez la voix“, „glissé“, „doux“, „très doux“ etc. etc.
                                  </span></li>
-                           <li><a class="anchorFoot" id="d52e1097"></a><span class="footnote_link"><a href="#d52e1097_inline" class="nounderline">**)</a></span><span class="footnote_text">Die „pikanten“ Verschiebungen des Rhythmus, insbesondere
+                           <li><a class="anchorFoot" id="d53e1097"></a><span class="footnote_link"><a href="#d53e1097_inline" class="nounderline">**)</a></span><span class="footnote_text">Die „pikanten“ Verschiebungen des Rhythmus, insbesondere
                                  <br class="pb" />das abscheuliche daktylische Abschnappen desselben am Ende einer
                                  <br class="pb" />Periode findet sich in der „<span class="works entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_work_id_211"></span>Dinorah“ noch häufiger als in <span class="persons entity " id="" data-bs-toggle="modal" data-bs-target="#hsl_person_id_182"></span>Meyer<span class="pb wrdbreak">-</span><br class="pb" />beer’s früheren Opern. Von dem Einleitungschor, welcher (im Zwei<span class="pb wrdbreak">-</span><br class="pb" />vierteltact) singt:
                                  <br class="pb" />„Der Abend<span class="italic">glocke</span> Ton klingt aus den <span class="italic">Dörfern</span> schon“,
@@ -401,114 +413,6 @@
                         </ul>
                      </div>
                      <div class="tei-back">
-                        <div class="modal fade" id="hsl_person_id_182" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Meyerbeer, Giacomo" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Meyerbeer, Giacomo</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/118581945" target="_blank">https://d-nb.info/gnd/118581945</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_182.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_56" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dessoff, Felix Otto" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dessoff, Felix Otto</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/116085053" target="_blank">https://d-nb.info/gnd/116085053</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_56.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_42" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Brioschi, Carlo" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Brioschi, Carlo</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/139882537" target="_blank">https://d-nb.info/gnd/139882537</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_42.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_240" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Rokitansky, Viktor von" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Rokitansky, Viktor von</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/117593427" target="_blank">https://d-nb.info/gnd/117593427</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_240.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
                         <div class="modal fade" id="hsl_person_id_592" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Hoël" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
@@ -518,10 +422,6 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
                                              <th>Werk</th>
                                              <td>
                                                 <ul>
@@ -530,12 +430,8 @@
                                              </td>
                                           </tr>
                                           <tr>
-                                             <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_592.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_592.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -544,52 +440,25 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_person_id_31" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Gomperz-Bettelheim, Caroline" aria-hidden="true">
+                        <div class="modal fade" id="hsl_person_id_1149" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Papageno" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Gomperz-Bettelheim, Caroline</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Papageno</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
+                                             <th>Werk</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Die Zauberflöte, KV620</li>
+                                                </ul>
+                                             </td>
                                           </tr>
                                           <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/116155833" target="_blank">https://d-nb.info/gnd/116155833</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_31.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_84" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Carré, Michel" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Carré, Michel</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/119374536" target="_blank">https://d-nb.info/gnd/119374536</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_84.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_1149.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -607,16 +476,467 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
+                                             <th>Lebensdaten</th>
+                                             <td>1827-1904</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Sänger (Bariton)</li>
+                                                </ul>
+                                             </td>
                                           </tr>
                                           <tr>
                                              <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/116101431" target="_blank">https://d-nb.info/gnd/116101431</a></td>
+                                             <td><a href="https://d-nb.info/gnd/116101431" target="_blank">116101431</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_24.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_24.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_240" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Rokitansky, Viktor von" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Rokitansky, Viktor von</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1836-1896</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Sänger (Bariton)</li>
+                                                   <li>Komponist</li>
+                                                   <li>Gesangslehrer</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/117593427" target="_blank">117593427</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_240.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_91" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Eppich, Franz" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Eppich, Franz</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1835-1893</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Schauspieler</li>
+                                                   <li>Sänger (Tenor)</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/143989677" target="_blank">143989677</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_91.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_56" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dessoff, Felix Otto" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dessoff, Felix Otto</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1835-1892</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Dirigent</li>
+                                                   <li>Komponist</li>
+                                                   <li>Musiklehrer</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/116085053" target="_blank">116085053</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_56.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_42" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Brioschi, Carlo" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Brioschi, Carlo</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1826-1895</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Maler</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/139882537" target="_blank">139882537</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_42.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_31" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Gomperz-Bettelheim, Caroline" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Gomperz-Bettelheim, Caroline</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1848-1925</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Pianistin</li>
+                                                   <li>Sängerin (Alt)</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/116155833" target="_blank">116155833</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_31.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_182" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Meyerbeer, Giacomo" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Meyerbeer, Giacomo</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1791-1864</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Komponist</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/118581945" target="_blank">118581945</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_182.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_190" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Murska, Ilma von" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Murska, Ilma von</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1834-1889</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Sängerin (Sopran)</li>
+                                                   <li>Gesangslehrerin</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/117187763" target="_blank">117187763</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_190.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_468" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Corentin" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Corentin</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Werk</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Dinorah ou Le pardon de Ploërmel</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_468.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_90" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Barbier, Jules" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Barbier, Jules</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1825-1901</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Schriftsteller</li>
+                                                   <li>Librettist</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/119309998" target="_blank">119309998</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_90.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_473" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dinorah" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dinorah</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Werk</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Dinorah ou Le pardon de Ploërmel</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_473.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_304" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Tellheim, Caroline" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tellheim, Caroline</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Name (alt) </th>
+                                             <td>Bettelheim</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1842-1906</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Sängerin (Sopran)</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/117254789" target="_blank">117254789</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_304.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_84" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Carré, Michel" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Carré, Michel</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Lebensdaten</th>
+                                             <td>1819-1872</td>
+                                          </tr>
+                                          <tr>
+                                             <th>Beschreibung</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Librettist</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND </th>
+                                             <td><a href="https://d-nb.info/gnd/119374536" target="_blank">119374536</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_84.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_person_id_453" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Bertram" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Bertram</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th>Werk</th>
+                                             <td>
+                                                <ul>
+                                                   <li>Robert le diable</li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_453.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -646,12 +966,8 @@
                                              </td>
                                           </tr>
                                           <tr>
-                                             <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_646.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_person_id_646.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -660,246 +976,25 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_person_id_1149" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Papageno" aria-hidden="true">
+                        <div class="modal fade" id="hsl_place_id_60" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Graz" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Papageno</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Graz</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
+                                             <th> Land </th>
+                                             <td>AT, Austria</td>
                                           </tr>
                                           <tr>
-                                             <th>Werk</th>
-                                             <td>
-                                                <ul>
-                                                   <li>Die Zauberflöte, KV620</li>
-                                                </ul>
-                                             </td>
+                                             <th> Geonames ID </th>
+                                             <td><a href="https://sws.geonames.org/2778067/" target="_blank">2778067</a></td>
                                           </tr>
                                           <tr>
-                                             <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_1149.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_304" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Tellheim, Caroline" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tellheim, Caroline</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td>Bettelheim</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/117254789" target="_blank">https://d-nb.info/gnd/117254789</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_304.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_468" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Corentin" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Corentin</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th>Werk</th>
-                                             <td>
-                                                <ul>
-                                                   <li>Dinorah ou Le pardon de Ploërmel</li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_468.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_91" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Eppich, Franz" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Eppich, Franz</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/143989677" target="_blank">https://d-nb.info/gnd/143989677</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_91.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_190" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Murska, Ilma von" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Murska, Ilma von</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/117187763" target="_blank">https://d-nb.info/gnd/117187763</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_190.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_90" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Barbier, Jules" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Barbier, Jules</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="https://d-nb.info/gnd/119309998" target="_blank">https://d-nb.info/gnd/119309998</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_90.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_453" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Bertram" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Bertram</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th>Werk</th>
-                                             <td>
-                                                <ul>
-                                                   <li>Robert le diable</li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_453.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_person_id_473" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dinorah" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dinorah</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Name (alt) </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th>Werk</th>
-                                             <td>
-                                                <ul>
-                                                   <li>Dinorah ou Le pardon de Ploërmel</li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_person_id_473.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_place_id_60.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -929,8 +1024,8 @@
                                              <td><a href="https://sws.geonames.org/3175395/" target="_blank">3175395</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_28.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_place_id_28.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -948,10 +1043,6 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
                                              <th> Land </th>
                                              <td>AT, Austria</td>
                                           </tr>
@@ -960,39 +1051,8 @@
                                              <td><a href="https://sws.geonames.org/2761369/" target="_blank">2761369</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_55.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_place_id_60" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Graz" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Graz</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Alternativname </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Land </th>
-                                             <td>AT, Austria</td>
-                                          </tr>
-                                          <tr>
-                                             <th> Geonames ID </th>
-                                             <td><a href="https://sws.geonames.org/2778067/" target="_blank">2778067</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_60.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_place_id_55.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1010,10 +1070,6 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Alternativname </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
                                              <th> Land </th>
                                              <td>FR, France</td>
                                           </tr>
@@ -1022,8 +1078,8 @@
                                              <td><a href="https://sws.geonames.org/2988507/" target="_blank">2988507</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_place_id_44.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_place_id_44.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1041,22 +1097,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1074,22 +1116,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1107,22 +1135,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1140,22 +1154,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1173,22 +1173,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1206,22 +1192,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1239,22 +1211,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1272,22 +1230,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1305,22 +1249,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1338,22 +1268,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1371,22 +1287,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1404,22 +1306,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1437,22 +1325,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1470,22 +1344,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1503,22 +1363,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1536,22 +1382,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1569,22 +1401,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1602,22 +1420,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1635,22 +1439,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1668,22 +1458,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1701,22 +1477,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1734,22 +1496,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1767,22 +1515,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1800,22 +1534,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1833,22 +1553,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1866,22 +1572,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1899,22 +1591,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1932,22 +1610,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1965,22 +1629,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -1998,22 +1648,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2031,22 +1667,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2064,22 +1686,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2097,22 +1705,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2130,22 +1724,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2163,22 +1743,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2196,22 +1762,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2229,22 +1781,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2262,22 +1800,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2295,22 +1819,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2328,22 +1838,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2361,22 +1857,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2394,22 +1876,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2427,22 +1895,8 @@
                                     <table>
                                        <tbody>
                                           <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul></ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href=".html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2451,11 +1905,30 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_work_id_11" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Die Grille" aria-hidden="true">
+                        <div class="modal fade" id="" data-bs-toggle="modal" tabindex="-1" aria-labelledby="" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Die Grille</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href=".html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_98" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Linda di Chamounix" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Linda di Chamounix</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
@@ -2463,238 +1936,22 @@
                                              <th> Autor(en) </th>
                                              <td>
                                                 <ul>
-                                                   <li><a href=".html">Birch-Pfeiffer, Charlotte</a></li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="" target="_blank"></a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_11.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_113" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Le prophète" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Le prophète</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul>
-                                                   <li><a href=".html">Deschamps, Emile</a></li>
-                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
-                                                   <li><a href=".html">Scribe, Eugène</a></li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td>Der Prophet</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300104286" target="_blank">300104286</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_113.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_9" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Festmarsch zu Schillers 100 jähriger Geburtstagsfeier" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Festmarsch zu Schillers 100 jähriger Geburtstagsfeier</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul>
-                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td>Schiller-Marsch, Schillermarsch</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300564287" target="_blank">300564287</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_9.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_105" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Les Huguenots" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Les Huguenots</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul>
-                                                   <li><a href=".html">Deschamps, Emile</a></li>
-                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
-                                                   <li><a href=".html">Scribe, Eugène</a></li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td>Die Hugenotten</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300245637" target="_blank">300245637</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_105.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_12" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Il crociato in Egitto" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Il crociato in Egitto</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul>
-                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
+                                                   <li><a href=".html">Donizetti, Gaetano</a></li>
                                                    <li><a href=".html">Rossi, Gaetano</a></li>
                                                 </ul>
                                              </td>
                                           </tr>
                                           <tr>
                                              <th> Alternativtitel </th>
-                                             <td></td>
+                                             <td>Linda von Chamounix</td>
                                           </tr>
                                           <tr>
                                              <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300465408" target="_blank">300465408</a></td>
+                                             <td><a href="https://d-nb.info/gnd/300045700" target="_blank">300045700</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_12.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_10" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Struensee" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Struensee</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul>
-                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td></td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300573057" target="_blank">300573057</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_10.html"> Details </a></td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
-                                 </div>
-                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="modal fade" id="hsl_work_id_211" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dinorah ou Le pardon de Ploërmel" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dinorah ou Le pardon de Ploërmel</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                                 <div class="modal-body">
-                                    <table>
-                                       <tbody>
-                                          <tr>
-                                             <th> Autor(en) </th>
-                                             <td>
-                                                <ul>
-                                                   <li><a href=".html">Barbier, Jules</a></li>
-                                                   <li><a href=".html">Carré, Michel</a></li>
-                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                          <tr>
-                                             <th> Alternativtitel </th>
-                                             <td>Dinorah oder Die Wallfahrt nach Ploërmel</td>
-                                          </tr>
-                                          <tr>
-                                             <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300425902" target="_blank">300425902</a></td>
-                                          </tr>
-                                          <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_211.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_98.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2730,8 +1987,213 @@
                                              <td><a href="https://d-nb.info/gnd/300205562" target="_blank">300205562</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_58.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_58.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_11" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Die Grille" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Die Grille</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Birch-Pfeiffer, Charlotte</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_11.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_12" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Il crociato in Egitto" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Il crociato in Egitto</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
+                                                   <li><a href=".html">Rossi, Gaetano</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/300465408" target="_blank">300465408</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_12.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_113" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Le prophète" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Le prophète</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Deschamps, Emile</a></li>
+                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
+                                                   <li><a href=".html">Scribe, Eugène</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td>Der Prophet</td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/300104286" target="_blank">300104286</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_113.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_9" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Festmarsch zu Schillers 100 jähriger Geburtstagsfeier" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Festmarsch zu Schillers 100 jähriger Geburtstagsfeier</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td>Schiller-Marsch, Schillermarsch</td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/300564287" target="_blank">300564287</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_9.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_211" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Dinorah ou Le pardon de Ploërmel" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dinorah ou Le pardon de Ploërmel</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Barbier, Jules</a></li>
+                                                   <li><a href=".html">Carré, Michel</a></li>
+                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td>Dinorah oder Die Wallfahrt nach Ploërmel</td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/300425902" target="_blank">300425902</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_211.html"> Weitere Details </a></td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal fade" id="hsl_work_id_105" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Les Huguenots" aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Les Huguenots</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                 <div class="modal-body">
+                                    <table>
+                                       <tbody>
+                                          <tr>
+                                             <th> Autor(en) </th>
+                                             <td>
+                                                <ul>
+                                                   <li><a href=".html">Deschamps, Emile</a></li>
+                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
+                                                   <li><a href=".html">Scribe, Eugène</a></li>
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <th> Alternativtitel </th>
+                                             <td>Die Hugenotten</td>
+                                          </tr>
+                                          <tr>
+                                             <th> GND ID </th>
+                                             <td><a href="https://d-nb.info/gnd/300245637" target="_blank">300245637</a></td>
+                                          </tr>
+                                          <tr>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_105.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2766,8 +2228,8 @@
                                              <td><a href="https://d-nb.info/gnd/300104200" target="_blank">300104200</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_139.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_139.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2776,11 +2238,11 @@
                               </div>
                            </div>
                         </div>
-                        <div class="modal fade" id="hsl_work_id_98" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Linda di Chamounix" aria-hidden="true">
+                        <div class="modal fade" id="hsl_work_id_10" data-bs-toggle="modal" tabindex="-1" aria-labelledby="Struensee" aria-hidden="true">
                            <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Linda di Chamounix</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Struensee</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                                  <div class="modal-body">
                                     <table>
                                        <tbody>
@@ -2788,22 +2250,17 @@
                                              <th> Autor(en) </th>
                                              <td>
                                                 <ul>
-                                                   <li><a href=".html">Donizetti, Gaetano</a></li>
-                                                   <li><a href=".html">Rossi, Gaetano</a></li>
+                                                   <li><a href=".html">Meyerbeer, Giacomo</a></li>
                                                 </ul>
                                              </td>
                                           </tr>
                                           <tr>
-                                             <th> Alternativtitel </th>
-                                             <td>Linda von Chamounix</td>
-                                          </tr>
-                                          <tr>
                                              <th> GND ID </th>
-                                             <td><a href="https://d-nb.info/gnd/300045700" target="_blank">300045700</a></td>
+                                             <td><a href="https://d-nb.info/gnd/300573057" target="_blank">300573057</a></td>
                                           </tr>
                                           <tr>
-                                             <th> Weiterlesen </th>
-                                             <td><a href="hsl_work_id_98.html"> Details </a></td>
+                                             <th></th>
+                                             <td style="padding-top: 1em;"><a href="hsl_work_id_10.html"> Weitere Details </a></td>
                                           </tr>
                                        </tbody>
                                     </table>
@@ -2817,7 +2274,7 @@
                </div>
             </div>
          </div>
-         <div class="wrapper bg-light translate-de" id="wrapper-footer-full">
+         <div class="wrapper translate-de" id="wrapper-footer-full">
             <div class="container" id="footer-full-content" tabindex="-1">
                <div class="footer-separator">
                   KONTAKT
@@ -2851,19 +2308,14 @@
                   <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
                      <h6 class="font-weight-bold">PROJEKTPARTNER</h6>
                      <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="https://www.fwf.ac.at/fileadmin/Website/Logos/FWF_Logo.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 180px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                           <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center"><a href="https://www.fwf.ac.at"><img class="card-img-right flex-auto d-md-block" src="https://www.fwf.ac.at/fileadmin/Website/Logos/FWF_Logo.png" alt="FWF Der Wissenschaftsfond Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="FWF Der Wissenschaftsfond" /></a></div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                           <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center"><a href="https://www.wien.gv.at"><img class="card-img-right flex-auto d-md-block" src="images/csm_Stadt-Wien_Logo_pos_rgb_ae2ce8a131.png" alt="Stadt Wien Logo" style="max-width: 140px; height: auto; margin-top:1em;" title="Stadt Wien" /></a></div>
                         </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"></div>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-12">
-                           <div class="flex-md-row mb-4 align-items-center"><a href="https://www.oenb.at"><img class="card-img-right flex-auto d-md-block" src="images/Oesterreichische_Nationalbank_Logo.svg" alt="Österreichische Nationalbank Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="Österreichische Nationalbank" /></a></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                           <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center"><a href="https://www.oenb.at"><img class="card-img-right flex-auto d-md-block" src="images/Oesterreichische_Nationalbank_Logo.svg" alt="Österreichische Nationalbank Logo" style="max-width: 200px; height: auto; margin-top:1em;" title="Österreichische Nationalbank" /></a></div>
                         </div>
                      </div>
                   </div>
@@ -2886,9 +2338,9 @@
                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-4.466 19.59c-.405.078-.534-.171-.534-.384v-2.195c0-.747-.262-1.233-.55-1.481 1.782-.198 3.654-.875 3.654-3.947 0-.874-.312-1.588-.823-2.147.082-.202.356-1.016-.079-2.117 0 0-.671-.215-2.198.82-.64-.18-1.324-.267-2.004-.271-.68.003-1.364.091-2.003.269-1.528-1.035-2.2-.82-2.2-.82-.434 1.102-.16 1.915-.077 2.118-.512.56-.824 1.273-.824 2.147 0 3.064 1.867 3.751 3.645 3.954-.229.2-.436.552-.508 1.07-.457.204-1.614.557-2.328-.666 0 0-.423-.768-1.227-.825 0 0-.78-.01-.055.487 0 0 .525.246.889 1.17 0 0 .463 1.428 2.688.944v1.489c0 .211-.129.459-.528.385-3.18-1.057-5.472-4.056-5.472-7.59 0-4.419 3.582-8 8-8s8 3.581 8 8c0 3.533-2.289 6.531-5.466 7.59z"></path></svg></a></div>
                            </div>
                            <div class="row">
-                              <div class="custom-html-widget col-12 py-2"><label>App: </label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.10362122"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10362122.svg" alt="DOI" /></a></div>
-                              <div class="custom-html-widget col-12 py-2"><label>Daten (VMS):</label><a style="margin-left: .5rem;" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
-                              <div class="custom-html-widget col-12 py-2"><label>Daten (NFP):</label><a style="margin-left: .5rem;" href="https://doi.org/10.5281/zenodo.10362003"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10362003.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2 d-block"><label>App: </label><a class="d-block" href="https://doi.org/10.5281/zenodo.10628725"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10628725.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2 d-block"><label>Daten (VMS):</label><a class="d-block" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI" /></a></div>
+                              <div class="custom-html-widget col-12 py-2  d-block"><label>Daten (NFP):</label><a class="d-block" href="https://doi.org/10.5281/zenodo.10628540"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10628540.svg" alt="DOI" /></a></div>
                            </div>
                         </div>
                      </div>
@@ -2900,7 +2352,7 @@
             © Copyright OEAW | <a href="imprint.html?lang=de">Impressum/Imprint</a></div>
          <div id="cookie-overlay">
             <div class="container">
-               <div class="cookie-message">This website uses cookies to ensure you get the best experience on our website. <a href="/browser/imprint">More info</a><br /></div>
+               <div class="cookie-message">This website uses cookies to ensure you get the best experience on our website. <a href="imprint.html?lang=de">More info</a><br /></div>
                <div class="cookie-buttons">
                   <div class="cookie-accept-btn">Accept All Cookies (functional and tracking)</div>
                   <div class="cookie-accept-necessary-btn">Accept Necessary Cookies Only</div>
@@ -2911,5 +2363,5 @@
                 $('li a.active').removeClass('active');
                 $('a[href="' + location.pathname.split("/").at(-1) + '"]').addClass('active');
             });
-        </script><script src="https://unpkg.com/de-micro-editor@0.2.85/dist/de-editor.min.js"></script><script src="js/navbar-autohide.js"></script><script src="js/cookie-consent.js"></script><script src="js/nav-show-hide.js"></script></div><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><script type="text/javascript" src="js/mark.js"></script><script type="text/javascript" src="js/run_editions.js"></script><script type="text/javascript" src="js/osd.js"></script></body>
+        </script><script src="https://unpkg.com/de-micro-editor@0.3.1/dist/de-editor.min.js"></script><script src="js/navbar-autohide.js"></script><script src="js/cookie-consent.js"></script><script src="js/nav-show-hide.js"></script></div><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script><script type="text/javascript" src="js/mark.js"></script><script type="text/javascript" src="js/run_editions.js"></script><script type="text/javascript" src="js/osd.js"></script></body>
 </html>

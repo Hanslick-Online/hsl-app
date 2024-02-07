@@ -54,17 +54,18 @@ search.addWidgets([
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
               <h5><span class="badge badge-primary">{{ project }}</span></h5>
               <div>
-                  <div>
+                  <a class="show-entities pointer" onclick="show_hide_click(this)">mehr anzeigen</a>
+                  <div style="display: none;">
                       {{#persons}}
                       <span class="badge bg-secondary">{{ . }}</span>
                       {{/persons}}
                   </div>
-                  <div>
+                  <div style="display: none;">
                       {{#works}}
                       <span class="badge bg-success">{{ . }}</span>
                       {{/works}}
                   </div>
-                  <div>
+                  <div style="display: none;">
                       {{#places}}
                       <span class="badge bg-info">{{ . }}</span>
                       {{/places}}
@@ -103,7 +104,7 @@ search.addWidgets([
     container: "#refinement-list-places",
     attribute: "places",
     searchable: true,
-    searchablePlaceholder: "Search for places",
+    searchablePlaceholder: "Nach Orte suchen",
     sortBy: ["isRefined", "count:desc", "name:asc"], // testing
     showMore: true,
     limit: 10,
@@ -125,7 +126,7 @@ search.addWidgets([
     container: "#refinement-list-persons",
     attribute: "persons",
     searchable: true,
-    searchablePlaceholder: "Search for persons",
+    searchablePlaceholder: "Nach Personen suchen",
     sortBy: ["isRefined", "count:desc", "name:asc"], // testing
     showMore: true,
     limit: 10,
@@ -147,7 +148,7 @@ search.addWidgets([
     container: "#refinement-list-works",
     attribute: "works",
     searchable: true,
-    searchablePlaceholder: "Search for works",
+    searchablePlaceholder: "Nach Werke suchen",
     sortBy: ["isRefined", "count:desc", "name:asc"], // testing
     showMore: true,
     limit: 10,
@@ -169,8 +170,8 @@ search.addWidgets([
     container: "#range-input",
     attribute: "year",
     templates: {
-      separatorText: "to",
-      submitText: "Search",
+      separatorText: "bis",
+      submitText: "Suchen",
     },
     cssClasses: {
       form: "form-inline",
@@ -237,5 +238,27 @@ search.addWidgets([
 //     attributesToSnippet: ["full_text:30", "title"],
 //   }),
 // ]);
+// search.setUiState({
+//   refinementList: {
+//     edition: ["english"],
+//   },
+// });
+
 
 search.start();
+
+function show_hide_click(el) {
+  var show_text = "mehr anzeigen";
+  var hide_text = "weniger anzeigen";
+  el.innerHTML = show_text;
+  var siblings = el.parentElement.querySelectorAll("div");
+  [...siblings].forEach((sibling) => {
+    if (sibling.style.display === "none") {
+      sibling.style.display = "block";
+      el.innerHTML = hide_text;
+    } else {
+      sibling.style.display = "none";
+      el.innerHTML = show_text;
+    }
+  });
+}
