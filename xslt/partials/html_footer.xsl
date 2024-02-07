@@ -96,15 +96,15 @@
                                 <div class="row">                         
                                     <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>App: </label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.8366294"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8366294.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.10628725"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10628725.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>Daten (VMS):</label>
                                         <a class="d-block" href="https://zenodo.org/badge/latestdoi/564263510"><img src="https://zenodo.org/badge/564263510.svg" alt="DOI"/></a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2 d-block">   
+                                    <div class="custom-html-widget col-12 py-2  d-block">   
                                         <label>Daten (NFP):</label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.10628540"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10628540.svg" alt="DOI"/></a>
                                     </div>
                                 </div>
                             </div>
