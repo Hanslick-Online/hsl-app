@@ -24,6 +24,8 @@
         <xsl:param name="back-page" />
         <xsl:param name="edition-project-class" />
         <xsl:param name="next-prev-page" />
+        <xsl:param name="document-download"/>
+        <xsl:param name="document-download-edition"/>
         <div class="row">
             <div class="col-md-6 facsimiles">
                 <div id="viewer-1">
@@ -42,7 +44,6 @@
                     </div>
                     <div class="col-md-6" style="text-align:right;">
                         <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
-                        
                     </div>
                 </div>
                 <div class="section {$edition-project-class}" id="section-1">
@@ -67,16 +68,22 @@
                                 <xsl:call-template name="book-editions"/>
                                 <!-- loaded in main editions.xls -->
                             </xsl:if>
+                            <xsl:if test="$document-download = 'true'">
+                                <xsl:call-template name="document-download">
+                                    <xsl:with-param name="edition" select="$document-download-edition"/>
+                                </xsl:call-template>
+                            </xsl:if>
                             <xsl:if test="$next-prev-page = 'true'">
                                 <xsl:call-template name="next-prev-page"/>
                                 <!-- loaded in main editions.xls -->
                             </xsl:if>
                         </div>
                     </xsl:if>
-                    <div id="mark-scroll">
+                    <div id="mark-scroll" class="fade-lang">
                         <button data-search="next" disabled="disabled">&#x2193;</button>
                         <button data-search="prev" disabled="disabled">&#x2191;</button>
                         <button data-search="clear" disabled="disabled">✖</button>
+                        <div id="results-div"></div>
                     </div>
                     <xsl:if test="$front-page = 'true'">
                         <div class="card-header yes-index">

@@ -39,30 +39,53 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <th> Name (alt) </th>
-                                        <td>
-                                            <xsl:if
-                                              test="./tei:persName[@type = 'alternative']/tei:surname/text()">
-                                              <xsl:value-of
-                                              select="./tei:persName[@type = 'alternative']/tei:surname"
-                                              />
-                                            </xsl:if>
-
-                                            <xsl:if test="
-                                                    ./tei:persName[@type = 'alternative']/tei:surname/text() and
-                                                    ./tei:persName[@type = 'alternative']/tei:forename/text()">
-                                              <xsl:text>, </xsl:text>
-                                            </xsl:if>
-                                            <xsl:if
-                                              test="./tei:persName[@type = 'alternative']/tei:forename/text()">
-                                              <xsl:value-of
-                                              select="./tei:persName[@type = 'alternative']/tei:forename"
-                                              />
-                                            </xsl:if>
-                                        </td>
-                                    </tr>
-                                    <xsl:if test="./tei:listBibl[@type = 'characterOf']/tei:bibl/text()">
+                                    <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text() or 
+                                                    ./tei:persName[@type = 'alternative']/tei:surname/text()">
+                                        <tr>
+                                            <th> Name (alt) </th>
+                                            <td>
+                                                <xsl:if
+                                                  test="./tei:persName[@type = 'alternative']/tei:surname/text()">
+                                                  <xsl:value-of
+                                                  select="./tei:persName[@type = 'alternative']/tei:surname"
+                                                  />
+                                                </xsl:if>
+    
+                                                <xsl:if test="
+                                                        ./tei:persName[@type = 'alternative']/tei:surname/text() and
+                                                        ./tei:persName[@type = 'alternative']/tei:forename/text()">
+                                                  <xsl:text>, </xsl:text>
+                                                </xsl:if>
+                                                <xsl:if
+                                                  test="./tei:persName[@type = 'alternative']/tei:forename/text()">
+                                                  <xsl:value-of
+                                                  select="./tei:persName[@type = 'alternative']/tei:forename"
+                                                  />
+                                                </xsl:if>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:birth/text()">
+                                        <tr>
+                                            <th>Lebensdaten</th>
+                                            <td><xsl:value-of select="./tei:birth/text()"/></td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:occupation/text()">
+                                        <tr>
+                                            <th>Beschreibung</th>
+                                            <td>
+                                                <ul>
+                                                    <xsl:for-each select="./tei:occupation">
+                                                        <xsl:if test="position() lt 4">
+                                                            <li><xsl:value-of select="./text()"/></li>
+                                                        </xsl:if>
+                                                    </xsl:for-each>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:listBibl[@type = 'characterOf']">
                                         <tr>
                                             <th>Werk</th>
                                             <td>
@@ -74,18 +97,20 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='GND']/text()">
+                                        <tr>
+                                            <th> GND </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='GND']}" target="_blank">
+                                                    <xsl:value-of select="tokenize(./tei:idno[@subtype = 'GND'], '/')[last()]"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <tr>
-                                        <th> GND </th>
-                                        <td>
-                                            <a href="{./tei:idno[@subtype='GND']}" target="_blank">
-                                                <xsl:value-of select="./tei:idno[@subtype = 'GND']"/>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Weiterlesen </th>
-                                        <td>
-                                            <a href="{concat(@xml:id, '.html')}"> Details </a>
+                                        <th></th>
+                                        <td style="padding-top: 1em;">
+                                            <a href="{concat(@xml:id, '.html')}"> Weitere Details </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -120,38 +145,44 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <th> Alternativname </th>
-                                        <td>
-                                            <xsl:value-of select="
+                                    <xsl:if test=".//tei:placeName[@type='alternative']/text()">
+                                        <tr>
+                                            <th> Alternativname </th>
+                                            <td>
+                                                <xsl:value-of select="
                                                     if (./tei:settlement) then
-                                                        (./tei:settlement/tei:placeName[@type = 'alternative'])
+                                                    (./tei:settlement/tei:placeName[@type = 'alternative'])
                                                     else
-                                                        (./tei:placeName[@type = 'alternative'])"
-                                            />
-                                        </td>
-                                    </tr>
+                                                    (./tei:placeName[@type = 'alternative'])"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:country/text()">
+                                        <tr>
+                                            <th> Land </th>
+                                            <td>
+                                                <xsl:value-of select="./tei:country"/>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='GEONAMES']/text()">
+                                        <tr>
+                                            <th> Geonames ID </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='GEONAMES']}"
+                                                  target="_blank">
+                                                  <xsl:value-of
+                                                      select="tokenize(./tei:idno[@subtype = 'GEONAMES'], '/')[4]"
+                                                  />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <tr>
-                                        <th> Land </th>
-                                        <td>
-                                            <xsl:value-of select="./tei:country"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Geonames ID </th>
-                                        <td>
-                                            <a href="{./tei:idno[@subtype='GEONAMES']}"
-                                              target="_blank">
-                                              <xsl:value-of
-                                                  select="tokenize(./tei:idno[@subtype = 'GEONAMES'], '/')[4]"
-                                              />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Weiterlesen </th>
-                                        <td>
-                                            <a href="{concat(@xml:id, '.html')}"> Details </a>
+                                        <th></th>
+                                        <td style="padding-top: 1em;">
+                                            <a href="{concat(@xml:id, '.html')}"> Weitere Details </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -180,44 +211,49 @@
                         <div class="modal-body">
                             <table>
                                 <tbody>
-
+                                    <xsl:if test="./tei:author">
+                                        <tr>
+                                            <th> Autor(en) </th>
+                                            <td>
+                                                <ul>
+                                                    <xsl:for-each select="./tei:author">
+                                                        <xsl:sort select="./tei:persName" order="ascending"/>
+                                                        <li>
+                                                            <a href="{@xml:id}.html">
+                                                                <xsl:value-of select="./tei:persName"/>
+                                                            </a>
+                                                        </li>
+                                                    </xsl:for-each>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:title[@type = 'alternative']/text()">
+                                        <tr>
+                                            <th> Alternativtitel </th>
+                                            <td>
+                                                <xsl:value-of
+                                                    select="./tei:title[@type = 'alternative']"/>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='GND']/text()">
+                                        <tr>
+                                            <th> GND ID </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='GND']}"
+                                                  target="_blank">
+                                                  <xsl:value-of
+                                                      select="tokenize(./tei:idno[@subtype = 'GND'], '/')[last()]"
+                                                  />
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <tr>
-                                        <th> Autor(en) </th>
-                                        <td>
-                                            <ul>
-                                              <xsl:for-each select="./tei:author">
-                                                  <xsl:sort select="./tei:persName" order="ascending"/>
-                                                  <li>
-                                                    <a href="{@xml:id}.html">
-                                                       <xsl:value-of select="./tei:persName"/>
-                                                    </a>
-                                                 </li>
-                                              </xsl:for-each>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Alternativtitel </th>
-                                        <td>
-                                            <xsl:value-of
-                                              select="./tei:title[@type = 'alternative']"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> GND ID </th>
-                                        <td>
-                                            <a href="{./tei:idno[@subtype='GND']}"
-                                              target="_blank">
-                                              <xsl:value-of
-                                                  select="tokenize(./tei:idno[@subtype = 'GND'], '/')[last()]"
-                                              />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Weiterlesen </th>
-                                        <td>
-                                            <a href="{concat(@xml:id, '.html')}"> Details </a>
+                                        <th></th>
+                                        <td style="padding-top: 1em;">
+                                            <a href="{concat(@xml:id, '.html')}"> Weitere Details </a>
                                         </td>
                                     </tr>
                                 </tbody>

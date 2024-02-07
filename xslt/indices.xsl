@@ -40,6 +40,7 @@
                     <xsl:call-template name="nav_bar"/>
                     
                     <div class="container-fluid">
+                        <h1 style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title"/></h1>
                         
                         <xsl:if test="contains($doc_title, 'Ortsregister')">
                             <div id="tableReload-wrapper">
@@ -76,7 +77,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listperson', 'Suche:', [2, 3, 6, 7], [0, 1, 4, 5], [7]);
+                                createDataTable('listperson', 'Suche:', [2, 3, 5], [0, 1, 4, 6, 7], [8]);
                             });
                         </script>
                     </xsl:when>
@@ -114,10 +115,11 @@
                      <tr>
                          <th>Name</th>
                          <th>Name (alt)</th>
-                         <th>Werke</th>
                          <th>Typ</th>
+                         <th>Lebensdaten</th>
+                         <th>Beschreibung</th>
+                         <th>Werke</th>
                          <th>GND</th>
-                         <th>Wikidata</th>
                          <th>Erwähnt #</th>
                          <th>Initial</th>
                      </tr>
@@ -152,14 +154,6 @@
                                     </xsl:if>
                                 </td>
                                 <td>
-                                    <xsl:if test="./tei:listBibl[@type='characterOf']">
-                                        <!--<a href="{./tei:bibl/@n}.html" alt="{./tei:listBibl[@type='characterOf']/tei:bibl/text()}">
-                                            <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
-                                        </a>-->
-                                        <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
-                                    </xsl:if>
-                                </td>
-                                <td>
                                     <xsl:choose>
                                         <xsl:when test="@role">
                                             <xsl:value-of select="@role"/>
@@ -170,18 +164,45 @@
                                     </xsl:choose>                                    
                                 </td>
                                 <td>
+                                    <xsl:value-of select="./tei:birth"/>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:occupation">
+                                        <ul>
+                                            <xsl:for-each select="./tei:occupation">
+                                                <li class="{substring-before(substring-after(@style, 'background-color: '), ';')}">
+                                                    <xsl:value-of select="./text()"/>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:listBibl[@type='characterOf']">
+                                        <!--<a href="{./tei:bibl/@n}.html" alt="{./tei:listBibl[@type='characterOf']/tei:bibl/text()}">
+                                            <xsl:value-of select="./tei:listBibl[@type='characterOf']/tei:bibl/text()"/>
+                                        </a>-->
+                                        <ul>
+                                            <xsl:for-each select="./tei:listBibl[@type='characterOf']/tei:bibl">
+                                                <li>
+                                                    <xsl:value-of select="./text()"/>
+                                                    <xsl:if test="position() != last()">
+                                                        <xsl:text>;</xsl:text>
+                                                    </xsl:if>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                    </xsl:if>
+                                </td>
+                                <td>
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
-                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
-                                    </a>
-                                </td>
-                                <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
                                 </td>
+                                
                                 <td>
                                     <xsl:value-of select="substring(./tei:persName[@type='main']/tei:surname, 1, 1)"/>
                                 </td>
@@ -312,6 +333,7 @@
                                     <xsl:value-of select="./tei:title[@type='alternative']"/>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:author">
                                     <ul>
                                         <xsl:for-each select="./tei:author">
                                             <xsl:sort select="./tei:persName/text()" order="ascending"/>
@@ -323,8 +345,10 @@
                                             </li>
                                         </xsl:for-each>    
                                     </ul>
+                                    </xsl:if>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:name[@type='character']">
                                     <ul>
                                         <xsl:for-each select="./tei:name[@type='character']">
                                             <xsl:sort select="." order="ascending"/>
@@ -336,6 +360,7 @@
                                             </li>
                                         </xsl:for-each>    
                                     </ul>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
