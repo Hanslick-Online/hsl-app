@@ -26,7 +26,7 @@
                     <div class="container-fluid" style="margin: 3em auto;">
                         <h1><xsl:value-of select="$doc_title"/></h1>
 
-                        <xsl:for-each select="//root/div[@lang='en']">
+                        <xsl:for-each select=".//div">
                             <xsl:apply-templates/>
                         </xsl:for-each>
                     </div>
