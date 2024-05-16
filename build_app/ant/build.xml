@@ -7,6 +7,7 @@
     <property name="meta" value="${basedir}/data/meta"/>
     <property name="indices" value="${basedir}/data/indices"/>
     <property name="imprint" value="${basedir}/data/imprint.xml"/>
+    <property name="imprint_en" value="${basedir}/data/imprint_en.xml"/>
     <property name="editions_ct" value="${basedir}/data/critics/editions"/>
     <property name="target" value="${basedir}/html"/>
     <property name="xsl_editions" value="${basedir}/xslt/editions.xsl"/>
@@ -95,7 +96,7 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt in="${imprint}" out="${target}/imprint_en.html" style="${xsl_imprint_en}">
+    <xslt in="${imprint_en}" out="${target}/imprint_en.html" style="${xsl_imprint_en}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
