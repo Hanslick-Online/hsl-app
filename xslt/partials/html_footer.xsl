@@ -96,7 +96,7 @@
                                 <div class="row">                         
                                     <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>App: </label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.10628725"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10628725.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.11202856"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.11202856.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>Daten (VMS):</label>
