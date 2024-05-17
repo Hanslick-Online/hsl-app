@@ -15,8 +15,6 @@
     <xsl:import href="partials/book-edition.xsl"/>
     <xsl:import href="partials/view-type.xsl"/>
     <xsl:import href="partials/view-type-content.xsl"/>
-    <!--<xsl:import href="partials/osd-container.xsl"/>-->
-    <!--<xsl:import href="partials/tei-facsimile.xsl"/>-->
     <xsl:import href="partials/entities-modal.xsl"/>
     <xsl:import href="partials/next-prev-page.xsl"/>
     <xsl:import href="partials/document-download.xsl"/>
