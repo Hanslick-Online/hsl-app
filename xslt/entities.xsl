@@ -213,6 +213,23 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
+                                                <xsl:if test="@cert">
+                                                    <tr>
+                                                        <th>
+                                                            Überprüft
+                                                        </th>
+                                                        <td>
+                                                            <xsl:choose>
+                                                                <xsl:when test="@cert='high'">
+                                                                    mehrfach
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    einmalig
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                             </tbody>
                                         </table>
                                            
@@ -390,6 +407,23 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
+                                                <xsl:if test="@cert">
+                                                    <tr>
+                                                        <th>
+                                                            Überprüft
+                                                        </th>
+                                                        <td>
+                                                            <xsl:choose>
+                                                                <xsl:when test="@cert='high'">
+                                                                    mehrfach
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    einmalig
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                             </tbody>
                                         </table>
                                         
@@ -557,6 +591,23 @@
                                                                     </li>
                                                                 </xsl:for-each>
                                                             </ul>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="@cert">
+                                                    <tr>
+                                                        <th>
+                                                            Überprüft
+                                                        </th>
+                                                        <td>
+                                                            <xsl:choose>
+                                                                <xsl:when test="@cert='high'">
+                                                                    mehrfach
+                                                                </xsl:when>
+                                                                <xsl:otherwise>
+                                                                    einmalig
+                                                                </xsl:otherwise>
+                                                            </xsl:choose>
                                                         </td>
                                                     </tr>
                                                 </xsl:if>

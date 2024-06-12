@@ -107,6 +107,23 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
+                                    <xsl:if test="@cert">
+                                        <tr>
+                                            <th>
+                                                Überprüft
+                                            </th>
+                                            <td>
+                                                <xsl:choose>
+                                                    <xsl:when test="@cert='high'">
+                                                        mehrfach
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        einmalig
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <tr>
                                         <th></th>
                                         <td style="padding-top: 1em;">
@@ -179,6 +196,23 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
+                                    <xsl:if test="@cert">
+                                        <tr>
+                                            <th>
+                                                Überprüft
+                                            </th>
+                                            <td>
+                                                <xsl:choose>
+                                                    <xsl:when test="@cert='high'">
+                                                        mehrfach
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        einmalig
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <tr>
                                         <th></th>
                                         <td style="padding-top: 1em;">
@@ -247,6 +281,23 @@
                                                       select="tokenize(./tei:idno[@subtype = 'GND'], '/')[last()]"
                                                   />
                                                 </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="@cert">
+                                        <tr>
+                                            <th>
+                                                Überprüft
+                                            </th>
+                                            <td>
+                                                <xsl:choose>
+                                                    <xsl:when test="@cert='high'">
+                                                        mehrfach
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        einmalig
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
                                             </td>
                                         </tr>
                                     </xsl:if>
