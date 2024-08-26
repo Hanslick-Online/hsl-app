@@ -289,7 +289,7 @@
                                             <th> Werkbezug </th>
                                             <td>
                                                 <ul>
-                                                    <xsl:for-each select="./tei:note">
+                                                    <xsl:for-each select="./tei:noteGrp[@type='Werkbezug']/tei:note">
                                                         <li>
                                                             <a href="{@target}"
                                                                 target="_blank">
