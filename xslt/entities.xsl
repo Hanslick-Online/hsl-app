@@ -566,6 +566,25 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>-->
+                                                <xsl:if test="./tei:noteGrp[@type='Werkbezug']">
+                                                    <tr>
+                                                        <th> Werkbezug </th>
+                                                        <td>
+                                                            <ul>
+                                                                <xsl:for-each select="./tei:note">
+                                                                    <li>
+                                                                        <a href="{@target}.html"
+                                                                            target="_blank">
+                                                                            <xsl:value-of
+                                                                                select="./text()"
+                                                                            />
+                                                                        </a>
+                                                                    </li>
+                                                                </xsl:for-each>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                                 <xsl:if test="./tei:idno[@subtype='Digitalisat']/text()">
                                                     <tr>
                                                         <th> Digitalisat </th>
@@ -602,7 +621,7 @@
                                                         </th>
                                                         <td>
                                                             <ul>
-                                                                <xsl:for-each select="./tei:noteGrp/tei:note">
+                                                                <xsl:for-each select="./tei:noteGrp/tei:note[@type='mentions']">
                                                                     <li>
                                                                         <a href="{replace(@target, '.xml', '.html')}">
                                                                             <xsl:value-of select="./text()"/>
