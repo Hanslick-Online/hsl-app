@@ -291,8 +291,7 @@
                                                 <ul>
                                                     <xsl:for-each select="./tei:noteGrp[@type='Werkbezug']/tei:note">
                                                         <li>
-                                                            <a href="{@target}"
-                                                                target="_blank">
+                                                            <a href="{@target}">
                                                                 <xsl:value-of
                                                                     select="./text()"
                                                                 />
