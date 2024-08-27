@@ -118,7 +118,7 @@
                          <th>Typ</th>
                          <th>Lebensdaten</th>
                          <th>Beschreibung</th>
-                         <th>Werke</th>
+                         <th>Werke (Figur)</th>
                          <th>GND</th>
                          <th>Erwähnt #</th>
                          <th>Initial</th>

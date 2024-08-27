@@ -99,7 +99,7 @@
                                 <div class="card-footer">
                                     <div class="row align-items-end">
                                         <div class="col-md-4">
-                                            <label for="selectV1">Compare</label>
+                                            <label for="selectV1">Vergleichen</label>
                                             <select class="form-select" id="selectV1">
                                                 <xsl:for-each select="//tei:cell[parent::tei:row[@role='data']]">
                                                     <xsl:variable name="p" select="position()"/>
@@ -110,7 +110,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="selectV2">… with </label>
+                                            <label for="selectV2">… mit </label>
                                             <select class="form-select" id="selectV2">
                                                 <xsl:for-each select="//tei:cell[parent::tei:row[@role='data']]">
                                                     <xsl:variable name="p" select="position()"/>
@@ -124,14 +124,14 @@
                                             </select>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="diffLevel">Level of Comparison</label>
+                                            <label for="diffLevel">Vergleichsbasis</label>
                                             <select class="form-select" id="diffLevel">
-                                                <option value="words">words</option>
-                                                <option value="sentences">sentences</option>
+                                                <option value="words">Wörter</option>
+                                                <option value="sentences">Sätze</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-primary" id="compBtn" onclick="compare()">compare</button>
+                                            <button class="btn btn-primary" id="compBtn" onclick="compare()">vergleichen</button>
                                         </div>
                                     </div>
                                     <div class="row p-2">

@@ -105,6 +105,11 @@
                     <xsl:apply-templates/>
                 </a>
             </xsl:when>
+            <xsl:when test="@type='video'">
+                <xsl:apply-templates/>
+                <br></br>
+                <iframe width="480" height="270" src="{@target}" title="{text()}"></iframe>
+            </xsl:when>
             <xsl:when test="child::tei:figure">
                 <a class="ref-figure" target="_blank">
                     <xsl:attribute name="href"><xsl:value-of select="@target"/></xsl:attribute>
