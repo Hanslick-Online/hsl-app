@@ -61,6 +61,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a class="dropdown-item" href="toc_vms.html?lang=de"
+                                            title="Übersicht">
+                                            Kritiken: Traktat
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"
                                             title="Editionsrichtlinine">
                                             Editionsrichtlinien und Zitiervorschlag

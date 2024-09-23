@@ -9,20 +9,24 @@
     <property name="imprint" value="${basedir}/data/imprint.xml"/>
     <property name="imprint_en" value="${basedir}/data/imprint_en.xml"/>
     <property name="editions_ct" value="${basedir}/data/critics/editions"/>
+    <property name="editions_vms" value="${basedir}/data/vms/editions"/>
     <property name="target" value="${basedir}/html"/>
     <property name="xsl_editions" value="${basedir}/xslt/editions.xsl"/>
     <property name="xsl_editions_ct" value="${basedir}/xslt/editions_ct.xsl"/>
+    <property name="xsl_editions_vms" value="${basedir}/xslt/editions_vms.xsl"/>
     <property name="xsl_comp" value="${basedir}/xslt/comp.xsl"/>
     <property name="xsl_meta" value="${basedir}/xslt/meta.xsl"/>
     <property name="xsl_index" value="${basedir}/xslt/index.xsl"/>
     <property name="xsl_toc" value="${basedir}/xslt/toc.xsl"/>
     <property name="xsl_toc_en" value="${basedir}/xslt/toc_en.xsl"/>
+    <property name="xsl_toc_vms" value="${basedir}/xslt/toc_vms.xsl"/>
     <property name="xsl_indices" value="${basedir}/xslt/indices.xsl"/>
     <property name="xsl_entities" value="${basedir}/xslt/entities.xsl"/>
     <property name="xsl_imprint" value="${basedir}/xslt/imprint.xsl"/>
     <property name="xsl_imprint_en" value="${basedir}/xslt/imprint_en.xsl"/>
     <property name="xsl_search" value="${basedir}/xslt/search.xsl"/>
     <property name="xsl_search_en" value="${basedir}/xslt/search-engl.xsl"/>
+    
 
     <delete>
         <fileset dir="${target}" includes="*.html"/>
@@ -45,6 +49,11 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+    <!-- project vms new -->
+    <xslt style="${xsl_editions_vms}"  basedir="${editions_vms}" destdir="${target}" includes="*.xml" filenameparameter="filename">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
     <!-- common files -->
     <delete>
         <fileset dir="${target}" includes="index.html"/>
@@ -63,6 +72,10 @@
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
     <xslt in="${index}" out="${target}/toc_en.html" style="${xsl_toc_en}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${target}/toc_vms.html" style="${xsl_toc_vms}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
