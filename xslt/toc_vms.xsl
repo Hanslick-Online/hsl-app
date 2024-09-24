@@ -36,8 +36,8 @@
                                             <th scope="col">Zeitschrift</th>
                                             <th scope="col">Ausgabe</th>
                                             <th scope="col">Nr. / Datum</th>
-                                            <th scope="col">Titel</th>
-                                            <th scope="col">Untertitel</th>
+                                            <!-- <th scope="col">Titel</th>
+                                            <th scope="col">Untertitel</th> -->
                                             <th scope="col">Datum</th>
                                         </tr>
                                     </thead>
@@ -58,10 +58,10 @@
                                                         <xsl:attribute name="href">                                                
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title[1]/text()"/>
+                                                        <xsl:value-of select="subsequence(tokenize(.//tei:titleStmt/tei:title[@level='a'], ' '), 2)"/>
                                                     </a>
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
                                                         <xsl:value-of select="."/>
                                                         <xsl:if test="position() != last()">
@@ -76,9 +76,9 @@
                                                             <br/>
                                                         </xsl:if>
                                                     </xsl:for-each>
-                                                </td>
+                                                </td> -->
                                                 <td>
-                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
+                                                    <xsl:value-of select="tokenize(.//tei:titleStmt/tei:title[@level='a'], ' ')[1]"/>
                                                 </td>
                                             </tr>
                                         </xsl:for-each>
@@ -91,7 +91,7 @@
                     <xsl:call-template name="html_footer"/>
                     <script>
                         $(document).ready(function () {
-                            createDataTable('tocTable', [[5, 'desc']], 50);
+                            createDataTable('tocTable', [[3, 'desc']], 50);
                         });
                     </script>
                 </div>

@@ -59,6 +59,8 @@ if (img.includes("api.digitale-sammlungen.de")) {
     img = `${img}/full/full/0/default.jpg`;
 } else if (img.includes("hsl-nfp")) {
     img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
+} else if (img.includes("hsl-vms")) {
+    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
 } else {
     var img = `${img}?format=iiif`;
 }
