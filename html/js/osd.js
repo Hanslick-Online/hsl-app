@@ -167,6 +167,8 @@ function loadNewImage(new_item) {
             new_image = `${new_image}/full/full/0/default.jpg`;
         } else if (new_image.includes("hsl-nfp")) {
             new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
+        } else if (new_image.includes("hsl-vms")) {
+            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
         } else {
             var new_image = `${new_image}?format=iiif`;
         }

@@ -252,34 +252,8 @@
     <xsl:template match="tei:pb">
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
         <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
-        <xsl:choose>
-            <xsl:when test="ancestor::tei:p and not(preceding-sibling::tei:list)">
-                <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
-            </xsl:when>
-            <xsl:when test="ancestor::tei:p and preceding-sibling::tei:list">
-                <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-                <p class="indentedP"><span class="pb"><br/><br/><xsl:value-of select="@n"/></span></p>
-            </xsl:when>
-            <xsl:when test="ancestor::tei:list">
-                <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
-            </xsl:when>
-            <xsl:when test="ancestor::tei:note">
-                <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
-            </xsl:when>
-            <xsl:when test="ancestor::tei:front">
-                <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-                <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
-            </xsl:when>
-            <xsl:otherwise>
-                <p class="indentedP">
-                    <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-                    <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
-                </p>
-            </xsl:otherwise>
-        </xsl:choose>
+        <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
+        <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
     </xsl:template>
     <xsl:template match="tei:cit">
         <cite><xsl:apply-templates/></cite>
