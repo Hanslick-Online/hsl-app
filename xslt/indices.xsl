@@ -34,6 +34,11 @@
                 
                 <!-- ############### datatable ############### -->
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/fc-4.2.1/fh-3.3.1/r-2.4.0/sp-2.1.0/sl-1.5.0/datatables.min.css"/>
+                <style>
+                    .container-fluid {
+                        max-width: 100% !important;
+                    }
+                </style>
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
@@ -77,7 +82,7 @@
                         <script type="text/javascript" src="js/dt-panes.js"></script>
                         <script type="text/javascript">
                             $(document).ready(function () {
-                                createDataTable('listperson', 'Suche:', [2, 3, 5], [0, 1, 4, 6, 7], [8]);
+                                createDataTable('listperson', 'Suche:', [2, 3, 5, 12], [0, 1, 4, 6, 7, 8, 9, 10, 11], [12]);
                             });
                         </script>
                     </xsl:when>
@@ -120,6 +125,10 @@
                          <th>Beschreibung</th>
                          <th>Werke (Figur)</th>
                          <th>GND</th>
+                         <th>Wikidata</th>
+                         <th>PMB</th>
+                         <th>OeBl</th>
+                         <th>OeMl</th>
                          <th>Erwähnt #</th>
                          <th>Initial</th>
                      </tr>
@@ -195,9 +204,47 @@
                                     </xsl:if>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:idno[@subtype='GND']">
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
+                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
+                                    </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='PMB']">
+                                    <a href="{./tei:idno[@subtype='PMB']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='PMB'], '/')[last()]"/>
+                                    </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='OEBL']">
+                                        <a href="{./tei:idno[@subtype='OEBL']}" target="_blank">
+                                            <xsl:value-of select="concat(
+                                                tokenize(./tei:idno[@subtype='OEBL'], '/')[last() - 1],
+                                                '/',
+                                                replace(tokenize(./tei:idno[@subtype='OEBL'], '/')[last()], '.xml', '')
+                                                )"/>
+                                        </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='OEML']">
+                                    <a href="{./tei:idno[@subtype='OEML']}" target="_blank">
+                                        <xsl:value-of select="concat(
+                                            tokenize(./tei:idno[@subtype='OEML'], '/')[last() - 1],
+                                            '/',
+                                            replace(tokenize(./tei:idno[@subtype='OEML'], '/')[last()], '.xml', '')
+                                            )"/>
+                                    </a>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
