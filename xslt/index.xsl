@@ -42,16 +42,16 @@
                                     else('Digital Edition')"/>
                                 <xsl:variable name="treatise" select="
                                     if(//tei:body/@xml:lang = 'de-AT') 
-                                    then('Traktat') 
-                                    else('Treatise')"/>
+                                    then('Traktat (VMS)') 
+                                    else('Treatise (VMS)')"/>
                                 <xsl:variable name="reviews" select="
                                     if(//tei:body/@xml:lang = 'de-AT') 
                                     then('Kritiken (in Arbeit)') 
                                     else('Reviews (in progress)')"/>
                                 <xsl:variable name="vms" select="
                                     if(//tei:body/@xml:lang = 'de-AT') 
-                                    then('Kritiken: Traktat (in Arbeit)') 
-                                    else('Reviews: Treatise (in progress)')"/>
+                                    then('Kritiken von VMS (in Arbeit)') 
+                                    else('Reviews of VMS (in progress)')"/>
                                 <xsl:variable name="more" select="
                                     if(//tei:body/@xml:lang = 'de-AT') 
                                     then('mehr anzeigen') 
@@ -71,10 +71,12 @@
                                         <xsl:value-of select="$reviews"/>
                                     </a>
                                 </button>
-                                <button type="button" class="btn text-light btn-index">
-                                    <a href="toc_vms.html{$lang}">
+                                <button type="button" class="btn text-light btn-index-secondary">
+                                    <!--<a href="toc_vms.html{$lang}">
                                         <xsl:value-of select="$vms"/>
-                                    </a>
+                                    </a>-->
+                                    
+                                    <xsl:value-of select="$vms"/>
                                 </button>
                                 
                                 <xsl:for-each select="//tei:body">
