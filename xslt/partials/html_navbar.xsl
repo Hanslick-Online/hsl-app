@@ -60,12 +60,12 @@
                                             Kritiken
                                         </a>
                                     </li>
-                                    <li>
-                                        <!--<a class="dropdown-item" href="toc_vms.html?lang=de"
+                                    <li><!--  href="toc_vms.html?lang=de" -->
+                                        <a class="dropdown-item text-muted"
                                             title="Übersicht">
-                                            
-                                        </a>-->
-                                        Kritiken von VMS (in Arbeit)
+                                            Kritiken von VMS (in Arbeit)
+                                        </a>
+                                        
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"

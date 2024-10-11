@@ -60,12 +60,11 @@
                                             Reviews
                                         </a>
                                     </li>
-                                    <li>
-                                        <!--<a class="dropdown-item" href="toc_vms.html?lang=en"
+                                    <li><!-- href="toc_vms.html?lang=en" -->
+                                        <a class="dropdown-item text-muted" 
                                             title="Übersicht">
-                                            
-                                        </a>-->
-                                        Reviews of VMS (in progress)
+                                            Reviews of VMS
+                                        </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html?lang=en"
