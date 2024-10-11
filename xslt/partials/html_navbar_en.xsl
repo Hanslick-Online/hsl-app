@@ -61,10 +61,11 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc_vms.html?lang=en"
+                                        <!--<a class="dropdown-item" href="toc_vms.html?lang=en"
                                             title="Übersicht">
-                                            Reviews: Treatise
-                                        </a>
+                                            
+                                        </a>-->
+                                        Reviews of VMS (in progress)
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html?lang=en"

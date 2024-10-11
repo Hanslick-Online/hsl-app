@@ -61,10 +61,11 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc_vms.html?lang=de"
+                                        <!--<a class="dropdown-item" href="toc_vms.html?lang=de"
                                             title="Übersicht">
-                                            Kritiken: Traktat
-                                        </a>
+                                            
+                                        </a>-->
+                                        Kritiken von VMS (in Arbeit)
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"
