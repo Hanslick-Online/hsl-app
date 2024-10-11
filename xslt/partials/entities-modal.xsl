@@ -107,6 +107,54 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='WIKIDATA']/text()">
+                                        <tr>
+                                            <th> WIKIDATA </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                                    <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='PMB']/text()">
+                                        <tr>
+                                            <th> PMB </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='PMB']}" target="_blank">
+                                                    <xsl:value-of select="tokenize(./tei:idno[@subtype='PMB'], '/')[last()]"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='OEBL']/text()">
+                                        <tr>
+                                            <th> OEBL </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='OEBL']}" target="_blank">
+                                                    <xsl:value-of select="concat(
+                                                        tokenize(./tei:idno[@subtype='OEBL'], '/')[last() - 1],
+                                                        '/',
+                                                        replace(tokenize(./tei:idno[@subtype='OEBL'], '/')[last()], '.xml', '')
+                                                        )"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:idno[@subtype='OEML']/text()">
+                                        <tr>
+                                            <th> OEML </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='OEML']}" target="_blank">
+                                                    <xsl:value-of select="concat(
+                                                        tokenize(./tei:idno[@subtype='OEML'], '/')[last() - 1],
+                                                        '/',
+                                                        replace(tokenize(./tei:idno[@subtype='OEML'], '/')[last()], '.xml', '')
+                                                        )"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
                                     <xsl:if test="@cert">
                                         <tr>
                                             <th>
