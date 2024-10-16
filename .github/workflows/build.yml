@@ -27,18 +27,23 @@ jobs:
       TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
     steps:
     - name: Perform Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Fetch data
       run: |
         ./build_app/shell/fetch_data.sh
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Setup Java / Ant
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '11'
     - name: Install Saxon, Ant and Fundament
       run: |
-        apt-get update && apt-get install openjdk-11-jre-headless ant -y --no-install-recommend
+        apt-get update && apt-get install ant -y --no-install-recommend
         ./build_app/shell/script.sh
-    - name: Install Ant-Contrib
-      run: |
-        wget https://repo1.maven.org/maven2/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar
-        mv ant-contrib-1.0b3.jar /usr/share/ant/lib
     - name: preprocess
       run: |
         ant -f build_app/ant/preprocess.xml
