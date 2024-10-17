@@ -26,6 +26,16 @@ mv hsl-data-ct-main/data/meta/*.xml ./data/meta
 rm -rf hsl-data-ct-main
 rm main.zip
 
+# fetch edition data-vms
+wget https://github.com/Hanslick-Online/hsl-data-vms/archive/refs/heads/main.zip
+unzip main
+mkdir ./data/vms
+mkdir ./data/vms/editions
+mv hsl-data-vms-main/data/editions/*.xml ./data/vms/editions
+mv hsl-data-vms-main/data/meta/*.xml ./data/meta
+rm -rf hsl-data-vms-main
+rm main.zip
+
 # fetch edition entities all
 rm -rf ./data/indices
 mkdir ./data/indices

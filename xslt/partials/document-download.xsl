@@ -39,6 +39,14 @@
                                     TEI/XML 
                                 </a>
                             </xsl:when>
+                            <xsl:when test="$edition = 'vms'">
+                                <a target="_blank"
+                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-vms/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'v__'))}"
+                                    aria-label="TEI/XML Document Download"
+                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
+                                    TEI/XML 
+                                </a>
+                            </xsl:when>
                         </xsl:choose>
                     </li>
                 </ul>                                                    

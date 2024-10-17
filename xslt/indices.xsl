@@ -34,6 +34,11 @@
                 
                 <!-- ############### datatable ############### -->
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/fc-4.2.1/fh-3.3.1/r-2.4.0/sp-2.1.0/sl-1.5.0/datatables.min.css"/>
+                <style>
+                    .container-fluid {
+                        max-width: 100% !important;
+                    }
+                </style>
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
@@ -74,28 +79,21 @@
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="contains($doc_title, 'Personenregister')">
-                        <script type="text/javascript" src="js/dt-panes.js"></script>
+                        <script src="js/dt-panes.js"/>
                         <script type="text/javascript">
-                            $(document).ready(function () {
-                                createDataTable('listperson', 'Suche:', [2, 3, 5], [0, 1, 4, 6, 7], [8]);
-                            });
+                            createDataTable('listperson', 'Suche:', [2, 3, 5, 12], [0, 1, 4, 6, 7, 8, 9, 10, 11], [12]);
                         </script>
                     </xsl:when>
                     <xsl:when test="contains($doc_title, 'Ortsregister')">
-                        
-                        <script src="js/leaflet.js"></script>
+                        <script src="js/leaflet.js"/>
                         <script type="text/javascript">
-                            $(document).ready(function () {
-                                leafletDatatable('listplace', [6, 7, 8], [0, 1, 2, 3, 4, 5]);
-                            });
+                            leafletDatatable('listplace', [6, 7, 8], [0, 1, 2, 3, 4, 5]);
                         </script>
                     </xsl:when>
                     <xsl:when test="contains($doc_title, 'Werkregister')">
-                        <script type="text/javascript" src="js/dt-panes.js"></script>
+                        <script src="js/dt-panes.js"/>
                         <script type="text/javascript">
-                            $(document).ready(function () {
-                                createDataTable('listbibl', 'Suche:', [2, 3, 5, 6], [0, 1, 4], [6]);
-                            });
+                            createDataTable('listbibl', 'Suche:', [2, 3, 5, 7], [0, 1, 4, 6], [8]);
                         </script>
                     </xsl:when>
                 </xsl:choose>
@@ -120,6 +118,10 @@
                          <th>Beschreibung</th>
                          <th>Werke (Figur)</th>
                          <th>GND</th>
+                         <th>Wikidata</th>
+                         <th>PMB</th>
+                         <th>OeBl</th>
+                         <th>OeMl</th>
                          <th>Erwähnt #</th>
                          <th>Initial</th>
                      </tr>
@@ -195,9 +197,47 @@
                                     </xsl:if>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:idno[@subtype='GND']">
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
+                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
+                                    </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='PMB']">
+                                    <a href="{./tei:idno[@subtype='PMB']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='PMB'], '/')[last()]"/>
+                                    </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='OEBL']">
+                                        <a href="{./tei:idno[@subtype='OEBL']}" target="_blank">
+                                            <xsl:value-of select="concat(
+                                                tokenize(./tei:idno[@subtype='OEBL'], '/')[last() - 1],
+                                                '/',
+                                                replace(tokenize(./tei:idno[@subtype='OEBL'], '/')[last()], '.xml', '')
+                                                )"/>
+                                        </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='OEML']">
+                                    <a href="{./tei:idno[@subtype='OEML']}" target="_blank">
+                                        <xsl:value-of select="concat(
+                                            tokenize(./tei:idno[@subtype='OEML'], '/')[last() - 1],
+                                            '/',
+                                            replace(tokenize(./tei:idno[@subtype='OEML'], '/')[last()], '.xml', '')
+                                            )"/>
+                                    </a>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>
@@ -315,7 +355,9 @@
                         <th>Titel (alt)</th>
                         <th style="min-width: 200px;">Autor</th>
                         <th style="min-width: 200px;">Figur</th>
-                        <th>GND ID</th>
+                        <th>GND</th>
+                        <th>Digitalisat</th>
+                        <th>Werkbezug</th>
                         <th>Erwähnt #</th>
                         <th>Initial</th>
                     </tr>
@@ -363,9 +405,30 @@
                                     </xsl:if>
                                 </td>
                                 <td>
+                                    <xsl:if test="./tei:idno[@subtype='GND']">
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
                                     </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='Digitalisat']/text()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                            <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+                                            <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                        </svg>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:noteGrp[@type='Werkbezug']">
+                                        <ul>
+                                            <xsl:for-each select="./tei:noteGrp[@type='Werkbezug']/tei:note">
+                                                <li>
+                                                    <xsl:value-of select="./text()"/>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <xsl:value-of select="count(./tei:noteGrp/tei:note)"/>

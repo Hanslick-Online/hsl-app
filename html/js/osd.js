@@ -59,6 +59,8 @@ if (img.includes("api.digitale-sammlungen.de")) {
     img = `${img}/full/full/0/default.jpg`;
 } else if (img.includes("hsl-nfp")) {
     img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
+} else if (img.includes("hsl-vms")) {
+    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
 } else {
     var img = `${img}?format=iiif`;
 }
@@ -164,6 +166,8 @@ function loadNewImage(new_item) {
         if (new_image.includes("api.digitale-sammlungen.de")) {
             new_image = `${new_image}/full/full/0/default.jpg`;
         } else if (new_image.includes("hsl-nfp")) {
+            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
+        } else if (new_image.includes("hsl-vms")) {
             new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
         } else {
             var new_image = `${new_image}?format=iiif`;
