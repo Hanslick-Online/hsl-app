@@ -223,19 +223,19 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
-                                    <xsl:if test="./tei:settlement/@type">
-                                        <tr>
-                                            <th> Typ </th>
-                                            <td>
-                                                <xsl:value-of select="concat(./tei:settlement/@type, ', ', ./tei:desc[@type='entity_type'])"/>
-                                            </td>
-                                        </tr>
-                                    </xsl:if>                                    
                                     <xsl:if test="./tei:country/text()">
                                         <tr>
                                             <th> Land </th>
                                             <td>
                                                 <xsl:value-of select="./tei:country"/>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                    <xsl:if test="./tei:settlement/@type">
+                                        <tr>
+                                            <th> Typ </th>
+                                            <td>
+                                                <xsl:value-of select="concat(./tei:settlement/@type, ', ', ./tei:desc[@type='entity_type'])"/>
                                             </td>
                                         </tr>
                                     </xsl:if>
