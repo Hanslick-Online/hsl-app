@@ -49,23 +49,21 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=de"
-                                            title="Traktat">
+                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=de">
                                             Traktat
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc.html?lang=de"
-                                            title="Übersicht">
+                                        <a class="dropdown-item" href="toc.html?lang=de">
                                             Kritiken
                                         </a>
                                     </li>
-                                    <li><!--  href="toc_vms.html?lang=de" -->
-                                        <a class="dropdown-item text-muted"
-                                            title="Übersicht">
+                                    <li> 
+                                        <a href="toc_vms.html?lang=de"
+                                           class="dropdown-item">
                                             Kritiken von VMS (in Arbeit)
                                         </a>
-                                        
+                                        <!--  text-muted -->
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"
