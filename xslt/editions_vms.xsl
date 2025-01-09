@@ -5,6 +5,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
+    <xsl:strip-space elements="*"/>
     
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
@@ -70,6 +71,22 @@
     <!--    
         TEI FRONT
     -->
+    <xsl:template match="//text()[ancestor::tei:body]">
+        <xsl:choose>
+            <xsl:when test="following-sibling::tei:*[1]/@break='no'">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <xsl:when test="matches(., '-$', 'm')">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <xsl:when test="following-sibling::tei:*[1]/@type='footnote'">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     
     <xsl:template match="tei:docTitle">
         <div class="docTitle">
@@ -165,7 +182,21 @@
         </p>
     </xsl:template>
     <xsl:template match="tei:lb">
-        <br/>
+        <xsl:if test="@break">
+            <span class="pb wrdbreak">-</span>
+        </xsl:if>
+        <br class="pb" />
+    </xsl:template>
+    <xsl:template match="tei:cb">
+        <xsl:if test="@break">
+            <span class="pb wrdbreak">-</span>
+        </xsl:if>
+        <br class="pb" />
+    </xsl:template>
+    <xsl:template match="tei:space">
+        <span class="space">
+            <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
+        </span>
     </xsl:template>
     <xsl:template match="tei:emph">
         <!--<xsl:choose>
