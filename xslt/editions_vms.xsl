@@ -189,9 +189,9 @@
     </xsl:template>
     <xsl:template match="tei:cb">
         <xsl:if test="@break">
-            <span class="pb wrdbreak">-</span>
+            <span class="cb wrdbreak">-</span>
         </xsl:if>
-        <br class="pb" />
+        <br class="cb" />
     </xsl:template>
     <xsl:template match="tei:space">
         <span class="space">
