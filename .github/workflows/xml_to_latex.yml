@@ -28,7 +28,7 @@ jobs:
 
     - name: Transform XML-TEI to LaTeX
       run: |
-        python scripts/python/tei2latex.py
+        python build_app/python/tei2latex.py
         # Replace `scripts/transform_tei_to_latex.py` with your actual script path.
 
     - name: Commit and push LaTeX files
