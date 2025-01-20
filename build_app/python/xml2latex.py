@@ -69,7 +69,6 @@ def transform_tei_to_latex(input_file, output_file):
         paragraph_text = process_paragraph(p)
         if paragraph_text:
             latex_content.append(paragraph_text)
-        print(paragraph_text)
 
 
 
