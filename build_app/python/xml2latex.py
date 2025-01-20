@@ -20,7 +20,7 @@ def process_paragraph(element):
 
         # Add the current node's text content
         if node.text:
-            result.append(node.text.strip())
+            result.append(node.text.strip().replace("&", "\\&"))
 
         # Add the tail content after a child node
         if node.tail:
