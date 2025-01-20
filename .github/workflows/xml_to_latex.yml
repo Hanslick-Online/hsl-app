@@ -13,7 +13,9 @@ jobs:
     steps:
     - name: Perform Checkout
       uses: actions/checkout@v4
-
+    - name: Fetch data
+      run: |
+        ./build_app/shell/fetch_data.sh
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -26,10 +28,14 @@ jobs:
 
     - name: Transform XML-TEI to LaTeX
       run: |
-        mkdir -p data/tex  # Create the output folder
-        for file in data/editions/*.xml; do
-          echo "Processing $file..."
-          build_app/python/tei2latex.py "$file" "data/tex/$(basename "${file%.xml}.tex")"
+        mkdir -p data/critics/tex/ 
+        mkdir -p data/traktat/tex/
+        mkdir -p data/vms/tex/
+        for folder in data/critics data/traktat /data/vms; do
+          for file in $folder/editions/*.xml; do
+            echo "Processing $file..."
+            build_app/python/tei2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
+          done
         done
 
     - name: Install TeX Live
