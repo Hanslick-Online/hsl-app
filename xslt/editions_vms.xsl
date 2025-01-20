@@ -187,12 +187,6 @@
         </xsl:if>
         <br class="pb" />
     </xsl:template>
-    <xsl:template match="tei:cb">
-        <xsl:if test="@break">
-            <span class="cb wrdbreak">-</span>
-        </xsl:if>
-        <br class="cb" />
-    </xsl:template>
     <xsl:template match="tei:space">
         <span class="space">
             <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
