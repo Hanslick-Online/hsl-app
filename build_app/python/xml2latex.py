@@ -24,7 +24,7 @@ def process_paragraph(element):
 
         # Add the tail content after a child node
         if node.tail:
-            result.append(node.tail.strip())
+            result.append(node.tail.strip().replace("&", "\\&"))
 
     return " ".join(result).strip() + "\n\n"  # Join with spaces to avoid word merging
 
@@ -65,7 +65,6 @@ def transform_tei_to_latex(input_file, output_file):
         latex_content.append(f"\\section*{{{text}}}")
     
     for p in tree.any_xpath(".//tei:text//tei:body//tei:div//tei:p"):
-        print(p)
         paragraph_text = process_paragraph(p)
         if paragraph_text:
             latex_content.append(paragraph_text)
