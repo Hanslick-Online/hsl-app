@@ -1,9 +1,9 @@
 name: XML-TEI to LaTeX Transformation
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #  branches:
+  #    - main
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -23,16 +23,31 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r build_app/python/requirements.txt
-        pip install lxml  # Required for XML parsing
-        pip install texify  # Example package for LaTeX rendering
 
     - name: Transform XML-TEI to LaTeX
       run: |
-        python build_app/python/tei2latex.py
-        # Replace `scripts/transform_tei_to_latex.py` with your actual script path.
+        mkdir -p data/tex  # Create the output folder
+        for file in data/editions/*.xml; do
+          echo "Processing $file..."
+          build_app/python/tei2latex.py "$file" "data/tex/$(basename "${file%.xml}.tex")"
+        done
 
-    - name: Commit and push LaTeX files
+    - name: Install TeX Live
       run: |
-        git add data/tex
-        git commit -m "Generated LaTeX file from XML-TEI"
+        sudo apt-get update
+        sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+    - name: Compile LaTeX to PDF
+      run: |
+        mkdir -p idata/pdf  # Create the folder for PDF files
+        for file in data/tex/*.tex; do
+          echo "Compiling $file..."
+          xelalatex -output-directory=data/pdf "$file"
+        done
+
+    # Step 7: Commit and push PDFs
+    - name: Commit and push PDF files
+      run: |
+        git add data/pdf/*.pdf
+        git commit -m "Generated PDFs from LaTeX files"
         git push
