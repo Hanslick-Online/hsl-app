@@ -87,12 +87,12 @@ var editor = new LoadEditor({
           opt: "pbs",
           color: "none",
           title: "Seitenumbrüche",
-          html_class: "pb",
+          html_class: "pb cb",  // Changed from "pb" to "pb cb"
           css_class: "pbs",
           chg_citation: "citation-url",
           hide: {
             hidden: true,
-            class: "pb",
+            class: "pb",  // Changed from "pb" to "pb cb"
           },
           features: {
             all: false,
@@ -293,4 +293,3 @@ var editor = new LoadEditor({
       active_class: "lang_active",
     }
   });
-  
