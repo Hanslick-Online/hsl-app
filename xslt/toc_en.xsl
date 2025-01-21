@@ -34,7 +34,8 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Newspaper</th>
-                                            <th scope="col">Author</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">No. / Date</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Subtitle</th>
                                             <th scope="col">Date</th>
@@ -47,15 +48,22 @@
                                             </xsl:variable>
                                             <tr>
                                                 <td>
-                                                    <xsl:attribute name="class">italics</xsl:attribute>
                                                     <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:titleStmt/tei:author/text()"/>
+                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='sub']/text()"/>
+                                                </td>
+                                                <td>                                        
+                                                    <a>
+                                                        <xsl:attribute name="href">                                                
+                                                            <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
+                                                        </xsl:attribute>
+                                                        <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title[1]/text()"/>
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
-                                                        <xsl:value-of select="replace(replace(replace(replace(., '\(', ''), '\)', ''), '„', ''), '“', '')"/>
+                                                        <xsl:value-of select="."/>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
@@ -63,25 +71,14 @@
                                                 </td>
                                                 <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
-                                                        <xsl:value-of select="replace(replace(., '\(', ''), '\)', '')"/>
+                                                        <xsl:value-of select="."/>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
                                                     </xsl:for-each>
                                                 </td>
-                                                <xsl:variable name="eventDate" select=".//tei:imprint/tei:date" />
                                                 <td>
-                                                    <xsl:attribute name="tabulator-data-sort">
-                                                        <xsl:value-of select="($eventDate/@when | .//tei:body//tei:date/@when)[1]" />
-                                                    </xsl:attribute>
-                                                    <xsl:choose>
-                                                        <xsl:when test="$eventDate">
-                                                            <xsl:value-of select="replace($eventDate/text(), '\.', '-')" />
-                                                        </xsl:when>
-                                                        <xsl:otherwise>
-                                                            <xsl:text>k.A.</xsl:text>
-                                                        </xsl:otherwise>
-                                                    </xsl:choose>
+                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
                                                 </td>
                                             </tr>
                                         </xsl:for-each>
