@@ -34,7 +34,7 @@ jobs:
         for folder in data/critics data/traktat /data/vms; do
           for file in $folder/editions/*.xml; do
             echo "Processing $file..."
-            build_app/python/tei2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
+            build_app/python/xml2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
           done
         done
 
@@ -45,10 +45,14 @@ jobs:
 
     - name: Compile LaTeX to PDF
       run: |
-        mkdir -p idata/pdf  # Create the folder for PDF files
-        for file in data/tex/*.tex; do
-          echo "Compiling $file..."
-          xelalatex -output-directory=data/pdf "$file"
+        mkdir -p data/critics/pdf/  # Create the folder for PDF files
+        mkdir -p data/traktat/pdf/
+        mkdir -p data/vms/pdf/
+        for folder in data/critics data/traktat /data/vms; do
+          for file in $folder/tex/*.tex; do
+            echo "Compiling $file..."
+            xelatex -output-directory="$folder/pdf" "$file"
+          done
         done
 
     # Step 7: Commit and push PDFs
