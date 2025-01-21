@@ -51,7 +51,7 @@ jobs:
         for folder in data/critics data/traktat /data/vms; do
           for file in $folder/tex/*.tex; do
             echo "Compiling $file..."
-            xelalatex -output-directory="$folder"/pdf "$file"
+            xelatex -output-directory="$folder/pdf" "$file"
           done
         done
 
