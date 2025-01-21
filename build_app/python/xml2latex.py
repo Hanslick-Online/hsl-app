@@ -7,10 +7,12 @@ import sys
 files = sorted(glob.glob(os.path.join("data", "editions", "*.xml")))
 
 
-
 def make_name_list(names):
     last = True
-    names = [" ".join([n.strip() for n in name.split(",")][::-1]) for name in list(dict.fromkeys(names))]
+    names = [
+        " ".join([n.strip() for n in name.split(",")][::-1])
+        for name in list(dict.fromkeys(names))
+    ]
 
     if len(names) > 1:
         names = ", ".join(names[:-1]) + " und " + names[-1]
@@ -19,6 +21,7 @@ def make_name_list(names):
     else:
         names = ""
     return names
+
 
 def process_paragraph(element):
     """
@@ -52,12 +55,19 @@ def process_paragraph(element):
             spacing = "\n\n"
     return spacing + " ".join(result).strip().replace("„ ", "„").replace(" “", "“")
 
+
 def get_info(tree):
-    titles =  tree.any_xpath(".//tei:analytic/tei:title") + tree.any_xpath(".//tei:monogr/tei:title")
+    titles = tree.any_xpath(".//tei:analytic/tei:title") + tree.any_xpath(
+        ".//tei:monogr/tei:title"
+    )
     titles = [elem.text for elem in titles if elem.text]
     authors = [elem.text for elem in tree.any_xpath(".//tei:author") if elem.text]
-    origdate = tree.any_xpath(".//tei:monogr/tei:imprint/tei:date")[0].text
-    origeditors = [elem.text for elem in tree.any_xpath(".//tei:monogr/tei:respStmt/tei:name") if elem.text]
+    origdate = tree.any_xpath(".//tei:monogr/tei:imprint/tei:date/@when")[0].split('-')
+    origeditors = [
+        elem.text
+        for elem in tree.any_xpath(".//tei:monogr/tei:respStmt/tei:name")
+        if elem.text
+    ]
     return titles, make_name_list(authors), origdate, make_name_list(origeditors)
 
 
@@ -69,18 +79,22 @@ def transform_tei_to_latex(input_file, output_file):
     if Titles:
         Title = Titles[0]
         if Titles[1:]:
-            Subtitle = '\\\\'.join([f'\\Large{{{title}}}' for title in Titles[1:]])
-            Title = f'{Title}\\\\{Subtitle}'
+            Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:]])
+            Title = f"{Title}\\\\{Subtitle}"
         if Editors:
-            Title = f'{Title}\\\\\\large{{Herausgegeben von {Editors}}}'
+            Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
     latex_content = []
     latex_content.append("\\documentclass[a4paper]{article}")
     latex_content.append("\\usepackage[austrian]{babel}")
     latex_content.append("\\usepackage{fontspec}")
     latex_content.append("\\usepackage{microtype}")
+    latex_content.append("\\usepackage{geometry}")
+    latex_content.append("\\usepackage[useregional]{datetime2}")
+    latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
     latex_content.append("\\setmainfont{Latin Modern Roman}")
     latex_content.append(f"\\title{{{Title}}}")
     latex_content.append(f"\\author{{{Author}}}")
+    Date = f"\\DTMdisplaydate{{{Date[0]}}}{{{Date[1]}}}{{{Date[2]}}}" + "{gregorian}"
     latex_content.append(f"\\date{{{Date}}}")
     latex_content.append("\\begin{document}")
     latex_content.append("\\maketitle")
@@ -93,8 +107,6 @@ def transform_tei_to_latex(input_file, output_file):
         paragraph_text = process_paragraph(p)
         if paragraph_text:
             latex_content.append(paragraph_text)
-
-
 
     latex_content.append("\\end{document}")
 
