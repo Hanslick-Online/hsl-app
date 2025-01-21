@@ -17,7 +17,7 @@ def make_name_list(names):
     elif names:
         names = names[0]
     else:
-        names = "" 
+        names = ""
     return names
 
 def process_paragraph(element):
@@ -49,7 +49,7 @@ def process_paragraph(element):
         if element.attrib.get("prev") == "true":
             spacing = ""
         else:
-            spacing = "\n\n" 
+            spacing = "\n\n"
     return spacing + " ".join(result).strip().replace("„ ", "„").replace(" “", "“")
 
 def get_info(tree):
@@ -74,7 +74,7 @@ def transform_tei_to_latex(input_file, output_file):
         if Editors:
             Title = f'{Title}\\\\\\large{{Herausgegeben von {Editors}}}'
     latex_content = []
-    latex_content.append("\\documentclass{article}")
+    latex_content.append("\\documentclass[a4paper]{article}")
     latex_content.append("\\usepackage[austrian]{babel}")
     latex_content.append("\\usepackage{fontspec}")
     latex_content.append("\\usepackage{microtype}")
@@ -86,9 +86,9 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\maketitle")
 
     for elem in tree.any_xpath(".//tei:head"):
-        text = "".join(elem.itertext()).strip().strip(".") 
+        text = "".join(elem.itertext()).strip().strip(".")
         latex_content.append(f"\\section*{{{text}}}")
-    
+
     for p in tree.any_xpath(".//tei:text//tei:body//tei:div//tei:p"):
         paragraph_text = process_paragraph(p)
         if paragraph_text:
