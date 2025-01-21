@@ -34,7 +34,7 @@ jobs:
         for folder in data/critics data/traktat /data/vms; do
           for file in $folder/editions/*.xml; do
             echo "Processing $file..."
-            build_app/python/tei2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
+            build_app/python/xml2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
           done
         done
 
