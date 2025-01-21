@@ -45,10 +45,14 @@ jobs:
 
     - name: Compile LaTeX to PDF
       run: |
-        mkdir -p data/pdf  # Create the folder for PDF files
-        for file in data/tex/*.tex; do
-          echo "Compiling $file..."
-          xelalatex -output-directory=data/pdf "$file"
+        mkdir -p data/critics/pdf/  # Create the folder for PDF files
+        mkdir -p data/traktat/pdf/
+        mkdir -p data/vms/pdf/
+        for folder in data/critics data/traktat /data/vms; do
+          for file in $folder/tex/*.tex; do
+            echo "Compiling $file..."
+            xelalatex -output-directory="$folder"/pdf "$file"
+          done
         done
 
     # Step 7: Commit and push PDFs
