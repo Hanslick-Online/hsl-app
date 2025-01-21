@@ -45,7 +45,7 @@ jobs:
 
     - name: Compile LaTeX to PDF
       run: |
-        mkdir -p idata/pdf  # Create the folder for PDF files
+        mkdir -p data/pdf  # Create the folder for PDF files
         for file in data/tex/*.tex; do
           echo "Compiling $file..."
           xelalatex -output-directory=data/pdf "$file"
