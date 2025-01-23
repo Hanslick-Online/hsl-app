@@ -53,12 +53,17 @@
 						     <xsl:value-of select=".//tei:titleStmt/tei:author/text()"/>
                                                 </td>
                                                 <td>
+                                                    <a>
+                                                    <xsl:attribute name="href">   
+                                                        <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
+                                                    </xsl:attribute>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
 							<xsl:value-of select="replace(replace(replace(replace(., '\(', ''), '\)', ''), '„', ''), '“', '')"/>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
                                                     </xsl:for-each>
+						    </a>
                                                 </td>
                                                 <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
