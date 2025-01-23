@@ -27,6 +27,9 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     font-weight: 600;
 }
 
+.italics {
+    font-style: italic;
+}
 .meta-head {
     margin-bottom: 1em !important;
 }
