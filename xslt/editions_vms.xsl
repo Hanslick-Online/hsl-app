@@ -139,6 +139,7 @@
                 <xsl:apply-templates/>
             </div>
         </xsl:if>
+    </xsl:template>
         
     <xsl:template match="tei:hi">
         <xsl:choose>
