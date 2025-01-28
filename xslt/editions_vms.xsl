@@ -139,6 +139,16 @@
                 <xsl:apply-templates/>
             </div>
         </xsl:if>
+        
+    <xsl:template match="tei:hi">
+        <xsl:choose>
+            <xsl:when test="@rendition='#em'">
+                <span class="italic"><xsl:apply-templates/></span>
+            </xsl:when>
+            <xsl:when test="@rendition='#bold'">
+                <span class="bold"><xsl:apply-templates/></span>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="tei:head">
