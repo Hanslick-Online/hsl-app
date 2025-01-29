@@ -72,9 +72,10 @@
                                     </a>
                                 </button>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="toc_vms.html{$lang}">
+                                    <!-- <a href="toc_vms.html{$lang}">
                                         <xsl:value-of select="$vms"/>
-                                    </a>
+                                    </a> -->
+                                    <xsl:value-of select="$vms"/>
 
                                     <!-- btn-index-secondary -->
                                 </button>
