@@ -59,11 +59,10 @@
                                         </a>
                                     </li>
                                     <li> 
-                                        <a href="toc_vms.html?lang=de"
-                                           class="dropdown-item">
+                                        <!-- <a href="toc_vms.html?lang=de" -->
+                                           <a class="dropdown-item text-muted">
                                             Kritiken von VMS (in Arbeit)
                                         </a>
-                                        <!--  text-muted -->
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"
