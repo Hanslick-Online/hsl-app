@@ -1,0 +1,63 @@
+name: XML-TEI to LaTeX Transformation
+
+on:
+  # push:
+  #  branches:
+  #    - main
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Perform Checkout
+      uses: actions/checkout@v4
+    - name: Fetch data
+      run: |
+        ./build_app/shell/fetch_data.sh
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.10
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r build_app/python/requirements.txt
+
+    - name: Transform XML-TEI to LaTeX
+      run: |
+        mkdir -p data/critics/tex/ 
+        mkdir -p data/traktat/tex/
+        mkdir -p data/vms/tex/
+        for folder in data/critics data/traktat /data/vms; do
+          for file in $folder/editions/*.xml; do
+            echo "Processing $file..."
+            build_app/python/xml2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
+          done
+        done
+
+    - name: Install TeX Live
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+    - name: Compile LaTeX to PDF
+      run: |
+        mkdir -p data/critics/pdf/  # Create the folder for PDF files
+        mkdir -p data/traktat/pdf/
+        mkdir -p data/vms/pdf/
+        for folder in data/critics data/traktat data/vms; do
+          for file in $folder/tex/*.tex; do
+            echo "Compiling $file..."
+            xelatex -output-directory="$folder/pdf" "$file"
+          done
+        done
+
+    # Step 7: Commit and push PDFs
+    - name: Commit and push PDF files
+      run: |
+        git add data/pdf/*.pdf
+        git commit -m "Generated PDFs from LaTeX files"
+        git push

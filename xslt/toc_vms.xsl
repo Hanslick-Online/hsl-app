@@ -19,7 +19,6 @@
                 </xsl:call-template>
                 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-html5-2.0.0/cr-1.5.4/r-2.2.9/sp-1.4.0/datatables.min.css"></link>
             </head>
-            
             <body class="page">
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
@@ -34,10 +33,9 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Zeitschrift</th>
-                                            <th scope="col">Ausgabe</th>
-                                            <th scope="col">Nr. / Datum</th>
-                                            <!-- <th scope="col">Titel</th>
-                                            <th scope="col">Untertitel</th> -->
+                                            <th scope="col">Autor</th>
+                                            <th scope="col">Titel</th>
+				            <th scope="col">Untertitel</th>
                                             <th scope="col">Datum</th>
                                         </tr>
                                     </thead>
@@ -48,37 +46,46 @@
                                             </xsl:variable>
                                             <tr>
                                                 <td>
+						    <xsl:attribute name="class">italics</xsl:attribute>
                                                     <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='sub']/text()"/>
+						     <xsl:value-of select=".//tei:titleStmt/tei:author/text()"/>
                                                 </td>
-                                                <td>                                        
+                                                <td>
                                                     <a>
-                                                        <xsl:attribute name="href">                                                
-                                                            <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
-                                                        </xsl:attribute>
-                                                        <xsl:value-of select="subsequence(tokenize(.//tei:titleStmt/tei:title[@level='a'], ' '), 2)"/>
-                                                    </a>
-                                                </td>
-                                                <!-- <td>
+                                                    <xsl:attribute name="href">   
+                                                        <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
+                                                    </xsl:attribute>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
-                                                        <xsl:value-of select="."/>
+							<xsl:value-of select="replace(replace(replace(replace(., '\(', ''), '\)', ''), '„', ''), '“', '')"/>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
                                                     </xsl:for-each>
+						    </a>
                                                 </td>
                                                 <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
-                                                        <xsl:value-of select="."/>
+							<xsl:value-of select="replace(replace(., '\(', ''), '\)', '')"/>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
                                                     </xsl:for-each>
-                                                </td> -->
+                                                </td>
+						 <xsl:variable name="eventDate" select=".//tei:imprint/tei:date" />
                                                 <td>
-                                                    <xsl:value-of select="tokenize(.//tei:titleStmt/tei:title[@level='a'], ' ')[1]"/>
+  							<xsl:attribute name="tabulator-data-sort">
+                                                        <xsl:value-of select="($eventDate/@when | .//tei:body//tei:date/@when)[1]" />
+                                                    </xsl:attribute>
+                                                    <xsl:choose>
+                                                        <xsl:when test="$eventDate">
+                                                            <xsl:value-of select="$eventDate/text()" />
+                                                        </xsl:when>
+                                                        <xsl:otherwise>
+                                                            <xsl:text>k.A.</xsl:text>
+                                                        </xsl:otherwise>
+                                                    </xsl:choose>
                                                 </td>
                                             </tr>
                                         </xsl:for-each>

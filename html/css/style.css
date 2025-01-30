@@ -27,6 +27,9 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     font-weight: 600;
 }
 
+.italics {
+    font-style: italic;
+}
 .meta-head {
     margin-bottom: 1em !important;
 }
@@ -89,6 +92,7 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     border: none;
     padding-right: 2em;
     vertical-align: top;
+    max-width: 20em;
 }
 
 /*#wrapper-hero {
@@ -414,6 +418,10 @@ sup {
 
 .entity-table {
     margin: 6em auto;
+}
+
+.entity-table th{
+    width: 426px ;
 }
 
 .entity-table ul li {
