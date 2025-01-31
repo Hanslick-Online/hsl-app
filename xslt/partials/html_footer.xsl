@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="flex-md-row mb-4 align-items-center d-flex justify-content-center">
-                                    <a href="https://www.plus.ac.at/"><img class="card-img-right flex-auto d-md-block" src="images/PLUS_Logo_.png" alt="Paris Lodron Universität Salzburg" style="max-width: 200px; height: auto; margin-top:1em;" title="Paris Lodron Universität Salzburg" /></a>
+                                    <a href="https://www.plus.ac.at/"><img class="card-img-right flex-auto d-md-block" src="images/PLUS_Logo.png" alt="Paris Lodron Universität Salzburg" style="max-width: 200px; height: auto; margin-top:1em;" title="Paris Lodron Universität Salzburg" /></a>
                                     <!--<div class="card-body d-flex flex-column align-items-start">
                                         <p class="card-text mb-auto">Project partner</p>
                                     </div>-->
@@ -104,15 +104,15 @@
                                 <div class="row">                         
                                     <div class="custom-html-widget col-12 py-2 d-block">   
                                         <label>App: </label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.14180002"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.14180002.svg" alt="DOI"/></a>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.7825053"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7825053.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2 d-block">   
-                                        <label>Daten (VMS):</label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.7825039"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7825039.svg" alt="DOI"/></a>
+                                        <label>Data (VMS):</label>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.7825038"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7825038.svg" alt="DOI"/></a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-2  d-block">   
-                                        <label>Daten (NFP):</label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.14179978"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.14179978.svg" alt="DOI"/></a>
+                                        <label>Data (NFP):</label>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/></a>
                                     </div>
                                 </div>
                             </div>
