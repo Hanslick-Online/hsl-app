@@ -71,13 +71,13 @@
                                         <xsl:value-of select="$reviews"/>
                                     </a>
                                 </button>
-                                <button type="button" class="btn text-light btn-index-secondary">
-                                    <!-- <a href="toc_vms.html{$lang}">
+                                <button type="button" class="btn btn-index"> 
+                                    <a href="toc_vms.html{$lang}">
                                         <xsl:value-of select="$vms"/>
-                                    </a> -->
-                                    <xsl:value-of select="$vms"/>
+                                    </a>
+                                    <!-- <xsl:value-of select="$vms"/>
 
-                                    <!-- btn-index-secondary -->
+                                    btn-index-secondary -->
                                 </button>
                                 
                                 <xsl:for-each select="//tei:body">
