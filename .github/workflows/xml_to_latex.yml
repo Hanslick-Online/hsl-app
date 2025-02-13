@@ -32,7 +32,7 @@ jobs:
         mkdir -p data/traktat/tex/
         mkdir -p data/vms/tex/
         for folder in data/critics data/traktat; do
-          for dir in $folder/editions/*.xml; do
+          for file in $folder/editions/*.xml; do
             echo "Processing $file..."
             build_app/python/xml2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
           done
