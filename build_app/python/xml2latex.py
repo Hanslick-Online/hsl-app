@@ -103,7 +103,7 @@ def make_front(front):
     if edition:
         text += "{\\small " + edition + "}\n\\vfill\n\n"
     if imprints:
-        text += "\n\n".join(imprints)    
+        text += "\n\n".join(imprints)
     return text + "\\end{center}\\clearpage\n\\mainmatter\n"
 
 
@@ -128,7 +128,8 @@ def transform_tei_to_latex(input_file, output_file):
             Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
     latex_content = []
     latex_content.append(f"\\documentclass[a4paper]{{{document}}}")
-    latex_content.append("\\usepackage[austrian]{babel}")
+    latex_content.append("\\usepackage{polyglossia}")
+    #latex_content.append("\\usepackage[austrian]{babel}")
     latex_content.append("\\usepackage{fontspec,xltxtra,xunicode}")
     latex_content.append("\\usepackage{microtype}")
     latex_content.append("\\usepackage{geometry}")
@@ -137,6 +138,7 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage[useregional]{datetime2}")
     latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
     latex_content.append("\\setmainfont{Latin Modern Roman}")
+    latex_content.append("\\setmainlanguage[variant=austrian,spelling=old]{german}")
     latex_content.append("\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{}{}{\\thepage}}\\pagestyle{mystyle}")
     latex_content.append(f"\\title{{{Title}}}")
     latex_content.append(f"\\author{{{Author}}}")
