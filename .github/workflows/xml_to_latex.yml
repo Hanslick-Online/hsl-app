@@ -31,8 +31,9 @@ jobs:
         mkdir -p data/{critics,traktat,vms}/{tex,pdf}
         folders="data/critics data/traktat data/vms"
         for folder in $folders ; do
-          find "$folder/editions" -type f -name "*.xml" | while read filename do
-            echo "Transforming $filename"; build_app/python/xml2latex.py "$filename" "$folder/tex/$(basename ${file%.xml}.tex)"
+          find "$folder/editions" -type f -name "*.xml" | while read filename; do
+            echo "Transforming $filename"
+            build_app/python/xml2latex.py "$filename" "$folder/tex/$(basename ${file%.xml}.tex)"
           done
         done
     - name: Install TeX Live
@@ -44,7 +45,8 @@ jobs:
       run: |
         for folder in data/critics data/traktat data/vms; do
           find "$folder/tex" -type f -name "*.tex" | while read filename; do
-            echo "Compiling $filename"; xelatex -interaction=nonstopmode -output-directory="$folder/pdf" "$filename"
+            echo "Compiling $filename"
+            xelatex -interaction=nonstopmode -output-directory="$folder/pdf" "$filename"
           done
         done
 
