@@ -28,16 +28,13 @@ jobs:
 
     - name: Transform XML-TEI to LaTeX
       run: |
-        mkdir -p data/critics/tex/ 
-        mkdir -p data/traktat/tex/
-        mkdir -p data/vms/tex/
-        for folder in data/critics data/traktat; do
-          for file in $folder/editions/*.xml; do
-            echo "Processing $file..."
-            build_app/python/xml2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
+        mkdir -p data/{critics,traktat,vms}/{tex,pdf}
+        folders="data/critics data/traktat data/vms"
+        for folder in $folders ; do
+          find "$folder/editions" -type f -name "*.xml" | while read filename do
+            echo "Transforming $filename"; build_app/python/xml2latex.py "$filename" "$folder/tex/$(basename "${file%.xml}.tex")"
           done
         done
-
     - name: Install TeX Live
       run: |
         sudo apt-get update
@@ -45,13 +42,9 @@ jobs:
 
     - name: Compile LaTeX to PDF
       run: |
-        mkdir -p data/critics/pdf/  # Create the folder for PDF files
-        mkdir -p data/traktat/pdf/
-        mkdir -p data/vms/pdf/
         for folder in data/critics data/traktat data/vms; do
-          for file in $folder/tex/*.tex; do
-            echo "Compiling $file..."
-            xelatex -interaction=nonstopmode -output-directory="$folder/pdf" "$file"
+          find "$folder/tex" -type f -name "*.tex" | while read filename; do
+            echo "Compiling $filename"; xelatex -interaction=nonstopmode -output-directory="$folder/pdf" "$filename"
           done
         done
 
