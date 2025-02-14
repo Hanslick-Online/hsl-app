@@ -12,6 +12,7 @@
     </doc>
     
     <xsl:template name="view-type">
+        <xsl:param name="toc-address" />
         <xsl:param name="editor-widget" />
         <xsl:param name="back-btn" />
         <xsl:param name="anotation-options" />
@@ -50,7 +51,7 @@
                     <xsl:if test="$editor-widget = 'true'">
                         <div id="editor-widget">
                             <xsl:if test="$back-btn = 'true'">
-                                <a title="zurück zu allen Kritiken" href="toc.html" class="nav-link btn btn-round btn-backlink">
+                                <a title="zurück zu allen Kritiken" href="{$toc-address}" class="nav-link btn btn-round btn-backlink">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
                                         <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
                                     </svg>
