@@ -53,6 +53,8 @@ jobs:
     # Step 7: Commit and push PDFs
     - name: Commit and push PDF files
       run: |
-        git add data/pdf/*.pdf
+        for folder in "${folders[@]}"; do
+          git add $folder/pdf
+        done
         git commit -m "Generated PDFs from LaTeX files"
         git push
