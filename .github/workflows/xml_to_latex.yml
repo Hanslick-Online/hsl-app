@@ -32,7 +32,7 @@ jobs:
         folders="data/critics data/traktat data/vms"
         for folder in $folders ; do
           find "$folder/editions" -type f -name "*.xml" | while read filename do
-            echo "Transforming $filename"; build_app/python/xml2latex.py "$filename" "$folder/tex/$(basename "${file%.xml}.tex")"
+            echo "Transforming $filename"; build_app/python/xml2latex.py "$filename" "$folder/tex/$(basename ${file%.xml}.tex)"
           done
         done
     - name: Install TeX Live
