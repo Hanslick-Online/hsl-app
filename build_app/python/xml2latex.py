@@ -3,7 +3,12 @@ import glob
 import os
 from acdh_tei_pyutils.tei import TeiReader, ET
 import sys
-ns = {'tei': 'http://www.tei-c.org/ns/1.0'}
+import re
+ns = {'tei': 'http://www.tei-c.org/ns/1.0', 'xml': "http://www.w3.org/XML/1998/namespace"}
+
+def fix_invalid_xml_id(xml_text):
+    """ Fix invalid xml:id values that don't start with a letter or underscore """
+    return re.sub(r'xml:id="([^a-zA-Z_])', r'xml:id="_\1', xml_text)
 
 def make_name_list(names):
     last = True
@@ -51,7 +56,7 @@ def process_paragraph(element):
 
 
 def get_date(tree):
-    date = tree.any_xpath(".//tei:monogr/tei:imprint/tei:date/@when")
+    date = tree.xpath(".//tei:monogr/tei:imprint/tei:date/@when", namespaces=ns)
     if date:
         date = date[0].split("-")
         for i in range(0, 3 - len(date)):
@@ -59,15 +64,15 @@ def get_date(tree):
     return date
 
 def get_info(tree):
-    titles = tree.any_xpath(".//tei:analytic/tei:title") + tree.any_xpath(
-        ".//tei:monogr/tei:title"
+    titles = tree.xpath(".//tei:analytic/tei:title", namespaces=ns) + tree.xpath(
+        ".//tei:monogr/tei:title", namespaces=ns
     )
     titles = [elem.text for elem in titles if elem.text]
-    authors = [elem.text for elem in tree.any_xpath(".//tei:author") if elem.text]
+    authors = [elem.text for elem in tree.xpath(".//tei:author", namespaces=ns) if elem.text]
     origdate = get_date(tree)
     origeditors = [
         elem.text
-        for elem in tree.any_xpath(".//tei:monogr/tei:respStmt/tei:name")
+        for elem in tree.xpath(".//tei:monogr/tei:respStmt/tei:name", namespaces=ns)
         if elem.text
     ]
     return titles, make_name_list(authors), origdate, make_name_list(origeditors)
@@ -75,7 +80,7 @@ def get_info(tree):
 
 def make_body(tree, section):
     text = ""
-    chapters = tree.any_xpath(".//tei:text//tei:body//tei:div")
+    chapters = tree.xpath(".//tei:text//tei:body//tei:div", namespaces=ns)
     for chapter in chapters:
         head = chapter.xpath("./tei:head", namespaces=ns)
         if head:
@@ -109,9 +114,15 @@ def make_front(front):
 
 def transform_tei_to_latex(input_file, output_file):
     # Parse the XML-TEI file
-    tree = TeiReader(input_file)
+    with open(input_file, "r", encoding="utf-8") as f:
+         xml_text = f.read()
+    fixed_xml_text = fix_invalid_xml_id(xml_text)
+
+    tree = ET.fromstring(fixed_xml_text.encode("utf-8"))
+    #tree = TeiReader(input_file)
+
     Titles, Author, Date, Editors = get_info(tree)
-    if front := tree.any_xpath(".//tei:text//tei:front"):
+    if front := tree.xpath(".//tei:text//tei:front", namespaces=ns):
         document = "book"
         section = "\\chapter{"
     else:
@@ -129,16 +140,17 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content = []
     latex_content.append(f"\\documentclass[a4paper]{{{document}}}")
     latex_content.append("\\usepackage{polyglossia}")
+    latex_content.append("\\setmainlanguage[variant=austrian]{german}")
+    latex_content.append("\\usepackage{tracklang}")
     #latex_content.append("\\usepackage[austrian]{babel}")
     latex_content.append("\\usepackage{fontspec,xltxtra,xunicode}")
     latex_content.append("\\usepackage{microtype}")
     latex_content.append("\\usepackage{geometry}")
-    latex_content.append("\\usepackage{titlesec}")
+    latex_content.append("\\usepackage[pagestyles]{titlesec}")
     latex_content.append("\\titleformat{\\chapter}[display]{\\normalfont\\bfseries}{}{0pt}{\\Large}")
     latex_content.append("\\usepackage[useregional]{datetime2}")
     latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
-    latex_content.append("\\setmainfont{Latin Modern Roman}")
-    latex_content.append("\\setmainlanguage[variant=austrian,spelling=old]{german}")
+    latex_content.append("\\setmainfont{Noto Serif}")
     latex_content.append("\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{}{}{\\thepage}}\\pagestyle{mystyle}")
     latex_content.append(f"\\title{{{Title}}}")
     latex_content.append(f"\\author{{{Author}}}")
@@ -148,7 +160,7 @@ def transform_tei_to_latex(input_file, output_file):
         Date = f"\\DTMdisplaydate{{{Date[0]}}}{{{Date[1]}}}{{{Date[2]}}}" + "{gregorian}"
     latex_content.append(f"\\date{{{Date}}}")
     latex_content.append("\\begin{document}")
-    if front := tree.any_xpath(".//tei:text//tei:front"):
+    if front := tree.xpath(".//tei:text//tei:front", namespaces=ns):
         latex_content.append(make_front(front[0]))
     else:
         latex_content.append("\\maketitle")
