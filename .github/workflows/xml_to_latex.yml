@@ -52,9 +52,6 @@ jobs:
 
     # Step 7: Commit and push PDFs
     - name: Commit and push PDF files
-      run: |
-        for folder in "${folders[@]}"; do
-          git add $folder/pdf
-        done
-        git commit -m "Generated PDFs from LaTeX files"
-        git push
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Export and Transformation done
