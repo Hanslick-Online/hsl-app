@@ -51,7 +51,7 @@ jobs:
         done
 
     # Step 7: Commit and push PDFs
-    - name: Commit and push PDF files
+      name: Commit and push PDF files
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: Export and Transformation done
