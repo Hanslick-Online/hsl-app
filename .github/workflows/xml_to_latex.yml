@@ -46,11 +46,9 @@ jobs:
         for folder in "${folders[@]}"; do
           find "$folder/tex" -type f -name "*.tex" | while read filename; do
             echo "Compiling $filename"
-            xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
+            xelatex -interaction=nonstopmode -output-directory="html" "$filename"
           done
         done
-
-    # Step 7: Commit and push PDFs
     - name: Commit and push PDF files
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
