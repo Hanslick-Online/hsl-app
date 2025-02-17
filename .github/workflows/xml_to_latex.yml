@@ -28,7 +28,7 @@ jobs:
 
     - name: Transform XML-TEI to LaTeX
       run: |
-        mkdir -p data/{critics,traktat,vms}/{tex,pdf}
+        mkdir -p data/{critics,traktat,vms}/{tex,pdf} html/pdf
         folders=("data/critics" "data/traktat" "data/vms")
         for folder in "${folders[@]}" ; do
           find "$folder/editions" -type f -name "*.xml" | while read filename; do
@@ -46,7 +46,7 @@ jobs:
         for folder in "${folders[@]}"; do
           find "$folder/tex" -type f -name "*.tex" | while read filename; do
             echo "Compiling $filename"
-            xelatex -interaction=nonstopmode -output-directory="$folder/pdf" "$filename"
+            xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
           done
         done
 
