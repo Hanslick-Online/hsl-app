@@ -43,10 +43,11 @@ jobs:
 
     - name: Compile LaTeX to PDF
       run: |
+        folders=("data/critics" "data/traktat" "data/vms")
         for folder in "${folders[@]}"; do
           find "$folder/tex" -type f -name "*.tex" | while read filename; do
             echo "Compiling $filename"
-            xelatex -interaction=nonstopmode -output-directory="html" "$filename"
+            xelatex -interaction=nonstopmode -output-directory="pdf/html" "$filename"
           done
         done
     - name: Commit and push PDF files
