@@ -49,6 +49,8 @@ jobs:
             xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
           done
         done
+    - name: Remove temp files
+      run: find "html/pdf" -type f \( -name "*.aux" -o -name "*.log" \) -delete
     - name: Commit and push PDF files
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
