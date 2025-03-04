@@ -912,11 +912,16 @@ nav.hiddenNav {
 }
 
 
-ul {
- list-style-type: disc ;
+li {
+    display: list-item !important; /* Ensures numbering appears */
+    }
+ol {
+  list-style: lower-roman !important;
 }
+
+
 .card-body li {
-	 list-style-type: disc ;
+	 list-style-type: inherit ;
 	 padding-left: 5%; 
  }
 
