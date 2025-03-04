@@ -351,5 +351,19 @@
     <xsl:template match="tei:l">
         <span class="vrs"><xsl:apply-templates/><span class="vrsSep"> / </span></span>
     </xsl:template>
-
+    <xsl:template match="text()">
+        <xsl:variable name="text" select="normalize-space(.)"/>
+        <xsl:choose>
+            <xsl:when test="$text != ''">
+                <xsl:if test="starts-with(., ' ')">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="$text"/>
+                <xsl:if test="ends-with(., ' ')">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
+    </xsl:template>
 </xsl:stylesheet>

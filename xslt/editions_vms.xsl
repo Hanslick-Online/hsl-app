@@ -205,7 +205,7 @@
             <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
         </span>
     </xsl:template>
-    <xsl:template match="tei:emph">
+    <xsl:template match="tei:emph"><em><xsl:apply-templates/></em></xsl:template>
         <!--<xsl:choose>
             <xsl:when test="starts-with(following-sibling::text()[1], ',') or 
                 starts-with(following-sibling::text()[1], '’') or
@@ -219,8 +219,6 @@
                 <em><xsl:apply-templates/></em>
             </xsl:otherwise>
         </xsl:choose>-->
-        <em><xsl:apply-templates/></em>
-    </xsl:template>
     <xsl:template match="tei:rs">
         <xsl:variable name="id" select="@xml:id"/>
         <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
@@ -381,5 +379,20 @@
     </xsl:template>
     <xsl:template match="tei:l">
         <xsl:apply-templates/><xsl:text> / </xsl:text>
+    </xsl:template>
+    <xsl:template match="text()">
+        <xsl:variable name="text" select="normalize-space(.)"/>
+        <xsl:choose>
+            <xsl:when test="$text != ''">
+                <xsl:if test="starts-with(., ' ')">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="$text"/>
+                <xsl:if test="ends-with(., ' ')">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>
