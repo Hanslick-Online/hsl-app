@@ -27,6 +27,21 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     font-weight: 600;
 }
 
+.row {
+	width: 100% 
+}
+
+.row .text {
+    position: relative;  /* This must be set for absolute positioning to work */
+}
+
+#editor-widget {
+    position: absolute;
+    top: 30%;   /* Adjust as needed */
+    right: 10px;
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+}
 .italics {
     font-style: italic;
 }
@@ -42,6 +57,12 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     margin-bottom: 0;
 }
 
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically center the content */
+    width: 100%;
+}
 
 .wrapper {
     padding: 30px 0;
@@ -121,7 +142,6 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
 .hide {
     display: none;
 }
-
 
 .navbar-search-icon {
   background-color: transparent;
@@ -310,7 +330,6 @@ mark {
 }
 
 p {
-    display: block;
     padding: 0 !important;
 }
 
@@ -510,9 +529,6 @@ span {
     padding: 0;
 }
 
-.indentedP {
-    text-indent: -5em;
-}
 
 .w-100 {
     max-width: 100%;
@@ -870,9 +886,39 @@ nav.hiddenNav {
     padding: 1em 0;
 }
 
+
+.card-body {
+    display: inline-block;
+    text-align: justify;  /* Justifies the text inside */
+    width: auto;
+    margin-left: auto;
+    flex: 0 0 auto ;
+    margin-right: auto;
+    max-width: 100% ;
+    transition: margin 0.2s ease-in-out; /* Smooth transition for margin change */
+}
 .card-body .dropdown {
     padding: .5em 0;
 }
+
+.card-body p,
+.card-body li {
+    margin: 0;
+    padding: 0;
+    display: block ;
+    max-width: 100% ;
+    display: block;
+    list-style-type: inherit ;
+}
+
+
+ul {
+ list-style-type: disc ;
+}
+.card-body li {
+	 list-style-type: disc ;
+	 padding-left: 5%; 
+ }
 
 #selPar {
     height: 200px;
