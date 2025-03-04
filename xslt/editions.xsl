@@ -170,20 +170,22 @@
         <br/>
     </xsl:template>
     <xsl:template match="tei:emph">
-        <!--<xsl:choose>
-            <xsl:when test="starts-with(following-sibling::text()[1], ',') or 
-                starts-with(following-sibling::text()[1], '’') or
-                starts-with(following-sibling::text()[1], '.')">
-                <em class="comma"><xsl:apply-templates/></em>
-            </xsl:when>
-            <xsl:when test="matches(preceding-sibling::text()[1], '\w+')">
-                <em class="prev-text"><xsl:apply-templates/></em>
-            </xsl:when>
-            <xsl:otherwise>
-                <em><xsl:apply-templates/></em>
-            </xsl:otherwise>
-        </xsl:choose>-->
         <em><xsl:apply-templates/></em>
+    </xsl:template>
+    <xsl:template match="text()">
+        <xsl:variable name="text" select="normalize-space(.)"/>
+        <xsl:choose>
+            <xsl:when test="$text != ''">
+                <xsl:if test="starts-with(., ' ')">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="$text"/>
+                <xsl:if test="ends-with(., ' ')">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:rs">
         <xsl:variable name="id" select="@xml:id"/>
@@ -309,7 +311,7 @@
     <xsl:template match="tei:ref">
         <xsl:choose>
             <xsl:when test="@type='edition'">
-                <a class="ref {@type}" href="t__{@target}"><xsl:apply-templates/></a>
+                <a class="ref {@type}" href="{replace(@target, '^(t__)+', 't__')}"><xsl:apply-templates/></a>
             </xsl:when>
             <xsl:otherwise>
                 <a class="ref {@type}" href="{@target}"><xsl:apply-templates/></a>
