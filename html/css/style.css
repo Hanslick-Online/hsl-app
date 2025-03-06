@@ -58,7 +58,7 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
 }
 
 .section {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center; /* Vertically center the content */
     width: 100%;
@@ -889,10 +889,10 @@ nav.hiddenNav {
 
 .card-body {
     display: inline-block;
-    text-align: justify;  /* Justifies the text inside */
+    text-align: left;  /* Justifies the text inside */
     width: auto;
     margin-left: auto;
-    flex: 0 0 auto ;
+    flex: left ;
     margin-right: auto;
     max-width: 100% ;
     transition: margin 0.2s ease-in-out; /* Smooth transition for margin change */
