@@ -62,7 +62,7 @@
                                     else('?lang=en')"/>
                                 <h1><xsl:value-of select="$h1"/></h1>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="VMS_Auflage_01_1854.html{$lang}">
+                                    <a href="t__VMS_Auflage_01_1854.html{$lang}">
                                         <xsl:value-of select="$treatise"/>
                                     </a>
                                 </button>
