@@ -49,7 +49,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=en">
+                                        <a class="dropdown-item" href="VMS_Auflage_01_1854.html?lang=en">
                                             Treatise
                                         </a>
                                     </li>
