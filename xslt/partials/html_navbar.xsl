@@ -49,7 +49,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__VMS_Auflage_01_1854.html?lang=de">
+                                        <a class="dropdown-item" href="toc_t.html?lang=de">
                                             Traktat
                                         </a>
                                     </li>

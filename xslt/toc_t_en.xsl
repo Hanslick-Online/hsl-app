@@ -10,7 +10,7 @@
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
     <xsl:template match="/">
-        <xsl:variable name="doc_title" select="'Inhaltsverzeichnis'"/>
+        <xsl:variable name="doc_title" select="'Table of contents'"/>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
@@ -33,12 +33,12 @@
                                 <table class="table table-striped display" id="tocTable" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Titel</th>
-                                            <th scope="col">Untertitel</th>
-                                            <th scope="col">Auflage</th>
-                                            <th scope="col">Ort</th>
-                                            <th scope="col">Verlag</th>
-                                            <th scope="col">Datum</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Subtitle</th>
+                                            <th scope="col">Edition</th>
+                                            <th scope="col">Place</th>
+                                            <th scope="col">Publisher</th>
+                                            <th scope="col">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
