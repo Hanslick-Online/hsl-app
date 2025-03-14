@@ -42,26 +42,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <xsl:for-each select="collection('../data/traktat/editions')//tei:TEI">
-                                            <xsl:variable name="full_path">
-                                                <xsl:value-of select="document-uri(/)"/>
-                                            </xsl:variable>
+                                        <xsl:for-each select="collection('../data/traktat/editions?select=*.xml')//tei:TEI">
+                                            <xsl:sort select="tokenize(base-uri(.), '/')[last()]"/>
+                                            <!--- Titel, Untertitle, Verlag are picked from the body, this is a workareound that may be changed if teiHeader gets expanded and fine grained -->
                                             <tr>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/>
+                                                    <a href="{replace(
+                                                        tokenize(base-uri(.), '/')[last()], 
+                                                        '^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$',
+                                                        't__VMS_Auflage_$1_$2.html'
+                                                        )}">
+                                                        <xsl:value-of select=".//tei:titlePage//tei:docTitle/tei:titlePart[@type='main']/text()"/>
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='sub']/text()"/>
+                                                    <xsl:value-of select=".//tei:titlePage//tei:docTitle/tei:titlePart[@type='sub']/text()"/>
                                                 </td>
                                                 <td>
-						     <xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:edition/@n" />                                    
+                                                    <xsl:value-of select=".//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:edition/@n"/>                                    
                                                 </td>
                                                 <td>
-							<xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:pubPlace/tei:placeName/text()" />
-						</td>
+                                                    <xsl:value-of select=".//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:pubPlace/tei:placeName/text()"/>
+                                                </td>
                                                 <td>
-							<xsl:value-of select="//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:imprint/tei:publisher/text()" />
-						</td>
+                                                    <xsl:value-of select=".//tei:titlePage/tei:docImprint/tei:publisher/text()"/>
+                                                </td>
                                                 <td>
                                                     <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/>
                                                 </td>
