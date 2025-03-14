@@ -25,7 +25,7 @@
             <body class="page">
                 <div class="hfeed site" id="page">
                     <xsl:choose>
-                        <xsl:when test="//tei:body[@xml:lang = 'de-AT']">
+                        <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
                             <xsl:call-template name="nav_bar"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -37,39 +37,62 @@
                         <div class="col-md-5 intro_colum" style="margin:0;padding:0;">
                             <div class="intro_text">
                                 <xsl:variable name="h1" select="
-                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('Digitale Edition') 
                                     else('Digital Edition')"/>
                                 <xsl:variable name="treatise" select="
-                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('Traktat (VMS)') 
                                     else('Treatise (VMS)')"/>
                                 <xsl:variable name="reviews" select="
-                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('Kritiken (in Arbeit)') 
                                     else('Reviews (in progress)')"/>
                                 <xsl:variable name="vms" select="
-                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('Kritiken von VMS (in Arbeit)') 
                                     else('Reviews of VMS (in progress)')"/>
                                 <xsl:variable name="more" select="
-                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('mehr anzeigen') 
                                     else('show more')"/>
                                 <xsl:variable name="lang" select="
-                                    if(//tei:body/@xml:lang = 'de-AT') 
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('?lang=de') 
                                     else('?lang=en')"/>
                                 <h1><xsl:value-of select="$h1"/></h1>
+                                <xsl:choose>
+                                    <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
+                                        <button type="button" class="btn text-light btn-index">
+                                            <a href="toc_t.html{$lang}">
+                                                <xsl:value-of select="$treatise"/>
+                                            </a>
+                                        </button>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <button type="button" class="btn text-light btn-index">
+                                            <a href="toc_t_en.html{$lang}">
+                                                <xsl:value-of select="$treatise"/>
+                                            </a>
+                                        </button>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                                 <button type="button" class="btn text-light btn-index">
-                                    <a href="t__VMS_Auflage_01_1854.html{$lang}">
-                                        <xsl:value-of select="$treatise"/>
-                                    </a>
-                                </button>
-                                <button type="button" class="btn text-light btn-index">
-                                    <a href="toc.html{$lang}">
-                                        <xsl:value-of select="$reviews"/>
-                                    </a>
+
+                                 <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
+                                        <button type="button" class="btn text-light btn-index">
+                                            <a href="toc.html{$lang}">
+                                                <xsl:value-of select="$reviews"/>
+                                            </a>
+                                        </button>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <button type="button" class="btn text-light btn-index">
+                                            <a href="toc_en.html{$lang}">
+                                                <xsl:value-of select="$reviews"/>
+                                            </a>
+                                        </button>
+                                    </xsl:otherwise>
                                 </button>
                                 <button type="button" class="btn btn-index"> 
                                     <a href="toc_vms.html{$lang}">
@@ -105,7 +128,7 @@
                     </div>
                     
                     <xsl:choose>
-                        <xsl:when test="//tei:body[@xml:lang = 'de-AT']">
+                        <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
                             <xsl:call-template name="html_footer"/>
                         </xsl:when>
                         <xsl:otherwise>

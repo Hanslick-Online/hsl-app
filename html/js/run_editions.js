@@ -255,7 +255,9 @@ var editor = new LoadEditor({
             "imprint.html": "imprint.html",
             "imprint_en.html": "imprint.html",
             "toc.html": "toc.html",
-            "toc_en.html": "toc.html"
+            "toc_en.html": "toc.html",
+            "toc_t.html": "toc_t_en.html",
+    	    "toc_t.html": "toc_t.html",
           },
         },
         {
@@ -286,7 +288,10 @@ var editor = new LoadEditor({
             "imprint.html": "imprint_en.html",
             "imprint_en.html": "imprint_en.html",
             "toc.html": "toc_en.html",
-            "toc_en.html": "toc_en.html"
+            "toc_en.html": "toc_en.html",
+            "toc_t_en.html": "toc_t.html",
+            "toc_t.html": "toc_t.html",
+    
           },
         },
       ],
