@@ -10,7 +10,6 @@ var editor = new LoadEditor({
             class: "multi-lang nav-link pointer",
             map: {
               "index-en.html": "index.html",
-              "index.html": "index.html",
               "bedeutung-hanslick-engl.html": "bedeutung-hanslick.html",
               "bedeutung-hanslick.html": "bedeutung-hanslick.html",
               "projektgeschichte-engl.html": "projektgeschichte.html",
@@ -31,10 +30,8 @@ var editor = new LoadEditor({
               "search.html": "search.html",
               "imprint.html": "imprint.html",
               "imprint_en.html": "imprint.html",
-              "toc.html": "toc_en.html",
-              "toc.html": "toc_en.html",
-              "toc_t.html": "toc_t_de.html",
-              "toc_t.html": "toc_t.html"
+              "toc_en.html": "toc.html",
+              "toc_t_en.html": "toc_t.html",
             },
           },
           {
@@ -43,7 +40,6 @@ var editor = new LoadEditor({
             class: "multi-lang nav-link pointer",
             map: {
               "index.html": "index-en.html",
-              "index-en.html": "index-en.html",
               "bedeutung-hanslick.html": "bedeutung-hanslick-engl.html",
               "bedeutung-hanslick-engl.html": "bedeutung-hanslick-engl.html",
               "projektgeschichte.html": "projektgeschichte-engl.html",
@@ -64,10 +60,8 @@ var editor = new LoadEditor({
               "search-engl.html": "search-engl.html",
               "imprint.html": "imprint_en.html",
               "imprint_en.html": "imprint_en.html",
-              "toc_en.html": "toc.html",
-              "toc_en.html": "toc_en.html",
-	      "toc_t_en.html": "toc_t.html",
-              "toc_t_en.html": "toc_t_en.html"
+              "toc.html": "toc_en.html",
+	            "toc_t.html": "toc_t_en.html",
             },
           },
         ],
