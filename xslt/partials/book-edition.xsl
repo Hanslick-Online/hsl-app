@@ -26,7 +26,11 @@
                     <xsl:choose>
                         <xsl:when test="position() = 1">
                             <li>
-                                <a class="dropdown-item active" aria-current="page" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                <a class="dropdown-item active" aria-current="page" href="{replace(
+                                tokenize(document-uri(/), '/')[last()], 
+                                '^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$',
+                                't__VMS_Auflage_$1_$2.html'
+                                )}"
                                     title="Auflage 1-10">
                                     <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                 </a>
@@ -34,8 +38,13 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <li>
-                                <a class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
-                                    title="Auflage 1-10">
+                            <a class="dropdown-item" href="{replace(
+                                tokenize(document-uri(/), '/')[last()], 
+                                '^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$',
+                                't__VMS_Auflage_$1_$2.html'
+                                )}" title="Auflage 1-10">
+                                <!-- class="dropdown-item" href="{replace(tokenize(document-uri(/), '/')[last()], '.xml', '.html')}"
+                                    title="Auflage 1-10"> -->
                                     <xsl:value-of select="concat('Auflage ', position(), ' (', //tei:sourceDesc//tei:imprint//tei:date/@when, ')')"/>
                                 </a>
                             </li>

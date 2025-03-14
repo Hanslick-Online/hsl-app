@@ -35,6 +35,7 @@
     <xslt style="${xsl_editions}"  basedir="${editions}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
+        <mapper type="regexp" from="^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$$" to="t__VMS_Auflage_\1_\2.html"/>
     </xslt>
     <xslt style="${xsl_comp}"  basedir="${comp}" destdir="${target}" includes="*.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
