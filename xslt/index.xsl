@@ -77,9 +77,8 @@
                                         </button>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                <button type="button" class="btn text-light btn-index">
-
-                                 <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
+                                <xsl:choose>
+                                    <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
                                         <button type="button" class="btn text-light btn-index">
                                             <a href="toc.html{$lang}">
                                                 <xsl:value-of select="$reviews"/>
@@ -93,7 +92,7 @@
                                             </a>
                                         </button>
                                     </xsl:otherwise>
-                                </button>
+                                </xsl:choose>
                                 <button type="button" class="btn btn-index"> 
                                     <a href="toc_vms.html{$lang}">
                                         <xsl:value-of select="$vms"/>
