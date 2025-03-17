@@ -57,6 +57,10 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     margin-bottom: 0;
 }
 
+.section-vms {
+	display: flex !important;
+}
+
 .section {
     /* display: flex; */
     justify-content: center;
@@ -896,7 +900,9 @@ nav.hiddenNav {
     margin-right: auto;
     max-width: 100% ;
     transition: margin 0.2s ease-in-out; /* Smooth transition for margin change */
+    flex-grow: 0;
 }
+
 .card-body .dropdown {
     padding: .5em 0;
 }
