@@ -27,13 +27,7 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
     font-weight: 600;
 }
 
-.row {
-	width: 100% 
-}
 
-.row .text {
-    position: relative;  /* This must be set for absolute positioning to work */
-}
 
 #editor-widget {
     position: absolute;
@@ -58,15 +52,9 @@ h1.yes-index, h2.yes-index, h3.yes-index, h4.yes-index {
 }
 
 .section-vms {
-	display: flex !important;
+	display: table;
 }
 
-.section {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center; /* Vertically center the content */
-    width: 100%;
-}
 
 .wrapper {
     padding: 30px 0;
@@ -891,18 +879,6 @@ nav.hiddenNav {
 }
 
 
-.card-body {
-    display: inline-block;
-    text-align: left;  /* Justifies the text inside */
-    width: auto;
-    margin-left: auto;
-    flex: left ;
-    margin-right: auto;
-    max-width: 100% ;
-    transition: margin 0.2s ease-in-out; /* Smooth transition for margin change */
-    flex-grow: 0;
-}
-
 .card-body .dropdown {
     padding: .5em 0;
 }
@@ -911,8 +887,6 @@ nav.hiddenNav {
 .card-body li {
     margin: 0;
     padding: 0;
-    display: block ;
-    max-width: 100% ;
     display: block;
     list-style-type: inherit ;
 }
