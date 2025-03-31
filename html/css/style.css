@@ -762,14 +762,12 @@ li.light-brown {
 
 .footnote_link {
     display: inline-block;
-    width: 2em;
     text-align: right;
-    margin: 0 .7em 0 -2.7em;
+    margin: 0 .7em 0 0;
 }
 
 .footnotes li {
     list-style: none;
-    padding: .3em 0;
 }
 
 .nounderline {
@@ -901,10 +899,6 @@ ol {
 }
 
 
-.card-body li {
-	 list-style-type: inherit ;
-	 padding-left: 5%; 
- }
 
 #selPar {
     height: 200px;
