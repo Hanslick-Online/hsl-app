@@ -778,6 +778,7 @@ li.light-brown {
 
 .footnotes {
     padding: 0;
+    list-style: none;
 }
 
 .figure {
