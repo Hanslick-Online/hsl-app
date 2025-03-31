@@ -61,18 +61,20 @@
                                                         <xsl:attribute name="href">
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
+                                                         <xsl:value-of select="concat('»',.//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title/text(),'«')"/>
+                                                        <!-- <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
                                                             <xsl:value-of select="replace(replace(replace(replace(., '\(', ''), '\)', ''), '„', ''), '“', '')"/>
                                                             <xsl:if test="position() != last()">
                                                                 <br/>
                                                             </xsl:if>
-                                                        </xsl:for-each>
+                                                        </xsl:for-each> -->
                                                     </a>
                                                 </td>
                                                 <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
+                                                        <xsl:text>„</xsl:text>
                                                         <xsl:apply-templates/>
-                                                        <!-- <xsl:value-of select="replace(replace(., '\(', ''), '\)', '')"/> -->
+                                                        <xsl:text>"</xsl:text>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
