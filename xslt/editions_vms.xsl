@@ -81,13 +81,28 @@
             <xsl:when test="matches(., '-$', 'm')">
                 <xsl:value-of select="replace(., '\s+$', '')"/>
             </xsl:when>
-            <xsl:when test="following-sibling::tei:*[1]/@type='footnote'">
+            <xsl:when test="following-sibling::tei:*[1][self::tei:note]">
                 <xsl:value-of select="replace(., '\s+$', '')"/>
+                <xsl:apply-templates select="following-sibling::tei:*[1]" mode="inline"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="tei:note" mode="inline">
+        <xsl:variable name="id" select="generate-id()"/>
+        <span id="{$id}_inline">
+            <a href="#{$id}" class="nounderline footnoteref">
+                <sup>
+                    <xsl:choose>
+                        <xsl:when test="starts-with(@n, '*')">*</xsl:when>
+                        <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
+                    </xsl:choose>
+                </sup>
+            </a>
+        </span>
     </xsl:template>
     
     <xsl:template match="tei:docTitle">
@@ -331,23 +346,21 @@
         <xsl:variable name="id" select="generate-id()"/>
         <xsl:choose>
             <xsl:when test="$inline = 'true'">
-                <xsl:choose>
-                    <xsl:when test="@place='foot'">
-                        <span>
-                            <a class="anchorFoot" id="{$id}_inline"></a>
-                            <a href="#{$id}" title="{.//text()}" class="nounderline">
-                                <sup><xsl:value-of select="@n"/></sup>
-                            </a>
-                        </span>
-                    </xsl:when>
-                </xsl:choose>
+                <!-- Skip rendering in normal flow when inline=true -->
             </xsl:when>
             <xsl:otherwise>
-                <a class="anchorFoot" id="{$id}"></a>
-                <span class="footnote_link">
-                    <a href="#{$id}_inline" class="nounderline">
-                        <xsl:value-of select="@n"/>
-                    </a>
+                <span id="{$id}" class="footnote">
+                    <span class="footnote_link">
+                        <a href="#{$id}_inline" class="nounderline">
+                            <xsl:choose>
+                                <xsl:when test="starts-with(@n, '*')">*</xsl:when>
+                                <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
+                            </xsl:choose>
+                        </a>
+                    </span>
+                    <span class="footnote_text">
+                        <xsl:apply-templates/>
+                    </span>
                 </span>
             </xsl:otherwise>
         </xsl:choose>
