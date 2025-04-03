@@ -125,7 +125,11 @@
             </div>
         </xsl:if>
     </xsl:template>
-
+ <xsl:template match="tei:space">
+        <span class="space">
+            <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
+        </span>
+    </xsl:template>
     <xsl:template match="tei:head">
         <h3 class="yes-index">
             <!--<xsl:choose>
