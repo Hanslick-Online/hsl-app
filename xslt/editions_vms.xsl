@@ -160,22 +160,22 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="tei:head">
-        <h3 class="yes-index">
-            <!--<xsl:choose>
-                <xsl:when test="contains(. ,'a)')">
-                    <xsl:variable name="chapter" select="tokenize(., 'I')"/>
-                    I. <xsl:value-of select="$chapter[2]"/>
-                    <br/>
-                    I. <xsl:value-of select="$chapter[3]"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates/>
-                </xsl:otherwise>
-            </xsl:choose>-->
-            <xsl:apply-templates/>
-        </h3>
-    </xsl:template>   
+   <xsl:template match="tei:head[ancestor::tei:body]">
+        <xsl:choose>
+            <xsl:when test="@type='h1'">
+                <h1 class="yes-index"><xsl:apply-templates/></h1>
+            </xsl:when>
+            <xsl:when test="@type='h2'">
+                <h2 class="yes-index"><xsl:apply-templates/></h2>
+            </xsl:when>
+            <xsl:when test="@type='h3'">
+                <h3 class="yes-index"><xsl:apply-templates/></h3>
+            </xsl:when>
+            <xsl:when test="@type='h4'">
+                <h4 class="yes-index"><xsl:apply-templates/></h4>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
     
     <xsl:template match="tei:p">
         <p id="{@xml:id}" class="indentedP yes-index">
