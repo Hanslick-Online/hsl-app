@@ -95,20 +95,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-    <xsl:template match="tei:note" mode="inline">
-        <xsl:variable name="id" select="generate-id()"/>
-        <span id="{$id}_inline">
-            <a href="#{$id}" class="nounderline footnoteref">
-                <sup>
-                    <xsl:choose>
-                        <xsl:when test="starts-with(@n, '*')">*</xsl:when>
-                        <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
-                    </xsl:choose>
-                </sup>
-            </a>
-        </span>
-    </xsl:template>
     
     <xsl:template match="tei:docTitle">
         <div class="docTitle">
@@ -262,45 +248,44 @@
                 <em><xsl:apply-templates/></em>
             </xsl:otherwise>
         </xsl:choose>-->
-    <xsl:template match="tei:rs">
+     <xsl:template match="tei:rs">
         <xsl:variable name="id" select="@xml:id"/>
         <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
         <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
         <xsl:choose>
-            <xsl:when test="count($tokens) > 1">
+            <xsl:when test="count($tokens) > 1 and not(@prev)">
                 <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
-                <xsl:apply-templates/>
                 <xsl:choose>
                     <xsl:when test="@type='person'">
                         <xsl:for-each select="$tokens">
                             <xsl:choose>
                                 <xsl:when test="$role = 'fictional'">
-                                    <sup class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                    </sup>
+                                    <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                    </span>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <sup class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                    </sup>
+                                    <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                                    </span>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="@type='place'">
                         <xsl:for-each select="$tokens">
-                            <sup class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                            </sup>
+                            <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                            </span>
                         </xsl:for-each>
                     </xsl:when>
                     <xsl:when test="@type='bibl'">
                         <xsl:for-each select="$tokens">
-                            <sup class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                <xsl:value-of select="position()"/>
-                            </sup>
+                            <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
+                            </span>
                         </xsl:for-each>
                     </xsl:when>
                 </xsl:choose>
+                <xsl:apply-templates/>
             </xsl:when>
-            <xsl:otherwise>
+            <xsl:when test="count($tokens) = 1 and not(@prev)">
                 <xsl:choose>
                     <xsl:when test="@type='person'">
                         <xsl:variable name="role" select="id(data(substring-after(@ref, '#')))/@role"/>
@@ -325,7 +310,10 @@
                     </xsl:when>
                 </xsl:choose>
                 <xsl:apply-templates/>
-            </xsl:otherwise>
+            </xsl:when>
+            <xsl:when test="@prev">
+                <xsl:apply-templates/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:pb">
