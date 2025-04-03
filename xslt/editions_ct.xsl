@@ -240,6 +240,10 @@
                             <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
                             </span>
                         </xsl:for-each>
+                        <!-- Add a space after <rs> if the next sibling is <date> -->
+                        <xsl:if test="following-sibling::date">
+                            <xsl:text> </xsl:text>
+                        </xsl:if>
                     </xsl:when>
                     <xsl:when test="@type='bibl'">
                         <xsl:for-each select="$tokens">
@@ -268,6 +272,10 @@
                     <xsl:when test="@type='place'">
                         <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
                         </span>
+                        <!-- Add a space after <rs> if the next sibling is <date> -->
+                        <xsl:if test="following-sibling::date">
+                            <xsl:text> </xsl:text>
+                        </xsl:if>
                     </xsl:when>
                     <xsl:when test="@type='bibl'">
                         <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
@@ -275,6 +283,9 @@
                     </xsl:when>
                 </xsl:choose>
                 <xsl:apply-templates/>
+                 <xsl:if test="following-sibling::text()[normalize-space(.) = ''] or following-sibling::*">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
             </xsl:when>
             <xsl:when test="@prev">
                 <xsl:apply-templates/>
