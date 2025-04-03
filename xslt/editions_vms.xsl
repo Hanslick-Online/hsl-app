@@ -75,7 +75,12 @@
     -->
     <xsl:template match="//text()[ancestor::tei:body]">
         <xsl:choose>
+            <!-- Existing condition for direct siblings -->
             <xsl:when test="following-sibling::tei:*[1]/@break='no'">
+                <xsl:value-of select="replace(., '\s+$', '')"/>
+            </xsl:when>
+            <!-- Updated condition to handle <tei:cb> followed by <tei:lb> with @break='no' -->
+            <xsl:when test="following-sibling::tei:cb[1]/following-sibling::tei:lb[1]/@break='no'">
                 <xsl:value-of select="replace(., '\s+$', '')"/>
             </xsl:when>
             <xsl:when test="matches(., '-$', 'm')">
@@ -209,12 +214,35 @@
             <xsl:apply-templates/>
         </p>
     </xsl:template>
+    
+    <xsl:template match="tei:cb" />
+    <!--    <xsl:choose>
+            <xsl:when test="following-sibling::*[@break]">
+                <xsl:text disable-output-escaping="yes" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template> -->
+
     <xsl:template match="tei:lb">
+        <xsl:choose>
+            <!-- Prevent newline when <lb/> follows <cb/> -->
+            <xsl:when test="preceding-sibling::tei:cb[1]">
+                <xsl:text disable-output-escaping="yes"></xsl:text>
+            </xsl:when>
+            <!-- Prevent extra space when <lb/> follows text -->
+            <xsl:when test="preceding-sibling::text()[normalize-space()][1]">
+                <xsl:text disable-output-escaping="yes"></xsl:text>
+            </xsl:when>
+        </xsl:choose>
         <xsl:if test="@break">
             <span class="pb wrdbreak">-</span>
         </xsl:if>
-        <br class="pb" />
+        <br class="pb"/>
     </xsl:template>
+
     <xsl:template match="tei:space">
         <span class="space">
             <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
@@ -394,18 +422,6 @@
         <xsl:apply-templates/><xsl:text> / </xsl:text>
     </xsl:template>
     <xsl:template match="text()">
-        <xsl:variable name="text" select="normalize-space(.)"/>
-        <xsl:choose>
-            <xsl:when test="$text != ''">
-                <xsl:if test="starts-with(., ' ')">
-                    <xsl:text> </xsl:text>
-                </xsl:if>
-                <xsl:value-of select="$text"/>
-                <xsl:if test="ends-with(., ' ')">
-                    <xsl:text> </xsl:text>
-                </xsl:if>
-            </xsl:when>
-            <xsl:otherwise/>
-        </xsl:choose>
+        <xsl:value-of select="normalize-space(.)"/>
     </xsl:template>
 </xsl:stylesheet>
