@@ -179,24 +179,6 @@
     
     <xsl:template match="tei:p">
         <p id="{@xml:id}" class="indentedP yes-index">
-            <a>
-                <xsl:choose>
-                    <xsl:when test="@n">
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="concat('diff_', @n, '.html')"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="class">
-                            <xsl:text>parNum nounderline</xsl:text>
-                        </xsl:attribute>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:attribute name="class">
-                            <xsl:text>noParNum nounderline</xsl:text>
-                        </xsl:attribute>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:value-of select="replace(@n, 'xyz', '')"/>
-            </a>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
