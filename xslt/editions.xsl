@@ -254,6 +254,10 @@
                     </xsl:when>
                 </xsl:choose>
                 <xsl:apply-templates/>
+                <!-- Add a space if the next sibling is a text node with whitespace or another element -->
+                <xsl:if test="following-sibling::text()[normalize-space(.) = ''] or following-sibling::*">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
