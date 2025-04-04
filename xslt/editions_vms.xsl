@@ -21,7 +21,8 @@
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
-            <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
+            <!-- Corrected line -->
+            <xsl:value-of select="/descendant::tei:titleStmt//tei:title[@type='main'][1]/text()"/>
         </xsl:variable>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
         <html>
@@ -73,21 +74,21 @@
     <!--    
         TEI FRONT
     -->
-    <xsl:template match="//text()[ancestor::tei:body]">
+    <xsl:template match="text()[ancestor::tei:body]" priority="1">
         <xsl:choose>
-            <!-- Existing condition for direct siblings -->
-            <xsl:when test="following-sibling::tei:*[1]/@break='no'">
-                <xsl:value-of select="replace(., '\s+$', '')"/>
+        <xsl:when test="following-sibling::tei:*[1][@break='no']">
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:when>
+          <xsl:when test="following-sibling::tei:cb[1] and
+                       following-sibling::tei:cb[1]/following-sibling::*[1][self::tei:lb][@break='no']">
+            <xsl:value-of select="."/>
+        </xsl:when>
+            <xsl:when test="matches(., '-$')">|
+                HYPHEN-MATCH<xsl:value-of select="."/>|
             </xsl:when>
-            <!-- Updated condition to handle <tei:cb> followed by <tei:lb> with @break='no' -->
-            <xsl:when test="following-sibling::tei:cb[1]/following-sibling::tei:lb[1]/@break='no'">
-                <xsl:value-of select="replace(., '\s+$', '')"/>
-            </xsl:when>
-            <xsl:when test="matches(., '-$', 'm')">
-                <xsl:value-of select="replace(., '\s+$', '')"/>
-            </xsl:when>
+
             <xsl:when test="following-sibling::tei:*[1][self::tei:note]">
-                <xsl:value-of select="replace(., '\s+$', '')"/>
+                <xsl:value-of select="normalize-space(.)"/>
                 <xsl:apply-templates select="following-sibling::tei:*[1]" mode="inline"/>
             </xsl:when>
             <xsl:otherwise>
@@ -195,20 +196,15 @@
     </xsl:template> -->
 
     <xsl:template match="tei:lb">
-        <xsl:choose>
-            <!-- Prevent newline when <lb/> follows <cb/> -->
-            <xsl:when test="preceding-sibling::tei:cb[1]">
-                <xsl:text disable-output-escaping="yes"></xsl:text>
-            </xsl:when>
-            <!-- Prevent extra space when <lb/> follows text -->
-            <xsl:when test="preceding-sibling::text()[normalize-space()][1]">
-                <xsl:text disable-output-escaping="yes"></xsl:text>
-            </xsl:when>
-        </xsl:choose>
-        <xsl:if test="@break">
-            <span class="pb wrdbreak">-</span>
+        <xsl:if test="parent::tei:rs">
+            <span class="pb wrdbreak">-</span><br class="pb"/>
         </xsl:if>
-        <br class="pb"/>
+        <xsl:if test="not(parent::tei:rs)">
+            <xsl:if test="@break='no'">
+                <span class="pb wrdbreak">-</span>
+            </xsl:if>
+            <br class="pb"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="tei:space">
@@ -230,74 +226,36 @@
                 <em><xsl:apply-templates/></em>
             </xsl:otherwise>
         </xsl:choose>-->
-     <xsl:template match="tei:rs">
+  <xsl:template match="tei:rs">
         <xsl:variable name="id" select="@xml:id"/>
         <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
         <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
         <xsl:choose>
-            <xsl:when test="count($tokens) > 1">
-                <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
-                <xsl:choose>
-                    <xsl:when test="@type='person'">
-                        <xsl:for-each select="$tokens">
-                            <xsl:choose>
-                                <xsl:when test="$role = 'fictional'">
-                                    <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                    </span>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                    </span>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:for-each>
-                    </xsl:when>
-                    <xsl:when test="@type='place'">
-                        <xsl:for-each select="$tokens">
-                            <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                            </span>
-                        </xsl:for-each>
-                    </xsl:when>
-                    <xsl:when test="@type='bibl'">
-                        <xsl:for-each select="$tokens">
-                            <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                            </span>
-                        </xsl:for-each>
-                    </xsl:when>
-                </xsl:choose>
+            <xsl:when test="@prev">
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:choose>
-                    <xsl:when test="@type='person'">
-                        <xsl:variable name="role" select="id(data(substring-after(@ref, '#')))/@role"/>
-                        <xsl:choose>
-                            <xsl:when test="$role = 'fictional'">
-                                <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                                </span>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                                </span>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:when test="@type='place'">
-                        <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                        </span>
-                    </xsl:when>
-                    <xsl:when test="@type='bibl'">
-                        <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                        </span>
-                    </xsl:when>
-                </xsl:choose>
-                <xsl:apply-templates/>
-                <xsl:if test="following-sibling::text()[normalize-space(.) = ''] or following-sibling::*">
+                <xsl:variable name="target" select="@ref"/>
+                <xsl:variable name="entityClass">
+                    <xsl:choose>
+                        <xsl:when test="@type='person'">persons</xsl:when>
+                        <xsl:when test="@type='place'">places</xsl:when>
+                        <xsl:when test="@type='bibl'">works</xsl:when>
+                        <xsl:otherwise>entity</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="modalTarget" select="concat('#', substring-after($target, '#'))"/>
+
+                <span class="{$entityClass} entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{$modalTarget}">
+                </span><xsl:apply-templates/>
+                
+                <xsl:if test="following-sibling::node()[1][self::text()][normalize-space(.) = '']">
                     <xsl:text> </xsl:text>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template match="tei:pb">
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
         <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
@@ -390,8 +348,5 @@
     </xsl:template>
     <xsl:template match="tei:l">
         <xsl:apply-templates/><xsl:text> / </xsl:text>
-    </xsl:template>
-    <xsl:template match="text()">
-        <xsl:value-of select="normalize-space(.)"/>
     </xsl:template>
 </xsl:stylesheet>
