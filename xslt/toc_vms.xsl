@@ -51,7 +51,7 @@
                                             <tr>
                                                 <td>
                                                     <xsl:attribute name="class">italics</xsl:attribute>
-                                                    <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/>
+                                                    <xsl:value-of select=".//tei:titleStmt/tei:title[@level='j']/text()"/>
                                                 </td>
                                                 <td>
                                                     <xsl:value-of select=".//tei:titleStmt/tei:author/text()"/>
