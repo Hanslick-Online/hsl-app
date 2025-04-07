@@ -302,10 +302,21 @@
         <xsl:variable name="id" select="generate-id()"/>
         <xsl:choose>
             <xsl:when test="$inline = 'true'">
-                <!-- Skip rendering in normal flow when inline=true -->
+                <xsl:choose>
+                    <xsl:when test="@type='footnote'">
+                        <span>
+                            <a class="anchorFoot" id="{$id}_inline"></a>
+                            <a href="#{$id}" title="{concat('footnote: ', @n)}"
+                               class="nounderline">
+                               <sup><xsl:value-of select="@n"/></sup>
+                            </a>
+                        </span>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <span id="{$id}" class="footnote">
+                <a class="anchorFoot" id="{$id}"></a>
                     <span class="footnote_link">
                         <a href="#{$id}_inline" class="nounderline">
                             <xsl:choose>
