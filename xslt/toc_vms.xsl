@@ -61,17 +61,11 @@
                                                         <xsl:attribute name="href">
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:value-of select="string(.//tei:titleStmt/tei:title[@level='a'][@type='main'])"/>
-                                                        <!-- <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
-                                                            <xsl:value-of select="replace(replace(replace(replace(., '\(', ''), '\)', ''), '„', ''), '“', '')"/>
-                                                            <xsl:if test="position() != last()">
-                                                                <br/>
-                                                            </xsl:if>
-                                                        </xsl:for-each> -->
+                                                        <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a'][@type='main']"/>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select="string(.//tei:titleStmt/tei:title[@level='a'][@type='sub'])"/>
+                                                     <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a'][@type='sub']"/>
                                                 </td>
                                                 <xsl:variable name="eventDate" select=".//tei:imprint/tei:date" />
                                                 <td>
@@ -114,6 +108,27 @@
         </h2>
     </xsl:template>
 
+    <xsl:template match="tei:title">
+        <xsl:choose>
+            <xsl:when test="@rend='italics'">
+                <span class="italic">
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:when>
+            <xsl:when test="@rend='quotes'">
+                <q>
+                    <xsl:apply-templates/>
+                </q>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="tei:rs">
+        <xsl:apply-templates/>
+    </xsl:template>
 
     <xsl:template match="tei:p">
         <p id="{generate-id()}">
