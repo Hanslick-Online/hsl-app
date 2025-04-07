@@ -61,7 +61,7 @@
                                                         <xsl:attribute name="href">
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title/text()"/>
+                                                        <xsl:value-of select="string(.//tei:titleStmt/tei:title[@level='a'][@type='main'])"/>
                                                         <!-- <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
                                                             <xsl:value-of select="replace(replace(replace(replace(., '\(', ''), '\)', ''), '„', ''), '“', '')"/>
                                                             <xsl:if test="position() != last()">
@@ -71,9 +71,7 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <xsl:for-each select="(//tei:body/tei:div/tei:head[@type='h2'])[1]">
-                                                        <xsl:value-of select="normalize-space()"/>
-                                                    </xsl:for-each>
+                                                    <xsl:value-of select="string(.//tei:titleStmt/tei:title[@level='a'][@type='sub'])"/>
                                                 </td>
                                                 <xsl:variable name="eventDate" select=".//tei:imprint/tei:date" />
                                                 <td>
