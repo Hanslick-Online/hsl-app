@@ -337,7 +337,7 @@
                 <xsl:if test="@type='footnote'">
                     <a class="anchorFoot" id="{$id}_inline"></a>
                     <a href="#{$id}" title="{concat('footnote: ', @n)}" class="nounderline">
-                        <sup><xsl:value-of select="@n"/></sup>
+                        <xsl:value-of select="@n"/>
                     </a>
                 </xsl:if>
             </xsl:when>
