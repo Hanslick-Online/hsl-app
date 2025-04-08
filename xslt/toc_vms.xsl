@@ -108,27 +108,27 @@
         </h2>
     </xsl:template>
 
-    <xsl:template match="tei:title">
+
+    <xsl:template match="tei:*[@rend]">
         <xsl:choose>
-            <xsl:when test="@rend='italics'">
-                <span class="italic">
-                    <xsl:apply-templates/>
-                </span>
-            </xsl:when>
             <xsl:when test="@rend='quotes'">
-                <q>
-                    <xsl:apply-templates/>
-                </q>
+                <q><xsl:apply-templates/></q>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates/>
+                <span>
+                    <xsl:attribute name="class">
+                        <xsl:value-of select="@rend"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </span>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="tei:rs">
-        <xsl:apply-templates/>
-    </xsl:template>
+<!-- Handle <rs> by just outputting its content -->
+<xsl:template match="tei:rs">
+    <xsl:apply-templates/>
+</xsl:template>
 
     <xsl:template match="tei:p">
         <p id="{generate-id()}">
