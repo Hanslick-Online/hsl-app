@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-    xmlns="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="xsl tei xs">
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
-    
+
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
@@ -33,11 +32,11 @@
                 <link rel="stylesheet" href="css/de-micro-editor.css"></link>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script>
             </head>
-            
+
             <body class="page">
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
-                    
+
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="toc-address" select="'toc_vms.html'" />
@@ -47,9 +46,7 @@
                             <xsl:with-param name="book-chapters" select="'false'"/>
                             <xsl:with-param name="book-editions" select="'false'"/>
                             <xsl:with-param name="footnotes" select="'true'"/>
-                            <xsl:with-param name="footnotes-xpath"
-                                as="item()*"
-                                select="//tei:body//tei:note[@type='footnote']"/>
+                            <xsl:with-param name="footnotes-xpath" as="item()*" select="//tei:body//tei:note[@type='footnote']"/>
                             <xsl:with-param name="body-xpath" as="item()*" select="//tei:body"/>
                             <xsl:with-param name="edition-project-class">
                                 <xsl:text>section-vms</xsl:text>
@@ -70,33 +67,32 @@
             </body>
         </html>
     </xsl:template>
-    
+
     <!--    
         TEI FRONT
     -->
     <xsl:template match="text()[ancestor::tei:body]" priority="1">
         <xsl:choose>
-        <xsl:when test="following-sibling::tei:*[1][@break='no']">
-            <xsl:value-of select="normalize-space(.)"/>
-        </xsl:when>
-          <xsl:when test="following-sibling::tei:cb[1] and
-                       following-sibling::tei:cb[1]/following-sibling::*[1][self::tei:lb][@break='no']">
-            <xsl:value-of select="."/>
-        </xsl:when>
+            <xsl:when test="following-sibling::tei:*[1][@break='no']">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:when>
+            <xsl:when test="following-sibling::tei:cb[1] and following-sibling::tei:cb[1]/following-sibling::*[1][self::tei:lb][@break='no']">
+                <xsl:value-of select="."/>
+            </xsl:when>
             <xsl:when test="matches(., '-$')">|
-                HYPHEN-MATCH<xsl:value-of select="."/>|
+                HYPHEN-MATCH<xsl:value-of select="."/>
+|
             </xsl:when>
 
             <xsl:when test="following-sibling::tei:*[1][self::tei:note]">
                 <xsl:value-of select="normalize-space(.)"/>
-                <xsl:apply-templates select="following-sibling::tei:*[1]" mode="inline"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="tei:docTitle">
         <div class="docTitle">
             <a class="anchor" id="index.xml-body.1_div.0"></a>
@@ -105,43 +101,45 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:titlePart">
         <div class="titlePart {@type}">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:docAuthor">
         <span class="docAuthor">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-    
+
     <xsl:template match="tei:docEdition">
         <div class="docEdition">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:docImprint">
         <div class="docImprint">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:milestone">
         <div class="milestone">
             <xsl:text>***</xsl:text>
         </div>
     </xsl:template>
-    
+
     <!--    
         TEI BODY
     -->
     <xsl:template match="tei:byline">
         <xsl:if test="ancestor::tei:body">
-            <p class="yes-index"><xsl:apply-templates/></p>
+            <p class="yes-index">
+                <xsl:apply-templates/>
+            </p>
         </xsl:if>
         <xsl:if test="ancestor::tei:front">
             <div class="byline">
@@ -149,41 +147,53 @@
             </div>
         </xsl:if>
     </xsl:template>
-        
+
     <xsl:template match="tei:hi">
         <xsl:choose>
             <xsl:when test="@rendition='#em'">
-                <span class="italic"><xsl:apply-templates/></span>
+                <span class="italic">
+                    <xsl:apply-templates/>
+                </span>
             </xsl:when>
             <xsl:when test="@rendition='#bold'">
-                <span class="bold"><xsl:apply-templates/></span>
+                <span class="bold">
+                    <xsl:apply-templates/>
+                </span>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
 
-   <xsl:template match="tei:head[ancestor::tei:body]">
+    <xsl:template match="tei:head[ancestor::tei:body]">
         <xsl:choose>
             <xsl:when test="@type='h1'">
-                <h1 class="yes-index"><xsl:apply-templates/></h1>
+                <h1 class="yes-index">
+                    <xsl:apply-templates/>
+                </h1>
             </xsl:when>
             <xsl:when test="@type='h2'">
-                <h2 class="yes-index"><xsl:apply-templates/></h2>
+                <h2 class="yes-index">
+                    <xsl:apply-templates/>
+                </h2>
             </xsl:when>
             <xsl:when test="@type='h3'">
-                <h3 class="yes-index"><xsl:apply-templates/></h3>
+                <h3 class="yes-index">
+                    <xsl:apply-templates/>
+                </h3>
             </xsl:when>
             <xsl:when test="@type='h4'">
-                <h4 class="yes-index"><xsl:apply-templates/></h4>
+                <h4 class="yes-index">
+                    <xsl:apply-templates/>
+                </h4>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="tei:p">
         <p id="{@xml:id}" class="indentedP yes-index">
             <xsl:apply-templates/>
         </p>
     </xsl:template>
-    
+
     <xsl:template match="tei:cb" />
     <!--    <xsl:choose>
             <xsl:when test="following-sibling::*[@break]">
@@ -197,7 +207,8 @@
 
     <xsl:template match="tei:lb">
         <xsl:if test="parent::tei:rs">
-            <span class="pb wrdbreak">-</span><br class="pb"/>
+            <span class="pb wrdbreak">-</span>
+            <br class="pb"/>
         </xsl:if>
         <xsl:if test="not(parent::tei:rs)">
             <xsl:if test="@break='no'">
@@ -212,8 +223,12 @@
             <xsl:value-of select="string-join((for $i in 1 to @quantity return '&#x00A0;'),'')"/>
         </span>
     </xsl:template>
-    <xsl:template match="tei:emph"><em><xsl:apply-templates/></em></xsl:template>
-        <!--<xsl:choose>
+    <xsl:template match="tei:emph">
+        <em>
+            <xsl:apply-templates/>
+        </em>
+    </xsl:template>
+    <!--<xsl:choose>
             <xsl:when test="starts-with(following-sibling::text()[1], ',') or 
                 starts-with(following-sibling::text()[1], '’') or
                 starts-with(following-sibling::text()[1], '.')">
@@ -226,7 +241,7 @@
                 <em><xsl:apply-templates/></em>
             </xsl:otherwise>
         </xsl:choose>-->
-  <xsl:template match="tei:rs">
+    <xsl:template match="tei:rs">
         <xsl:variable name="id" select="@xml:id"/>
         <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
         <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
@@ -247,23 +262,30 @@
                 <xsl:variable name="modalTarget" select="concat('#', substring-after($target, '#'))"/>
 
                 <span class="{$entityClass} entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{$modalTarget}">
-                </span><xsl:apply-templates/>
-                
+                </span>
+                <xsl:apply-templates/>
+
                 <xsl:if test="following-sibling::node()[1][self::text()][normalize-space(.) = '']">
-                    <xsl:text> </xsl:text>
+                    <xsl:text></xsl:text>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="tei:pb">
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
         <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
         <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-        <span class="pb"><br/><br/><xsl:value-of select="@n"/></span>
+        <span class="pb">
+            <br/>
+            <br/>
+            <xsl:value-of select="@n"/>
+        </span>
     </xsl:template>
     <xsl:template match="tei:cit">
-        <cite><xsl:apply-templates/></cite>
+        <cite>
+            <xsl:apply-templates/>
+        </cite>
     </xsl:template>
     <xsl:template match="tei:quote">
         <xsl:apply-templates/>
@@ -280,58 +302,64 @@
     <xsl:template match="tei:item">
         <xsl:choose>
             <xsl:when test="parent::tei:list[@type='unordered']|ancestor::tei:body">
-                <li><xsl:apply-templates/></li>
+                <li>
+                    <xsl:apply-templates/>
+                </li>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="tei:date">
-        <span class="date"><xsl:apply-templates/></span>
+        <span class="date">
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
     <xsl:template match="tei:ref">
         <xsl:choose>
             <xsl:when test="@type='edition'">
-                <a class="ref {@type}" href="t__{@target}"><xsl:apply-templates/></a>
+                <a class="ref {@type}" href="t__{@target}">
+                    <xsl:apply-templates/>
+                </a>
             </xsl:when>
             <xsl:otherwise>
-                <a class="ref {@type}" href="{@target}"><xsl:apply-templates/></a>
+                <a class="ref {@type}" href="{@target}">
+                    <xsl:apply-templates/>
+                </a>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
     <xsl:template match="tei:note" name="footnote">
         <xsl:param name="inline" select="'true'"/>
         <xsl:variable name="id" select="generate-id()"/>
         <xsl:choose>
             <xsl:when test="$inline = 'true'">
-                <xsl:choose>
-                    <xsl:when test="@type='footnote'">
-                        <span>
-                            <a class="anchorFoot" id="{$id}_inline"></a>
-                            <a href="#{$id}" title="{concat('footnote: ', @n)}"
-                               class="nounderline">
-                               <sup><xsl:value-of select="@n"/></sup>
-                            </a>
-                        </span>
-                    </xsl:when>
-                </xsl:choose>
+                <!-- Only render the reference number in the main text -->
+                <xsl:if test="@type='footnote'">
+                    <a class="anchorFoot" id="{$id}_inline"></a>
+                    <a href="#{$id}" title="{concat('footnote: ', @n)}" class="nounderline">
+                        <sup><xsl:value-of select="@n"/></sup>
+                    </a>
+                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <span id="{$id}" class="footnote">
-                <a class="anchorFoot" id="{$id}"></a>
-                    <span class="footnote_link">
-                        <a href="#{$id}_inline" class="nounderline">
-                            <xsl:choose>
-                                <xsl:when test="starts-with(@n, '*')">*</xsl:when>
-                                <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
-                            </xsl:choose>
-                        </a>
+                <!-- Render the full footnote in the footnotes section -->
+                <xsl:if test="@type='footnote'">
+                    <span id="{$id}" class="footnote">
+                        <a class="anchorFoot" id="{$id}"></a>
+                        <span class="footnote_link">
+                            <a href="#{$id}_inline" class="nounderline">
+                                <xsl:value-of select="@n"/>
+                            </a>
+                        </span>
+                        <span class="footnote_text">
+                            <xsl:apply-templates/>
+                        </span>
                     </span>
-                    <span class="footnote_text">
-                        <xsl:apply-templates/>
-                    </span>
-                </span>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
     <xsl:template match="tei:notatedMusic">
         <xsl:choose>
             <xsl:when test="parent::tei:p">
@@ -358,6 +386,7 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="tei:l">
-        <xsl:apply-templates/><xsl:text> / </xsl:text>
+        <xsl:apply-templates/>
+        <xsl:text> / </xsl:text>
     </xsl:template>
 </xsl:stylesheet>
