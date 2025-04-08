@@ -245,6 +245,7 @@
         <xsl:variable name="id" select="@xml:id"/>
         <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
         <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
+        <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
         <xsl:choose>
             <xsl:when test="@prev">
                 <xsl:apply-templates/>
@@ -253,6 +254,8 @@
                 <xsl:variable name="target" select="@ref"/>
                 <xsl:variable name="entityClass">
                     <xsl:choose>
+                        <xsl:when test="$role='fictional'">figures</xsl:when>
+                        <xsl:when test="@role='fictional'">figures</xsl:when>
                         <xsl:when test="@type='person'">persons</xsl:when>
                         <xsl:when test="@type='place'">places</xsl:when>
                         <xsl:when test="@type='bibl'">works</xsl:when>
