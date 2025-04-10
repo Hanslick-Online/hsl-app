@@ -80,7 +80,7 @@
                 <xsl:value-of select="."/>
             </xsl:when>
             <xsl:when test="matches(., '-$')">|
-                HYPHEN-MATCH<xsl:value-of select="."/>
+                <xsl:value-of select="."/>
 |
             </xsl:when>
 
