@@ -355,7 +355,7 @@
                             </a>
                         </span>
                         <span class="footnote_text">
-                            <xsl:apply-templates/>
+                            <!-- <xsl:apply-templates/> -->
                         </span>
                     </span>
                 </xsl:if>
