@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td>
                                                     <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
-                                                        <xsl:value-of select="."/>
+                                                        <xsl:apply-templates select="node()"/>
                                                         <xsl:if test="position() != last()">
                                                             <br/>
                                                         </xsl:if>
@@ -108,7 +108,20 @@
     <xsl:template match="tei:p">
         <p id="{generate-id()}"><xsl:apply-templates/></p>
     </xsl:template>
-    
+     <xsl:template match="text()[ancestor::tei:body]" priority="1">
+        <xsl:choose>
+            <xsl:when test="following-sibling::tei:*[1][@break='no']">
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:when>
+            <xsl:when test="matches(., '-$')">|
+                HYPHEN-MATCH<xsl:value-of select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="tei:lb[@break='no']" />
     <xsl:template match="tei:list">
         <ul id="{generate-id()}"><xsl:apply-templates/></ul>
     </xsl:template>
