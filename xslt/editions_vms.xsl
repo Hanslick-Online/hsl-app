@@ -79,9 +79,8 @@
             <xsl:when test="following-sibling::tei:cb[1] and following-sibling::tei:cb[1]/following-sibling::*[1][self::tei:lb][@break='no']">
                 <xsl:value-of select="."/>
             </xsl:when>
-            <xsl:when test="matches(., '-$')">|
+            <xsl:when test="matches(., '-$')">
                 <xsl:value-of select="."/>
-|
             </xsl:when>
 
             <xsl:when test="following-sibling::tei:*[1][self::tei:note]">
