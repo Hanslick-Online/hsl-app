@@ -77,12 +77,14 @@
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:when>
             <xsl:when test="following-sibling::tei:cb[1] and following-sibling::tei:cb[1]/following-sibling::*[1][self::tei:lb][@break='no']">
-                <xsl:value-of select="."/>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:when>
+            <xsl:when test="following-sibling::tei:pb[1] and following-sibling::tei:pb[1]/following-sibling::*[1][self::tei:lb][@break='no']">
+                <xsl:value-of select="normalize-space(.)"/>
             </xsl:when>
             <xsl:when test="matches(., '-$')">
                 <xsl:value-of select="."/>
             </xsl:when>
-
             <xsl:when test="following-sibling::tei:*[1][self::tei:note]">
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:when>
@@ -206,15 +208,9 @@
 
     <xsl:template match="tei:lb">
         <xsl:if test="parent::tei:rs">
-            <span class="pb wrdbreak">-</span>
-            <br class="pb"/>
+            <span class="pb wrdbreak">-</span><br class="pb"/>
         </xsl:if>
-        <xsl:if test="not(parent::tei:rs)">
-            <xsl:if test="@break='no'">
-                <span class="pb wrdbreak">-</span>
-            </xsl:if>
-            <br class="pb"/>
-        </xsl:if>
+        <xsl:if test="not(parent::tei:rs)"><xsl:if test="@break='no'"><span class="pb wrdbreak">-</span></xsl:if><br class="pb"/></xsl:if>
     </xsl:template>
 
     <xsl:template match="tei:space">
@@ -278,11 +274,7 @@
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
         <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
         <span class="anchor-pb" source="hsl-vms/{$facs_url}"></span>
-        <span class="pb">
-            <br/>
-            <br/>
-            <xsl:value-of select="@n"/>
-        </span>
+        <span class="pb"><xsl:value-of select="@n"/></span>
     </xsl:template>
     <xsl:template match="tei:cit">
         <cite>
