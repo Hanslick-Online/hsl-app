@@ -81,14 +81,13 @@
         <xsl:variable name="shouldNormalise" select="matches(., '-$')" />
         <xsl:choose>
             <xsl:when test="$shouldHyphenate">
-                <xsl:value-of select="replace(., '\s{2,}', ' ')"/>
+                <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s+$', '')"/>
                 <xsl:choose>
                     <xsl:when test="$shouldNormalise">
                         <xsl:value-of select="replace(., '\s$', '')" />
-                        <span class="wrdbreak">-</span>
                     </xsl:when>
                 </xsl:choose>
-                <span class="wrdbreak">-</span>
+                <span class="pb wrdbreak">-</span>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
