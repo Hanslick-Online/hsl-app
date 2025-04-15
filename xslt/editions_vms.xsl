@@ -72,17 +72,23 @@
         <xsl:variable name="n1" select="following-sibling::node()[1]"/>
         <xsl:variable name="n2" select="following-sibling::node()[2]"/>
         <xsl:variable name="n3" select="following-sibling::node()[3]"/>
-        <xsl:variable name="shouldHyphenate" select=" $n1/self::tei:lb[@break='no'] or
-                                                      $n1/self::tei:cb[@break='no'] or
+        <xsl:variable name="shouldHyphenate" select=" $n1/self::tei:lb[@break='no'] or $n1/self::tei:cb[@break='no'] or
                                                     ( $n1/self::tei:cb and $n2/self::tei:*[@break='no']) or
                                                     ( $n1/self::tei:pb and $n2/self::tei:*[@break='no']) or
                                                     ( $n1/self::tei:pb and $n2/self::tei:cb and $n3/self::tei:*[@break='no']) or
                                                       matches(., '-$')
         "/>
+        <xsl:variable name="shouldNormalise" select="matches(., '-$')" />
         <xsl:choose>
             <xsl:when test="$shouldHyphenate">
                 <xsl:value-of select="replace(., '\s{2,}', ' ')"/>
-<span class="wrdbreak">-</span>
+                <xsl:choose>
+                    <xsl:when test="$shouldNormalise">
+                        <xsl:value-of select="replace(., '\s$', '')" />
+                        <span class="wrdbreak">-</span>
+                    </xsl:when>
+                </xsl:choose>
+                <span class="wrdbreak">-</span>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
@@ -192,11 +198,11 @@
     </xsl:template>
 
     <xsl:template match="tei:cb">
-        <br class="cb"/>
+        <br class="pb"/>
     </xsl:template>
 
     <xsl:template match="tei:lb">
-        <br class="lb"/>
+        <br class="pb"/>
     </xsl:template>
 
     <xsl:template match="tei:space">
