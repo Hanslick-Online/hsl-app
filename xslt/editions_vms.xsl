@@ -81,7 +81,7 @@
         "/>
         <xsl:choose>
             <xsl:when test="$shouldHyphenate">
-                <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s+$', '')"/>
+                <xsl:value-of select="replace(., '\s{2,}', ' ')"/>
 <span class="wrdbreak">-</span>
             </xsl:when>
             <xsl:otherwise>
