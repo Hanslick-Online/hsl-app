@@ -173,11 +173,11 @@
         <xsl:choose>
             <xsl:when test="$text != ''">
                 <xsl:if test="starts-with(., ' ')">
-                    <xsl:text></xsl:text>
+                    <xsl:text> </xsl:text>
                 </xsl:if>
                 <xsl:value-of select="$text"/>
                 <xsl:if test="ends-with(., ' ')">
-                    <xsl:text></xsl:text>
+                    <xsl:text> </xsl:text>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise/>
