@@ -19,45 +19,39 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.10
+        python-version: "3.10"
 
-    - name: Install dependencies
+    - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r build_app/python/requirements.txt
-
-    - name: Transform XML-TEI to LaTeX
-      run: |
-        mkdir -p data/critics/tex/ 
-        mkdir -p data/traktat/tex/
-        mkdir -p data/vms/tex/
-        for folder in data/critics data/traktat /data/vms; do
-          for file in $folder/editions/*.xml; do
-            echo "Processing $file..."
-            build_app/python/xml2latex.py "$file" "$folder/tex/$(basename "${file%.xml}.tex")"
-          done
-        done
-
     - name: Install TeX Live
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+        sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-german
 
-    - name: Compile LaTeX to PDF
+    - name: Transform XML-TEI to LaTeX
       run: |
-        mkdir -p data/critics/pdf/  # Create the folder for PDF files
-        mkdir -p data/traktat/pdf/
-        mkdir -p data/vms/pdf/
-        for folder in data/critics data/traktat data/vms; do
-          for file in $folder/tex/*.tex; do
-            echo "Compiling $file..."
-            xelatex -output-directory="$folder/pdf" "$file"
+        mkdir -p data/{critics,traktat,vms}/{tex,pdf} html/pdf
+        folders=("data/critics" "data/traktat" "data/vms")
+        for folder in "${folders[@]}" ; do
+          find "$folder/editions" -type f -name "*.xml" | while read filename; do
+            echo "Transforming $filename"
+            build_app/python/xml2latex.py "$filename" "$folder/tex/$(basename ${filename%.xml}.tex)"
           done
         done
-
-    # Step 7: Commit and push PDFs
-    - name: Commit and push PDF files
+    - name: Compile LaTeX to PDF
       run: |
-        git add data/pdf/*.pdf
-        git commit -m "Generated PDFs from LaTeX files"
-        git push
+        folders=("data/critics" "data/traktat" "data/vms")
+        for folder in "${folders[@]}"; do
+          find "$folder/tex" -type f -name "*.tex" | while read filename; do
+            echo "Compiling $filename"
+            xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
+          done
+        done
+    - name: Remove temp files
+      run: find "html/pdf" -type f \( -name "*.aux" -o -name "*.log" \) -delete
+    - name: Commit and push PDF files
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Export and Transformation done

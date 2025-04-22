@@ -17,7 +17,9 @@
     <property name="xsl_comp" value="${basedir}/xslt/comp.xsl"/>
     <property name="xsl_meta" value="${basedir}/xslt/meta.xsl"/>
     <property name="xsl_index" value="${basedir}/xslt/index.xsl"/>
+    <property name="xsl_toc_t" value="${basedir}/xslt/toc_t.xsl"/>
     <property name="xsl_toc" value="${basedir}/xslt/toc.xsl"/>
+    <property name="xsl_toc_t_en" value="${basedir}/xslt/toc_t_en.xsl"/>
     <property name="xsl_toc_en" value="${basedir}/xslt/toc_en.xsl"/>
     <property name="xsl_toc_vms" value="${basedir}/xslt/toc_vms.xsl"/>
     <property name="xsl_indices" value="${basedir}/xslt/indices.xsl"/>
@@ -35,6 +37,7 @@
     <xslt style="${xsl_editions}"  basedir="${editions}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
+        <mapper type="regexp" from="^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$$" to="t__VMS_Auflage_\1_\2.html"/>
     </xslt>
     <xslt style="${xsl_comp}"  basedir="${comp}" destdir="${target}" includes="*.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
@@ -67,6 +70,14 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+    <xslt in="${index}" out="${target}/toc_t.html" style="${xsl_toc_t}">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+   <xslt in="${index}" out="${target}/toc_t_en.html" style="${xsl_toc_t_en}"> 
+       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+       <classpath location="${basedir}/saxon/saxon9he.jar"/>
+   </xslt>            
     <xslt in="${index}" out="${target}/toc.html" style="${xsl_toc}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>

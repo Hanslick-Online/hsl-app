@@ -49,20 +49,24 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=en">
+                                        <a class="dropdown-item" href="toc_t_en.html?lang=en">
                                             Treatise
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc.html?lang=en">
+                                        <a class="dropdown-item" href="toc_en.html?lang=en">
                                             Reviews
                                         </a>
                                     </li>
                                     <li>
-                                        <!-- <a href="toc_vms.html?lang=de" -->
-                                           <a class="dropdown-item text-muted">
+                                        <a class="dropdown-item" href="toc_vms.html?lang=en">
                                             Review of VMS (in progress)
                                         </a>
+                                        <!--
+                                        <a class="dropdown-item text-muted">
+                                            Review of VMS (in progress)
+                                        </a>
+                                        -->
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite-engl.html?lang=en"

@@ -49,7 +49,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="t__01_VMS_1854_TEI_AW_26-01-21-TEI-P5.html?lang=de">
+                                        <a class="dropdown-item" href="toc_t.html?lang=de">
                                             Traktat
                                         </a>
                                     </li>
@@ -58,11 +58,15 @@
                                             Kritiken
                                         </a>
                                     </li>
-                                    <li> 
-                                        <!-- <a href="toc_vms.html?lang=de" -->
-                                           <a class="dropdown-item text-muted">
+                                    <li>
+                                        <a class="dropdown-item" href="toc_vms.html?lang=de">
+                                               Kritiken von VMS (in Arbeit)
+                                        </a>
+                                        <!-- 
+                                        <a class="dropdown-item text-muted">
                                             Kritiken von VMS (in Arbeit)
                                         </a>
+                                        -->
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="editionsrichtlinien-und-how-to-cite.html?lang=de"

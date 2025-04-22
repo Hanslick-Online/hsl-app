@@ -86,13 +86,13 @@ var editor = new LoadEditor({
         {
           opt: "pbs",
           color: "none",
-          title: "Seitenumbrüche",
-          html_class: "pb cb",  // Changed from "pb" to "pb cb"
+          title: "Seiten-, Spalten- und Zeilenumbrüche",
+          html_class: "pb",
           css_class: "pbs",
           chg_citation: "citation-url",
           hide: {
             hidden: true,
-            class: "pb",  // Changed from "pb" to "pb cb"
+            class: "pb"  // Changed from "pb" to "pb cb"
           },
           features: {
             all: false,
@@ -255,7 +255,9 @@ var editor = new LoadEditor({
             "imprint.html": "imprint.html",
             "imprint_en.html": "imprint.html",
             "toc.html": "toc.html",
-            "toc_en.html": "toc.html"
+            "toc_en.html": "toc.html",
+            "toc_t.html": "toc_t_en.html",
+    	    "toc_t.html": "toc_t.html",
           },
         },
         {
@@ -286,7 +288,10 @@ var editor = new LoadEditor({
             "imprint.html": "imprint_en.html",
             "imprint_en.html": "imprint_en.html",
             "toc.html": "toc_en.html",
-            "toc_en.html": "toc_en.html"
+            "toc_en.html": "toc_en.html",
+            "toc_t_en.html": "toc_t.html",
+            "toc_t.html": "toc_t.html",
+    
           },
         },
       ],
