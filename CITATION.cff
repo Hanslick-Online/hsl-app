@@ -11,22 +11,22 @@ grant: 'https://doi.org/10.55776/P30554'
 grant: 'https://doi.org/10.55776/P35379'
 authors:
    - given-names: Fernando
-    family-names: Sanz-Lázaro
-    orcid: 'https://orcid.org/0000-0002-8815-6741'
-    affiliation: 'Austrian Academy of Sciences'
-    role: 'Research Data Engineer'
-  - given-names: Daniel
-    family-names: Elsner
-    orcid: 'https://orcid.org/0000-0002-0636-4476'
-    affiliation: 'Austrian Academy of Sciences'
-    role: 'Research Data Engineer' 
-  - given-names: Alexander
-    family-names: Wilfing
-    affiliation: 'Austrian Academy of Sciences'
-    orcid: 'https://orcid.org/0000-0002-0117-3574'
-    role: 'Principal Investigator'
-  - given-names: Peter
-    family-name: Andorfer
-    orcid: 'https://orcid.org/0000-0002-9575-9372'
-    affiliation: 'Austrian Academy of Sciences'
-    role: Researcher
+     family-names: Sanz-Lázaro
+     orcid: 'https://orcid.org/0000-0002-8815-6741'
+     affiliation: 'https://ror.org/03anc3s24'
+     role: 'Research Data Engineer'
+   - given-names: Daniel
+     family-names: Elsner
+     orcid: 'https://orcid.org/0000-0002-0636-4476'
+     affiliation: 'https://ror.org/03anc3s24'
+     role: 'Research Data Engineer' 
+   - given-names: Alexander
+     family-names: Wilfing
+     affiliation: 'https://ror.org/03anc3s24'
+     orcid: 'https://orcid.org/0000-0002-0117-3574'
+     role: 'Principal Investigator'
+   - given-names: Peter
+     family-name: Andorfer
+     orcid: 'https://orcid.org/0000-0002-9575-9372'
+     affiliation: 'https://ror.org/03anc3s24'
+     role: Researcher
