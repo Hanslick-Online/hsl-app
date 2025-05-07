@@ -50,11 +50,11 @@
                 </li>
                 <xsl:if test="$showSlider = 'true'">
                     <li class="dropdown-item">
-                        <annotation-slider opt="cnpt"></annotation-slider>
+                        <annotation-slider opt="term"></annotation-slider>
                     </li>
                 </xsl:if>
                 <li class="dropdown-item">
-                    <annotation-slider opt="term"></annotation-slider>
+                    <annotation-slider opt="pbs"></annotation-slider>
                 </li>
             </ul>                                                    
         </div>
