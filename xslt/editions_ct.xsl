@@ -116,8 +116,7 @@
                 </xsl:choose>
                 <xsl:variable name="hyphenMark">
                     <xsl:choose>
-                        <xsl:when test="$shouldNormalise"></xsl:when>
-                        <xsl:otherwise>-</xsl:otherwise>
+                        <xsl:when test="not($shouldNormalise)" >-</xsl:when>
                     </xsl:choose>
                 </xsl:variable>
                 <span class="pb wrdbreak"><xsl:value-of select="$hyphenMark" /></span>
