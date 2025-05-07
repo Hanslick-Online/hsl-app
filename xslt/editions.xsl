@@ -4,7 +4,6 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
-
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
@@ -38,6 +37,7 @@
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="toc-address" select="'toc.html'"/>
+                            <xsl:with-param name="showSlider" select="'true'"/>
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="book-chapters" select="'true'"/>
                             <xsl:with-param name="back-btn" select="'false'"/>

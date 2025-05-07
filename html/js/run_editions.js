@@ -84,6 +84,22 @@ var editor = new LoadEditor({
           },
         },
         {
+          opt: "term",
+          color: "blue",
+          title: "Begriffe",
+          html_class: "terms",
+          css_class: "term",
+          chg_citation: "citation-url",
+          hide: {
+            hidden: false,
+            class: "terms .entity",
+          },
+          features: {
+            all: false,
+            class: "features-2",
+          },
+        },
+        {
           opt: "pbs",
           color: "none",
           title: "Seiten-, Spalten- und Zeilenumbrüche",

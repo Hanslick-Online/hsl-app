@@ -10,8 +10,8 @@
             <p>Custom template to create a editions view.</p>
         </desc>    
     </doc>
-    
     <xsl:template name="view-type">
+        <xsl:param name="showSlider" select="'false'"/>
         <xsl:param name="toc-address" />
         <xsl:param name="editor-widget" />
         <xsl:param name="back-btn" />
@@ -58,7 +58,9 @@
                                 </a>
                             </xsl:if>
                             <xsl:if test="$anotation-options = 'true'">
-                                <xsl:call-template name="annotation-options"/>
+                                <xsl:call-template name="annotation-options">
+                                    <xsl:with-param name="showSlider" select="$showSlider"/>
+                                </xsl:call-template>
                                 <!-- loaded in main editions.xls -->
                             </xsl:if>
                             <xsl:if test="$book-editions = 'true'">
