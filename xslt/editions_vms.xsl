@@ -232,26 +232,21 @@
                     <xsl:when test="$type='person'">
                         <xsl:choose>
                             <xsl:when test="$role = 'fictional'">
-                                <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                </span>
+                                <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                                </span>
+                                <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="$type='place'">
-                        <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                        </span>
+                        <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
                     </xsl:when>
                     <xsl:when test="$type='bibl'">
-                        <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                        </span>
+                        <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}">
-                        </span>
+                        <span class="entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:for-each>
@@ -273,9 +268,8 @@
                 </xsl:choose>
             </xsl:variable>
             
-            <span class="{$entityClass} entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{$target}">
-                <xsl:apply-templates/>
-            </span>
+            <span class="{$entityClass} entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{$target}" />
+            <xsl:apply-templates/>
         </xsl:when>
         
         <!-- Previous reference case -->
