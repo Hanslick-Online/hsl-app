@@ -99,6 +99,13 @@
                                             Works
                                         </a>
                                     </li>
+                                    <li>
+                                        <span class="text-muted">Terms</span>
+                                        <!-- <a class="dropdown-item text-light" href="listterm.html?lang=de"
+                                            title="">
+                                            Terms
+                                        </a>   -->
+                                    </li>
                                 </ul>
                             </li>
                             

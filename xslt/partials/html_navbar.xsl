@@ -99,6 +99,13 @@
                                             Werkregister
                                         </a>
                                     </li>
+                                    <li>
+                                        <span class="text-muted">Begriffsregister</span>
+                                        <!-- <a class="dropdown-item text-light" href="listterm.html?lang=de"
+                                            title="">
+                                            Begriffsregister
+                                        </a>   -->
+                                    </li>
                                 </ul>
                             </li>
                             
