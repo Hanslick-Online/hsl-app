@@ -100,7 +100,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <span class="text-muted">Terms</span>
+                                        <span class="dropdown-item text-muted">Terms</span>
                                         <!-- <a class="dropdown-item text-light" href="listterm.html?lang=de"
                                             title="">
                                             Terms

@@ -49,7 +49,7 @@
                     <annotation-slider opt="wrk"></annotation-slider>
                 </li>
                 <xsl:if test="$showSlider = 'true'">
-                    <li class="dropdown-item">
+                    <li class="dropdown-item text-muted">
                         <annotation-slider opt="term"></annotation-slider>
                     </li>
                 </xsl:if>

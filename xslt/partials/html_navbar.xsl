@@ -100,7 +100,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <span class="text-muted">Begriffsregister</span>
+                                        <span class="dropdown-item text-muted">Begriffsregister</span>
                                         <!-- <a class="dropdown-item text-light" href="listterm.html?lang=de"
                                             title="">
                                             Begriffsregister
