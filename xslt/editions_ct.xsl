@@ -101,22 +101,16 @@
                                                     ( $n1/self::tei:cb and $n2/self::tei:*[@break='no']) or
                                                     ( $n1/self::tei:pb and $n2/self::tei:*[@break='no']) or
                                                     ( $n1/self::tei:pb and $n2/self::tei:cb and $n3/self::tei:*[@break='no']) or
-                                                      matches(., '-$')
+                                                      matches(., '\-\s*$')
         "/>
         <xsl:variable name="shouldNormalise" select="matches(., '\-\s*$')" />
         <xsl:choose>
             <xsl:when test="$shouldHyphenate">
-                <xsl:choose>
-                    <xsl:when test="$shouldNormalise">
-                        <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s$', '')" />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s+$', '')" />
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s$', '')" />
                 <xsl:variable name="hyphenMark">
                     <xsl:choose>
-                        <xsl:when test="not($shouldNormalise)" >-</xsl:when>
+                        <xsl:when test="$shouldNormalise" />
+                        <xsl:otherwise>-</xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
                 <span class="pb wrdbreak"><xsl:value-of select="$hyphenMark" /></span>
