@@ -205,11 +205,11 @@
     </xsl:template>
 
     <xsl:template match="tei:cb">
-        <br class="pb"/>
+        <br class="pb badge-item"/>
     </xsl:template>
 
     <xsl:template match="tei:lb">
-        <br class="pb"/>
+        <br class="pb badge-item"/>
     </xsl:template>
 
     <xsl:template match="tei:space">

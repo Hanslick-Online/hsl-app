@@ -84,6 +84,22 @@ var editor = new LoadEditor({
           },
         },
         {
+          opt: "pbs",
+          color: "none",
+          title: "Seiten-, Spalten- und Zeilenumbrüche",
+          html_class: "pb",
+          css_class: "pbs",
+          chg_citation: "citation-url",
+          hide: {
+            hidden: true,
+            class: "pb"  // Changed from "pb" to "pb cb"
+          },
+          features: {
+            all: false,
+            class: "features-2",
+          },
+        },
+        {
           opt: "term",
           color: "blue",
           title: "Begriffe",
@@ -99,22 +115,6 @@ var editor = new LoadEditor({
             class: "features-2",
           },
         },
-        {
-          opt: "pbs",
-          color: "none",
-          title: "Seiten-, Spalten- und Zeilenumbrüche",
-          html_class: "pb",
-          css_class: "pbs",
-          chg_citation: "citation-url",
-          hide: {
-            hidden: true,
-            class: "pb"  // Changed from "pb" to "pb cb"
-          },
-          features: {
-            all: false,
-            class: "features-2",
-          },
-        }
       ],
       span_element: {
         css_class: "badge-item",

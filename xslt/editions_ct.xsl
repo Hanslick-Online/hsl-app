@@ -177,7 +177,7 @@
     </xsl:template>
     <xsl:template match="tei:lb">
         <xsl:if test="ancestor::tei:p and not(ancestor::tei:note)">
-            <br class="pb"/>
+            <br class="pb badge-item"/>
             <a>
                 <xsl:variable name="para" as="xs:int">
                     <xsl:number level="any" from="tei:body" count="tei:p"/>
@@ -216,7 +216,7 @@
             
         </xsl:if>
         <xsl:if test="ancestor::tei:note and position() != 1">
-            <br class="pb"/>
+            <br class="pb badge-item"/>
         </xsl:if>
     </xsl:template>
 
