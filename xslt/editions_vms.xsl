@@ -199,7 +199,9 @@
     </xsl:template>
 
     <xsl:template match="tei:p">
+        
         <p id="{@xml:id}" class="indentedP yes-index">
+            <a class="parNum nounderline" />
             <xsl:apply-templates/>
         </p>
     </xsl:template>

@@ -81,7 +81,9 @@
     </xsl:template>
 
     <xsl:template match="tei:p[not(@prev)]">
-        <p class="yes-index">
+     
+        <p class="indentedP yes-index">
+            <a class="parNum nounderline" />
             <xsl:apply-templates/>
             <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">
