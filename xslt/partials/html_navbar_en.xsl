@@ -69,7 +69,7 @@
                                         -->
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="toc_d.html?lang=en">
+                                        <a class="dropdown-item" href="toc_doc.html?lang=en">
                                             Documents on VMS (in progress)
                                         </a>
                                         <!--

@@ -106,7 +106,7 @@
                                     btn-index-secondary -->
                                 </button>
                                  <button type="button" class="btn btn-index"> 
-                                    <a href="toc_d.html{$lang}">
+                                    <a href="toc_doc.html{$lang}">
                                         <xsl:value-of select="$docs"/>
                                     </a>
                                     <!-- <xsl:value-of select="$vms"/>
