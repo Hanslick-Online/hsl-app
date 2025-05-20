@@ -234,7 +234,7 @@
         <!-- Handle multiple references -->
         <xsl:when test="count($tokens) > 1 and not(@prev)">
             <xsl:variable name="type" select="@type"/>
-            <xsl:variable name="role" select="@role"/>
+            <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
             
             <xsl:for-each select="$tokens">
                 <xsl:choose>
@@ -268,7 +268,7 @@
             <xsl:variable name="target" select="@ref"/>
             <xsl:variable name="entityClass">
                 <xsl:choose>
-                    <xsl:when test="@role='fictional'">figures</xsl:when>
+                    <xsl:when test="$role='fictional'">figures</xsl:when>
                     <xsl:when test="@type='person'">persons</xsl:when>
                     <xsl:when test="@type='place'">places</xsl:when>
                     <xsl:when test="@type='bibl'">works</xsl:when>
