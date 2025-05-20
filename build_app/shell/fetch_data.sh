@@ -41,7 +41,7 @@ wget https://github.com/Hanslick-Online/hsl-vms-docs/archive/refs/heads/main.zip
 unzip main
 mkdir ./data/vms-docs
 mkdir ./data/vms-docs/editions
-mv hsl-data-vms-docs-main/data/editions/*.xml ./data/vms/editions
+mv hsl-data-vms-docs-main/data/editions/*.xml ./data/doc/editions
 mv hsl-data-vms-docs-main/data/meta/*.xml ./data/meta
 rm -rf hsl-vms-docs-main
 rm main.zip
