@@ -50,12 +50,12 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="toc_t.html?lang=de">
-                                            Traktat
+                                            Traktat (VMS)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc.html?lang=de">
-                                            Kritiken
+                                            Kritiken (in Arbeit)
                                         </a>
                                     </li>
                                     <li>

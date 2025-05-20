@@ -50,17 +50,17 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="toc_t_en.html?lang=en">
-                                            Treatise
+                                            Treatise (VMS)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_en.html?lang=en">
-                                            Reviews
+                                            Reviews (in progress)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=en">
-                                            Review of VMS
+                                            Review of VMS 
                                         </a>
                                         <!--
                                         <a class="dropdown-item text-muted">

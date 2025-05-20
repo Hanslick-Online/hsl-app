@@ -46,8 +46,8 @@
                                     else('Treatise (VMS)')"/>
                                 <xsl:variable name="reviews" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Kritiken') 
-                                    else('Reviews')"/>
+                                    then('Kritiken (in Arbeit)') 
+                                    else('Reviews (in progress)')"/>
                                 <xsl:variable name="vms" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('Kritiken von VMS') 
