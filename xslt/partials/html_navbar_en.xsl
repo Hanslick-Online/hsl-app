@@ -60,7 +60,17 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=en">
+                                            Review of VMS
+                                        </a>
+                                        <!--
+                                        <a class="dropdown-item text-muted">
                                             Review of VMS (in progress)
+                                        </a>
+                                        -->
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="toc_d.html?lang=en">
+                                            Documents on VMS (in progress)
                                         </a>
                                         <!--
                                         <a class="dropdown-item text-muted">

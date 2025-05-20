@@ -46,12 +46,16 @@
                                     else('Treatise (VMS)')"/>
                                 <xsl:variable name="reviews" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Kritiken (in Arbeit)') 
-                                    else('Reviews (in progress)')"/>
+                                    then('Kritiken') 
+                                    else('Reviews')"/>
                                 <xsl:variable name="vms" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Kritiken von VMS (in Arbeit)') 
-                                    else('Reviews of VMS (in progress)')"/>
+                                    then('Kritiken von VMS') 
+                                    else('Reviews of VMS')"/>
+                                <xsl:variable name="docs" select="
+                                    if(starts-with(//tei:body/@xml:lang, 'de')) 
+                                    then('Dokumente zu VMS (in Arbeit)') 
+                                    else('Documents on VMS (in progress)')"/>
                                 <xsl:variable name="more" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('mehr anzeigen') 
@@ -96,6 +100,14 @@
                                 <button type="button" class="btn btn-index"> 
                                     <a href="toc_vms.html{$lang}">
                                         <xsl:value-of select="$vms"/>
+                                    </a>
+                                    <!-- <xsl:value-of select="$vms"/>
+
+                                    btn-index-secondary -->
+                                </button>
+                                 <button type="button" class="btn btn-index"> 
+                                    <a href="toc_d.html{$lang}">
+                                        <xsl:value-of select="$docs"/>
                                     </a>
                                     <!-- <xsl:value-of select="$vms"/>
 

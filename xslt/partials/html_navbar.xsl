@@ -60,7 +60,17 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=de">
-                                               Kritiken von VMS (in Arbeit)
+                                               Kritiken von VMS
+                                        </a>
+                                        <!-- 
+                                        <a class="dropdown-item text-muted">
+                                            Kritiken von VMS (in Arbeit)
+                                        </a>
+                                        -->
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="toc_d.html?lang=de">
+                                               Dokumente zu VMS (in Arbeit)
                                         </a>
                                         <!-- 
                                         <a class="dropdown-item text-muted">
