@@ -30,6 +30,6 @@
 
     <move todir="${editions_doc}">
         <fileset dir="${editions_doc}"/>
-        <mapper type="glob" from="*.xml" to="v__*.xml"/>
+        <mapper type="glob" from="*.xml" to="d__*.xml"/>
     </move>
 </project>
