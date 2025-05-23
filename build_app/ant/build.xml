@@ -10,6 +10,7 @@
     <property name="imprint_en" value="${basedir}/data/imprint_en.xml"/>
     <property name="editions_ct" value="${basedir}/data/critics/editions"/>
     <property name="editions_vms" value="${basedir}/data/vms/editions"/>
+    <property name="editions_doc" value="${basedir}/data/doc/editions"/>
     <property name="target" value="${basedir}/html"/>
     <property name="xsl_editions" value="${basedir}/xslt/editions.xsl"/>
     <property name="xsl_editions_ct" value="${basedir}/xslt/editions_ct.xsl"/>
@@ -54,6 +55,10 @@
     </xslt>
     <!-- project vms new -->
     <xslt style="${xsl_editions_vms}"  basedir="${editions_vms}" destdir="${target}" includes="*.xml" filenameparameter="filename">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt style="${xsl_editions_doc}"  basedir="${editions_doc}" destdir="${target}" includes="*.xml" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
