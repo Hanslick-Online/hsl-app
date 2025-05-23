@@ -23,7 +23,7 @@
     <property name="xsl_toc_t_en" value="${basedir}/xslt/toc_t_en.xsl"/>
     <property name="xsl_toc_en" value="${basedir}/xslt/toc_en.xsl"/>
     <property name="xsl_toc_vms" value="${basedir}/xslt/toc_vms.xsl"/>
-    <property name="xsl_toc_doc" value="${basedir}/xslt/toc_vms.xsl"/>
+    <property name="xsl_toc_doc" value="${basedir}/xslt/toc_doc.xsl"/>
    <property name="xsl_indices" value="${basedir}/xslt/indices.xsl"/>
     <property name="xsl_entities" value="${basedir}/xslt/entities.xsl"/>
     <property name="xsl_imprint" value="${basedir}/xslt/imprint.xsl"/>
@@ -90,7 +90,7 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt in="${index}" out="${target}/toc_doc.html" style="${xsl_toc_vms}">
+    <xslt in="${index}" out="${target}/toc_doc.html" style="${xsl_toc_doc}">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
