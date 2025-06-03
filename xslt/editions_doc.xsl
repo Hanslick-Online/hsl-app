@@ -55,7 +55,7 @@
                             <xsl:with-param name="back-page" select="'true'"/>
                             <xsl:with-param name="next-prev-page" select="'true'"/>
                             <xsl:with-param name="document-download" select="'true'"/>
-                            <xsl:with-param name="document-download-edition" select="'vms'"/>
+                            <xsl:with-param name="document-download-edition" select="'doc'"/>
                         </xsl:call-template>
                     </div>
                     <xsl:call-template name="html_footer"/>
