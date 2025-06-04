@@ -61,7 +61,15 @@ if (img.includes("api.digitale-sammlungen.de")) {
     img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
 } else if (img.includes("hsl-vms")) {
     img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
-} else {
+    
+} else if (img.includes("hsl-doc")) {
+    if (img.endsWith(".jpg")) {
+    img = img.slice(0, -4); // removes the last 4 characters (".jpg")
+  };
+    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/!600,600/0/default.jpg`;
+    
+}
+else {
     var img = `${img}?format=iiif`;
 }
 var imageURL = {
@@ -77,7 +85,7 @@ initialize osd
 */
 var viewer = OpenSeadragon({
     id: 'container_facs_1',
-    prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/images/',
+    prefixUrl: 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/images/',
     sequenceMode: true,
     showNavigator: true,
     tileSources: tileSources,
@@ -142,13 +150,21 @@ var next = document.querySelector("div[title='Next page']");
 prev.style.opacity = 1;
 next.style.opacity = 1;
 prev.addEventListener("click", () => {
+    if (prev_idx = idx) {
+        prev_idx = idx - 1;
+    }
     if (idx <= 0) {
         element_a[0].scrollIntoView();
-    } else {
+    } 
+    else {
         element_a[prev_idx].scrollIntoView();
     }
 });
 next.addEventListener("click", () => {
+    if (idx > element_a.length - 1) {
+        idx = element_a.length - 1;
+        prev_idx = idx -1 ;
+    }
     element_a[idx].scrollIntoView();
 });
 
@@ -169,7 +185,14 @@ function loadNewImage(new_item) {
             new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
         } else if (new_image.includes("hsl-vms")) {
             new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
-        } else {
+        } 
+        else if (new_image.includes("hsl-doc")) {
+            if (new_image.endsWith(".jpg")) {
+            new_image = new_image.slice(0, -4); // removes the last 4 characters (".jpg")
+            };
+            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/!600,600/0/default.jpg`; 
+            }
+        else {
             var new_image = `${new_image}?format=iiif`;
         }
         var old_image = viewer.world.getItemAt(0);

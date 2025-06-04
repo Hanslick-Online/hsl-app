@@ -49,7 +49,7 @@
                             <xsl:with-param name="footnotes-xpath" as="item()*" select="//tei:body//tei:note[@type='footnote']"/>
                             <xsl:with-param name="body-xpath" as="item()*" select="//tei:body"/>
                             <xsl:with-param name="edition-project-class">
-                                <xsl:text>section-vms</xsl:text>
+                                <xsl:text>section-doc</xsl:text>
                             </xsl:with-param>
                             <xsl:with-param name="front-page" select="'false'"/>
                             <xsl:with-param name="back-page" select="'true'"/>
