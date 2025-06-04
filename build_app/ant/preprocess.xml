@@ -28,6 +28,8 @@
         <mapper type="glob" from="*.xml" to="v__*.xml"/>
     </move>
 
+     <!-- project docs zu vms -->
+     
     <move todir="${editions_doc}">
         <fileset dir="${editions_doc}"/>
         <mapper type="glob" from="*.xml" to="d__*.xml"/>

@@ -15,7 +15,7 @@
     <property name="xsl_editions" value="${basedir}/xslt/editions.xsl"/>
     <property name="xsl_editions_ct" value="${basedir}/xslt/editions_ct.xsl"/>
     <property name="xsl_editions_vms" value="${basedir}/xslt/editions_vms.xsl"/>
-    <property name="xsl_editions_doc" value="${basedir}/xslt/editions_vms.xsl"/>
+    <property name="xsl_editions_doc" value="${basedir}/xslt/editions_doc.xsl"/>
     <property name="xsl_comp" value="${basedir}/xslt/comp.xsl"/>
     <property name="xsl_meta" value="${basedir}/xslt/meta.xsl"/>
     <property name="xsl_index" value="${basedir}/xslt/index.xsl"/>
