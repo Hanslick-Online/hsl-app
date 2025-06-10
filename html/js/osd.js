@@ -66,7 +66,7 @@ if (img.includes("api.digitale-sammlungen.de")) {
     if (img.endsWith(".jpg")) {
     img = img.slice(0, -4); // removes the last 4 characters (".jpg")
   };
-    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/!600,600/0/default.jpg`;
+    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
     
 }
 else {
