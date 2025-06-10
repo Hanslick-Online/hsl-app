@@ -190,7 +190,7 @@ function loadNewImage(new_item) {
             if (new_image.endsWith(".jpg")) {
             new_image = new_image.slice(0, -4); // removes the last 4 characters (".jpg")
             };
-            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/!600,600/0/default.jpg`; 
+            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`; 
             }
         else {
             var new_image = `${new_image}?format=iiif`;
