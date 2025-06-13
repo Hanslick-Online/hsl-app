@@ -11,6 +11,7 @@ def fix_invalid_xml_id(xml_text):
     return re.sub(r'xml:id="([^a-zA-Z_])', r'xml:id="_\1', xml_text)
 
 def make_name_list(names):
+    print(names)
     last = True
     names = [
         " ".join([n.strip() for n in name.split(",")][::-1])
@@ -64,11 +65,28 @@ def get_date(tree):
     return date
 
 def get_info(tree):
-    titles = tree.xpath(".//tei:analytic/tei:title", namespaces=ns) + tree.xpath(
-        ".//tei:monogr/tei:title", namespaces=ns
-    )
-    titles = [elem.text for elem in titles if elem.text]
-    authors = [elem.text for elem in tree.xpath(".//tei:author", namespaces=ns) if elem.text]
+    if tree.xpath(".//tei:titleStmt/tei:title[@level='a']", namespaces=ns):
+        titles =  tree.xpath(".//tei:titleStmt/tei:title[@level='a']/text()", namespaces=ns)
+        if tree.xpath(".//tei:titleStmt/tei:title[@level='s']", namespaces=ns):
+            titles  += tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
+        if tree.xpath(".//tei:titleStmt/tei:title[@level='j']", namespaces=ns):
+            titles  += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
+    elif tree.xpath(".//tei:titleStmt/tei:title[@level='s']", namespaces=ns):
+        titles  = tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
+        if tree.xpath(".//tei:titleStmt/tei:title[@level='j']", namespaces=ns):
+            titles  += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
+    else:
+        titles = tree.xpath(".//tei:analytic/tei:title/text()", namespaces=ns) + tree.xpath(".//tei:monogr/tei:title/text()", namespaces=ns)
+    print(titles)
+    if tree.xpath(".//tei:titleStmt/tei:authors", namespaces=ns):
+        authorsb =  tree.xpath(".//tei:titleStmt/tei:authors/text()", namespaces=ns)
+    else:
+         authorsb = tree.xpath(".//tei:author", namespaces=ns)
+
+    authors = []
+    for elem in authorsb:
+        if elem.text and elem.text.strip() and  elem.text not in authors:
+            authors.append(elem.text.strip())
     origdate = get_date(tree)
     origeditors = [
         elem.text
@@ -131,9 +149,12 @@ def transform_tei_to_latex(input_file, output_file):
 
     # Example: Extracting some TEI elements and converting to LaTeX
     if Titles:
+        print(Titles)
         Title = Titles[0]
         if Titles[1:]:
+            print(Titles[1:])
             Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:]])
+            print(Subtitle)
             Title = f"{Title}\\\\{Subtitle}"
         if Editors:
             Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
