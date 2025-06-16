@@ -31,7 +31,7 @@
                                     aria-label="TEI/XML Document Download">
                                     TEI/XML 
                                 </a></li>
-                                <li><a href="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                <li><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
                                     aria-label="PDF Document Download">
                                     PDF (beta)
                                 </a></li>
