@@ -8,7 +8,12 @@
 /test
 
 html/*html
-html/*xml
+html/c__*xml
+html/d__*xml
+html/t__*xml
+html/v__*xml
+html/hsl_*xml
+html/diff*
 html/pdf
 
 # Byte-compiled / optimized / DLL files
