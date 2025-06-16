@@ -74,6 +74,7 @@ jobs:
       TYPESENSE_PROTOCOL: https
       TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
     needs: build_pages
+    steps:
     - name: Perform Checkout
       uses: actions/checkout@v4
     - name: Download data-artifact
@@ -123,7 +124,9 @@ jobs:
         name: htm-artifact
         path: "html"
   deploy:
-    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: compile_latex
     steps:
