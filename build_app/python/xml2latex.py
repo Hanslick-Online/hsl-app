@@ -1,22 +1,20 @@
 #!/usr/bin/env python
-import glob
-import os
-from acdh_tei_pyutils.tei import TeiReader, ET
+from acdh_tei_pyutils.tei import ET
 import sys
 import re
 ns = {'tei': 'http://www.tei-c.org/ns/1.0', 'xml': "http://www.w3.org/XML/1998/namespace"}
+
 
 def fix_invalid_xml_id(xml_text):
     """ Fix invalid xml:id values that don't start with a letter or underscore """
     return re.sub(r'xml:id="([^a-zA-Z_])', r'xml:id="_\1', xml_text)
 
+
 def make_name_list(names):
-    last = True
     names = [
         " ".join([n.strip() for n in name.split(",")][::-1])
         for name in list(dict.fromkeys(names))
     ]
-
     if len(names) > 1:
         names = ", ".join(names[:-1]) + " und " + names[-1]
     elif names:
@@ -25,8 +23,10 @@ def make_name_list(names):
         names = ""
     return names
 
+
 def clean_text(text):
     return text.strip().replace("&", "\\&").replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
+
 
 def process_paragraph(element):
     """
@@ -63,27 +63,29 @@ def get_date(tree):
             date += [0]
     return date
 
+
 def get_info(tree):
     if tree.xpath(".//tei:titleStmt/tei:title[@level='a']", namespaces=ns):
-        titles =  tree.xpath(".//tei:titleStmt/tei:title[@level='a']/text()", namespaces=ns)
+        titles = tree.xpath(".//tei:titleStmt/tei:title[@level='a']/text()", namespaces=ns)
         if tree.xpath(".//tei:titleStmt/tei:title[@level='s']", namespaces=ns):
-            titles  += tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
+            titles += tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
         if tree.xpath(".//tei:titleStmt/tei:title[@level='j']", namespaces=ns):
-            titles  += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
+            titles += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
     elif tree.xpath(".//tei:titleStmt/tei:title[@level='s']", namespaces=ns):
-        titles  = tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
+        titles = tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
         if tree.xpath(".//tei:titleStmt/tei:title[@level='j']", namespaces=ns):
-            titles  += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
+            titles += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
     else:
-        titles = tree.xpath(".//tei:analytic/tei:title/text()", namespaces=ns) + tree.xpath(".//tei:monogr/tei:title/text()", namespaces=ns)
+        titles = tree.xpath(".//tei:analytic/tei:title/text()", namespaces=ns) + tree.xpath(
+            ".//tei:monogr/tei:title/text()", namespaces=ns)
     if tree.xpath(".//tei:titleStmt/tei:authors", namespaces=ns):
-        authorsb =  tree.xpath(".//tei:titleStmt/tei:authors/text()", namespaces=ns)
+        authorsb = tree.xpath(".//tei:titleStmt/tei:authors/text()", namespaces=ns)
     else:
-         authorsb = tree.xpath(".//tei:author", namespaces=ns)
+        authorsb = tree.xpath(".//tei:author", namespaces=ns)
 
     authors = []
     for elem in authorsb:
-        if elem.text and elem.text.strip() and  elem.text not in authors:
+        if elem.text and elem.text.strip() and elem.text not in authors:
             authors.append(elem.text.strip())
     origdate = get_date(tree)
     origeditors = [
@@ -116,7 +118,13 @@ def make_front(front):
     bylines = ["".join(byline.itertext()).strip() for byline in front.xpath("//tei:byline", namespaces=ns)]
     imprints = [''.join(imprint.itertext()).strip() for imprint in front.xpath("//tei:docImprint", namespaces=ns)]
     edition = ' '.join(front.xpath("//tei:docEdition/text()", namespaces=ns))
-    text = "\\frontmatter\n\\thispagestyle{empty}\\strut\\vspace{.2\\textheight}\n\n\\begin{center}\n{\\Huge\\textbf{" + title + "}}\\vspace{.05\\textheight}\n\n"
+    text = f"""\\frontmatter
+        \\thispagestyle{{empty}}\\strut\\vspace{{.2\\textheight}}
+
+        \\begin{{center}}
+        {{\\Huge\\textbf{{{title}}}}}\\vspace{{.05\\textheight}}
+
+        """
     if subtitles:
         text += "{\\LARGE\\textbf{" + ' '.join(subtitles) + "}}\\vspace{.1\\textheight}\n\n"
     if bylines:
@@ -131,11 +139,11 @@ def make_front(front):
 def transform_tei_to_latex(input_file, output_file):
     # Parse the XML-TEI file
     with open(input_file, "r", encoding="utf-8") as f:
-         xml_text = f.read()
+        xml_text = f.read()
     fixed_xml_text = fix_invalid_xml_id(xml_text)
 
     tree = ET.fromstring(fixed_xml_text.encode("utf-8"))
-    #tree = TeiReader(input_file)
+    # tree = TeiReader(input_file)
 
     Titles, Author, Date, Editors = get_info(tree)
     if front := tree.xpath(".//tei:text//tei:front", namespaces=ns):
@@ -149,7 +157,7 @@ def transform_tei_to_latex(input_file, output_file):
     if Titles:
         Title = Titles[0]
         if Titles[1:]:
-            Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:]])
+            Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:] if title.strip()])
             Title = f"{Title}\\\\{Subtitle}"
         if Editors:
             Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
@@ -158,7 +166,7 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage{polyglossia}")
     latex_content.append("\\setmainlanguage[variant=austrian]{german}")
     latex_content.append("\\usepackage{tracklang}")
-    #latex_content.append("\\usepackage[austrian]{babel}")
+    # latex_content.append("\\usepackage[austrian]{babel}")
     latex_content.append("\\usepackage{fontspec,xltxtra,xunicode}")
     latex_content.append("\\usepackage{microtype}")
     latex_content.append("\\usepackage{geometry}")
@@ -167,7 +175,8 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage[useregional]{datetime2}")
     latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
     latex_content.append("\\setmainfont{Noto Serif}")
-    latex_content.append("\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{}{}{\\thepage}}\\pagestyle{mystyle}")
+    latex_content.append(
+        "\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{}{}{\\thepage}}\\pagestyle{mystyle}")
     latex_content.append(f"\\title{{{Title}}}")
     latex_content.append(f"\\author{{{Author}}}")
     if Date[1] == 0:
