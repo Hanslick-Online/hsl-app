@@ -34,24 +34,31 @@ def process_paragraph(element):
     and handle <lb>, <cb>, and inline elements properly.
     """
     result = []
+    skip_space = False
     for node in element.iter():
+        text = ""
+        tail = ""
+        tag = node.tag.split("}")[-1]  # remove namespace if present
         # Handle line or column breaks
-        if node.tag.endswith("lb") or node.tag.endswith("cb"):
-            if node.attrib.get("break") != "no":
-                result.append(" ")  # Add space unless break="no"
+
+        if tag in {"lb", "cb", "pb"}:
+            if node.attrib.get("break") == "no":
+                skip_space = True
+        text = ""
         # Add the current node's text content
-        if node.tag.endswith("hi") and node.attrib.get("rendition") == "#em":
-            if node.text:
-                result.append("\\textit{" + node.text.strip() + "}")
-        elif node.text:
-            result.append(node.text.strip())
-        # Add the tail content after a child node
-        if node.tail:
-            result.append(node.tail.strip())
-        if element.attrib.get("prev") == "true":
-            spacing = ""
+        if node.text:
+            text = node.text.strip() if node.text else ""
+            if (node.tag == "hi" and node.attrib.get("rendition") == "#em") or node.tag == "emph":
+                text = "\\textit{" + text + "}"
+                # result.append("\\textit{" + text + "}")
+        if node.tail and node.tail.strip():
+            tail = node.tail.strip()
+        if skip_space and result:
+            result[-1] += text + tail
+            skip_space = False
         else:
-            spacing = "\n\n"
+            result.append(text + tail)
+    spacing = "" if element.attrib.get("prev") == "true" else "\n\n"
     return spacing + clean_text(" ".join(result))
 
 
