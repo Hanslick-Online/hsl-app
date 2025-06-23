@@ -44,6 +44,10 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a>
+                                <li><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF (beta)
+                                </a></li>
                             </xsl:when>
                             <xsl:when test="$edition = 'vms'">
                                 <a target="_blank"
@@ -52,6 +56,10 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a>
+                                <li><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF (beta)
+                                </a></li>
                             </xsl:when>
                               <xsl:when test="$edition = 'doc'">
                                 <a target="_blank"
@@ -60,6 +68,10 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a>
+                                <li><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF (beta)
+                                </a></li>
                             </xsl:when>
                        </xsl:choose>
                     </li>
