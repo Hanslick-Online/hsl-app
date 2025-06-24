@@ -41,8 +41,8 @@
                                     else('Digital Edition')"/>
                                 <xsl:variable name="treatise" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Traktat (VMS)') 
-                                    else('Treatise (VMS)')"/>
+                                    then('Traktat') 
+                                    else('Treatise')"/>
                                 <xsl:variable name="reviews">
                                     <xsl:choose>
                                         <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
@@ -55,12 +55,12 @@
                                 </xsl:variable>
                                 <xsl:variable name="vms" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Kritiken von VMS') 
-                                    else('Reviews of VMS')"/>
+                                    then('Kritiken von') 
+                                    else('Reviews of')"/>
                                 <xsl:variable name="docs" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Dokumente zu VMS') 
-                                    else('Documents on VMS')"/>
+                                    then('Dokumente zu') 
+                                    else('Documents on')"/>
                                 <xsl:variable name="more" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('mehr anzeigen') 
@@ -74,14 +74,14 @@
                                     <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
                                         <button type="button" class="btn text-light btn-index">
                                             <a href="toc_t.html{$lang}">
-                                                <xsl:value-of select="$treatise"/>
+                                                <xsl:value-of select="$treatise"/><br/>(<i class="italics">VMS</i>) 
                                             </a>
                                         </button>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <button type="button" class="btn text-light btn-index">
                                             <a href="toc_t_en.html{$lang}">
-                                                <xsl:value-of select="$treatise"/>
+                                                <xsl:value-of select="$treatise"/><br/>(<span class="italics">VMS</span>) 
                                             </a>
                                         </button>
                                     </xsl:otherwise>
@@ -97,22 +97,21 @@
                                     <xsl:otherwise>
                                      <a href="toc_en.html{$lang}">
                                         <button type="button" class="btn text-light btn-index">
-                                                <xsl:value-of select="$reviews"/>
+                                                <xsl:value-of select="$reviews"/><br/>(<span class="italics">Neue Freie Presse</span>)  
                                         </button>
                                         </a>
                                     </xsl:otherwise>
                                 </xsl:choose>
                                 <a href="toc_vms.html{$lang}">
                                 <button type="button" class="btn btn-index">
-                                        <xsl:value-of select="$vms"/>
+                                        <xsl:value-of select="$vms"/><xsl:text> </xsl:text> <i class="italics">VMS</i>
                                     <!-- <xsl:value-of select="$vms"/>
                                     btn-index-secondary -->
                                 </button>
                                  </a>
                                   <a href="toc_doc.html{$lang}">
                                 <button type="button" class="btn btn-index">
-                                        <xsl:value-of select="$docs"/>
-                                    
+                                        <xsl:value-of select="$docs"/><xsl:text> </xsl:text> <i class="italics">VMS</i>                      
                                     <!-- <xsl:value-of select="$vms"/>
                                     btn-index-secondary -->
                                 </button></a>

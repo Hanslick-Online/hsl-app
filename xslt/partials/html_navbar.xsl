@@ -50,7 +50,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="toc_t.html?lang=de">
-                                            Traktat (VMS)
+                                            Traktat (<i>VMS</i>)
                                         </a>
                                     </li>
                                     <li>
@@ -60,7 +60,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=de">
-                                               Kritiken von VMS
+                                               Kritiken von <i>VMS</i>
                                         </a>
                                         <!-- 
                                         <a class="dropdown-item text-muted">
@@ -70,7 +70,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_doc.html?lang=de">
-                                               Dokumente zu VMS
+                                               Dokumente zu <i>VMS</i>
                                         </a>
                                         <!-- 
                                         <a class="dropdown-item text-muted">

@@ -50,7 +50,7 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="toc_t_en.html?lang=en">
-                                            Treatise (VMS)
+                                            Treatise (<i>VMS</i>)
                                         </a>
                                     </li>
                                     <li>
@@ -60,7 +60,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=en">
-                                            Review of VMS 
+                                            Review of <i>VMS</i> 
                                         </a>
                                         <!--
                                         <a class="dropdown-item text-muted">
@@ -70,7 +70,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_doc.html?lang=en">
-                                            Documents on VMS
+                                            Documents on <i>VMS</i>
                                         </a>
                                         <!--
                                         <a class="dropdown-item text-muted">
