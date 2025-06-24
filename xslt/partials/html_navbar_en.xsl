@@ -55,7 +55,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_en.html?lang=en">
-                                            Reviews (in progress)
+                                            Reviews (<i>Neue Freie Presse</i>)
                                         </a>
                                     </li>
                                     <li>
@@ -70,7 +70,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_doc.html?lang=en">
-                                            Documents on VMS (in progress)
+                                            Documents on VMS
                                         </a>
                                         <!--
                                         <a class="dropdown-item text-muted">

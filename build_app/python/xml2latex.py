@@ -103,14 +103,19 @@ def get_info(tree):
     return titles, make_name_list(authors), origdate, make_name_list(origeditors)
 
 
-def make_body(tree, section):
+def make_body(tree, document_type):
     text = ""
     chapters = tree.xpath(".//tei:text//tei:body//tei:div", namespaces=ns)
     for chapter in chapters:
         head = chapter.xpath("./tei:head", namespaces=ns)
         if head:
             head = process_paragraph(head[0]).strip()
-            text += section + head + "}\n"
+            if len(head) > 80:
+                short = head[:-79]
+            else:
+                short = ""
+            text += section(document_type, head, short) + "\n"
+
         paragraphs = chapter.xpath("./tei:p", namespaces=ns)
         for p in paragraphs:
             paragraph_text = process_paragraph(p)
@@ -143,6 +148,16 @@ def make_front(front):
     return text + "\\end{center}\\clearpage\n\\mainmatter\n"
 
 
+def section(document, text, shorttext=""):
+    if shorttext:
+        shorttext = f"[{shorttext}]"
+    if document == "book":
+        section = "chapter"
+    else:
+        section = "section"
+    return f"\n\n\\{section}{shorttext}" + "{" + text + "}"
+
+
 def transform_tei_to_latex(input_file, output_file):
     # Parse the XML-TEI file
     with open(input_file, "r", encoding="utf-8") as f:
@@ -154,11 +169,9 @@ def transform_tei_to_latex(input_file, output_file):
 
     Titles, Author, Date, Editors = get_info(tree)
     if front := tree.xpath(".//tei:text//tei:front", namespaces=ns):
-        document = "book"
-        section = "\\chapter{"
+        document_type = "book"
     else:
-        document = "article"
-        section = "\\section{"
+        document_type = "article"
 
     # Example: Extracting some TEI elements and converting to LaTeX
     if Titles:
@@ -169,7 +182,7 @@ def transform_tei_to_latex(input_file, output_file):
         if Editors:
             Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
     latex_content = []
-    latex_content.append(f"\\documentclass[a4paper]{{{document}}}")
+    latex_content.append(f"\\documentclass[a4paper]{{{document_type}}}")
     latex_content.append("\\usepackage{polyglossia}")
     latex_content.append("\\setmainlanguage[variant=austrian]{german}")
     latex_content.append("\\usepackage{tracklang}")
@@ -196,7 +209,7 @@ def transform_tei_to_latex(input_file, output_file):
         latex_content.append(make_front(front[0]))
     else:
         latex_content.append("\\maketitle")
-    latex_content.append(make_body(tree, section))
+    latex_content.append(make_body(tree, document_type))
 
     latex_content.append("\\end{document}")
 

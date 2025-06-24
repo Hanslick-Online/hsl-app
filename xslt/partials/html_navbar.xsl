@@ -55,7 +55,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc.html?lang=de">
-                                            Kritiken (in Arbeit)
+                                            Kritiken (<i>Neue Freie Presse</i>)
                                         </a>
                                     </li>
                                     <li>
@@ -70,7 +70,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_doc.html?lang=de">
-                                               Dokumente zu VMS (in Arbeit)
+                                               Dokumente zu VMS
                                         </a>
                                         <!-- 
                                         <a class="dropdown-item text-muted">
