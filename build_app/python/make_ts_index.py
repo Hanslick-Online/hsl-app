@@ -240,7 +240,8 @@ for x in tqdm(files, total=len(files)):
             except ValueError:
                 pass
             handle_entities(body, record, cfts_record)
-    # index for critics edition
+
+# index for critics edition
     if 'vms' in x:
         pages = 0
         for v in facs:
@@ -285,6 +286,51 @@ for x in tqdm(files, total=len(files)):
             except ValueError:
                 pass
             handle_entities(body, record, cfts_record)
+    if 'doc' in x:
+        pages = 0
+        for v in facs:
+            pages += 1
+            p_group = f".//tei:body/tei:div[{pages}]"
+            body = doc.any_xpath(p_group)
+            cfts_record = {
+                'project': 'hsl',
+            }
+            record = {}
+            record["edition"] = ["Documents/Dokumente"]
+            record['id'] = os.path.split(x)[-1].replace('.xml', ".html")
+            cfts_record['id'] = record['id']
+            hsl_url = "https://hanslick-online.github.io/hsl-vms-doc"
+            # hsl_url = "https://hanslick.acdh.oeaw.ac.at"
+            cfts_record['resolver'] = f"{hsl_url}/{record['id']}"
+            record['rec_id'] = os.path.split(x)[-1]
+            cfts_record['rec_id'] = record['rec_id']
+            r_title = " ".join(" ".join(
+                doc.any_xpath('.//tei:titleStmt/tei:title[@level="a"]/text()')
+            ).split())
+            s_title = doc.any_xpath(
+                './/tei:titleStmt/tei:title[@level="s"]/text()')[0]
+            title = f"{r_title} {s_title}"
+            record['title'] = title
+            cfts_record['title'] = record['title']
+            try:
+                date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
+                if len(date_str) == 4:
+                    date_str = f"{date_str}-01-01"
+                date_seq = time.mktime(datetime.datetime.strptime(date_str,
+                                                                  "%Y-%m-%d")
+                                       .timetuple())
+            except IndexError:
+                date_str = "0000-00-00"
+                date_seq = "0000-00-00"
+
+            try:
+                record['year'] = int(date_str[:4])
+                record['date'] = int(date_seq)
+                cfts_record['year'] = int(date_str[:4])
+            except ValueError:
+                pass
+            handle_entities(body, record, cfts_record)
+
 
 make_index = client.collections['hsl'].documents.import_(records)
 print(make_index)
