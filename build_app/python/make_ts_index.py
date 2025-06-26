@@ -316,6 +316,8 @@ for x in tqdm(files, total=len(files)):
                 date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
                 if len(date_str) == 4:
                     date_str = f"{date_str}-01-01"
+                elif len(date_str) == 7:
+                    date_str = f"{date_str}-01"
                 date_seq = time.mktime(datetime.datetime.strptime(date_str,
                                                                   "%Y-%m-%d")
                                        .timetuple())
