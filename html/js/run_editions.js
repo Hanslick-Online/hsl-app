@@ -98,7 +98,23 @@ var editor = new LoadEditor({
             all: false,
             class: "features-2",
           },
-        }
+        },
+        {
+          opt: "term",
+          color: "blue",
+          title: "Begriffe",
+          html_class: "terms",
+          css_class: "term",
+          chg_citation: "citation-url",
+          hide: {
+            hidden: false,
+            class: "terms .entity",
+          },
+          features: {
+            all: false,
+            class: "features-2",
+          },
+        },
       ],
       span_element: {
         css_class: "badge-item",

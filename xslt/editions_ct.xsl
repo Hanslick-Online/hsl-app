@@ -81,7 +81,9 @@
     </xsl:template>
 
     <xsl:template match="tei:p[not(@prev)]">
-        <p class="yes-index">
+     
+        <p class="indentedP yes-index">
+            <a class="parNum nounderline" />
             <xsl:apply-templates/>
             <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">
@@ -101,18 +103,19 @@
                                                     ( $n1/self::tei:cb and $n2/self::tei:*[@break='no']) or
                                                     ( $n1/self::tei:pb and $n2/self::tei:*[@break='no']) or
                                                     ( $n1/self::tei:pb and $n2/self::tei:cb and $n3/self::tei:*[@break='no']) or
-                                                      matches(., '-$')
+                                                      matches(., '\-\s*$')
         "/>
-        <xsl:variable name="shouldNormalise" select="matches(., '-$')" />
+        <xsl:variable name="shouldNormalise" select="matches(., '\-\s*$')" />
         <xsl:choose>
             <xsl:when test="$shouldHyphenate">
-                <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s+$', '')"/>
-                <xsl:choose>
-                    <xsl:when test="$shouldNormalise">
-                        <xsl:value-of select="replace(., '\s$', '')" />
-                    </xsl:when>
-                </xsl:choose>
-                <span class="pb wrdbreak">-</span>
+                <xsl:value-of select="replace(., '\s{2,}', ' ') => replace('\s$', '')" />
+                <xsl:variable name="hyphenMark">
+                    <xsl:choose>
+                        <xsl:when test="$shouldNormalise" />
+                        <xsl:otherwise>-</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <span class="pb wrdbreak"><xsl:value-of select="$hyphenMark" /></span>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
@@ -176,7 +179,7 @@
     </xsl:template>
     <xsl:template match="tei:lb">
         <xsl:if test="ancestor::tei:p and not(ancestor::tei:note)">
-            <br class="pb"/>
+            <br class="pb badge-item"/>
             <a>
                 <xsl:variable name="para" as="xs:int">
                     <xsl:number level="any" from="tei:body" count="tei:p"/>
@@ -215,7 +218,7 @@
             
         </xsl:if>
         <xsl:if test="ancestor::tei:note and position() != 1">
-            <br class="pb"/>
+            <br class="pb badge-item"/>
         </xsl:if>
     </xsl:template>
 
@@ -230,29 +233,72 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="tei:rs">
-        <xsl:variable name="id" select="@xml:id"/>
-        <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
-        <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
-        <xsl:variable name="role" select="id(data(substring-after($tokens[1], '#')))/@role"/>
-        <xsl:variable name="target" select="@ref"/>
-        <xsl:variable name="entityClass">
-            <xsl:choose>
-                <xsl:when test="$role='fictional'">figures</xsl:when>
-                <xsl:when test="@role='fictional'">figures</xsl:when>
-                <xsl:when test="@type='person'">persons</xsl:when>
-                <xsl:when test="@type='place'">places</xsl:when>
-                <xsl:when test="@type='bibl'">works</xsl:when>
-                <xsl:otherwise>entity</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="modalTarget" select="concat('#', substring-after($target, '#'))"/>
-        <span class="{$entityClass} entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{$modalTarget}" />
-        <xsl:apply-templates/>
-        <xsl:if test="following-sibling::node()[1][self::text()][normalize-space(.) = '']">
-            <xsl:text></xsl:text>
-        </xsl:if>
-    </xsl:template>
+<xsl:template match="tei:rs">
+    <xsl:variable name="id" select="@xml:id"/>
+    <xsl:variable name="tokens" select="tokenize(@ref, ' ')"/>
+    <xsl:variable name="rendition" select="substring-after(@rendition, '#')"/>
+    
+    <xsl:choose>
+        <!-- Handle multiple references -->
+        <xsl:when test="count($tokens) > 1 and not(@prev)">
+            <xsl:variable name="type" select="@type"/>
+            <xsl:variable name="role" select="id(substring-after(@ref, '#'))/@role"/>
+            
+            <xsl:for-each select="$tokens">
+                <xsl:choose>
+                    <xsl:when test="$type='person'">
+                        <xsl:choose>
+                            <xsl:when test="$role = 'fictional'">
+                                <span class="figures entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <span class="persons entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="$type='place'">
+                        <span class="places entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
+                    </xsl:when>
+                    <xsl:when test="$type='bibl'">
+                        <span class="works entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{.}"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+            <xsl:apply-templates/>
+        </xsl:when>
+        
+        <!-- Single reference case - original functionality -->
+        <xsl:when test="count($tokens) = 1 and not(@prev)">
+            <xsl:variable name="role" select="id(substring-after(@ref, '#'))/@role"/>
+            <xsl:variable name="target" select="@ref"/>
+            <xsl:variable name="entityClass">
+                <xsl:choose>
+                    <xsl:when test="$role='fictional'">figures</xsl:when>
+                    <xsl:when test="@type='person'">persons</xsl:when>
+                    <xsl:when test="@type='place'">places</xsl:when>
+                    <xsl:when test="@type='bibl'">works</xsl:when>
+                    <xsl:otherwise>entity</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            
+            <span class="{$entityClass} entity {$rendition}" id="{$id}" data-bs-toggle="modal" data-bs-target="{$target}"/>
+            <xsl:apply-templates/>
+        </xsl:when>
+        
+        <!-- Previous reference case -->
+        <xsl:when test="@prev">
+            <xsl:apply-templates/>
+        </xsl:when>
+    </xsl:choose>
+    
+    <!-- Handle trailing whitespace -->
+    <xsl:if test="following-sibling::node()[1][self::text()][normalize-space(.) = '']">
+        <xsl:text></xsl:text>
+    </xsl:if>
+</xsl:template>
 
     <xsl:template match="tei:pb[following-sibling::tei:p[1]/@prev = 'true']">
         <!--  do not display independently -->

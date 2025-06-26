@@ -50,17 +50,27 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="toc_t.html?lang=de">
-                                            Traktat
+                                            Traktat (<i>VMS</i>)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc.html?lang=de">
-                                            Kritiken
+                                            Kritiken (<i>Neue Freie Presse</i>)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=de">
-                                               Kritiken von VMS (in Arbeit)
+                                               Kritiken von <i>VMS</i>
+                                        </a>
+                                        <!-- 
+                                        <a class="dropdown-item text-muted">
+                                            Kritiken von VMS (in Arbeit)
+                                        </a>
+                                        -->
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="toc_doc.html?lang=de">
+                                               Dokumente zu <i>VMS</i>
                                         </a>
                                         <!-- 
                                         <a class="dropdown-item text-muted">
@@ -98,6 +108,13 @@
                                             title="">
                                             Werkregister
                                         </a>
+                                    </li>
+                                    <li>
+                                        <span class="dropdown-item text-muted">Begriffsregister</span>
+                                        <!-- <a class="dropdown-item text-light" href="listterm.html?lang=de"
+                                            title="">
+                                            Begriffsregister
+                                        </a>   -->
                                     </li>
                                 </ul>
                             </li>

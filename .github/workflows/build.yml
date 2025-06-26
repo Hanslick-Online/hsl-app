@@ -21,16 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANT_OPTS: -Xmx5g
-      TYPESENSE_HOST: typesense.acdh-dev.oeaw.ac.at
-      TYPESENSE_PORT: 443
-      TYPESENSE_PROTOCOL: https
-      TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
     steps:
     - name: Perform Checkout
       uses: actions/checkout@v4
-    - name: Fetch data
-      run: |
-        ./build_app/shell/fetch_data.sh
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -40,6 +33,9 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
+    - name: Fetch data
+      run: |
+        ./build_app/shell/fetch_data.sh
     - name: Install Saxon, Ant and Fundament
       run: |
         apt-get update && apt-get install ant -y --no-install-recommend
@@ -58,17 +54,84 @@ jobs:
         ant -f build_app/ant/build.xml
     - name: Setup Pages
       uses: actions/configure-pages@v5
-    - name: Upload artifact
+    - name: Upload HTML artifact
       uses: actions/upload-pages-artifact@v3
       with:
+        name: html-artifact
         # Upload entire repository
         path: "./html"
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+    - name: Upload XML artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: data-artifact
+        path: "./data"
+  typesense:
+    name: Reindex Typesense
+    runs-on: ubuntu-latest
+    env:
+      TYPESENSE_HOST: typesense.acdh-dev.oeaw.ac.at
+      TYPESENSE_PORT: 443
+      TYPESENSE_PROTOCOL: https
+      TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
+    needs: build_pages
+    steps:
+    - name: Perform Checkout
+      uses: actions/checkout@v4
+    - name: Download data-artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: data-artifact
+        path: data
     - name: Preprocess data for Typesense
       run: |
         ant -f build_app/ant/fixtures.xml
     - name: Build Typesense Index
       run: |
         python build_app/python/make_ts_index.py
+  compile_latex:
+    name: Produce PDF files
+    id: xml2latex
+    needs: build_pages
+    steps:
+    - name: Perform Checkout
+      uses: actions/checkout@v4
+    - name: Download html-artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: html-artifact
+        path: html
+    - name: Install TeX Live
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-german
+    - name: Transform XML-TEI to LaTeX
+      run: |
+        mkdir -p tmp/tex html/pdf
+        folders=("data/critics" "data/traktat" "data/vms")
+        find "html" -type f -name "{c,t,v,d}__*.xml" | while read filename; do
+          echo "Transforming $filename"
+          build_app/python/xml2latex.py "$filename" "tmp/${filename%.xml}.tex)"
+        done
+    - name: Compile LaTeX to PDF
+      run: |
+        find "tmp" -type f -name "*.tex" | while read filename; do
+            echo "Compiling $filename"
+            xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
+        done
+    - name: Upload full site artifacts
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: htm-artifact
+        path: "html"
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: compile_latex
+    steps:
+    - name: Setup GitHub Pages
+      uses: actions/configure-pages@v5
+    - name: Deploy
+      uses: actions/deploy-pages@v4
+

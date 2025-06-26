@@ -7,11 +7,11 @@
             <h1>Widget annotation options.</h1>
             <p>Contact person: daniel.elsner@oeaw.ac.at</p>
             <p>Applied with call-templates in html:body.</p>
-            <p>Custom template to create interactive options for text annoations.</p>
+            <p>Custom template to create interactive options for text annotations.</p>
         </desc>    
     </doc>
-    
     <xsl:template name="annotation-options">
+        <xsl:param name="showSlider" />
         <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart">
             <!-- Your menu goes here -->
             <a title="Annotationen" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" role="button">
@@ -48,6 +48,11 @@
                 <li class="dropdown-item">
                     <annotation-slider opt="wrk"></annotation-slider>
                 </li>
+                <xsl:if test="$showSlider = 'true'">
+                    <li class="dropdown-item text-muted">
+                        <annotation-slider opt="term"></annotation-slider>
+                    </li>
+                </xsl:if>
                 <li class="dropdown-item">
                     <annotation-slider opt="pbs"></annotation-slider>
                 </li>

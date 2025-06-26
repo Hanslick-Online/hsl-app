@@ -50,17 +50,27 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" href="toc_t_en.html?lang=en">
-                                            Treatise
+                                            Treatise (<i>VMS</i>)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_en.html?lang=en">
-                                            Reviews
+                                            Reviews (<i>Neue Freie Presse</i>)
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="toc_vms.html?lang=en">
+                                            Review of <i>VMS</i> 
+                                        </a>
+                                        <!--
+                                        <a class="dropdown-item text-muted">
                                             Review of VMS (in progress)
+                                        </a>
+                                        -->
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="toc_doc.html?lang=en">
+                                            Documents on <i>VMS</i>
                                         </a>
                                         <!--
                                         <a class="dropdown-item text-muted">
@@ -98,6 +108,13 @@
                                             title="">
                                             Works
                                         </a>
+                                    </li>
+                                    <li>
+                                        <span class="dropdown-item text-muted">Terms</span>
+                                        <!-- <a class="dropdown-item text-light" href="listterm.html?lang=de"
+                                            title="">
+                                            Terms
+                                        </a>   -->
                                     </li>
                                 </ul>
                             </li>

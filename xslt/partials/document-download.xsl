@@ -23,32 +23,54 @@
                     </svg>
                 </a>                    
                 <ul class="dropdown-menu">
-                    <li class="dropdown-item">
                         <xsl:choose>
                             <xsl:when test="$edition = 'traktat'">
-                                <a href="{concat('https://id.acdh.oeaw.ac.at/hanslick-vms/', //tei:TEI/@xml:id, '?format=raw')}"
+                                <li class="dropdown-item"><a  href="{concat('https://id.acdh.oeaw.ac.at/hanslick-vms/', //tei:TEI/@xml:id, '?format=raw')}"
                                     aria-label="TEI/XML Document Download">
                                     TEI/XML 
-                                </a>
+                                </a></li>
+                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF <sup><tt>beta</tt></sup>
+                                </a></li>
                             </xsl:when>
                             <xsl:when test="$edition = 'kritiken'">
-                                <a target="_blank"
+                                <li class="dropdown-item"><a target="_blank"
                                     href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-ct/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'c__'))}"
                                     aria-label="TEI/XML Document Download"
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
-                                </a>
+                                </a></li>
+                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF <sup><tt>beta</tt></sup>
+                                </a></li>
                             </xsl:when>
                             <xsl:when test="$edition = 'vms'">
-                                <a target="_blank"
+                                <li class="dropdown-item"><a target="_blank"
                                     href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-vms/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'v__'))}"
                                     aria-label="TEI/XML Document Download"
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
-                                </a>
+                                </a></li>
+                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF <sup><tt>beta</tt></sup>
+                                </a></li>
                             </xsl:when>
-                        </xsl:choose>
-                    </li>
+                              <xsl:when test="$edition = 'doc'">
+                                <li class="dropdown-item"><a target="_blank"
+                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-vms-docs/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'd__'))}"
+                                    aria-label="TEI/XML Document Download"
+                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
+                                    TEI/XML 
+                                </a></li>
+                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                    aria-label="PDF Document Download">
+                                    PDF <sup><tt>beta</tt></sup>
+                                </a></li>
+                            </xsl:when>
+                       </xsl:choose>
                 </ul>                                                    
             </div>
         </div> 

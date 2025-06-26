@@ -49,13 +49,13 @@
                             <xsl:with-param name="footnotes-xpath" as="item()*" select="//tei:body//tei:note[@type='footnote']"/>
                             <xsl:with-param name="body-xpath" as="item()*" select="//tei:body"/>
                             <xsl:with-param name="edition-project-class">
-                                <xsl:text>section-vms</xsl:text>
+                                <xsl:text>section-doc</xsl:text>
                             </xsl:with-param>
                             <xsl:with-param name="front-page" select="'false'"/>
                             <xsl:with-param name="back-page" select="'true'"/>
                             <xsl:with-param name="next-prev-page" select="'true'"/>
                             <xsl:with-param name="document-download" select="'true'"/>
-                            <xsl:with-param name="document-download-edition" select="'vms'"/>
+                            <xsl:with-param name="document-download-edition" select="'doc'"/>
                         </xsl:call-template>
                     </div>
                     <xsl:call-template name="html_footer"/>
@@ -295,7 +295,7 @@
     <xsl:template match="tei:pb">
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
         <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
-        <span class="anchor-pb" source="hsl-vms/{$facs_url}" />
+        <span class="anchor-pb" source="hsl-doc/{$facs_url}" />
         <span class="pb">
             <xsl:value-of select="@n"/>
         </span>

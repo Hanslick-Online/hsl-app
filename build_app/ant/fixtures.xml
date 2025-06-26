@@ -9,6 +9,10 @@
     <property name="editions_vms" value="${basedir}/data/vms/editions"/>
     <property name="target_vms" value="${basedir}/data/vms/tmp"/>
 
+    <property name="editions_doc" value="${basedir}/data/doc/editions"/>
+    <property name="target_doc" value="${basedir}/data/doc/tmp"/>
+
+
     <!-- critics project -->
     <mkdir dir="${target}"/>
 
@@ -39,6 +43,22 @@
 
     <move todir="${editions_vms}">
         <fileset dir="${target_vms}"/>
+    </move>
+
+    <!-- new docs on vms project -->
+    <mkdir dir="${target_doc}"/>
+
+    <xslt style="${fixtures}"
+          basedir="${editions_doc}"
+          destdir="${target_doc}"
+          includes="*.xml"
+          extension=".xml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+
+    <move todir="${editions_doc}">
+        <fileset dir="${target_doc}"/>
     </move>
 
 </project>

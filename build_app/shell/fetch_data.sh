@@ -5,9 +5,7 @@ rm -rf ./data
 # fetch edition traktat
 wget https://github.com/Hanslick-Online/hsl-vms-data/archive/refs/heads/master.zip
 unzip master
-mkdir ./data
-mkdir ./data/traktat
-mkdir ./data/traktat/editions
+mkdir -p ./data/traktat/editions
 mkdir ./data/traktat/comp
 mkdir ./data/meta
 mv hsl-vms-data-master/102_derived_tei/102_02_tei-simple_refactored/*.xml ./data/traktat/editions
@@ -19,8 +17,7 @@ rm master.zip
 # fetch edition critics
 wget https://github.com/Hanslick-Online/hsl-data-ct/archive/refs/heads/main.zip
 unzip main
-mkdir ./data/critics
-mkdir ./data/critics/editions
+mkdir -p ./data/critics/editions
 mv hsl-data-ct-main/data/editions/*.xml ./data/critics/editions
 mv hsl-data-ct-main/data/meta/*.xml ./data/meta
 rm -rf hsl-data-ct-main
@@ -29,11 +26,19 @@ rm main.zip
 # fetch edition data-vms
 wget https://github.com/Hanslick-Online/hsl-data-vms/archive/refs/heads/main.zip
 unzip main
-mkdir ./data/vms
-mkdir ./data/vms/editions
+mkdir -p ./data/vms/editions
 mv hsl-data-vms-main/data/editions/*.xml ./data/vms/editions
 mv hsl-data-vms-main/data/meta/*.xml ./data/meta
 rm -rf hsl-data-vms-main
+rm main.zip
+
+# fetch docs about VMS
+wget https://github.com/Hanslick-Online/hsl-vms-docs/archive/refs/heads/main.zip
+unzip main
+mkdir -p ./data/doc/editions
+mv hsl-vms-docs-main/data/editions/*.xml ./data/doc/editions
+mv hsl-vms-docs-main/data/meta/*.xml ./data/meta
+rm -rf hsl-vms-docs-main
 rm main.zip
 
 # fetch edition entities all
