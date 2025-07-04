@@ -3,3 +3,4 @@ acdh-cfts-pyutils>=0.2
 pandas
 texify
 acdh_tei_pyutils
+typesense
