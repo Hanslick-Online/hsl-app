@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-    xmlns="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="xsl tei xs">
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
-    
+
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="partials/html_footer.xsl"/>
@@ -28,17 +27,19 @@
                     }
                 </style>
             </head>
-            
+
             <body class="page">
                 <div class="hfeed site" id="page">
                     <xsl:call-template name="nav_bar"/>
-                    
-                    <div class="container-fluid">                        
+
+                    <div class="container-fluid">
                         <div class="row">
-                            
+
                             <div class="col-md-12 comp-card">
                                 <div class="card-header">
-                                    <h2><xsl:value-of select="//tei:titleStmt/tei:title[1]"/></h2>
+                                    <h2>
+                                        <xsl:value-of select="//tei:titleStmt/tei:title[1]"/>
+                                    </h2>
                                     <hr></hr>
                                 </div>
                                 <div class="card-body">
@@ -48,12 +49,20 @@
                                         </button>
                                         <ul class="dropdown-menu" id="selPar" aria-labelledby="selectParNoButton">
                                             <xsl:for-each select="//tei:list[@type='selectPar']/tei:item[starts-with(.,'V')]">
-                                                <xsl:sort select="xs:integer(substring-after(substring-before(.,'.'),'V'))"/> 
-                                                <xsl:copy><a class="dropdown-item"  href="diff_{.}.html"><xsl:value-of select="replace(., 'xyz', '')"/></a></xsl:copy>
+                                                <xsl:sort select="xs:integer(substring-after(substring-before(.,'.'),'V'))"/>
+                                                <xsl:copy>
+                                                    <a class="dropdown-item" href="diff_{.}.html">
+                                                        <xsl:value-of select="replace(., 'xyz', '')"/>
+                                                    </a>
+                                                </xsl:copy>
                                             </xsl:for-each>
                                             <xsl:for-each select="//tei:list[@type='selectPar']/tei:item[not(starts-with(.,'V'))]">
-                                                <xsl:sort select="xs:integer(substring-before(.,'.'))"/> 
-                                                <xsl:copy><a class="dropdown-item"  href="diff_{.}.html"><xsl:value-of select="replace(., 'xyz', '')"/></a></xsl:copy>
+                                                <xsl:sort select="xs:integer(substring-before(.,'.'))"/>
+                                                <xsl:copy>
+                                                    <a class="dropdown-item" href="diff_{.}.html">
+                                                        <xsl:value-of select="replace(., 'xyz', '')"/>
+                                                    </a>
+                                                </xsl:copy>
                                             </xsl:for-each>
                                         </ul>
                                     </div>
@@ -71,16 +80,21 @@
                                                                         </a>
                                                                     </xsl:if>
                                                                     <xsl:if test="./tei:ref[not(@type)]">
-                                                                        <a class="link_ref" href="{./tei:ref[not(@type)]/@target}">
+                                                                        <xsl:variable name="target" select="tokenize(./tei:ref[not(@type)]/@target, '#')"/>
+                                                                        <xsl:variable name="parts" select="tokenize($target[1], '_')"/>
+                                                                        <xsl:variable name="file" select="concat('t__VMS_Auflage_', $parts[3], '_', $parts[5], '.html')"/>
+                                                                        <a>
+                                                                            <xsl:attribute name="class" select="'link_ref'" />
+                                                                            <xsl:attribute name="href" select="concat($file,'#',$target[last()])" />
                                                                             <xsl:value-of select="./tei:ref[not(@type)]"/>
                                                                         </a>
-                                                                    </xsl:if>                                                                
+                                                                    </xsl:if>
                                                                     <xsl:if test="./tei:ref[@type='nextLink']">
                                                                         <a class="nextlink" href="{./tei:ref[@type='nextLink']/@target}">
                                                                             <xsl:value-of select="./tei:ref[@type='nextLink']"/>
                                                                         </a>
-                                                                    </xsl:if>                                                                
-                                                                </span>                                                            
+                                                                    </xsl:if>
+                                                                </span>
                                                             </xsl:for-each>
                                                         </th>
                                                     </xsl:for-each>
@@ -139,7 +153,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
@@ -148,5 +162,5 @@
             </body>
         </html>
     </xsl:template>
-    
+
 </xsl:stylesheet>
