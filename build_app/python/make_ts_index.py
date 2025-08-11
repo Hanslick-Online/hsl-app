@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import glob
 import os
 import time
@@ -141,59 +142,59 @@ for x in tqdm(files, total=len(files)):
         pages = 0
         for v in facs:
             pages += 1
+            # paragraph-level indexing within this chapter/div
             p_group = f".//tei:body/tei:div[{pages}]/tei:p"
-            body = doc.any_xpath(p_group)
-            cfts_record = {
-                'project': 'hsl',
-            }
-            record = {}
-            record["edition"] = ["Treatise/Traktat"]
-            anchor_id_1 = os.path.split(x)[-1]
-            anchor_id_2 = ".html#index.xml-body.1_div."
-            record['id'] = anchor_id_1.replace('.xml',
-                                               f"{anchor_id_2}{str(pages)}")
-            cfts_record['id'] = record['id']
-            hsl_url = "https://hanslick.acdh.oeaw.ac.at"
-            cfts_record['resolver'] = f"{hsl_url}/{record['id']}"
-            record['rec_id'] = os.path.split(x)[-1]
-            cfts_record['rec_id'] = record['rec_id']
+            paras = doc.any_xpath(p_group)
+            # shared static metadata per chapter
+            anchor_base_html = os.path.split(x)[-1].replace('.xml', '.html')
+            anchor_fragment = f"#index.xml-body.1_div.{pages}"
             r_title = " ".join(
                 " ".join(doc.any_xpath(
                     './/tei:titleStmt/tei:title[@type="main"]/text()')).split())
             s_title = doc.any_xpath('.//tei:sourceDesc//tei:edition/@n')[0]
-            title = f"{r_title} {s_title}. Auflage"
+            title_base = f"{r_title} {s_title}. Auflage"
             if pages - 1 == 0:
                 cht = "Vorwort"
             else:
                 cht = f"Kapitel {str(pages - 1)}"
-            record['title'] = f"{title} - {cht}"
-            cfts_record['title'] = record['title']
             try:
                 date_str = doc.any_xpath('//tei:sourceDesc//tei:date/@when')[0]
-                date_seq = f"{date_str}-0{str(pages)}-01"
-                date_seq = time.mktime(datetime.datetime.strptime(date_seq,
-                                                                  "%Y-%m-%d"
-                                                                  ).timetuple()
-                                       )
+                date_seq_str = f"{date_str}-0{str(pages)}-01"
+                date_seq = time.mktime(datetime.datetime.strptime(date_seq_str, "%Y-%m-%d").timetuple())
             except IndexError:
                 try:
-                    date_str = doc.any_xpath(
-                        '//tei:sourceDesc//tei:date/text()')[0]
+                    date_str = doc.any_xpath('//tei:sourceDesc//tei:date/text()')[0]
                 except IndexError:
-                    date_str = "0"
-            if len(date_str) > 3:
-                date_str = date_str
-                date_seq = date_seq
-            else:
-                date_str = "1854"
+                    date_str = "1854"
+                # fallback sequence date
+                date_seq = time.mktime(datetime.datetime.strptime(f"{date_str[:4]}-01-01", "%Y-%m-%d").timetuple())
 
-            try:
-                record['year'] = int(date_str[:4])
-                record['date'] = int(date_seq)
-                cfts_record['year'] = int(date_str[:4])
-            except ValueError:
-                pass
-            handle_entities(body, record, cfts_record)
+            para_idx = 0
+            for p in paras:
+                para_idx += 1
+                # one record per paragraph
+                body = [p]
+                cfts_record = {
+                    'project': 'hsl',
+                }
+                record = {}
+                record["edition"] = ["Treatise/Traktat"]
+                # ensure unique id while keeping a valid landing URL (query before fragment)
+                record['id'] = f"{anchor_base_html}?p={para_idx}{anchor_fragment}"
+                cfts_record['id'] = record['id']
+                hsl_url = "https://hanslick.acdh.oeaw.ac.at"
+                cfts_record['resolver'] = f"{hsl_url}/{record['id']}"
+                record['rec_id'] = os.path.split(x)[-1]
+                cfts_record['rec_id'] = record['rec_id']
+                record['title'] = f"{title_base} - {cht} · Absatz {para_idx}"
+                cfts_record['title'] = record['title']
+                try:
+                    record['year'] = int(date_str[:4])
+                    record['date'] = int(date_seq)
+                    cfts_record['year'] = int(date_str[:4])
+                except ValueError:
+                    pass
+                handle_entities(body, record, cfts_record)
 
     # index for critics edition
     if 'critics' in x:
@@ -246,7 +247,7 @@ for x in tqdm(files, total=len(files)):
         pages = 0
         for v in facs:
             pages += 1
-            p_group = f".//tei:body/tei:div[{pages}]"
+            p_group = f".//tei:body/tei:div[{pages}]/tei:p"
             body = doc.any_xpath(p_group)
             cfts_record = {
                 'project': 'hsl',
