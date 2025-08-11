@@ -81,12 +81,14 @@ jobs:
          python-version: '3.10'
     - name: Install Python libs
       run: |
-        pip install -U pip
-        pip install -r build_app/python/requirements.txt
+        echo "Placeholder"
+        # pip install -U pip
+        # pip install -r build_app/python/requirements.txt
     - name: Install TeX Live
       run: |
-        sudo apt-get update
-        sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-german
+        echo "Placeholder"
+        # sudo apt-get update
+        # sudo apt-get install -y texlive-xetex texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-german
     - name: Transform XML-TEI to LaTeX
       run: |
         mkdir -p tmp/tex html/pdf
@@ -96,17 +98,18 @@ jobs:
             filename=$(basename "$filepath")
             echo "Transforming $filename"
             chmod +x build_app/python/xml2latex.py
-            build_app/python/xml2latex.py "$filepath" "tmp/tex/${filename%.xml}.tex"
+            # build_app/python/xml2latex.py "$filepath" "tmp/tex/${filename%.xml}.tex"
           done
         done
     - name: Print .tex file header
       run: |
-        head -n 20 tmp/tex/v__1855GoettingischeGelehrteAnzeigenAusschnitt.tex
+        echo "Placeholder"
+        # head -n 20 tmp/tex/v__1855GoettingischeGelehrteAnzeigenAusschnitt.tex
     - name: Compile LaTeX to PDF
       run: |
         find "tmp/tex" -type f -name "*.tex" | while read filename; do
             echo "Compiling $filename"
-            xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
+            # xelatex -interaction=nonstopmode -output-directory="html/pdf" "$filename"
         done
     - name: Setup GitHub Pages
       uses: actions/configure-pages@v5
