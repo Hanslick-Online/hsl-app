@@ -143,7 +143,7 @@ for x in tqdm(files, total=len(files)):
         for v in facs:
             pages += 1
             # paragraph-level indexing within this chapter/div
-            p_group = f".//tei:body/tei:div[{pages}]/tei:p"
+            p_group = f".//tei:body/tei:p"
             paras = doc.any_xpath(p_group)
             # shared static metadata per chapter
             anchor_base_html = os.path.split(x)[-1].replace('.xml', '.html')
