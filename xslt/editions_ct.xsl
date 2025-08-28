@@ -138,7 +138,7 @@
     <xsl:template name="pb-prev">
         <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
             <xsl:for-each select="preceding-sibling::tei:*[2]">
-                <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
+                <xsl:variable name="graphic-url" select="substring-before(string((id(data(substring-after(@facs, '#')))/tei:graphic/@url)[1]), '.jpg')"/>
                 <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
                 <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
             </xsl:for-each>
@@ -305,7 +305,7 @@
     </xsl:template>
 
     <xsl:template match="tei:pb[not(following-sibling::tei:p[1]/@prev = 'true')]">
-        <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
+        <xsl:variable name="graphic-url" select="substring-before(string((id(data(substring-after(@facs, '#')))/tei:graphic/@url)[1]), '.jpg')"/>
         <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
         <span class="pb">[<xsl:value-of select="@n"/>]</span>
     </xsl:template>
