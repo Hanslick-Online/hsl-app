@@ -138,10 +138,7 @@
     <xsl:template name="pb-prev">
         <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
             <xsl:for-each select="preceding-sibling::tei:*[2]">
-                <!-- Get graphic URLs and explicitly select first item as an xs:string -->
-                <xsl:variable name="graphic-urls" select="id(data(substring-after(@facs, '#')))/tei:graphic/@url"/>
-                <xsl:variable name="first-url" select="$graphic-urls[1]" as="xs:string?"/>
-                <xsl:variable name="graphic-url" select="if ($first-url) then substring-before($first-url, '.jpg') else ''"/>
+                <xsl:variable name="graphic-url" select="substring-before(string((id(data(substring-after(@facs, '#')))/tei:graphic/@url)[1]), '.jpg')"/>
                 <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
                 <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
             </xsl:for-each>
@@ -308,10 +305,7 @@
     </xsl:template>
 
     <xsl:template match="tei:pb[not(following-sibling::tei:p[1]/@prev = 'true')]">
-        <!-- Get graphic URLs and explicitly select first item as an xs:string -->
-        <xsl:variable name="graphic-urls" select="id(data(substring-after(@facs, '#')))/tei:graphic/@url"/>
-        <xsl:variable name="first-url" select="$graphic-urls[1]" as="xs:string?"/>
-        <xsl:variable name="graphic-url" select="if ($first-url) then substring-before($first-url, '.jpg') else ''"/>
+        <xsl:variable name="graphic-url" select="substring-before(string((id(data(substring-after(@facs, '#')))/tei:graphic/@url)[1]), '.jpg')"/>
         <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
         <span class="pb">[<xsl:value-of select="@n"/>]</span>
     </xsl:template>
