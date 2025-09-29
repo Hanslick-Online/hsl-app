@@ -22,10 +22,13 @@ def make_name_list(names):
     else:
         names = ""
     return names
-
+    
 
 def clean_text(text):
-    return text.strip().replace("&", "\\&").replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
+    text = text.strip()
+    for i in ("_", "{", "}", "&"):
+        text = text.replace(i, rf"\{i}")
+    return text.replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
 
 
 def process_paragraph(element):
@@ -176,7 +179,7 @@ def transform_tei_to_latex(input_file, output_file):
     # Example: Extracting some TEI elements and converting to LaTeX
     if Titles:
         #  Fix title
-        Titles = [i.replace("_", r"\_") for i in Titles]
+        Titles = [clean_text(i) for i in Titles]
         Title = Titles[0]
         if Titles[1:]:
             Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:] if title.strip()])
