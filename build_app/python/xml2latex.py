@@ -192,7 +192,7 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage{geometry}")
     latex_content.append("\\usepackage[pagestyles]{titlesec}")
     latex_content.append("\\titleformat{\\chapter}[display]{\\normalfont\\bfseries}{}{0pt}{\\Large}")
-    latex_content.append("\\usepackage[useregional]{datetime2}")
+    latex_content.append("\\usepackage[de-AT]{datetime2}")
     latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
     latex_content.append("\\setmainfont{Noto Serif}")
     latex_content.append(
