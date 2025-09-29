@@ -296,7 +296,6 @@
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
         <xsl:variable name="facs_url"
     select="replace((ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url)[1], '.jpeg', '')"/>
-        <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
         <span class="anchor-pb" source="hsl-doc/{$facs_url}" />
         <span class="pb">
             <xsl:value-of select="@n"/>
