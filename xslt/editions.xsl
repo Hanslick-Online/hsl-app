@@ -37,6 +37,7 @@
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="toc-address" select="'toc.html'"/>
+                            <xsl:with-param name="doc-type" select="'Auflagen'" />
                             <xsl:with-param name="showSlider" select="'true'"/>
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="book-chapters" select="'true'"/>

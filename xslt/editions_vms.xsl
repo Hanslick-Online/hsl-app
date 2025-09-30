@@ -40,6 +40,7 @@
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="toc-address" select="'toc_vms.html'" />
+                             <xsl:with-param name="doc-type" select="'Kritiken'" />
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="editor-widget" select="'true'"/>
                             <xsl:with-param name="back-btn" select="'true'"/>
