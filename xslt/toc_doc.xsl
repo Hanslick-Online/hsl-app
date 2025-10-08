@@ -40,7 +40,7 @@
                                             <th scope="col">Zeitschrift</th>
                                             <th scope="col">Autor</th>
                                             <th scope="col">Titel</th>
-                                            <th scope="col">Untertitel</th>
+                                            <!-- <th scope="col">Untertitel</th> -->
                                             <th scope="col">Datum</th>
                                         </tr>
                                     </thead>
@@ -62,12 +62,12 @@
                                                         <xsl:attribute name="href">
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a'][@type='main']"/>
+                                                        <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a']"/>
                                                     </a>
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                      <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a'][@type='sub']"/>
-                                                </td>
+                                                </td> -->
                                                 <xsl:variable name="eventDate" select=".//tei:imprint/tei:date" />
                                                 <td>
                                                     <xsl:attribute name="tabulator-data-sort">
