@@ -47,6 +47,7 @@
                                             </xsl:variable>
                                             <tr>
                                                 <td>
+                                                    <xsl:attribute name="class">italics</xsl:attribute>
                                                     <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/>
                                                 </td>
                                                 <td>

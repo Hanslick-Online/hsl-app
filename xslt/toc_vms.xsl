@@ -55,7 +55,10 @@
                                                     <xsl:value-of select=".//tei:titleStmt/tei:title[@level='j']/text()"/>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:titleStmt/tei:author/text()"/>
+                                                    <xsl:for-each select=".//tei:titleStmt/tei:author">
+                                                        <xsl:value-of select="text()"/>
+                                                        <xsl:if test="position() != last()">, </xsl:if>
+                                                    </xsl:for-each>
                                                 </td>
                                                 <td>
                                                     <a>
