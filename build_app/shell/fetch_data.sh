@@ -30,6 +30,13 @@ mkdir -p ./data/vms/editions
 mv hsl-data-vms-main/data/editions/*.xml ./data/vms/editions
 mv hsl-data-vms-main/data/meta/*.xml ./data/meta
 rm -rf hsl-data-vms-main
+ for f in data/editions/[0-9][0-9][0-9][0-9]*.xml; do
+  b=${f##*/}            # filename
+  n=${b%.xml}           # strip .xml
+  A=${n:0:4}            # first 4 chars
+  B=${n:4}              # rest
+  [ -n "$B" ] && mv -- "$f" "${f%/*}/v__${A}_${B}.xml"
+done
 rm main.zip
 
 # fetch docs about VMS
