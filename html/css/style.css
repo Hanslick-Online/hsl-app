@@ -396,6 +396,11 @@ sup {
     padding: 0 .75em;
 }
 
+/* Separate consecutive TEI div blocks for clearer spacing */
+.tei-div:has(+ .tei-div) {
+    padding-bottom: 10rem;
+}
+
 .meta-h {
     display: block !important;
     text-align: center;
