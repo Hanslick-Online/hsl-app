@@ -113,6 +113,20 @@
         </div>
     </xsl:template>
 
+    <xsl:template match="tei:div">
+        <xsl:variable name="div-id" select="if (@xml:id) then @xml:id else concat('tei-div-', count(preceding::tei:div) + 1)"/>
+        <xsl:variable name="class-value" select="string-join(('tei-div', if (@type) then concat('tei-div-type-', @type) else (), if (@n) then concat('tei-div-n-', @n) else ()), ' ')"/>
+        <div id="{$div-id}">
+            <xsl:if test="$class-value">
+                <xsl:attribute name="class" select="$class-value"/>
+            </xsl:if>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
     <xsl:template match="tei:titlePart">
         <div class="titlePart {@type}">
             <xsl:apply-templates/>
