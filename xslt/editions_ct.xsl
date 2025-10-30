@@ -82,9 +82,16 @@
     </xsl:template>
 
     <xsl:template match="tei:p[not(@prev)]">
-     
         <p class="indentedP yes-index">
-            <a class="parNum nounderline" />
+            <xsl:attribute name="id">
+                <xsl:value-of select="if (@xml:id) then @xml:id else concat('p_auto_', generate-id())"/>
+            </xsl:attribute>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
+            <a class="parNum nounderline">
+                <xsl:value-of select="@n"/>
+            </a>
             <xsl:apply-templates/>
             <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">

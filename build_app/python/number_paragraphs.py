@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add sequential @n attributes to <tei:p> nodes lacking them."""
+"""Add sequential @n attributes to <tei:p> nodes lacking them and ensure @xml:id."""
 
 from __future__ import annotations
 
@@ -10,6 +10,8 @@ from typing import Iterable
 from lxml import etree as ET
 
 TEI_NS = {"tei": "http://www.tei-c.org/ns/1.0"}
+XML_NS = "http://www.w3.org/XML/1998/namespace"
+XML_ID_ATTR = f"{{{XML_NS}}}id"
 
 
 def iter_bodies(tree: ET._ElementTree) -> Iterable[ET._Element]:
@@ -18,16 +20,40 @@ def iter_bodies(tree: ET._ElementTree) -> Iterable[ET._Element]:
     return tree.xpath("//tei:body", namespaces=TEI_NS)
 
 
-def add_missing_numbers(doc_path: Path, *, dry_run: bool = False, output_path: Path | None = None) -> int:
-    """Add @n attributes to <tei:p> nodes without one (or empty) and return count of updates."""
+def add_missing_numbers(
+    doc_path: Path,
+    *,
+    dry_run: bool = False,
+    output_path: Path | None = None,
+) -> tuple[int, int]:
+    """Add @n and @xml:id attributes to <tei:p> nodes lacking them and report totals."""
 
     tree = ET.parse(str(doc_path))
-    updated = 0
+    number_updates = 0
+    id_updates = 0
+
+    existing_ids: set[str] = set(
+        tree.xpath("//*/@xml:id", namespaces={"xml": XML_NS})
+    )
+    id_counter = 1
+
+    def next_xml_id() -> str:
+        nonlocal id_counter
+        while True:
+            candidate = f"p_auto_{id_counter:05d}"
+            id_counter += 1
+            if candidate not in existing_ids:
+                existing_ids.add(candidate)
+                return candidate
 
     for body in iter_bodies(tree):
         counter = 1
         for para in body.xpath(".//tei:p", namespaces=TEI_NS):
             current = (para.get("n") or "").strip()
+            xml_id = (para.get(XML_ID_ATTR) or "").strip()
+            if not xml_id:
+                para.set(XML_ID_ATTR, next_xml_id())
+                id_updates += 1
             if current:
                 try:
                     counter = int(current) + 1
@@ -36,10 +62,10 @@ def add_missing_numbers(doc_path: Path, *, dry_run: bool = False, output_path: P
                 continue
             para.set("n", str(counter))
             counter += 1
-            updated += 1
+            number_updates += 1
 
     if dry_run:
-        return updated
+        return number_updates, id_updates
 
     destination = output_path if output_path is not None else doc_path
     tree.write(
@@ -48,7 +74,7 @@ def add_missing_numbers(doc_path: Path, *, dry_run: bool = False, output_path: P
         xml_declaration=True,
         pretty_print=True,
     )
-    return updated
+    return number_updates, id_updates
 
 
 def main() -> None:
@@ -80,21 +106,30 @@ def main() -> None:
     if args.output and len(args.input) != 1:
         parser.error("--output can only be used when processing a single input file")
 
-    total_updates = 0
+    total_number_updates = 0
+    total_id_updates = 0
     for input_path in args.input:
         if not input_path.exists():
             parser.error(f"Input file not found: {input_path}")
         target_output = args.output if args.output else None
-        added = add_missing_numbers(
+        added_numbers, added_ids = add_missing_numbers(
             input_path,
             dry_run=args.dry_run,
             output_path=target_output,
         )
-        total_updates += added
-        print(f"{input_path}: added {added} @n attributes")
+        total_number_updates += added_numbers
+        total_id_updates += added_ids
+        print(
+            f"{input_path}: added {added_numbers} @n attributes, "
+            f"{added_ids} @xml:id attributes"
+        )
 
     if args.dry_run:
-        print(f"Dry run finished, {total_updates} attributes would be added across all files")
+        print(
+            "Dry run finished, "
+            f"{total_number_updates} @n and {total_id_updates} @xml:id attributes "
+            "would be added across all files"
+        )
 
 
 if __name__ == "__main__":

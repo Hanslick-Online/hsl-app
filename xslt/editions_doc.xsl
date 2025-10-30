@@ -200,9 +200,16 @@
     </xsl:template>
 
     <xsl:template match="tei:p">
-        
-        <p id="{@xml:id}" class="indentedP yes-index">
-            <a class="parNum nounderline" />
+        <p class="indentedP yes-index">
+            <xsl:attribute name="id">
+                <xsl:value-of select="if (@xml:id) then @xml:id else concat('p_auto_', generate-id())"/>
+            </xsl:attribute>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
+            <a class="parNum nounderline">
+                <xsl:value-of select="@n"/>
+            </a>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
