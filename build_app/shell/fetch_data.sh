@@ -28,9 +28,9 @@ wget https://github.com/Hanslick-Online/hsl-data-vms/archive/refs/heads/main.zip
 unzip main
 mkdir -p ./data/vms/editions
 mv hsl-data-vms-main/data/editions/*.xml ./data/vms/editions
-mv hsl-data-vms-main/data/meta/*.xml ./data/meta
+# mv hsl-data-vms-main/data/meta/*.xml ./data/meta
 rm -rf hsl-data-vms-main
- for f in data/editions/[0-9][0-9][0-9][0-9]*.xml; do
+for f in data/critics/editions/[0-9][0-9][0-9][0-9]*.xml; do
   b=${f##*/}            # filename
   n=${b%.xml}           # strip .xml
   A=${n:0:4}            # first 4 chars
@@ -59,3 +59,5 @@ mv hsl-entities-main/out/*.xml ./data/indices
 mv hsl-entities-main/out/*.geojson ./html/geo
 rm -rf hsl-entities-main
 rm main.zip
+
+build_app/python/number_paragraphs.py data/{doc,critics,vms}/editions/*xml
