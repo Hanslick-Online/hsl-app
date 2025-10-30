@@ -1,5 +1,6 @@
 import glob
 import os
+import re
 import time
 import datetime
 from urllib.parse import quote
@@ -82,6 +83,17 @@ client.collections.create(current_schema)
 
 XML_NS = {'tei': "http://www.tei-c.org/ns/1.0"}
 XML_ID = '{http://www.w3.org/XML/1998/namespace}id'
+TRACTAT_FILENAME_PATTERN = re.compile(r'^t__(\d{2})_VMS_(\d{4})_.*\.xml$')
+
+
+def tractat_html_filename(base_id: str) -> str:
+    """Return the published HTML filename for a Traktat TEI file."""
+    match = TRACTAT_FILENAME_PATTERN.match(base_id)
+    if match:
+        edition, year = match.groups()
+        return f"t__VMS_Auflage_{edition}_{year}.html"
+    # Fallback: mimic previous behaviour for unexpected filenames
+    return base_id.replace('.xml', '.html')
 
 
 def get_entities(paragraph_nodes, ent_type, ent_node, ent_name, record_id):
@@ -186,7 +198,7 @@ for x in tqdm(files, total=len(files)):
             if not paragraph_nodes:
                 continue
             base_id = os.path.split(x)[-1]
-            html_filename = base_id.replace('.xml', '.html')
+            html_filename = tractat_html_filename(base_id)
             cfts_record_template = {
                 'project': 'hsl',
             }
