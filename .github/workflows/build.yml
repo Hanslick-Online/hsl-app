@@ -23,12 +23,12 @@ jobs:
       ANT_OPTS: -Xmx5g
     steps:
     - name: Perform Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
          python-version: '3.10'
-    - name: Setup Java / Ant
+    - name: Setup Java
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
@@ -41,10 +41,9 @@ jobs:
       run: |
         chmod +x build_app/shell/* build_app/python/*
         ./build_app/shell/fetch_data.sh
-    - name: Install Saxon, Ant and Fundament
+    - name: Generate Imprint
       run: |
-        apt-get update && apt-get install ant -y --no-install-recommend
-        ./build_app/shell/script.sh
+        ./build_app/shell/dl_imprint.sh
     - name: preprocess
       run: |
         ant -f build_app/ant/preprocess.xml
