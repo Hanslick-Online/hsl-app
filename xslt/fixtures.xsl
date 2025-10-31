@@ -13,7 +13,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="tei:lb"/>
+    <!-- <xsl:template match="tei:lb"/> -->
 
     <xsl:template match="tei:p[not(@prev)]">
         <xsl:copy>
