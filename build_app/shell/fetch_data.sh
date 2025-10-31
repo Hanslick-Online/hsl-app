@@ -29,13 +29,13 @@ unzip main
 mkdir -p ./data/vms/editions
 mv hsl-data-vms-main/data/editions/*.xml ./data/vms/editions
 # mv hsl-data-vms-main/data/meta/*.xml ./data/meta
-rm -rf hsl-data-vms-main
-for f in data/critics/editions/[0-9][0-9][0-9][0-9]*.xml; do
-  b=${f##*/}            # filename
-  n=${b%.xml}           # strip .xml
-  clean_n=${n//[^0-9]/} # collapse non-digits to get pure date stamp
-  [ -n "$clean_n" ] && mv -- "$f" "${f%/*}/${clean_n}.xml"
-done
+#rm -rf hsl-data-vms-main
+#for f in data/critics/editions/[0-9][0-9][0-9][0-9]*.xml; do
+#  b=${f##*/}            # filename
+#  n=${b%.xml}           # strip .xml
+#  clean_n=${n//[^0-9]/} # collapse non-digits to get pure date stamp
+#  [ -n "$clean_n" ] && mv -- "$f" "${f%/*}/${clean_n}.xml"
+#done
 rm main.zip
 
 # fetch docs about VMS
