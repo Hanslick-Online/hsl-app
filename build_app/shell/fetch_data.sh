@@ -59,4 +59,4 @@ mv hsl-entities-main/out/*.geojson ./html/geo
 rm -rf hsl-entities-main
 rm main.zip
 
-build_app/python/number_paragraphs.py data/{doc,critics,vms}/editions/*xml
+./build_app/python/number_paragraphs.py data/{doc,critics,vms}/editions/*xml
