@@ -33,9 +33,8 @@ rm -rf hsl-data-vms-main
 for f in data/critics/editions/[0-9][0-9][0-9][0-9]*.xml; do
   b=${f##*/}            # filename
   n=${b%.xml}           # strip .xml
-  A=${n:0:4}            # first 4 chars
-  B=${n:4}              # rest
-  [ -n "$B" ] && mv -- "$f" "${f%/*}/v__${A}_${B}.xml"
+  clean_n=${n//[^0-9]/} # collapse non-digits to get pure date stamp
+  [ -n "$clean_n" ] && mv -- "$f" "${f%/*}/${clean_n}.xml"
 done
 rm main.zip
 
