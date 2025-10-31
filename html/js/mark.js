@@ -60,7 +60,17 @@ function performMarkUrl() {
     markInstance.unmark({
       done: function () {
         if (params.length >= 3) {
-          markInstance.mark(params, options);
+          var markOptions = Object.assign({}, options);
+          if (/\s/.test(params)) {
+            markOptions.separateWordSearch = false;
+            markOptions.accuracy = {
+              value: "exactly",
+              limiters: ["'", "‚", "“", "”", "\"", "\u2019", "\u2018"]
+            };
+            markOptions.acrossElements = true;
+            markOptions.ignoreJoiners = true;
+          }
+          markInstance.mark(params, markOptions);
         }
       },
     });
