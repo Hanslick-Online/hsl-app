@@ -1,5 +1,30 @@
-var tsInput = document.querySelector("input[type='search']");
-tsInput.addEventListener("input", updateHeaderUrl);
+var tsInput;
+
+function attachSearchListener() {
+  if (tsInput) {
+    return;
+  }
+
+  tsInput = document.querySelector("input[type='search']");
+
+  if (!tsInput) {
+    setTimeout(attachSearchListener, 100);
+    return;
+  }
+
+  var initialQuery = new URLSearchParams(window.location.search).get(
+    "hsl[query]"
+  );
+  if (initialQuery && !tsInput.value) {
+    tsInput.value = initialQuery;
+  }
+
+  tsInput.addEventListener("input", updateHeaderUrl);
+
+  setTimeout(updateHeaderUrl, 300);
+}
+
+attachSearchListener();
 
 function listenToPagination() {
   setTimeout(() => {
@@ -40,21 +65,27 @@ function updateHeaderUrl() {
     // }
 
     var urlToUpdate = document.querySelectorAll(".ais-Hits-item h5 a");
-    var tsInputVal = tsInput.value;
+  var tsInputVal = tsInput ? tsInput.value : "";
 
     urlToUpdate.forEach((el) => {
       var urlToUpdateHref = el.getAttribute("href");
-      if (urlToUpdateHref.includes("?mark=")) {
-        var newUrl = urlToUpdateHref.replace(
-          /\?mark=\.+$/,
-          `?mark=${tsInputVal}`
-        );
-        el.setAttribute("href", newUrl);
-      } else {
-        var searchParams = new URLSearchParams("?mark=default");
-        searchParams.set("mark", tsInputVal);
-        var url = `${urlToUpdateHref.split("#")[0]}?${searchParams.toString()}#${urlToUpdateHref.split("#")[1]}`
-        el.setAttribute("href", url);
+      if (!urlToUpdateHref) {
+        return;
+      }
+
+      try {
+        var newUrl = new URL(urlToUpdateHref, window.location.href);
+
+        if (tsInputVal) {
+          newUrl.searchParams.set("mark", tsInputVal);
+        } else {
+          newUrl.searchParams.delete("mark");
+        }
+
+        var relativeHref = `${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
+        el.setAttribute("href", relativeHref);
+      } catch (err) {
+        // Keep existing href if URL parsing fails.
       }
     });
 
