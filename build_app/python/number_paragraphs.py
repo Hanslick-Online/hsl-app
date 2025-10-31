@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add sequential @n attributes to <tei:p> nodes lacking them and ensure @xml:id."""
+"""Ensure <tei:p> nodes have @xml:id attributes (numeration disabled)."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ def add_missing_numbers(
     dry_run: bool = False,
     output_path: Path | None = None,
 ) -> tuple[int, int]:
-    """Add @n and @xml:id attributes to <tei:p> nodes lacking them and report totals."""
+    """Add @xml:id attributes to <tei:p> nodes lacking them and report totals."""
 
     tree = ET.parse(str(doc_path))
     number_updates = 0
@@ -47,22 +47,17 @@ def add_missing_numbers(
                 return candidate
 
     for body in iter_bodies(tree):
-        counter = 1
         for para in body.xpath(".//tei:p", namespaces=TEI_NS):
-            current = (para.get("n") or "").strip()
             xml_id = (para.get(XML_ID_ATTR) or "").strip()
             if not xml_id:
                 para.set(XML_ID_ATTR, next_xml_id())
                 id_updates += 1
-            if current:
-                try:
-                    counter = int(current) + 1
-                except ValueError:
-                    counter += 1
-                continue
-            para.set("n", str(counter))
-            counter += 1
-            number_updates += 1
+            # Numeration logic intentionally disabled; keeping existing @n values.
+            # current = (para.get("n") or "").strip()
+            # if not current:
+            #     para.set("n", str(counter))
+            #     number_updates += 1
+            # counter += 1
 
     if dry_run:
         return number_updates, id_updates
@@ -80,8 +75,7 @@ def add_missing_numbers(
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Add sequential @n attributes to <tei:p> elements below <tei:body> "
-            "when the attribute is missing or empty."
+            "Ensure every <tei:p> element below <tei:body> has an @xml:id attribute."
         )
     )
     parser.add_argument(
@@ -99,7 +93,7 @@ def main() -> None:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Report how many @n attributes would be added without writing changes",
+    help="Report how many @xml:id attributes would be added without writing changes",
     )
     args = parser.parse_args()
 
@@ -119,16 +113,12 @@ def main() -> None:
         )
         total_number_updates += added_numbers
         total_id_updates += added_ids
-        print(
-            f"{input_path}: added {added_numbers} @n attributes, "
-            f"{added_ids} @xml:id attributes"
-        )
+        print(f"{input_path}: added {added_ids} @xml:id attributes")
 
     if args.dry_run:
         print(
             "Dry run finished, "
-            f"{total_number_updates} @n and {total_id_updates} @xml:id attributes "
-            "would be added across all files"
+            f"{total_id_updates} @xml:id attributes would be added across all files"
         )
 
 
