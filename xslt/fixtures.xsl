@@ -17,7 +17,7 @@
 
     <xsl:template match="tei:p[not(@prev)]">
         <xsl:copy>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="@*|node()"/>
             <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">
                     <xsl:call-template name="pb-prev"/>
