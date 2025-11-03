@@ -179,7 +179,7 @@ def transform_tei_to_latex(input_file, output_file):
     # Example: Extracting some TEI elements and converting to LaTeX
     if Titles:
         #  Fix title
-        Titles = [clean_text(i) for i in Titles]
+        Titles = [clean_text(i) for i in Titles if len(clean_text(i)) > 0]
         Title = Titles[0]
         if Titles[1:]:
             Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:] if title.strip()])
