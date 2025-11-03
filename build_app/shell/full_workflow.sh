@@ -5,7 +5,8 @@ ANT_OPTS="-Xmx5g"
 #TYPESENSE_PROTOCOL="https"
 #TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
 ./build_app/shell/fetch_data.sh
-./build_app/shell/script.sh
+#./build_app/shell/script.sh
+./build_app/shell/dl_imprint.sh
 ant -f build_app/ant/preprocess.xml
 ./build_app/shell/attributes.sh
 ./build_app/shell/denormalize.sh
