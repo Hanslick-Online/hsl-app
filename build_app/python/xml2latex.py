@@ -183,9 +183,9 @@ def transform_tei_to_latex(input_file, output_file):
         Title = Titles[0]
         if Titles[1:]:
             Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:] if title.strip()])
-            Title = f"{Title}\\\\{Subtitle}"
+            Title = "\\\\".join([Title, Subtitle])
         if Editors:
-            Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
+            Title = "\\\\".join([Title, f"\\large{{Herausgegeben von {Editors}}}"])
     latex_content = []
     latex_content.append(f"\\documentclass[a4paper]{{{document_type}}}")
     latex_content.append("\\usepackage{polyglossia}")
