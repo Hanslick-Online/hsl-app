@@ -114,6 +114,14 @@
                                         <label>Data (NFP):</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.8033446"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/></a>
                                     </div>
+	                            <div class="custom-html-widget col-12 py-2  d-block">   
+                                        <label>Data (Reviews of VMS):</label>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.15274665"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15274665.svg" alt="DOI"/></a>
+                                    </div>
+	                            <div class="custom-html-widget col-12 py-2  d-block">
+                                        <label>Data (Documents):</label>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.15744324"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15744324.svg" alt="DOI"/></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
