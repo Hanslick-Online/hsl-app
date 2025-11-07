@@ -48,7 +48,7 @@
                             </xsl:when>
                             <xsl:when test="$edition = 'vms'">
                                 <li class="dropdown-item"><a target="_blank"
-                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-vms/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'v__'))}"
+                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-vms/main/data/editions/', //tei:TEI/@xml:id, '?format=raw')}"
                                     aria-label="TEI/XML Document Download"
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 

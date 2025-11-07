@@ -48,16 +48,18 @@
                                             <!--- Titel, Untertitle, Verlag are picked from the body, this is a workareound that may be changed if teiHeader gets expanded and fine grained -->
                                             <tr>
                                                 <td>
+                                                    <xsl:attribute name="class">italics</xsl:attribute>
                                                     <a href="{replace(
                                 tokenize(document-uri(/), '/')[last()], 
                                 '^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$',
                                 't__VMS_Auflage_$1_$2.html'
                                 )}">
-                                                        <xsl:value-of select=".//tei:titlePage//tei:docTitle/tei:titlePart[@type='main']/text()"/>
+                                                        <xsl:value-of select="replace(string(.//tei:titlePage//tei:docTitle/tei:titlePart[@type='main']), '\.$', '')"/>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:titlePage//tei:docTitle/tei:titlePart[@type='sub']/text()"/>
+                                                     <xsl:attribute name="class">italics</xsl:attribute>
+                                                    <xsl:value-of select="replace(string(.//tei:titlePage//tei:docTitle/tei:titlePart[@type='sub']), '\.$', '')"/>
                                                 </td>
                                                 <td>
                                                     <xsl:value-of select=".//tei:sourceDesc/tei:biblStruct/tei:monogr/tei:edition/@n"/>                                    
@@ -86,10 +88,10 @@
                         });
                     </script>
                 </div>
-                <script type="text/javascript" src="js/run.js"></script>
+                <script type="text/javascript" src="js/run.js" />
                 <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-html5-2.0.0/cr-1.5.4/r-2.2.9/sp-1.4.0/datatables.min.js" /> -->
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" />
-                <script type="text/javascript" src="js/dt.js"></script>
+                <script type="text/javascript" src="js/dt.js" />
             </body>
         </html>
     </xsl:template>

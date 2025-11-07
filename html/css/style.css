@@ -55,6 +55,15 @@ q { quotes: "„" "“" "‚" "‘" }
 	display: table;
 }
 
+.paginate_button {
+    padding-left: .1em;
+    padding-right: .1em;
+}
+
+.paginate_button.current {
+    font-weight: 800;
+}
+
 
 .wrapper {
     padding: 30px 0;
@@ -385,6 +394,11 @@ sup {
 
 .meta-p {
     padding: 0 .75em;
+}
+
+/* Separate consecutive TEI div blocks for clearer spacing */
+.tei-div:has(+ .tei-div) {
+    padding-bottom: 10rem;
 }
 
 .meta-h {

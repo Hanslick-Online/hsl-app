@@ -55,14 +55,17 @@
                                                     <xsl:value-of select=".//tei:titleStmt/tei:title[@level='j']/text()"/>
                                                 </td>
                                                 <td>
-                                                    <xsl:value-of select=".//tei:titleStmt/tei:author/text()"/>
+                                                    <xsl:for-each select=".//tei:titleStmt/tei:author">
+                                                        <xsl:value-of select="text()"/>
+                                                        <xsl:if test="position() != last()">, </xsl:if>
+                                                    </xsl:for-each>
                                                 </td>
                                                 <td>
                                                     <a>
                                                         <xsl:attribute name="href">
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a'][@type='main']"/>
+                                                        <xsl:apply-templates select=".//tei:titleStmt/tei:title[@level='a']"/>
                                                     </a>
                                                 </td>
                                                 <td>

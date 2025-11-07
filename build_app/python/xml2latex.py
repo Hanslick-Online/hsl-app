@@ -22,10 +22,13 @@ def make_name_list(names):
     else:
         names = ""
     return names
-
+    
 
 def clean_text(text):
-    return text.strip().replace("&", "\\&").replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
+    text = text.strip()
+    for i in ("_", "{", "}", "&"):
+        text = text.replace(i, rf"\{i}")
+    return text.replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
 
 
 def process_paragraph(element):
@@ -175,12 +178,14 @@ def transform_tei_to_latex(input_file, output_file):
 
     # Example: Extracting some TEI elements and converting to LaTeX
     if Titles:
+        #  Fix title
+        Titles = [clean_text(i) for i in Titles if len(clean_text(i)) > 0]
         Title = Titles[0]
         if Titles[1:]:
             Subtitle = "\\\\".join([f"\\Large{{{title}}}" for title in Titles[1:] if title.strip()])
-            Title = f"{Title}\\\\{Subtitle}"
+            Title = "\\\\".join([Title, Subtitle])
         if Editors:
-            Title = f"{Title}\\\\\\large{{Herausgegeben von {Editors}}}"
+            Title = "\\\\".join([Title, f"\\large{{Herausgegeben von {Editors}}}"])
     latex_content = []
     latex_content.append(f"\\documentclass[a4paper]{{{document_type}}}")
     latex_content.append("\\usepackage{polyglossia}")
@@ -192,7 +197,7 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage{geometry}")
     latex_content.append("\\usepackage[pagestyles]{titlesec}")
     latex_content.append("\\titleformat{\\chapter}[display]{\\normalfont\\bfseries}{}{0pt}{\\Large}")
-    latex_content.append("\\usepackage[useregional]{datetime2}")
+    latex_content.append("\\usepackage[de-AT]{datetime2}")
     latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
     latex_content.append("\\setmainfont{Noto Serif}")
     latex_content.append(

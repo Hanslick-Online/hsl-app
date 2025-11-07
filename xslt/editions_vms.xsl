@@ -40,6 +40,7 @@
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="toc-address" select="'toc_vms.html'" />
+                             <xsl:with-param name="doc-type" select="'Kritiken'" />
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="editor-widget" select="'true'"/>
                             <xsl:with-param name="back-btn" select="'true'"/>
@@ -108,6 +109,20 @@
             <a class="anchor" id="index.xml-body.1_div.0"></a>
             <!--<span class="anchor-pb" source="{tokenize(//tei:front//tei:pb/@facs, '/')[last()]}"><br/><br/></span>-->
             <!--<span class="pb"></span>-->
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="tei:div">
+        <xsl:variable name="div-id" select="if (@xml:id) then @xml:id else concat('tei-div-', count(preceding::tei:div) + 1)"/>
+        <xsl:variable name="class-value" select="string-join(('tei-div', if (@type) then concat('tei-div-type-', @type) else (), if (@n) then concat('tei-div-n-', @n) else ()), ' ')"/>
+        <div id="{$div-id}">
+            <xsl:if test="$class-value">
+                <xsl:attribute name="class" select="$class-value"/>
+            </xsl:if>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -199,9 +214,16 @@
     </xsl:template>
 
     <xsl:template match="tei:p">
-        
-        <p id="{@xml:id}" class="indentedP yes-index">
-            <a class="parNum nounderline" />
+        <p class="indentedP yes-index">
+            <xsl:attribute name="id">
+                <xsl:value-of select="if (@xml:id) then @xml:id else concat('p_auto_', generate-id())"/>
+            </xsl:attribute>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
+            <a class="parNum nounderline">
+                <xsl:value-of select="@n"/>
+            </a>
             <xsl:apply-templates/>
         </p>
     </xsl:template>

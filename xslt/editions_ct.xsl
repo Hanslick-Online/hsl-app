@@ -39,6 +39,7 @@
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
                             <xsl:with-param name="toc-address" select="'toc.html'"/>
+                             <xsl:with-param name="doc-type" select="'Kritiken'" />
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="editor-widget" select="'true'"/>
                             <xsl:with-param name="back-btn" select="'true'"/>
@@ -81,9 +82,16 @@
     </xsl:template>
 
     <xsl:template match="tei:p[not(@prev)]">
-     
         <p class="indentedP yes-index">
-            <a class="parNum nounderline" />
+            <xsl:attribute name="id">
+                <xsl:value-of select="if (@xml:id) then @xml:id else concat('p_auto_', generate-id())"/>
+            </xsl:attribute>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
+            <a class="parNum nounderline">
+                <xsl:value-of select="@n"/>
+            </a>
             <xsl:apply-templates/>
             <xsl:if test="following-sibling::tei:p[1]/@prev = 'true'">
                 <xsl:for-each select="following-sibling::tei:p[1]">
@@ -138,7 +146,7 @@
     <xsl:template name="pb-prev">
         <xsl:if test="preceding-sibling::tei:*[2]/name() = 'pb'">
             <xsl:for-each select="preceding-sibling::tei:*[2]">
-                <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
+                <xsl:variable name="graphic-url" select="substring-before(string((id(data(substring-after(@facs, '#')))/tei:graphic/@url)[1]), '.jpg')"/>
                 <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
                 <span class="pb pb-prev">[<xsl:value-of select="@n"/>]</span>
             </xsl:for-each>
@@ -305,7 +313,7 @@
     </xsl:template>
 
     <xsl:template match="tei:pb[not(following-sibling::tei:p[1]/@prev = 'true')]">
-        <xsl:variable name="graphic-url" select="substring-before(id(data(substring-after(@facs, '#')))/tei:graphic/@url, '.jpg')"/>
+        <xsl:variable name="graphic-url" select="substring-before(string((id(data(substring-after(@facs, '#')))/tei:graphic/@url)[1]), '.jpg')"/>
         <span class="anchor-pb" source="hsl-nfp/{$graphic-url}"></span>
         <span class="pb">[<xsl:value-of select="@n"/>]</span>
     </xsl:template>

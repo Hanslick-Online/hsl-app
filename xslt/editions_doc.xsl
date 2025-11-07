@@ -39,7 +39,8 @@
 
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
-                            <xsl:with-param name="toc-address" select="'toc_vms.html'" />
+                            <xsl:with-param name="toc-address" select="'toc_doc.html'" />
+                            <xsl:with-param name="doc-type" select="'Dokumenten'" />
                             <xsl:with-param name="anotation-options" select="'true'"/>
                             <xsl:with-param name="editor-widget" select="'true'"/>
                             <xsl:with-param name="back-btn" select="'true'"/>
@@ -199,9 +200,16 @@
     </xsl:template>
 
     <xsl:template match="tei:p">
-        
-        <p id="{@xml:id}" class="indentedP yes-index">
-            <a class="parNum nounderline" />
+        <p class="indentedP yes-index">
+            <xsl:attribute name="id">
+                <xsl:value-of select="if (@xml:id) then @xml:id else concat('p_auto_', generate-id())"/>
+            </xsl:attribute>
+            <xsl:if test="@n">
+                <xsl:attribute name="data-n" select="@n"/>
+            </xsl:if>
+            <a class="parNum nounderline">
+                <xsl:value-of select="@n"/>
+            </a>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -294,7 +302,8 @@
 
     <xsl:template match="tei:pb">
         <xsl:variable name="facs" select="substring-after(data(@facs), '#')"/>
-        <xsl:variable name="facs_url" select="replace(ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url, '.jpeg', '')"/>
+        <xsl:variable name="facs_url"
+    select="replace((ancestor::tei:TEI//tei:surface[@xml:id=$facs]/tei:graphic/@url)[1], '.jpeg', '')"/>
         <span class="anchor-pb" source="hsl-doc/{$facs_url}" />
         <span class="pb">
             <xsl:value-of select="@n"/>
