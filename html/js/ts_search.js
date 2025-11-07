@@ -73,6 +73,12 @@ search.addWidgets([
               </div>
           `,
     },
+    transformItems(items) {
+      return items.map(item => ({
+        ...item,
+        id: item.id.replace(/t__(\d\d)_VMS_(\d\d\d\d)_TEI_AW_(\d\d-\d\d-\d\d)-TEI-P5\.html/, 't__VMS_Auflage_$1_$2.html')
+      }));
+    },
   }),
 
   instantsearch.widgets.stats({
