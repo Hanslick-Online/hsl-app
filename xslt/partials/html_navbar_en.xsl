@@ -32,7 +32,7 @@
                                     
                                     <li>
                                         <a class="dropdown-item" href="projektgeschichte-engl.html?lang=en">
-                                            History of "Hanslick in Context"
+                                            History of "Hanslick Online"
                                         </a>
                                     </li>
                                     <li>
