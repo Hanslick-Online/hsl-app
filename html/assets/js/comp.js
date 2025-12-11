@@ -108,7 +108,9 @@ async function loadFootnotes(){
             block.className = 'comp-footnote-block mb-3';
             const heading = document.createElement('h5');
             heading.textContent = `Fußnoten ${editionLabel}`;
-            const list = document.createElement('ol');
+            const list = document.createElement('ul');
+            list.style.listStyleType = 'none';
+            list.style.paddingLeft = '0';
             notes.forEach((note) => {
                 const li = document.createElement('li');
                 li.innerHTML = `<strong>${note.number}</strong> ${note.content}`;
