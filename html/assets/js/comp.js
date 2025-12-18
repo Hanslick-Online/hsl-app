@@ -47,6 +47,9 @@ function compare(){
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4e20c39 (Align footnotes)
 async function fetchFootnotesForLink(link){
     const parsed = new URL(link.getAttribute('href'), window.location.href);
     const targetId = parsed.hash ? parsed.hash.slice(1) : '';
@@ -132,6 +135,7 @@ function renderFootnotesBlock(editionLabel, notes){
 }
 
 // Load footnotes for each edition referenced in the header and render them inside the corresponding column.
+<<<<<<< HEAD
 async function loadFootnotes(){
     const table = document.querySelector('.table');
     if(!table){
@@ -187,101 +191,67 @@ async function loadFootnotes(){
     }));
 =======
 // Load footnotes for each edition referenced in the header and render them below the table.
+=======
+>>>>>>> 4e20c39 (Align footnotes)
 async function loadFootnotes(){
     const table = document.querySelector('.table');
-    const cardBody = document.querySelector('.card-body');
-    if(!table || !cardBody){
+    if(!table){
         return;
     }
 
-    let container = document.getElementById('comp-footnotes');
-    if(!container){
-        container = document.createElement('div');
-        container.id = 'comp-footnotes';
-        container.className = 'mt-3';
-        cardBody.appendChild(container);
-    } else {
-        container.innerHTML = '';
-    }
+    cacheCompBodyTexts();
 
-    const linkRefs = Array.from(table.querySelectorAll('.link_ref'));
-    if(!linkRefs.length){
+    // Remove previously injected footnotes
+    table.querySelectorAll('.comp-footnotes-container').forEach((el) => el.remove());
+
+    const headerCells = Array.from(table.querySelectorAll('tr.label > th'));
+    const dataCells = Array.from(table.querySelectorAll('tr.data > td'));
+    if(!headerCells.length || !dataCells.length){
         return;
     }
 
-    const blocks = await Promise.all(linkRefs.map(async (link) => {
-        const parsed = new URL(link.getAttribute('href'), window.location.href);
-        const targetId = parsed.hash ? parsed.hash.slice(1) : '';
-        if(!targetId){
-            return null;
+    await Promise.all(headerCells.map(async (headerCell, colIndex) => {
+        const td = dataCells[colIndex];
+        if(!td){
+            return;
         }
 
-        const editionLabel = link.textContent.trim();
-        const pageUrl = parsed.href.split('#')[0];
-
-        try{
-            const res = await fetch(pageUrl);
-            if(!res.ok){
-                return null;
-            }
-            const html = await res.text();
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            const para = doc.getElementById(targetId);
-            if(!para){
-                return null;
-            }
-
-            const footnoteLinks = Array.from(para.querySelectorAll('a[href^="#"]'));
-            if(!footnoteLinks.length){
-                return null;
-            }
-
-            const notes = [];
-            footnoteLinks.forEach((a) => {
-                const target = a.getAttribute('href').slice(1);
-                if(!target){
-                    return;
-                }
-                const footnoteAnchor = doc.getElementById(target);
-                if(!footnoteAnchor){
-                    return;
-                }
-                const li = footnoteAnchor.closest('li') || footnoteAnchor.parentElement;
-                if(!li){
-                    return;
-                }
-                const body = li.querySelector('.footnote_text');
-                const content = body ? body.innerHTML.trim() : li.innerHTML.trim();
-                const number = a.textContent.trim() || target;
-                notes.push({ number, content });
-            });
-
-            if(!notes.length){
-                return null;
-            }
-
-            const block = document.createElement('div');
-            block.className = 'comp-footnote-block mb-3';
-            const heading = document.createElement('h5');
-            heading.textContent = `Fußnoten ${editionLabel}`;
-            const list = document.createElement('ul');
-            list.style.listStyleType = 'none';
-            list.style.paddingLeft = '0';
-            notes.forEach((note) => {
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${note.number}</strong> ${note.content}`;
-                list.appendChild(li);
-            });
-            block.appendChild(heading);
-            block.appendChild(list);
-            return block;
-        } catch(err){
-            return null;
+        const refs = Array.from(headerCell.querySelectorAll('.link_ref'));
+        if(!refs.length){
+            return;
         }
+
+        const results = await Promise.all(refs.map(async (link) => {
+            try{
+                return await fetchFootnotesForLink(link);
+            } catch(err){
+                return null;
+            }
+        }));
+
+        const footnoteBlocks = results.filter(Boolean);
+        if(!footnoteBlocks.length){
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'comp-footnotes-container';
+
+        const hr = document.createElement('hr');
+        container.appendChild(hr);
+
+        footnoteBlocks.forEach(({ editionLabel, notes }) => {
+            container.appendChild(renderFootnotesBlock(editionLabel, notes));
+        });
+
+        td.appendChild(container);
     }));
+<<<<<<< HEAD
 
     blocks.filter(Boolean).forEach((block) => container.appendChild(block));
 >>>>>>> 210d41b (Add footnotes to collation)
+=======
+>>>>>>> 4e20c39 (Align footnotes)
 };
 
 document.addEventListener('DOMContentLoaded', loadFootnotes);
