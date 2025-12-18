@@ -133,6 +133,15 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+
+    <!-- expose TEI/XML sources for same-origin downloads (keep prefixes) -->
+    <copy todir="${target}" flatten="true" overwrite="true">
+        <fileset dir="${editions}" includes="t__*.xml"/>
+        <fileset dir="${editions_ct}" includes="c__*.xml"/>
+        <fileset dir="${editions_vms}" includes="v__*.xml"/>
+        <fileset dir="${editions_doc}" includes="d__*.xml"/>
+    </copy>
+
     <replace dir="${target}" value="">
         <include name="*.html"/>
         <replacetoken> xmlns=""</replacetoken>
