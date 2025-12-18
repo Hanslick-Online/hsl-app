@@ -46,10 +46,6 @@ function compare(){
     display.appendChild(fragment);
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4e20c39 (Align footnotes)
 async function fetchFootnotesForLink(link){
     const parsed = new URL(link.getAttribute('href'), window.location.href);
     const targetId = parsed.hash ? parsed.hash.slice(1) : '';
@@ -135,7 +131,6 @@ function renderFootnotesBlock(editionLabel, notes){
 }
 
 // Load footnotes for each edition referenced in the header and render them inside the corresponding column.
-<<<<<<< HEAD
 async function loadFootnotes(){
     const table = document.querySelector('.table');
     if(!table){
@@ -189,69 +184,4 @@ async function loadFootnotes(){
 
         td.appendChild(container);
     }));
-=======
-// Load footnotes for each edition referenced in the header and render them below the table.
-=======
->>>>>>> 4e20c39 (Align footnotes)
-async function loadFootnotes(){
-    const table = document.querySelector('.table');
-    if(!table){
-        return;
-    }
-
-    cacheCompBodyTexts();
-
-    // Remove previously injected footnotes
-    table.querySelectorAll('.comp-footnotes-container').forEach((el) => el.remove());
-
-    const headerCells = Array.from(table.querySelectorAll('tr.label > th'));
-    const dataCells = Array.from(table.querySelectorAll('tr.data > td'));
-    if(!headerCells.length || !dataCells.length){
-        return;
-    }
-
-    await Promise.all(headerCells.map(async (headerCell, colIndex) => {
-        const td = dataCells[colIndex];
-        if(!td){
-            return;
-        }
-
-        const refs = Array.from(headerCell.querySelectorAll('.link_ref'));
-        if(!refs.length){
-            return;
-        }
-
-        const results = await Promise.all(refs.map(async (link) => {
-            try{
-                return await fetchFootnotesForLink(link);
-            } catch(err){
-                return null;
-            }
-        }));
-
-        const footnoteBlocks = results.filter(Boolean);
-        if(!footnoteBlocks.length){
-            return;
-        }
-
-        const container = document.createElement('div');
-        container.className = 'comp-footnotes-container';
-
-        const hr = document.createElement('hr');
-        container.appendChild(hr);
-
-        footnoteBlocks.forEach(({ editionLabel, notes }) => {
-            container.appendChild(renderFootnotesBlock(editionLabel, notes));
-        });
-
-        td.appendChild(container);
-    }));
-<<<<<<< HEAD
-
-    blocks.filter(Boolean).forEach((block) => container.appendChild(block));
->>>>>>> 210d41b (Add footnotes to collation)
-=======
->>>>>>> 4e20c39 (Align footnotes)
 };
-
-document.addEventListener('DOMContentLoaded', loadFootnotes);
