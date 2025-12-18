@@ -32,7 +32,8 @@
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
@@ -44,7 +45,8 @@
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
@@ -56,7 +58,8 @@
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
@@ -68,7 +71,8 @@
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
