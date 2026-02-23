@@ -17,6 +17,7 @@
     <xsl:import href="partials/entities-modal.xsl"/>
     <xsl:import href="partials/next-prev-page.xsl"/>
     <xsl:import href="partials/document-download.xsl"/>
+    <xsl:import href="partials/image-source.xsl"/>
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
