@@ -185,3 +185,5 @@ async function loadFootnotes(){
         td.appendChild(container);
     }));
 };
+
+document.addEventListener('DOMContentLoaded', loadFootnotes);
