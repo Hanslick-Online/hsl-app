@@ -41,6 +41,8 @@ jobs:
       run: |
         chmod +x build_app/shell/* build_app/python/*
         ./build_app/shell/fetch_data.sh
+    - name: Fix wrong pagination in 8th edition
+      run: ./build_app/python/fix_facs_1891.py
     - name: Generate Imprint
       run: |
         ./build_app/shell/script.sh
