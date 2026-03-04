@@ -4,6 +4,21 @@ import sys
 import re
 ns = {'tei': 'http://www.tei-c.org/ns/1.0', 'xml': "http://www.w3.org/XML/1998/namespace"}
 
+biblinfo = {'t': ['Vom Musikalisch-Schönen: Ein Beitrag zur Revision der Ästhetik der Tonkunst',
+                  'Alexander Wilfing', 'Daniel Elsner und Meike Wilfing-Albrecht', '2023'],
+            'c': ['Eduard Hanslicks Schriften für die „Neue Freie Presse“',
+                  'Alexander Wilfing',
+                  'Katharina Bamer, Daniel Elsner, Anna-Maria Pfiel und Fernando Sanz-Lázaro', '2023–2026'],
+            'v': ['Die Rezensionen zu Eduard Hanslicks „Vom Musikalisch-Schönen“ (1854–1857)',
+                  'Alexander Wilfing und Anna-Maria Pfiel', 'Daniel Elsner und Fernando Sanz-Lázaro', '2024–2025'],
+            'd': ['Dokumente zu Eduard Hanslicks „Vom Musikalisch-Schönen',
+                  'Alexander Wilfing und Meike Wilfing-Albrecht', 'Fernando Sanz-Lázaro',  '2025']
+            }
+
+
+def make_bibl(title, hsrg, mitarbeiter, year):
+    return f"\\emph{{{title}}}, hrsg. von {hsrg} unter Mitarbeit von {mitarbeiter} (Wien: ACDH. {year})."
+
 
 def fix_invalid_xml_id(xml_text):
     """ Fix invalid xml:id values that don't start with a letter or underscore """
@@ -22,7 +37,7 @@ def make_name_list(names):
     else:
         names = ""
     return names
-    
+
 
 def clean_text(text):
     text = text.strip()
@@ -133,9 +148,20 @@ def make_front(front):
     bylines = ["".join(byline.itertext()).strip() for byline in front.xpath("//tei:byline", namespaces=ns)]
     imprints = [''.join(imprint.itertext()).strip() for imprint in front.xpath("//tei:docImprint", namespaces=ns)]
     edition = ' '.join(front.xpath("//tei:docEdition/text()", namespaces=ns))
+
+    tei_root = front.getroottree().getroot()
+    tei_xml_id = tei_root.attrib.get(f"{{{ns['xml']}}}id", "")
+    i = tei_xml_id[:1].lower()
+    if i not in biblinfo:
+        raise ValueError(
+            f"Unexpected TEI xml:id '{tei_xml_id}'. "
+            f"Expected first character to be one of {sorted(biblinfo.keys())}."
+        )
+
+    bibl = make_bibl(*biblinfo[i])
     text = f"""\\frontmatter
         \\thispagestyle{{empty}}\\strut\\vspace{{.2\\textheight}}
-
+        {bibl}
         \\begin{{center}}
         {{\\Huge\\textbf{{{title}}}}}\\vspace{{.05\\textheight}}
 
