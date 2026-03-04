@@ -80,10 +80,8 @@ def make_name_list(names):
     return names
 
 
-def clean_text(text):
+def normalize_text(text: str) -> str:
     text = re.sub(r"\s+", " ", text.strip())
-    for i in ("_", "&"):
-        text = text.replace(i, rf"\{i}")
     text = text.replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
     # fix common OCR/source spacing artifacts
     text = re.sub(r"\(\s+", "(", text)   # no space after '('
@@ -92,12 +90,24 @@ def clean_text(text):
     return text
 
 
+def escape_latex(text: str) -> str:
+    # Escape literal characters that would break LaTeX when they come from TEI text.
+    # (Do NOT run this on strings that already contain LaTeX commands/macros.)
+    for ch in ("{", "}", "_", "&", "%", "#", "$"):
+        text = text.replace(ch, rf"\{ch}")
+    return text
+
+
+def clean_text(text: str) -> str:
+    return escape_latex(normalize_text(text))
+
+
 def process_paragraph(element):
     """
     Processes a paragraph element to combine all text, adding spaces where needed,
     and handle <lb>, <cb>, and inline elements properly.
     """
-    result = []
+    result: list[str] = []
     skip_space = False
     for node in element.iter():
         text = ""
@@ -111,12 +121,15 @@ def process_paragraph(element):
         text = ""
         # Add the current node's text content
         if node.text:
-            text = node.text.strip() if node.text else ""
+            raw_text = node.text.strip() if node.text else ""
+            raw_text = escape_latex(raw_text)
             if (tag == "hi" and node.attrib.get("rendition") == "#em") or tag == "emph":
-                text = "\\textit{" + text + "}"
+                text = "\\textit{" + raw_text + "}"
+            else:
+                text = raw_text
                 # result.append("\\textit{" + text + "}")
         if node.tail and node.tail.strip():
-            tail = re.sub(r"\s+", " ", node.tail)
+            tail = escape_latex(re.sub(r"\s+", " ", node.tail))
             if tail == " ":
                 tail = ""
         if skip_space and result:
@@ -125,7 +138,9 @@ def process_paragraph(element):
         else:
             result.append(text + tail)
     spacing = "" if element.attrib.get("prev") == "true" else "\n\n"
-    return spacing + clean_text(" ".join(result))
+    # At this point `result` may contain LaTeX macros (e.g. \textit{...}),
+    # so only normalize whitespace/punctuation; escaping already happened per-text-segment.
+    return spacing + normalize_text(" ".join(result))
 
 
 def get_date(tree):
