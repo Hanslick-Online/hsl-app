@@ -1,8 +1,49 @@
 #!/usr/bin/env python
 from acdh_tei_pyutils.tei import ET
+import os
 import sys
 import re
 ns = {'tei': 'http://www.tei-c.org/ns/1.0', 'xml': "http://www.w3.org/XML/1998/namespace"}
+
+
+def norm_ws(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def node_text(node) -> str:
+    return norm_ws("".join(node.itertext()))
+
+
+def lines_on_lb(element) -> list[str]:
+    lines: list[str] = []
+    current: list[str] = []
+
+    for node in element.iter():
+        tag = node.tag.split("}")[-1]
+
+        if node is element:
+            if node.text and node.text.strip():
+                current.append(node.text)
+            continue
+
+        if tag == "lb":
+            line = norm_ws("".join(current)).rstrip(".")
+            if line:
+                lines.append(clean_text(line))
+            current = []
+            if node.tail and node.tail.strip():
+                current.append(node.tail)
+            continue
+
+        if node.text and node.text.strip():
+            current.append(node.text)
+        if node.tail and node.tail.strip():
+            current.append(node.tail)
+
+    line = norm_ws("".join(current)).rstrip(".")
+    if line:
+        lines.append(clean_text(line))
+    return lines
 
 biblinfo = {'t': ['Eduard Hanslick, \\emph{Vom Musikalisch-Schönen: Ein Beitrag zur Revision der Ästhetik der Tonkunst}',
                   'Alexander Wilfing', 'Daniel Elsner und Meike Wilfing-Albrecht', '2023'],
@@ -43,7 +84,12 @@ def clean_text(text):
     text = re.sub(r"\s+", " ", text.strip())
     for i in ("_", "&"):
         text = text.replace(i, rf"\{i}")
-    return text.replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
+    text = text.replace("„ ", "„").replace(" “", "“").replace(" ,", ",").replace(" ’", "’")
+    # fix common OCR/source spacing artifacts
+    text = re.sub(r"\(\s+", "(", text)   # no space after '('
+    text = re.sub(r"\s+\)", ")", text)   # no space before ')'
+    text = re.sub(r"\s+([,.;:!?])", r"\1", text)  # no space before punctuation
+    return text
 
 
 def process_paragraph(element):
@@ -92,19 +138,23 @@ def get_date(tree):
 
 
 def get_info(tree):
-    if tree.xpath(".//tei:titleStmt/tei:title[@level='a']", namespaces=ns):
-        titles = tree.xpath(".//tei:titleStmt/tei:title[@level='a']/text()", namespaces=ns)
-        if tree.xpath(".//tei:titleStmt/tei:title[@level='s']", namespaces=ns):
-            titles += tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
-        if tree.xpath(".//tei:titleStmt/tei:title[@level='j']", namespaces=ns):
-            titles += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
-    elif tree.xpath(".//tei:titleStmt/tei:title[@level='s']", namespaces=ns):
-        titles = tree.xpath(".//tei:titleStmt/tei:title[@level='s']/text()", namespaces=ns)
-        if tree.xpath(".//tei:titleStmt/tei:title[@level='j']", namespaces=ns):
-            titles += tree.xpath(".//tei:titleStmt/tei:title[@level='j']/text()", namespaces=ns)
+    def _titles_for(levels: list[str]) -> list[str]:
+        out: list[str] = []
+        for level in levels:
+            for t in tree.xpath(f".//tei:titleStmt/tei:title[@level='{level}']", namespaces=ns):
+                txt = clean_text(node_text(t))
+                if txt:
+                    out.append(txt)
+        return out
+
+    titles = _titles_for(["a"])
+    if titles:
+        titles += _titles_for(["s", "j"])
     else:
-        titles = tree.xpath(".//tei:analytic/tei:title/text()", namespaces=ns) + tree.xpath(
-            ".//tei:monogr/tei:title/text()", namespaces=ns)
+        titles = _titles_for(["s", "j"])
+    if not titles:
+        fallback_nodes = tree.xpath(".//tei:analytic/tei:title | .//tei:monogr/tei:title", namespaces=ns)
+        titles = [clean_text(node_text(t)) for t in fallback_nodes if clean_text(node_text(t))]
     if tree.xpath(".//tei:titleStmt/tei:authors", namespaces=ns):
         authorsb = tree.xpath(".//tei:titleStmt/tei:authors/text()", namespaces=ns)
     else:
@@ -145,33 +195,28 @@ def make_body(tree, document_type):
 
 
 def make_front(front):
-    def _norm_ws(s: str) -> str:
-        return re.sub(r"\s+", " ", s).strip()
 
     title_nodes = front.xpath(".//tei:titlePage//tei:docTitle/tei:titlePart[@type='main']", namespaces=ns)
-    title = clean_text(_norm_ws(" ".join("".join(n.itertext()) for n in title_nodes)))
+    title = clean_text(norm_ws(" ".join("".join(n.itertext()) for n in title_nodes)))
 
     subtitle_nodes = front.xpath(".//tei:titlePage//tei:docTitle/tei:titlePart[@type='sub']", namespaces=ns)
     subtitles = [
-        clean_text(_norm_ws("".join(n.itertext())))
+        clean_text(norm_ws("".join(n.itertext())))
         for n in subtitle_nodes
-        if _norm_ws("".join(n.itertext()))
+        if norm_ws("".join(n.itertext()))
     ]
 
-    bylines = [
-        clean_text(_norm_ws("".join(byline.itertext())))
-        for byline in front.xpath(".//tei:titlePage//tei:byline", namespaces=ns)
-        if _norm_ws("".join(byline.itertext()))
-    ]
+    bylines: list[str] = []
+    for byline in front.xpath(".//tei:titlePage//tei:byline", namespaces=ns):
+        bylines.extend(lines_on_lb(byline))
 
-    imprints = [
-        clean_text(_norm_ws("".join(imprint.itertext())))
-        for imprint in front.xpath(".//tei:titlePage//tei:docImprint", namespaces=ns)
-        if _norm_ws("".join(imprint.itertext()))
-    ]
+    imprints: list[str] = []
+    for imprint in front.xpath(".//tei:titlePage//tei:docImprint", namespaces=ns):
+        imprints.extend(lines_on_lb(imprint))
+    
 
     edition_nodes = front.xpath(".//tei:titlePage//tei:docEdition", namespaces=ns)
-    edition = clean_text(_norm_ws(" ".join("".join(n.itertext()) for n in edition_nodes)))
+    edition = clean_text(norm_ws(" ".join("".join(n.itertext()) for n in edition_nodes)))
 
     tei_root = front.getroottree().getroot()
     tei_xml_id = tei_root.attrib.get(f"{{{ns['xml']}}}id", "")
@@ -184,7 +229,7 @@ def make_front(front):
 
     bibl = make_bibl(*biblinfo[i])
     text = f"""\\frontmatter
-        \\thispagestyle{{empty}}\\noindent {bibl}\\vspace{{.2\\textheight}}
+        \\thispagestyle{{empty}}\\noindent {{\\linespread{{1}}\\selectfont {bibl}}}\\vspace{{.2\\textheight}}
         \\begin{{center}}
         {{\\Huge\\textbf{{{title.strip('.')}}}}}\\vspace{{.05\\textheight}}
 
@@ -192,11 +237,11 @@ def make_front(front):
     if subtitles:
         text += "{\\LARGE\\textbf{" + ' '.join(subtitles).strip('.') + "}}\\vspace{.1\\textheight}\n\n"
     if bylines:
-        text += "{\\large " + ' '.join(bylines).strip('.') + "}\n\\vfill\n\n"
+        text += "{\\large " + "\\\\\n".join([b.rstrip('.') for b in bylines]) + "}\n\\vfill\n\n"
     if edition:
         text += "{\\small " + edition.strip('.') + "}\n\\vfill\n\n"
     if imprints:
-        text += "\n\n".join(imprints).strip('.')
+        text += "\\\\\n".join([i.rstrip('.') for i in imprints])
     return text + "\\end{center}\\clearpage\n\\mainmatter\n"
 
 
@@ -219,6 +264,12 @@ def transform_tei_to_latex(input_file, output_file):
     tree = ET.fromstring(fixed_xml_text.encode("utf-8"))
     # tree = TeiReader(input_file)
 
+    tei_xml_id = tree.attrib.get(f"{{{ns['xml']}}}id", "")
+    if not tei_xml_id:
+        tei_xml_id = os.path.basename(input_file)
+    prefix = tei_xml_id[:1].lower() if tei_xml_id else ""
+    bibl = make_bibl(*biblinfo[prefix]) if prefix in biblinfo else ""
+
     Titles, Author, Date, Editors = get_info(tree)
     front = tree.xpath(".//tei:text//tei:front", namespaces=ns)
     has_title_page = bool(tree.xpath(".//tei:text//tei:front//tei:titlePage", namespaces=ns))
@@ -227,7 +278,6 @@ def transform_tei_to_latex(input_file, output_file):
     # Example: Extracting some TEI elements and converting to LaTeX
     Title = ""
     if Titles:
-        #  Fix title
         Titles = [clean_text(i) for i in Titles if len(clean_text(i)) > 0]
         Title = Titles[0]
         if Titles[1:]:
@@ -235,6 +285,55 @@ def transform_tei_to_latex(input_file, output_file):
             Title = "\\\\".join([Title, Subtitle])
         if Editors:
             Title = "\\\\".join([Title, f"\\large{{Herausgegeben von {Editors}}}"])
+
+    # Systematize maketitle fields for articles:
+    # title <- bibl, title, subtitles
+    # author <- bylines
+    # date <- imprints
+    if document_type == "article":
+        byline_nodes = tree.xpath(".//tei:text//tei:front//tei:titlePage//tei:byline", namespaces=ns)
+        bylines: list[str] = []
+        for b in byline_nodes:
+            bylines.extend(lines_on_lb(b))
+        if not bylines:
+            author_nodes = tree.xpath(".//tei:teiHeader//tei:fileDesc//tei:titleStmt//tei:author", namespaces=ns)
+            author_names = [node_text(a) for a in author_nodes if node_text(a)]
+            if author_names:
+                bylines = [make_name_list(author_names)]
+        if bylines:
+            Author = "\\\\\n".join([b.rstrip('.') for b in bylines])
+
+        imprint_lines: list[str] = []
+        for imp in tree.xpath(".//tei:teiHeader//tei:sourceDesc//tei:biblStruct//tei:monogr//tei:imprint", namespaces=ns):
+            pub_place = " ".join([node_text(p) for p in imp.xpath("./tei:pubPlace", namespaces=ns) if node_text(p)]).strip()
+            publisher = " ".join([node_text(p) for p in imp.xpath("./tei:publisher", namespaces=ns) if node_text(p)]).strip()
+            date_nodes = imp.xpath("./tei:date", namespaces=ns)
+            date_text = " ".join([node_text(d) for d in date_nodes if node_text(d)]).strip()
+            if pub_place and date_text:
+                imprint_lines.append(clean_text(f"{pub_place}, {date_text}").rstrip("."))
+            elif pub_place:
+                imprint_lines.append(clean_text(pub_place).rstrip("."))
+            elif date_text:
+                imprint_lines.append(clean_text(date_text).rstrip("."))
+            if publisher:
+                imprint_lines.append(clean_text(publisher).rstrip("."))
+        if not imprint_lines:
+            pub_place = " ".join([node_text(p) for p in tree.xpath(".//tei:teiHeader//tei:fileDesc//tei:publicationStmt//tei:pubPlace", namespaces=ns) if node_text(p)]).strip()
+            pub_date = " ".join([node_text(d) for d in tree.xpath(".//tei:teiHeader//tei:fileDesc//tei:publicationStmt//tei:date", namespaces=ns) if node_text(d)]).strip()
+            if pub_place and pub_date:
+                imprint_lines = [clean_text(f"{pub_place}, {pub_date}").rstrip(".")]
+            elif pub_place or pub_date:
+                imprint_lines = [clean_text(pub_place or pub_date).rstrip(".")]
+        if imprint_lines:
+            Date = "\\\\".join(imprint_lines)
+
+        title_lines: list[str] = []
+        if Titles:
+            title_lines.append(f"{{\\Large {Titles[0].strip('.')}}}")
+            for t in Titles[1:]:
+                if t.strip():
+                    title_lines.append(f"{{\\large {t.strip('.')}}}")
+        Title = "\\\\".join(title_lines) if title_lines else Title
     latex_content = []
     latex_content.append(f"\\documentclass[a4paper]{{{document_type}}}")
     latex_content.append("\\usepackage{polyglossia}")
@@ -253,16 +352,28 @@ def transform_tei_to_latex(input_file, output_file):
         "\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{}{}{\\thepage}}\\pagestyle{mystyle}")
     latex_content.append(f"\\title{{{Title}}}")
     latex_content.append(f"\\author{{{Author}}}")
-    if Date[1] == 0:
-        Date = Date[0]
-    else:
-        Date = f"\\DTMdisplaydate{{{Date[0]}}}{{{Date[1]}}}{{{Date[2]}}}" + "{gregorian}"
+    if document_type != "article":
+        if Date[1] == 0:
+            Date = Date[0]
+        else:
+            Date = f"\\DTMdisplaydate{{{Date[0]}}}{{{Date[1]}}}{{{Date[2]}}}" + "{gregorian}"
     latex_content.append(f"\\date{{{Date}}}")
     latex_content.append("\\begin{document}")
     if document_type == "book" and front:
         latex_content.append(make_front(front[0]))
     else:
-        latex_content.append("\\maketitle")
+        if document_type == "article" and bibl:
+            latex_content.append(
+                "\\begingroup\\linespread{1}\\selectfont\\small\\noindent "
+                + bibl
+                + "\\par\\endgroup"
+            )
+            latex_content.append("\\vspace{0.5\\baselineskip}")
+            latex_content.append("\\begingroup\\let\\newpage\\relax\\let\\clearpage\\relax\\let\\cleardoublepage\\relax")
+            latex_content.append("\\maketitle")
+            latex_content.append("\\endgroup")
+        else:
+            latex_content.append("\\maketitle")
     latex_content.append(make_body(tree, document_type))
 
     latex_content.append("\\end{document}")
