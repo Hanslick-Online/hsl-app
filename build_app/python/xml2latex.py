@@ -333,8 +333,9 @@ def make_body(tree, document_type):
         head = chapter.xpath("./tei:head", namespaces=ns)
         if head:
             head = process_paragraph(head[0]).strip()
-            if len(head) > 80:
-                short = head[:-79]
+            plain_head = strip_latex_commands(head)
+            if len(plain_head) > 80:
+                short = plain_head[:80]
             else:
                 short = ""
             text += section(document_type, head, short) + "\n"
@@ -398,14 +399,34 @@ def make_front(front):
     return text + "\\end{center}\\clearpage\n\\mainmatter\n"
 
 
+def strip_latex_commands(text: str) -> str:
+    """Remove LaTeX commands from text, keeping only the plain content."""
+    text = re.sub(r"\\textit\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"\\textbf\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"\\emph\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"\\[a-zA-Z]+\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"[{}]", "", text)
+    return text.strip()
+
+
+def protect_latex_commands(text: str) -> str:
+    """Add \\protect before fragile LaTeX commands so they survive moving arguments (headers, TOC)."""
+    for cmd in ("textit", "textbf", "emph", "textsc", "textsf", "texttt"):
+        text = text.replace(f"\\{cmd}{{", f"\\protect\\{cmd}{{")
+    return text
+
+
 def section(document, text, shorttext=""):
     if shorttext:
+        shorttext = strip_latex_commands(shorttext)
         shorttext = f"[{shorttext}]"
+    # Protect fragile commands in the full title for page headers (titlesec \chaptertitle)
+    protected = protect_latex_commands(text)
     if document == "book":
         section = "chapter"
     else:
         section = "section"
-    return f"\n\n\\{section}{shorttext}" + "{" + text + "}"
+    return f"\n\n\\{section}{shorttext}" + "{" + protected + "}"
 
 
 def transform_tei_to_latex(input_file, output_file):
@@ -542,8 +563,10 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage[de-AT]{datetime2}")
     latex_content.append("\\geometry{left=35mm, right=35mm, top=35mm, bottom=35mm}")
     latex_content.append("\\setmainfont{Noto Serif}")
+    latex_content.append("\\widowpenalty=10000")
+    latex_content.append("\\clubpenalty=10000")
     latex_content.append(
-        "\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{}{}{\\thepage}}\\pagestyle{mystyle}")
+        "\\newpagestyle{mystyle}{\\sethead[\\thepage][][\\chaptertitle]{\\chaptertitle}{}{\\thepage}}\\pagestyle{mystyle}")
     latex_content.append(f"\\title{{{Title}}}")
     latex_content.append(f"\\author{{{Author}}}")
     if document_type != "article":
