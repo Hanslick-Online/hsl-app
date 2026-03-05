@@ -358,6 +358,7 @@ def transform_tei_to_latex(input_file, output_file):
     latex_content.append("\\usepackage{fontspec,xltxtra,xunicode}")
     latex_content.append("\\usepackage{microtype}")
     latex_content.append("\\usepackage{geometry}")
+    latex_content.append("\\usepackage{emptypage}")
     latex_content.append("\\usepackage[pagestyles]{titlesec}")
     latex_content.append("\\titleformat{\\chapter}[display]{\\normalfont\\bfseries}{}{0pt}{\\Large}")
     latex_content.append("\\usepackage[de-AT]{datetime2}")
