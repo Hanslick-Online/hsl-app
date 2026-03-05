@@ -102,19 +102,108 @@ def clean_text(text: str) -> str:
     return escape_latex(normalize_text(text))
 
 
+def _is_emph_node(node) -> bool:
+    """Return True if *node* itself introduces italic formatting."""
+    tag = node.tag.split("}")[-1]
+    return tag == "emph" or (tag == "hi" and node.attrib.get("rendition") == "#em")
+
+
+def _has_emph_ancestor(node, root) -> bool:
+    """Return True if any ancestor of *node* (up to but not including *root*) is <emph>."""
+    parent = node.getparent()
+    while parent is not None and parent is not root:
+        if _is_emph_node(parent):
+            return True
+        parent = parent.getparent()
+    return False
+
+
+def _extract_note_text(note_element) -> str:
+    """Recursively extract the text content of a <note> element for use in \\footnote{}.
+
+    Uses a proper tree-walk so that formatting context (e.g. <emph>) is
+    correctly propagated to descendant nodes like <rs>.
+    """
+    def _walk(node, in_emph: bool) -> list[str]:
+        tag = node.tag.split("}")[-1]
+        is_emph = _is_emph_node(node)
+        cur_emph = in_emph or is_emph  # True inside this node and its children
+
+        parts: list[str] = []
+
+        # 1. Node's own .text (before any child elements)
+        if node.text and node.text.strip():
+            raw = escape_latex(node.text.strip())
+            if cur_emph:
+                raw = "\\textit{" + raw + "}"
+            parts.append(raw)
+
+        # 2. Process child elements (in document order)
+        for child in node:
+            parts.extend(_walk(child, cur_emph))
+
+        # 3. Node's .tail (text after </node>, belongs to the *parent's* context)
+        if node.tail and node.tail.strip():
+            tail = escape_latex(re.sub(r"\s+", " ", node.tail))
+            if tail != " ":
+                if in_emph:  # parent's emph context, not this node's
+                    tail = "\\textit{" + tail + "}"
+                parts.append(tail)
+
+        return parts
+
+    # Walk the note's children (note_element itself is the root, not formatted)
+    parts: list[str] = []
+    if note_element.text and note_element.text.strip():
+        parts.append(escape_latex(note_element.text.strip()))
+    for child in note_element:
+        parts.extend(_walk(child, in_emph=False))
+    return normalize_text(" ".join(parts))
+
+
+def _is_descendant_of_note(node, element) -> bool:
+    """Check whether *node* is inside a <note> that is a descendant of *element*."""
+    parent = node.getparent()
+    while parent is not None and parent is not element:
+        if parent.tag.split("}")[-1] == "note":
+            return True
+        parent = parent.getparent()
+    return False
+
+
 def process_paragraph(element):
     """
     Processes a paragraph element to combine all text, adding spaces where needed,
-    and handle <lb>, <cb>, and inline elements properly.
+    and handle <lb>, <cb>, <note>, and inline elements properly.
     """
     result: list[str] = []
     skip_space = False
     for node in element.iter():
+        tag = node.tag.split("}")[-1]  # remove namespace if present
+
+        # Skip nodes that are descendants of a <note> (handled when <note> is encountered)
+        if node is not element and _is_descendant_of_note(node, element):
+            continue
+
+        # Handle <note place="foot"> → \footnote{...}
+        if tag == "note" and node.attrib.get("place") in {"foot", "bottom"}:
+            fn_text = _extract_note_text(node)
+            if fn_text:
+                if result:
+                    result[-1] += "\\footnote{" + fn_text + "}"
+                else:
+                    result.append("\\footnote{" + fn_text + "}")
+            # Process the note's tail (text after the closing </note>)
+            if node.tail and node.tail.strip():
+                tail = escape_latex(re.sub(r"\s+", " ", node.tail))
+                if tail != " ":
+                    result.append(tail)
+            continue
+
         text = ""
         tail = ""
-        tag = node.tag.split("}")[-1]  # remove namespace if present
-        # Handle line or column breaks
 
+        # Handle line or column breaks
         if tag in {"lb", "cb", "pb"}:
             if node.attrib.get("break") == "no":
                 skip_space = True
@@ -123,15 +212,17 @@ def process_paragraph(element):
         if node.text:
             raw_text = node.text.strip() if node.text else ""
             raw_text = escape_latex(raw_text)
-            if (tag == "hi" and node.attrib.get("rendition") == "#em") or tag == "emph":
+            want_emph = _is_emph_node(node) or (node is not element and _has_emph_ancestor(node, element))
+            if want_emph:
                 text = "\\textit{" + raw_text + "}"
             else:
                 text = raw_text
-                # result.append("\\textit{" + text + "}")
         if node.tail and node.tail.strip():
             tail = escape_latex(re.sub(r"\s+", " ", node.tail))
             if tail == " ":
                 tail = ""
+            elif _has_emph_ancestor(node, element):
+                tail = "\\textit{" + tail + "}"
         if skip_space and result:
             result[-1] += text + tail
             skip_space = False
@@ -186,6 +277,53 @@ def get_info(tree):
         if elem.text
     ]
     return titles, make_name_list(authors), origdate, make_name_list(origeditors)
+
+
+def get_source_desc_article_info(tree):
+    """Extract structured bibliographic info from sourceDesc/biblStruct
+    for building article title pages."""
+    bs = tree.xpath(".//tei:sourceDesc//tei:biblStruct", namespaces=ns)
+    if not bs:
+        return None
+    bs = bs[0]
+    analytic_titles = [
+        node_text(t)
+        for t in bs.xpath("./tei:analytic/tei:title", namespaces=ns)
+        if node_text(t)
+    ]
+    analytic_authors = [
+        node_text(a)
+        for a in bs.xpath("./tei:analytic/tei:author", namespaces=ns)
+        if node_text(a)
+    ]
+    monogr_main = " ".join(
+        [node_text(t) for t in bs.xpath("./tei:monogr/tei:title[@type='main']", namespaces=ns) if node_text(t)]
+    ).strip()
+    monogr_sub = " ".join(
+        [node_text(t) for t in bs.xpath("./tei:monogr/tei:title[@type='sub']", namespaces=ns) if node_text(t)]
+    ).strip()
+    resp_text = " ".join(
+        [node_text(r) for r in bs.xpath("./tei:monogr/tei:respStmt/tei:resp", namespaces=ns) if node_text(r)]
+    ).strip()
+    editor_names = [
+        node_text(n)
+        for n in bs.xpath("./tei:monogr/tei:respStmt/tei:name", namespaces=ns)
+        if node_text(n)
+    ]
+    date_when = (bs.xpath("./tei:monogr/tei:imprint/tei:date/@when", namespaces=ns) or [""])[0]
+    date_text = " ".join(
+        [node_text(d) for d in bs.xpath("./tei:monogr/tei:imprint/tei:date", namespaces=ns) if node_text(d)]
+    ).strip()
+    return {
+        'analytic_titles': analytic_titles,
+        'analytic_authors': analytic_authors,
+        'monogr_main': monogr_main,
+        'monogr_sub': monogr_sub,
+        'resp_text': resp_text,
+        'editor_names': editor_names,
+        'date_when': date_when,
+        'date_text': date_text,
+    }
 
 
 def make_body(tree, document_type):
@@ -302,53 +440,93 @@ def transform_tei_to_latex(input_file, output_file):
             Title = "\\\\".join([Title, f"\\large{{Herausgegeben von {Editors}}}"])
 
     # Systematize maketitle fields for articles:
-    # title <- bibl, title, subtitles
-    # author <- bylines
-    # date <- imprints
+    # title <- source line (journal info) + item line (author, article title)
+    # author <- empty (author is embedded in item line)
+    # date <- empty (date is in source line or item line)
     if document_type == "article":
-        byline_nodes = tree.xpath(".//tei:text//tei:front//tei:titlePage//tei:byline", namespaces=ns)
-        bylines: list[str] = []
-        for b in byline_nodes:
-            bylines.extend(lines_on_lb(b))
-        if not bylines:
-            author_nodes = tree.xpath(".//tei:teiHeader//tei:fileDesc//tei:titleStmt//tei:author", namespaces=ns)
-            author_names = [node_text(a) for a in author_nodes if node_text(a)]
-            if author_names:
-                bylines = [make_name_list(author_names)]
-        if bylines:
-            Author = "\\\\\n".join([b.rstrip('.') for b in bylines])
+        src_info = get_source_desc_article_info(tree)
 
-        imprint_lines: list[str] = []
-        for imp in tree.xpath(".//tei:teiHeader//tei:sourceDesc//tei:biblStruct//tei:monogr//tei:imprint", namespaces=ns):
-            pub_place = " ".join([node_text(p) for p in imp.xpath("./tei:pubPlace", namespaces=ns) if node_text(p)]).strip()
-            publisher = " ".join([node_text(p) for p in imp.xpath("./tei:publisher", namespaces=ns) if node_text(p)]).strip()
-            date_nodes = imp.xpath("./tei:date", namespaces=ns)
-            date_text = " ".join([node_text(d) for d in date_nodes if node_text(d)]).strip()
-            if pub_place and date_text:
-                imprint_lines.append(clean_text(f"{pub_place}, {date_text}").rstrip("."))
-            elif pub_place:
-                imprint_lines.append(clean_text(pub_place).rstrip("."))
-            elif date_text:
-                imprint_lines.append(clean_text(date_text).rstrip("."))
-            if publisher:
-                imprint_lines.append(clean_text(publisher).rstrip("."))
-        if not imprint_lines:
-            pub_place = " ".join([node_text(p) for p in tree.xpath(".//tei:teiHeader//tei:fileDesc//tei:publicationStmt//tei:pubPlace", namespaces=ns) if node_text(p)]).strip()
-            pub_date = " ".join([node_text(d) for d in tree.xpath(".//tei:teiHeader//tei:fileDesc//tei:publicationStmt//tei:date", namespaces=ns) if node_text(d)]).strip()
-            if pub_place and pub_date:
-                imprint_lines = [clean_text(f"{pub_place}, {pub_date}").rstrip(".")]
-            elif pub_place or pub_date:
-                imprint_lines = [clean_text(pub_place or pub_date).rstrip(".")]
-        if imprint_lines:
-            Date = "\\\\".join(imprint_lines)
+        # Check if titleStmt has explicit article title (level='a' with type='main')
+        a_main_nodes = tree.xpath(
+            ".//tei:titleStmt/tei:title[@level='a'][@type='main']", namespaces=ns
+        )
+        has_explicit_article_title = bool(a_main_nodes)
 
+        # --- Build source line (journal/publication info) ---
+        source_line = ""
+        if src_info and src_info['editor_names']:
+            parts = []
+            if src_info['monogr_main']:
+                main = clean_text(src_info['monogr_main'])
+                if "„" not in main and "\u201E" not in main:
+                    main = "\\emph{" + main + "}"
+                parts.append(main)
+            editors_str = clean_text(make_name_list(src_info['editor_names']))
+            resp = clean_text(src_info['resp_text']) if src_info['resp_text'] else "Herausgegeben von"
+            parts.append(f"{resp} {editors_str}")
+            if src_info['monogr_sub']:
+                parts.append(clean_text(src_info['monogr_sub']))
+            # When analytic/title is issue info (no type='main' on level='a'),
+            # append it to the source line rather than treating it as the article title.
+            if not has_explicit_article_title and src_info['analytic_titles']:
+                parts.append(clean_text(src_info['analytic_titles'][0]))
+            source_line = ". ".join(p.rstrip('.') for p in parts if p) + "."
+
+        # --- Build article title ---
+        if has_explicit_article_title:
+            article_parts = []
+            for t in a_main_nodes:
+                txt = clean_text(node_text(t))
+                if txt:
+                    article_parts.append(txt)
+            a_sub_nodes = tree.xpath(
+                ".//tei:titleStmt/tei:title[@level='a'][@type='sub']", namespaces=ns
+            )
+            for t in a_sub_nodes:
+                txt = clean_text(node_text(t))
+                if txt:
+                    article_parts.append(txt)
+            article_title = ". ".join(p.rstrip('.') for p in article_parts if p)
+        else:
+            # Fallback: get article title from body head elements (e.g. c__ documents)
+            heads = tree.xpath(
+                ".//tei:text//tei:body//tei:div[1]/tei:head", namespaces=ns
+            )
+            article_parts = [
+                clean_text(node_text(h))
+                for h in heads if clean_text(node_text(h))
+            ]
+            article_title = " ".join(article_parts) if article_parts else ""
+
+        # --- Build item line (Author, Title) ---
+        if src_info and src_info['analytic_authors']:
+            sd_author = clean_text(make_name_list(src_info['analytic_authors']))
+        else:
+            sd_author = Author
+
+        item_parts = []
+        if sd_author:
+            item_parts.append(sd_author)
+        if article_title:
+            item_parts.append(article_title.rstrip('.'))
+
+        # For non-journal documents (no source line), append the year
+        if not source_line and src_info:
+            dw = src_info['date_when'] or src_info['date_text']
+            if dw:
+                year = clean_text(dw.split('-')[0] if '-' in dw else dw)
+                item_parts.append(year)
+
+        item_line = ", ".join(item_parts) + "."
+
+        # --- Assemble Title; clear Author and Date ---
         title_lines: list[str] = []
-        if Titles:
-            title_lines.append(f"{{\\Large {Titles[0].strip('.')}}}")
-            for t in Titles[1:]:
-                if t.strip():
-                    title_lines.append(f"{{\\large {t.strip('.')}}}")
-        Title = "\\\\".join(title_lines) if title_lines else Title
+        if source_line:
+            title_lines.append(f"{{\\large {source_line}}}")
+        title_lines.append(f"{{\\Large {item_line}}}")
+        Title = "\\\\[1em]".join(title_lines)
+        Author = ""
+        Date = ""
     latex_content = []
     latex_content.append(f"\\documentclass[a4paper]{{{document_type}}}")
     latex_content.append("\\usepackage{polyglossia}")
