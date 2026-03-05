@@ -72,122 +72,135 @@
                                 </h1>
                                 <xsl:choose>
                                     <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
-                                        <button type="button" class="btn text-light btn-index">
-                                            <a href="toc_t.html{$lang}">
-                                                <xsl:value-of select="$treatise"/><br/>(<i class="italics">VMS</i>) 
+                                        <a href="toc_t.html{$lang}">
+                                            <button type="button" class="btn text-light btn-index">
+                                                    <xsl:value-of select="$treatise"/>
+                                                    <br/>
+                                                    (<i class="italics">VMS</i>) 
+                                                </button>
                                             </a>
-                                        </button>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <button type="button" class="btn text-light btn-index">
+                                        </xsl:when>
+                                        <xsl:otherwise>
                                             <a href="toc_t_en.html{$lang}">
-                                                <xsl:value-of select="$treatise"/><br/>(<span class="italics">VMS</span>) 
+                                                <button type="button" class="btn text-light btn-index">
+                                                    <xsl:value-of select="$treatise"/>
+                                                    <br/>
+                                                (<span class="italics">VMS</span>) 
+                                                </button>
                                             </a>
-                                        </button>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <xsl:choose>
-                                    <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
-                                        <a href="toc.html{$lang}">
-                                        <button type="button" class="btn text-light btn-index">
-                                                <xsl:value-of select="$reviews"/><br/>(<span class="italics">Neue Freie Presse</span>)                                            
-                                        </button>
-                                        </a>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                     <a href="toc_en.html{$lang}">
-                                        <button type="button" class="btn text-light btn-index">
-                                                <xsl:value-of select="$reviews"/><br/>(<span class="italics">Neue Freie Presse</span>)  
-                                        </button>
-                                        </a>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <a href="toc_vms.html{$lang}">
-                                <button type="button" class="btn btn-index">
-                                        <xsl:value-of select="$vms"/><xsl:text> </xsl:text> <i class="italics">VMS</i>
-                                    <!-- <xsl:value-of select="$vms"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                    <xsl:choose>
+                                        <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
+                                            <a href="toc.html{$lang}">
+                                                <button type="button" class="btn text-light btn-index">
+                                                    <xsl:value-of select="$reviews"/>
+                                                    <br/>
+                                                (<span class="italics">Neue Freie Presse</span>)                                            
+                                                </button>
+                                            </a>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <a href="toc_en.html{$lang}">
+                                                <button type="button" class="btn text-light btn-index">
+                                                    <xsl:value-of select="$reviews"/>
+                                                    <br/>
+                                                    (<span class="italics">Neue Freie Presse</span>)  
+                                                </button>
+                                            </a>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                    <a href="toc_vms.html{$lang}">
+                                        <button type="button" class="btn btn-index">
+                                            <xsl:value-of select="$vms"/>
+                                            <xsl:text></xsl:text>
+                                            <i class="italics">VMS</i>
+                                            <!-- <xsl:value-of select="$vms"/>
                                     btn-index-secondary -->
-                                </button>
-                                 </a>
-                                  <a href="toc_doc.html{$lang}">
-                                <button type="button" class="btn btn-index">
-                                        <xsl:value-of select="$docs"/><xsl:text> </xsl:text> <i class="italics">VMS</i>                      
-                                    <!-- <xsl:value-of select="$vms"/>
+                                        </button>
+                                    </a>
+                                    <a href="toc_doc.html{$lang}">
+                                        <button type="button" class="btn btn-index">
+                                            <xsl:value-of select="$docs"/>
+                                            <xsl:text></xsl:text>
+                                            <i class="italics">VMS</i>
+                                            <!-- <xsl:value-of select="$vms"/>
                                     btn-index-secondary -->
-                                </button></a>
-                                <xsl:for-each select="//tei:body">
-                                    <xsl:for-each select="./tei:div/tei:p">
-                                        <xsl:choose>
-                                            <xsl:when test="position() = 1">
-                                                <p class="index_text">
-                                                    <xsl:apply-templates/>
-                                                </p>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <p class="index_text about-text-hidden fade-lang">
-                                                    <xsl:apply-templates/>
-                                                </p>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
+                                        </button>
+                                    </a>
+                                    <xsl:for-each select="//tei:body">
+                                        <xsl:for-each select="./tei:div/tei:p">
+                                            <xsl:choose>
+                                                <xsl:when test="position() = 1">
+                                                    <p class="index_text">
+                                                        <xsl:apply-templates/>
+                                                    </p>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <p class="index_text about-text-hidden fade-lang">
+                                                        <xsl:apply-templates/>
+                                                    </p>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
 
+                                        </xsl:for-each>
+                                        <p id="show-text">
+                                            <xsl:value-of select="$more"/>
+                                        </p>
                                     </xsl:for-each>
-                                    <p id="show-text">
-                                        <xsl:value-of select="$more"/>
-                                    </p>
-                                </xsl:for-each>
 
+                                </div>
+                            </div>
+                            <div class="col-md-7 i_img_cl" style="margin:0;padding:0;">
+                                <div class="intro_image">
+                                    <img src="images/thumbnail.jpg" alt="Hanslick Online Hintergrundbild"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-7 i_img_cl" style="margin:0;padding:0;">
-                            <div class="intro_image">
-                                <img src="images/thumbnail.jpg" alt="Hanslick Online Hintergrundbild"/>
-                            </div>
-                        </div>
+
+                        <xsl:choose>
+                            <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
+                                <xsl:call-template name="html_footer"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:call-template name="html_footer_en"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </div>
+                    <script type="text/javascript" src="js/run.js"></script>
+                    <script src="js/hide-md.js"></script>
+                </body>
+            </html>
+        </xsl:template>
+        <xsl:template match="tei:div//tei:head">
+            <h2 id="{generate-id()}">
+                <xsl:apply-templates/>
+            </h2>
+        </xsl:template>
+        <xsl:template match="tei:div">
+            <div id="{generate-id()}">
+                <xsl:apply-templates/>
+            </div>
+        </xsl:template>
+        <xsl:template match="tei:emph">
+            <em>
+                <xsl:apply-templates/>
+            </em>
+        </xsl:template>
+        <xsl:template match="tei:list">
+            <ul id="{generate-id()}">
+                <xsl:apply-templates/>
+            </ul>
+        </xsl:template>
 
-                    <xsl:choose>
-                        <xsl:when test="starts-with(//tei:body/@xml:lang, 'de')">
-                            <xsl:call-template name="html_footer"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="html_footer_en"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
-                <script type="text/javascript" src="js/run.js"></script>
-                <script src="js/hide-md.js"></script>
-            </body>
-        </html>
-    </xsl:template>
-    <xsl:template match="tei:div//tei:head">
-        <h2 id="{generate-id()}">
-            <xsl:apply-templates/>
-        </h2>
-    </xsl:template>
-    <xsl:template match="tei:div">
-        <div id="{generate-id()}">
-            <xsl:apply-templates/>
-        </div>
-    </xsl:template>
-    <xsl:template match="tei:emph">
-        <em>
-            <xsl:apply-templates/>
-        </em>
-    </xsl:template>
-    <xsl:template match="tei:list">
-        <ul id="{generate-id()}">
-            <xsl:apply-templates/>
-        </ul>
-    </xsl:template>
-
-    <xsl:template match="tei:item">
-        <li id="{generate-id()}">
-            <xsl:apply-templates/>
-        </li>
-    </xsl:template>
-    <xsl:template match="tei:ref">
-        <a target="_blank" href="{@target}">
-            <xsl:apply-templates/>
-        </a>
-    </xsl:template>
-</xsl:stylesheet>
+        <xsl:template match="tei:item">
+            <li id="{generate-id()}">
+                <xsl:apply-templates/>
+            </li>
+        </xsl:template>
+        <xsl:template match="tei:ref">
+            <a target="_blank" href="{@target}">
+                <xsl:apply-templates/>
+            </a>
+        </xsl:template>
+    </xsl:stylesheet>
