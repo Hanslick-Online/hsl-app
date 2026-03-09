@@ -28,6 +28,7 @@
         <xsl:param name="next-prev-page" />
         <xsl:param name="document-download"/>
         <xsl:param name="document-download-edition"/>
+        <xsl:param name="image-source"/>
         <div class="row">
             <div class="col-md-6 facsimiles">
                 <div id="viewer-1">
@@ -76,6 +77,9 @@
                                 <xsl:call-template name="document-download">
                                     <xsl:with-param name="edition" select="$document-download-edition"/>
                                 </xsl:call-template>
+                            </xsl:if>
+                            <xsl:if test="$image-source = 'true'">
+                                <xsl:call-template name="image-source"/>
                             </xsl:if>
                             <xsl:if test="$next-prev-page = 'true'">
                                 <xsl:call-template name="next-prev-page"/>

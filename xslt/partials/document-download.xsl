@@ -25,48 +25,54 @@
                 <ul class="dropdown-menu">
                         <xsl:choose>
                             <xsl:when test="$edition = 'traktat'">
-                                <li class="dropdown-item"><a  href="{concat('https://id.acdh.oeaw.ac.at/hanslick-vms/', //tei:TEI/@xml:id, '?format=raw')}"
-                                    aria-label="TEI/XML Document Download">
+                                <li class="dropdown-item"><a
+                                    href="{//tei:TEI/@xml:id}"
+                                    aria-label="TEI/XML Document Download"
+                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
                             <xsl:when test="$edition = 'kritiken'">
-                                <li class="dropdown-item"><a target="_blank"
-                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-ct/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'c__'))}"
+                                <li class="dropdown-item"><a
+                                    href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
                             <xsl:when test="$edition = 'vms'">
-                                <li class="dropdown-item"><a target="_blank"
-                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-data-vms/main/data/editions/', //tei:TEI/@xml:id, '?format=raw')}"
+                                <li class="dropdown-item"><a
+                                    href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
                               <xsl:when test="$edition = 'doc'">
-                                <li class="dropdown-item"><a target="_blank"
-                                    href="{concat('https://raw.githubusercontent.com/Hanslick-Online/hsl-vms-docs/main/data/editions/', substring-after(//tei:TEI/@xml:id, 'd__'))}"
+                                <li class="dropdown-item"><a
+                                    href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
-                                    aria-label="PDF Document Download">
+                                    aria-label="PDF Document Download"
+                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>

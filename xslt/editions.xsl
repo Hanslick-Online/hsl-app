@@ -15,6 +15,7 @@
     <xsl:import href="partials/entities-modal.xsl"/>
     <xsl:import href="partials/next-prev-page.xsl"/>
     <xsl:import href="partials/document-download.xsl"/>
+    <xsl:import href="partials/image-source.xsl"/>
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
@@ -59,10 +60,69 @@
                     </div>
                     <xsl:call-template name="html_footer"/>
                 </div>
+
+                <!-- Usage hints modal -->
+                <div class="modal fade" id="usageHintsModal" tabindex="-1" aria-labelledby="usageHintsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title translate-de" id="usageHintsModalLabel">Komparative Textanalyse: Hinweise zur Nutzung</h3>
+                                <h3 class="modal-title translate-en" id="usageHintsModalLabelEn">Comparative Text Analysis: Usage Guide</h3>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="translate-de">
+                                    <p>Unsere Edition ermöglicht es Ihnen, die diachrone Entwicklung von <em>Vom Musikalisch-Schönen</em> über alle zehn Auflagen hinweg im Detail zu verfolgen. Um die Iterationen des Traktats zu analysieren, nutzen Sie bitte das integrierte Vergleichs-Werkzeug.</p>
+                                    <h4>Navigation</h4>
+                                    <p>Die blau markierten Absatzzahlen innerhalb der Edition dienen als Ankerpunkte. Ein Klick auf diese Ziffern öffnet die Synopse des entsprechenden Textabschnitts.
+                                        Variantenvergleich: In der vergleichenden Ansicht werden die Textfassungen parallelisiert dargestellt. Dies ermöglicht eine komplette Übersicht zu Hanslicks Revisionen.</p>
+                                    <h4>Granularität der Analyse</h4>
+                                    <p>Über das darunter liegende Steuerungselement &#x201E;vergleichen&#x201C; können Sie beliebige Auflagen miteinander kontrastieren und den Grad der Differenzierung (Vergleich auf Wortebene oder Satzebene) selbst wählen.</p>
+                                </div>
+                                <div class="translate-en">
+                                    <p>Our edition allows you to trace the diachronic development of <em>On the Musically Beautiful</em> across all ten editions in detail. To analyze the iterations of the treatise, please use the integrated comparison tool.</p>
+                                    <h4>Navigation</h4>
+                                    <p>The blue-highlighted paragraph numbers within the edition serve as anchor points. Clicking on these numbers opens the synopsis of the corresponding text section.
+                                        Variant comparison: In the comparative view, the text versions are displayed in parallel. This enables a complete overview of Hanslick's revisions.</p>
+                                    <h4>Granularity of Analysis</h4>
+                                    <p>Using the control element &#x201C;compare&#x201D; below, you can contrast any editions with each other and choose the degree of differentiation (comparison at word level or sentence level) yourself.</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="form-check me-auto">
+                                    <input class="form-check-input" type="checkbox" id="usageHintsDismiss"/>
+                                    <label class="form-check-label translate-de" for="usageHintsDismiss">Nicht mehr anzeigen</label>
+                                    <label class="form-check-label translate-en" for="usageHintsDismiss">Do not show again</label>
+                                </div>
+                                <button type="button" class="btn btn-primary translate-de" data-bs-dismiss="modal">Verstanden</button>
+                                <button type="button" class="btn btn-primary translate-en" data-bs-dismiss="modal">Got it</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <script type="text/javascript" src="js/run_editions.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
                 <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/osd.js"></script>
+                <script type="text/javascript">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        if (document.cookie.indexOf("usageHintsDismissed=1") !== -1) return;
+                        var lang = new URLSearchParams(window.location.search).get("lang") || "de";
+                        var hideCls = lang === "en" ? "translate-de" : "translate-en";
+                        document.querySelectorAll("#usageHintsModal ." + hideCls).forEach(function (el) {
+                            el.style.display = "none";
+                        });
+                        var modalEl = document.getElementById("usageHintsModal");
+                        var modal = new bootstrap.Modal(modalEl);
+                        modalEl.addEventListener("hidden.bs.modal", function () {
+                            if (document.getElementById("usageHintsDismiss").checked) {
+                                document.cookie = "usageHintsDismissed=1; max-age=31536000; path=/; SameSite=Lax";
+                            }
+                        });
+                        modal.show();
+                    });
+                </script>
             </body>
         </html>
     </xsl:template>
