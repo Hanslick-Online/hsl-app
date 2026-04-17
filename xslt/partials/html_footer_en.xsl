@@ -39,13 +39,13 @@
                                 🖂                                <a href="mailto:acdh-officek@oeaw.ac.at">acdh-office@oeaw.ac.at</a>
                             </p>
                         </div>
-                        <!-- <div class="textwidget custom-html-widget">
-                            <h6 class="font-weight-bold">HELPDESK</h6>
+                        <div class="textwidget custom-html-widget">
+                            <!-- <h6 class="font-weight-bold">HELPDESK</h6> -->
                             <p>ACDH runs a helpdesk offering advice for questions related to various digital humanities topics.</p>
-                            <p>
+                            <!-- <p>
                                 <a class="helpdesk-button" href="mailto:acdh-helpdesk@oeaw.ac.at">ASK US!</a>
-                            </p>
-                        </div> -->
+                            </p> -->
+                        </div>
                     </div>
                     <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
                         <h6 class="font-weight-bold">PROJECT PARTNERS</h6>

@@ -39,10 +39,10 @@
                                 🖂 <a href="mailto:acdh-officek@oeaw.ac.at">acdh-office@oeaw.ac.at</a>
                             </p>
                         </div>
-                        <!-- <div class="textwidget custom-html-widget">
+                        <div class="textwidget custom-html-widget">
                             <h6 class="font-weight-bold">HELPDESK</h6>
                             <p>ACDH betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
                         <h6 class="font-weight-bold">PROJEKTPARTNER</h6>
