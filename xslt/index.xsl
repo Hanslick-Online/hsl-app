@@ -55,12 +55,12 @@
                                 </xsl:variable>
                                 <xsl:variable name="vms" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Kritiken von') 
-                                    else('Reviews of')"/>
+                                    then('Kritiken von ') 
+                                    else('Reviews of ')"/>
                                 <xsl:variable name="docs" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
-                                    then('Dokumente zu') 
-                                    else('Documents on')"/>
+                                    then('Dokumente zu ') 
+                                    else('Documents on ')"/>
                                 <xsl:variable name="more" select="
                                     if(starts-with(//tei:body/@xml:lang, 'de')) 
                                     then('mehr anzeigen') 
