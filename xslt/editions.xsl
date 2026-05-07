@@ -169,7 +169,7 @@
 
     <xsl:template match="tei:milestone">
         <xsl:if test="@type='english-translation' and @subtype='edition' and @unit='pb' and @n">
-            <span class="pb pb-en">
+            <span class="pb-en">
                 <xsl:text>[Eng. </xsl:text>
                 <xsl:value-of select="@n"/><xsl:text>]</xsl:text>
             </span>

@@ -491,9 +491,13 @@ sup {
     margin: 2em auto;
 }
 
-.pb {
+.pb, .pb-en {
     color: lightgrey;
     
+}
+
+.pb-en {
+    color: lightgrey;
 }
 
 .pb-prev {
