@@ -100,6 +100,22 @@ var editor = new LoadEditor({
           },
         },
         {
+          opt: "pbs-en",
+          color: "none",
+          title: "Seitenumbrüche der englischen Ausgabe",
+          html_class: "pb-en",
+          css_class: "pbs-en",
+          chg_citation: "citation-url",
+          hide: {
+            hidden: true,
+            class: "pb-en",
+          },
+          features: {
+            all: false,
+            class: "features-2",
+          },
+        },
+        {
           opt: "term",
           color: "blue",
           title: "Begriffe",
@@ -314,3 +330,43 @@ var editor = new LoadEditor({
       active_class: "lang_active",
     }
   });
+
+function bindSamePageLanguageSwitch() {
+  const applyLang = (lang) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", lang);
+    window.location.href = `${url.pathname}?${url.searchParams.toString()}`;
+  };
+
+  const bind = (id, lang) => {
+    const node = document.getElementById(id);
+    if (!node) {
+      return false;
+    }
+    node.setAttribute("href", "#");
+    node.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        applyLang(lang);
+      },
+      { capture: true }
+    );
+    return true;
+  };
+
+  // multi-language anchors are injected by web components, so retry briefly
+  let retries = 0;
+  const maxRetries = 20;
+  const timer = window.setInterval(() => {
+    const deBound = bind("ml_de", "de");
+    const enBound = bind("ml_en", "en");
+    if ((deBound && enBound) || retries >= maxRetries) {
+      window.clearInterval(timer);
+    }
+    retries += 1;
+  }, 100);
+}
+
+bindSamePageLanguageSwitch();

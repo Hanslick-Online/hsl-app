@@ -66,26 +66,29 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h3 class="modal-title translate-de" id="usageHintsModalLabel">Komparative Textanalyse: Hinweise zur Nutzung</h3>
-                                <h3 class="modal-title translate-en" id="usageHintsModalLabelEn">Comparative Text Analysis: Usage Guide</h3>
+                                <h3 class="modal-title translate-de" id="usageHintsModalLabel">Komparative Textanalyse und englische Seitenzahlen</h3>
+                                <h3 class="modal-title translate-en" id="usageHintsModalLabelEn">Comparative Text Analysis and English Pagination</h3>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="translate-de">
-                                    <p>Unsere Edition ermöglicht es Ihnen, die diachrone Entwicklung von <em>Vom Musikalisch-Schönen</em> über alle zehn Auflagen hinweg im Detail zu verfolgen. Um die Iterationen des Traktats zu analysieren, nutzen Sie bitte das integrierte Vergleichs-Werkzeug.</p>
+                                    <p>Unsere Edition ermöglicht es Ihnen, die diachrone Entwicklung von Vom Musikalisch-Schönen über alle zehn Auflagen hinweg im Detail zu verfolgen. Um die Iterationen des Traktats zu analysieren, nutzen Sie bitte das integrierte Vergleichs-Werkzeug.</p>
                                     <h4>Navigation</h4>
-                                    <p>Die blau markierten Absatzzahlen innerhalb der Edition dienen als Ankerpunkte. Ein Klick auf diese Ziffern öffnet die Synopse des entsprechenden Textabschnitts.
-                                        Variantenvergleich: In der vergleichenden Ansicht werden die Textfassungen parallelisiert dargestellt. Dies ermöglicht eine komplette Übersicht zu Hanslicks Revisionen.</p>
+				    <p>Die blau markierten Absatzzahlen innerhalb der Edition dienen als Ankerpunkte. Ein Klick auf diese Ziffern öffnet die Synopse des entsprechenden Textabschnitts. Variantenvergleich: In der vergleichenden Ansicht werden die Textfassungen parallelisiert dargestellt. Dies ermöglicht eine komplette Übersicht zu Hanslicks Revisionen.</p>
                                     <h4>Granularität der Analyse</h4>
-                                    <p>Über das darunter liegende Steuerungselement &#x201E;vergleichen&#x201C; können Sie beliebige Auflagen miteinander kontrastieren und den Grad der Differenzierung (Vergleich auf Wortebene oder Satzebene) selbst wählen.</p>
+				    <p>Über das darunter liegende Steuerungselement „vergleichen“ können Sie beliebige Auflagen miteinander kontrastieren und den Grad der Differenzierung (Vergleich auf Wortebene oder Satzebene) selbst wählen.</p>
+				  <h4>Englische Übersetzungen</h4>
+				<p>Zur leichteren Orientierung können im Annotationsmenü die Seitenzahlen der englischen Übersetzungen ein- und ausgeblendet werden: Gustav Cohen (7. Auflage), Geoffrey Payzant (8. Auflage) sowie Lee Rothfarb und Christoph Landerer (10. Auflage). Aufgrund syntaktischer Unterschiede zwischen Deutsch und Englisch sowie unterschiedlicher Übersetzungsnähe konnten Seitenumbrüche nicht immer exakt gesetzt werden.</p>
                                 </div>
                                 <div class="translate-en">
-                                    <p>Our edition allows you to trace the diachronic development of <em>On the Musically Beautiful</em> across all ten editions in detail. To analyze the iterations of the treatise, please use the integrated comparison tool.</p>
+				    <p>Our edition allows you to trace the development of On the Musically Beautiful across all ten editions in detail. To analyze the treatise’s iterations, please use the integrated comparison tool.</p>
                                     <h4>Navigation</h4>
-                                    <p>The blue-highlighted paragraph numbers within the edition serve as anchor points. Clicking on these numbers opens the synopsis of the corresponding text section.
-                                        Variant comparison: In the comparative view, the text versions are displayed in parallel. This enables a complete overview of Hanslick's revisions.</p>
+				    <p>The blue paragraph numbers within the edition serve as anchor points. Clicking on these numbers opens a synopsis of the corresponding passage. In the comparative view, different versions of the text are displayed in parallel, providing a complete overview of Hanslick’s revisions.</p>
+                                    <p>Variant comparison: In the comparative view, the text versions are displayed in parallel. This enables a complete overview of Hanslick's revisions.</p>
                                     <h4>Granularity of Analysis</h4>
-                                    <p>Using the control element &#x201C;compare&#x201D; below, you can contrast any editions with each other and choose the degree of differentiation (comparison at word level or sentence level) yourself.</p>
+				    <p>Using the ‘Compare’ control below, you can contrast any editions and select the level of differentiation yourself (word-level or sentence-level comparison).</p>
+				    <h4>English Translations</h4>
+				    <p>For easier orientation, the annotation menu allows you to display or hide page numbers from the English translations: Gustav Cohen (7th edition), Geoffrey Payzant (8th edition), and Lee Rothfarb and Christoph Landerer (10th edition). Due to syntactic differences between German and English as well as varying degrees of translation literalness, page breaks could not always be positioned exactly.</p> 
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -165,9 +168,14 @@
     </xsl:template>
 
     <xsl:template match="tei:milestone">
-        <div class="milestone">
-            <xsl:text>***</xsl:text>
-        </div>
+        <xsl:if test="@type='english-translation' and @subtype='edition' and @unit='pb' and @n">
+            <span class="pb pb-en">
+                <br/>
+                <br/>
+                <xsl:text>[Eng. </xsl:text>
+                <xsl:value-of select="@n"/><xsl:text>]</xsl:text>
+            </span>
+        </xsl:if>
     </xsl:template>
 
     <!--    
