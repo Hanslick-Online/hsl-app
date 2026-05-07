@@ -170,8 +170,6 @@
     <xsl:template match="tei:milestone">
         <xsl:if test="@type='english-translation' and @subtype='edition' and @unit='pb' and @n">
             <span class="pb pb-en">
-                <br/>
-                <br/>
                 <xsl:text>[Eng. </xsl:text>
                 <xsl:value-of select="@n"/><xsl:text>]</xsl:text>
             </span>
@@ -348,8 +346,6 @@
             <xsl:when test="ancestor::tei:p and not(preceding-sibling::tei:list)">
                 <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb">
-                    <br/>
-                    <br/>
                     <xsl:value-of select="@n"/>
                 </span>
             </xsl:when>
@@ -357,8 +353,6 @@
                 <span class="anchor-pb" source="{@facs}"></span>
                 <p class="indentedP">
                     <span class="pb">
-                        <br/>
-                        <br/>
                         <xsl:value-of select="@n"/>
                     </span>
                 </p>
@@ -366,24 +360,18 @@
             <xsl:when test="ancestor::tei:list">
                 <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb">
-                    <br/>
-                    <br/>
                     <xsl:value-of select="@n"/>
                 </span>
             </xsl:when>
             <xsl:when test="ancestor::tei:note">
                 <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb">
-                    <br/>
-                    <br/>
                     <xsl:value-of select="@n"/>
                 </span>
             </xsl:when>
             <xsl:when test="ancestor::tei:front">
                 <span class="anchor-pb" source="{@facs}"></span>
                 <span class="pb">
-                    <br/>
-                    <br/>
                     <xsl:value-of select="@n"/>
                 </span>
             </xsl:when>
@@ -391,8 +379,6 @@
                 <p class="indentedP">
                     <span class="anchor-pb" source="{@facs}"></span>
                     <span class="pb">
-                        <br/>
-                        <br/>
                         <xsl:value-of select="@n"/>
                     </span>
                 </p>
