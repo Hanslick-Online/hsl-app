@@ -149,7 +149,7 @@
                                         </div>
                                     </div>
                                     <div class="row p-2">
-                                        <p id="display"></p>
+                                        <div id="display"></div>
                                     </div>
                                 </div>
                             </div>
