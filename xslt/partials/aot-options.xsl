@@ -56,6 +56,15 @@
                 <li class="dropdown-item">
                     <annotation-slider opt="pbs"></annotation-slider>
                 </li>
+                <li class="dropdown-item">
+                    <annotation-slider opt="pbs-en">
+                        <label>Seitenumbrueche der englischen Ausgabe / English-edition page breaks</label>
+                        <label class="switch">
+                            <input title="Seitenumbrueche der englischen Ausgabe / English-edition page breaks" onclick="null" type="checkbox" id="pbs-en" data-target="annotation_slider" class="features-2" aot-type="false"/>
+                            <span id="pbs-en-slider" class="i-slider round"></span>
+                        </label>
+                    </annotation-slider>
+                </li>
             </ul>                                                    
         </div>
         <script type="text/javascript">
