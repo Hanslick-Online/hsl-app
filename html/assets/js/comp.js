@@ -1,12 +1,29 @@
 function getCompCellText(cellId){
     const el = document.getElementById(cellId);
     if(!el){
-        return '';
+        return { body: '', notes: '' };
     }
-    const raw = (el.dataset && el.dataset.compBodyText)
+
+    const body = (el.dataset && el.dataset.compBodyText)
         ? el.dataset.compBodyText
         : el.textContent;
-    return raw.replace(/\s+/g, ' ');
+
+    const notes = Array.from(el.querySelectorAll('.comp-footnotes-container .footnotes li'))
+        .map((li) => {
+            const num = li.querySelector('.footnote_link')?.textContent?.trim() || '';
+            const txt = li.querySelector('.footnote_text')?.textContent?.trim() || '';
+            if(!num && !txt){
+                return '';
+            }
+            return num ? `${num} ${txt}` : txt;
+        })
+        .filter(Boolean)
+        .join(' ');
+
+    return {
+        body: body.replace(/\s+/g, ' ').trim(),
+        notes: notes.replace(/\s+/g, ' ').trim()
+    };
 }
 
 function cacheCompBodyTexts(){
@@ -18,6 +35,57 @@ function cacheCompBodyTexts(){
     });
 }
 
+function buildDiffFragment(one, other, diffLevel){
+    const diff = diffLevel === 'sentences'
+        ? Diff.diffSentences(one, other)
+        : Diff.diffWords(one, other);
+
+    const fragment = document.createDocumentFragment();
+    diff.forEach((part) => {
+        const diffClass = part.added ? 'diff-added' :
+            part.removed ? 'diff-removed' : 'diff-unchanged';
+        const span = document.createElement('span');
+        span.classList.add(diffClass);
+        span.appendChild(document.createTextNode(part.value));
+        fragment.appendChild(span);
+    });
+    return fragment;
+}
+
+function renderDiffSection(title, one, other, diffLevel){
+    const section = document.createElement('div');
+    section.className = 'comp-result-section mb-3';
+
+    const heading = document.createElement('h6');
+    heading.className = 'mb-2';
+    heading.textContent = title;
+    section.appendChild(heading);
+
+    const body = document.createElement('div');
+    body.className = 'comp-result-body';
+    body.appendChild(buildDiffFragment(one, other, diffLevel));
+    section.appendChild(body);
+
+    return section;
+}
+
+function getDisplayContainer(){
+    const display = document.getElementById('display');
+    if(!display){
+        return null;
+    }
+
+    // Older generated pages use <p id="display">; replace it to allow block sections.
+    if(display.tagName === 'P'){
+        const replacement = document.createElement('div');
+        replacement.id = 'display';
+        display.replaceWith(replacement);
+        return replacement;
+    }
+
+    return display;
+}
+
 function compare(){
     const v1 = document.getElementById('selectV1').value;
     const v2 = document.getElementById('selectV2').value;
@@ -25,25 +93,16 @@ function compare(){
     const one = getCompCellText(v1);
     const other = getCompCellText(v2);
 
-    let span = null;
-
     const diffLevel = document.getElementById('diffLevel').value;
-    const diff = diffLevel === 'sentences'
-        ? Diff.diffSentences(one, other)
-        : Diff.diffWords(one, other);
-    const display = document.getElementById('display');
-    const fragment = document.createDocumentFragment();
+    const display = getDisplayContainer();
+    if(!display){
+        return;
+    }
 
-    diff.forEach((part) => {
-        const diffClass = part.added ? 'diff-added' :
-            part.removed ? 'diff-removed' : 'diff-unchanged';
-        span = document.createElement('span');
-        span.classList.add(diffClass);
-        span.appendChild(document.createTextNode(part.value));
-        fragment.appendChild(span);
-    });
     display.innerHTML = '';
-    display.appendChild(fragment);
+
+    display.appendChild(renderDiffSection('Textvergleich (Haupttext)', one.body, other.body, diffLevel));
+    display.appendChild(renderDiffSection('Textvergleich (Fußnoten)', one.notes, other.notes, diffLevel));
 };
 
 async function fetchFootnotesForLink(link){
@@ -98,13 +157,13 @@ async function fetchFootnotesForLink(link){
     return { editionLabel, notes };
 }
 
-function renderFootnotesBlock(editionLabel, notes){
+function renderFootnotesBlock(notes){
     const block = document.createElement('div');
     block.className = 'comp-footnote-block mt-3';
 
     const heading = document.createElement('div');
     heading.className = 'fw-semibold';
-    heading.textContent = `Fußnoten ${editionLabel}`;
+    heading.textContent = 'Fußnoten';
 
     const list = document.createElement('ul');
     list.className = 'footnotes';
@@ -167,8 +226,37 @@ async function loadFootnotes(){
             }
         }));
 
-        const footnoteBlocks = results.filter(Boolean);
-        if(!footnoteBlocks.length){
+        const mergedNotes = [];
+        const seenNumbers = new Set();
+        const seenNoNumber = new Set();
+
+        results.filter(Boolean).forEach((entry) => {
+            entry.notes.forEach((note) => {
+                const number = (note.number || '').trim();
+                const content = (note.content || '').trim();
+                if(!number && !content){
+                    return;
+                }
+
+                if(number){
+                    if(seenNumbers.has(number)){
+                        return;
+                    }
+                    seenNumbers.add(number);
+                    mergedNotes.push({ number, content });
+                    return;
+                }
+
+                const normalizedContent = content.replace(/\s+/g, ' ');
+                if(seenNoNumber.has(normalizedContent)){
+                    return;
+                }
+                seenNoNumber.add(normalizedContent);
+                mergedNotes.push({ number, content });
+            });
+        });
+
+        if(!mergedNotes.length){
             return;
         }
 
@@ -178,9 +266,7 @@ async function loadFootnotes(){
         const hr = document.createElement('hr');
         container.appendChild(hr);
 
-        footnoteBlocks.forEach(({ editionLabel, notes }) => {
-            container.appendChild(renderFootnotesBlock(editionLabel, notes));
-        });
+        container.appendChild(renderFootnotesBlock(mergedNotes));
 
         td.appendChild(container);
     }));
