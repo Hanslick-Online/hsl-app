@@ -12,6 +12,10 @@
     </doc>
     <xsl:template name="annotation-options">
         <xsl:param name="showSlider" />
+           <xsl:variable name="doc-id" select="string(/*/@xml:id)"/>
+        <xsl:variable name="edition-num" select="normalize-space((/*/tei:teiHeader//tei:sourceDesc//tei:edition/@n)[1])"/>
+        <xsl:variable name="show-english-pagebreak-toggle"
+              select="starts-with($doc-id, 't__') and matches($edition-num, '^(0?7|0?8|10)$')"/>
         <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart">
             <!-- Your menu goes here -->
             <a title="Annotationen" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" role="button">
@@ -56,15 +60,17 @@
                 <li class="dropdown-item">
                     <annotation-slider opt="pbs"></annotation-slider>
                 </li>
-                <li class="dropdown-item">
-                    <annotation-slider opt="pbs-en">
-                        <label>Seitenumbrueche der englischen Ausgabe / English-edition page breaks</label>
-                        <label class="switch">
-                            <input title="Seitenumbrueche der englischen Ausgabe / English-edition page breaks" onclick="null" type="checkbox" id="pbs-en" data-target="annotation_slider" class="features-2" aot-type="false"/>
-                            <span id="pbs-en-slider" class="i-slider round"></span>
-                        </label>
-                    </annotation-slider>
-                </li>
+                <xsl:if test="$show-english-pagebreak-toggle">
+                    <li class="dropdown-item">
+                        <annotation-slider opt="pbs-en">
+                            <label>Seitenumbrueche der englischen Ausgabe / English-edition page breaks</label>
+                            <label class="switch">
+                                <input title="Seitenumbrueche der englischen Ausgabe / English-edition page breaks" onclick="null" type="checkbox" id="pbs-en" data-target="annotation_slider" class="features-2" aot-type="false"/>
+                                <span id="pbs-en-slider" class="i-slider round"></span>
+                            </label>
+                        </annotation-slider>
+                    </li>
+                </xsl:if>
             </ul>                                                    
         </div>
         <script type="text/javascript">

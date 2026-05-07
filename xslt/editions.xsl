@@ -168,8 +168,10 @@
     </xsl:template>
 
     <xsl:template match="tei:milestone">
-        <xsl:if test="@type='english-translation' and @subtype='edition' and @unit='pb' and @n">
-            <span class="pb pb-en">
+        <xsl:variable name="doc-id" select="string(/*/@xml:id)"/>
+        <xsl:variable name="edition-num" select="normalize-space((/*/tei:teiHeader//tei:sourceDesc//tei:edition/@n)[1])"/>
+        <xsl:if test="@type='english-translation' and @subtype='edition' and @unit='pb' and @n and starts-with($doc-id, 't__') and matches($edition-num, '^(0?7|0?8|10)$')">
+            <span class="pb-en">
                 <xsl:text>[Eng. </xsl:text>
                 <xsl:value-of select="@n"/><xsl:text>]</xsl:text>
             </span>

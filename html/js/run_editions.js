@@ -1,3 +1,8 @@
+// Keep English pagebreak markers independent from the general pagebreak toggle.
+document.querySelectorAll('.pb-en.pb').forEach((el) => {
+  el.classList.remove('pb');
+});
+
 var editor = new LoadEditor({
     aot: {
       title: "Text Annotations",
