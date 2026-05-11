@@ -43,14 +43,20 @@ q { quotes: "„" "“" "‚" "‘" }
     margin-bottom: 1em !important;
 }
 
-.section-critics {
+.section-critics,
+.section-doc {
     display: table;
+
 }
 
 .section-critics p {
     margin-bottom: 0;
 }
 
+.section h2{
+  inline-size: 20em;
+  overflow-wrap: break-word;
+}
 .section-vms {
 	display: table;
 }
