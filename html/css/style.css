@@ -56,9 +56,12 @@ q { quotes: "„" "“" "‚" "‘" }
 .section h2{
   overflow-wrap: break-word;
 }
-body:has(#pbs:checked) .section h2 {
+body:has(#pbs:checked) .section h1,
+body:has(#pbs:checked) .section h2
+ {
   inline-size: 20em;
 }
+
 .section-vms {
 	display: table;
 }
