@@ -57,7 +57,8 @@ q { quotes: "„" "“" "‚" "‘" }
   overflow-wrap: break-word;
 }
 body:has(#pbs:checked) .section h1,
-body:has(#pbs:checked) .section h2
+body:has(#pbs:checked) .section h2,
+body:has(#pbs:checked) .section h3
  {
   inline-size: 20em;
 }
