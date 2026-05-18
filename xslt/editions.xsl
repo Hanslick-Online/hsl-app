@@ -72,7 +72,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="translate-de">
-                                    <p>Unsere Edition ermöglicht es Ihnen, die diachrone Entwicklung von Vom Musikalisch-Schönen über alle zehn Auflagen hinweg im Detail zu verfolgen. Um die Iterationen des Traktats zu analysieren, nutzen Sie bitte das integrierte Vergleichs-Werkzeug.</p>
+                                    <p>Unsere Edition ermöglicht es Ihnen, die diachrone Entwicklung von <i>Vom Musikalisch-Schönen</i> über alle zehn Auflagen hinweg im Detail zu verfolgen. Um die Iterationen des Traktats zu analysieren, nutzen Sie bitte das integrierte Vergleichs-Werkzeug.</p>
                                     <h4>Navigation</h4>
 				    <p>Die blau markierten Absatzzahlen innerhalb der Edition dienen als Ankerpunkte. Ein Klick auf diese Ziffern öffnet die Synopse des entsprechenden Textabschnitts. Variantenvergleich: In der vergleichenden Ansicht werden die Textfassungen parallelisiert dargestellt. Dies ermöglicht eine komplette Übersicht zu Hanslicks Revisionen.</p>
                                     <h4>Granularität der Analyse</h4>
