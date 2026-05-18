@@ -30,7 +30,7 @@
                         <span class="translate-de">Bildquelle: </span>
                         <!-- <span class="translate-en">Image source: </span> -->
                         <span id="image-source-link">
-                            <xsl:variable name="firstSource" select="(//tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:bibl[@type='facsimiles-source']/tei:relatedItem[@type='facsimile'])[1]"/>
+                            <xsl:variable name="firstSource" select="(//tei:teiHeader/tei:fileDesc/tei:sourceDesc//tei:bibl[@type='facsimiles-source']/tei:relatedItem[@type='facsimile'])[1]"/>
                             <xsl:choose>
                                 <xsl:when test="$firstSource">
                                     <a href="{$firstSource/@target}" target="_blank" rel="noopener noreferrer"><xsl:value-of select="$firstSource/@subtype"/></a>
@@ -46,7 +46,7 @@
             </div>
             <!-- Hidden data container: one span per relatedItem[@type='facsimile'] -->
             <div id="image-source-data" style="display:none;">
-                <xsl:for-each select="//tei:teiHeader/tei:fileDesc/tei:sourceDesc/tei:bibl[@type='facsimiles-source']/tei:relatedItem[@type='facsimile']">
+                <xsl:for-each select="//tei:teiHeader/tei:fileDesc/tei:sourceDesc//tei:bibl[@type='facsimiles-source']/tei:relatedItem[@type='facsimile']">
                     <span class="image-source-item"
                           data-subtype="{@subtype}"
                           data-target="{@target}"/>
