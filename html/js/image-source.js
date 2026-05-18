@@ -42,7 +42,7 @@ corresponding to the currently visible page (anchor-pb index).
                 li.className = "dropdown-item";
                 li.innerHTML =
                     '<span class="translate-de">Bildquelle: </span>' +
-                    '<span class="translate-en">Image source: </span>' +
+                    //'<span class="translate-en">Image source: </span>' +
                     '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + label + '</a>';
                 ul.appendChild(li);
             });
