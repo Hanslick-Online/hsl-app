@@ -62,7 +62,7 @@ body:has(#pbs:checked) .section h3,
 body:has(#pbs:checked) .section h4,
 body:has(#pbs:checked) .section h5,
 body:has(#pbs:checked) .section ul.footnotes,
-body:has(#pbs:checked) .section p.indentedP.yes-index
+body:has(#pbs:checked) .section p.yes-index
  {
     inline-size: min(100%, var(--pbs-text-inline-size, 100%));
     max-inline-size: 100%;
@@ -73,7 +73,8 @@ body:has(#pbs:checked) .section h1,
 body:has(#pbs:checked) .section h2,
 body:has(#pbs:checked) .section h3,
 body:has(#pbs:checked) .section h4,
-body:has(#pbs:checked) .section h5
+body:has(#pbs:checked) .section h5,
+body:has(#pbs:checked) .section p.meta-head
  {
     text-align: center;
 }
