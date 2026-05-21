@@ -32,12 +32,12 @@
                                     
                                     <li>
                                         <a class="dropdown-item" href="projektgeschichte.html?lang=de">
-                                            Geschichte von "Hanslick Online"
+                                            Geschichte von <i>Hanslick Online</i>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="projektziele.html?lang=de">
-                                            Projektziele von "Hanslick Online"
+                                            Projektziele von <i>Hanslick Online</i>
                                         </a>
                                     </li>
                                 </ul>

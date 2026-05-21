@@ -4,8 +4,18 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="xsl tei xs">
+    xmlns:hsl="https://hanslick.acdh.oeaw.ac.at/ns/hsl"
+    version="2.0" exclude-result-prefixes="xsl tei xs hsl">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
+
+    <xsl:function name="hsl:target-to-html" as="xs:string">
+        <xsl:param name="target" as="xs:string"/>
+        <xsl:sequence select="
+            if (matches($target, '^t__\d\d_VMS_\d\d\d\d_.*\.xml$'))
+            then replace($target, '^t__(\d\d)_VMS_(\d\d\d\d)_.*\.xml$', 't__VMS_Auflage_$1_$2.html')
+            else replace($target, '\.xml$', '.html')
+        "/>
+    </xsl:function>
     
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
@@ -216,7 +226,7 @@
                                                         <ul>
                                                             <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                 <li>
-                                                                    <a href="{replace(@target, '.xml', '.html')}">
+                                                                    <a href="{hsl:target-to-html(string(@target))}">
                                                                         <xsl:value-of select="./text()"/>
                                                                     </a>
                                                                 </li>
@@ -410,7 +420,7 @@
                                                             <ul>
                                                                 <xsl:for-each select="./tei:noteGrp/tei:note">
                                                                     <li>
-                                                                        <a href="{replace(@target, '.xml', '.html')}">
+                                                                        <a href="{hsl:target-to-html(string(@target))}">
                                                                             <xsl:value-of select="./text()"/>
                                                                         </a>
                                                                     </li>
@@ -634,7 +644,7 @@
                                                             <ul>
                                                                 <xsl:for-each select="./tei:noteGrp/tei:note[@type='mentions']">
                                                                     <li>
-                                                                        <a href="{replace(@target, '.xml', '.html')}">
+                                                                        <a href="{hsl:target-to-html(string(@target))}">
                                                                             <xsl:value-of select="./text()"/>
                                                                         </a>
                                                                     </li>
