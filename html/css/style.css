@@ -58,9 +58,19 @@ q { quotes: "„" "“" "‚" "‘" }
 }
 body:has(#pbs:checked) .section h1,
 body:has(#pbs:checked) .section h2,
+body:has(#pbs:checked) .section h3,
+body:has(#pbs:checked) .section p.indentedP.yes-index
+ {
+    inline-size: min(100%, var(--pbs-text-inline-size, 100%));
+    max-inline-size: 100%;
+    margin-inline: auto;
+ }
+
+body:has(#pbs:checked) .section h1,
+body:has(#pbs:checked) .section h2,
 body:has(#pbs:checked) .section h3
  {
-  inline-size: 26rem;
+    text-align: center;
 }
 
 .section-vms {

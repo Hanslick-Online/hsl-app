@@ -375,3 +375,122 @@ function bindSamePageLanguageSwitch() {
 }
 
 bindSamePageLanguageSwitch();
+
+const PBS_TEXT_INLINE_SIZE_VAR = "--pbs-text-inline-size";
+let pbsHeadingWidthFrame = null;
+
+function getRenderedLineWidth(element) {
+  const range = document.createRange();
+  range.selectNodeContents(element);
+
+  const rects = Array.from(range.getClientRects()).filter(
+    (rect) => rect.width > 1 && rect.height > 0,
+  );
+
+  const lines = [];
+  rects.forEach((rect) => {
+    const line = lines.find((entry) => Math.abs(entry.top - rect.top) < 1);
+    if (line) {
+      line.left = Math.min(line.left, rect.left);
+      line.right = Math.max(line.right, rect.right);
+      return;
+    }
+
+    lines.push({
+      top: rect.top,
+      left: rect.left,
+      right: rect.right,
+    });
+  });
+
+  return lines.reduce((widest, line) => {
+    return Math.max(widest, line.right - line.left);
+  }, 0);
+}
+
+function syncPbsHeadingWidths() {
+  const pbsToggle = document.getElementById("pbs");
+  const pbsEnabled = Boolean(pbsToggle?.checked);
+
+  document.querySelectorAll(".section").forEach((section) => {
+    section.style.removeProperty(PBS_TEXT_INLINE_SIZE_VAR);
+
+    if (!pbsEnabled) {
+      return;
+    }
+
+    const widestParagraphLine = Array.from(
+      section.querySelectorAll("p.indentedP.yes-index"),
+    ).reduce((widest, paragraph) => {
+      return Math.max(widest, getRenderedLineWidth(paragraph));
+    }, 0);
+
+    if (widestParagraphLine > 0) {
+      section.style.setProperty(
+        PBS_TEXT_INLINE_SIZE_VAR,
+        `${Math.ceil(widestParagraphLine)}px`,
+      );
+    }
+  });
+}
+
+function queuePbsHeadingWidthSync() {
+  if (pbsHeadingWidthFrame !== null) {
+    cancelAnimationFrame(pbsHeadingWidthFrame);
+  }
+
+  pbsHeadingWidthFrame = requestAnimationFrame(() => {
+    pbsHeadingWidthFrame = null;
+    syncPbsHeadingWidths();
+  });
+}
+
+document.addEventListener("change", (event) => {
+  if (event.target instanceof HTMLElement && event.target.matches("#pbs, #fs, #ff")) {
+    queuePbsHeadingWidthSync();
+  }
+});
+
+window.addEventListener("resize", queuePbsHeadingWidthSync);
+
+if ("ResizeObserver" in window) {
+  const resizeObserver = new ResizeObserver(() => {
+    queuePbsHeadingWidthSync();
+  });
+
+  document.querySelectorAll(".text, .section").forEach((element) => {
+    resizeObserver.observe(element);
+  });
+}
+
+if (document.fonts?.ready) {
+  document.fonts.ready.then(() => {
+    queuePbsHeadingWidthSync();
+  });
+}
+
+function bindPbsHeadingWidthSync() {
+  queuePbsHeadingWidthSync();
+
+  let retries = 0;
+  const maxRetries = 20;
+  const timer = window.setInterval(() => {
+    const hasControls = Boolean(
+      document.getElementById("pbs") ||
+        document.getElementById("fs") ||
+        document.getElementById("ff"),
+    );
+
+    if (hasControls || retries >= maxRetries) {
+      queuePbsHeadingWidthSync();
+    }
+
+    if (hasControls || retries >= maxRetries) {
+      window.clearInterval(timer);
+    }
+
+    retries += 1;
+  }, 100);
+}
+
+bindPbsHeadingWidthSync();
