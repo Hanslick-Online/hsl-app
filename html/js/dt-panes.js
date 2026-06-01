@@ -12,8 +12,12 @@ function splitPaneListValues(data) {
 }
 
 function createDataTable(containerElement, title, panesShow, panesHide, hide) {
+    const splitPaneTargets = containerElement === 'listbibl'
+        ? [2, 3]
+        : [];
+
     const paneTargets = containerElement === 'listbibl'
-        ? panesShow.filter((target) => target !== 2)
+        ? panesShow.filter((target) => !splitPaneTargets.includes(target))
         : panesShow;
 
     const columnDefs = [
@@ -38,7 +42,7 @@ function createDataTable(containerElement, title, panesShow, panesHide, hide) {
 
     if (containerElement === 'listbibl') {
         columnDefs.push({
-            targets: 2,
+            targets: splitPaneTargets,
             render: function (data, type) {
                 if (type === 'sp') {
                     return splitPaneListValues(data);
