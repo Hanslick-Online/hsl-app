@@ -1,5 +1,63 @@
+function splitPaneListValues(data) {
+    if (!data) {
+        return [];
+    }
+
+    const html = document.createElement('div');
+    html.innerHTML = data;
+
+    return Array.from(html.querySelectorAll('li'))
+        .map((item) => item.textContent.replace(/;\s*$/, '').trim())
+        .filter(Boolean);
+}
+
 function createDataTable(containerElement, title, panesShow, panesHide, hide) {
-    
+    const paneTargets = containerElement === 'listbibl'
+        ? panesShow.filter((target) => target !== 2)
+        : panesShow;
+
+    const columnDefs = [
+        {
+            searchPanes: {
+                show: true
+            },
+            targets: paneTargets
+        },
+        {
+            searchPanes: {
+                show: false
+            },
+            targets: panesHide
+        },
+        {
+            targets: hide,
+            searchable: true,
+            visible: false
+        }
+    ];
+
+    if (containerElement === 'listbibl') {
+        columnDefs.push({
+            targets: 2,
+            render: function (data, type) {
+                if (type === 'sp') {
+                    return splitPaneListValues(data);
+                }
+
+                return data;
+            },
+            searchPanes: {
+                orthogonal: {
+                    display: 'sp',
+                    filter: 'sp',
+                    search: 'sp',
+                    sort: 'sp',
+                    type: 'sp'
+                },
+                show: true
+            }
+        });
+    }
 
     var table = $(`#${containerElement}`).DataTable({
         responsive: true,
@@ -30,24 +88,6 @@ function createDataTable(containerElement, title, panesShow, panesHide, hide) {
         //     }
         // }
         ],
-        columnDefs: [
-            {
-                searchPanes: {
-                    show: true
-                },
-                targets: panesShow
-            },
-            {
-                searchPanes: {
-                    show: false
-                },
-                targets: panesHide
-            },
-            {
-                targets: hide,
-                searchable: true,
-                visible: false
-            }
-        ],
+        columnDefs: columnDefs,
     });
 }
