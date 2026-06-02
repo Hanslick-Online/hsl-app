@@ -31,6 +31,8 @@
     <property name="xsl_imprint_en" value="${basedir}/xslt/imprint_en.xsl"/>
     <property name="xsl_search" value="${basedir}/xslt/search.xsl"/>
     <property name="xsl_search_en" value="${basedir}/xslt/search-engl.xsl"/>
+    
+    <property name="xsl_graphics" value="${basedir}/xslt/graphics.xsl"/>
     <delete>
         <fileset dir="${target}" includes="*.html"/>
     </delete>
@@ -44,7 +46,7 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt style="${xsl_meta}"  basedir="${meta}" destdir="${target}" includes="*.xml">
+    <xslt style="${xsl_meta}"  basedir="${meta}" destdir="${target}" includes="*.xml" excludes="graphics.xml">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
@@ -62,6 +64,11 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+     <xslt style="${xsl_graphics}"  basedir="${meta}" destdir="${target}" includes="graphics.xml" filenameparameter="filename">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/saxon/saxon9he.jar"/>
+    </xslt>
+   
     <!-- common files -->
     <delete>
         <fileset dir="${target}" includes="index.html"/>

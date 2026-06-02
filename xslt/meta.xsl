@@ -21,6 +21,7 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
+                <xsl:call-template name="meta_extra_head"/>
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
@@ -55,9 +56,15 @@
                     </xsl:choose>
                 </div>
                 <script type="text/javascript" src="js/run.js"></script>
+                <xsl:call-template name="meta_extra_scripts"/>
             </body>
         </html>
     </xsl:template>
+
+    <xsl:template name="meta_extra_head"/>
+
+    <xsl:template name="meta_extra_scripts"/>
+
     <xsl:template match="tei:div[@type='main']/tei:head">
         <h1 id="{generate-id()}" class="py-4 meta-h"><xsl:apply-templates/></h1>
     </xsl:template>    
