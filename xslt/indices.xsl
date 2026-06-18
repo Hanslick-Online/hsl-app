@@ -6,6 +6,10 @@
     xmlns:local="urn:hsl:indices"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0" exclude-result-prefixes="local xsl tei xs">
+    <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_head.xsl"/>
+    <xsl:import href="partials/html_footer.xsl"/>
+
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
 
     <xsl:variable name="hanslick-id" as="xs:string" select="'hsl_person_id_1'"/>
@@ -42,9 +46,20 @@
         </xsl:choose>
     </xsl:function>
 
+    <xsl:function name="local:normalize-target" as="xs:string">
+        <xsl:param name="target" as="xs:string"/>
+        <xsl:choose>
+            <!-- Treat all VMS treatise editions as a single logical document. -->
+            <xsl:when test="starts-with($target, 't__')">t__VMS_TREATISE</xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="$target"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
     <xsl:function name="local:pub-targets" as="xs:string*">
         <xsl:param name="person" as="element(tei:person)"/>
-        <xsl:sequence select="distinct-values($person/tei:noteGrp/tei:note[@type='mentions'][starts-with(string(@target), 'c__') or starts-with(string(@target), 't__')]/string(@target))"/>
+        <xsl:sequence select="distinct-values(for $target in $person/tei:noteGrp/tei:note[@type='mentions'][starts-with(string(@target), 'c__') or starts-with(string(@target), 't__')]/string(@target) return local:normalize-target($target))"/>
     </xsl:function>
 
     <xsl:function name="local:doc-mention-targets" as="xs:string*">
@@ -73,10 +88,6 @@
         </xsl:choose>
     </xsl:function>
     
-    <xsl:import href="./partials/html_navbar.xsl"/>
-    <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer.xsl"/>
-
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
@@ -129,12 +140,122 @@
                         width: 220px;
                     }
 
+                    .person-network-category-toggles {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        width: 100%;
+                        margin-top: 0.25rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-category-toggles label {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                        font-weight: 400;
+                    }
+
+                    .person-network-performance-note {
+                        width: 100%;
+                        font-size: 0.82rem;
+                        color: #6b7280;
+                    }
+
+                    .person-network-copresence-min {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                    }
+
+                    .person-network-copresence-min input {
+                        width: 64px;
+                    }
+
+                    .person-network-node-limit {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .person-network-node-limit input[type='range'] {
+                        width: 220px;
+                    }
+
                     #person-network {
+                        position: relative;
                         height: 560px;
                         width: 100%;
                         border: 1px solid #cfd8e3;
                         border-radius: 0.5rem;
                         background: #ffffff;
+                    }
+
+                    .person-network-popup {
+                        position: absolute;
+                        z-index: 30;
+                        display: none;
+                        pointer-events: auto;
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+
+                    .person-network-popup .leaflet-popup-content-wrapper {
+                        padding: 1px;
+                        border-radius: 12px;
+                        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22);
+                        background: #fff;
+                        color: #333;
+                        text-align: left;
+                    }
+
+                    .person-network-popup .leaflet-popup-content {
+                        margin: 13px 24px 13px 20px;
+                        line-height: 1.35;
+                        font-size: 13px;
+                        min-width: 120px;
+                        max-width: 220px;
+                    }
+
+                    .person-network-popup .leaflet-popup-tip-container {
+                        width: 40px;
+                        height: 20px;
+                        position: absolute;
+                        left: 50%;
+                        margin-top: -1px;
+                        margin-left: -20px;
+                        overflow: hidden;
+                        pointer-events: none;
+                        bottom: -20px;
+                    }
+
+                    .person-network-popup .leaflet-popup-tip {
+                        width: 17px;
+                        height: 17px;
+                        padding: 1px;
+                        margin: -10px auto 0;
+                        transform: rotate(45deg);
+                        background: #fff;
+                        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+                    }
+
+                    .person-network-popup .leaflet-popup-close-button {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 24px;
+                        height: 24px;
+                        color: #757575;
+                        text-align: center;
+                        text-decoration: none;
+                        font: 16px/24px Tahoma, Verdana, sans-serif;
+                        background: transparent;
+                        border: 0;
+                        cursor: pointer;
+                    }
+
+                    .person-network-popup .leaflet-popup-close-button:hover {
+                        color: #333;
                     }
 
                     .person-network-legend {
@@ -182,15 +303,32 @@
                                     <label for="person-network-min-rel">Mindestanzahl Relationen:</label>
                                     <input id="person-network-min-rel" type="range" min="1" max="{$graph-max-rel}" value="1"/>
                                     <span id="person-network-min-rel-value">1</span>
+                                    <div class="person-network-node-limit">
+                                        <label for="person-network-node-limit">Knoten pro Kategorie:</label>
+                                        <input id="person-network-node-limit" type="range" min="1" max="25" value="25"/>
+                                        <span id="person-network-node-limit-value">25</span>
+                                    </div>
+                                    <div class="person-network-category-toggles">
+                                        <label><input type="checkbox" class="person-network-category-toggle" data-group="pub-person" checked="checked"/>Personen von Hanslick erwähnt</label>
+                                        <label><input type="checkbox" class="person-network-category-toggle" data-group="pub-character" checked="checked"/>Figuren von Hanslick erwähnt</label>
+                                        <label><input type="checkbox" class="person-network-category-toggle" data-group="doc-author" checked="checked"/>erwähnt Hanslick</label>
+                                        <label><input type="checkbox" class="person-network-category-toggle" data-group="doc-person" checked="checked"/>Kopräsenz mit Hanslick (Person)</label>
+                                        <label><input type="checkbox" class="person-network-category-toggle" data-group="doc-character" checked="checked"/>Kopräsenz mit Hanslick (Figur)</label>
+                                        <label><input type="checkbox" id="person-network-toggle-copresence"/>Kopräsenz-Kanten zwischen Knoten</label>
+                                        <label class="person-network-copresence-min" for="person-network-min-copresence">Min. Kopräsenz:
+                                            <input id="person-network-min-copresence" type="number" min="1" step="1" value="2"/>
+                                        </label>
+                                        <span class="person-network-performance-note">Hinweis: Kopräsenz-Kanten sind bei großen Netzen aufwendig und standardmäßig deaktiviert.</span>
+                                    </div>
                                 </div>
                                 <div id="person-network"></div>
                                 <div class="person-network-hint">Klicken Sie auf einen Knoten, um zur Personenseite zu wechseln. Zoomen mit Mausrad oder Touch-Geste.</div>
                                 <div class="person-network-legend">
-                                    <span><i style="background:#1d4e89"></i>Person in Publikationen von Hanslick (ohne d__)</span>
-                                    <span><i style="background:#5f93c2"></i>Figur in Publikationen von Hanslick (ohne d__)</span>
-                                    <span><i style="background:#ba4a00"></i>Autor/in von Dokumenten über Hanslick</span>
-                                    <span><i style="background:#e67e22"></i>Person in Dokumenten über Hanslick</span>
-                                    <span><i style="background:#f5b041"></i>Figur in Dokumenten über Hanslick</span>
+                                    <span><i style="background:#1d4e89"></i>Personen von Hanslick erwähnt</span>
+                                    <span><i style="background:#5f93c2"></i>Figuren von Hanslick erwähnt</span>
+                                    <span><i style="background:#ba4a00"></i>erwähnt Hanslick</span>
+                                    <span><i style="background:#e67e22"></i>Kopräsenz mit Hanslick (Person)</span>
+                                    <span><i style="background:#f5b041"></i>Kopräsenz mit Hanslick (Figur)</span>
                                 </div>
 
                                 <div id="person-network-data" class="d-none" data-hanslick-id="{$hanslick-id}" data-max-rel="{$graph-max-rel}">
@@ -210,7 +348,8 @@
                                                 data-rel-total="{$total-rel}"
                                                 data-rel-pub="{count($pub-targets)}"
                                                 data-rel-doc-mentions="{count($doc-targets)}"
-                                                data-rel-doc-authored="{count($authored-targets)}"/>
+                                                data-rel-doc-authored="{count($authored-targets)}"
+                                                data-targets="{string-join($relation-targets, '|')}"/>
                                         </xsl:if>
                                     </xsl:for-each>
                                 </div>
