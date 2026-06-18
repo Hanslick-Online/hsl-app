@@ -3,9 +3,75 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:local="urn:hsl:indices"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="xsl tei xs">
+    version="2.0" exclude-result-prefixes="local xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
+
+    <xsl:variable name="hanslick-id" as="xs:string" select="'hsl_person_id_1'"/>
+    <xsl:variable name="doc-targets" as="xs:string*" select="distinct-values(/tei:TEI//tei:listPerson/tei:person/tei:noteGrp/tei:note[starts-with(string(@target), 'd__')]/string(@target))"/>
+    <xsl:variable name="doc-editions" as="document-node()*">
+        <xsl:for-each select="$doc-targets">
+            <xsl:variable name="doc-uri" as="xs:anyURI" select="resolve-uri(concat('../data/doc/editions/', .), static-base-uri())"/>
+            <xsl:if test="doc-available($doc-uri)">
+                <xsl:sequence select="doc($doc-uri)"/>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:function name="local:person-label" as="xs:string">
+        <xsl:param name="person" as="element(tei:person)"/>
+        <xsl:variable name="main" as="element(tei:persName)?" select="$person/tei:persName[@type='main'][1]"/>
+        <xsl:variable name="fallback" as="element(tei:persName)?" select="$person/tei:persName[1]"/>
+        <xsl:variable name="selected" as="element(tei:persName)?" select="($main, $fallback)[1]"/>
+        <xsl:variable name="surname" as="xs:string" select="normalize-space(string($selected/tei:surname))"/>
+        <xsl:variable name="forename" as="xs:string" select="normalize-space(string($selected/tei:forename))"/>
+        <xsl:choose>
+            <xsl:when test="$surname != '' and $forename != ''">
+                <xsl:sequence select="concat($surname, ', ', $forename)"/>
+            </xsl:when>
+            <xsl:when test="$surname != ''">
+                <xsl:sequence select="$surname"/>
+            </xsl:when>
+            <xsl:when test="$forename != ''">
+                <xsl:sequence select="$forename"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="normalize-space(string-join($selected//text(), ' '))"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+    <xsl:function name="local:pub-targets" as="xs:string*">
+        <xsl:param name="person" as="element(tei:person)"/>
+        <xsl:sequence select="distinct-values($person/tei:noteGrp/tei:note[@type='mentions'][starts-with(string(@target), 'c__') or starts-with(string(@target), 't__')]/string(@target))"/>
+    </xsl:function>
+
+    <xsl:function name="local:doc-mention-targets" as="xs:string*">
+        <xsl:param name="person" as="element(tei:person)"/>
+        <xsl:sequence select="distinct-values($person/tei:noteGrp/tei:note[@type='mentions'][starts-with(string(@target), 'd__')]/string(@target))"/>
+    </xsl:function>
+
+    <xsl:function name="local:doc-authored-targets" as="xs:string*">
+        <xsl:param name="person" as="element(tei:person)"/>
+        <xsl:variable name="person-ref" as="xs:string" select="concat('#', string($person/@xml:id))"/>
+        <xsl:sequence select="distinct-values(for $doc in $doc-editions[.//tei:teiHeader//tei:author[@ref = $person-ref]] return string((($doc/tei:TEI/@xml:id)[1], tokenize(base-uri($doc), '/')[last()])[1]))"/>
+    </xsl:function>
+
+    <xsl:function name="local:node-group" as="xs:string">
+        <xsl:param name="person" as="element(tei:person)"/>
+        <xsl:param name="pub-count" as="xs:integer"/>
+        <xsl:param name="doc-mention-count" as="xs:integer"/>
+        <xsl:param name="doc-authored-count" as="xs:integer"/>
+        <xsl:choose>
+            <xsl:when test="string($person/@xml:id) = $hanslick-id">hanslick</xsl:when>
+            <xsl:when test="$doc-authored-count gt 0">doc-author</xsl:when>
+            <xsl:when test="$doc-mention-count gt 0 and $person/@role = 'fictional'">doc-character</xsl:when>
+            <xsl:when test="$doc-mention-count gt 0">doc-person</xsl:when>
+            <xsl:when test="$pub-count gt 0 and $person/@role = 'fictional'">pub-character</xsl:when>
+            <xsl:otherwise>pub-person</xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
     
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
@@ -38,6 +104,65 @@
                     .container-fluid {
                         max-width: 100% !important;
                     }
+
+                    .person-network-panel {
+                        margin: 1.5rem auto 2rem auto;
+                        padding: 1rem;
+                        border: 1px solid #d9e2ec;
+                        border-radius: 0.75rem;
+                        background: #f8fbfd;
+                    }
+
+                    .person-network-controls {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.75rem 1.25rem;
+                        align-items: center;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    .person-network-controls label {
+                        font-weight: 600;
+                    }
+
+                    .person-network-controls input[type='range'] {
+                        width: 220px;
+                    }
+
+                    #person-network {
+                        height: 560px;
+                        width: 100%;
+                        border: 1px solid #cfd8e3;
+                        border-radius: 0.5rem;
+                        background: #ffffff;
+                    }
+
+                    .person-network-legend {
+                        margin-top: 0.75rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-legend span {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                    }
+
+                    .person-network-legend i {
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 50%;
+                        display: inline-block;
+                    }
+
+                    .person-network-hint {
+                        margin-top: 0.5rem;
+                        color: #4b5563;
+                        font-size: 0.88rem;
+                    }
                 </style>
             </head>
             <body class="page">
@@ -46,6 +171,51 @@
                     
                     <div class="container-fluid">
                         <h1 style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title"/></h1>
+
+                        <xsl:if test="contains($doc_title, 'Personenregister')">
+                            <xsl:variable name="graph-persons" as="element(tei:person)*" select="//tei:listPerson/tei:person"/>
+                            <xsl:variable name="graph-max-rel" as="xs:integer"
+                                select="max((1, for $person in $graph-persons return count(distinct-values((local:pub-targets($person), local:doc-mention-targets($person), local:doc-authored-targets($person))))))"/>
+
+                            <div class="person-network-panel">
+                                <div class="person-network-controls">
+                                    <label for="person-network-min-rel">Mindestanzahl Relationen:</label>
+                                    <input id="person-network-min-rel" type="range" min="1" max="{$graph-max-rel}" value="1"/>
+                                    <span id="person-network-min-rel-value">1</span>
+                                </div>
+                                <div id="person-network"></div>
+                                <div class="person-network-hint">Klicken Sie auf einen Knoten, um zur Personenseite zu wechseln. Zoomen mit Mausrad oder Touch-Geste.</div>
+                                <div class="person-network-legend">
+                                    <span><i style="background:#1d4e89"></i>Person in Publikationen von Hanslick (ohne d__)</span>
+                                    <span><i style="background:#5f93c2"></i>Figur in Publikationen von Hanslick (ohne d__)</span>
+                                    <span><i style="background:#ba4a00"></i>Autor/in von Dokumenten über Hanslick</span>
+                                    <span><i style="background:#e67e22"></i>Person in Dokumenten über Hanslick</span>
+                                    <span><i style="background:#f5b041"></i>Figur in Dokumenten über Hanslick</span>
+                                </div>
+
+                                <div id="person-network-data" class="d-none" data-hanslick-id="{$hanslick-id}" data-max-rel="{$graph-max-rel}">
+                                    <xsl:for-each select="$graph-persons">
+                                        <xsl:variable name="pub-targets" as="xs:string*" select="local:pub-targets(.)"/>
+                                        <xsl:variable name="doc-targets" as="xs:string*" select="local:doc-mention-targets(.)"/>
+                                        <xsl:variable name="authored-targets" as="xs:string*" select="local:doc-authored-targets(.)"/>
+                                        <xsl:variable name="relation-targets" as="xs:string*" select="distinct-values(($pub-targets, $doc-targets, $authored-targets))"/>
+                                        <xsl:variable name="total-rel" as="xs:integer" select="count($relation-targets)"/>
+                                        <xsl:if test="string(@xml:id) = $hanslick-id or $total-rel gt 0">
+                                            <div class="person-network-node"
+                                                data-id="{string(@xml:id)}"
+                                                data-label="{local:person-label(.)}"
+                                                data-url="{concat(string(@xml:id), '.html')}"
+                                                data-role="{if (@role = 'fictional') then 'fictional' else 'person'}"
+                                                data-group="{local:node-group(., count($pub-targets), count($doc-targets), count($authored-targets))}"
+                                                data-rel-total="{$total-rel}"
+                                                data-rel-pub="{count($pub-targets)}"
+                                                data-rel-doc-mentions="{count($doc-targets)}"
+                                                data-rel-doc-authored="{count($authored-targets)}"/>
+                                        </xsl:if>
+                                    </xsl:for-each>
+                                </div>
+                            </div>
+                        </xsl:if>
                         
                         <xsl:if test="contains($doc_title, 'Ortsregister')">
                             <div id="tableReload-wrapper">
@@ -76,6 +246,10 @@
                     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/build/heatmap.min.js"></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/plugins/leaflet-heatmap/leaflet-heatmap.js"></script>
+                </xsl:if>
+                <xsl:if test="contains($doc_title, 'Personenregister')">
+                    <script src="https://unpkg.com/cytoscape@3.29.2/dist/cytoscape.min.js"></script>
+                    <script src="js/person-network.js"></script>
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="contains($doc_title, 'Personenregister')">
