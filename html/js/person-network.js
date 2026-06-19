@@ -5,6 +5,9 @@
     var MAX_NODES_PER_TARGET = 90;
     var INITIAL_ZOOM_WIDE = 1;
     var INITIAL_ZOOM_DEFAULT = 0.86;
+    var INITIAL_RENDER_NODE_CAP = 42;
+    var INITIAL_RENDER_CHUNK_SIZE = 70;
+    var INITIAL_RENDER_CHUNK_DELAY = 32;
 
     function computeNodeSize(relTotal) {
         var rel = Math.max(1, parseIntOr(relTotal, 1));
@@ -12,16 +15,15 @@
     }
 
     function buildElements(nodeData) {
-        var elements = [];
+        var nodeElementsById = {};
         var center = null;
-        var targetToNodes = {};
 
         nodeData.forEach(function (node) {
             if (node.group === 'hanslick' || node.id === 'hsl_person_id_1') {
                 center = node.id;
             }
 
-            elements.push({
+            nodeElementsById[node.id] = {
                 data: {
                     id: node.id,
                     label: node.label,
@@ -33,16 +35,8 @@
                     relDocAuthored: node.relDocAuthored,
                     nodeSize: computeNodeSize(node.relTotal)
                 }
-            });
+            };
 
-            if (node.targets && node.targets.length) {
-                node.targets.forEach(function (targetId) {
-                    if (!targetToNodes[targetId]) {
-                        targetToNodes[targetId] = [];
-                    }
-                    targetToNodes[targetId].push(node.id);
-                });
-            }
         });
 
         if (!center && nodeData.length) {
@@ -50,10 +44,28 @@
         }
 
         return {
-            elements: elements,
-            center: center,
-            targetToNodes: targetToNodes
+            nodeElementsById: nodeElementsById,
+            center: center
         };
+    }
+
+    function buildTargetToNodes(nodeData) {
+        var targetToNodes = {};
+
+        nodeData.forEach(function (node) {
+            if (!node.targets || !node.targets.length) {
+                return;
+            }
+
+            node.targets.forEach(function (targetId) {
+                if (!targetToNodes[targetId]) {
+                    targetToNodes[targetId] = [];
+                }
+                targetToNodes[targetId].push(node.id);
+            });
+        });
+
+        return targetToNodes;
     }
 
     function parseIntOr(value, fallback) {
@@ -330,9 +342,57 @@
         });
     }
 
+    function ensureVisibleNodes(cy, visibleNodeIds, nodeElementsById) {
+        cy.nodes().forEach(function (node) {
+            if (!visibleNodeIds[node.id()]) {
+                node.remove();
+            }
+        });
+
+        Object.keys(visibleNodeIds).forEach(function (nodeId) {
+            if (!nodeElementsById[nodeId]) {
+                return;
+            }
+
+            if (cy.getElementById(nodeId).empty()) {
+                cy.add({
+                    group: 'nodes',
+                    data: nodeElementsById[nodeId].data
+                });
+            }
+        });
+    }
+
+    function capVisibleNodeIds(visibleNodeIds, centerId, orderedNodeIds, renderCap) {
+        var limitedIds = {};
+        var kept = 0;
+
+        if (!renderCap || renderCap < 1) {
+            return visibleNodeIds;
+        }
+
+        limitedIds[centerId] = true;
+        kept = 1;
+
+        orderedNodeIds.forEach(function (nodeId) {
+            if (kept >= renderCap) {
+                return;
+            }
+            if (visibleNodeIds[nodeId] !== true || nodeId === centerId) {
+                return;
+            }
+            limitedIds[nodeId] = true;
+            kept += 1;
+        });
+
+        return limitedIds;
+    }
+
     function applyFilters(cy, centerId, threshold, enabledGroups, options) {
+        var desiredVisibleNodeIds = {};
         var visibleNodeIds = {};
         var visibleCount = 0;
+        var desiredVisibleCount = 0;
         var limitedVisibleNodeIds = {};
 
         options.ranking.groups.forEach(function (group) {
@@ -355,25 +415,25 @@
         });
 
         cy.batch(function () {
-            cy.edges('[kind = "copresence"], [kind = "center"]').remove();
+            desiredVisibleNodeIds[centerId] = true;
+            desiredVisibleCount = 1;
 
-            cy.nodes().forEach(function (node) {
-                var isCenter = node.id() === centerId;
-                var group = String(node.data('group') || '');
-                var categoryVisible = isCenter || enabledGroups[group] !== false;
-                var visible = isCenter || (categoryVisible && limitedVisibleNodeIds[node.id()] === true);
-                node.style('display', visible ? 'element' : 'none');
-                if (visible) {
-                    visibleNodeIds[node.id()] = true;
-                    visibleCount += 1;
-                }
+            Object.keys(limitedVisibleNodeIds).forEach(function (nodeId) {
+                desiredVisibleNodeIds[nodeId] = true;
+                desiredVisibleCount += 1;
             });
 
-            cy.edges().forEach(function (edge) {
-                var sourceVisible = edge.source().style('display') !== 'none';
-                var targetVisible = edge.target().style('display') !== 'none';
-                edge.style('display', sourceVisible && targetVisible ? 'element' : 'none');
-            });
+            visibleNodeIds = capVisibleNodeIds(
+                desiredVisibleNodeIds,
+                centerId,
+                options.orderedNodeIds,
+                parseIntOr(options.renderCap, 0)
+            );
+
+            visibleCount = Object.keys(visibleNodeIds).length;
+
+            ensureVisibleNodes(cy, visibleNodeIds, options.nodeElementsById);
+            cy.edges().remove();
 
             Object.keys(visibleNodeIds).forEach(function (nodeId) {
                 var nodeMeta;
@@ -400,6 +460,9 @@
             });
 
             if (options.enableCopresence && visibleCount <= options.maxVisibleNodesForCopresence) {
+                if (!options.targetToNodes) {
+                    options.targetToNodes = buildTargetToNodes(options.nodeData || []);
+                }
                 buildCopresenceEdges(cy, centerId, options.targetToNodes, visibleNodeIds, options.minCopresence);
             }
         });
@@ -411,6 +474,11 @@
         if (centerNode && !centerNode.empty() && centerNode.style('display') !== 'none') {
             cy.center(centerNode);
         }
+
+        return {
+            desiredVisibleCount: desiredVisibleCount,
+            renderedVisibleCount: visibleCount
+        };
     }
 
     function initialize() {
@@ -460,14 +528,17 @@
             var popupClose = popup.querySelector('.leaflet-popup-close-button');
 
             var runtimeOptions = {
-                targetToNodes: assembled.targetToNodes,
+                targetToNodes: null,
+                nodeData: nodeData,
                 enableCopresence: false,
                 maxVisibleNodesForCopresence: 280,
                 minCopresence: 2,
                 ranking: ranking,
                 nodeLimitPerCategory: 25,
                 orderedNodeIds: buildOrderedNodeIds(ranking),
-                host: host
+                nodeElementsById: assembled.nodeElementsById,
+                host: host,
+                renderCap: 0
             };
 
             var maxNodeLimit = Math.max(1, ranking.maxGroupSize);
@@ -478,12 +549,13 @@
                 nodeLimitMax.textContent = '/ max ' + String(maxNodeLimit);
             }
 
+            var centerElement = assembled.nodeElementsById[centerId] || assembled.nodeElementsById[assembled.center] || null;
+
             var cy = cytoscape({
                 container: host,
-                elements: assembled.elements,
+                elements: centerElement ? [{ group: 'nodes', data: centerElement.data }] : [],
                 minZoom: 0.2,
                 maxZoom: 4,
-                wheelSensitivity: 0.16,
                 layout: {
                     name: 'preset',
                     fit: false,
@@ -584,7 +656,7 @@
 
                 window.addEventListener('resize', function () {
                     cy.zoom(initialZoomForWidth(host.clientWidth || 1200));
-                    applyFilters(cy, centerId, parseIntOr(slider.value, 1), enabledGroups, runtimeOptions);
+                    applyFilters(cy, centerId, parseIntOr(minRelInput.value, 1), enabledGroups, runtimeOptions);
                     if (popupState.visible && popupState.nodeId) {
                         placePopupForNode(cy.getElementById(popupState.nodeId));
                     }
@@ -603,7 +675,12 @@
                 var x;
                 var y;
 
-                if (!node || node.empty() || !popupState.visible) {
+                if (!popupState.visible) {
+                    return;
+                }
+
+                if (!node || node.empty()) {
+                    hidePopup();
                     return;
                 }
 
@@ -681,6 +758,36 @@
 
             var initialThreshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
             var enabledGroups = collectEnabledGroups(categoryToggles);
+            var pendingFrame = null;
+            var progressiveTimer = null;
+
+            function clearProgressiveTimer() {
+                if (progressiveTimer !== null) {
+                    clearTimeout(progressiveTimer);
+                    progressiveTimer = null;
+                }
+            }
+
+            function updateGraph() {
+                var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
+                clearProgressiveTimer();
+                runtimeOptions.renderCap = 0;
+                applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
+                if (popupState.visible && popupState.nodeId) {
+                    placePopupForNode(cy.getElementById(popupState.nodeId));
+                }
+            }
+
+            function scheduleGraphUpdate() {
+                if (pendingFrame !== null) {
+                    cancelAnimationFrame(pendingFrame);
+                }
+                pendingFrame = requestAnimationFrame(function () {
+                    pendingFrame = null;
+                    updateGraph();
+                });
+            }
+
             runtimeOptions.enableCopresence = !!(copresenceToggle && copresenceToggle.checked);
             runtimeOptions.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
             nodeLimitSlider.value = String(runtimeOptions.nodeLimitPerCategory);
@@ -689,58 +796,74 @@
                 minCopresenceInput.value = String(runtimeOptions.minCopresence);
             }
             minRelInput.value = String(initialThreshold);
-            applyFilters(cy, centerId, initialThreshold, enabledGroups, runtimeOptions);
+
+            function runProgressiveInitialRender() {
+                var desired = 0;
+                var initialCap = Math.max(1, Math.min(INITIAL_RENDER_NODE_CAP, (runtimeOptions.nodeLimitPerCategory * 2) + 1));
+
+                function step() {
+                    var result;
+
+                    runtimeOptions.renderCap = initialCap;
+                    result = applyFilters(cy, centerId, initialThreshold, enabledGroups, runtimeOptions);
+                    desired = Math.max(1, result.desiredVisibleCount || 1);
+
+                    if (popupState.visible && popupState.nodeId) {
+                        placePopupForNode(cy.getElementById(popupState.nodeId));
+                    }
+
+                    if (initialCap >= desired) {
+                        runtimeOptions.renderCap = 0;
+                        return;
+                    }
+
+                    initialCap = Math.min(desired, initialCap + INITIAL_RENDER_CHUNK_SIZE);
+                    progressiveTimer = setTimeout(step, INITIAL_RENDER_CHUNK_DELAY);
+                }
+
+                step();
+            }
+
+            requestAnimationFrame(function () {
+                runProgressiveInitialRender();
+                try {
+                    window.dispatchEvent(new CustomEvent('person-network-ready'));
+                } catch (error) {
+                    // Ignore event dispatch failures in older browsers.
+                }
+            });
 
             minRelInput.addEventListener('input', function () {
                 var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
                 minRelInput.value = String(threshold);
-                applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
-                if (popupState.visible && popupState.nodeId) {
-                    placePopupForNode(cy.getElementById(popupState.nodeId));
-                }
+                scheduleGraphUpdate();
             });
 
             nodeLimitSlider.addEventListener('input', function () {
-                var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
                 runtimeOptions.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
                 nodeLimitSlider.value = String(runtimeOptions.nodeLimitPerCategory);
-                applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
-                if (popupState.visible && popupState.nodeId) {
-                    placePopupForNode(cy.getElementById(popupState.nodeId));
-                }
+                scheduleGraphUpdate();
             });
 
             categoryToggles.forEach(function (checkbox) {
                 checkbox.addEventListener('change', function () {
-                    var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
                     enabledGroups = collectEnabledGroups(categoryToggles);
-                    applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
-                    if (popupState.visible && popupState.nodeId) {
-                        placePopupForNode(cy.getElementById(popupState.nodeId));
-                    }
+                    scheduleGraphUpdate();
                 });
             });
 
             if (copresenceToggle) {
                 copresenceToggle.addEventListener('change', function () {
-                    var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
                     runtimeOptions.enableCopresence = !!copresenceToggle.checked;
-                    applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
-                    if (popupState.visible && popupState.nodeId) {
-                        placePopupForNode(cy.getElementById(popupState.nodeId));
-                    }
+                    scheduleGraphUpdate();
                 });
             }
 
             if (minCopresenceInput) {
                 minCopresenceInput.addEventListener('change', function () {
-                    var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
                     runtimeOptions.minCopresence = Math.max(1, parseIntOr(minCopresenceInput.value, 2));
                     minCopresenceInput.value = String(runtimeOptions.minCopresence);
-                    applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
-                    if (popupState.visible && popupState.nodeId) {
-                        placePopupForNode(cy.getElementById(popupState.nodeId));
-                    }
+                    scheduleGraphUpdate();
                 });
             }
         });
