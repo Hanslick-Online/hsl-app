@@ -427,7 +427,38 @@
                     <xsl:when test="contains($doc_title, 'Personenregister')">
                         <script src="js/dt-panes.js"/>
                         <script type="text/javascript">
-                            createDataTable('listperson', 'Suche:', [2, 3, 5, 12], [0, 1, 4, 6, 7, 8, 9, 10, 11], [12]);
+                            (function () {
+                                var started = false;
+                                var graphReady = false;
+
+                                function startTable() {
+                                    if (started) {
+                                        return;
+                                    }
+                                    started = true;
+                                    createDataTable('listperson', 'Suche:', [2, 3, 5, 12], [0, 1, 4, 6, 7, 8, 9, 10, 11], [12]);
+                                }
+
+                                function scheduleTableStart() {
+                                    if (typeof requestIdleCallback === 'function') {
+                                        requestIdleCallback(startTable, { timeout: 1200 });
+                                    } else {
+                                        setTimeout(startTable, 50);
+                                    }
+                                }
+
+                                window.addEventListener('person-network-ready', function () {
+                                    graphReady = true;
+                                    scheduleTableStart();
+                                }, { once: true });
+
+                                // Fail-safe only: start table if graph never signals readiness.
+                                setTimeout(function () {
+                                    if (!graphReady) {
+                                        scheduleTableStart();
+                                    }
+                                }, 12000);
+                            }());
                         </script>
                     </xsl:when>
                     <xsl:when test="contains($doc_title, 'Ortsregister')">
