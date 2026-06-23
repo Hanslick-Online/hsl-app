@@ -23,20 +23,15 @@ jobs:
       ANT_OPTS: -Xmx5g
     steps:
     - name: Perform Checkout
-      uses: actions/checkout@v5
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-         python-version: '3.10'
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'zulu'
-        java-version: '11'
-    - name: Install Python libraries
+      uses: actions/checkout@v7
+    - name: set up uv (Python)
+      uses: astral-sh/setup-uv@v8.1.0
+    - name: Install Python dependencies
       run: |
-        pip install -U pip
-        pip install -r build_app/python/requirements.txt
+        uv sync
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+    - name: Install Python dependencies
+        run: uv sync              
     - name: Fetch data
       run: |
         chmod +x build_app/shell/* build_app/python/*
@@ -45,7 +40,7 @@ jobs:
       run: ./build_app/python/fix_facs_1891.py
     - name: Generate Imprint
       run: |
-        ./build_app/shell/script.sh
+        ./build_app/python/dl_imprint.py
     - name: preprocess
       run: |
         ant -f build_app/ant/preprocess.xml
@@ -72,19 +67,16 @@ jobs:
     - name: Perform Checkout
       uses: actions/checkout@v4
     - name: Download data-artifact
-      uses: actions/download-artifact@v4
       with:
         name: data-artifact
         path: .
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-         python-version: '3.10'
-    - name: Install Python libs
+    - name: set up uv (Python)
+      uses: astral-sh/setup-uv@v8.1.0
+    - name: Install Python dependencies
       run: |
-        #echo "Placeholder"
-        pip install -U pip
-        pip install -r build_app/python/requirements.txt
+        uv sync
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+
     - name: Install TeX Live
       run: |
         #echo "Placeholder"
@@ -116,7 +108,7 @@ jobs:
       uses: actions/configure-pages@v5
     - name: Upload full site artifacts
       id: deployment
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v5
       with:
         path: "html"
   type_sense:
@@ -130,16 +122,14 @@ jobs:
       TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
     steps:
     - name: Perform Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: Download repo artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: data-artifact
         path: .
-    - name: Install Python libraries
-      run: |
-        pip install -U pip
-        pip install -r build_app/python/requirements.txt
+    - name: set up uv (Python)
+      uses: astral-sh/setup-uv@v8.1.0
     - name: Preprocess data for Typesense
       run: |
         ant -f build_app/ant/fixtures.xml
@@ -155,4 +145,4 @@ jobs:
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5

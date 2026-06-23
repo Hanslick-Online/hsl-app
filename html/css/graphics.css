@@ -1,0 +1,172 @@
+                    .container-fluid {
+                        max-width: 100% !important;
+                    }
+
+                    .person-network-panel {
+                        margin: 1.5rem auto 2rem auto;
+                        padding: 1rem;
+                        border: 1px solid #d9e2ec;
+                        border-radius: 0.75rem;
+                        background: #f8fbfd;
+                    }
+
+                    .person-network-controls {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.75rem 1.25rem;
+                        align-items: center;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    .person-network-controls label {
+                        font-weight: 600;
+                    }
+
+                    .person-network-controls input[type='range'] {
+                        width: 220px;
+                    }
+
+                    .person-network-category-toggles {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        width: 100%;
+                        margin-top: 0.25rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-category-toggles label {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                        font-weight: 400;
+                    }
+
+                    .person-network-performance-note {
+                        width: 100%;
+                        font-size: 0.82rem;
+                        color: #6b7280;
+                    }
+
+                    .person-network-copresence-min {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                    }
+
+                    .person-network-copresence-min input {
+                        width: 64px;
+                    }
+
+                    .person-network-node-limit {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .person-network-node-limit input[type='number'] {
+                        width: 92px;
+                    }
+
+                    #person-network {
+                        position: relative;
+                        height: 560px;
+                        width: 100%;
+                        border: 1px solid #cfd8e3;
+                        border-radius: 0.5rem;
+                        background: #ffffff;
+                    }
+
+                    .person-network-popup {
+                        position: absolute;
+                        z-index: 30;
+                        display: none;
+                        pointer-events: auto;
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+
+                    .person-network-popup .leaflet-popup-content-wrapper {
+                        padding: 1px;
+                        border-radius: 12px;
+                        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22);
+                        background: #fff;
+                        color: #333;
+                        text-align: left;
+                    }
+
+                    .person-network-popup .leaflet-popup-content {
+                        margin: 13px 24px 13px 20px;
+                        line-height: 1.35;
+                        font-size: 13px;
+                        min-width: 120px;
+                        max-width: 220px;
+                    }
+
+                    .person-network-popup .leaflet-popup-tip-container {
+                        width: 40px;
+                        height: 20px;
+                        position: absolute;
+                        left: 50%;
+                        margin-top: -1px;
+                        margin-left: -20px;
+                        overflow: hidden;
+                        pointer-events: none;
+                        bottom: -20px;
+                    }
+
+                    .person-network-popup .leaflet-popup-tip {
+                        width: 17px;
+                        height: 17px;
+                        padding: 1px;
+                        margin: -10px auto 0;
+                        transform: rotate(45deg);
+                        background: #fff;
+                        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+                    }
+
+                    .person-network-popup .leaflet-popup-close-button {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 24px;
+                        height: 24px;
+                        color: #757575;
+                        text-align: center;
+                        text-decoration: none;
+                        font: 16px/24px Tahoma, Verdana, sans-serif;
+                        background: transparent;
+                        border: 0;
+                        cursor: pointer;
+                    }
+
+                    .person-network-popup .leaflet-popup-close-button:hover {
+                        color: #333;
+                    }
+
+                    .person-network-legend {
+                        margin-top: 0.75rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-legend span {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                    }
+
+                    .person-network-legend i {
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 50%;
+                        display: inline-block;
+                    }
+
+                    .person-network-hint {
+                        margin-top: 0.5rem;
+                        color: #4b5563;
+                        font-size: 0.88rem;
+                    }
