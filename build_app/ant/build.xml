@@ -46,7 +46,7 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-    <xslt style="${xsl_meta}"  basedir="${meta}" destdir="${target}" includes="*.xml" excludes="graphics.xml">
+    <xslt style="${xsl_meta}"  basedir="${meta}" destdir="${target}" includes="*.xml" excludes="g_*.xml" >
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
@@ -64,10 +64,11 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
-     <xslt style="${xsl_graphics}"  basedir="${meta}" destdir="${target}" includes="graphics.xml" filenameparameter="filename">
+     <xslt style="${xsl_graphics}"  basedir="${meta}" destdir="${target}" includes="g_*" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+
    
     <!-- common files -->
     <delete>
