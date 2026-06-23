@@ -40,7 +40,7 @@ jobs:
       run: ./build_app/python/fix_facs_1891.py
     - name: Generate Imprint
       run: |
-        ./build_app/shell/script.sh
+        ./build_app/python/dl_imprint.py
     - name: preprocess
       run: |
         ant -f build_app/ant/preprocess.xml
