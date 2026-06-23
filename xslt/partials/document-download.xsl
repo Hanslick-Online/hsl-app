@@ -13,6 +13,7 @@
     
     <xsl:template name="document-download">
         <xsl:param name="edition"/>
+        <xsl:variable name="pdfRepo" select="'https://hanslick-online.github.io/hsl-pdf/'" />
         <div id="document-download">
             <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart">
                 <!-- Your menu goes here -->
@@ -31,7 +32,7 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
-                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
                                     aria-label="PDF Document Download"
                                     download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
@@ -44,9 +45,9 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
-                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
                                     aria-label="PDF Document Download"
-                                    download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
+                                    download="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
                                 </a></li>
                             </xsl:when>
@@ -57,7 +58,7 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
-                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
                                     aria-label="PDF Document Download"
                                     download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
@@ -70,7 +71,7 @@
                                     download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
                                     TEI/XML 
                                 </a></li>
-                                <li class="dropdown-item"><a href="{concat('pdf/', substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
+                                <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
                                     aria-label="PDF Document Download"
                                     download="{concat(substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}">
                                     PDF <sup><tt>beta</tt></sup>
