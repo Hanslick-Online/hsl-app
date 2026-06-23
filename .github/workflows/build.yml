@@ -26,6 +26,12 @@ jobs:
       uses: actions/checkout@v7
     - name: set up uv (Python)
       uses: astral-sh/setup-uv@v8.1.0
+    - name: Install Python dependencies
+      run: |
+        uv sync
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+    - name: Install Python dependencies
+        run: uv sync              
     - name: Fetch data
       run: |
         chmod +x build_app/shell/* build_app/python/*
@@ -66,6 +72,11 @@ jobs:
         path: .
     - name: set up uv (Python)
       uses: astral-sh/setup-uv@v8.1.0
+    - name: Install Python dependencies
+      run: |
+        uv sync
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+
     - name: Install TeX Live
       run: |
         #echo "Placeholder"
