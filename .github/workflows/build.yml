@@ -29,9 +29,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         uv sync
-        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
-    - name: Install Python dependencies
-        run: uv sync              
+        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH          
     - name: Fetch data
       run: |
         chmod +x build_app/shell/* build_app/python/*
