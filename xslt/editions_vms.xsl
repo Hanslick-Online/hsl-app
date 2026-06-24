@@ -31,7 +31,7 @@
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
                 <link rel="stylesheet" href="css/de-micro-editor.css"></link>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script>
+                <script src="vendor/openseadragon-bin-4.1.1/openseadragon.min.js" />
             </head>
 
             <body class="page">
