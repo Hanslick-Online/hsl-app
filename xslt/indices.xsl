@@ -68,11 +68,9 @@
                 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/fc-4.2.1/fh-3.3.1/r-2.4.0/sp-2.1.0/sl-1.5.0/datatables.min.js"></script>                
                 <xsl:if test="contains($doc_title, 'Ortsregister')">
                     <!-- ############### leaflet script ################ -->
-                    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-                        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-                        crossorigin=""></script>
+                    <script src="vendor/leaflet/leaflet.js" />
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-                    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+                    <script src="vendor/leaflet.markercluster/leaflet.markercluster.js" />
                     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/build/heatmap.min.js"></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/plugins/leaflet-heatmap/leaflet-heatmap.js"></script>

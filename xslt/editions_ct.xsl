@@ -67,7 +67,7 @@
 
                   <xsl:call-template name="image-source-modal"/>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script>
+                <script src="vendor/openseadragon-bin-4.1.1/openseadragon.min.js" />
                 <script type="text/javascript" src="js/mark.js"></script>
                 <script type="text/javascript" src="js/run_editions.js"></script>
                 <script type="text/javascript" src="js/osd.js"></script>
