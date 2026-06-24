@@ -27,50 +27,55 @@ jobs:
       TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
 
     steps:
-    - name: Perform Checkout
-      uses: actions/checkout@v7
+      - name: Perform Checkout
+        uses: actions/checkout@v7
 
-    - name: set up uv (Python)
-      uses: astral-sh/setup-uv@v8.1.0
+      - name: set up uv (Python)
+        uses: astral-sh/setup-uv@v8.1.0
 
-    - name: Install Python dependencies
-      run: |
-        uv sync
-        echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
-    - name: Fetch data
-      run: ./build_app/shell/fetch_data.sh
+      - name: Install Python dependencies
+        run: |
+          uv sync
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
 
-    - name: Fix wrong pagination in 8th edition
-      run: ./build_app/python/fix_facs_1891.py
-    - name: Generate Imprint
-      run: ./build_app/shell/dl_imprint.sh
+      - name: Fetch data
+        run: ./build_app/shell/fetch_data.sh
 
-    - name: preprocess
-      run: |
-        ant -f build_app/ant/preprocess.xml
-    - name: add attributes and denormalize indices
-      run: |
-        ./build_app/shell/attributes.sh
-        ./build_app/shell/denormalize.sh
+      - name: Fix wrong pagination in 8th edition
+        run: ./build_app/python/fix_facs_1891.py
 
-    - name: Fix TEI
-      run: ant -f build_app/ant/fixtures.xml
-    - name: Build
-      run: |
-        ant -f build_app/ant/build.xml
+      - name: Generate Imprint
+        run: ./build_app/shell/dl_imprint.sh
 
-    - name: Preprocess data for Typesense
-      run: ant -f build_app/ant/fixtures.xml 
-    - name: Build Typesense Index
-      run: ./build_app/python/make_ts_index.py
+      - name: preprocess
+        run: ant -f build_app/ant/preprocess.xml
+
+      - name: add attributes and denormalize indices
+        run: |
+          ./build_app/shell/attributes.sh
+          ./build_app/shell/denormalize.sh
+
+      - name: Fix TEI
+        run: ant -f build_app/ant/fixtures.xml
+
+      - name: Build
+        run: ant -f build_app/ant/build.xml
+
+      - name: Preprocess data for Typesense
+        run: ant -f build_app/ant/fixtures.xml 
+
+      - name: Build Typesense Index
+        run: ./build_app/python/make_ts_index.py
 
 
-    - name: Setup GitHub Pages
-        uses: actions/configure-pages@v6
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v5
-      with:
-        path: './html'
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v5
+      - name: Setup GitHub Pages
+          uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: './html'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
