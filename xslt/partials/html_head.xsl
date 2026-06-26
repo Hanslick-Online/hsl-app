@@ -27,7 +27,7 @@
         <link href="vendor/bootstrap-5.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-        <script src="vendor/popper2.10.2/popper.min.js" />
+        <script src="vendor/popper-2.10.2/popper.min.js" />
         <script src="vendor/bootstrap-5.3.5-dist/js/bootstrap.min.js" />
         <script src="vendor/jquery/jquery-3.7.1.min.js" />
     </xsl:template>
