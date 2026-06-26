@@ -69,7 +69,7 @@
                 <xsl:if test="contains($doc_title, 'Ortsregister')">
                     <!-- ############### leaflet script ################ -->
                     <script src="vendor/leaflet/leaflet.js" />
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+                    <script src="vendor/leaflet-ajax/leaflet.ajax.min.js" />
                     <script src="vendor/leaflet.markercluster/leaflet.markercluster.js" />
                     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/build/heatmap.min.js"></script>
