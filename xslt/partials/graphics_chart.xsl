@@ -108,6 +108,8 @@
 
         <xsl:template name="meta_extra_scripts">
             <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
             <script type="text/javascript" src="js/graphics.js"></script>
         </xsl:template>
 
@@ -154,6 +156,9 @@
                                 </div>
                             </div>
                             <div class="col-lg-8">
+                                <div class="d-flex justify-content-end mb-2">
+                                    <button id="graphics-reset-zoom" class="btn btn-sm btn-outline-secondary" type="button"><xsl:value-of select="local:text('Zoom zurücksetzen', 'Reset zoom')"/></button>
+                                </div>
                                 <div class="graphics-chart-shell">
                                     <canvas id="graphics-chart"></canvas>
                                 </div>
