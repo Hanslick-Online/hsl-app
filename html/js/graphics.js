@@ -236,6 +236,17 @@
           legend: {
             position: "bottom",
           },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: "x",
+            },
+            zoom: {
+              wheel: { enabled: true },
+              pinch: { enabled: true },
+              mode: "x",
+            },
+          },
           tooltip: {
             callbacks: {
               title(items) {
@@ -412,6 +423,19 @@
   }
 
   function init() {
+    // Register the zoom plugin now that all scripts should be loaded
+    if (window.Chart) {
+      const zoomPlugin = window.ChartZoom || window.chartjsPluginZoom;
+      if (zoomPlugin && !window.Chart.__zoomRegistered) {
+        try {
+          window.Chart.register(zoomPlugin);
+          window.Chart.__zoomRegistered = true;
+        } catch (e) {
+          console.warn("Failed to register zoom plugin:", e);
+        }
+      }
+    }
+
     const elements = collectElements();
     if (!elements) {
       return;
@@ -476,6 +500,15 @@
     elements.corpusCheckboxes.forEach((checkbox) => {
       checkbox.addEventListener("change", () => updateChart(elements));
     });
+
+    const resetZoomButton = document.getElementById("graphics-reset-zoom");
+    if (resetZoomButton) {
+      resetZoomButton.addEventListener("click", () => {
+        if (state.chart) {
+          state.chart.resetZoom();
+        }
+      });
+    }
   }
 
   if (document.readyState === "loading") {
