@@ -94,7 +94,7 @@
             <xsl:sequence select="$entity/tei:noteGrp/tei:note[@type='mentions'][matches(normalize-space(@corresp), '^\d{4}')][local:corpus(string(@target)) != '']"/>
         </xsl:function>
 
-        <xsl:variable name="people" as="element(tei:person)*" select="$person-index//tei:person[local:entity-mentions(.)]"/>
+        <xsl:variable name="people" as="element(tei:person)*" select="$person-index//tei:person[local:entity-mentions(.)][not(lower-case(normalize-space(@role)) = 'fictional' or tei:listBibl[@type='characterOf'])]"/>
         <xsl:variable name="works" as="element(tei:bibl)*" select="$bibl-index//tei:listBibl/tei:bibl[local:entity-mentions(.)]"/>
         <xsl:variable name="places" as="element(tei:place)*" select="$place-index//tei:place[local:entity-mentions(.)]"/>
         <xsl:variable name="entities" as="element()*" select="($people, $works, $places)"/>
@@ -123,10 +123,18 @@
                                 <div class="graphics-controls">
                                     <div>
                                         <div class="graphics-section-title"><xsl:value-of select="local:text('Entitäten', 'Entities')"/></div>
-                                        <label class="form-label" for="graphics-entity-input"><xsl:value-of select="local:text('Bis zu fünf Entitäten hinzufügen', 'Add up to five entities')"/></label>
+                                        <label class="form-label" for="graphics-person-input"><xsl:value-of select="local:text('Bis zu fünf Entitäten hinzufügen', 'Add up to five entities')"/></label>
                                         <div class="graphics-add-row">
-                                            <input id="graphics-entity-input" class="form-control" type="text" list="graphics-entity-options" placeholder="{local:text('Entität eingeben', 'Start typing an entity')}"/>
-                                            <button id="graphics-add-entity" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
+                                            <input id="graphics-person-input" class="form-control" type="text" list="graphics-person-options" placeholder="{local:text('Person eingeben', 'Start typing a person')}"/>
+                                            <button id="graphics-add-person" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
+                                        </div>
+                                        <div class="graphics-add-row mt-2">
+                                            <input id="graphics-work-input" class="form-control" type="text" list="graphics-work-options" placeholder="{local:text('Werk eingeben', 'Start typing a work')}"/>
+                                            <button id="graphics-add-work" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
+                                        </div>
+                                        <div class="graphics-add-row mt-2">
+                                            <input id="graphics-place-input" class="form-control" type="text" list="graphics-place-options" placeholder="{local:text('Ort eingeben', 'Start typing a place')}"/>
+                                            <button id="graphics-add-place" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
                                         </div>
                                     </div>
                                     <div>
@@ -155,9 +163,20 @@
                     </div>
                 </div>
 
-                <datalist id="graphics-entity-options">
-                    <xsl:apply-templates select="$entities" mode="entity-option">
-                        <xsl:sort select="local:entity-sort-group(.)" data-type="number"/>
+                <datalist id="graphics-person-options">
+                    <xsl:apply-templates select="$people" mode="entity-option">
+                        <xsl:sort select="lower-case(local:entity-label(.))"/>
+                    </xsl:apply-templates>
+                </datalist>
+
+                <datalist id="graphics-work-options">
+                    <xsl:apply-templates select="$works" mode="entity-option">
+                        <xsl:sort select="lower-case(local:entity-label(.))"/>
+                    </xsl:apply-templates>
+                </datalist>
+
+                <datalist id="graphics-place-options">
+                    <xsl:apply-templates select="$places" mode="entity-option">
                         <xsl:sort select="lower-case(local:entity-label(.))"/>
                     </xsl:apply-templates>
                 </datalist>
@@ -179,7 +198,10 @@
                     data-status-total-plural="{local:text('Zeige {count} Entitäten über alle Korpora zusammen.', 'Showing {count} entities across all corpora together.')}"
                     data-status-filtered-singular="{local:text('Zeige {count} Entität für {corpora}.', 'Showing {count} entity for {corpora}.')}"
                     data-status-filtered-plural="{local:text('Zeige {count} Entitäten für {corpora}.', 'Showing {count} entities for {corpora}.')}"
-                    data-error-invalid-entity="{local:text('Wählen Sie vor dem Hinzufügen eine Entität aus der Vorschlagsliste aus.', 'Choose an entity from the suggestion list before adding it.')}"
+                    data-status-point="{local:text('{label} ({type}), Jahr {year}: {count}', '{label} ({type}), year {year}: {count}')}"
+                    data-error-invalid-person="{local:text('Wählen Sie vor dem Hinzufügen eine Person aus der Vorschlagsliste aus.', 'Choose a person from the suggestion list before adding it.')}"
+                    data-error-invalid-work="{local:text('Wählen Sie vor dem Hinzufügen ein Werk aus der Vorschlagsliste aus.', 'Choose a work from the suggestion list before adding it.')}"
+                    data-error-invalid-place="{local:text('Wählen Sie vor dem Hinzufügen einen Ort aus der Vorschlagsliste aus.', 'Choose a place from the suggestion list before adding it.')}"
                     data-error-duplicate="{local:text('{label} ist bereits ausgewählt.', '{label} is already selected.')}"
                     data-error-max="{local:text('Sie können bis zu {max} Entitäten gleichzeitig vergleichen.', 'You can compare up to {max} entities at once.')}">
                     <xsl:apply-templates select="$entities" mode="entity-data">
@@ -193,7 +215,8 @@
         <xsl:template match="tei:person | tei:bibl | tei:place" mode="entity-option">
             <xsl:variable name="label" as="xs:string" select="local:entity-label(.)"/>
             <xsl:variable name="type-label" as="xs:string" select="local:entity-type-label(.)"/>
-            <option value="{$label} ({$type-label}, {@xml:id})" data-entity-id="{string(@xml:id)}" data-display-label="{$label}" data-entity-type="{$type-label}">
+            <xsl:variable name="kind" as="xs:string" select="if (self::tei:person) then 'person' else if (self::tei:bibl) then 'work' else 'place'"/>
+            <option value="{$label} ({$type-label}, {@xml:id})" data-entity-id="{string(@xml:id)}" data-display-label="{$label}" data-entity-type="{$type-label}" data-entity-kind="{$kind}">
                 <xsl:value-of select="$label"/>
             </option>
         </xsl:template>
@@ -201,8 +224,9 @@
         <xsl:template match="tei:person | tei:bibl | tei:place" mode="entity-data">
             <xsl:variable name="label" as="xs:string" select="local:entity-label(.)"/>
             <xsl:variable name="type-label" as="xs:string" select="local:entity-type-label(.)"/>
+            <xsl:variable name="kind" as="xs:string" select="if (self::tei:person) then 'person' else if (self::tei:bibl) then 'work' else 'place'"/>
             <xsl:variable name="mentions" as="element(tei:note)*" select="local:entity-mentions(.)"/>
-            <div class="graphics-entity" data-entity-id="{string(@xml:id)}" data-entity-label="{$label}" data-entity-type="{$type-label}">
+            <div class="graphics-entity" data-entity-id="{string(@xml:id)}" data-entity-label="{$label}" data-entity-type="{$type-label}" data-entity-kind="{$kind}">
                 <xsl:for-each-group select="$mentions" group-by="substring(normalize-space(@corresp), 1, 4)">
                     <xsl:sort select="xs:integer(current-grouping-key())" data-type="number"/>
                     <span class="graphics-year"

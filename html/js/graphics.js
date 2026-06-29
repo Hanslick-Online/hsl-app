@@ -1,6 +1,7 @@
 (() => {
   const MAX_ENTITIES = 5;
   const COLORS = ["#0b6e4f", "#c84c09", "#22577a", "#a4243b", "#5f0f40"];
+
   const CORPUS_KEYS = ["traktat", "critics", "vms", "documents"];
   const DEFAULT_I18N = {
     axisFrequency: "Frequency",
@@ -70,25 +71,35 @@
   function collectElements() {
     const dataRoot = document.getElementById("graphics-data");
     const canvas = document.getElementById("graphics-chart");
-    const input = document.getElementById("graphics-entity-input");
-    const addButton = document.getElementById("graphics-add-entity");
     const selected = document.getElementById("graphics-selected-entities");
-    const datalist = document.getElementById("graphics-entity-options");
     const totalCheckbox = document.getElementById("graphics-corpus-total");
     const corpusCheckboxes = Array.from(document.querySelectorAll(".graphics-corpus-checkbox"));
     const status = document.getElementById("graphics-status");
 
-    if (!dataRoot || !canvas || !input || !addButton || !selected || !datalist || !totalCheckbox || !status) {
+    // Collect entity-specific inputs (persons, works, places)
+    const personInput = document.getElementById("graphics-person-input");
+    const personButton = document.getElementById("graphics-add-person");
+    const personDatalist = document.getElementById("graphics-person-options");
+
+    const workInput = document.getElementById("graphics-work-input");
+    const workButton = document.getElementById("graphics-add-work");
+    const workDatalist = document.getElementById("graphics-work-options");
+
+    const placeInput = document.getElementById("graphics-place-input");
+    const placeButton = document.getElementById("graphics-add-place");
+    const placeDatalist = document.getElementById("graphics-place-options");
+
+    if (!dataRoot || !canvas || !selected || !totalCheckbox || !status) {
       return null;
     }
 
     return {
-      addButton,
       canvas,
       corpusCheckboxes,
-      datalist,
       dataRoot,
-      input,
+      person: { input: personInput, button: personButton, datalist: personDatalist },
+      work: { input: workInput, button: workButton, datalist: workDatalist },
+      place: { input: placeInput, button: placeButton, datalist: placeDatalist },
       selected,
       status,
       totalCheckbox,
@@ -113,13 +124,18 @@
     });
   }
 
-  function collectOptions(datalist) {
-    Array.from(datalist.querySelectorAll("option")).forEach((option) => {
-      state.optionMap.set(option.value, {
-        id: option.dataset.entityId,
-        label: option.dataset.displayLabel,
-        type: option.dataset.entityType,
-      });
+  function collectOptions(elements) {
+    // Collect options from all three datalists
+    [elements.person.datalist, elements.work.datalist, elements.place.datalist].forEach((datalist) => {
+      if (datalist) {
+        Array.from(datalist.querySelectorAll("option")).forEach((option) => {
+          state.optionMap.set(option.value, {
+            id: option.dataset.entityId,
+            label: option.dataset.displayLabel,
+            type: option.dataset.entityType,
+          });
+        });
+      }
     });
   }
 
@@ -211,8 +227,8 @@
       options: {
         animation: false,
         interaction: {
-          intersect: false,
-          mode: "index",
+          intersect: true,
+          mode: "nearest",
         },
         maintainAspectRatio: false,
         parsing: false,
@@ -226,16 +242,15 @@
                 if (!items.length) {
                   return "";
                 }
-
                 return formatMessage(state.i18n.tooltipYear, { year: items[0].raw.x });
               },
               label(context) {
-                return `${context.dataset.label}: ${context.formattedValue}`;
+                return `${context.dataset.label}: ${context.raw.y}`;
               },
               afterLabel(context) {
                 const activeCorpora = context.chart.$activeCorpora || CORPUS_KEYS;
                 const breakdown = context.raw.corpora || {};
-                return activeCorpora.map((corpus) => `${state.i18n.corpusLabels[corpus]}: ${breakdown[corpus] || 0}`);
+                return activeCorpora.map((corpus) => `  ${state.i18n.corpusLabels[corpus]}: ${breakdown[corpus] || 0}`);
               },
             },
           },
@@ -297,8 +312,9 @@
       borderWidth: 2,
       data,
       label: `${entity.label} [${entity.type}]`,
-      pointRadius: 0,
-      pointHoverRadius: 4,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      pointBackgroundColor: color,
       tension: 0.2,
     };
   }
@@ -404,17 +420,50 @@
     state.years = buildYears(elements.dataRoot);
     state.i18n = collectI18n(elements.dataRoot);
     collectEntityNodes(elements.dataRoot);
-    collectOptions(elements.datalist);
+    collectOptions(elements);
     syncCorpusControls(elements);
     updateChart(elements);
 
-    elements.addButton.addEventListener("click", () => addEntity(elements));
-    elements.input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        addEntity(elements);
+    // Helper function to add entity from a specific input
+    const addEntityFromInput = (input) => {
+      const value = input.value.trim();
+      const entry = state.optionMap.get(value);
+
+      if (!entry) {
+        setStatus(elements, state.i18n.errorInvalidEntity, "danger");
+        return;
+      }
+
+      if (state.selectedIds.includes(entry.id)) {
+        setStatus(elements, formatMessage(state.i18n.errorDuplicate, { label: entry.label }), "warning");
+        input.value = "";
+        return;
+      }
+
+      if (state.selectedIds.length >= MAX_ENTITIES) {
+        setStatus(elements, formatMessage(state.i18n.errorMax, { max: MAX_ENTITIES }), "warning");
+        return;
+      }
+
+      state.selectedIds.push(entry.id);
+      input.value = "";
+      renderSelectedEntities(elements);
+      updateChart(elements);
+    };
+
+    // Attach listeners to all three entity type inputs and buttons
+    [elements.person, elements.work, elements.place].forEach((entityGroup) => {
+      if (entityGroup.button && entityGroup.input) {
+        entityGroup.button.addEventListener("click", () => addEntityFromInput(entityGroup.input));
+        entityGroup.input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addEntityFromInput(entityGroup.input);
+          }
+        });
       }
     });
+
     elements.selected.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-entity-id]");
       if (!button) {
