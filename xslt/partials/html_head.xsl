@@ -23,7 +23,7 @@
         <meta name="msapplication-TileColor" content="#ffffff"/>
         <meta name="msapplication-TileImage" content="images/Auden_Musulin_Papers_Logo_rechteckig_favicon_144.png"/>
         <title><xsl:value-of select="$project_short_title"/></title>
-        <link rel="stylesheet" href="vendor/fontawesome-free-7.3.0-web/css/all.min.css" />
+        <link rel="stylesheet" href="vendor/fontawesome-free-5.15.4-web/css/all.min.css" />
         <link href="vendor/bootstrap-5.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css" type="text/css" />
         <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
