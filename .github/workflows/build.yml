@@ -49,6 +49,8 @@ jobs:
         run: ant -f build_app/ant/fixtures.xml
       - name: Build
         run: ant -f build_app/ant/build.xml
+      - name: Generate JSON for the visualisations
+        rin: ./build_app/python/generate_graphics_json.py
       - name: Preprocess data for Typesense
         run: ant -f build_app/ant/fixtures.xml 
       - name: Build Typesense Index
