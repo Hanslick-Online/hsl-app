@@ -10,6 +10,7 @@
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="./partials/html_footer.xsl"/>
     <xsl:import href="./partials/html_footer_en.xsl"/>
+    <xsl:import href="./partials/graphics_common.xsl"/>
     <xsl:import href="./partials/graphics_net.xsl"/>
     <xsl:import href="./partials/graphics_chart.xsl"/>
 
