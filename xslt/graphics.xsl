@@ -13,6 +13,7 @@
     <xsl:import href="./partials/graphics_common.xsl"/>
     <xsl:import href="./partials/graphics_net.xsl"/>
     <xsl:import href="./partials/graphics_chart.xsl"/>
+    <xsl:import href="./partials/graphics_vms_chart.xsl"/>
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
@@ -49,7 +50,14 @@
                                             <xsl:call-template name="net_container"/>
                                         </xsl:if>
                                         <xsl:if test="contains($doc_title, 'Chart')">
-                                            <xsl:call-template name="chart_container"/>
+                                            <xsl:choose>
+                                                <xsl:when test="contains($doc_title, 'VMS Chart')">
+                                                    <xsl:call-template name="vms_chart_container"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:call-template name="chart_container"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
                                         </xsl:if>
                                     </div>
                             </div>
@@ -67,7 +75,14 @@
                 </div>
                 <xsl:if test="contains($doc_title, 'Chart')">
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-                    <script type="text/javascript" src="js/graphics.js"></script>
+                    <xsl:choose>
+                        <xsl:when test="contains($doc_title, 'VMS Chart')">
+                            <script type="text/javascript" src="js/graphics-vms.js"></script>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <script type="text/javascript" src="js/graphics.js"></script>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:if>
                 <script type="text/javascript" src="js/run.js"></script>
             </body>
