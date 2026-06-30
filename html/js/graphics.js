@@ -16,27 +16,184 @@
     errorInvalidEntity: "Choose an entity from the suggestion list before adding it.",
     errorMax: "You can compare up to {max} entities at once.",
     removeAriaLabel: "Remove {label}",
+    statusLoadError: "Chart data could not be loaded.",
+    statusLoading: "Loading chart data...",
     statusEmpty: "Select at least one entity to draw the chart.",
     statusFilteredPlural: "Showing {count} entities for {corpora}.",
     statusFilteredSingular: "Showing {count} entity for {corpora}.",
     statusNoCorpora: "Enable at least one corpus or switch Total back on.",
     statusTotalPlural: "Showing {count} entities across all corpora together.",
     statusTotalSingular: "Showing {count} entity across all corpora together.",
+    typeLabels: {
+      person: "Person",
+      place: "Place",
+      work: "Work",
+    },
     tooltipYear: "Year {year}",
   };
 
   const state = {
     chart: null,
     entityCache: new Map(),
-    entityNodes: new Map(),
     i18n: DEFAULT_I18N,
     optionMap: new Map(),
     selectedIds: [],
     years: [],
+    zoomPlugin: null,
   };
 
   function formatMessage(template, values = {}) {
     return template.replace(/\{(\w+)\}/g, (_, key) => `${values[key] ?? ""}`);
+  }
+
+  function getZoomPlugin() {
+    const candidates = [
+      window.ChartZoom,
+      window.chartjsPluginZoom,
+      window["chartjs-plugin-zoom"],
+      window.ChartZoom && window.ChartZoom.default,
+      window.chartjsPluginZoom && window.chartjsPluginZoom.default,
+      window["chartjs-plugin-zoom"] && window["chartjs-plugin-zoom"].default,
+    ];
+
+    return candidates.find((candidate) => candidate && typeof candidate === "object") || null;
+  }
+
+  function resetChartZoom() {
+    if (!state.chart) {
+      return;
+    }
+
+    if (typeof state.chart.resetZoom === "function") {
+      state.chart.resetZoom();
+      return;
+    }
+
+    if (state.zoomPlugin && typeof state.zoomPlugin.resetZoom === "function") {
+      state.zoomPlugin.resetZoom(state.chart);
+      return;
+    }
+
+    // Fallback when plugin APIs are unavailable: restore the full x-axis range.
+    const xScale = state.chart.options?.scales?.x;
+    if (xScale) {
+      delete xScale.min;
+      delete xScale.max;
+      state.chart.update();
+    }
+  }
+
+  function installDragZoom(elements) {
+    const canvas = elements.canvas;
+    const shell = canvas.parentElement;
+
+    if (!shell || canvas.dataset.dragZoomBound === "true") {
+      return;
+    }
+
+    canvas.dataset.dragZoomBound = "true";
+
+    let overlay = shell.querySelector(".graphics-zoom-selection");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.className = "graphics-zoom-selection";
+      shell.appendChild(overlay);
+    }
+
+    let dragging = false;
+    let startX = 0;
+    let currentX = 0;
+
+    const MIN_DRAG_PIXELS = 8;
+
+    const getRelativeX = (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      return Math.max(0, Math.min(rect.width, x));
+    };
+
+    const updateOverlay = () => {
+      const left = Math.min(startX, currentX);
+      const width = Math.abs(currentX - startX);
+      overlay.style.left = `${left}px`;
+      overlay.style.width = `${width}px`;
+      overlay.style.display = "block";
+    };
+
+    const clearOverlay = () => {
+      overlay.style.display = "none";
+      overlay.style.width = "0";
+    };
+
+    canvas.addEventListener("mousedown", (event) => {
+      if (event.button !== 0 || !state.chart) {
+        return;
+      }
+
+      dragging = true;
+      startX = getRelativeX(event);
+      currentX = startX;
+      updateOverlay();
+      event.preventDefault();
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      if (!dragging) {
+        return;
+      }
+
+      currentX = getRelativeX(event);
+      updateOverlay();
+    });
+
+    window.addEventListener("mouseup", (event) => {
+      if (!dragging) {
+        return;
+      }
+
+      dragging = false;
+      currentX = getRelativeX(event);
+      const draggedPixels = Math.abs(currentX - startX);
+      clearOverlay();
+
+      if (draggedPixels < MIN_DRAG_PIXELS || !state.chart) {
+        return;
+      }
+
+      const xScale = state.chart.scales?.x;
+      if (!xScale || typeof xScale.getValueForPixel !== "function") {
+        return;
+      }
+
+      const valueA = Number(xScale.getValueForPixel(startX));
+      const valueB = Number(xScale.getValueForPixel(currentX));
+
+      if (!Number.isFinite(valueA) || !Number.isFinite(valueB) || valueA === valueB) {
+        return;
+      }
+
+      const fullMin = state.years[0];
+      const fullMax = state.years[state.years.length - 1];
+      if (!Number.isFinite(fullMin) || !Number.isFinite(fullMax)) {
+        return;
+      }
+
+      const targetMin = Math.max(fullMin, Math.floor(Math.min(valueA, valueB)));
+      const targetMax = Math.min(fullMax, Math.ceil(Math.max(valueA, valueB)));
+
+      if (targetMax <= targetMin) {
+        return;
+      }
+
+      const xOptions = state.chart.options?.scales?.x;
+      if (!xOptions) {
+        return;
+      }
+
+      xOptions.min = targetMin;
+      xOptions.max = targetMax;
+      state.chart.update("none");
+    });
   }
 
   function collectI18n(dataRoot) {
@@ -53,12 +210,19 @@
       errorInvalidEntity: dataRoot.dataset.errorInvalidEntity || DEFAULT_I18N.errorInvalidEntity,
       errorMax: dataRoot.dataset.errorMax || DEFAULT_I18N.errorMax,
       removeAriaLabel: dataRoot.dataset.removeAriaLabel || DEFAULT_I18N.removeAriaLabel,
+      statusLoadError: dataRoot.dataset.statusLoadError || DEFAULT_I18N.statusLoadError,
+      statusLoading: dataRoot.dataset.statusLoading || DEFAULT_I18N.statusLoading,
       statusEmpty: dataRoot.dataset.statusEmpty || DEFAULT_I18N.statusEmpty,
       statusFilteredPlural: dataRoot.dataset.statusFilteredPlural || DEFAULT_I18N.statusFilteredPlural,
       statusFilteredSingular: dataRoot.dataset.statusFilteredSingular || DEFAULT_I18N.statusFilteredSingular,
       statusNoCorpora: dataRoot.dataset.statusNoCorpora || DEFAULT_I18N.statusNoCorpora,
       statusTotalPlural: dataRoot.dataset.statusTotalPlural || DEFAULT_I18N.statusTotalPlural,
       statusTotalSingular: dataRoot.dataset.statusTotalSingular || DEFAULT_I18N.statusTotalSingular,
+      typeLabels: {
+        person: dataRoot.dataset.typePerson || DEFAULT_I18N.typeLabels.person,
+        place: dataRoot.dataset.typePlace || DEFAULT_I18N.typeLabels.place,
+        work: dataRoot.dataset.typeWork || DEFAULT_I18N.typeLabels.work,
+      },
       tooltipYear: dataRoot.dataset.tooltipYear || DEFAULT_I18N.tooltipYear,
     };
   }
@@ -106,9 +270,7 @@
     };
   }
 
-  function buildYears(dataRoot) {
-    const minYear = Number(dataRoot.dataset.minYear || 0);
-    const maxYear = Number(dataRoot.dataset.maxYear || 0);
+  function buildYears(minYear, maxYear) {
     const years = [];
 
     for (let year = minYear; year <= maxYear; year += 1) {
@@ -118,58 +280,97 @@
     return years;
   }
 
-  function collectEntityNodes(dataRoot) {
-    Array.from(dataRoot.querySelectorAll(".graphics-entity")).forEach((node) => {
-      state.entityNodes.set(node.dataset.entityId, node);
-    });
-  }
-
-  function collectOptions(elements) {
-    // Collect options from all three datalists
-    [elements.person.datalist, elements.work.datalist, elements.place.datalist].forEach((datalist) => {
-      if (datalist) {
-        Array.from(datalist.querySelectorAll("option")).forEach((option) => {
-          state.optionMap.set(option.value, {
-            id: option.dataset.entityId,
-            label: option.dataset.displayLabel,
-            type: option.dataset.entityType,
-          });
-        });
+  function fetchChartData(source) {
+    return fetch(source).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load chart JSON: ${response.status}`);
       }
+
+      return response.json();
     });
   }
 
-  function parseEntity(id) {
-    const node = state.entityNodes.get(id);
+  function entityTypeLabel(kind) {
+    return state.i18n.typeLabels[kind] || kind;
+  }
 
-    if (!node) {
-      return null;
+  function appendOption(datalist, entity) {
+    if (!datalist) {
+      return;
     }
 
-    const years = new Map();
-    Array.from(node.querySelectorAll(".graphics-year")).forEach((yearNode) => {
-      const year = Number(yearNode.dataset.year);
-      years.set(year, {
-        traktat: Number(yearNode.dataset.traktat || 0),
-        critics: Number(yearNode.dataset.critics || 0),
-        vms: Number(yearNode.dataset.vms || 0),
-        documents: Number(yearNode.dataset.documents || 0),
-      });
-    });
+    const option = document.createElement("option");
+    option.dataset.entityId = entity.id;
+    option.dataset.displayLabel = entity.label;
+    option.dataset.entityKind = entity.kind;
+    option.dataset.entityType = entity.type;
+    option.value = `${entity.label} (${entity.type}, ${entity.id})`;
+    option.textContent = entity.label;
+    datalist.appendChild(option);
 
-    const entity = {
-      id,
-      label: node.dataset.entityLabel,
-      type: node.dataset.entityType,
-      years,
+    state.optionMap.set(option.value, {
+      id: entity.id,
+      label: entity.label,
+      type: entity.type,
+    });
+  }
+
+  function applyChartData(elements, payload) {
+    const entities = Array.isArray(payload.entities) ? payload.entities : [];
+    const datalists = {
+      person: elements.person.datalist,
+      place: elements.place.datalist,
+      work: elements.work.datalist,
     };
 
-    state.entityCache.set(id, entity);
-    return entity;
+    state.entityCache.clear();
+    state.optionMap.clear();
+    Object.values(datalists).forEach((datalist) => {
+      if (datalist) {
+        datalist.innerHTML = "";
+      }
+    });
+
+    entities.forEach((rawEntity) => {
+      const kind = rawEntity.kind;
+      const id = rawEntity.id;
+      const label = rawEntity.label;
+      if (!id || !kind || !label) {
+        return;
+      }
+
+      const years = new Map();
+      const yearlyCounts = rawEntity.years || {};
+      Object.keys(yearlyCounts).forEach((yearKey) => {
+        const year = Number(yearKey);
+        const counts = yearlyCounts[yearKey] || {};
+        years.set(year, {
+          traktat: Number(counts.traktat || 0),
+          critics: Number(counts.critics || 0),
+          vms: Number(counts.vms || 0),
+          documents: Number(counts.documents || 0),
+        });
+      });
+
+      const entity = {
+        id,
+        kind,
+        label,
+        type: entityTypeLabel(kind),
+        years,
+      };
+
+      state.entityCache.set(id, entity);
+      appendOption(datalists[kind], entity);
+    });
+
+    const minYear = Number(payload.min_year || 0);
+    const maxYear = Number(payload.max_year || 0);
+    state.years = minYear && maxYear && maxYear >= minYear ? buildYears(minYear, maxYear) : [];
   }
 
   function getEntity(id) {
-    return state.entityCache.get(id) || parseEntity(id);
+    return state.entityCache.get(id) || null;
   }
 
   function syncCorpusControls(elements) {
@@ -217,8 +418,56 @@
     });
   }
 
+  function ensureLegendContainer(elements) {
+    let legendRoot = document.getElementById("graphics-legend");
+    if (legendRoot) {
+      return legendRoot;
+    }
+
+    // Create a runtime legend container so link-based legend works even on older generated pages.
+    legendRoot = document.createElement("div");
+    legendRoot.id = "graphics-legend";
+    legendRoot.className = "graphics-legend-list mt-3";
+    elements.canvas.parentElement?.insertAdjacentElement("afterend", legendRoot);
+    return legendRoot;
+  }
+
+  function renderLegend(elements, datasets) {
+    const legendRoot = ensureLegendContainer(elements);
+
+    legendRoot.innerHTML = "";
+
+    if (!datasets.length) {
+      return;
+    }
+
+    const list = document.createElement("ul");
+    list.className = "graphics-legend-items";
+
+    datasets.forEach((dataset) => {
+      const item = document.createElement("li");
+      item.className = "graphics-legend-item";
+
+      const swatch = document.createElement("span");
+      swatch.className = "graphics-legend-swatch";
+      swatch.style.backgroundColor = dataset.borderColor;
+
+      const link = document.createElement("a");
+      link.className = "graphics-legend-link";
+      link.href = `${dataset.entityId}.html`;
+      link.textContent = dataset.label;
+
+      item.appendChild(swatch);
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    legendRoot.appendChild(list);
+  }
+
   function createChart(elements) {
     const context = elements.canvas.getContext("2d");
+    ensureLegendContainer(elements);
     state.chart = new Chart(context, {
       type: "line",
       data: {
@@ -234,16 +483,23 @@
         parsing: false,
         plugins: {
           legend: {
+            display: false,
             position: "bottom",
           },
           zoom: {
             pan: {
-              enabled: true,
+              enabled: false,
               mode: "x",
             },
             zoom: {
-              wheel: { enabled: true },
-              pinch: { enabled: true },
+              drag: {
+                enabled: true,
+                backgroundColor: "rgba(34, 87, 122, 0.18)",
+                borderColor: "rgba(34, 87, 122, 0.9)",
+                borderWidth: 1,
+              },
+              wheel: { enabled: false },
+              pinch: { enabled: false },
               mode: "x",
             },
           },
@@ -322,6 +578,7 @@
       backgroundColor: color,
       borderWidth: 2,
       data,
+      entityId: entity.id,
       label: `${entity.label} [${entity.type}]`,
       pointRadius: 4,
       pointHoverRadius: 6,
@@ -343,6 +600,7 @@
       state.chart.data.datasets = [];
       state.chart.$activeCorpora = activeCorpora;
       state.chart.update();
+      renderLegend(elements, []);
       setStatus(elements, state.i18n.statusEmpty);
       return;
     }
@@ -351,6 +609,7 @@
       state.chart.data.datasets = [];
       state.chart.$activeCorpora = [];
       state.chart.update();
+      renderLegend(elements, []);
       setStatus(elements, state.i18n.statusNoCorpora, "warning");
       return;
     }
@@ -369,6 +628,7 @@
     state.chart.data.datasets = datasets;
     state.chart.$activeCorpora = activeCorpora;
     state.chart.update();
+    renderLegend(elements, datasets);
 
     if (elements.totalCheckbox.checked) {
       setStatus(
@@ -422,10 +682,10 @@
     updateChart(elements);
   }
 
-  function init() {
+  async function init() {
     // Register the zoom plugin now that all scripts should be loaded
     if (window.Chart) {
-      const zoomPlugin = window.ChartZoom || window.chartjsPluginZoom;
+      const zoomPlugin = getZoomPlugin();
       if (zoomPlugin && !window.Chart.__zoomRegistered) {
         try {
           window.Chart.register(zoomPlugin);
@@ -434,6 +694,10 @@
           console.warn("Failed to register zoom plugin:", e);
         }
       }
+
+      if (zoomPlugin) {
+        state.zoomPlugin = zoomPlugin;
+      }
     }
 
     const elements = collectElements();
@@ -441,12 +705,23 @@
       return;
     }
 
-    state.years = buildYears(elements.dataRoot);
     state.i18n = collectI18n(elements.dataRoot);
-    collectEntityNodes(elements.dataRoot);
-    collectOptions(elements);
+    setStatus(elements, state.i18n.statusLoading);
+
+    const source = elements.dataRoot.dataset.source || "data/graphics-chart-data.json";
+
+    try {
+      const payload = await fetchChartData(source);
+      applyChartData(elements, payload);
+    } catch (error) {
+      console.error(error);
+      setStatus(elements, state.i18n.statusLoadError, "danger");
+      return;
+    }
+
     syncCorpusControls(elements);
     updateChart(elements);
+    installDragZoom(elements);
 
     // Helper function to add entity from a specific input
     const addEntityFromInput = (input) => {
@@ -504,9 +779,7 @@
     const resetZoomButton = document.getElementById("graphics-reset-zoom");
     if (resetZoomButton) {
       resetZoomButton.addEventListener("click", () => {
-        if (state.chart) {
-          state.chart.resetZoom();
-        }
+        resetChartZoom();
       });
     }
   }

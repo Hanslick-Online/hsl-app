@@ -31,6 +31,8 @@
     <property name="xsl_imprint_en" value="${basedir}/xslt/imprint_en.xsl"/>
     <property name="xsl_search" value="${basedir}/xslt/search.xsl"/>
     <property name="xsl_search_en" value="${basedir}/xslt/search-engl.xsl"/>
+    <property name="graphics_json_script" value="${basedir}/build_app/python/generate_graphics_json.py"/>
+    <property name="graphics_json_out" value="${target}/data/graphics-chart-data.json"/>
     
     <property name="xsl_graphics" value="${basedir}/xslt/graphics.xsl"/>
     <delete>
@@ -64,6 +66,18 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
     </xslt>
+    <mkdir dir="${target}/data"/>
+    <exec executable="python3" failonerror="true">
+        <arg value="${graphics_json_script}"/>
+        <arg value="--person-index"/>
+        <arg value="${indices}/listperson.xml"/>
+        <arg value="--work-index"/>
+        <arg value="${indices}/listbibl.xml"/>
+        <arg value="--place-index"/>
+        <arg value="${indices}/listplace.xml"/>
+        <arg value="--out"/>
+        <arg value="${graphics_json_out}"/>
+    </exec>
      <xslt style="${xsl_graphics}"  basedir="${meta}" destdir="${target}" includes="g_*" filenameparameter="filename">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/saxon/saxon9he.jar"/>
