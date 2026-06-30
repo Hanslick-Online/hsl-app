@@ -149,11 +149,35 @@ def collect_entities(kind: str, root: ET.Element) -> list[dict]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate JSON data for the graphics chart")
-    parser.add_argument("--person-index", required=True, type=Path)
-    parser.add_argument("--work-index", required=True, type=Path)
-    parser.add_argument("--place-index", required=True, type=Path)
-    parser.add_argument("--out", required=True, type=Path)
+    parser = argparse.ArgumentParser(
+        description="Generate JSON data for the graphics chart"
+    )
+
+    parser.add_argument(
+        "--person-index",
+        type=Path,
+        default=Path("data/indices/listperson.xml"),
+        help="Path to the person index XML (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--work-index",
+        type=Path,
+        default=Path("data/indices/listbibl.xml"),
+        help="Path to the work index XML (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--place-index",
+        type=Path,
+        default=Path("data/indices/listplace.xml"),
+        help="Path to the place index XML (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--out",
+        type=Path,
+        default=Path("html/data/graphics-chart-data.json"),
+        help="Output JSON file (default: %(default)s)",
+    )
+
     return parser.parse_args()
 
 
