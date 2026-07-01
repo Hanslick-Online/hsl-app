@@ -136,7 +136,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item">
+                                        <a class="dropdown-item" href="g_net.html">
                                             Beziehungsnetzwerke
                                         </a>
                                     </li>
