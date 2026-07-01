@@ -77,6 +77,10 @@
                         background: #ffffff;
                     }
 
+                    #person-network canvas {
+                        border-radius: 0.5rem;
+                    }
+
                     .person-network-popup {
                         position: absolute;
                         z-index: 30;
@@ -86,7 +90,7 @@
                         margin-bottom: 20px;
                     }
 
-                    .person-network-popup .leaflet-popup-content-wrapper {
+                    .person-network-popup .person-network-popup-content-wrapper {
                         padding: 1px;
                         border-radius: 12px;
                         box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22);
@@ -95,7 +99,7 @@
                         text-align: left;
                     }
 
-                    .person-network-popup .leaflet-popup-content {
+                    .person-network-popup .person-network-popup-content {
                         margin: 13px 24px 13px 20px;
                         line-height: 1.35;
                         font-size: 13px;
@@ -103,7 +107,16 @@
                         max-width: 220px;
                     }
 
-                    .person-network-popup .leaflet-popup-tip-container {
+                    .person-network-popup .person-network-popup-content a {
+                        color: #1d4e89;
+                        text-decoration: none;
+                    }
+
+                    .person-network-popup .person-network-popup-content a:hover {
+                        text-decoration: underline;
+                    }
+
+                    .person-network-popup .person-network-popup-tip-container {
                         width: 40px;
                         height: 20px;
                         position: absolute;
@@ -115,7 +128,7 @@
                         bottom: -20px;
                     }
 
-                    .person-network-popup .leaflet-popup-tip {
+                    .person-network-popup .person-network-popup-tip {
                         width: 17px;
                         height: 17px;
                         padding: 1px;
@@ -125,7 +138,7 @@
                         box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
                     }
 
-                    .person-network-popup .leaflet-popup-close-button {
+                    .person-network-popup .person-network-popup-close-button {
                         position: absolute;
                         top: 0;
                         right: 0;
@@ -140,7 +153,7 @@
                         cursor: pointer;
                     }
 
-                    .person-network-popup .leaflet-popup-close-button:hover {
+                    .person-network-popup .person-network-popup-close-button:hover {
                         color: #333;
                     }
 
