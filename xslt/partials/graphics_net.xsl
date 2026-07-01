@@ -70,8 +70,9 @@
     </xsl:function>
 
     <xsl:template name="net_container">
-         <script src="https://unpkg.com/cytoscape@3.29.2/dist/cytoscape.min.js" />
-                                             <script src="js/person-network.js" />
+        <script src="https://unpkg.com/graphology@0.25.4/dist/graphology.umd.min.js" />
+        <script src="https://unpkg.com/sigma@2.4.0/build/sigma.min.js" />
+        <script src="js/person-network.js" />
         <div id="graphic-container" style="padding:.5em;">
             <xsl:variable name="graph-persons" as="element(tei:person)*" select="$net-person-index//tei:listPerson/tei:person"/>
             <xsl:variable name="graph-max-rel" as="xs:integer" select="max((1, for $person in $graph-persons return count(distinct-values((local:pub-targets($person), local:doc-mention-targets($person), local:doc-authored-targets($person))))))"/>
@@ -156,7 +157,7 @@ Kopräsenz-Kanten zwischen Knoten</label>
                     </div>
                 </div>
                 <div id="person-network"></div>
-                <div class="person-network-hint">Klicken Sie auf einen Knoten, um zur Personenseite zu wechseln. Zoomen mit Mausrad oder Touch-Geste.</div>
+                <div class="person-network-hint">Klicken oder tippen Sie auf einen Knoten, um Details und den Link zur Personenseite anzuzeigen. Zoomen mit Mausrad oder Touch-Geste.</div>
                 <div class="person-network-legend">
                     <span>
                         <i style="background:#1d4e89"></i>Personen von Hanslick erwähnt</span>
