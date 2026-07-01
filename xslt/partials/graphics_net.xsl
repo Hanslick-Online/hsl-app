@@ -70,8 +70,8 @@
     </xsl:function>
 
     <xsl:template name="net_container">
-        <script src="https://unpkg.com/graphology@0.25.4/dist/graphology.umd.min.js" />
-        <script src="https://unpkg.com/sigma@2.4.0/build/sigma.min.js" />
+        <script src="vendor/graphology/graphology.umd.min.js" />
+        <script src="vendor/sigma/sigma.min.js" />
         <script src="js/person-network.js" />
         <div id="graphic-container" style="padding:.5em;">
             <xsl:variable name="graph-persons" as="element(tei:person)*" select="$net-person-index//tei:listPerson/tei:person"/>
