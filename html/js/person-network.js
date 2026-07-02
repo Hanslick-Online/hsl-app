@@ -3,70 +3,18 @@
 
     var MAX_COPRESENCE_EDGES = 4500;
     var MAX_NODES_PER_TARGET = 90;
-    var INITIAL_ZOOM_WIDE = 1;
-    var INITIAL_ZOOM_DEFAULT = 0.86;
     var INITIAL_RENDER_NODE_CAP = 42;
     var INITIAL_RENDER_CHUNK_SIZE = 70;
     var INITIAL_RENDER_CHUNK_DELAY = 32;
-
-    function computeNodeSize(relTotal) {
-        var rel = Math.max(1, parseIntOr(relTotal, 1));
-        return Math.round(Math.min(72, 20 + (Math.sqrt(rel) * 5.2)));
-    }
-
-    function buildElements(nodeData) {
-        var nodeElementsById = {};
-        var center = null;
-
-        nodeData.forEach(function (node) {
-            if (node.group === 'hanslick' || node.id === 'hsl_person_id_1') {
-                center = node.id;
-            }
-
-            nodeElementsById[node.id] = {
-                data: {
-                    id: node.id,
-                    label: node.label,
-                    url: node.url,
-                    group: node.group,
-                    relTotal: node.relTotal,
-                    relPub: node.relPub,
-                    relDocMentions: node.relDocMentions,
-                    relDocAuthored: node.relDocAuthored,
-                    nodeSize: computeNodeSize(node.relTotal)
-                }
-            };
-
-        });
-
-        if (!center && nodeData.length) {
-            center = nodeData[0].id;
-        }
-
-        return {
-            nodeElementsById: nodeElementsById,
-            center: center
-        };
-    }
-
-    function buildTargetToNodes(nodeData) {
-        var targetToNodes = {};
-
-        nodeData.forEach(function (node) {
-            if (!node.targets || !node.targets.length) {
-                return;
-            }
-
-            node.targets.forEach(function (targetId) {
-                if (!targetToNodes[targetId]) {
-                    targetToNodes[targetId] = [];
-                }
-                targetToNodes[targetId].push(node.id);
-            });
-        });
-
-        return targetToNodes;
-    }
+    var GROUP_ORDER = ['pub-person', 'pub-character', 'doc-author', 'doc-person', 'doc-character'];
+    var GROUP_COLORS = {
+        hanslick: '#111111',
+        'pub-person': '#1d4e89',
+        'pub-character': '#5f93c2',
+        'doc-author': '#ba4a00',
+        'doc-person': '#e67e22',
+        'doc-character': '#f5b041'
+    };
 
     function parseIntOr(value, fallback) {
         var parsed = parseInt(value, 10);
@@ -74,6 +22,30 @@
             return fallback;
         }
         return parsed;
+    }
+
+    function escapeHtml(value) {
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function computeNodeSize(relTotal, isCenter) {
+        var rel = Math.max(1, parseIntOr(relTotal, 1));
+        if (isCenter) {
+            return 18;
+        }
+        return Math.max(5, Math.min(13, 4.8 + (Math.sqrt(rel) * 0.85)));
+    }
+
+    function computeEdgeSize(weight, kind) {
+        var base = Math.max(1, parseIntOr(weight, 1));
+        if (kind === 'copresence') {
+            return Math.min(2.2, 0.45 + (Math.log(base + 1) * 0.34));
+        }
+        return Math.min(3.6, 0.85 + (Math.log(base + 1) * 0.48));
     }
 
     function parseNodeData(container) {
@@ -156,17 +128,54 @@
         });
     }
 
-    function buildRankingData(nodeData, centerId) {
-        var groups = ['pub-person', 'pub-character', 'doc-author', 'doc-person', 'doc-character'];
-        var grouped = {};
+    function buildNodeMeta(nodeData) {
         var nodeMetaById = {};
+        var center = '';
 
-        groups.forEach(function (group) {
+        nodeData.forEach(function (node) {
+            if (node.group === 'hanslick' || node.id === 'hsl_person_id_1') {
+                center = node.id;
+            }
+            nodeMetaById[node.id] = node;
+        });
+
+        if (!center && nodeData.length) {
+            center = nodeData[0].id;
+        }
+
+        return {
+            center: center,
+            nodeMetaById: nodeMetaById
+        };
+    }
+
+    function buildTargetToNodes(nodeData) {
+        var targetToNodes = {};
+
+        nodeData.forEach(function (node) {
+            if (!node.targets || !node.targets.length) {
+                return;
+            }
+
+            node.targets.forEach(function (targetId) {
+                if (!targetToNodes[targetId]) {
+                    targetToNodes[targetId] = [];
+                }
+                targetToNodes[targetId].push(node.id);
+            });
+        });
+
+        return targetToNodes;
+    }
+
+    function buildRankingData(nodeData, centerId) {
+        var grouped = {};
+
+        GROUP_ORDER.forEach(function (group) {
             grouped[group] = [];
         });
 
         nodeData.forEach(function (node) {
-            nodeMetaById[node.id] = node;
             if (node.id === centerId) {
                 return;
             }
@@ -186,10 +195,9 @@
         });
 
         return {
-            groups: groups,
+            groups: GROUP_ORDER.slice(),
             grouped: grouped,
-            nodeMetaById: nodeMetaById,
-            maxGroupSize: Math.max.apply(null, groups.map(function (group) {
+            maxGroupSize: Math.max.apply(null, GROUP_ORDER.map(function (group) {
                 return (grouped[group] || []).length;
             }).concat([1]))
         };
@@ -207,67 +215,6 @@
         return ordered;
     }
 
-    function initialZoomForWidth(width) {
-        if (width >= 1800) {
-            return INITIAL_ZOOM_WIDE;
-        }
-        return INITIAL_ZOOM_DEFAULT;
-    }
-
-    function applyCompactLayout(cy, orderedNodeIds, centerId, host, visibleNodeIds) {
-        var width = Math.max(960, host.clientWidth || 1200);
-        var height = Math.max(420, host.clientHeight || 560);
-        var ringStepX = Math.max(60, Math.round(width * 0.07));
-        var ringStepY = Math.max(34, Math.round(height * 0.07));
-        var baseRadiusX = Math.max(160, Math.round(width * 0.15));
-        var baseRadiusY = Math.max(86, Math.round(height * 0.17));
-        var maxRadiusX = Math.max(260, Math.round((width * 0.5) - 70));
-        var maxRadiusY = Math.max(140, Math.round((height * 0.5) - 40));
-        var startAngle = -Math.PI / 2;
-        var ringIndex = 0;
-        var index = 0;
-        var centerNode = cy.getElementById(centerId);
-
-        function ringCapacity(radiusX, radiusY) {
-            var perimeterEstimate = Math.PI * Math.sqrt(2 * ((radiusX * radiusX) + (radiusY * radiusY)));
-            return Math.max(14, Math.floor(perimeterEstimate / 54));
-        }
-
-        var idsToPlace = orderedNodeIds.filter(function (nodeId) {
-            return !visibleNodeIds || visibleNodeIds[nodeId] === true;
-        });
-
-        if (centerNode && !centerNode.empty()) {
-            centerNode.position({ x: 0, y: 0 });
-        }
-
-        while (index < idsToPlace.length) {
-            var radiusX = Math.min(maxRadiusX, baseRadiusX + (ringIndex * ringStepX));
-            var radiusY = Math.min(maxRadiusY, baseRadiusY + (ringIndex * ringStepY));
-            var cap = ringCapacity(radiusX, radiusY);
-            var slice = idsToPlace.slice(index, index + cap);
-
-            slice.forEach(function (nodeId, localIndex) {
-                var node = cy.getElementById(nodeId);
-                var angle;
-                var x;
-                var y;
-
-                if (!node || node.empty()) {
-                    return;
-                }
-
-                angle = startAngle + ((2 * Math.PI * localIndex) / Math.max(1, slice.length));
-                x = Math.round(radiusX * Math.cos(angle));
-                y = Math.round(radiusY * Math.sin(angle));
-                node.position({ x: x, y: y });
-            });
-
-            index += slice.length;
-            ringIndex += 1;
-        }
-    }
-
     function collectEnabledGroups(categoryToggles) {
         var enabled = {};
         categoryToggles.forEach(function (checkbox) {
@@ -279,9 +226,117 @@
         return enabled;
     }
 
-    function buildCopresenceEdges(cy, centerId, targetToNodes, visibleNodeIds, minCopresence) {
+    function capVisibleNodeIds(visibleNodeIds, centerId, orderedNodeIds, renderCap) {
+        var limitedIds = {};
+        var kept = 0;
+
+        if (!renderCap || renderCap < 1) {
+            return visibleNodeIds;
+        }
+
+        limitedIds[centerId] = true;
+        kept = 1;
+
+        orderedNodeIds.forEach(function (nodeId) {
+            if (kept >= renderCap) {
+                return;
+            }
+            if (visibleNodeIds[nodeId] !== true || nodeId === centerId) {
+                return;
+            }
+            limitedIds[nodeId] = true;
+            kept += 1;
+        });
+
+        return limitedIds;
+    }
+
+    function computeVisibleNodeIds(centerId, threshold, enabledGroups, options) {
+        var desiredVisibleNodeIds = {};
+        var desiredVisibleCount = 1;
+
+        desiredVisibleNodeIds[centerId] = true;
+
+        options.ranking.groups.forEach(function (group) {
+            var shown = 0;
+            var sorted = options.ranking.grouped[group] || [];
+
+            if (enabledGroups[group] === false) {
+                return;
+            }
+
+            sorted.forEach(function (node) {
+                if (shown >= options.nodeLimitPerCategory) {
+                    return;
+                }
+                if (node.relTotal >= threshold) {
+                    desiredVisibleNodeIds[node.id] = true;
+                    desiredVisibleCount += 1;
+                    shown += 1;
+                }
+            });
+        });
+
+        return {
+            desiredVisibleNodeIds: desiredVisibleNodeIds,
+            desiredVisibleCount: desiredVisibleCount,
+            visibleNodeIds: capVisibleNodeIds(
+                desiredVisibleNodeIds,
+                centerId,
+                options.orderedNodeIds,
+                parseIntOr(options.renderCap, 0)
+            )
+        };
+    }
+
+    function buildLayoutPositions(orderedNodeIds, centerId, host, visibleNodeIds) {
+        var positions = {};
+        var width = Math.max(960, host.clientWidth || 1200);
+        var height = Math.max(420, host.clientHeight || 560);
+        var ringStepX = Math.max(110, Math.round(width * 0.11));
+        var ringStepY = Math.max(64, Math.round(height * 0.11));
+        var baseRadiusX = Math.max(180, Math.round(width * 0.18));
+        var baseRadiusY = Math.max(120, Math.round(height * 0.21));
+        var maxRadiusX = Math.max(360, Math.round((width * 0.62) - 90));
+        var maxRadiusY = Math.max(220, Math.round((height * 0.62) - 60));
+        var startAngle = -Math.PI / 2;
+        var ringIndex = 0;
+        var index = 0;
+        var idsToPlace = orderedNodeIds.filter(function (nodeId) {
+            return visibleNodeIds[nodeId] === true && nodeId !== centerId;
+        });
+
+        function ringCapacity(radiusX, radiusY) {
+            var perimeterEstimate = Math.PI * Math.sqrt(2 * ((radiusX * radiusX) + (radiusY * radiusY)));
+            return Math.max(14, Math.floor(perimeterEstimate / 78));
+        }
+
+        positions[centerId] = { x: 0, y: 0 };
+
+        while (index < idsToPlace.length) {
+            var radiusX = Math.min(maxRadiusX, baseRadiusX + (ringIndex * ringStepX));
+            var radiusY = Math.min(maxRadiusY, baseRadiusY + (ringIndex * ringStepY));
+            var cap = ringCapacity(radiusX, radiusY);
+            var slice = idsToPlace.slice(index, index + cap);
+
+            slice.forEach(function (nodeId, localIndex) {
+                var angle = startAngle + ((2 * Math.PI * localIndex) / Math.max(1, slice.length));
+                positions[nodeId] = {
+                    x: Math.round(radiusX * Math.cos(angle)),
+                    y: Math.round(radiusY * Math.sin(angle))
+                };
+            });
+
+            index += slice.length;
+            ringIndex += 1;
+        }
+
+        return positions;
+    }
+
+    function buildCopresenceEdges(centerId, targetToNodes, visibleNodeIds, minCopresence) {
         var edgeWeights = {};
-        var produced = 0;
+        var edges = [];
 
         Object.keys(targetToNodes).forEach(function (targetId) {
             var sourceIds = targetToNodes[targetId] || [];
@@ -319,165 +374,117 @@
 
         Object.keys(edgeWeights).forEach(function (pairKey) {
             var ids;
-            if (produced >= MAX_COPRESENCE_EDGES) {
+
+            if (edges.length >= MAX_COPRESENCE_EDGES) {
                 return;
             }
-
             if (edgeWeights[pairKey] < minCopresence) {
                 return;
             }
 
             ids = pairKey.split('|');
-            cy.add({
-                group: 'edges',
-                data: {
-                    id: 'edge-cop-' + ids[0] + '-' + ids[1],
-                    source: ids[0],
-                    target: ids[1],
-                    weight: edgeWeights[pairKey],
-                    kind: 'copresence'
-                }
+            edges.push({
+                id: 'edge-cop-' + ids[0] + '-' + ids[1],
+                source: ids[0],
+                target: ids[1],
+                weight: edgeWeights[pairKey],
+                kind: 'copresence'
             });
-            produced += 1;
         });
+
+        return edges;
     }
 
-    function ensureVisibleNodes(cy, visibleNodeIds, nodeElementsById) {
-        cy.nodes().forEach(function (node) {
-            if (!visibleNodeIds[node.id()]) {
-                node.remove();
+    function createGraphModel(centerId, visibleNodeIds, options) {
+        var graph = new graphology.Graph();
+        var positions = buildLayoutPositions(options.orderedNodeIds, centerId, options.host, visibleNodeIds);
+        var copresenceEdges = [];
+
+        Object.keys(visibleNodeIds).forEach(function (nodeId) {
+            var node = options.nodeMetaById[nodeId];
+            var isCenter = nodeId === centerId;
+            var position = positions[nodeId] || { x: 0, y: 0 };
+            var nodeColor = GROUP_COLORS[node.group] || GROUP_COLORS['pub-person'];
+
+            if (!node) {
+                return;
             }
+
+            graph.addNode(nodeId, {
+                x: position.x,
+                y: position.y,
+                size: computeNodeSize(node.relTotal, isCenter),
+                color: isCenter ? GROUP_COLORS.hanslick : nodeColor,
+                label: String(node.label || ''),
+                forceLabel: isCenter,
+                zIndex: isCenter ? 10 : 1,
+                url: String(node.url || ''),
+                group: String(node.group || 'pub-person'),
+                relTotal: parseIntOr(node.relTotal, 0),
+                relPub: parseIntOr(node.relPub, 0),
+                relDocMentions: parseIntOr(node.relDocMentions, 0),
+                relDocAuthored: parseIntOr(node.relDocAuthored, 0)
+            });
         });
 
         Object.keys(visibleNodeIds).forEach(function (nodeId) {
-            if (!nodeElementsById[nodeId]) {
+            var node = options.nodeMetaById[nodeId];
+
+            if (!node || nodeId === centerId) {
                 return;
             }
 
-            if (cy.getElementById(nodeId).empty()) {
-                cy.add({
-                    group: 'nodes',
-                    data: nodeElementsById[nodeId].data
-                });
-            }
-        });
-    }
-
-    function capVisibleNodeIds(visibleNodeIds, centerId, orderedNodeIds, renderCap) {
-        var limitedIds = {};
-        var kept = 0;
-
-        if (!renderCap || renderCap < 1) {
-            return visibleNodeIds;
-        }
-
-        limitedIds[centerId] = true;
-        kept = 1;
-
-        orderedNodeIds.forEach(function (nodeId) {
-            if (kept >= renderCap) {
-                return;
-            }
-            if (visibleNodeIds[nodeId] !== true || nodeId === centerId) {
-                return;
-            }
-            limitedIds[nodeId] = true;
-            kept += 1;
-        });
-
-        return limitedIds;
-    }
-
-    function applyFilters(cy, centerId, threshold, enabledGroups, options) {
-        var desiredVisibleNodeIds = {};
-        var visibleNodeIds = {};
-        var visibleCount = 0;
-        var desiredVisibleCount = 0;
-        var limitedVisibleNodeIds = {};
-
-        options.ranking.groups.forEach(function (group) {
-            var shown = 0;
-            var sorted = options.ranking.grouped[group] || [];
-
-            if (enabledGroups[group] === false) {
-                return;
-            }
-
-            sorted.forEach(function (node) {
-                if (shown >= options.nodeLimitPerCategory) {
-                    return;
-                }
-                if (node.relTotal >= threshold) {
-                    limitedVisibleNodeIds[node.id] = true;
-                    shown += 1;
-                }
+            graph.addEdgeWithKey('edge-' + centerId + '-' + nodeId, centerId, nodeId, {
+                size: computeEdgeSize(node.relTotal, 'center'),
+                color: '#8ca0b7',
+                kind: 'center',
+                weight: Math.max(1, parseIntOr(node.relTotal, 1)),
+                zIndex: 1
             });
         });
 
-        cy.batch(function () {
-            desiredVisibleNodeIds[centerId] = true;
-            desiredVisibleCount = 1;
-
-            Object.keys(limitedVisibleNodeIds).forEach(function (nodeId) {
-                desiredVisibleNodeIds[nodeId] = true;
-                desiredVisibleCount += 1;
-            });
-
-            visibleNodeIds = capVisibleNodeIds(
-                desiredVisibleNodeIds,
-                centerId,
-                options.orderedNodeIds,
-                parseIntOr(options.renderCap, 0)
-            );
-
-            visibleCount = Object.keys(visibleNodeIds).length;
-
-            ensureVisibleNodes(cy, visibleNodeIds, options.nodeElementsById);
-            cy.edges().remove();
-
-            Object.keys(visibleNodeIds).forEach(function (nodeId) {
-                var nodeMeta;
-
-                if (nodeId === centerId) {
+        if (options.enableCopresence && Object.keys(visibleNodeIds).length <= options.maxVisibleNodesForCopresence) {
+            copresenceEdges = buildCopresenceEdges(centerId, options.targetToNodes, visibleNodeIds, options.minCopresence);
+            copresenceEdges.forEach(function (edge) {
+                if (!graph.hasNode(edge.source) || !graph.hasNode(edge.target) || graph.hasEdge(edge.id)) {
                     return;
                 }
-
-                nodeMeta = options.ranking.nodeMetaById[nodeId];
-                if (!nodeMeta) {
-                    return;
-                }
-
-                cy.add({
-                    group: 'edges',
-                    data: {
-                        id: 'edge-' + centerId + '-' + nodeId,
-                        source: centerId,
-                        target: nodeId,
-                        weight: Math.max(1, parseIntOr(nodeMeta.relTotal, 1)),
-                        kind: 'center'
-                    }
+                graph.addEdgeWithKey(edge.id, edge.source, edge.target, {
+                    size: computeEdgeSize(edge.weight, edge.kind),
+                    color: '#c8ced6',
+                    kind: edge.kind,
+                    weight: edge.weight,
+                    zIndex: 0
                 });
             });
-
-            if (options.enableCopresence && visibleCount <= options.maxVisibleNodesForCopresence) {
-                if (!options.targetToNodes) {
-                    options.targetToNodes = buildTargetToNodes(options.nodeData || []);
-                }
-                buildCopresenceEdges(cy, centerId, options.targetToNodes, visibleNodeIds, options.minCopresence);
-            }
-        });
-
-        applyCompactLayout(cy, options.orderedNodeIds, centerId, options.host, visibleNodeIds);
-
-        var centerNode = cy.getElementById(centerId);
-
-        if (centerNode && !centerNode.empty() && centerNode.style('display') !== 'none') {
-            cy.center(centerNode);
         }
 
         return {
-            desiredVisibleCount: desiredVisibleCount,
-            renderedVisibleCount: visibleCount
+            graph: graph,
+            copresenceEdgeIds: copresenceEdges.map(function (edge) {
+                return edge.id;
+            })
+        };
+    }
+
+    function initializePopup(host) {
+        var popup = document.createElement('div');
+        popup.className = 'person-network-popup';
+        popup.innerHTML = [
+            '<div class="person-network-popup-content-wrapper">',
+            '  <button class="person-network-popup-close-button" type="button" aria-label="Close">',
+            '    <span aria-hidden="true">x</span>',
+            '  </button>',
+            '  <div class="person-network-popup-content"></div>',
+            '</div>',
+            '<div class="person-network-popup-tip-container"><div class="person-network-popup-tip"></div></div>'
+        ].join('');
+        host.appendChild(popup);
+
+        return {
+            popup: popup,
+            content: popup.querySelector('.person-network-popup-content'),
+            closeButton: popup.querySelector('.person-network-popup-close-button')
         };
     }
 
@@ -491,275 +498,190 @@
         var copresenceToggle = document.getElementById('person-network-toggle-copresence');
         var minCopresenceInput = document.getElementById('person-network-min-copresence');
 
-        if (!host || !dataContainer || !minRelInput || !nodeLimitSlider || typeof cytoscape === 'undefined') {
+        if (!host || !dataContainer || !minRelInput || !nodeLimitSlider || typeof graphology === 'undefined' || typeof Sigma === 'undefined') {
             return;
         }
 
         loadNodeData(dataContainer).then(function (loaded) {
             var nodeData = loaded.nodes;
+            var meta;
+            var centerId;
+            var ranking;
+            var popupElements;
+            var renderer;
+            var graphState;
+            var enabledGroups;
+            var pendingFrame = null;
+            var progressiveTimer = null;
+            var activeNodeId = null;
+            var hoveredNodeId = null;
+            var popupState = {
+                visible: false,
+                nodeId: null
+            };
+
             if (!nodeData.length) {
                 return;
             }
 
-            var assembled = buildElements(nodeData);
-            var centerId = loaded.hanslickId || assembled.center;
-            var ranking = buildRankingData(nodeData, centerId);
-            var popupState = {
-                nodeId: null,
-                visible: false
-            };
+            meta = buildNodeMeta(nodeData);
+            centerId = loaded.hanslickId || meta.center;
+            ranking = buildRankingData(nodeData, centerId);
 
             host.innerHTML = '';
+            popupElements = initializePopup(host);
 
-            var popup = document.createElement('div');
-            popup.className = 'leaflet-popup leaflet-zoom-animated person-network-popup';
-            popup.innerHTML = [
-                '<div class="leaflet-popup-content-wrapper">',
-                '  <button class="leaflet-popup-close-button" type="button" aria-label="Close" href="#close">',
-                '    <span aria-hidden="true">x</span>',
-                '  </button>',
-                '  <div class="leaflet-popup-content"></div>',
-                '</div>',
-                '<div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div>'
-            ].join('');
-            host.appendChild(popup);
-
-            var popupContent = popup.querySelector('.leaflet-popup-content');
-            var popupClose = popup.querySelector('.leaflet-popup-close-button');
-
-            var runtimeOptions = {
-                targetToNodes: null,
+            graphState = {
+                targetToNodes: buildTargetToNodes(nodeData),
                 nodeData: nodeData,
+                nodeMetaById: meta.nodeMetaById,
+                ranking: ranking,
+                orderedNodeIds: buildOrderedNodeIds(ranking),
+                host: host,
                 enableCopresence: false,
                 maxVisibleNodesForCopresence: 280,
                 minCopresence: 2,
-                ranking: ranking,
                 nodeLimitPerCategory: 25,
-                orderedNodeIds: buildOrderedNodeIds(ranking),
-                nodeElementsById: assembled.nodeElementsById,
-                host: host,
-                renderCap: 0
+                renderCap: 0,
+                visibleNodeIds: {},
+                copresenceEdgeIds: []
             };
 
-            var maxNodeLimit = Math.max(1, ranking.maxGroupSize);
-            var defaultNodeLimit = Math.min(25, maxNodeLimit);
-            nodeLimitSlider.max = String(maxNodeLimit);
-            nodeLimitSlider.value = String(defaultNodeLimit);
-            if (nodeLimitMax) {
-                nodeLimitMax.textContent = '/ max ' + String(maxNodeLimit);
-            }
+            renderer = new Sigma(new graphology.Graph(), host, {
+                allowInvalidContainer: true,
+                renderEdgeLabels: false,
+                labelDensity: 0.08,
+                labelRenderedSizeThreshold: 13,
+                labelSize: 13,
+                labelFont: 'Georgia, serif',
+                edgeLabelSize: 12,
+                stagePadding: 30,
+                minCameraRatio: 0.06,
+                maxCameraRatio: 5,
+                defaultEdgeType: 'line',
+                zIndex: true,
+                nodeReducer: function (node, data) {
+                    var reduced = Object.assign({}, data);
+                    var selected = activeNodeId === node;
+                    var highlighted = hoveredNodeId === node || selected;
 
-            var centerElement = assembled.nodeElementsById[centerId] || assembled.nodeElementsById[assembled.center] || null;
+                    if (highlighted) {
+                        reduced.highlighted = true;
+                        reduced.forceLabel = true;
+                        reduced.zIndex = 20;
+                        reduced.color = '#b45309';
+                    }
 
-            var cy = cytoscape({
-                container: host,
-                elements: centerElement ? [{ group: 'nodes', data: centerElement.data }] : [],
-                minZoom: 0.2,
-                maxZoom: 4,
-                layout: {
-                    name: 'preset',
-                    fit: false,
-                    animate: false
+                    return reduced;
                 },
-                style: [
-                {
-                    selector: 'node',
-                    style: {
-                        'label': '',
-                        'font-size': 10,
-                        'text-wrap': 'wrap',
-                        'text-max-width': 120,
-                        'text-valign': 'center',
-                        'text-halign': 'center',
-                        'color': '#1f2937',
-                        'background-color': '#1d4e89',
-                        'width': 'data(nodeSize)',
-                        'height': 'data(nodeSize)',
-                        'border-width': 1,
-                        'border-color': '#ffffff'
+                edgeReducer: function (edge, data) {
+                    var reduced = Object.assign({}, data);
+                    var active = activeNodeId || hoveredNodeId;
+
+                    if (!active) {
+                        return reduced;
                     }
-                },
-                {
-                    selector: 'node[group = "hanslick"]',
-                    style: {
-                        'background-color': '#111111',
-                        'color': '#ffffff',
-                        'font-size': 12,
-                        'width': 64,
-                        'height': 64,
-                        'z-index': 20
+
+                    if (renderer.getGraph().hasExtremity(edge, active)) {
+                        reduced.color = data.kind === 'copresence' ? '#9ca3af' : '#5f7085';
+                        reduced.size = Math.max(data.size || 1, (data.size || 1) + 0.3);
+                    } else {
+                        reduced.color = '#e5e7eb';
                     }
-                },
-                {
-                    selector: 'node[group = "pub-person"]',
-                    style: {
-                        'background-color': '#1d4e89'
-                    }
-                },
-                {
-                    selector: 'node[group = "pub-character"]',
-                    style: {
-                        'background-color': '#5f93c2'
-                    }
-                },
-                {
-                    selector: 'node[group = "doc-author"]',
-                    style: {
-                        'background-color': '#ba4a00'
-                    }
-                },
-                {
-                    selector: 'node[group = "doc-person"]',
-                    style: {
-                        'background-color': '#e67e22'
-                    }
-                },
-                {
-                    selector: 'node[group = "doc-character"]',
-                    style: {
-                        'background-color': '#f5b041'
-                    }
-                },
-                {
-                    selector: 'edge',
-                    style: {
-                        'curve-style': 'bezier',
-                        'width': 'mapData(weight, 1, 30, 1, 4)',
-                        'line-color': '#7c8ea5',
-                        'opacity': 0.8
-                    }
-                },
-                {
-                    selector: 'edge[kind = "copresence"]',
-                    style: {
-                        'line-color': '#9ca3af',
-                        'line-style': 'dashed',
-                        'opacity': 0.6,
-                        'width': 'mapData(weight, 1, 30, 1, 3)'
-                    }
-                },
-                {
-                    selector: ':selected',
-                    style: {
-                        'overlay-opacity': 0,
-                        'border-width': 3,
-                        'border-color': '#f59e0b'
-                    }
+
+                    return reduced;
                 }
-                ]
             });
 
-            var centerNode = cy.getElementById(centerId);
-            if (centerNode && !centerNode.empty()) {
-                cy.zoom(initialZoomForWidth(host.clientWidth || 1200));
-                cy.center(centerNode);
-
-                window.addEventListener('resize', function () {
-                    cy.zoom(initialZoomForWidth(host.clientWidth || 1200));
-                    applyFilters(cy, centerId, parseIntOr(minRelInput.value, 1), enabledGroups, runtimeOptions);
-                    if (popupState.visible && popupState.nodeId) {
-                        placePopupForNode(cy.getElementById(popupState.nodeId));
-                    }
-                });
-            }
-
             function hidePopup() {
-                popup.style.display = 'none';
+                popupElements.popup.style.display = 'none';
                 popupState.visible = false;
                 popupState.nodeId = null;
             }
 
-            function placePopupForNode(node) {
-                var pos;
+            function countCopresenceEdges(nodeId) {
+                var count = 0;
+
+                graphState.copresenceEdgeIds.forEach(function (edgeId) {
+                    if (!renderer.getGraph().hasEdge(edgeId)) {
+                        return;
+                    }
+                    if (renderer.getGraph().hasExtremity(edgeId, nodeId)) {
+                        count += 1;
+                    }
+                });
+
+                return count;
+            }
+
+            function placePopupForNode(nodeId) {
+                var displayData;
+                var viewportPosition;
                 var popupRect;
                 var x;
                 var y;
 
-                if (!popupState.visible) {
-                    return;
-                }
-
-                if (!node || node.empty()) {
+                if (!popupState.visible || !nodeId || !renderer.getGraph().hasNode(nodeId)) {
                     hidePopup();
                     return;
                 }
 
-                if (node.style('display') === 'none') {
+                displayData = renderer.getNodeDisplayData(nodeId);
+                if (!displayData) {
                     hidePopup();
                     return;
                 }
 
-                pos = node.renderedPosition();
-                popup.style.display = 'block';
-                popupRect = popup.getBoundingClientRect();
+                viewportPosition = renderer.graphToViewport({
+                    x: displayData.x,
+                    y: displayData.y
+                });
+                popupElements.popup.style.display = 'block';
+                popupRect = popupElements.popup.getBoundingClientRect();
 
-                x = pos.x - (popupRect.width / 2);
-                y = pos.y - popupRect.height - 8;
+                x = viewportPosition.x - (popupRect.width / 2);
+                y = viewportPosition.y - popupRect.height - 10;
 
-                popup.style.left = String(Math.round(x)) + 'px';
-                popup.style.top = String(Math.round(y)) + 'px';
+                popupElements.popup.style.left = String(Math.round(x)) + 'px';
+                popupElements.popup.style.top = String(Math.round(y)) + 'px';
             }
 
-            function showPopupForNode(node) {
-                var label = node.data('label') || '';
-                var url = node.data('url') || '';
-                var relPub = parseIntOr(node.data('relPub'), 0);
-                var relDocAuthored = parseIntOr(node.data('relDocAuthored'), 0);
-                var relDocMentions = parseIntOr(node.data('relDocMentions'), 0);
-                var copresenceCount = node.connectedEdges('[kind = "copresence"]').filter(':visible').length;
+            function showPopupForNode(nodeId) {
+                var graph = renderer.getGraph();
+                var node;
                 var details = [];
-                var safeLabel = String(label)
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
+                var copresenceCount;
 
-                if (relPub > 0) {
-                    details.push('vom H. erwähnt: ' + String(relPub));
+                if (!graph.hasNode(nodeId)) {
+                    hidePopup();
+                    return;
                 }
-                if (relDocAuthored > 0) {
-                    details.push('erwähnt Hanslick: ' + String(relDocAuthored));
+
+                node = graph.getNodeAttributes(nodeId);
+                copresenceCount = countCopresenceEdges(nodeId);
+
+                if (node.relPub > 0) {
+                    details.push('vom H. erwähnt: ' + String(node.relPub));
                 }
-                if (relDocMentions > 0) {
-                    details.push('Kopräsenz mit Hanslick: ' + String(relDocMentions));
+                if (node.relDocAuthored > 0) {
+                    details.push('erwähnt Hanslick: ' + String(node.relDocAuthored));
+                }
+                if (node.relDocMentions > 0) {
+                    details.push('Kopräsenz mit Hanslick: ' + String(node.relDocMentions));
                 }
                 if (copresenceCount > 0) {
-                    details.push('Copresence: ' + String(copresenceCount));
+                    details.push('Kopräsenz-Kanten: ' + String(copresenceCount));
                 }
 
-                popupContent.innerHTML = safeLabel + (details.length ? '<br/>' + details.join('<br/>') : '') + '<br/><a href="' + url + '">Read more</a>';
+                popupElements.content.innerHTML = [
+                    '<strong>' + escapeHtml(node.label) + '</strong>',
+                    details.length ? '<br>' + details.map(escapeHtml).join('<br>') : '',
+                    node.url ? '<br><a href="' + escapeHtml(node.url) + '">Zur Personenseite</a>' : ''
+                ].join('');
                 popupState.visible = true;
-                popupState.nodeId = node.id();
-                placePopupForNode(node);
+                popupState.nodeId = nodeId;
+                placePopupForNode(nodeId);
             }
-
-            cy.on('tap', 'node', function (evt) {
-                var node = evt.target;
-                showPopupForNode(node);
-            });
-
-            cy.on('tap', function (evt) {
-                if (evt.target === cy) {
-                    hidePopup();
-                }
-            });
-
-            cy.on('pan zoom resize', function () {
-                if (!popupState.visible || !popupState.nodeId) {
-                    return;
-                }
-
-                placePopupForNode(cy.getElementById(popupState.nodeId));
-            });
-
-            popupClose.addEventListener('click', function (event) {
-                event.preventDefault();
-                hidePopup();
-            });
-
-            var initialThreshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
-            var enabledGroups = collectEnabledGroups(categoryToggles);
-            var pendingFrame = null;
-            var progressiveTimer = null;
 
             function clearProgressiveTimer() {
                 if (progressiveTimer !== null) {
@@ -768,14 +690,28 @@
                 }
             }
 
-            function updateGraph() {
-                var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
-                clearProgressiveTimer();
-                runtimeOptions.renderCap = 0;
-                applyFilters(cy, centerId, threshold, enabledGroups, runtimeOptions);
+            function renderGraph(threshold) {
+                var visibility = computeVisibleNodeIds(centerId, threshold, enabledGroups, graphState);
+                var model;
+
+                graphState.visibleNodeIds = visibility.visibleNodeIds;
+                model = createGraphModel(centerId, visibility.visibleNodeIds, graphState);
+                graphState.copresenceEdgeIds = model.copresenceEdgeIds;
+                renderer.setGraph(model.graph);
+                renderer.refresh();
+
                 if (popupState.visible && popupState.nodeId) {
-                    placePopupForNode(cy.getElementById(popupState.nodeId));
+                    if (model.graph.hasNode(popupState.nodeId)) {
+                        placePopupForNode(popupState.nodeId);
+                    } else {
+                        hidePopup();
+                    }
                 }
+
+                return {
+                    desiredVisibleCount: visibility.desiredVisibleCount,
+                    renderedVisibleCount: Object.keys(visibility.visibleNodeIds).length
+                };
             }
 
             function scheduleGraphUpdate() {
@@ -783,49 +719,129 @@
                     cancelAnimationFrame(pendingFrame);
                 }
                 pendingFrame = requestAnimationFrame(function () {
+                    var threshold;
+
                     pendingFrame = null;
-                    updateGraph();
+                    threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
+                    clearProgressiveTimer();
+                    graphState.renderCap = 0;
+                    renderGraph(threshold);
                 });
             }
 
-            runtimeOptions.enableCopresence = !!(copresenceToggle && copresenceToggle.checked);
-            runtimeOptions.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
-            nodeLimitSlider.value = String(runtimeOptions.nodeLimitPerCategory);
-            if (minCopresenceInput) {
-                runtimeOptions.minCopresence = Math.max(1, parseIntOr(minCopresenceInput.value, 2));
-                minCopresenceInput.value = String(runtimeOptions.minCopresence);
-            }
-            minRelInput.value = String(initialThreshold);
-
-            function runProgressiveInitialRender() {
-                var desired = 0;
-                var initialCap = Math.max(1, Math.min(INITIAL_RENDER_NODE_CAP, (runtimeOptions.nodeLimitPerCategory * 2) + 1));
+            function runProgressiveInitialRender(initialThreshold) {
+                var initialCap = Math.max(1, Math.min(INITIAL_RENDER_NODE_CAP, (graphState.nodeLimitPerCategory * 2) + 1));
 
                 function step() {
                     var result;
 
-                    runtimeOptions.renderCap = initialCap;
-                    result = applyFilters(cy, centerId, initialThreshold, enabledGroups, runtimeOptions);
-                    desired = Math.max(1, result.desiredVisibleCount || 1);
+                    graphState.renderCap = initialCap;
+                    result = renderGraph(initialThreshold);
 
-                    if (popupState.visible && popupState.nodeId) {
-                        placePopupForNode(cy.getElementById(popupState.nodeId));
-                    }
-
-                    if (initialCap >= desired) {
-                        runtimeOptions.renderCap = 0;
+                    if (initialCap >= Math.max(1, result.desiredVisibleCount || 1)) {
+                        graphState.renderCap = 0;
                         return;
                     }
 
-                    initialCap = Math.min(desired, initialCap + INITIAL_RENDER_CHUNK_SIZE);
+                    initialCap = Math.min(result.desiredVisibleCount, initialCap + INITIAL_RENDER_CHUNK_SIZE);
                     progressiveTimer = setTimeout(step, INITIAL_RENDER_CHUNK_DELAY);
                 }
 
                 step();
             }
 
+            function syncPopupToHighlight() {
+                renderer.refresh();
+                if (popupState.visible && popupState.nodeId) {
+                    placePopupForNode(popupState.nodeId);
+                }
+            }
+
+            var maxNodeLimit = Math.max(1, ranking.maxGroupSize);
+            var defaultNodeLimit = Math.min(25, maxNodeLimit);
+            var initialThreshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
+
+            enabledGroups = collectEnabledGroups(categoryToggles);
+            graphState.enableCopresence = !!(copresenceToggle && copresenceToggle.checked);
+            graphState.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
+            graphState.minCopresence = minCopresenceInput ? Math.max(1, parseIntOr(minCopresenceInput.value, 2)) : 2;
+
+            nodeLimitSlider.max = String(maxNodeLimit);
+            nodeLimitSlider.value = String(graphState.nodeLimitPerCategory);
+            minRelInput.value = String(initialThreshold);
+            if (minCopresenceInput) {
+                minCopresenceInput.value = String(graphState.minCopresence);
+            }
+            if (nodeLimitMax) {
+                nodeLimitMax.textContent = '/ max ' + String(maxNodeLimit);
+            }
+
+            renderer.on('enterNode', function (event) {
+                hoveredNodeId = event.node;
+                if (!activeNodeId) {
+                    showPopupForNode(event.node);
+                }
+                syncPopupToHighlight();
+            });
+
+            renderer.on('leaveNode', function (event) {
+                if (hoveredNodeId === event.node) {
+                    hoveredNodeId = null;
+                }
+                if (!activeNodeId) {
+                    hidePopup();
+                }
+                syncPopupToHighlight();
+            });
+
+            renderer.on('clickNode', function (event) {
+                if (activeNodeId === event.node) {
+                    activeNodeId = null;
+                    if (hoveredNodeId) {
+                        showPopupForNode(hoveredNodeId);
+                    } else {
+                        hidePopup();
+                    }
+                } else {
+                    activeNodeId = event.node;
+                    showPopupForNode(event.node);
+                }
+                syncPopupToHighlight();
+            });
+
+            renderer.on('clickStage', function () {
+                activeNodeId = null;
+                if (hoveredNodeId) {
+                    showPopupForNode(hoveredNodeId);
+                } else {
+                    hidePopup();
+                }
+                syncPopupToHighlight();
+            });
+
+            renderer.on('afterRender', function () {
+                if (popupState.visible && popupState.nodeId) {
+                    placePopupForNode(popupState.nodeId);
+                }
+            });
+
+            popupElements.closeButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                activeNodeId = null;
+                if (hoveredNodeId) {
+                    showPopupForNode(hoveredNodeId);
+                } else {
+                    hidePopup();
+                }
+                syncPopupToHighlight();
+            });
+
+            window.addEventListener('resize', function () {
+                scheduleGraphUpdate();
+            });
+
             requestAnimationFrame(function () {
-                runProgressiveInitialRender();
+                runProgressiveInitialRender(initialThreshold);
                 try {
                     window.dispatchEvent(new CustomEvent('person-network-ready'));
                 } catch (error) {
@@ -840,8 +856,8 @@
             });
 
             nodeLimitSlider.addEventListener('input', function () {
-                runtimeOptions.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
-                nodeLimitSlider.value = String(runtimeOptions.nodeLimitPerCategory);
+                graphState.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
+                nodeLimitSlider.value = String(graphState.nodeLimitPerCategory);
                 scheduleGraphUpdate();
             });
 
@@ -854,15 +870,15 @@
 
             if (copresenceToggle) {
                 copresenceToggle.addEventListener('change', function () {
-                    runtimeOptions.enableCopresence = !!copresenceToggle.checked;
+                    graphState.enableCopresence = !!copresenceToggle.checked;
                     scheduleGraphUpdate();
                 });
             }
 
             if (minCopresenceInput) {
                 minCopresenceInput.addEventListener('change', function () {
-                    runtimeOptions.minCopresence = Math.max(1, parseIntOr(minCopresenceInput.value, 2));
-                    minCopresenceInput.value = String(runtimeOptions.minCopresence);
+                    graphState.minCopresence = Math.max(1, parseIntOr(minCopresenceInput.value, 2));
+                    minCopresenceInput.value = String(graphState.minCopresence);
                     scheduleGraphUpdate();
                 });
             }
