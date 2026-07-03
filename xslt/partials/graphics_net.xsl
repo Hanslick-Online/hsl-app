@@ -59,16 +59,6 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="local:json-escape" as="xs:string">
-        <xsl:param name="value" as="xs:string?"/>
-        <xsl:variable name="v0" as="xs:string" select="string($value)"/>
-        <xsl:variable name="v1" as="xs:string" select="replace($v0, '\\', '\\\\')"/>
-        <xsl:variable name="v2" as="xs:string" select="replace($v1, '&quot;', '\\&quot;')"/>
-        <xsl:variable name="v3" as="xs:string" select="replace($v2, codepoints-to-string(10), '\\n')"/>
-        <xsl:variable name="v4" as="xs:string" select="replace($v3, codepoints-to-string(13), '\\r')"/>
-        <xsl:sequence select="replace($v4, codepoints-to-string(9), '\\t')"/>
-    </xsl:function>
-
     <xsl:template name="net_container">
         <script src="vendor/graphology/graphology.umd.min.js" />
         <script src="vendor/sigma/sigma.min.js" />
@@ -76,51 +66,6 @@
         <div id="graphic-container" style="padding:.5em;">
             <xsl:variable name="graph-persons" as="element(tei:person)*" select="$net-person-index//tei:listPerson/tei:person"/>
             <xsl:variable name="graph-max-rel" as="xs:integer" select="max((1, for $person in $graph-persons return count(distinct-values((local:pub-targets($person), local:doc-mention-targets($person), local:doc-authored-targets($person))))))"/>
-
-            <xsl:result-document href="person-network-data.json" method="text" encoding="UTF-8">
-                <xsl:text>{"hanslickId":"</xsl:text>
-                <xsl:value-of select="$hanslick-id"/>
-                <xsl:text>","maxRel":</xsl:text>
-                <xsl:value-of select="$graph-max-rel"/>
-                <xsl:text>,"nodes":[</xsl:text>
-                <xsl:for-each select="$graph-persons[string(@xml:id) = $hanslick-id or count(distinct-values((local:pub-targets(.), local:doc-mention-targets(.), local:doc-authored-targets(.)))) gt 0]">
-                    <xsl:variable name="pub-targets" as="xs:string*" select="local:pub-targets(.)"/>
-                    <xsl:variable name="doc-targets" as="xs:string*" select="local:doc-mention-targets(.)"/>
-                    <xsl:variable name="authored-targets" as="xs:string*" select="local:doc-authored-targets(.)"/>
-                    <xsl:variable name="relation-targets" as="xs:string*" select="distinct-values(($pub-targets, $doc-targets, $authored-targets))"/>
-                    <xsl:variable name="total-rel" as="xs:integer" select="count($relation-targets)"/>
-                    <xsl:if test="position() gt 1">
-                        <xsl:text>,</xsl:text>
-                    </xsl:if>
-                    <xsl:text>{"id":"</xsl:text>
-                    <xsl:value-of select="local:json-escape(string(@xml:id))"/>
-                    <xsl:text>","label":"</xsl:text>
-                    <xsl:value-of select="local:json-escape(local:person-label(.))"/>
-                    <xsl:text>","url":"</xsl:text>
-                    <xsl:value-of select="local:json-escape(concat(string(@xml:id), '.html'))"/>
-                    <xsl:text>","group":"</xsl:text>
-                    <xsl:value-of select="local:json-escape(local:node-group(., count($pub-targets), count($doc-targets), count($authored-targets)))"/>
-                    <xsl:text>","relTotal":</xsl:text>
-                    <xsl:value-of select="$total-rel"/>
-                    <xsl:text>,"relPub":</xsl:text>
-                    <xsl:value-of select="count($pub-targets)"/>
-                    <xsl:text>,"relDocMentions":</xsl:text>
-                    <xsl:value-of select="count($doc-targets)"/>
-                    <xsl:text>,"relDocAuthored":</xsl:text>
-                    <xsl:value-of select="count($authored-targets)"/>
-                    <xsl:text>,"targets":[</xsl:text>
-                    <xsl:for-each select="$relation-targets">
-                        <xsl:if test="position() gt 1">
-                            <xsl:text>,</xsl:text>
-                        </xsl:if>
-                        <xsl:text>"</xsl:text>
-                        <xsl:value-of select="local:json-escape(.)"/>
-                        <xsl:text>"</xsl:text>
-                    </xsl:for-each>
-                    <xsl:text>]}</xsl:text>
-                </xsl:for-each>
-                <xsl:text>]}</xsl:text>
-            </xsl:result-document>
 
             <div class="person-network-panel">
                 <div class="person-network-controls">
