@@ -138,7 +138,12 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item">
-                                            Relations network
+                                            General relationhip graph
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">
+                                            <i>VMS</i> relationhip graph
                                         </a>
                                     </li>
                                 </ul>
