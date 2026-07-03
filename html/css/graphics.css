@@ -77,7 +77,20 @@
                         background: #ffffff;
                     }
 
+                    #vms-network {
+                        position: relative;
+                        height: 620px;
+                        width: 100%;
+                        border: 1px solid #cfd8e3;
+                        border-radius: 0.5rem;
+                        background: #ffffff;
+                    }
+
                     #person-network canvas {
+                        border-radius: 0.5rem;
+                    }
+
+                    #vms-network canvas {
                         border-radius: 0.5rem;
                     }
 
@@ -176,6 +189,24 @@
                         height: 0.75rem;
                         border-radius: 50%;
                         display: inline-block;
+                    }
+
+                    .person-network-legend i.network-line-key {
+                        width: 1.1rem;
+                        height: 0;
+                        border-radius: 0;
+                        border-top-style: solid;
+                        background: transparent !important;
+                    }
+
+                    .person-network-legend i.network-line-single {
+                        border-top-width: 1px;
+                        border-top-color: #c6d1dd;
+                    }
+
+                    .person-network-legend i.network-line-multiple {
+                        border-top-width: 3px;
+                        border-top-color: #334155;
                     }
 
                     .person-network-hint {
