@@ -137,12 +137,12 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item  href="g_net.html"">
+                                        <a class="dropdown-item"  href="g_net.html">
                                             Allgemeiner Beziehungsgraph
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item  href="g_vmsnet.html"">
+                                        <a class="dropdown-item"  href="g_vmsnet.html">
                                             <i>VMS</i>-Beziehungsgraph
                                         </a>
                                     </li>
