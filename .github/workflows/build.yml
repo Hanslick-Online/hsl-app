@@ -53,6 +53,7 @@ jobs:
         run: |
           mkdir -p html/data
           ./build_app/python/generate_graphics_json.py
+          ./build_app/python/generate_network_json.py
       - name: Preprocess data for Typesense
         run: ant -f build_app/ant/fixtures.xml 
       - name: Build Typesense Index
