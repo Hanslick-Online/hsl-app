@@ -13,13 +13,13 @@
         <script src="vendor/sigma/sigma.min.js" />
         <script src="js/vms-network.js" />
 
-        <div id="graphic-container" style="padding:.5em;">
+        <div id="graphic-container" class="graphic-container-padded">
             <div class="person-network-panel">
                 <div class="person-network-controls">
                     <label for="vms-network-relation-mode">
                         <xsl:value-of select="local:text('Kopräsenz-Ebene:', 'Copresence level:')"/>
                     </label>
-                    <select id="vms-network-relation-mode" class="form-select form-select-sm" style="width:auto;min-width:180px;">
+                    <select id="vms-network-relation-mode" class="form-select form-select-sm person-network-control-select person-network-control-select-relmode">
                         <option value="paragraph">
                             <xsl:value-of select="local:text('Absatz', 'Paragraph')"/>
                         </option>
@@ -31,17 +31,17 @@
                     <label for="vms-network-min-rel">
                         <xsl:value-of select="local:text('Min. Relationen pro Knoten:', 'Min relations per node:')"/>
                     </label>
-                    <input id="vms-network-min-rel" type="number" min="0" step="1" value="1" style="width:90px;"/>
+                    <input id="vms-network-min-rel" class="person-network-control-input" type="number" min="0" step="1" value="1"/>
 
                     <label for="vms-network-min-copresence">
                         <xsl:value-of select="local:text('Min. Kopräsenz pro Kante:', 'Min copresence per edge:')"/>
                     </label>
-                    <input id="vms-network-min-copresence" type="number" min="1" step="1" value="1" style="width:90px;"/>
+                    <input id="vms-network-min-copresence" class="person-network-control-input" type="number" min="1" step="1" value="1"/>
 
                     <label for="vms-network-grade-mode">
                         <xsl:value-of select="local:text('Beziehungsgrad nach:', 'Relation grade by:')"/>
                     </label>
-                    <select id="vms-network-grade-mode" class="form-select form-select-sm" style="width:auto;min-width:200px;">
+                    <select id="vms-network-grade-mode" class="form-select form-select-sm person-network-control-select person-network-control-select-grademode">
                         <option value="auto">
                             <xsl:value-of select="local:text('wie Kopräsenz-Ebene', 'same as copresence level')"/>
                         </option>
@@ -56,7 +56,7 @@
                     <label for="vms-network-node-limit">
                         <xsl:value-of select="local:text('Knoten-Limit pro Typ:', 'Node limit per type:')"/>
                     </label>
-                    <input id="vms-network-node-limit" type="number" min="5" step="1" value="120" style="width:90px;"/>
+                    <input id="vms-network-node-limit" class="person-network-control-input" type="number" min="5" step="1" value="120"/>
 
                     <div class="person-network-category-toggles">
                         <label>
@@ -78,9 +78,9 @@
                     <xsl:value-of select="local:text('Kanten zeigen Kopräsenz in derselben Einheit (Absatz oder Kapitel).', 'Edges represent copresence in the same unit (paragraph or chapter).')"/>
                 </div>
                 <div class="person-network-legend">
-                    <span><i style="background:#1d4e89"></i><xsl:value-of select="local:text('Person', 'Person')"/></span>
-                    <span><i style="background:#ba4a00"></i><xsl:value-of select="local:text('Werk', 'Work')"/></span>
-                    <span><i style="background:#111111"></i><xsl:value-of select="local:text('Aktuelles Zentrum', 'Current center')"/></span>
+                    <span><i class="person-network-swatch-person"></i><xsl:value-of select="local:text('Person', 'Person')"/></span>
+                    <span><i class="person-network-swatch-work-vms"></i><xsl:value-of select="local:text('Werk', 'Work')"/></span>
+                    <span><i class="person-network-swatch-center"></i><xsl:value-of select="local:text('Aktuelles Zentrum', 'Current center')"/></span>
                     <span><i class="network-line-key network-line-single"></i><xsl:value-of select="local:text('einmalige Kopräsenz', 'single copresence')"/></span>
                     <span><i class="network-line-key network-line-multiple"></i><xsl:value-of select="local:text('mehrfache Kopräsenz', 'multiple copresences')"/></span>
                 </div>

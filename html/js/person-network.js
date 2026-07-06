@@ -6,15 +6,18 @@
     var INITIAL_RENDER_NODE_CAP = 42;
     var INITIAL_RENDER_CHUNK_SIZE = 70;
     var INITIAL_RENDER_CHUNK_DELAY = 32;
-    var GROUP_ORDER = ['pub-person', 'pub-character', 'doc-author', 'doc-person', 'doc-character'];
+    var GROUP_ORDER = ['hanslick', 'pub-person', 'pub-place', 'pub-work'];
     var GROUP_COLORS = {
         hanslick: '#111111',
         'pub-person': '#1d4e89',
-        'pub-character': '#5f93c2',
-        'doc-author': '#ba4a00',
-        'doc-person': '#e67e22',
-        'doc-character': '#f5b041'
+        'pub-place': '#b91c1c',
+        'pub-work': '#0f766e'
     };
+    var COLLECTION_LABELS = {
+        nfp: '<i>NFP</i>',
+        vms: '<i>VMS</i>'
+    };
+    var COLLECTION_ORDER = ['nfp', 'vms'];
 
     function parseIntOr(value, fallback) {
         var parsed = parseInt(value, 10);
@@ -22,14 +25,6 @@
             return fallback;
         }
         return parsed;
-    }
-
-    function escapeHtml(value) {
-        return String(value || '')
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;');
     }
 
     function computeNodeSize(relTotal, isCenter) {
@@ -54,11 +49,8 @@
                 id: el.getAttribute('data-id') || '',
                 label: el.getAttribute('data-label') || '',
                 url: el.getAttribute('data-url') || '',
+                kind: el.getAttribute('data-kind') || 'person',
                 group: el.getAttribute('data-group') || 'pub-person',
-                relTotal: parseIntOr(el.getAttribute('data-rel-total'), 0),
-                relPub: parseIntOr(el.getAttribute('data-rel-pub'), 0),
-                relDocMentions: parseIntOr(el.getAttribute('data-rel-doc-mentions'), 0),
-                relDocAuthored: parseIntOr(el.getAttribute('data-rel-doc-authored'), 0),
                 targets: (el.getAttribute('data-targets') || '').split('|').filter(function (value) {
                     return value.length > 0;
                 })
@@ -68,25 +60,42 @@
         });
     }
 
+    function normalizeStringArray(values) {
+        if (!Array.isArray(values)) {
+            return [];
+        }
+
+        return values.map(function (value) {
+            return String(value || '');
+        }).filter(function (value) {
+            return value.length > 0;
+        });
+    }
+
     function normalizeNodeEntry(entry) {
         if (!entry || typeof entry !== 'object') {
             return null;
+        }
+
+        var targetsByCollection = {
+            nfp: [],
+            vms: []
+        };
+
+        if (entry.targetsByCollection && typeof entry.targetsByCollection === 'object') {
+            targetsByCollection.nfp = normalizeStringArray(entry.targetsByCollection.nfp);
+            targetsByCollection.vms = normalizeStringArray(entry.targetsByCollection.vms);
         }
 
         return {
             id: String(entry.id || ''),
             label: String(entry.label || ''),
             url: String(entry.url || ''),
+            kind: String(entry.kind || 'person'),
             group: String(entry.group || 'pub-person'),
             relTotal: parseIntOr(entry.relTotal, 0),
-            relPub: parseIntOr(entry.relPub, 0),
-            relDocMentions: parseIntOr(entry.relDocMentions, 0),
-            relDocAuthored: parseIntOr(entry.relDocAuthored, 0),
-            targets: Array.isArray(entry.targets) ? entry.targets.map(function (target) {
-                return String(target || '');
-            }).filter(function (target) {
-                return target.length > 0;
-            }) : []
+            targets: normalizeStringArray(entry.targets),
+            targetsByCollection: targetsByCollection
         };
     }
 
@@ -153,11 +162,13 @@
         var targetToNodes = {};
 
         nodeData.forEach(function (node) {
-            if (!node.targets || !node.targets.length) {
+            var targets = getNodeTargets(node);
+
+            if (!targets || !targets.length) {
                 return;
             }
 
-            node.targets.forEach(function (targetId) {
+            targets.forEach(function (targetId) {
                 if (!targetToNodes[targetId]) {
                     targetToNodes[targetId] = [];
                 }
@@ -168,8 +179,170 @@
         return targetToNodes;
     }
 
+    function getNodeTargets(node) {
+        if (!node) {
+            return [];
+        }
+        return node.activeTargets || node.targets || [];
+    }
+
+    function getTargetCollection(targetId) {
+        var value = String(targetId || '').trim();
+
+        if (value.charAt(0) === '#') {
+            value = value.slice(1);
+        }
+
+        if (value.indexOf('hsl_work_id_') === 0) {
+            return 'vms';
+        }
+        if (value.indexOf('hsl_person_id_') === 0 || value.indexOf('hsl_place_id_') === 0) {
+            return 'nfp';
+        }
+
+        if (value.indexOf('d__') === 0) {
+            return 'nfp';
+        }
+        if (value.indexOf('t__') === 0 || value.indexOf('v__') === 0 || value.indexOf('w__') === 0) {
+            return 'vms';
+        }
+
+        return '';
+    }
+
+    function getActiveRelTotal(node) {
+        if (node && Number.isFinite(node.relTotalActive)) {
+            return Math.max(0, parseIntOr(node.relTotalActive, 0));
+        }
+        return Math.max(0, parseIntOr(node && node.relTotal, 0));
+    }
+
+    function buildCollectionOptions() {
+        return COLLECTION_ORDER.map(function (collection) {
+            return {
+                id: collection,
+                label: COLLECTION_LABELS[collection] || collection.toUpperCase()
+            };
+        });
+    }
+
+    function collectEnabledCollections(collectionToggles) {
+        var enabled = {};
+
+        collectionToggles.forEach(function (checkbox) {
+            var collection = checkbox.getAttribute('data-collection') || '';
+            if (collection.length > 0) {
+                enabled[collection] = checkbox.checked;
+            }
+        });
+
+        return enabled;
+    }
+
+    function resolveNodeGroup(node) {
+        var nodeKind = String(node.kind || 'person');
+
+        if (node.id === 'hsl_person_id_1') {
+            return 'hanslick';
+        }
+        if (nodeKind === 'work') {
+            return 'pub-work';
+        }
+        if (nodeKind === 'place') {
+            return 'pub-place';
+        }
+        return 'pub-person';
+    }
+
+    function collectActiveTargets(node, enabledCollections) {
+        var activeTargets = [];
+        var seenActiveTargets = {};
+        var hasExplicitCollectionTargets = node.targetsByCollection && typeof node.targetsByCollection === 'object' && (Array.isArray(node.targetsByCollection.nfp) || Array.isArray(node.targetsByCollection.vms));
+
+        function pushUniqueTarget(targetId) {
+            var key = String(targetId || '');
+            if (!key || seenActiveTargets[key]) {
+                return;
+            }
+            seenActiveTargets[key] = true;
+            activeTargets.push(key);
+        }
+
+        if (hasExplicitCollectionTargets) {
+            COLLECTION_ORDER.forEach(function (collection) {
+                var scopedTargets;
+
+                if (enabledCollections[collection] === false) {
+                    return;
+                }
+                scopedTargets = node.targetsByCollection[collection];
+                if (!Array.isArray(scopedTargets)) {
+                    return;
+                }
+                scopedTargets.forEach(pushUniqueTarget);
+            });
+            return activeTargets;
+        }
+
+        return (node.targets || []).filter(function (targetId) {
+            var collection = getTargetCollection(targetId);
+
+            if (!collection) {
+                return false;
+            }
+            return enabledCollections[collection] !== false;
+        });
+    }
+
+    function applyCollectionFilter(nodeData, enabledCollections) {
+        var filteredNodes = [];
+
+        nodeData.forEach(function (node) {
+            var activeTargets = collectActiveTargets(node, enabledCollections);
+
+            filteredNodes.push(Object.assign({}, node, {
+                activeTargets: activeTargets,
+                relTotalActive: activeTargets.length,
+                group: resolveNodeGroup(node)
+            }));
+        });
+
+        return filteredNodes;
+    }
+
     function buildRankingData(nodeData, centerId) {
         var grouped = {};
+        var centerNode = null;
+        var centerTargets = {};
+
+        nodeData.forEach(function (node) {
+            if (node.id === centerId) {
+                centerNode = node;
+            }
+        });
+
+        if (centerNode) {
+            getNodeTargets(centerNode).forEach(function (target) {
+                centerTargets[target] = true;
+            });
+        }
+
+        function sharedTargetCount(node) {
+            var count = 0;
+            var targets = getNodeTargets(node);
+
+            if (!targets.length) {
+                return 0;
+            }
+
+            targets.forEach(function (target) {
+                if (centerTargets[target] === true) {
+                    count += 1;
+                }
+            });
+
+            return count;
+        }
 
         GROUP_ORDER.forEach(function (group) {
             grouped[group] = [];
@@ -187,15 +360,20 @@
 
         Object.keys(grouped).forEach(function (group) {
             grouped[group].sort(function (a, b) {
-                if (b.relTotal !== a.relTotal) {
-                    return b.relTotal - a.relTotal;
+                var aShared = sharedTargetCount(a);
+                var bShared = sharedTargetCount(b);
+
+                if (bShared !== aShared) {
+                    return bShared - aShared;
+                }
+                if (getActiveRelTotal(b) !== getActiveRelTotal(a)) {
+                    return getActiveRelTotal(b) - getActiveRelTotal(a);
                 }
                 return String(a.label).localeCompare(String(b.label), 'de');
             });
         });
 
         return {
-            groups: GROUP_ORDER.slice(),
             grouped: grouped,
             maxGroupSize: Math.max.apply(null, GROUP_ORDER.map(function (group) {
                 return (grouped[group] || []).length;
@@ -206,7 +384,7 @@
     function buildOrderedNodeIds(ranking) {
         var ordered = [];
 
-        ranking.groups.forEach(function (group) {
+        GROUP_ORDER.forEach(function (group) {
             (ranking.grouped[group] || []).forEach(function (node) {
                 ordered.push(node.id);
             });
@@ -217,6 +395,11 @@
 
     function collectEnabledGroups(categoryToggles) {
         var enabled = {};
+
+        GROUP_ORDER.forEach(function (group) {
+            enabled[group] = false;
+        });
+
         categoryToggles.forEach(function (checkbox) {
             var group = checkbox.getAttribute('data-group') || '';
             if (group.length > 0) {
@@ -224,6 +407,52 @@
             }
         });
         return enabled;
+    }
+
+    function getNodeKindTag(node) {
+        var kind = String(node && node.kind || 'person');
+
+        if (kind === 'place') {
+            return 'O';
+        }
+        if (kind === 'work') {
+            return 'W';
+        }
+        return 'P';
+    }
+
+    function buildNodeSearchEntries(nodeData) {
+        var displayCount = {};
+
+        nodeData.forEach(function (node) {
+            var label = String(node.label || node.id || '').trim();
+            var baseDisplay = label + ' (' + getNodeKindTag(node) + ')';
+
+            if (!label) {
+                return;
+            }
+
+            displayCount[baseDisplay] = (displayCount[baseDisplay] || 0) + 1;
+        });
+
+        return nodeData.map(function (node) {
+            var label = String(node.label || node.id || '').trim();
+            var baseDisplay = label + ' (' + getNodeKindTag(node) + ')';
+            var needsIdSuffix = (displayCount[baseDisplay] || 0) > 1;
+
+            if (!label) {
+                return null;
+            }
+
+            return {
+                id: String(node.id || ''),
+                display: needsIdSuffix ? (baseDisplay + ' [' + String(node.id || '') + ']') : baseDisplay
+            };
+        }).filter(function (entry) {
+            return !!entry && entry.id.length > 0;
+        }).sort(function (a, b) {
+            return String(a.display).localeCompare(String(b.display), 'de');
+        });
     }
 
     function capVisibleNodeIds(visibleNodeIds, centerId, orderedNodeIds, renderCap) {
@@ -254,10 +483,29 @@
     function computeVisibleNodeIds(centerId, threshold, enabledGroups, options) {
         var desiredVisibleNodeIds = {};
         var desiredVisibleCount = 1;
+        var centerNode = options.nodeMetaById[centerId];
+        var centerTargets = {};
+
+        function hasCenterLink(node) {
+            var targets;
+
+            if (!node || node.id === centerId) {
+                return true;
+            }
+
+            targets = getNodeTargets(node);
+            return targets.some(function (target) {
+                return centerTargets[target] === true;
+            });
+        }
+
+        getNodeTargets(centerNode).forEach(function (target) {
+            centerTargets[target] = true;
+        });
 
         desiredVisibleNodeIds[centerId] = true;
 
-        options.ranking.groups.forEach(function (group) {
+        GROUP_ORDER.forEach(function (group) {
             var shown = 0;
             var sorted = options.ranking.grouped[group] || [];
 
@@ -269,7 +517,10 @@
                 if (shown >= options.nodeLimitPerCategory) {
                     return;
                 }
-                if (node.relTotal >= threshold) {
+                if (!hasCenterLink(node)) {
+                    return;
+                }
+                if (getActiveRelTotal(node) >= threshold) {
                     desiredVisibleNodeIds[node.id] = true;
                     desiredVisibleCount += 1;
                     shown += 1;
@@ -306,12 +557,62 @@
             return visibleNodeIds[nodeId] === true && nodeId !== centerId;
         });
 
+        function hashString(value) {
+            var hash = 0;
+            var i;
+            var text = String(value || '');
+
+            for (i = 0; i < text.length; i += 1) {
+                hash = ((hash << 5) - hash) + text.charCodeAt(i);
+                hash |= 0;
+            }
+
+            return Math.abs(hash);
+        }
+
+        function nudgeIfColliding(nodeId, point, occupied) {
+            var minDist = 14;
+            var minDistSquared = minDist * minDist;
+            var attempts = 0;
+            var seed = hashString(nodeId);
+            var baseAngle = ((seed % 360) / 180) * Math.PI;
+            var radiusStep = 4;
+            var angleStep = Math.PI / 5;
+            var x = point.x;
+            var y = point.y;
+            var collides;
+
+            function hasCollision(px, py) {
+                return occupied.some(function (existing) {
+                    var dx = existing.x - px;
+                    var dy = existing.y - py;
+                    return ((dx * dx) + (dy * dy)) < minDistSquared;
+                });
+            }
+
+            collides = hasCollision(x, y);
+            while (collides && attempts < 16) {
+                var ring = Math.floor(attempts / 4) + 1;
+                var angle = baseAngle + (attempts * angleStep);
+                var radius = ring * radiusStep;
+
+                x = point.x + (Math.cos(angle) * radius);
+                y = point.y + (Math.sin(angle) * radius);
+                attempts += 1;
+                collides = hasCollision(x, y);
+            }
+
+            occupied.push({ x: x, y: y });
+            return { x: x, y: y };
+        }
+
         function ringCapacity(radiusX, radiusY) {
             var perimeterEstimate = Math.PI * Math.sqrt(2 * ((radiusX * radiusX) + (radiusY * radiusY)));
             return Math.max(14, Math.floor(perimeterEstimate / 78));
         }
 
         positions[centerId] = { x: 0, y: 0 };
+        var occupiedPositions = [{ x: 0, y: 0 }];
 
         while (index < idsToPlace.length) {
             var radiusX = Math.min(maxRadiusX, baseRadiusX + (ringIndex * ringStepX));
@@ -321,10 +622,12 @@
 
             slice.forEach(function (nodeId, localIndex) {
                 var angle = startAngle + ((2 * Math.PI * localIndex) / Math.max(1, slice.length));
-                positions[nodeId] = {
-                    x: Math.round(radiusX * Math.cos(angle)),
-                    y: Math.round(radiusY * Math.sin(angle))
+                var point = {
+                    x: radiusX * Math.cos(angle),
+                    y: radiusY * Math.sin(angle)
                 };
+
+                positions[nodeId] = nudgeIfColliding(nodeId, point, occupiedPositions);
             });
 
             index += slice.length;
@@ -413,17 +716,15 @@
             graph.addNode(nodeId, {
                 x: position.x,
                 y: position.y,
-                size: computeNodeSize(node.relTotal, isCenter),
+                size: computeNodeSize(getActiveRelTotal(node), isCenter),
                 color: isCenter ? GROUP_COLORS.hanslick : nodeColor,
-                label: String(node.label || ''),
-                forceLabel: isCenter,
+                label: '',
+                popupLabel: String(node.label || ''),
+                forceLabel: false,
                 zIndex: isCenter ? 10 : 1,
                 url: String(node.url || ''),
                 group: String(node.group || 'pub-person'),
-                relTotal: parseIntOr(node.relTotal, 0),
-                relPub: parseIntOr(node.relPub, 0),
-                relDocMentions: parseIntOr(node.relDocMentions, 0),
-                relDocAuthored: parseIntOr(node.relDocAuthored, 0)
+                relTotal: getActiveRelTotal(node)
             });
         });
 
@@ -435,15 +736,15 @@
             }
 
             graph.addEdgeWithKey('edge-' + centerId + '-' + nodeId, centerId, nodeId, {
-                size: computeEdgeSize(node.relTotal, 'center'),
+                size: computeEdgeSize(getActiveRelTotal(node), 'center'),
                 color: '#8ca0b7',
                 kind: 'center',
-                weight: Math.max(1, parseIntOr(node.relTotal, 1)),
+                weight: Math.max(1, getActiveRelTotal(node)),
                 zIndex: 1
             });
         });
 
-        if (options.enableCopresence && Object.keys(visibleNodeIds).length <= options.maxVisibleNodesForCopresence) {
+        if (options.enableCopresence) {
             copresenceEdges = buildCopresenceEdges(centerId, options.targetToNodes, visibleNodeIds, options.minCopresence);
             copresenceEdges.forEach(function (edge) {
                 if (!graph.hasNode(edge.source) || !graph.hasNode(edge.target) || graph.hasEdge(edge.id)) {
@@ -459,46 +760,15 @@
             });
         }
 
-        return {
-            graph: graph,
-            copresenceEdgeIds: copresenceEdges.map(function (edge) {
-                return edge.id;
-            })
-        };
-    }
-
-    function initializePopup(host) {
-        var popup = document.createElement('div');
-        popup.className = 'person-network-popup';
-        popup.innerHTML = [
-            '<div class="person-network-popup-content-wrapper">',
-            '  <button class="person-network-popup-close-button" type="button" aria-label="Close">',
-            '    <span aria-hidden="true">x</span>',
-            '  </button>',
-            '  <div class="person-network-popup-content"></div>',
-            '</div>',
-            '<div class="person-network-popup-tip-container"><div class="person-network-popup-tip"></div></div>'
-        ].join('');
-        host.appendChild(popup);
-
-        return {
-            popup: popup,
-            content: popup.querySelector('.person-network-popup-content'),
-            closeButton: popup.querySelector('.person-network-popup-close-button')
-        };
+        return graph;
     }
 
     function initialize() {
         var host = document.getElementById('person-network');
         var dataContainer = document.getElementById('person-network-data');
-        var minRelInput = document.getElementById('person-network-min-rel');
-        var nodeLimitSlider = document.getElementById('person-network-node-limit');
-        var nodeLimitMax = document.getElementById('person-network-node-limit-max');
         var categoryToggles = Array.prototype.slice.call(document.querySelectorAll('.person-network-category-toggle'));
-        var copresenceToggle = document.getElementById('person-network-toggle-copresence');
-        var minCopresenceInput = document.getElementById('person-network-min-copresence');
 
-        if (!host || !dataContainer || !minRelInput || !nodeLimitSlider || typeof graphology === 'undefined' || typeof Sigma === 'undefined') {
+        if (!host || !dataContainer || typeof graphology === 'undefined' || typeof Sigma === 'undefined') {
             return;
         }
 
@@ -507,18 +777,20 @@
             var meta;
             var centerId;
             var ranking;
-            var popupElements;
+            var collectionToggles = [];
+            var enabledCollections = {};
+            var itemLink;
             var renderer;
             var graphState;
             var enabledGroups;
             var pendingFrame = null;
             var progressiveTimer = null;
-            var activeNodeId = null;
             var hoveredNodeId = null;
-            var popupState = {
-                visible: false,
-                nodeId: null
-            };
+            var searchInput = document.getElementById('person-network-node-search');
+            var searchButton = document.getElementById('person-network-node-search-button');
+            var searchDatalist = document.getElementById('person-network-node-options');
+            var searchIdByDisplay = {};
+            var searchDisplayById = {};
 
             if (!nodeData.length) {
                 return;
@@ -528,30 +800,138 @@
             centerId = loaded.hanslickId || meta.center;
             ranking = buildRankingData(nodeData, centerId);
 
+            (function createCollectionControls() {
+                var categoryContainer = document.querySelector('.person-network-category-toggles');
+                var collectionOptions = buildCollectionOptions();
+                var collectionContainer;
+
+                if (!categoryContainer || !collectionOptions.length) {
+                    return;
+                }
+
+                collectionContainer = document.createElement('div');
+                collectionContainer.className = 'person-network-collection-toggles';
+                collectionContainer.innerHTML = '<span class="person-network-collection-label">Kollektionen:</span>';
+
+                collectionOptions.forEach(function (option) {
+                    var label = document.createElement('label');
+                    var input = document.createElement('input');
+                    var text = document.createElement('span');
+
+                    input.type = 'checkbox';
+                    input.className = 'person-network-collection-toggle';
+                    input.setAttribute('data-collection', option.id);
+                    input.checked = option.id !== 'vms';
+                    label.appendChild(input);
+                    text.innerHTML = ' ' + option.label;
+                    label.appendChild(text);
+                    collectionContainer.appendChild(label);
+                });
+
+                categoryContainer.parentNode.insertBefore(collectionContainer, categoryContainer.nextSibling);
+                collectionToggles = Array.prototype.slice.call(collectionContainer.querySelectorAll('.person-network-collection-toggle'));
+                enabledCollections = collectEnabledCollections(collectionToggles);
+            }());
+
             host.innerHTML = '';
-            popupElements = initializePopup(host);
+            itemLink = document.createElement('a');
+            itemLink.className = 'person-network-item-link';
+            itemLink.textContent = 'Zur Knotenseite';
+            itemLink.setAttribute('target', '_self');
+            host.insertAdjacentElement('afterend', itemLink);
 
             graphState = {
-                targetToNodes: buildTargetToNodes(nodeData),
                 nodeData: nodeData,
                 nodeMetaById: meta.nodeMetaById,
                 ranking: ranking,
                 orderedNodeIds: buildOrderedNodeIds(ranking),
+                targetToNodes: buildTargetToNodes(nodeData),
                 host: host,
-                enableCopresence: false,
-                maxVisibleNodesForCopresence: 280,
-                minCopresence: 2,
+                enableCopresence: true,
+                minCopresence: 1,
                 nodeLimitPerCategory: 25,
                 renderCap: 0,
-                visibleNodeIds: {},
-                copresenceEdgeIds: []
+                visibleNodeIds: {}
             };
+
+            function refreshDerivedGraphData() {
+                var filteredNodeData = applyCollectionFilter(nodeData, enabledCollections);
+                var filteredMeta = buildNodeMeta(filteredNodeData);
+
+                if (!filteredMeta.nodeMetaById[centerId]) {
+                    centerId = filteredMeta.center;
+                }
+
+                graphState.nodeData = filteredNodeData;
+                graphState.nodeMetaById = filteredMeta.nodeMetaById;
+                graphState.targetToNodes = buildTargetToNodes(filteredNodeData);
+                ranking = buildRankingData(filteredNodeData, centerId);
+                graphState.ranking = ranking;
+                graphState.orderedNodeIds = buildOrderedNodeIds(ranking);
+                refreshSearchDatalist();
+                syncSearchInputWithCenter();
+            }
+
+            function refreshSearchDatalist() {
+                var entries;
+
+                if (!searchDatalist) {
+                    return;
+                }
+
+                entries = buildNodeSearchEntries(graphState.nodeData);
+                searchIdByDisplay = {};
+                searchDisplayById = {};
+                searchDatalist.innerHTML = '';
+
+                entries.forEach(function (entry) {
+                    var option = document.createElement('option');
+                    option.value = entry.display;
+                    searchDatalist.appendChild(option);
+                    searchIdByDisplay[entry.display] = entry.id;
+                    searchDisplayById[entry.id] = entry.display;
+                });
+            }
+
+            function syncSearchInputWithCenter() {
+                if (!searchInput || !searchDisplayById[centerId]) {
+                    return;
+                }
+                searchInput.value = searchDisplayById[centerId];
+            }
+
+            function tryCenterFromSearch() {
+                var query;
+                var nodeId;
+
+                if (!searchInput) {
+                    return;
+                }
+
+                query = String(searchInput.value || '').trim();
+                if (!query) {
+                    return;
+                }
+
+                nodeId = searchIdByDisplay[query] || '';
+                if (!nodeId || !graphState.nodeMetaById[nodeId]) {
+                    return;
+                }
+
+                hoveredNodeId = null;
+                setCenterNode(nodeId);
+                renderer.refresh();
+                syncSearchInputWithCenter();
+            }
+
+            refreshDerivedGraphData();
 
             renderer = new Sigma(new graphology.Graph(), host, {
                 allowInvalidContainer: true,
+                renderLabels: true,
                 renderEdgeLabels: false,
-                labelDensity: 0.08,
-                labelRenderedSizeThreshold: 13,
+                labelDensity: 0,
+                labelRenderedSizeThreshold: 9999,
                 labelSize: 13,
                 labelFont: 'Georgia, serif',
                 edgeLabelSize: 12,
@@ -562,21 +942,24 @@
                 zIndex: true,
                 nodeReducer: function (node, data) {
                     var reduced = Object.assign({}, data);
-                    var selected = activeNodeId === node;
-                    var highlighted = hoveredNodeId === node || selected;
+                    var highlighted = hoveredNodeId === node;
 
                     if (highlighted) {
                         reduced.highlighted = true;
-                        reduced.forceLabel = true;
                         reduced.zIndex = 20;
                         reduced.color = '#b45309';
+                        reduced.label = String(data.popupLabel || data.label || '');
+                        reduced.forceLabel = true;
+                    } else {
+                        reduced.label = '';
+                        reduced.forceLabel = false;
                     }
 
                     return reduced;
                 },
                 edgeReducer: function (edge, data) {
                     var reduced = Object.assign({}, data);
-                    var active = activeNodeId || hoveredNodeId;
+                    var active = hoveredNodeId;
 
                     if (!active) {
                         return reduced;
@@ -593,94 +976,17 @@
                 }
             });
 
-            function hidePopup() {
-                popupElements.popup.style.display = 'none';
-                popupState.visible = false;
-                popupState.nodeId = null;
-            }
+            function updateCenterItemLink() {
+                var node = graphState.nodeMetaById[centerId];
 
-            function countCopresenceEdges(nodeId) {
-                var count = 0;
-
-                graphState.copresenceEdgeIds.forEach(function (edgeId) {
-                    if (!renderer.getGraph().hasEdge(edgeId)) {
-                        return;
-                    }
-                    if (renderer.getGraph().hasExtremity(edgeId, nodeId)) {
-                        count += 1;
-                    }
-                });
-
-                return count;
-            }
-
-            function placePopupForNode(nodeId) {
-                var displayData;
-                var viewportPosition;
-                var popupRect;
-                var x;
-                var y;
-
-                if (!popupState.visible || !nodeId || !renderer.getGraph().hasNode(nodeId)) {
-                    hidePopup();
+                if (!node || !node.url) {
+                    itemLink.classList.remove('is-visible');
+                    itemLink.removeAttribute('href');
                     return;
                 }
 
-                displayData = renderer.getNodeDisplayData(nodeId);
-                if (!displayData) {
-                    hidePopup();
-                    return;
-                }
-
-                viewportPosition = renderer.graphToViewport({
-                    x: displayData.x,
-                    y: displayData.y
-                });
-                popupElements.popup.style.display = 'block';
-                popupRect = popupElements.popup.getBoundingClientRect();
-
-                x = viewportPosition.x - (popupRect.width / 2);
-                y = viewportPosition.y - popupRect.height - 10;
-
-                popupElements.popup.style.left = String(Math.round(x)) + 'px';
-                popupElements.popup.style.top = String(Math.round(y)) + 'px';
-            }
-
-            function showPopupForNode(nodeId) {
-                var graph = renderer.getGraph();
-                var node;
-                var details = [];
-                var copresenceCount;
-
-                if (!graph.hasNode(nodeId)) {
-                    hidePopup();
-                    return;
-                }
-
-                node = graph.getNodeAttributes(nodeId);
-                copresenceCount = countCopresenceEdges(nodeId);
-
-                if (node.relPub > 0) {
-                    details.push('vom H. erwähnt: ' + String(node.relPub));
-                }
-                if (node.relDocAuthored > 0) {
-                    details.push('erwähnt Hanslick: ' + String(node.relDocAuthored));
-                }
-                if (node.relDocMentions > 0) {
-                    details.push('Kopräsenz mit Hanslick: ' + String(node.relDocMentions));
-                }
-                if (copresenceCount > 0) {
-                    details.push('Kopräsenz-Kanten: ' + String(copresenceCount));
-                }
-
-                popupElements.content.innerHTML = [
-                    '<strong>' + escapeHtml(node.label) + '</strong>',
-                    details.length ? '<br>' + details.map(escapeHtml).join('<br>') : '',
-                    node.url ? '<br><a href="' + escapeHtml(node.url) + '">Zur Personenseite</a>' : ''
-                ].join('');
-                popupState.visible = true;
-                popupState.nodeId = nodeId;
-                placePopupForNode(nodeId);
+                itemLink.href = String(node.url);
+                itemLink.classList.add('is-visible');
             }
 
             function clearProgressiveTimer() {
@@ -692,26 +998,41 @@
 
             function renderGraph(threshold) {
                 var visibility = computeVisibleNodeIds(centerId, threshold, enabledGroups, graphState);
-                var model;
+                var graph;
 
                 graphState.visibleNodeIds = visibility.visibleNodeIds;
-                model = createGraphModel(centerId, visibility.visibleNodeIds, graphState);
-                graphState.copresenceEdgeIds = model.copresenceEdgeIds;
-                renderer.setGraph(model.graph);
+                graph = createGraphModel(centerId, visibility.visibleNodeIds, graphState);
+                renderer.setGraph(graph);
                 renderer.refresh();
 
-                if (popupState.visible && popupState.nodeId) {
-                    if (model.graph.hasNode(popupState.nodeId)) {
-                        placePopupForNode(popupState.nodeId);
-                    } else {
-                        hidePopup();
-                    }
+                return {
+                    desiredVisibleCount: visibility.desiredVisibleCount
+                };
+            }
+
+            function setCenterNode(nodeId) {
+                if (!nodeId || !graphState.nodeMetaById[nodeId]) {
+                    return;
                 }
 
-                return {
-                    desiredVisibleCount: visibility.desiredVisibleCount,
-                    renderedVisibleCount: Object.keys(visibility.visibleNodeIds).length
-                };
+                centerId = nodeId;
+                ranking = buildRankingData(graphState.nodeData, centerId);
+                graphState.ranking = ranking;
+                graphState.orderedNodeIds = buildOrderedNodeIds(ranking);
+                updateCenterItemLink();
+                renderGraph(1);
+                syncSearchInputWithCenter();
+
+                try {
+                    var camera = renderer.getCamera();
+                    if (camera && typeof camera.animatedReset === 'function') {
+                        camera.animatedReset({ duration: 320 });
+                    } else if (camera && typeof camera.animate === 'function') {
+                        camera.animate({ x: 0, y: 0, ratio: 1 }, { duration: 320 });
+                    }
+                } catch (error) {
+                    // Ignore camera reset failures in older or custom Sigma builds.
+                }
             }
 
             function scheduleGraphUpdate() {
@@ -719,13 +1040,10 @@
                     cancelAnimationFrame(pendingFrame);
                 }
                 pendingFrame = requestAnimationFrame(function () {
-                    var threshold;
-
                     pendingFrame = null;
-                    threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
                     clearProgressiveTimer();
                     graphState.renderCap = 0;
-                    renderGraph(threshold);
+                    renderGraph(1);
                 });
             }
 
@@ -750,90 +1068,35 @@
                 step();
             }
 
-            function syncPopupToHighlight() {
-                renderer.refresh();
-                if (popupState.visible && popupState.nodeId) {
-                    placePopupForNode(popupState.nodeId);
-                }
-            }
-
             var maxNodeLimit = Math.max(1, ranking.maxGroupSize);
-            var defaultNodeLimit = Math.min(25, maxNodeLimit);
-            var initialThreshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
+            var initialThreshold = 1;
 
             enabledGroups = collectEnabledGroups(categoryToggles);
-            graphState.enableCopresence = !!(copresenceToggle && copresenceToggle.checked);
-            graphState.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
-            graphState.minCopresence = minCopresenceInput ? Math.max(1, parseIntOr(minCopresenceInput.value, 2)) : 2;
-
-            nodeLimitSlider.max = String(maxNodeLimit);
-            nodeLimitSlider.value = String(graphState.nodeLimitPerCategory);
-            minRelInput.value = String(initialThreshold);
-            if (minCopresenceInput) {
-                minCopresenceInput.value = String(graphState.minCopresence);
-            }
-            if (nodeLimitMax) {
-                nodeLimitMax.textContent = '/ max ' + String(maxNodeLimit);
-            }
+            graphState.enableCopresence = true;
+            graphState.nodeLimitPerCategory = maxNodeLimit;
+            graphState.minCopresence = 1;
+            updateCenterItemLink();
 
             renderer.on('enterNode', function (event) {
                 hoveredNodeId = event.node;
-                if (!activeNodeId) {
-                    showPopupForNode(event.node);
-                }
-                syncPopupToHighlight();
+                renderer.refresh();
             });
 
             renderer.on('leaveNode', function (event) {
                 if (hoveredNodeId === event.node) {
                     hoveredNodeId = null;
                 }
-                if (!activeNodeId) {
-                    hidePopup();
-                }
-                syncPopupToHighlight();
+                renderer.refresh();
             });
 
             renderer.on('clickNode', function (event) {
-                if (activeNodeId === event.node) {
-                    activeNodeId = null;
-                    if (hoveredNodeId) {
-                        showPopupForNode(hoveredNodeId);
-                    } else {
-                        hidePopup();
-                    }
-                } else {
-                    activeNodeId = event.node;
-                    showPopupForNode(event.node);
-                }
-                syncPopupToHighlight();
+                setCenterNode(event.node);
+                renderer.refresh();
             });
 
             renderer.on('clickStage', function () {
-                activeNodeId = null;
-                if (hoveredNodeId) {
-                    showPopupForNode(hoveredNodeId);
-                } else {
-                    hidePopup();
-                }
-                syncPopupToHighlight();
-            });
-
-            renderer.on('afterRender', function () {
-                if (popupState.visible && popupState.nodeId) {
-                    placePopupForNode(popupState.nodeId);
-                }
-            });
-
-            popupElements.closeButton.addEventListener('click', function (event) {
-                event.preventDefault();
-                activeNodeId = null;
-                if (hoveredNodeId) {
-                    showPopupForNode(hoveredNodeId);
-                } else {
-                    hidePopup();
-                }
-                syncPopupToHighlight();
+                hoveredNodeId = null;
+                renderer.refresh();
             });
 
             window.addEventListener('resize', function () {
@@ -849,18 +1112,6 @@
                 }
             });
 
-            minRelInput.addEventListener('input', function () {
-                var threshold = Math.min(parseIntOr(minRelInput.max, ranking.maxGroupSize), Math.max(1, parseIntOr(minRelInput.value, 1)));
-                minRelInput.value = String(threshold);
-                scheduleGraphUpdate();
-            });
-
-            nodeLimitSlider.addEventListener('input', function () {
-                graphState.nodeLimitPerCategory = Math.min(maxNodeLimit, Math.max(1, parseIntOr(nodeLimitSlider.value, defaultNodeLimit)));
-                nodeLimitSlider.value = String(graphState.nodeLimitPerCategory);
-                scheduleGraphUpdate();
-            });
-
             categoryToggles.forEach(function (checkbox) {
                 checkbox.addEventListener('change', function () {
                     enabledGroups = collectEnabledGroups(categoryToggles);
@@ -868,20 +1119,34 @@
                 });
             });
 
-            if (copresenceToggle) {
-                copresenceToggle.addEventListener('change', function () {
-                    graphState.enableCopresence = !!copresenceToggle.checked;
+            collectionToggles.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    enabledCollections = collectEnabledCollections(collectionToggles);
+                    refreshDerivedGraphData();
                     scheduleGraphUpdate();
+                });
+            });
+
+            if (searchButton) {
+                searchButton.addEventListener('click', function () {
+                    tryCenterFromSearch();
                 });
             }
 
-            if (minCopresenceInput) {
-                minCopresenceInput.addEventListener('change', function () {
-                    graphState.minCopresence = Math.max(1, parseIntOr(minCopresenceInput.value, 2));
-                    minCopresenceInput.value = String(graphState.minCopresence);
-                    scheduleGraphUpdate();
+            if (searchInput) {
+                searchInput.addEventListener('change', function () {
+                    tryCenterFromSearch();
+                });
+
+                searchInput.addEventListener('keydown', function (event) {
+                    if (event.key !== 'Enter') {
+                        return;
+                    }
+                    event.preventDefault();
+                    tryCenterFromSearch();
                 });
             }
+
         });
     }
 
