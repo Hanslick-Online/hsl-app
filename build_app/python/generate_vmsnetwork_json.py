@@ -4,6 +4,7 @@
 Usage:
     python3 build_app/python/generate_vmsnetwork_json.py \
         --person-index data/indices/listperson.xml \
+        --place-index data/indices/listplace.xml \
         --work-index data/indices/listbibl.xml \
         --traktat-editions-dir data/traktat/editions \
         --out html/data/vms-network-data.json
@@ -84,7 +85,7 @@ def chapter_bucket(div: ET.Element) -> str | None:
     if heading.casefold().startswith("vorwort"):
         return "Vorwort"
 
-    match = re.match(r"^([IVXLCDM]+)\\b", heading, re.IGNORECASE)
+    match = re.match(r"^([IVXLCDM]+)\b", heading, re.IGNORECASE)
     if not match:
         return None
 
@@ -94,6 +95,16 @@ def chapter_bucket(div: ET.Element) -> str | None:
 def entity_label(kind: str, node: ET.Element) -> str:
     if kind == "person":
         return text_content(first(node, "tei:persName[@type='main']", "tei:persName"))
+    if kind == "place":
+        return text_content(
+            first(
+                node,
+                "tei:settlement/tei:placeName[@type='main']",
+                "tei:placeName[@type='main']",
+                "tei:settlement/tei:placeName",
+                "tei:placeName",
+            )
+        )
     return text_content(first(node, "tei:title[@type='main']", "tei:title"))
 
 
@@ -103,7 +114,7 @@ def include_person(node: ET.Element) -> bool:
     return role != "fictional" and not is_character
 
 
-def build_catalog(person_root: ET.Element, work_root: ET.Element) -> dict[str, dict[str, str]]:
+def build_catalog(person_root: ET.Element, place_root: ET.Element, work_root: ET.Element) -> dict[str, dict[str, str]]:
     catalog: dict[str, dict[str, str]] = {}
 
     for node in person_root.findall(".//tei:listPerson/tei:person", NS):
@@ -132,6 +143,19 @@ def build_catalog(person_root: ET.Element, work_root: ET.Element) -> dict[str, d
             "url": f"{entity_id}.html",
         }
 
+    for node in place_root.findall(".//tei:listPlace/tei:place", NS):
+        entity_id = (node.get(XML_ID) or "").strip()
+        if not entity_id:
+            continue
+        label = entity_label("place", node)
+        if not label:
+            continue
+        catalog[entity_id] = {
+            "kind": "place",
+            "label": label,
+            "url": f"{entity_id}.html",
+        }
+
     return catalog
 
 
@@ -139,7 +163,7 @@ def extract_entities(context_node: ET.Element, catalog: dict[str, dict[str, str]
     entities: set[str] = set()
     for rs in context_node.findall(".//tei:rs", NS):
         rs_type = (rs.get("type") or "").strip()
-        if rs_type not in {"person", "bibl"}:
+        if rs_type not in {"person", "bibl", "place"}:
             continue
 
         ref = (rs.get("ref") or "").strip()
@@ -154,7 +178,7 @@ def extract_entities(context_node: ET.Element, catalog: dict[str, dict[str, str]
         if entity is None:
             continue
 
-        expected_kind = "person" if rs_type == "person" else "work"
+        expected_kind = "person" if rs_type == "person" else ("work" if rs_type == "bibl" else "place")
         if entity["kind"] != expected_kind:
             continue
 
@@ -204,9 +228,10 @@ def collect_memberships(editions_dir: Path, catalog: dict[str, dict[str, str]]) 
 
 def generate_vms_payload(args: argparse.Namespace) -> dict:
     person_root = ET.parse(args.person_index).getroot()
+    place_root = ET.parse(args.place_index).getroot()
     work_root = ET.parse(args.work_index).getroot()
 
-    catalog = build_catalog(person_root, work_root)
+    catalog = build_catalog(person_root, place_root, work_root)
     chapter_memberships, paragraph_memberships, edition_labels, chapter_order = collect_memberships(
         args.traktat_editions_dir,
         catalog,
@@ -215,7 +240,10 @@ def generate_vms_payload(args: argparse.Namespace) -> dict:
     nodes: list[dict] = []
     for entity_id, meta in sorted(
         catalog.items(),
-        key=lambda item: (0 if item[1]["kind"] == "person" else 1, item[1]["label"].casefold()),
+        key=lambda item: (
+            0 if item[1]["kind"] == "person" else (1 if item[1]["kind"] == "place" else 2),
+            item[1]["label"].casefold(),
+        ),
     ):
         chapter_keys = sorted(chapter_memberships.get(entity_id, set()))
         paragraph_keys = sorted(paragraph_memberships.get(entity_id, set()))
@@ -257,6 +285,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("data/indices/listbibl.xml"),
         help="Path to the work index XML (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--place-index",
+        type=Path,
+        default=Path("data/indices/listplace.xml"),
+        help="Path to the place index XML (default: %(default)s)",
     )
     parser.add_argument(
         "--traktat-editions-dir",

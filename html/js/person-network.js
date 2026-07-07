@@ -28,6 +28,14 @@
         return parsed;
     }
 
+    function escapeHtml(value) {
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
     function computeNodeSize(relTotal, isCenter) {
         var rel = Math.max(1, parseIntOr(relTotal, 1));
         if (isCenter) {
@@ -838,7 +846,7 @@
             var collectionToggles = [];
             var enabledCollections = {};
             var vmsModeSelect = null;
-            var itemLink;
+            var detailBox;
             var renderer;
             var graphState;
             var enabledGroups;
@@ -921,11 +929,23 @@
             }());
 
             host.innerHTML = '';
-            itemLink = document.createElement('a');
-            itemLink.className = 'person-network-item-link';
-            itemLink.textContent = 'Zur Knotenseite';
-            itemLink.setAttribute('target', '_self');
-            host.insertAdjacentElement('afterend', itemLink);
+            detailBox = document.getElementById('person-network-details');
+            if (!detailBox) {
+                detailBox = document.createElement('div');
+                detailBox.id = 'person-network-details';
+                detailBox.className = 'person-network-hint';
+            }
+
+            (function placeDetailBox() {
+                var panel = host.parentNode;
+                var legend = panel ? panel.querySelector('.person-network-legend') : null;
+
+                if (legend && legend.parentNode) {
+                    legend.insertAdjacentElement('afterend', detailBox);
+                } else {
+                    host.insertAdjacentElement('afterend', detailBox);
+                }
+            }());
 
             graphState = {
                 nodeData: nodeData,
@@ -1068,17 +1088,46 @@
                 }
             });
 
-            function updateCenterItemLink() {
+            function updateCenterDetails() {
                 var node = graphState.nodeMetaById[centerId];
+                var typeLabel;
+                var parts;
+                var visibleConnections = 0;
 
-                if (!node || !node.url) {
-                    itemLink.classList.remove('is-visible');
-                    itemLink.removeAttribute('href');
+                if (!detailBox) {
+                    return;
+                }
+                if (!node) {
+                    detailBox.textContent = '';
                     return;
                 }
 
-                itemLink.href = String(node.url);
-                itemLink.classList.add('is-visible');
+                if (node.kind === 'place') {
+                    typeLabel = 'Ort';
+                } else if (node.kind === 'work') {
+                    typeLabel = 'Werk';
+                } else {
+                    typeLabel = 'Person';
+                }
+
+                Object.keys(graphState.visibleNodeIds || {}).forEach(function (nodeId) {
+                    if (nodeId !== centerId && graphState.visibleNodeIds[nodeId] === true) {
+                        visibleConnections += 1;
+                    }
+                });
+
+                parts = [
+                    '<strong>' + escapeHtml(node.label || '') + '</strong>',
+                    ' | Typ: ' + typeLabel,
+                    ' | Sichtbare Verbindungen: ' + String(visibleConnections),
+                    ' | Quellen-Treffer: ' + String(getActiveRelTotal(node) || 0)
+                ];
+
+                if (node.url) {
+                    parts.push(' | <a href="' + escapeHtml(node.url) + '">Detailseite</a>');
+                }
+
+                detailBox.innerHTML = parts.join('');
             }
 
             function clearProgressiveTimer() {
@@ -1096,6 +1145,7 @@
                 graph = createGraphModel(centerId, visibility.visibleNodeIds, graphState);
                 renderer.setGraph(graph);
                 renderer.refresh();
+                updateCenterDetails();
 
                 return {
                     desiredVisibleCount: visibility.desiredVisibleCount
@@ -1111,7 +1161,6 @@
                 ranking = buildRankingData(graphState.nodeData, centerId);
                 graphState.ranking = ranking;
                 graphState.orderedNodeIds = buildOrderedNodeIds(ranking);
-                updateCenterItemLink();
                 renderGraph(1);
                 syncSearchInputWithCenter();
 
@@ -1167,7 +1216,7 @@
             graphState.enableCopresence = true;
             graphState.nodeLimitPerCategory = maxNodeLimit;
             graphState.minCopresence = 1;
-            updateCenterItemLink();
+            updateCenterDetails();
 
             renderer.on('enterNode', function (event) {
                 hoveredNodeId = event.node;
