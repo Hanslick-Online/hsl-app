@@ -67,12 +67,124 @@
         return byId;
     }
 
-    function resolveGradeMode(value, relationMode) {
-        if (value === 'chapter' || value === 'paragraph') {
-            return value;
+    function kindLabel(kind) {
+        if (kind === 'work') {
+            return 'Work';
         }
-        return relationMode;
+        if (kind === 'place') {
+            return 'Place';
+        }
+        return 'Person';
     }
+
+    function buildNodeSearchEntries(nodes) {
+        var labelCounts = {};
+        var entries = [];
+
+        nodes.forEach(function (node) {
+            var label = String(node.label || '').trim();
+
+            if (!label) {
+                return;
+            }
+            labelCounts[label] = (labelCounts[label] || 0) + 1;
+        });
+
+        nodes.forEach(function (node) {
+            var label = String(node.label || '').trim();
+            var display = label;
+
+            if (!label) {
+                return;
+            }
+            if (labelCounts[label] > 1) {
+                display = label + ' (' + kindLabel(node.kind) + ')';
+            }
+
+            entries.push({
+                id: node.id,
+                display: display,
+                label: label
+            });
+        });
+
+        entries.sort(function (a, b) {
+            var byLabel = a.label.localeCompare(b.label, 'de');
+
+            if (byLabel !== 0) {
+                return byLabel;
+            }
+
+            return a.display.localeCompare(b.display, 'de');
+        });
+
+        return entries;
+    }
+
+    function ensureSearchControls() {
+        var searchInput = document.getElementById('vms-network-node-search');
+        var searchButton = document.getElementById('vms-network-node-search-button');
+        var searchDatalist = document.getElementById('vms-network-node-options');
+        var controls;
+        var row;
+        var label;
+        var isEnglish;
+
+        if (searchInput && searchButton && searchDatalist) {
+            return {
+                searchInput: searchInput,
+                searchButton: searchButton,
+                searchDatalist: searchDatalist
+            };
+        }
+
+        controls = document.querySelector('.person-network-controls');
+        if (!controls) {
+            return {
+                searchInput: null,
+                searchButton: null,
+                searchDatalist: null
+            };
+        }
+
+        isEnglish = String((document.documentElement && document.documentElement.lang) || '').toLowerCase().indexOf('en') === 0;
+
+        row = document.createElement('div');
+        row.className = 'person-network-search-row';
+
+        label = document.createElement('label');
+        label.setAttribute('for', 'vms-network-node-search');
+        label.textContent = isEnglish ? 'Search node:' : 'Knoten suchen:';
+        row.appendChild(label);
+
+        searchInput = document.createElement('input');
+        searchInput.id = 'vms-network-node-search';
+        searchInput.className = 'person-network-search-input';
+        searchInput.type = 'text';
+        searchInput.setAttribute('list', 'vms-network-node-options');
+        searchInput.setAttribute('placeholder', isEnglish ? 'Enter name' : 'Name eingeben');
+        row.appendChild(searchInput);
+
+        searchButton = document.createElement('button');
+        searchButton.id = 'vms-network-node-search-button';
+        searchButton.className = 'person-network-search-button';
+        searchButton.type = 'button';
+        searchButton.textContent = isEnglish ? 'Center' : 'Zentrieren';
+        row.appendChild(searchButton);
+
+        searchDatalist = document.createElement('datalist');
+        searchDatalist.id = 'vms-network-node-options';
+        row.appendChild(searchDatalist);
+
+        controls.appendChild(row);
+
+        return {
+            searchInput: searchInput,
+            searchButton: searchButton,
+            searchDatalist: searchDatalist
+        };
+    }
+
 
     function edgeVisuals(weight) {
         if (weight <= 1) {
@@ -203,14 +315,15 @@
         var host = document.getElementById('vms-network');
         var dataContainer = document.getElementById('vms-network-data');
         var relationModeInput = document.getElementById('vms-network-relation-mode');
-        var gradeModeInput = document.getElementById('vms-network-grade-mode');
-        var minRelInput = document.getElementById('vms-network-min-rel');
-        var minCopresenceInput = document.getElementById('vms-network-min-copresence');
         var nodeLimitInput = document.getElementById('vms-network-node-limit');
         var detailBox = document.getElementById('vms-network-details');
         var kindToggles = Array.prototype.slice.call(document.querySelectorAll('.vms-network-kind-toggle'));
+        var searchControls = ensureSearchControls();
+        var searchInput = searchControls.searchInput;
+        var searchButton = searchControls.searchButton;
+        var searchDatalist = searchControls.searchDatalist;
 
-        if (!host || !dataContainer || !relationModeInput || !gradeModeInput || !minRelInput || !minCopresenceInput || !nodeLimitInput ||
+        if (!host || !dataContainer || !relationModeInput ||
             typeof graphology === 'undefined' || typeof Sigma === 'undefined') {
             return;
         }
@@ -223,6 +336,8 @@
                 paragraph: null
             };
             var centerId = '';
+            var searchIdByDisplay = {};
+            var searchDisplayById = {};
             var renderer = new Sigma(new graphology.Graph(), host, {
                 allowInvalidContainer: true,
                 renderEdgeLabels: false,
@@ -257,7 +372,7 @@
                 var node = nodeById[nodeId];
                 detailBox.innerHTML = [
                     '<strong>' + escapeHtml(node.label) + '</strong>',
-                    ' | Typ: ' + escapeHtml(node.kind === 'person' ? 'Person' : 'Werk'),
+                    ' | Typ: ' + escapeHtml(kindLabel(node.kind)),
                     ' | Relationen (' + escapeHtml(mode) + '): ' + String(score || 0),
                     ' | Kapitel-Einheiten: ' + String(chapterCount || 0),
                     ' | Absatz-Einheiten: ' + String(paragraphCount || 0),
@@ -265,28 +380,84 @@
                 ].join('');
             }
 
+            function refreshSearchDatalist(enabledKinds, cache) {
+                var entries;
+
+                if (!searchDatalist || !cache) {
+                    return;
+                }
+
+                entries = buildNodeSearchEntries(nodes.filter(function (node) {
+                    var score = cache.nodeScores[node.id] || 0;
+                    return !!enabledKinds[node.kind] && score >= 1;
+                }));
+
+                searchIdByDisplay = {};
+                searchDisplayById = {};
+                searchDatalist.innerHTML = '';
+
+                entries.forEach(function (entry) {
+                    var option = document.createElement('option');
+
+                    option.value = entry.display;
+                    searchDatalist.appendChild(option);
+                    searchIdByDisplay[entry.display] = entry.id;
+                    searchDisplayById[entry.id] = entry.display;
+                });
+            }
+
+            function syncSearchInputWithCenter() {
+                if (!searchInput) {
+                    return;
+                }
+                if (!centerId || !searchDisplayById[centerId]) {
+                    return;
+                }
+                searchInput.value = searchDisplayById[centerId];
+            }
+
+            function tryCenterFromSearch() {
+                var query;
+                var nodeId;
+
+                if (!searchInput) {
+                    return;
+                }
+
+                query = String(searchInput.value || '').trim();
+                if (!query) {
+                    return;
+                }
+
+                nodeId = searchIdByDisplay[query] || '';
+                if (!nodeId || !nodeById[nodeId]) {
+                    return;
+                }
+
+                centerId = nodeId;
+                renderGraph();
+            }
+
             function renderGraph() {
                 var mode = relationModeInput.value === 'chapter' ? 'chapter' : 'paragraph';
-                var gradeMode = resolveGradeMode(gradeModeInput.value, mode);
-                var minRel = Math.max(0, parseIntOr(minRelInput.value, 1));
-                var minEdge = Math.max(1, parseIntOr(minCopresenceInput.value, 1));
-                var nodeLimit = Math.max(5, parseIntOr(nodeLimitInput.value, 120));
+                var nodeLimit = Math.max(5, parseIntOr(nodeLimitInput ? nodeLimitInput.value : 120, 120));
                 var enabledKinds = getEnabledKinds();
                 var cache = getModeCache(modeCache, mode, nodes);
-                var gradeCache = getModeCache(modeCache, gradeMode, nodes);
+                var gradeCache = getModeCache(modeCache, 1, nodes);
                 var graph = new graphology.Graph();
                 var selectedNodes = [];
                 var grouped = {
                     person: [],
                     work: []
                 };
+                var selectedById = {};
 
                 nodes.forEach(function (node) {
                     var score = cache.nodeScores[node.id] || 0;
                     if (!enabledKinds[node.kind]) {
                         return;
                     }
-                    if (score < minRel) {
+                    if (score < 1) {
                         return;
                     }
                     if (!grouped[node.kind]) {
@@ -295,17 +466,84 @@
                     grouped[node.kind].push({ node: node, score: score });
                 });
 
-                ['person', 'work'].forEach(function (kind) {
-                    grouped[kind].sort(function (a, b) {
+                if (centerId && nodeById[centerId] && enabledKinds[nodeById[centerId].kind]) {
+                    selectedById[centerId] = {
+                        node: nodeById[centerId],
+                        score: cache.nodeScores[centerId] || 0,
+                        centerWeight: Number.POSITIVE_INFINITY
+                    };
+
+                    Object.keys(cache.edgeWeights).forEach(function (key) {
+                        var idsPair = key.split('|');
+                        var source = idsPair[0];
+                        var target = idsPair[1];
+                        var neighborId = '';
+                        var neighborNode;
+                        var neighborScore;
+                        var weight;
+
+                        if (source === centerId) {
+                            neighborId = target;
+                        } else if (target === centerId) {
+                            neighborId = source;
+                        } else {
+                            return;
+                        }
+
+                        neighborNode = nodeById[neighborId];
+                        if (!neighborNode || !enabledKinds[neighborNode.kind]) {
+                            return;
+                        }
+
+                        neighborScore = cache.nodeScores[neighborId] || 0;
+                        if (neighborScore < 1) {
+                            return;
+                        }
+
+                        weight = cache.edgeWeights[key] || 0;
+                        selectedById[neighborId] = {
+                            node: neighborNode,
+                            score: neighborScore,
+                            centerWeight: weight
+                        };
+                    });
+
+                    selectedNodes = Object.keys(selectedById).map(function (id) {
+                        return selectedById[id];
+                    });
+
+                    selectedNodes.sort(function (a, b) {
+                        if (a.node.id === centerId) {
+                            return -1;
+                        }
+                        if (b.node.id === centerId) {
+                            return 1;
+                        }
+                        if ((b.centerWeight || 0) !== (a.centerWeight || 0)) {
+                            return (b.centerWeight || 0) - (a.centerWeight || 0);
+                        }
                         if (b.score !== a.score) {
                             return b.score - a.score;
                         }
                         return a.node.label.localeCompare(b.node.label, 'de');
                     });
-                    grouped[kind].slice(0, nodeLimit).forEach(function (entry) {
-                        selectedNodes.push(entry);
+
+                    selectedNodes = selectedNodes.slice(0, nodeLimit + 1);
+                } else {
+                    ['person', 'work'].forEach(function (kind) {
+                        grouped[kind].sort(function (a, b) {
+                            if (b.score !== a.score) {
+                                return b.score - a.score;
+                            }
+                            return a.node.label.localeCompare(b.node.label, 'de');
+                        });
+                        grouped[kind].slice(0, nodeLimit).forEach(function (entry) {
+                            selectedNodes.push(entry);
+                        });
                     });
-                });
+                }
+
+                refreshSearchDatalist(enabledKinds, cache);
 
                 if (centerId && !selectedNodes.some(function (entry) { return entry.node.id === centerId; })) {
                     centerId = '';
@@ -366,7 +604,7 @@
                     var weight = cache.edgeWeights[key];
                     var gradeWeight = gradeCache.edgeWeights[key] || 0;
 
-                    if (weight < minEdge || !visible[source] || !visible[target]) {
+                    if (weight < 1 || !visible[source] || !visible[target]) {
                         return;
                     }
 
@@ -392,6 +630,7 @@
                         centerNode.chapterKeys.length,
                         centerNode.paragraphKeys.length
                     );
+                    syncSearchInputWithCenter();
                 } else {
                     updateDetails('', 0, mode, 0, 0);
                 }
@@ -408,13 +647,30 @@
             });
 
             relationModeInput.addEventListener('change', renderGraph);
-            gradeModeInput.addEventListener('change', renderGraph);
-            minRelInput.addEventListener('change', renderGraph);
-            minCopresenceInput.addEventListener('change', renderGraph);
-            nodeLimitInput.addEventListener('change', renderGraph);
             kindToggles.forEach(function (toggle) {
                 toggle.addEventListener('change', renderGraph);
             });
+
+            if (searchButton) {
+                searchButton.addEventListener('click', function () {
+                    tryCenterFromSearch();
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('change', function () {
+                    tryCenterFromSearch();
+                });
+
+                searchInput.addEventListener('keydown', function (event) {
+                    if (event.key !== 'Enter') {
+                        return;
+                    }
+                    event.preventDefault();
+                    tryCenterFromSearch();
+                });
+            }
+
             window.addEventListener('resize', renderGraph);
 
             renderGraph();

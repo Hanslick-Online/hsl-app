@@ -77,6 +77,22 @@ def parse_publication_year(root: ET.Element) -> str:
     return ""
 
 
+def parse_source_edition_number(root: ET.Element) -> str:
+    edition_node = root.find(".//tei:sourceDesc//tei:edition", NS)
+    if edition_node is None:
+        return ""
+
+    number = (edition_node.get("n") or "").strip()
+    if number:
+        return number
+
+    label = text_content(edition_node)
+    match = re.search(r"(\d+)", label)
+    if not match:
+        return ""
+    return match.group(1)
+
+
 def chapter_bucket(div: ET.Element) -> str | None:
     heading = text_content(div.find("tei:head", NS))
     if not heading:
@@ -195,6 +211,10 @@ def collect_memberships(editions_dir: Path, catalog: dict[str, dict[str, str]]) 
 
     for edition_path in sorted(editions_dir.glob("*.xml")):
         root = ET.parse(edition_path).getroot()
+        source_edition_number = parse_source_edition_number(root)
+        if source_edition_number != "10":
+            continue
+
         year = parse_publication_year(root)
         if not year:
             continue

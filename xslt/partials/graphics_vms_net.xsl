@@ -28,48 +28,33 @@
                         </option>
                     </select>
 
-                    <label for="vms-network-min-rel">
-                        <xsl:value-of select="local:text('Min. Relationen pro Knoten:', 'Min relations per node:')"/>
-                    </label>
-                    <input id="vms-network-min-rel" class="person-network-control-input" type="number" min="0" step="1" value="1"/>
-
-                    <label for="vms-network-min-copresence">
-                        <xsl:value-of select="local:text('Min. Kopräsenz pro Kante:', 'Min copresence per edge:')"/>
-                    </label>
-                    <input id="vms-network-min-copresence" class="person-network-control-input" type="number" min="1" step="1" value="1"/>
-
-                    <label for="vms-network-grade-mode">
-                        <xsl:value-of select="local:text('Beziehungsgrad nach:', 'Relation grade by:')"/>
-                    </label>
-                    <select id="vms-network-grade-mode" class="form-select form-select-sm person-network-control-select person-network-control-select-grademode">
-                        <option value="auto">
-                            <xsl:value-of select="local:text('wie Kopräsenz-Ebene', 'same as copresence level')"/>
-                        </option>
-                        <option value="paragraph">
-                            <xsl:value-of select="local:text('Absatz-Kopräsenz', 'paragraph copresence')"/>
-                        </option>
-                        <option value="chapter">
-                            <xsl:value-of select="local:text('Kapitel-Kopräsenz', 'chapter copresence')"/>
-                        </option>
-                    </select>
-
-                    <label for="vms-network-node-limit">
-                        <xsl:value-of select="local:text('Knoten-Limit pro Typ:', 'Node limit per type:')"/>
-                    </label>
-                    <input id="vms-network-node-limit" class="person-network-control-input" type="number" min="5" step="1" value="120"/>
-
                     <div class="person-network-category-toggles">
                         <label>
                             <input type="checkbox" class="vms-network-kind-toggle" data-kind="person" checked="checked"/>
-                            <xsl:value-of select="local:text('Personen (ohne Figuren)', 'Persons (without characters)')"/>
+                            <xsl:value-of select="local:text('Personen', 'Persons')"/>
                         </label>
                         <label>
                             <input type="checkbox" class="vms-network-kind-toggle" data-kind="work" checked="checked"/>
                             <xsl:value-of select="local:text('Werke', 'Works')"/>
                         </label>
+                         <label>
+                            <input type="checkbox" class="vms-network-kind-toggle" data-kind="place" checked="checked"/>
+                            <xsl:value-of select="local:text('Orte', 'Places')"/>
+                        </label>
                         <span class="person-network-performance-note">
                             <xsl:value-of select="local:text('Klick auf einen Knoten setzt ihn als Zentrum. Klick auf die Fläche hebt das Zentrum auf.', 'Click a node to set it as center. Click the stage to clear the center.')"/>
                         </span>
+                    </div>
+
+                    <div class="person-network-search-row">
+                        <label for="vms-network-node-search">
+                            <xsl:value-of select="local:text('Knoten suchen:', 'Search node:')"/>
+                        </label>
+                        <input id="vms-network-node-search" class="person-network-search-input" type="text" list="vms-network-node-options" placeholder="Name eingeben"/>
+                        <button id="vms-network-node-search-button" class="person-network-search-button" type="button">
+                            <xsl:value-of select="local:text('Zentrieren', 'Center')"/>
+                        </button>
+                        <datalist id="vms-network-node-options"/>
                     </div>
                 </div>
 
