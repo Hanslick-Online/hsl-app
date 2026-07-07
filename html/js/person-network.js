@@ -879,7 +879,7 @@
 
                 collectionContainer = document.createElement('div');
                 collectionContainer.className = 'person-network-collection-toggles';
-                collectionContainer.innerHTML = '<span class="person-network-collection-label">Kollektionen:</span>';
+                collectionContainer.innerHTML = '';
 
                 collectionOptions.forEach(function (option) {
                     var label = document.createElement('label');
@@ -902,7 +902,7 @@
 
                 vmsModeWrapper = document.createElement('label');
                 vmsModeWrapper.className = 'person-network-vms-mode';
-                vmsModeWrapper.innerHTML = '<span>VMS:</span> ';
+                vmsModeWrapper.innerHTML = '';
                 vmsModeSelect = document.createElement('select');
                 vmsModeSelect.className = 'person-network-vms-mode-select';
                 vmsModeSelect.innerHTML = '<option value="band">Band</option><option value="chapter">Kapitel</option>';
