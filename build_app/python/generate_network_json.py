@@ -15,15 +15,18 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import Iterable
+from collections.abc import Hashable, Iterable
 from pathlib import Path
 import re
+from typing import TypeVar
 import xml.etree.ElementTree as ET
 
 NS = {"tei": "http://www.tei-c.org/ns/1.0"}
 XML_ID = "{http://www.w3.org/XML/1998/namespace}id"
 DEFAULT_HANSLICK_ID = "hsl_person_id_1"
 ENTITY_REF_PATTERN = re.compile(r"#?e?(hsl_(?:person|work|place)_id_[A-Za-z0-9_\-]+)")
+TARGET_VMS_FILENAME = "t__10_VMS_1902_TEI_AW_26-01-21-TEI-P5.xml"
+T = TypeVar("T", bound=Hashable)
 
 
 def text_content(node: ET.Element | None) -> str:
@@ -40,9 +43,9 @@ def first(node: ET.Element, *xpaths: str) -> ET.Element | None:
     return None
 
 
-def unique_preserve_order(values: Iterable[str]) -> list[str]:
-    seen: set[str] = set()
-    result: list[str] = []
+def unique_preserve_order(values: Iterable[T]) -> list[T]:
+    seen: set[T] = set()
+    result: list[T] = []
     for value in values:
         if value and value not in seen:
             seen.add(value)
@@ -130,13 +133,9 @@ def normalize_collection_target(collection: str, file_name: str) -> str:
     return f"t__{file_name}"
 
 
-def extract_entity_ids_from_body(root: ET.Element, catalog: dict[str, dict[str, str]]) -> set[str]:
-    body = root.find(".//tei:text/tei:body", NS)
-    if body is None:
-        return set()
-
+def extract_entity_ids_in_node(context_node: ET.Element, catalog: dict[str, dict[str, str]]) -> set[str]:
     entity_ids: set[str] = set()
-    for node in body.iter():
+    for node in context_node.iter():
         for attr in ("ref", "corresp"):
             value = (node.get(attr) or "").strip()
             if not value:
@@ -150,26 +149,57 @@ def extract_entity_ids_from_body(root: ET.Element, catalog: dict[str, dict[str, 
     return entity_ids
 
 
+def extract_entity_ids_from_body(root: ET.Element, catalog: dict[str, dict[str, str]]) -> set[str]:
+    body = root.find(".//tei:text/tei:body", NS)
+    if body is None:
+        return set()
+
+    return extract_entity_ids_in_node(body, catalog)
+
+
+def extract_entity_ids_by_vms_chapter(root: ET.Element, catalog: dict[str, dict[str, str]]) -> dict[int, set[str]]:
+    body = root.find(".//tei:text/tei:body", NS)
+    if body is None:
+        return {}
+
+    by_chapter: dict[int, set[str]] = {}
+    chapter_index = 0
+
+    for div in body.findall("tei:div", NS):
+        by_chapter[chapter_index] = extract_entity_ids_in_node(div, catalog)
+        chapter_index += 1
+
+    return by_chapter
+
+
 def collect_targets_by_collection(
     catalog: dict[str, dict[str, str]],
     critics_editions_dir: Path,
     traktat_editions_dir: Path,
-) -> dict[str, dict[str, list[str]]]:
-    memberships: dict[str, dict[str, list[str]]] = {}
+) -> dict[str, dict[str, list[str] | list[int]]]:
+    memberships: dict[str, dict[str, list[str] | list[int]]] = {}
 
-    def append_target(entity_id: str, collection: str, target_id: str) -> None:
+    def append_target(entity_id: str, collection: str, target_id: str | int) -> None:
         if entity_id not in memberships:
             memberships[entity_id] = {"nfp": [], "vms": []}
         memberships[entity_id][collection].append(target_id)
 
-    for collection, editions_dir in (("nfp", critics_editions_dir), ("vms", traktat_editions_dir)):
-        for edition_path in sorted(editions_dir.glob("*.xml")):
-            root = ET.parse(edition_path).getroot()
-            entity_ids = extract_entity_ids_from_body(root, catalog)
-            target_id = normalize_collection_target(collection, edition_path.name)
+    for edition_path in sorted(critics_editions_dir.glob("*.xml")):
+        root = ET.parse(edition_path).getroot()
+        entity_ids = extract_entity_ids_from_body(root, catalog)
+        target_id = normalize_collection_target("nfp", edition_path.name)
 
+        for entity_id in entity_ids:
+            append_target(entity_id, "nfp", target_id)
+
+    vms_path = traktat_editions_dir / TARGET_VMS_FILENAME
+    if vms_path.exists():
+        vms_root = ET.parse(vms_path).getroot()
+        by_chapter = extract_entity_ids_by_vms_chapter(vms_root, catalog)
+
+        for chapter_index, entity_ids in by_chapter.items():
             for entity_id in entity_ids:
-                append_target(entity_id, collection, target_id)
+                append_target(entity_id, "vms", chapter_index)
 
     for entity_id, by_collection in memberships.items():
         memberships[entity_id] = {

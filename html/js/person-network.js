@@ -18,6 +18,7 @@
         vms: '<i>VMS</i>'
     };
     var COLLECTION_ORDER = ['nfp', 'vms'];
+    var VMS_BAND_TARGET_ID = '__vms_band__';
 
     function parseIntOr(value, fallback) {
         var parsed = parseInt(value, 10);
@@ -179,6 +180,38 @@
         return targetToNodes;
     }
 
+    function buildCopresenceTargetToNodes(nodeData, vmsMode) {
+        var targetToNodes = {};
+
+        function appendTarget(targetId, nodeId) {
+            if (!targetToNodes[targetId]) {
+                targetToNodes[targetId] = [];
+            }
+            targetToNodes[targetId].push(nodeId);
+        }
+
+        nodeData.forEach(function (node) {
+            var byCollection = node.activeTargetsByCollection || { nfp: [], vms: [] };
+
+            (byCollection.nfp || []).forEach(function (targetId) {
+                appendTarget(targetId, node.id);
+            });
+
+            if (vmsMode === 'band') {
+                if ((byCollection.vms || []).length > 0) {
+                    appendTarget(VMS_BAND_TARGET_ID, node.id);
+                }
+                return;
+            }
+
+            (byCollection.vms || []).forEach(function (targetId) {
+                appendTarget(targetId, node.id);
+            });
+        });
+
+        return targetToNodes;
+    }
+
     function getNodeTargets(node) {
         if (!node) {
             return [];
@@ -254,18 +287,24 @@
         return 'pub-person';
     }
 
-    function collectActiveTargets(node, enabledCollections) {
-        var activeTargets = [];
-        var seenActiveTargets = {};
+    function collectActiveTargetsByCollection(node, enabledCollections) {
+        var activeTargetsByCollection = {
+            nfp: [],
+            vms: []
+        };
+        var seenByCollection = {
+            nfp: {},
+            vms: {}
+        };
         var hasExplicitCollectionTargets = node.targetsByCollection && typeof node.targetsByCollection === 'object' && (Array.isArray(node.targetsByCollection.nfp) || Array.isArray(node.targetsByCollection.vms));
 
-        function pushUniqueTarget(targetId) {
+        function pushUniqueTarget(collection, targetId) {
             var key = String(targetId || '');
-            if (!key || seenActiveTargets[key]) {
+            if (!key || seenByCollection[collection][key]) {
                 return;
             }
-            seenActiveTargets[key] = true;
-            activeTargets.push(key);
+            seenByCollection[collection][key] = true;
+            activeTargetsByCollection[collection].push(key);
         }
 
         if (hasExplicitCollectionTargets) {
@@ -279,29 +318,48 @@
                 if (!Array.isArray(scopedTargets)) {
                     return;
                 }
-                scopedTargets.forEach(pushUniqueTarget);
+                scopedTargets.forEach(function (targetId) {
+                    pushUniqueTarget(collection, targetId);
+                });
             });
-            return activeTargets;
+            return activeTargetsByCollection;
         }
 
-        return (node.targets || []).filter(function (targetId) {
+        (node.targets || []).forEach(function (targetId) {
             var collection = getTargetCollection(targetId);
 
             if (!collection) {
-                return false;
+                return;
             }
-            return enabledCollections[collection] !== false;
+            if (enabledCollections[collection] === false) {
+                return;
+            }
+            pushUniqueTarget(collection, targetId);
         });
+
+        return activeTargetsByCollection;
     }
 
     function applyCollectionFilter(nodeData, enabledCollections) {
         var filteredNodes = [];
 
         nodeData.forEach(function (node) {
-            var activeTargets = collectActiveTargets(node, enabledCollections);
+            var activeTargetsByCollection = collectActiveTargetsByCollection(node, enabledCollections);
+            var seenTargets = {};
+            var activeTargets = [];
+
+            activeTargetsByCollection.nfp.concat(activeTargetsByCollection.vms).forEach(function (targetId) {
+                var key = String(targetId || '');
+                if (!key || seenTargets[key]) {
+                    return;
+                }
+                seenTargets[key] = true;
+                activeTargets.push(key);
+            });
 
             filteredNodes.push(Object.assign({}, node, {
                 activeTargets: activeTargets,
+                activeTargetsByCollection: activeTargetsByCollection,
                 relTotalActive: activeTargets.length,
                 group: resolveNodeGroup(node)
             }));
@@ -745,7 +803,7 @@
         });
 
         if (options.enableCopresence) {
-            copresenceEdges = buildCopresenceEdges(centerId, options.targetToNodes, visibleNodeIds, options.minCopresence);
+            copresenceEdges = buildCopresenceEdges(centerId, options.copresenceTargetToNodes || options.targetToNodes, visibleNodeIds, options.minCopresence);
             copresenceEdges.forEach(function (edge) {
                 if (!graph.hasNode(edge.source) || !graph.hasNode(edge.target) || graph.hasEdge(edge.id)) {
                     return;
@@ -779,6 +837,7 @@
             var ranking;
             var collectionToggles = [];
             var enabledCollections = {};
+            var vmsModeSelect = null;
             var itemLink;
             var renderer;
             var graphState;
@@ -804,6 +863,7 @@
                 var categoryContainer = document.querySelector('.person-network-category-toggles');
                 var collectionOptions = buildCollectionOptions();
                 var collectionContainer;
+                var vmsModeWrapper;
 
                 if (!categoryContainer || !collectionOptions.length) {
                     return;
@@ -831,6 +891,33 @@
                 categoryContainer.parentNode.insertBefore(collectionContainer, categoryContainer.nextSibling);
                 collectionToggles = Array.prototype.slice.call(collectionContainer.querySelectorAll('.person-network-collection-toggle'));
                 enabledCollections = collectEnabledCollections(collectionToggles);
+
+                vmsModeWrapper = document.createElement('label');
+                vmsModeWrapper.className = 'person-network-vms-mode';
+                vmsModeWrapper.innerHTML = '<span>VMS:</span> ';
+                vmsModeSelect = document.createElement('select');
+                vmsModeSelect.className = 'person-network-vms-mode-select';
+                vmsModeSelect.innerHTML = '<option value="band">Band</option><option value="chapter">Kapitel</option>';
+                vmsModeWrapper.appendChild(vmsModeSelect);
+                collectionContainer.appendChild(vmsModeWrapper);
+
+                function updateVmsModeControlState() {
+                    var isVmsEnabled = enabledCollections.vms !== false;
+
+                    if (!vmsModeSelect) {
+                        return;
+                    }
+                    vmsModeSelect.disabled = !isVmsEnabled;
+                }
+
+                updateVmsModeControlState();
+
+                collectionToggles.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', function () {
+                        enabledCollections = collectEnabledCollections(collectionToggles);
+                        updateVmsModeControlState();
+                    });
+                });
             }());
 
             host.innerHTML = '';
@@ -846,10 +933,12 @@
                 ranking: ranking,
                 orderedNodeIds: buildOrderedNodeIds(ranking),
                 targetToNodes: buildTargetToNodes(nodeData),
+                copresenceTargetToNodes: buildTargetToNodes(nodeData),
                 host: host,
                 enableCopresence: true,
                 minCopresence: 1,
                 nodeLimitPerCategory: 25,
+                vmsCopresenceMode: 'band',
                 renderCap: 0,
                 visibleNodeIds: {}
             };
@@ -857,6 +946,7 @@
             function refreshDerivedGraphData() {
                 var filteredNodeData = applyCollectionFilter(nodeData, enabledCollections);
                 var filteredMeta = buildNodeMeta(filteredNodeData);
+                var selectedVmsMode = (vmsModeSelect && vmsModeSelect.value === 'chapter') ? 'chapter' : 'band';
 
                 if (!filteredMeta.nodeMetaById[centerId]) {
                     centerId = filteredMeta.center;
@@ -865,6 +955,8 @@
                 graphState.nodeData = filteredNodeData;
                 graphState.nodeMetaById = filteredMeta.nodeMetaById;
                 graphState.targetToNodes = buildTargetToNodes(filteredNodeData);
+                graphState.vmsCopresenceMode = selectedVmsMode;
+                graphState.copresenceTargetToNodes = buildCopresenceTargetToNodes(filteredNodeData, selectedVmsMode);
                 ranking = buildRankingData(filteredNodeData, centerId);
                 graphState.ranking = ranking;
                 graphState.orderedNodeIds = buildOrderedNodeIds(ranking);
@@ -1126,6 +1218,13 @@
                     scheduleGraphUpdate();
                 });
             });
+
+            if (vmsModeSelect) {
+                vmsModeSelect.addEventListener('change', function () {
+                    refreshDerivedGraphData();
+                    scheduleGraphUpdate();
+                });
+            }
 
             if (searchButton) {
                 searchButton.addEventListener('click', function () {
