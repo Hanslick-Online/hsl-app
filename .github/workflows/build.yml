@@ -52,9 +52,9 @@ jobs:
       - name: Generate JSON for the visualisations
         run: |
           mkdir -p html/data
-          ./build_app/python/generate_graphics_json.py
-          ./build_app/python/generate_network_json.py
-          ./build_app/python/generate_vmsnetwork_json.py
+          uv ./build_app/python/generate_graphics_json.py
+          uv ./build_app/python/generate_network_json.py
+          uv ./build_app/python/generate_vmsnetwork_json.py
       - name: Preprocess data for Typesense
         run: ant -f build_app/ant/fixtures.xml 
       - name: Build Typesense Index
