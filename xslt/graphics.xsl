@@ -12,13 +12,14 @@
     <xsl:import href="./partials/html_footer_en.xsl"/>
     <xsl:import href="./partials/graphics_common.xsl"/>
     <xsl:import href="./partials/graphics_net.xsl"/>
+    <xsl:import href="./partials/graphics_vms_net.xsl"/>
     <xsl:import href="./partials/graphics_chart.xsl"/>
     <xsl:import href="./partials/graphics_vms_chart.xsl"/>
 
     <xsl:template match="/">
-        <xsl:variable name="doc_title">
-            <xsl:value-of select=".//tei:title[1]/text()"/>
-        </xsl:variable>
+        <xsl:variable name="doc_title" as="xs:string" select="normalize-space(string(.//tei:title[1]))"/>
+        <xsl:variable name="doc-title-lower" as="xs:string" select="lower-case($doc_title)"/>
+        <xsl:variable name="is-vms-net" as="xs:boolean" select="contains($doc-title-lower, 'vms') and (contains($doc-title-lower, 'beziehungsgraph') or contains($doc-title-lower, 'network'))"/>
 
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -46,9 +47,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                    <div class="main">
-                                        <xsl:if test="contains($doc_title, 'Network')">
-                                            <xsl:call-template name="net_container"/>
-                                        </xsl:if>
+                                        <xsl:choose>
+                                            <xsl:when test="$is-vms-net">
+                                                <xsl:call-template name="vms_net_container"/>
+                                            </xsl:when>
+                                            <xsl:when test="contains($doc-title-lower, 'network') or contains($doc-title-lower, 'beziehungsgraph')">
+                                                <xsl:call-template name="net_container"/>
+                                            </xsl:when>
+                                        </xsl:choose>
                                         <xsl:if test="contains($doc_title, 'Chart')">
                                             <xsl:choose>
                                                 <xsl:when test="contains($doc_title, 'VMS Chart')">
