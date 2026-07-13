@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Generate chart payload JSON for the graphics page.
 
 This script reads the TEI index files used by the graphics chart and writes a
