@@ -60,8 +60,7 @@ function leafletDatatable(table, panesShow, panesHide) {
         "language": {
         "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json"
             },
-        dom: 'PfpBrtip',
-        buttons:['copy', 'excel', 'pdf'],
+        dom: 'Pfprtip',
         "lengthMenu":[25, 50, 75, 100, "All"],
         responsive: true,
         orderCellsTop: true,
