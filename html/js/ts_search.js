@@ -1,3 +1,63 @@
+const searchLang = new URL(window.location.href).searchParams.get("lang") === "en" ? "en" : "de";
+const searchText = {
+  de: {
+    empty: "Keine Treffer für <q>{{ query }}</q>",
+    showMore: "mehr anzeigen",
+    showLess: "weniger anzeigen",
+    stats: `
+            {{#areHitsSorted}}
+              {{#hasNoSortedResults}}keine Treffer{{/hasNoSortedResults}}
+              {{#hasOneSortedResults}}1 Treffer{{/hasOneSortedResults}}
+              {{#hasManySortedResults}}{{#helpers.formatNumber}}{{nbSortedHits}}{{/helpers.formatNumber}} Treffer{{/hasManySortedResults}}
+              aus {{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}}
+            {{/areHitsSorted}}
+            {{^areHitsSorted}}
+              {{#hasNoResults}}keine Treffer{{/hasNoResults}}
+              {{#hasOneResult}}1 Treffer{{/hasOneResult}}
+              {{#hasManyResults}}{{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}} Treffer{{/hasManyResults}}
+            {{/areHitsSorted}}
+            gefunden in {{processingTimeMS}}ms
+          `,
+    placesPlaceholder: "Nach Orten suchen",
+    personsPlaceholder: "Nach Personen suchen",
+    worksPlaceholder: "Nach Werken suchen",
+    rangeSeparator: "bis",
+    rangeSubmit: "Suchen",
+    resetFilters: "Filter zurücksetzen",
+    sortDefault: "Standard",
+    sortAsc: "Jahr (asc)",
+    sortDesc: "Jahr (desc)",
+  },
+  en: {
+    empty: "No hits for <q>{{ query }}</q>",
+    showMore: "show more",
+    showLess: "show less",
+    stats: `
+            {{#areHitsSorted}}
+              {{#hasNoSortedResults}}no hits{{/hasNoSortedResults}}
+              {{#hasOneSortedResults}}1 hit{{/hasOneSortedResults}}
+              {{#hasManySortedResults}}{{#helpers.formatNumber}}{{nbSortedHits}}{{/helpers.formatNumber}} hits{{/hasManySortedResults}}
+              out of {{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}}
+            {{/areHitsSorted}}
+            {{^areHitsSorted}}
+              {{#hasNoResults}}no hits{{/hasNoResults}}
+              {{#hasOneResult}}1 hit{{/hasOneResult}}
+              {{#hasManyResults}}{{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}} hits{{/hasManyResults}}
+            {{/areHitsSorted}}
+            found in {{processingTimeMS}}ms
+          `,
+    placesPlaceholder: "Search for places",
+    personsPlaceholder: "Search for persons",
+    worksPlaceholder: "Search for works",
+    rangeSeparator: "to",
+    rangeSubmit: "Search",
+    resetFilters: "Reset Filters",
+    sortDefault: "Default",
+    sortAsc: "Year (asc)",
+    sortDesc: "Year (desc)",
+  },
+}[searchLang];
+
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   server: {
     apiKey: "dFQLGBzgcWlXNzL1XENqHFUaOHJvcSRr", // Be sure to use an API key that only allows searches, in production
@@ -48,13 +108,13 @@ search.addWidgets([
   instantsearch.widgets.hits({
     container: "#hits",
     templates: {
-      empty: "Keine Treffer für <q>{{ query }}</q>",
+      empty: searchText.empty,
       item: `
               <h5><a href="{{ id }}">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
               <h5><span class="badge badge-primary">{{ project }}</span></h5>
               <div>
-                  <a class="show-entities pointer" onclick="show_hide_click(this)">mehr anzeigen</a>
+                  <a class="show-entities pointer" onclick="show_hide_click(this)">${searchText.showMore}</a>
                   <div style="display: none;">
                       {{#persons}}
                       <span class="badge bg-secondary">{{ . }}</span>
@@ -84,20 +144,7 @@ search.addWidgets([
   instantsearch.widgets.stats({
     container: "#stats-container",
     templates: {
-      text: `
-            {{#areHitsSorted}}
-              {{#hasNoSortedResults}}keine Treffer{{/hasNoSortedResults}}
-              {{#hasOneSortedResults}}1 Treffer{{/hasOneSortedResults}}
-              {{#hasManySortedResults}}{{#helpers.formatNumber}}{{nbSortedHits}}{{/helpers.formatNumber}} Treffer {{/hasManySortedResults}}
-              aus {{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}}
-            {{/areHitsSorted}}
-            {{^areHitsSorted}}
-              {{#hasNoResults}}keine Treffer{{/hasNoResults}}
-              {{#hasOneResult}}1 Treffer{{/hasOneResult}}
-              {{#hasManyResults}}{{#helpers.formatNumber}}{{nbHits}}{{/helpers.formatNumber}} Treffer{{/hasManyResults}}
-            {{/areHitsSorted}}
-            gefunden in {{processingTimeMS}}ms
-          `,
+      text: searchText.stats,
     },
   }),
 
@@ -110,7 +157,7 @@ search.addWidgets([
     container: "#refinement-list-places",
     attribute: "places",
     searchable: true,
-    searchablePlaceholder: "Nach Orte suchen",
+    searchablePlaceholder: searchText.placesPlaceholder,
     sortBy: ["isRefined", "count:desc", "name:asc"], // testing
     showMore: true,
     limit: 10,
@@ -132,7 +179,7 @@ search.addWidgets([
     container: "#refinement-list-persons",
     attribute: "persons",
     searchable: true,
-    searchablePlaceholder: "Nach Personen suchen",
+    searchablePlaceholder: searchText.personsPlaceholder,
     sortBy: ["isRefined", "count:desc", "name:asc"], // testing
     showMore: true,
     limit: 10,
@@ -154,7 +201,7 @@ search.addWidgets([
     container: "#refinement-list-works",
     attribute: "works",
     searchable: true,
-    searchablePlaceholder: "Nach Werke suchen",
+    searchablePlaceholder: searchText.worksPlaceholder,
     sortBy: ["isRefined", "count:desc", "name:asc"], // testing
     showMore: true,
     limit: 10,
@@ -176,8 +223,8 @@ search.addWidgets([
     container: "#range-input",
     attribute: "year",
     templates: {
-      separatorText: "bis",
-      submitText: "Suchen",
+      separatorText: searchText.rangeSeparator,
+      submitText: searchText.rangeSubmit,
     },
     cssClasses: {
       form: "form-inline",
@@ -209,7 +256,7 @@ search.addWidgets([
   instantsearch.widgets.clearRefinements({
     container: "#clear-refinements",
     templates: {
-      resetLabel: "Filter zurücksetzen",
+      resetLabel: searchText.resetFilters,
     },
     cssClasses: {
       button: "btn",
@@ -227,9 +274,9 @@ search.addWidgets([
   instantsearch.widgets.sortBy({
     container: "#sort-by",
     items: [
-      { label: "Default", value: "hsl" },
-      { label: "Jahr (asc)", value: "hsl/sort/date:asc" },
-      { label: "Jahr (desc)", value: "hsl/sort/date:desc" },
+      { label: searchText.sortDefault, value: "hsl" },
+      { label: searchText.sortAsc, value: "hsl/sort/date:asc" },
+      { label: searchText.sortDesc, value: "hsl/sort/date:desc" },
     ],
   }),
 
@@ -254,8 +301,8 @@ search.addWidgets([
 search.start();
 
 function show_hide_click(el) {
-  var show_text = "mehr anzeigen";
-  var hide_text = "weniger anzeigen";
+  var show_text = searchText.showMore;
+  var hide_text = searchText.showLess;
   el.innerHTML = show_text;
   var siblings = el.parentElement.querySelectorAll("div");
   [...siblings].forEach((sibling) => {

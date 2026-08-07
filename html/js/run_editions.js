@@ -3,6 +3,36 @@ document.querySelectorAll('.pb-en.pb').forEach((el) => {
   el.classList.remove('pb');
 });
 
+const editionsLang = window.hslSiteLang || (new URL(window.location.href).searchParams.get("lang") === "en" ? "en" : "de");
+const editionsText = {
+  de: {
+    allContent: "Alle Inhalte",
+    persons: "Personen",
+    figures: "Figuren",
+    places: "Orte",
+    works: "Werke",
+    pageBreaks: "Seiten-, Spalten- und Zeilenumbrüche",
+    englishPageBreaks: "Seitenumbrüche der englischen Ausgabe",
+    fontFamily: "Schriftart",
+    fontSize: "Schriftgröße",
+    facsimilesName: "Faksimiles EIN/AUS",
+    facsimilesToggle: "Faksimiles ein/aus",
+  },
+  en: {
+    allContent: "All Content",
+    persons: "Persons",
+    figures: "Figures",
+    places: "Places",
+    works: "Works",
+    pageBreaks: "Page, column, and line breaks",
+    englishPageBreaks: "English edition page breaks",
+    fontFamily: "Font family",
+    fontSize: "Font size",
+    facsimilesName: "Facsimiles on/off",
+    facsimilesToggle: "Toggle facsimiles",
+  },
+}[editionsLang];
+
 var editor = new LoadEditor({
     aot: {
       title: "Text Annotations",
@@ -10,7 +40,7 @@ var editor = new LoadEditor({
         {
           opt: "entities-features",
           opt_slider: "entities-features-slider",
-          title: "Alle Inhalte",
+          title: editionsText.allContent,
           color: "grey",
           html_class: "undefined",
           css_class: "undefined",
@@ -27,7 +57,7 @@ var editor = new LoadEditor({
         {
           opt: "prs",
           color: "pink",
-          title: "Personen",
+          title: editionsText.persons,
           html_class: "persons",
           css_class: "pers",
           hide: {
@@ -43,7 +73,7 @@ var editor = new LoadEditor({
         {
           opt: "prsf",
           color: "green",
-          title: "Figuren",
+          title: editionsText.figures,
           html_class: "figures",
           css_class: "figr",
           hide: {
@@ -59,7 +89,7 @@ var editor = new LoadEditor({
         {
           opt: "plc",
           color: "gold",
-          title: "Orte",
+          title: editionsText.places,
           html_class: "places",
           css_class: "plc",
           hide: {
@@ -75,7 +105,7 @@ var editor = new LoadEditor({
         {
           opt: "wrk",
           color: "turquoise",
-          title: "Werke",
+          title: editionsText.works,
           html_class: "works",
           css_class: "wrk",
           chg_citation: "citation-url",
@@ -91,7 +121,7 @@ var editor = new LoadEditor({
         {
           opt: "pbs",
           color: "none",
-          title: "Seiten-, Spalten- und Zeilenumbrüche",
+          title: editionsText.pageBreaks,
           html_class: "pb",
           css_class: "pbs",
           chg_citation: "citation-url",
@@ -107,7 +137,7 @@ var editor = new LoadEditor({
         {
           opt: "pbs-en",
           color: "none",
-          title: "Seitenumbrüche der englischen Ausgabe",
+          title: editionsText.englishPageBreaks,
           html_class: "pb-en",
           css_class: "pbs-en",
           chg_citation: "citation-url",
@@ -151,7 +181,7 @@ var editor = new LoadEditor({
       variants: [
         {
           opt: "ff",
-          title: "Schriftart",
+          title: editionsText.fontFamily,
           urlparam: "ff",
           chg_citation: "citation-url",
           fonts: {
@@ -190,7 +220,7 @@ var editor = new LoadEditor({
       variants: [
         {
           opt: "fs",
-          title: "Schriftgröße",
+          title: editionsText.fontSize,
           urlparam: "fs",
           chg_citation: "citation-url",
           sizes: {
@@ -209,11 +239,11 @@ var editor = new LoadEditor({
       html_class: "form-select",
     },
     is: {
-      name: "Faksimiles EIN/AUS",
+      name: editionsText.facsimilesName,
       variants: [
         {
           opt: "edition-switch",
-          title: "Faksimiles ein/aus",
+          title: editionsText.facsimilesToggle,
           urlparam: "img",
           chg_citation: "citation-url",
           fade: "fade-lang",

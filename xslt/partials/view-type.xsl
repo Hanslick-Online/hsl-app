@@ -43,17 +43,19 @@
             <div class="col-md-6 text">
                 <div class="row" style="margin: 2em auto;">
                     <div class="col-md-6" style="text-align:right;">
-                        <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/> Wörter einzeln suchen
+                        <input type="checkbox" name="opt[]" value="separateWordSearch" checked="checked"/>
+                        <span data-lang="de"> Wörter einzeln suchen</span>
+                        <span data-lang="en" hidden="hidden"> Search words separately</span>
                     </div>
                     <div class="col-md-6" style="text-align:right;">
-                        <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..."/>
+                        <input type="text" name="keyword" class="form-control input-sm" placeholder="Schlagwort eingeben..." data-placeholder-de="Schlagwort eingeben..." data-placeholder-en="Enter keyword..."/>
                     </div>
                 </div>
                 <div class="section {$edition-project-class}" id="section-1">
                     <xsl:if test="$editor-widget = 'true'">
                         <div id="editor-widget">
                             <xsl:if test="$back-btn = 'true'">
-                                <a title="zurück zu allen {$doc-type}" href="{$toc-address}" class="nav-link btn btn-round btn-backlink">
+                                <a title="zurück zum Verzeichnis" data-title-de="zurück zum Verzeichnis" data-title-en="back to table of contents" href="{$toc-address}" class="nav-link btn btn-round btn-backlink">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-back" viewBox="0 0 16 16">
                                         <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
                                     </svg>

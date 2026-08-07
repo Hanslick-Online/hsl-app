@@ -1,18 +1,59 @@
 /* http://live.datatables.net/nugeyewe/7/edit */
 /* script provided by https://github.com/babslgam */
+const DATA_TABLE_TEXT = {
+    de: {
+        search: "Suche:",
+        info: "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
+        infoEmpty: "Keine Einträge verfügbar",
+        infoFiltered: "(gefiltert von _MAX_ Einträgen)",
+        lengthMenu: "_MENU_ Einträge pro Seite",
+        zeroRecords: "Keine passenden Einträge gefunden",
+        paginate: {
+            first: "Erste",
+            previous: "Zurück",
+            next: "Weiter",
+            last: "Letzte"
+        },
+        buttons: {
+            copy: "Kopieren",
+            excel: "Excel",
+            pdf: "PDF"
+        }
+    },
+    en: {
+        search: "Search:",
+        info: "Showing _START_ to _END_ of _TOTAL_ entries",
+        infoEmpty: "No entries available",
+        infoFiltered: "(filtered from _MAX_ total entries)",
+        lengthMenu: "_MENU_ entries per page",
+        zeroRecords: "No matching entries found",
+        paginate: {
+            first: "First",
+            previous: "Previous",
+            next: "Next",
+            last: "Last"
+        },
+        buttons: {
+            copy: "Copy",
+            excel: "Excel",
+            pdf: "PDF"
+        }
+    }
+};
+
 function hideSearchInputs(containerElement, columns) {
-    for (i = 0; i < columns.length; i++) {
-        if (columns[i]) {
-
-            $(`#${containerElement} .filters th`).eq(i).show();
+    for (let index = 0; index < columns.length; index += 1) {
+        if (columns[index]) {
+            $(`#${containerElement} .filters th`).eq(index).show();
         } else {
-            $(`#${containerElement} .filters th`).eq(i).hide();
-
+            $(`#${containerElement} .filters th`).eq(index).hide();
         }
     }
 }
 
-function createDataTable(containerElement, order, pageLength) {
+function createDataTable(containerElement, order, pageLength, lang) {
+    const uiLang = lang || window.hslSiteLang || document.documentElement.lang || "de";
+    const messages = DATA_TABLE_TEXT[uiLang] || DATA_TABLE_TEXT.de;
     
     $(`#${containerElement} thead tr`)
         .clone(true)
@@ -29,7 +70,7 @@ function createDataTable(containerElement, order, pageLength) {
         buttons: [{
             extend: 'copyHtml5',
             text: '<i class="far fa-copy"/>',
-            titleAttr: 'Copy',
+            titleAttr: messages.buttons.copy,
             className: 'btn-link',
             init: function (api, node, config) {
                 $(node).removeClass('btn-secondary')
@@ -38,7 +79,7 @@ function createDataTable(containerElement, order, pageLength) {
         {
             extend: 'excelHtml5',
             text: '<i class="far fa-file-excel"/>',
-            titleAttr: 'Excel',
+            titleAttr: messages.buttons.excel,
             className: 'btn-link',
             init: function (api, node, config) {
                 $(node).removeClass('btn-secondary')
@@ -47,12 +88,21 @@ function createDataTable(containerElement, order, pageLength) {
         {
             extend: 'pdfHtml5',
             text: '<i class="far fa-file-pdf"/>',
-            titleAttr: 'PDF',
+            titleAttr: messages.buttons.pdf,
             className: 'btn-link',
             init: function (api, node, config) {
                 $(node).removeClass('btn-secondary')
             }
         }],
+        language: {
+            search: messages.search,
+            info: messages.info,
+            infoEmpty: messages.infoEmpty,
+            infoFiltered: messages.infoFiltered,
+            lengthMenu: messages.lengthMenu,
+            zeroRecords: messages.zeroRecords,
+            paginate: messages.paginate,
+        },
         order: order,
         orderCellsTop: true,
         fixedHeader: true,

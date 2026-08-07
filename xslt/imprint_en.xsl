@@ -6,57 +6,12 @@
     version="2.0" exclude-result-prefixes="#all">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     
-    <xsl:import href="./partials/html_navbar_en.xsl"/>
-    <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer_en.xsl"/>
+    <xsl:import href="./partials/i18n-utils.xsl"/>
     <xsl:template match="/">
-        <xsl:variable name="doc_title" select="'Impressum'"/>
-        <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-        <html xmlns="http://www.w3.org/1999/xhtml">
-            <head>
-                <xsl:call-template name="html_head">
-                    <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
-                </xsl:call-template>
-            </head>
-            
-            <body class="page">
-                <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar_en"/>
-                    
-                    <div class="container-fluid" style="margin: 3em auto;">
-                        <h1><xsl:value-of select="$doc_title"/></h1>
-
-                        <xsl:for-each select=".//div">
-                            <xsl:apply-templates/>
-                        </xsl:for-each>
-                    </div>
-                    
-                    <xsl:call-template name="html_footer_en"/>
-                    
-                </div>
-                <script type="text/javascript" src="js/run.js"></script>
-            </body>
-        </html>
-    </xsl:template>
-    <xsl:template match="div">
-        <div><xsl:apply-templates/></div>
-    </xsl:template>
-    <xsl:template match="p">
-        <p><xsl:apply-templates/></p>
-    </xsl:template>
-    <xsl:template match="h2">
-        <h2><xsl:apply-templates/></h2>
-    </xsl:template>
-    <xsl:template match="h3">
-        <h3><xsl:apply-templates/></h3>
-    </xsl:template>
-    <xsl:template match="hr">
-        <hr/>
-    </xsl:template>
-    <xsl:template match="br">
-        <br/>
-    </xsl:template>
-    <xsl:template match="a">
-        <a href="{@href}"><xsl:apply-templates/></a>
+        <xsl:call-template name="redirect-page">
+            <xsl:with-param name="canonicalPath" select="'imprint.html'"/>
+            <xsl:with-param name="defaultLang" select="'en'"/>
+            <xsl:with-param name="htmlTitle" select="'Redirecting to imprint'"/>
+        </xsl:call-template>
     </xsl:template>
 </xsl:stylesheet>
