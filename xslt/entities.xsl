@@ -367,18 +367,6 @@
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
-                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']/text()">
-                                                <tr>
-                                                    <th>
-                                                        Wikidata ID
-                                                    </th>
-                                                    <td>
-                                                        <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
-                                                            <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                </xsl:if>
                                                 <xsl:if test="./tei:idno[@subtype='GND']/text()">
                                                 <tr>
                                                     <th>
@@ -387,6 +375,18 @@
                                                     <td>
                                                         <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                                             <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']/text()">
+                                                <tr>
+                                                    <th>
+                                                        Wikidata ID
+                                                    </th>
+                                                    <td>
+                                                        <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                                            <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -576,18 +576,18 @@
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
-                                                <!--<xsl:if test="./tei:idno[@type='WIKIDATA']">
+                                                <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
                                                     <tr>
                                                         <th>
                                                             Wikidata
                                                         </th>
                                                         <td>
                                                             <a href="{./tei:idno[@type='WIKIDATA']}" target="_blank">
-                                                                <xsl:value-of select="tokenize(./tei:idno[@type='WIKIDATA'], '/')[last()]"/>
+                                                                <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                </xsl:if>-->
+                                                </xsl:if>
                                                 <xsl:if test="./tei:noteGrp[@type='Werkbezug']">
                                                     <tr>
                                                         <th> Werkbezug </th>

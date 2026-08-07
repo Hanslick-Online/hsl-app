@@ -91,7 +91,7 @@
                     <xsl:when test="contains($doc_title, 'Werkregister')">
                         <script src="js/dt-panes.js"/>
                         <script type="text/javascript">
-                            createDataTable('listbibl', 'Suche:', [2, 3, 5, 7], [0, 1, 4, 6], [8]);
+                            createDataTable('listbibl', 'Suche:', [2, 3, 6, 8], [0, 1, 4, 7], [9]);
                         </script>
                     </xsl:when>
                 </xsl:choose>
@@ -354,6 +354,7 @@
                         <th style="min-width: 200px;">Autor</th>
                         <th style="min-width: 200px;">Figur</th>
                         <th>GND</th>
+                        <th>Wikidata</th>
                         <th>Digitalisat</th>
                         <th>Werkbezug</th>
                         <th>Erwähnt #</th>
@@ -406,6 +407,13 @@
                                     <xsl:if test="./tei:idno[@subtype='GND']">
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
+                                    </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
+                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
                                     </a>
                                     </xsl:if>
                                 </td>

@@ -366,6 +366,52 @@
                                             </td>
                                         </tr>
                                     </xsl:if>
+                                     <xsl:if test="./tei:idno[@subtype='WIKIDATA']/text()">
+                                        <tr>
+                                            <th> WIKIDATA </th>
+                                            <td>
+                                                <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                                    <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </xsl:if>
+                                     <xsl:if test="./tei:idno[@subtype='PMB']/text()">
+                                                    <tr>
+                                                        <th>
+                                                            Personen der Moderne Basis (PMB)
+                                                        </th>
+                                                        <td>
+                                                            <a href="{./tei:idno[@subtype='PMB']}" target="_blank">
+                                                                <xsl:value-of select="tokenize(./tei:idno[@subtype='PMB'], '/')[last()]"/>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:idno[@subtype='OEML']/text()">
+                                                    <tr>
+                                                        <th>
+                                                            Österreichisches Musiklexikon
+                                                        </th>
+                                                        <td>
+                                                            <a href="{./tei:idno[@subtype='OEML']}" target="_blank">
+                                                                <xsl:value-of select="tokenize(./tei:idno[@subtype='OEML'], '/')[last()]"/>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
+                                                <xsl:if test="./tei:idno[@subtype='OEBL']/text()">
+                                                    <tr>
+                                                        <th>
+                                                            Österreichisches Biographisches Lexikon
+                                                        </th>
+                                                        <td>
+                                                            <a href="{./tei:idno[@subtype='OEBL']}" target="_blank">
+                                                                <xsl:value-of select="tokenize(./tei:idno[@subtype='OEBL'], '/')[last()]"/>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </xsl:if>
                                     <xsl:if test="./tei:noteGrp[@type='Werkbezug']">
                                         <tr>
                                             <th> Werkbezug </th>
