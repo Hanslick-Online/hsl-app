@@ -14,6 +14,10 @@
     <xsl:template name="document-download">
         <xsl:param name="edition"/>
         <xsl:variable name="pdfRepo" select="'https://hanslick-online.github.io/hsl-pdf/'" />
+        <xsl:variable name="teiDownloadName"
+            select="if (ends-with(//tei:TEI/@xml:id, '.xml'))
+                    then //tei:TEI/@xml:id
+                    else concat(//tei:TEI/@xml:id, '.xml')"/>
         <div id="document-download">
             <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart">
                 <!-- Your menu goes here -->
@@ -29,7 +33,7 @@
                                 <li class="dropdown-item"><a
                                     href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
-                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
+                                    download="{$teiDownloadName}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
@@ -42,7 +46,7 @@
                                 <li class="dropdown-item"><a
                                     href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
-                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
+                                    download="{$teiDownloadName}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
@@ -55,7 +59,7 @@
                                 <li class="dropdown-item"><a
                                     href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
-                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
+                                    download="{$teiDownloadName}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
@@ -68,7 +72,7 @@
                                 <li class="dropdown-item"><a
                                     href="{//tei:TEI/@xml:id}"
                                     aria-label="TEI/XML Document Download"
-                                    download="{substring-before(//tei:TEI/@xml:id, '.xml')}">
+                                    download="{$teiDownloadName}">
                                     TEI/XML 
                                 </a></li>
                                 <li class="dropdown-item"><a href="{concat($pdfRepo, substring-before(//tei:TEI/@xml:id, '.xml'), '.pdf')}"
