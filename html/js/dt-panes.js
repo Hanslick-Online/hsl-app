@@ -45,6 +45,10 @@ function getDataTableLanguage(searchLabel) {
     if (lang === 'en') {
         return {
             search: searchLabel,
+            paginate: {
+                previous: 'Previous',
+                next: 'Next'
+            },
             searchPanes: {
                 clearMessage: 'Clear All',
                 clearPane: 'Clear Pane',
@@ -60,6 +64,10 @@ function getDataTableLanguage(searchLabel) {
 
     return {
         search: searchLabel,
+        paginate: {
+            previous: 'Zurück',
+            next: 'Weiter'
+        },
         searchPanes: {
             clearMessage: 'Alle löschen',
             clearPane: 'Filter löschen',

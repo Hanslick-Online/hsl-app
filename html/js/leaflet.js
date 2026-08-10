@@ -32,6 +32,10 @@ function leafletDatatable(table, panesShow, panesHide) {
 
         if (lang === 'en') {
             return {
+                paginate: {
+                    previous: 'Previous',
+                    next: 'Next'
+                },
                 searchPanes: {
                     clearMessage: 'Clear All',
                     clearPane: 'Clear Pane',
@@ -46,6 +50,10 @@ function leafletDatatable(table, panesShow, panesHide) {
         }
 
         return {
+            paginate: {
+                previous: 'Zurück',
+                next: 'Weiter'
+            },
             searchPanes: {
                 clearMessage: 'Alle löschen',
                 clearPane: 'Filter löschen',
