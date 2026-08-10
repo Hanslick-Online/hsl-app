@@ -1,4 +1,32 @@
 function leafletDatatable(table, panesShow, panesHide) {                
+    function localizePanePlaceholders(containerElement) {
+        var lang = window.hslSiteLang || document.documentElement.lang || 'de';
+        var labelMap = new Map();
+
+        document.querySelectorAll(`#${containerElement} thead th[data-label-de][data-label-en]`).forEach(function(header) {
+            var deLabel = header.getAttribute('data-label-de') || '';
+            var enLabel = header.getAttribute('data-label-en') || '';
+            var localizedLabel = lang === 'en' ? enLabel : deLabel;
+
+            if (deLabel) {
+                labelMap.set(deLabel, localizedLabel);
+            }
+
+            if (enLabel) {
+                labelMap.set(enLabel, localizedLabel);
+            }
+        });
+
+        document.querySelectorAll('.dtsp-paneInputButton').forEach(function(input) {
+            var placeholder = input.getAttribute('placeholder') || '';
+            var localizedPlaceholder = labelMap.get(placeholder);
+
+            if (localizedPlaceholder) {
+                input.setAttribute('placeholder', localizedPlaceholder);
+            }
+        });
+    }
+
     // display map container
     $('#leaflet-map-one').css({'display': 'flex'});
     // leaflet map:
@@ -81,7 +109,19 @@ function leafletDatatable(table, panesShow, panesHide) {
             }
         ],
     });
-    
+
+    if (window.hslApplyLanguage) {
+        window.hslApplyLanguage(window.hslSiteLang || document.documentElement.lang || 'de');
+    }
+
+    localizePanePlaceholders(table);
+    tableOne.on('draw.dt', function() {
+        if (window.hslApplyLanguage) {
+            window.hslApplyLanguage(window.hslSiteLang || document.documentElement.lang || 'de');
+        }
+        localizePanePlaceholders(table);
+    });
+
     tableOne.on('search.dt', function() {
         var value = $('.dataTables_filter input').val();
         if (value.length != 0) {

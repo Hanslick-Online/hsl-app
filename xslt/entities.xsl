@@ -6,6 +6,11 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:hsl="https://hanslick.acdh.oeaw.ac.at/ns/hsl"
     version="2.0" exclude-result-prefixes="xsl tei xs hsl">
+    <xsl:import href="./partials/i18n-utils.xsl"/>
+    <xsl:import href="./partials/html_navbar_i18n.xsl"/>
+    <xsl:import href="./partials/html_head.xsl"/>
+    <xsl:import href="partials/html_footer_i18n.xsl"/>
+
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
 
     <xsl:function name="hsl:target-to-html" as="xs:string">
@@ -16,10 +21,6 @@
             else replace($target, '\.xml$', '.html')
         "/>
     </xsl:function>
-    
-    <xsl:import href="./partials/html_navbar.xsl"/>
-    <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer.xsl"/>
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
@@ -31,7 +32,7 @@
                     <xsl:variable name="doc_url" select="concat(@xml:id, '.html')"/>
                     <xsl:result-document href="{$doc_url}">
                         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-                        <html>
+                        <html lang="de" data-has-english="true" data-title-de="{$doc_title}" data-title-en="Person entry | Hanslick Edition">
                             <head>
                                 <xsl:call-template name="html_head">
                                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -39,7 +40,7 @@
                             </head>
                             <body class="page">
                                 <div class="hfeed site" id="page">
-                                    <xsl:call-template name="nav_bar"/>
+                                    <xsl:call-template name="nav_bar_i18n"/>
                                     
                                     <div class="container-fluid">
                                             
@@ -48,7 +49,7 @@
                                                 <xsl:if test="./tei:persName[@type='main']/tei:surname/text()">
                                                 <tr>
                                                     <th>
-                                                        Name
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Name'"/><xsl:with-param name="en" select="'Name'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="./tei:persName[@type='main']/tei:surname"/>
@@ -58,7 +59,7 @@
                                                 <xsl:if test="./tei:persName[@type='main']/tei:forename/text()">
                                                 <tr>
                                                     <th>
-                                                        Vorname
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Vorname'"/><xsl:with-param name="en" select="'Given name'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="./tei:persName[@type='main']/tei:forename"/>
@@ -69,7 +70,7 @@
                                                     .           /tei:persName[@type='alternative']/tei:forename/text()">
                                                     <tr>
                                                         <th>
-                                                            Name (alt)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Name (alt)'"/><xsl:with-param name="en" select="'Alternative name'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:if test="./tei:persName[@type='alternative']/tei:surname/text()">
@@ -88,17 +89,18 @@
                                                 <xsl:if test="@role">
                                                     <tr>
                                                         <th>
-                                                            Funktion
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Funktion'"/><xsl:with-param name="en" select="'Role'"/></xsl:call-template>
                                                         </th>
                                                         <td>
-                                                            Figur
+                                                            <span data-lang="de">Figur</span>
+                                                            <span data-lang="en" hidden="hidden">Character</span>
                                                         </td>
                                                     </tr>
                                                 </xsl:if>
                                                 <xsl:if test="./tei:birth/text()">
                                                 <tr>
                                                     <th>
-                                                        Lebensdaten
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Lebensdaten'"/><xsl:with-param name="en" select="'Life dates'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="./tei:birth"/>
@@ -108,7 +110,7 @@
                                                 <xsl:if test="./tei:occupation/text()">
                                                     <tr>
                                                         <th>
-                                                            Beschreibung
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Beschreibung'"/><xsl:with-param name="en" select="'Description'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -146,7 +148,7 @@
                                                 <xsl:if test="./tei:idno[@subtype='PMB']/text()">
                                                     <tr>
                                                         <th>
-                                                            Personen der Moderne Basis (PMB)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Personen der Moderne Basis (PMB)'"/><xsl:with-param name="en" select="'Persons of Modernity Base (PMB)'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <a href="{./tei:idno[@subtype='PMB']}" target="_blank">
@@ -158,7 +160,7 @@
                                                 <xsl:if test="./tei:idno[@subtype='OEML']/text()">
                                                     <tr>
                                                         <th>
-                                                            Österreichisches Musiklexikon
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Oesterreichisches Musiklexikon'"/><xsl:with-param name="en" select="'Austrian Music Lexicon'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <a href="{./tei:idno[@subtype='OEML']}" target="_blank">
@@ -170,7 +172,7 @@
                                                 <xsl:if test="./tei:idno[@subtype='OEBL']/text()">
                                                     <tr>
                                                         <th>
-                                                            Österreichisches Biographisches Lexikon
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Oesterreichisches Biographisches Lexikon'"/><xsl:with-param name="en" select="'Austrian Biographical Lexicon'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <a href="{./tei:idno[@subtype='OEBL']}" target="_blank">
@@ -182,7 +184,7 @@
                                                 <xsl:if test="./tei:listBibl[@type='authorOf']">
                                                 <tr>
                                                     <th>
-                                                        Werke (Schöpfer)
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Werke (Schoepfer)'"/><xsl:with-param name="en" select="'Works (creator)'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <ul>
@@ -201,7 +203,7 @@
                                                 <xsl:if test="./tei:listBibl[@type='characterOf']">
                                                     <tr>
                                                         <th>
-                                                            Werke (Figur)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Werke (Figur)'"/><xsl:with-param name="en" select="'Works (character)'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -220,7 +222,7 @@
                                                 <xsl:if test="./tei:noteGrp">
                                                 <tr>
                                                     <th>
-                                                        Erwähnt in
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwaehnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <ul>
@@ -238,15 +240,17 @@
                                                 <xsl:if test="@cert">
                                                     <tr>
                                                         <th>
-                                                            Überprüft
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Ueberprueft'"/><xsl:with-param name="en" select="'Verified'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:choose>
                                                                 <xsl:when test="@cert='high'">
-                                                                    mehrfach
+                                                                    <span data-lang="de">mehrfach</span>
+                                                                    <span data-lang="en" hidden="hidden">multiple checks</span>
                                                                 </xsl:when>
                                                                 <xsl:otherwise>
-                                                                    einmalig
+                                                                    <span data-lang="de">einmalig</span>
+                                                                    <span data-lang="en" hidden="hidden">single check</span>
                                                                 </xsl:otherwise>
                                                             </xsl:choose>
                                                         </td>
@@ -256,7 +260,7 @@
                                         </table>
                                            
                                     </div><!-- .container-fluid -->
-                                    <xsl:call-template name="html_footer"/>
+                                    <xsl:call-template name="html_footer_i18n"/>
                                 </div><!-- .site -->
                             </body>
                         </html>
@@ -268,7 +272,7 @@
                     <xsl:variable name="doc_url" select="concat(@xml:id, '.html')"/>
                     <xsl:result-document href="{$doc_url}">
                         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-                        <html>
+                        <html lang="de" data-has-english="true" data-title-de="{$doc_title}" data-title-en="Place entry | Hanslick Edition">
                             <head>
                                 <xsl:call-template name="html_head">
                                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -276,7 +280,7 @@
                             </head>
                             <body class="page">
                                 <div class="hfeed site" id="page">
-                                    <xsl:call-template name="nav_bar"/>
+                                    <xsl:call-template name="nav_bar_i18n"/>
                                     
                                     <div class="container-fluid">  
                                         
@@ -285,7 +289,7 @@
                                             <tbody>
                                                 <tr>
                                                     <th>
-                                                        Ortsname
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Ortsname'"/><xsl:with-param name="en" select="'Place name'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:choose>
@@ -301,7 +305,7 @@
                                                 <xsl:if test="//tei:placeName[@type='alternative']/text()">
                                                     <tr>
                                                         <th>
-                                                            Ortsname (alt)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Ortsname (alt)'"/><xsl:with-param name="en" select="'Alternative place name'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:choose>
@@ -318,7 +322,7 @@
                                                 <xsl:if test="./tei:location[@type='located_in_place']/text()">
                                                     <tr>
                                                         <th>
-                                                            Teil von
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Teil von'"/><xsl:with-param name="en" select="'Part of'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -338,7 +342,7 @@
                                                 <xsl:if test="./tei:country/text()">
                                                 <tr>
                                                     <th>
-                                                        Land
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Land'"/><xsl:with-param name="en" select="'Country'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="./tei:country"/>
@@ -348,7 +352,7 @@
                                                 <xsl:if test="./tei:settlement/text()">
                                                 <tr>
                                                     <th>
-                                                        Typ
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Typ'"/><xsl:with-param name="en" select="'Type'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="./tei:settlement/@type"/>, <xsl:value-of select="./tei:desc[@type='entity_type']"/>
@@ -394,7 +398,7 @@
                                                 <xsl:if test="./tei:location/tei:geo/text()">
                                                 <tr>
                                                     <th>
-                                                        Latitude
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Latitude'"/><xsl:with-param name="en" select="'Latitude'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="tokenize(./tei:location/tei:geo, ', ')[1]"/>
@@ -404,7 +408,7 @@
                                                 <xsl:if test="./tei:location/tei:geo/text()">
                                                 <tr>
                                                     <th>
-                                                        Longitude
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Longitude'"/><xsl:with-param name="en" select="'Longitude'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <xsl:value-of select="tokenize(./tei:location/tei:geo, ', ')[2]"/>
@@ -414,7 +418,7 @@
                                                 <xsl:if test="./tei:noteGrp">
                                                     <tr>
                                                         <th>
-                                                            Erwähnt in
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwaehnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -432,15 +436,17 @@
                                                 <xsl:if test="@cert">
                                                     <tr>
                                                         <th>
-                                                            Überprüft
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Ueberprueft'"/><xsl:with-param name="en" select="'Verified'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:choose>
                                                                 <xsl:when test="@cert='high'">
-                                                                    mehrfach
+                                                                    <span data-lang="de">mehrfach</span>
+                                                                    <span data-lang="en" hidden="hidden">multiple checks</span>
                                                                 </xsl:when>
                                                                 <xsl:otherwise>
-                                                                    einmalig
+                                                                    <span data-lang="de">einmalig</span>
+                                                                    <span data-lang="en" hidden="hidden">single check</span>
                                                                 </xsl:otherwise>
                                                             </xsl:choose>
                                                         </td>
@@ -450,7 +456,7 @@
                                         </table>
                                         
                                     </div><!-- .container-fluid -->
-                                    <xsl:call-template name="html_footer"/>
+                                    <xsl:call-template name="html_footer_i18n"/>
                                 </div><!-- .site -->
                             </body>
                         </html>
@@ -462,7 +468,7 @@
                     <xsl:variable name="doc_url" select="concat(@xml:id, '.html')"/>
                     <xsl:result-document href="{$doc_url}">
                         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-                        <html>
+                        <html lang="de" data-has-english="true" data-title-de="{$doc_title}" data-title-en="Work entry | Hanslick Edition">
                             <head>
                                 <xsl:call-template name="html_head">
                                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -470,7 +476,7 @@
                             </head>
                             <body class="page">
                                 <div class="hfeed site" id="page">
-                                    <xsl:call-template name="nav_bar"/>
+                                    <xsl:call-template name="nav_bar_i18n"/>
                                     
                                     <div class="container-fluid">  
                                         
@@ -479,7 +485,7 @@
                                                 <xsl:if test="./tei:title[@type='main']/text()">
                                                     <tr>
                                                         <th>
-                                                            Titel
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Titel'"/><xsl:with-param name="en" select="'Title'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:title[@type='main']"/>
@@ -489,7 +495,7 @@
                                                 <xsl:if test="./tei:title[@type='alternative']/text()">
                                                     <tr>
                                                         <th>
-                                                            Titel (alt)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Titel (alt)'"/><xsl:with-param name="en" select="'Alternative title'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:title[@type='alternative']"/>
@@ -499,7 +505,7 @@
                                                 <xsl:if test="./tei:author">
                                                     <tr>
                                                         <th>
-                                                            Autor(en)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Autor(en)'"/><xsl:with-param name="en" select="'Author(s)'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -518,7 +524,7 @@
                                                 <xsl:if test="./tei:name[@type='character']">
                                                     <tr>
                                                         <th>
-                                                            Figur(en)
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Figur(en)'"/><xsl:with-param name="en" select="'Character(s)'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -537,7 +543,7 @@
                                                 <xsl:if test="./tei:date/text()">
                                                     <tr>
                                                         <th>
-                                                            Datum
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Datum'"/><xsl:with-param name="en" select="'Date'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:date"/>
@@ -547,7 +553,7 @@
                                                 <xsl:if test="./tei:biblScope[@type='volume']/text()">
                                                     <tr>
                                                         <th>
-                                                            Band
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Band'"/><xsl:with-param name="en" select="'Volume'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:biblScope[@type='volume']"/>
@@ -557,7 +563,7 @@
                                                 <xsl:if test="./tei:biblScope[@type='chapter']/text()">
                                                     <tr>
                                                         <th>
-                                                            Kapitel
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Kapitel'"/><xsl:with-param name="en" select="'Chapter'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:biblScope[@type='chapter']"/>
@@ -590,7 +596,7 @@
                                                 </xsl:if>
                                                 <xsl:if test="./tei:noteGrp[@type='Werkbezug']">
                                                     <tr>
-                                                        <th> Werkbezug </th>
+                                                        <th><xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Werkbezug'"/><xsl:with-param name="en" select="'Work relation'"/></xsl:call-template></th>
                                                         <td>
                                                             <ul>
                                                                 <xsl:for-each select="./tei:noteGrp[@type='Werkbezug']/tei:note">
@@ -608,7 +614,7 @@
                                                 </xsl:if>
                                                 <xsl:if test="./tei:idno[@subtype='Digitalisat']/text()">
                                                     <tr>
-                                                        <th> Digitalisat </th>
+                                                        <th><xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Digitalisat'"/><xsl:with-param name="en" select="'Digital copy'"/></xsl:call-template></th>
                                                         <td>
                                                             <ul>
                                                                 <xsl:for-each select="./tei:idno[@subtype = 'Digitalisat']">
@@ -628,7 +634,7 @@
                                                 <xsl:if test="./tei:lang/text()">
                                                     <tr>
                                                         <th>
-                                                            Sprache
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Sprache'"/><xsl:with-param name="en" select="'Language'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:value-of select="./tei:lang"/>
@@ -638,7 +644,7 @@
                                                 <xsl:if test="./tei:noteGrp">
                                                     <tr>
                                                         <th>
-                                                            Erwähnt in
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwaehnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -656,15 +662,17 @@
                                                 <xsl:if test="@cert">
                                                     <tr>
                                                         <th>
-                                                            Überprüft
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Ueberprueft'"/><xsl:with-param name="en" select="'Verified'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <xsl:choose>
                                                                 <xsl:when test="@cert='high'">
-                                                                    mehrfach
+                                                                    <span data-lang="de">mehrfach</span>
+                                                                    <span data-lang="en" hidden="hidden">multiple checks</span>
                                                                 </xsl:when>
                                                                 <xsl:otherwise>
-                                                                    einmalig
+                                                                    <span data-lang="de">einmalig</span>
+                                                                    <span data-lang="en" hidden="hidden">single check</span>
                                                                 </xsl:otherwise>
                                                             </xsl:choose>
                                                         </td>
@@ -674,7 +682,7 @@
                                         </table>
                                         
                                     </div><!-- .container-fluid -->
-                                    <xsl:call-template name="html_footer"/>
+                                    <xsl:call-template name="html_footer_i18n"/>
                                 </div><!-- .site -->
                             </body>
                         </html>
