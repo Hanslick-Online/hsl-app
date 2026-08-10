@@ -128,7 +128,7 @@
                          <th>PMB</th>
                          <th>OeBl</th>
                          <th>OeMl</th>
-                         <th data-label-de="Erwaehnt #" data-label-en="Mentions #">Erwaehnt #</th>
+                         <th data-label-de="Erwähnt #" data-label-en="Mentions #">Erwähnt #</th>
                          <th data-label-de="Initial" data-label-en="Initial">Initial</th>
                      </tr>
                  </thead>
@@ -273,7 +273,7 @@
                         <th data-label-de="Koordinaten" data-label-en="Coordinates">Koordinaten</th>
                         <th data-label-de="Typ" data-label-en="Type">Typ</th>
                         <th data-label-de="Land" data-label-en="Country">Land</th>
-                        <th data-label-de="Erwaehnt #" data-label-en="Mentions #">Erwaehnt #</th>
+                        <th data-label-de="Erwähnt #" data-label-en="Mentions #">Erwähnt #</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -366,7 +366,7 @@
                         <th>Wikidata</th>
                         <th data-label-de="Digitalisat" data-label-en="Digital copy">Digitalisat</th>
                         <th data-label-de="Werkbezug" data-label-en="Work relation">Werkbezug</th>
-                        <th data-label-de="Erwaehnt #" data-label-en="Mentions #">Erwaehnt #</th>
+                        <th data-label-de="Erwähnt #" data-label-en="Mentions #">Erwähnt #</th>
                         <th data-label-de="Initial" data-label-en="Initial">Initial</th>
                     </tr>
                 </thead>

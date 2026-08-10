@@ -222,7 +222,7 @@
                                                 <xsl:if test="./tei:noteGrp">
                                                 <tr>
                                                     <th>
-                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwaehnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
+                                                        <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwähnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
                                                     </th>
                                                     <td>
                                                         <ul>
@@ -418,7 +418,7 @@
                                                 <xsl:if test="./tei:noteGrp">
                                                     <tr>
                                                         <th>
-                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwaehnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwähnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
@@ -644,7 +644,7 @@
                                                 <xsl:if test="./tei:noteGrp">
                                                     <tr>
                                                         <th>
-                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwaehnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
+                                                            <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Erwähnt in'"/><xsl:with-param name="en" select="'Mentioned in'"/></xsl:call-template>
                                                         </th>
                                                         <td>
                                                             <ul>
