@@ -27,6 +27,38 @@ function leafletDatatable(table, panesShow, panesHide) {
         });
     }
 
+    function getDataTableLanguage() {
+        var lang = window.hslSiteLang || document.documentElement.lang || 'de';
+
+        if (lang === 'en') {
+            return {
+                searchPanes: {
+                    clearMessage: 'Clear All',
+                    clearPane: 'Clear Pane',
+                    collapseMessage: 'Collapse All',
+                    showMessage: 'Show All',
+                    title: {
+                        0: 'Filters Active - 0',
+                        _: 'Filters Active - %d'
+                    }
+                }
+            };
+        }
+
+        return {
+            searchPanes: {
+                clearMessage: 'Alle löschen',
+                clearPane: 'Filter löschen',
+                collapseMessage: 'Alle einklappen',
+                showMessage: 'Alle anzeigen',
+                title: {
+                    0: 'Aktive Filter - 0',
+                    _: 'Aktive Filter - %d'
+                }
+            }
+        };
+    }
+
     // display map container
     $('#leaflet-map-one').css({'display': 'flex'});
     // leaflet map:
@@ -85,9 +117,7 @@ function leafletDatatable(table, panesShow, panesHide) {
     // variable id #tableOne must match table id in html
     var tableOne = $('#' + table)
     .DataTable({
-        "language": {
-        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json"
-            },
+        language: getDataTableLanguage(),
         dom: 'Pfprtip',
         "lengthMenu":[25, 50, 75, 100, "All"],
         responsive: true,

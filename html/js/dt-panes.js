@@ -39,6 +39,40 @@ function localizePanePlaceholders(containerElement) {
     });
 }
 
+function getDataTableLanguage(searchLabel) {
+    const lang = window.hslSiteLang || document.documentElement.lang || 'de';
+
+    if (lang === 'en') {
+        return {
+            search: searchLabel,
+            searchPanes: {
+                clearMessage: 'Clear All',
+                clearPane: 'Clear Pane',
+                collapseMessage: 'Collapse All',
+                showMessage: 'Show All',
+                title: {
+                    0: 'Filters Active - 0',
+                    _: 'Filters Active - %d'
+                }
+            }
+        };
+    }
+
+    return {
+        search: searchLabel,
+        searchPanes: {
+            clearMessage: 'Alle löschen',
+            clearPane: 'Filter löschen',
+            collapseMessage: 'Alle einklappen',
+            showMessage: 'Alle anzeigen',
+            title: {
+                0: 'Aktive Filter - 0',
+                _: 'Aktive Filter - %d'
+            }
+        }
+    };
+}
+
 function createDataTable(containerElement, title, panesShow, panesHide, hide) {
     const splitPaneTargets = containerElement === 'listbibl'
         ? [2, 3]
@@ -94,9 +128,7 @@ function createDataTable(containerElement, title, panesShow, panesHide, hide) {
     var table = $(`#${containerElement}`).DataTable({
         responsive: true,
         pageLength: 50,
-        oLanguage: {
-            "sSearch": title
-        },
+        language: getDataTableLanguage(title),
         dom: 'PfpBrtip',
         searchPanes: {
             initCollapsed: false
