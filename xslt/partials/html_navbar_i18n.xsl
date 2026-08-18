@@ -90,8 +90,8 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a data-lang="de" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Visualisierungen</a>
-                                <a data-lang="en" hidden="hidden" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Visualizations</a>
+                                <a data-lang="de" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Visualisierungen<sup  style="font-variant: small-caps;">beta</sup></a>
+                                <a data-lang="en" hidden="hidden" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Visualizations<sup  style="font-variant: small-caps">beta</sup></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a data-lang="de" class="dropdown-item" href="g_chart.html">Allgemeines Diagramm</a>
