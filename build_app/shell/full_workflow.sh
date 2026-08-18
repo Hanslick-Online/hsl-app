@@ -5,6 +5,7 @@ ANT_OPTS="-Xmx5g"
 #TYPESENSE_PROTOCOL="https"
 #TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
 ./build_app/shell/fetch_data.sh
+./build_app/shell/fetch_vendor.sh
 #./build_app/shell/script.sh
 ./build_app/shell/dl_imprint.sh
 python ./build_app/python/fix_facs_1891.py

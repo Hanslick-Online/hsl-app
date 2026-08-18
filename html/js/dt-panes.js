@@ -11,6 +11,76 @@ function splitPaneListValues(data) {
         .filter(Boolean);
 }
 
+function localizePanePlaceholders(containerElement) {
+    const lang = window.hslSiteLang || document.documentElement.lang || 'de';
+    const labelMap = new Map();
+
+    document.querySelectorAll(`#${containerElement} thead th[data-label-de][data-label-en]`).forEach((header) => {
+        const deLabel = header.getAttribute('data-label-de') || '';
+        const enLabel = header.getAttribute('data-label-en') || '';
+        const localizedLabel = lang === 'en' ? enLabel : deLabel;
+
+        if (deLabel) {
+            labelMap.set(deLabel, localizedLabel);
+        }
+
+        if (enLabel) {
+            labelMap.set(enLabel, localizedLabel);
+        }
+    });
+
+    document.querySelectorAll('.dtsp-paneInputButton').forEach((input) => {
+        const placeholder = input.getAttribute('placeholder') || '';
+        const localizedPlaceholder = labelMap.get(placeholder);
+
+        if (localizedPlaceholder) {
+            input.setAttribute('placeholder', localizedPlaceholder);
+        }
+    });
+}
+
+function getDataTableLanguage(searchLabel) {
+    const lang = window.hslSiteLang || document.documentElement.lang || 'de';
+
+    if (lang === 'en') {
+        return {
+            search: searchLabel,
+            paginate: {
+                previous: 'Previous',
+                next: 'Next'
+            },
+            searchPanes: {
+                clearMessage: 'Clear All',
+                clearPane: 'Clear Pane',
+                collapseMessage: 'Collapse All',
+                showMessage: 'Show All',
+                title: {
+                    0: 'Filters Active - 0',
+                    _: 'Filters Active - %d'
+                }
+            }
+        };
+    }
+
+    return {
+        search: searchLabel,
+        paginate: {
+            previous: 'Zurück',
+            next: 'Weiter'
+        },
+        searchPanes: {
+            clearMessage: 'Alle löschen',
+            clearPane: 'Filter löschen',
+            collapseMessage: 'Alle einklappen',
+            showMessage: 'Alle anzeigen',
+            title: {
+                0: 'Aktive Filter - 0',
+                _: 'Aktive Filter - %d'
+            }
+        }
+    };
+}
+
 function createDataTable(containerElement, title, panesShow, panesHide, hide) {
     const splitPaneTargets = containerElement === 'listbibl'
         ? [2, 3]
@@ -66,9 +136,7 @@ function createDataTable(containerElement, title, panesShow, panesHide, hide) {
     var table = $(`#${containerElement}`).DataTable({
         responsive: true,
         pageLength: 50,
-        oLanguage: {
-            "sSearch": title
-        },
+        language: getDataTableLanguage(title),
         dom: 'PfpBrtip',
         searchPanes: {
             initCollapsed: false
@@ -94,4 +162,17 @@ function createDataTable(containerElement, title, panesShow, panesHide, hide) {
         ],
         columnDefs: columnDefs,
     });
+
+    if (window.hslApplyLanguage) {
+        window.hslApplyLanguage(window.hslSiteLang || document.documentElement.lang || 'de');
+    }
+
+    localizePanePlaceholders(containerElement);
+    table.on('draw.dt', function () {
+        if (window.hslApplyLanguage) {
+            window.hslApplyLanguage(window.hslSiteLang || document.documentElement.lang || 'de');
+        }
+        localizePanePlaceholders(containerElement);
+    });
+
 }

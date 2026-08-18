@@ -35,6 +35,8 @@ jobs:
           echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
       - name: Fetch data
         run: ./build_app/shell/fetch_data.sh
+      - name: Fetch vendor assets
+        run: ./build_app/shell/fetch_vendor.sh
       - name: Fix wrong pagination in 8th edition
         run: ./build_app/python/fix_facs_1891.py
       - name: Generate Imprint
