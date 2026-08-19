@@ -96,8 +96,8 @@
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
                                         <label><i>VMS</i>:</label>
-                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.7825038">
-                                            <img src="images/zenodo.7825038.svg" alt="DOI"/>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.7825039">
+                                            <img src="images/zenodo.78250389.svg" alt="DOI"/>
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
