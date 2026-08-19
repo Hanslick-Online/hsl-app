@@ -213,12 +213,19 @@ body:has(#pbs:checked) .section p.meta-head
 
 .btn-index {
     color: #fff;
-    width: 250px;
+    width: 15rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     background-color: #222fa8;
-    font-size: 22px;
-    margin: 1em 1em 1em 0;
+    font-size: 1.5rem;
+    margin: 0 1em 1em 0;
 }
 
+.index_buttons{
+margin-top: 1rem;
+margin-bottom: 1rem;
+max-width: 44rem; 
+}
 .btn-index a {
     color: #fff;
 }

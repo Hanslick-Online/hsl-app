@@ -95,31 +95,35 @@
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
-                                        <label>VMS:</label>
+                                        <label><i>VMS</i>:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.7825038">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7825038.svg" alt="DOI"/>
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
-                                        <label>NFP:</label>
+                                        <label data-lang="de">Kritiken (<i>NFP</i>):</label>
+                                        <label data-lang="en">Reviews (<i>NFP</i>):</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.8033446">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/>
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
-                                        <label>Reviews of VMS:</label>
+                                        <label data-lang="de">Kritiken von<i>VMS</i>:</label>
+                                        <label data-lang="en">Reviews of VMS:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.15274665">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15274665.svg" alt="DOI"/>
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
-                                        <label>Documents:</label>
+                                        <label data-lang="de">Dokumente zu <i>VMS</i>:</label>
+                                        <label data-lang="en">Documents on <i>VMS</i>:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.15744324">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15744324.svg" alt="DOI"/>
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
-                                        <label>Entities:</label>
+                                        <label data-lang="de">Entitäten:</label>
+                                        <label data-lang="en">Entities:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.22007952">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.22007952.svg" alt="DOI"/>
                                         </a>

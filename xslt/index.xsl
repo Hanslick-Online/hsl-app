@@ -81,10 +81,12 @@
                 <xsl:attribute name="hidden">hidden</xsl:attribute>
             </xsl:if>
             <h1 id="{concat('content-', $lang)}"><xsl:value-of select="$heading"/></h1>
+            <div class="index_buttons">
             <a href="{concat('toc_t.html?lang=', $lang)}"><button type="button" class="btn text-light btn-index"><xsl:value-of select="$treatise"/><br/>(<i class="italics">VMS</i>)</button></a>
             <a href="{concat('toc.html?lang=', $lang)}"><button type="button" class="btn text-light btn-index"><xsl:value-of select="$reviews"/><br/>(<span class="italics">Neue Freie Presse</span>)</button></a>
             <a href="{concat('toc_vms.html?lang=', $lang)}"><button type="button" class="btn btn-index"><xsl:value-of select="$vms"/><i class="italics">VMS</i></button></a>
             <a href="{concat('toc_doc.html?lang=', $lang)}"><button type="button" class="btn btn-index"><xsl:value-of select="$docs"/><i class="italics">VMS</i></button></a>
+            </div>
             <xsl:for-each select="$doc//tei:body/tei:div/tei:p">
                 <xsl:choose>
                     <xsl:when test="position() = 1">
