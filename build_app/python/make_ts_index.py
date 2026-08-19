@@ -5,7 +5,7 @@ import time
 import datetime
 from typing import Any, Dict, cast
 
-from typesense.api_call import ObjectNotFound
+from typesense.exceptions import ObjectNotFound
 from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
 from acdh_cfts_pyutils import CFTS_COLLECTION
 from acdh_tei_pyutils.tei import TeiReader
