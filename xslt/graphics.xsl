@@ -5,11 +5,9 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0" exclude-result-prefixes="tei xsl xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
-    <xsl:import href="./partials/html_navbar.xsl"/>
-    <xsl:import href="./partials/html_navbar_en.xsl"/>
+    <xsl:import href="./partials/html_navbar_i18n.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="./partials/html_footer.xsl"/>
-    <xsl:import href="./partials/html_footer_en.xsl"/>
+    <xsl:import href="./partials/html_footer_i18n.xsl"/>
     <xsl:import href="./partials/graphics_common.xsl"/>
     <xsl:import href="./partials/graphics_net.xsl"/>
     <xsl:import href="./partials/graphics_vms_net.xsl"/>
