@@ -88,34 +88,40 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="custom-html-widget col-12 py-2 d-block">
+                                    <div class="custom-html-widget col-12 py-1 d-block">
                                         <label>App:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.7825053">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7825053.svg" alt="DOI"/>
                                         </a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2 d-block">
-                                        <label>Data (VMS):</label>
+                                    <div class="custom-html-widget col-12 py-1 d-block">
+                                        <label>VMS:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.7825038">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7825038.svg" alt="DOI"/>
                                         </a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2 d-block">
-                                        <label>Data (NFP):</label>
+                                    <div class="custom-html-widget col-12 py-1 d-block">
+                                        <label>NFP:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.8033446">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8033446.svg" alt="DOI"/>
                                         </a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2 d-block">
-                                        <label>Data (Reviews of VMS):</label>
+                                    <div class="custom-html-widget col-12 py-1 d-block">
+                                        <label>Reviews of VMS:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.15274665">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15274665.svg" alt="DOI"/>
                                         </a>
                                     </div>
-                                    <div class="custom-html-widget col-12 py-2 d-block">
-                                        <label>Data (Documents):</label>
+                                    <div class="custom-html-widget col-12 py-1 d-block">
+                                        <label>Documents:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.15744324">
                                             <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.15744324.svg" alt="DOI"/>
+                                        </a>
+                                    </div>
+                                    <div class="custom-html-widget col-12 py-1 d-block">
+                                        <label>Entities:</label>
+                                        <a class="d-block" href="https://doi.org/10.5281/zenodo.22007952">
+                                            <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.22007952.svg" alt="DOI"/>
                                         </a>
                                     </div>
                                 </div>
