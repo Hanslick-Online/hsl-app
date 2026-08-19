@@ -1,0 +1,140 @@
+   .graphics-page {
+                        margin-bottom: 2rem;
+                    }
+
+                    .graphics-panel {
+                        border: 1px solid rgba(0, 0, 0, 0.08);
+                        border-radius: 0.9rem;
+                    }
+
+                    .graphics-intro {
+                        color: #495057;
+                        margin-bottom: 1.5rem;
+                        max-width: 70ch;
+                    }
+
+                    .graphics-controls {
+                        display: grid;
+                        gap: 1.25rem;
+                    }
+
+                    .graphics-section-title {
+                        font-size: 0.95rem;
+                        font-weight: 700;
+                        letter-spacing: 0.04em;
+                        margin-bottom: 0.65rem;
+                        text-transform: uppercase;
+                    }
+
+                    .graphics-add-row {
+                        display: flex;
+                        gap: 0.75rem;
+                    }
+
+                    .graphics-add-row input {
+                        flex: 1 1 auto;
+                    }
+
+                    .graphics-selected-list {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                        min-height: 2.5rem;
+                    }
+
+                    .graphics-selected-item {
+                        align-items: center;
+                        background: #eff6ff;
+                        border: 1px solid #bfdbfe;
+                        border-radius: 999px;
+                        color: #1d4ed8;
+                        display: inline-flex;
+                        gap: 0.5rem;
+                        padding: 0.35rem 0.75rem;
+                    }
+
+                    .graphics-selected-item button {
+                        background: transparent;
+                        border: 0;
+                        color: inherit;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        line-height: 1;
+                        padding: 0;
+                    }
+
+                    .graphics-corpus-list {
+                        display: grid;
+                        gap: 0.6rem;
+                    }
+
+                    .graphics-corpus-list label {
+                        align-items: center;
+                        display: inline-flex;
+                        gap: 0.55rem;
+                    }
+
+                    .graphics-chart-shell {
+                        min-height: 430px;
+                        position: relative;
+                    }
+
+                    #graphics-chart {
+                        cursor: crosshair;
+                    }
+
+                    .graphics-zoom-selection {
+                        background: rgba(34, 87, 122, 0.18);
+                        border: 1px solid rgba(34, 87, 122, 0.9);
+                        bottom: 0;
+                        display: none;
+                        left: 0;
+                        pointer-events: none;
+                        position: absolute;
+                        top: 0;
+                        width: 0;
+                        z-index: 3;
+                    }
+
+                    .graphics-status {
+                        min-height: 1.5rem;
+                    }
+
+                    .graphics-legend-items {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.6rem 1rem;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .graphics-legend-item {
+                        align-items: center;
+                        display: inline-flex;
+                        gap: 0.45rem;
+                    }
+
+                    .graphics-legend-swatch {
+                        border-radius: 999px;
+                        display: inline-block;
+                        height: 0.7rem;
+                        margin-right: 0.25rem;
+                        width: 0.7rem;
+                    }
+
+                    .graphics-legend-link {
+                        color: #0b5394;
+                        text-decoration: none;
+                    }
+
+                    .graphics-legend-link:hover,
+                    .graphics-legend-link:focus {
+                        text-decoration: underline;
+                    }
+
+                    @media (max-width: 991px) {
+                        .graphics-chart-shell {
+                            min-height: 360px;
+                        }
+                    }

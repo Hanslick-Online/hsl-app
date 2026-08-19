@@ -4,19 +4,27 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="xsl tei xs">
-    <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
-    
-    <xsl:import href="./partials/html_navbar.xsl"/>
+    xmlns:hsl="https://hanslick.acdh.oeaw.ac.at/ns/hsl"
+    version="2.0" exclude-result-prefixes="xsl tei xs hsl">
+    <xsl:import href="./partials/i18n-utils.xsl"/>
+    <xsl:import href="./partials/html_navbar_i18n.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer.xsl"/>
+    <xsl:import href="partials/html_footer_i18n.xsl"/>
+
+    <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="no" omit-xml-declaration="yes"/>
 
     <xsl:template match="/">
         <xsl:variable name="doc_title">
             <xsl:value-of select=".//tei:titleStmt//tei:title[@type='main'][1]/text()"/>
         </xsl:variable>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-        <html>
+        <xsl:variable name="doc_title_en" select="
+            if (contains($doc_title, 'Personenregister')) then 'Persons Index of the Hanslick Edition'
+            else if (contains($doc_title, 'Ortsregister')) then 'Places Index of the Hanslick Edition'
+            else if (contains($doc_title, 'Werkregister')) then 'Works Index of the Hanslick Edition'
+            else $doc_title
+        "/>
+        <html lang="de" data-has-english="true" data-title-de="{$doc_title}" data-title-en="{$doc_title_en}">
             <head>
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -33,7 +41,7 @@
                 </xsl:if>
                 
                 <!-- ############### datatable ############### -->
-                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/fc-4.2.1/fh-3.3.1/r-2.4.0/sp-2.1.0/sl-1.5.0/datatables.min.css"/>
+                <link rel="stylesheet" type="text/css" href="vendor/datatables/indices/datatables.min.css"/>
                 <style>
                     .container-fluid {
                         max-width: 100% !important;
@@ -42,10 +50,11 @@
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:call-template name="nav_bar_i18n"/>
                     
                     <div class="container-fluid">
-                        <h1 style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title"/></h1>
+                        <h1 data-lang="de" style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title"/></h1>
+                        <h1 data-lang="en" hidden="hidden" style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title_en"/></h1>
                         
                         <xsl:if test="contains($doc_title, 'Ortsregister')">
                             <div id="tableReload-wrapper">
@@ -60,19 +69,17 @@
                         <xsl:apply-templates select="//tei:body"/>
 
                     </div><!-- .container-fluid -->
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:call-template name="html_footer_i18n"/>
                 </div><!-- .site -->
                 
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-                <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/fc-4.2.1/fh-3.3.1/r-2.4.0/sp-2.1.0/sl-1.5.0/datatables.min.js"></script>                
+                <script type="text/javascript" src="vendor/pdfmake/pdfmake.min.js"></script>
+                <script type="text/javascript" src="vendor/pdfmake/vfs_fonts.js"></script>
+                <script type="text/javascript" src="vendor/datatables/indices/datatables.min.js"></script>
                 <xsl:if test="contains($doc_title, 'Ortsregister')">
                     <!-- ############### leaflet script ################ -->
-                    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-                        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-                        crossorigin=""></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-                    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+                    <script src="vendor/leaflet/leaflet.js" />
+                    <script src="vendor/leaflet-ajax/leaflet.ajax.min.js" />
+                    <script src="vendor/leaflet.markercluster/leaflet.markercluster.js" />
                     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/build/heatmap.min.js"></script>
                     <script src="https://unpkg.com/heatmap.js@2.0.5/plugins/leaflet-heatmap/leaflet-heatmap.js"></script>
@@ -81,7 +88,7 @@
                     <xsl:when test="contains($doc_title, 'Personenregister')">
                         <script src="js/dt-panes.js"/>
                         <script type="text/javascript">
-                            createDataTable('listperson', 'Suche:', [2, 3, 5, 12], [0, 1, 4, 6, 7, 8, 9, 10, 11], [12]);
+                            createDataTable('listperson', new URLSearchParams(window.location.search).get('lang') === 'en' ? 'Search:' : 'Suche:', [2, 3, 5, 12], [0, 1, 4, 6, 7, 8, 9, 10, 11], [12]);
                         </script>
                     </xsl:when>
                     <xsl:when test="contains($doc_title, 'Ortsregister')">
@@ -93,11 +100,10 @@
                     <xsl:when test="contains($doc_title, 'Werkregister')">
                         <script src="js/dt-panes.js"/>
                         <script type="text/javascript">
-                            createDataTable('listbibl', 'Suche:', [2, 3, 5, 7], [0, 1, 4, 6], [8]);
+                            createDataTable('listbibl', new URLSearchParams(window.location.search).get('lang') === 'en' ? 'Search:' : 'Suche:', [2, 3, 6, 8], [0, 1, 4, 7], [9]);
                         </script>
                     </xsl:when>
                 </xsl:choose>
-                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>
@@ -111,19 +117,19 @@
             <table class="table" id="listperson">
                  <thead>
                      <tr>
-                         <th>Name</th>
-                         <th>Name (alt)</th>
-                         <th>Typ</th>
-                         <th>Lebensdaten</th>
-                         <th>Beschreibung</th>
-                         <th>Werke (Figur)</th>
+                         <th data-label-de="Name" data-label-en="Name">Name</th>
+                         <th data-label-de="Name (alt)" data-label-en="Alternative name">Name (alt)</th>
+                         <th data-label-de="Typ" data-label-en="Type">Typ</th>
+                         <th data-label-de="Lebensdaten" data-label-en="Life dates">Lebensdaten</th>
+                         <th data-label-de="Beschreibung" data-label-en="Description">Beschreibung</th>
+                         <th data-label-de="Werke (Figur)" data-label-en="Works (character)">Werke (Figur)</th>
                          <th>GND</th>
                          <th>Wikidata</th>
                          <th>PMB</th>
                          <th>OeBl</th>
                          <th>OeMl</th>
-                         <th>Erwähnt #</th>
-                         <th>Initial</th>
+                         <th data-label-de="Erwähnt #" data-label-en="Mentions #">Erwähnt #</th>
+                         <th data-label-de="Initial" data-label-en="Initial">Initial</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -161,7 +167,8 @@
                                             <xsl:value-of select="@role"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:text>non fictional</xsl:text>
+                                            <span data-lang="de">non fictional</span>
+                                            <span data-lang="en" hidden="hidden">non fictional</span>
                                         </xsl:otherwise>
                                     </xsl:choose>                                    
                                 </td>
@@ -258,15 +265,15 @@
             <table class="table" id="listplace">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Name (alt)</th>
+                        <th data-label-de="Name" data-label-en="Name">Name</th>
+                        <th data-label-de="Name (alt)" data-label-en="Alternative name">Name (alt)</th>
                         <th>Geonames ID</th>
                         <th>Wikidata ID</th>
                         <th>GND ID</th>
-                        <th>Koordinaten</th>
-                        <th>Typ</th>
-                        <th>Land</th>
-                        <th>Erwähnt #</th>
+                        <th data-label-de="Koordinaten" data-label-en="Coordinates">Koordinaten</th>
+                        <th data-label-de="Typ" data-label-en="Type">Typ</th>
+                        <th data-label-de="Land" data-label-en="Country">Land</th>
+                        <th data-label-de="Erwähnt #" data-label-en="Mentions #">Erwähnt #</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -351,15 +358,16 @@
             <table class="table" id="listbibl">
                 <thead>
                     <tr>
-                        <th>Titel</th>
-                        <th>Titel (alt)</th>
-                        <th style="min-width: 200px;">Autor</th>
-                        <th style="min-width: 200px;">Figur</th>
+                        <th data-label-de="Titel" data-label-en="Title">Titel</th>
+                        <th data-label-de="Titel (alt)" data-label-en="Alternative title">Titel (alt)</th>
+                        <th style="min-width: 200px;" data-label-de="Autor" data-label-en="Author">Autor</th>
+                        <th style="min-width: 200px;" data-label-de="Figur" data-label-en="Character">Figur</th>
                         <th>GND</th>
-                        <th>Digitalisat</th>
-                        <th>Werkbezug</th>
-                        <th>Erwähnt #</th>
-                        <th>Initial</th>
+                        <th>Wikidata</th>
+                        <th data-label-de="Digitalisat" data-label-en="Digital copy">Digitalisat</th>
+                        <th data-label-de="Werkbezug" data-label-en="Work relation">Werkbezug</th>
+                        <th data-label-de="Erwähnt #" data-label-en="Mentions #">Erwähnt #</th>
+                        <th data-label-de="Initial" data-label-en="Initial">Initial</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -408,6 +416,13 @@
                                     <xsl:if test="./tei:idno[@subtype='GND']">
                                     <a href="{./tei:idno[@subtype='GND']}" target="_blank">
                                         <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
+                                    </a>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="./tei:idno[@subtype='WIKIDATA']">
+                                    <a href="{./tei:idno[@subtype='WIKIDATA']}" target="_blank">
+                                        <xsl:value-of select="tokenize(./tei:idno[@subtype='WIKIDATA'], '/')[last()]"/>
                                     </a>
                                     </xsl:if>
                                 </td>

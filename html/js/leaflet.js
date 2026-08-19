@@ -1,4 +1,72 @@
 function leafletDatatable(table, panesShow, panesHide) {                
+    function localizePanePlaceholders(containerElement) {
+        var lang = window.hslSiteLang || document.documentElement.lang || 'de';
+        var labelMap = new Map();
+
+        document.querySelectorAll(`#${containerElement} thead th[data-label-de][data-label-en]`).forEach(function(header) {
+            var deLabel = header.getAttribute('data-label-de') || '';
+            var enLabel = header.getAttribute('data-label-en') || '';
+            var localizedLabel = lang === 'en' ? enLabel : deLabel;
+
+            if (deLabel) {
+                labelMap.set(deLabel, localizedLabel);
+            }
+
+            if (enLabel) {
+                labelMap.set(enLabel, localizedLabel);
+            }
+        });
+
+        document.querySelectorAll('.dtsp-paneInputButton').forEach(function(input) {
+            var placeholder = input.getAttribute('placeholder') || '';
+            var localizedPlaceholder = labelMap.get(placeholder);
+
+            if (localizedPlaceholder) {
+                input.setAttribute('placeholder', localizedPlaceholder);
+            }
+        });
+    }
+
+    function getDataTableLanguage() {
+        var lang = window.hslSiteLang || document.documentElement.lang || 'de';
+
+        if (lang === 'en') {
+            return {
+                paginate: {
+                    previous: 'Previous',
+                    next: 'Next'
+                },
+                searchPanes: {
+                    clearMessage: 'Clear All',
+                    clearPane: 'Clear Pane',
+                    collapseMessage: 'Collapse All',
+                    showMessage: 'Show All',
+                    title: {
+                        0: 'Filters Active - 0',
+                        _: 'Filters Active - %d'
+                    }
+                }
+            };
+        }
+
+        return {
+            paginate: {
+                previous: 'Zurück',
+                next: 'Weiter'
+            },
+            searchPanes: {
+                clearMessage: 'Alle löschen',
+                clearPane: 'Filter löschen',
+                collapseMessage: 'Alle einklappen',
+                showMessage: 'Alle anzeigen',
+                title: {
+                    0: 'Aktive Filter - 0',
+                    _: 'Aktive Filter - %d'
+                }
+            }
+        };
+    }
+
     // display map container
     $('#leaflet-map-one').css({'display': 'flex'});
     // leaflet map:
@@ -57,11 +125,8 @@ function leafletDatatable(table, panesShow, panesHide) {
     // variable id #tableOne must match table id in html
     var tableOne = $('#' + table)
     .DataTable({
-        "language": {
-        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json"
-            },
-        dom: 'PfpBrtip',
-        buttons:['copy', 'excel', 'pdf'],
+        language: getDataTableLanguage(),
+        dom: 'Pfprtip',
         "lengthMenu":[25, 50, 75, 100, "All"],
         responsive: true,
         orderCellsTop: true,
@@ -82,7 +147,19 @@ function leafletDatatable(table, panesShow, panesHide) {
             }
         ],
     });
-    
+
+    if (window.hslApplyLanguage) {
+        window.hslApplyLanguage(window.hslSiteLang || document.documentElement.lang || 'de');
+    }
+
+    localizePanePlaceholders(table);
+    tableOne.on('draw.dt', function() {
+        if (window.hslApplyLanguage) {
+            window.hslApplyLanguage(window.hslSiteLang || document.documentElement.lang || 'de');
+        }
+        localizePanePlaceholders(table);
+    });
+
     tableOne.on('search.dt', function() {
         var value = $('.dataTables_filter input').val();
         if (value.length != 0) {

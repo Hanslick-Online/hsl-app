@@ -5,16 +5,17 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
 
-    <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_navbar_i18n.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer.xsl"/>
+    <xsl:import href="partials/html_footer_i18n.xsl"/>
     <xsl:template match="/">
-        <xsl:variable name="doc_title" select="'Inhaltsverzeichnis'"/>
+        <xsl:variable name="doc_title_de" select="'Inhaltsverzeichnis'"/>
+        <xsl:variable name="doc_title_en" select="'Table of Contents'"/>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html xmlns="http://www.w3.org/1999/xhtml" lang="de" data-has-english="true" data-title-de="{$doc_title_de}" data-title-en="{$doc_title_en}">
             <head>
                 <xsl:call-template name="html_head">
-                    <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
+                    <xsl:with-param name="html_title" select="$doc_title_de"></xsl:with-param>
                 </xsl:call-template>
                 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-html5-2.0.0/cr-1.5.4/r-2.2.9/sp-1.4.0/datatables.min.css"></link> -->
                 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css"/>
@@ -22,15 +23,16 @@
 
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:call-template name="nav_bar_i18n"/>
 
                     <div class="container-fluid">
                         <div class="card">
                             <div class="card-header">
-                                <h1>Inhaltsverzeichnis</h1>
+                                <h1 id="content" data-lang="de">Inhaltsverzeichnis</h1>
+                                <h1 id="content-en" data-lang="en" hidden="hidden">Table of Contents</h1>
                             </div>
-                            <div class="card-body">
-                                <table class="table table-striped display" id="tocTable" style="width:100%">
+                            <div class="card-body" data-lang="de">
+                                <table class="table table-striped display" id="tocTable-de" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">Zeitschrift</th>
@@ -57,7 +59,7 @@
                                                 <td>
                                                     <a>
                                                         <xsl:attribute name="href">
-                                                            <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
+                                                            <xsl:value-of select="concat(replace(tokenize($full_path, '/')[last()], '.xml', '.html'), '?lang=de')"/>
                                                         </xsl:attribute>
                                                         <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title[1]/text()"/>
                                                     </a>
@@ -86,17 +88,63 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="card-body" data-lang="en" hidden="hidden">
+                                <table class="table table-striped display" id="tocTable-en" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Newspaper</th>
+                                            <th scope="col">Issue</th>
+                                            <th scope="col">No. / Date</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Subtitle</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <xsl:for-each select="collection('../data/critics/editions')//tei:TEI">
+                                            <xsl:variable name="full_path">
+                                                <xsl:value-of select="document-uri(/)"/>
+                                            </xsl:variable>
+                                            <tr>
+                                                <td><xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='main']/text()"/></td>
+                                                <td><xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:title[@type='sub']/text()"/></td>
+                                                <td>
+                                                    <a>
+                                                        <xsl:attribute name="href">
+                                                            <xsl:value-of select="concat(replace(tokenize($full_path, '/')[last()], '.xml', '.html'), '?lang=en')"/>
+                                                        </xsl:attribute>
+                                                        <xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:analytic/tei:title[1]/text()"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h1']">
+                                                        <xsl:value-of select="."/>
+                                                        <xsl:if test="position() != last()"><br/></xsl:if>
+                                                    </xsl:for-each>
+                                                </td>
+                                                <td>
+                                                    <xsl:for-each select="//tei:body/tei:div/tei:head[@type='h2']">
+                                                        <xsl:apply-templates select="node()"/>
+                                                        <xsl:if test="position() != last()"><br/></xsl:if>
+                                                    </xsl:for-each>
+                                                </td>
+                                                <td><xsl:value-of select=".//tei:sourceDesc//tei:biblStruct/tei:monogr/tei:imprint/tei:date/@when"/></td>
+                                            </tr>
+                                        </xsl:for-each>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:call-template name="html_footer_i18n"/>
                     <script>
                         $(document).ready(function () {
-                            createDataTable('tocTable', [[5, 'asc']], 50);
+                            var activeTable = window.hslSiteLang === 'en' ? 'tocTable-en' : 'tocTable-de';
+                            createDataTable(activeTable, [[5, 'asc']], 50, window.hslSiteLang);
                         });
                     </script>
                 </div>
-                <script type="text/javascript" src="js/run.js"></script>
                 <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-html5-2.0.0/cr-1.5.4/r-2.2.9/sp-1.4.0/datatables.min.js" /> -->
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" />
                 <script type="text/javascript" src="js/dt.js"></script>

@@ -16,7 +16,8 @@
         <xsl:if test="$node_xpath">
             <div class="card-body yes-index my-4">
                 <a class="anchor" id="index.xml-body.1_div.999"></a>
-                <h5>Fußnoten</h5>
+                <h5 data-lang="de">Fußnoten</h5>
+                <h5 data-lang="en" hidden="hidden">Footnotes</h5>
                 <ul class="footnotes">
                     <xsl:for-each select="$node_xpath">
                         <li>

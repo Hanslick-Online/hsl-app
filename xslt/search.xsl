@@ -6,25 +6,26 @@
     version="2.0" exclude-result-prefixes="xsl tei xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     
-    <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_navbar_i18n.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="./partials/html_footer.xsl"/>
+    <xsl:import href="./partials/html_footer_i18n.xsl"/>
     <xsl:template match="/">
-        <xsl:variable name="doc_title" select="'Volltextsuche'"/>
+        <xsl:variable name="doc_title_de" select="'Volltextsuche'"/>
+        <xsl:variable name="doc_title_en" select="'Full Text Search'"/>
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;</xsl:text>
-        <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+        <html xmlns="http://www.w3.org/1999/xhtml" lang="de" data-has-english="true" data-title-de="{$doc_title_de}" data-title-en="{$doc_title_en}">
             <head>
                 <xsl:call-template name="html_head">
-                    <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
+                    <xsl:with-param name="html_title" select="$doc_title_de"></xsl:with-param>
                 </xsl:call-template>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"/>
+                <link rel="stylesheet" href="vendor/instantsearch-themes/algolia-min.css"/>
                 <link rel="stylesheet" type="text/css" href="css/ts_search.css"/>
             </head>
             
             
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:call-template name="nav_bar_i18n"/>
                     
                     <div class="container-fluid">
                         <div class="search-panel">
@@ -32,18 +33,24 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div id="stats-container"></div>
-                                        <h4>Volltextsuche</h4>
+                                        <h4 data-lang="de" id="content">Volltextsuche</h4>
+                                        <h4 data-lang="en" hidden="hidden" id="content-en">Full Text Search</h4>
                                         <div id="searchbox"></div>
                                         <div id="clear-refinements"></div>
-                                        <h4>Edition</h4>
+                                        <h4 data-lang="de">Edition</h4>
+                                        <h4 data-lang="en" hidden="hidden">Edition</h4>
                                         <div id="menu-edition"></div>
-                                        <h4>Personen</h4>
+                                        <h4 data-lang="de">Personen</h4>
+                                        <h4 data-lang="en" hidden="hidden">Persons</h4>
                                         <div id="refinement-list-persons"></div>
-                                        <h4>Orte</h4>
+                                        <h4 data-lang="de">Orte</h4>
+                                        <h4 data-lang="en" hidden="hidden">Places</h4>
                                         <div id="refinement-list-places"></div>
-                                        <h4>Werke</h4>
+                                        <h4 data-lang="de">Werke</h4>
+                                        <h4 data-lang="en" hidden="hidden">Works</h4>
                                         <div id="refinement-list-works"></div>
-                                        <h4>Jahr</h4>
+                                        <h4 data-lang="de">Jahr</h4>
+                                        <h4 data-lang="en" hidden="hidden">Date</h4>
                                         <div id="range-input"></div>
                                     </div>
                                     <div class="col-md-8">
@@ -58,15 +65,14 @@
                         </div>
                     </div>
                     
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:call-template name="html_footer_i18n"/>
                     
                 </div>
                 
-                <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0"></script>
-                <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
+                <script src="vendor/instantsearch/instantsearch.production.min.js"></script>
+                <script src="vendor/typesense-instantsearch-adapter/typesense-instantsearch-adapter.min.js"></script>
                 <script src="js/ts_search.js"></script>
                 <script src="js/ts_update_url.js"></script>
-                <script type="text/javascript" src="js/run.js"></script>
             </body>
             
         </html>

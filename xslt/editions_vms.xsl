@@ -6,9 +6,9 @@
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     <xsl:strip-space elements="*"/>
 
-    <xsl:import href="./partials/html_navbar.xsl"/>
+    <xsl:import href="./partials/html_navbar_i18n.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
-    <xsl:import href="partials/html_footer.xsl"/>
+    <xsl:import href="partials/html_footer_i18n.xsl"/>
     <xsl:import href="partials/aot-options.xsl"/>
     <xsl:import href="partials/chapters.xsl"/>
     <xsl:import href="partials/book-edition.xsl"/>
@@ -31,12 +31,12 @@
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
                 <link rel="stylesheet" href="css/de-micro-editor.css"></link>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.0.0/openseadragon.min.js"></script>
+                <script src="vendor/openseadragon-bin-4.1.1/openseadragon.min.js" />
             </head>
 
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar"/>
+                    <xsl:call-template name="nav_bar_i18n"/>
 
                     <div class="container-fluid" style="max-width:75%; margin: 2em auto;">
                         <xsl:call-template name="view-type">
@@ -61,7 +61,7 @@
                             <xsl:with-param name="image-source" select="'true'"/>
                         </xsl:call-template>
                     </div>
-                    <xsl:call-template name="html_footer"/>
+                    <xsl:call-template name="html_footer_i18n"/>
                 </div>
 
                 <!-- Image source modal at body level -->

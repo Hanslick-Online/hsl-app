@@ -15,7 +15,12 @@ html/v__*xml
 html/hsl_*xml
 html/diff*
 html/pdf
-
+arche
+extra
+tmp
+.in
+.out
+html/vendor
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

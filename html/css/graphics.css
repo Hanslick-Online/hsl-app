@@ -1,0 +1,313 @@
+                    .container-fluid {
+                        max-width: 100% !important;
+                    }
+
+                    .person-network-panel {
+                        margin: 1.5rem auto 2rem auto;
+                        padding: 1rem;
+                        border: 1px solid #d9e2ec;
+                        border-radius: 0.75rem;
+                        background: #f8fbfd;
+                    }
+
+                    .person-network-controls {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.75rem 1.25rem;
+                        align-items: center;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    .person-network-controls label {
+                        font-weight: 600;
+                    }
+
+                    .person-network-controls input[type='range'] {
+                        width: 220px;
+                    }
+
+                    .person-network-category-toggles {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        width: 100%;
+                        margin-top: 0.25rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-category-toggles label {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                        font-weight: 400;
+                    }
+
+                    .person-network-search-row {
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        gap: 0.5rem;
+                        width: 100%;
+                        margin-top: 0.25rem;
+                    }
+
+                    .person-network-search-row label {
+                        font-weight: 600;
+                        margin-right: 0.15rem;
+                    }
+
+                    .person-network-search-input {
+                        width: min(420px, 100%);
+                        max-width: 100%;
+                        padding: 0.35rem 0.55rem;
+                        border: 1px solid #cbd5e1;
+                        border-radius: 0.35rem;
+                        background: #ffffff;
+                        font-size: 0.92rem;
+                    }
+
+                    .person-network-search-button {
+                        border: 1px solid #1d4e89;
+                        background: #1d4e89;
+                        color: #ffffff;
+                        border-radius: 0.35rem;
+                        padding: 0.35rem 0.7rem;
+                        font-size: 0.88rem;
+                        line-height: 1.2;
+                        cursor: pointer;
+                    }
+
+                    .person-network-search-button:hover {
+                        background: #173f6e;
+                        border-color: #173f6e;
+                    }
+
+                    .person-network-collection-toggles {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        width: 100%;
+                        margin-top: 0.35rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-collection-toggles label {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                        font-weight: 400;
+                    }
+
+                    .person-network-collection-label {
+                        font-weight: 600;
+                    }
+
+                    .person-network-performance-note {
+                        width: 100%;
+                        font-size: 0.82rem;
+                        color: #6b7280;
+                    }
+
+                    .person-network-copresence-min {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                    }
+
+                    .person-network-copresence-min input {
+                        width: 64px;
+                    }
+
+                    .person-network-node-limit {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .person-network-node-limit input[type='number'] {
+                        width: 92px;
+                    }
+
+                    .graphic-container-padded {
+                        padding: 0.5em;
+                    }
+
+                    .person-network-control-input {
+                        width: 90px;
+                    }
+
+                    .person-network-control-select {
+                        width: auto;
+                    }
+
+                    .person-network-control-select-relmode {
+                        min-width: 180px;
+                    }
+
+                    .person-network-control-select-grademode {
+                        min-width: 200px;
+                    }
+
+                    #person-network {
+                        position: relative;
+                        height: 560px;
+                        width: 100%;
+                        border: 1px solid #cfd8e3;
+                        border-radius: 0.5rem;
+                        background: #ffffff;
+                    }
+
+                    #vms-network {
+                        position: relative;
+                        height: 620px;
+                        width: 100%;
+                        border: 1px solid #cfd8e3;
+                        border-radius: 0.5rem;
+                        background: #ffffff;
+                    }
+
+                    #person-network canvas {
+                        border-radius: 0.5rem;
+                    }
+
+                    #vms-network canvas {
+                        border-radius: 0.5rem;
+                    }
+
+                    .person-network-popup {
+                        position: absolute;
+                        z-index: 30;
+                        display: none;
+                        pointer-events: none;
+                        text-align: center;
+                        margin-bottom: 20px;
+                    }
+
+                    .person-network-popup .person-network-popup-content-wrapper {
+                        padding: 1px;
+                        border-radius: 12px;
+                        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22);
+                        background: #fff;
+                        color: #333;
+                        text-align: left;
+                    }
+
+                    .person-network-popup .person-network-popup-content {
+                        margin: 13px 24px 13px 20px;
+                        line-height: 1.35;
+                        font-size: 13px;
+                        min-width: 120px;
+                        max-width: 220px;
+                    }
+
+                    .person-network-popup .person-network-popup-content a {
+                        color: #1d4e89;
+                        text-decoration: none;
+                    }
+
+                    .person-network-popup .person-network-popup-content a:hover {
+                        text-decoration: underline;
+                    }
+
+                    .person-network-popup .person-network-popup-tip-container {
+                        width: 40px;
+                        height: 20px;
+                        position: absolute;
+                        left: 50%;
+                        margin-top: -1px;
+                        margin-left: -20px;
+                        overflow: hidden;
+                        pointer-events: none;
+                        bottom: -20px;
+                    }
+
+                    .person-network-popup .person-network-popup-tip-container {
+                        display: none;
+                    }
+
+                    .person-network-popup .person-network-popup-tip {
+                        width: 17px;
+                        height: 17px;
+                        padding: 1px;
+                        margin: -10px auto 0;
+                        transform: rotate(45deg);
+                        background: #fff;
+                        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+                    }
+
+                    .person-network-legend {
+                        margin-top: 0.75rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem 1rem;
+                        font-size: 0.9rem;
+                    }
+
+                    .person-network-legend span {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.35rem;
+                    }
+
+                    .person-network-legend i {
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 50%;
+                        display: inline-block;
+                    }
+
+                    .person-network-legend i.person-network-swatch-person {
+                        background: #1d4e89;
+                    }
+
+                    .person-network-legend i.person-network-swatch-place {
+                        background: #b91c1c;
+                    }
+
+                    .person-network-legend i.person-network-swatch-work {
+                        background: #0f766e;
+                    }
+
+                    .person-network-legend i.person-network-swatch-work-vms {
+                        background: #ba4a00;
+                    }
+
+                    .person-network-legend i.person-network-swatch-center {
+                        background: #111111;
+                    }
+
+                    .person-network-legend i.network-line-key {
+                        width: 1.1rem;
+                        height: 0;
+                        border-radius: 0;
+                        border-top-style: solid;
+                        background: transparent !important;
+                    }
+
+                    .person-network-legend i.network-line-single {
+                        border-top-width: 1px;
+                        border-top-color: #c6d1dd;
+                    }
+
+                    .person-network-legend i.network-line-multiple {
+                        border-top-width: 3px;
+                        border-top-color: #334155;
+                    }
+
+                    .person-network-hint {
+                        margin-top: 0.5rem;
+                        color: #4b5563;
+                        font-size: 0.88rem;
+                    }
+
+                    .person-network-item-link {
+                        display: none;
+                        margin: 0.45rem 0 0.25rem 0;
+                        font-size: 0.9rem;
+                        color: #1d4e89;
+                        text-decoration: none;
+                    }
+
+                    .person-network-item-link.is-visible {
+                        display: inline-block;
+                    }

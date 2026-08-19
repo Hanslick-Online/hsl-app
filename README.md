@@ -12,3 +12,58 @@ Enthält u.a. statische Dateien wie Stylesheets (CSS), Bilder, JavaScript (JS).
 
 Enthält XSL Stylesheets für XML -> HTML Serialisierung.
 
+## Graphics Chart JSON
+
+Die Chart-Seite verwendet externe Daten aus einer JSON-Datei statt eingebetteter Entity-Daten im HTML.
+
+- Generator-Skript: [build_app/python/generate_graphics_json.py](build_app/python/generate_graphics_json.py)
+- Ausgabe-Datei: [html/data/graphics-chart-data.json](html/data/graphics-chart-data.json)
+
+Manuell ausführen:
+
+```bash
+python3 build_app/python/generate_graphics_json.py \
+	--person-index data/indices/listperson.xml \
+	--work-index data/indices/listbibl.xml \
+	--place-index data/indices/listplace.xml \
+	--out html/data/graphics-chart-data.json
+```
+
+Beim Ant-Build wird das Skript automatisch vor der Serialisierung von [data/meta/g_chart.xml](data/meta/g_chart.xml) ausgeführt.
+
+## Person Network JSON
+
+Die Netzwerk-Seite verwendet externe Daten aus einer JSON-Datei, die per Python-Skript erzeugt wird.
+
+- Generator-Skript: [build_app/python/generate_network_json.py](build_app/python/generate_network_json.py)
+- Ausgabe-Datei: [html/data/person-network-data.json](html/data/person-network-data.json)
+
+Manuell ausführen:
+
+```bash
+python3 build_app/python/generate_network_json.py \
+	--person-index data/indices/listperson.xml \
+	--place-index data/indices/listplace.xml \
+	--work-index data/indices/listbibl.xml \
+	--critics-editions-dir data/critics/editions \
+	--traktat-editions-dir data/traktat/editions \
+	--out html/data/person-network-data.json
+```
+
+## VMS Network JSON
+
+Der VMS-Beziehungsgraph verwendet externe Daten aus einer eigenen JSON-Datei.
+
+- Generator-Skript: [build_app/python/generate_vmsnetwork_json.py](build_app/python/generate_vmsnetwork_json.py)
+- Ausgabe-Datei: [html/data/vms-network-data.json](html/data/vms-network-data.json)
+
+Manuell ausführen:
+
+```bash
+python3 build_app/python/generate_vmsnetwork_json.py \
+	--person-index data/indices/listperson.xml \
+	--work-index data/indices/listbibl.xml \
+	--traktat-editions-dir data/traktat/editions \
+	--out html/data/vms-network-data.json
+```
+
