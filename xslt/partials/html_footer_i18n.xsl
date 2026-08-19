@@ -108,7 +108,7 @@
                                         </a>
                                     </div>
                                     <div class="custom-html-widget col-12 py-1 d-block">
-                                        <label data-lang="de">Kritiken von<i>VMS</i>:</label>
+                                        <label data-lang="de">Kritiken von <i>VMS</i>:</label>
                                         <label data-lang="en">Reviews of VMS:</label>
                                         <a class="d-block" href="https://doi.org/10.5281/zenodo.15274665">
                                             <img src="images/zenodo.15274665.svg" alt="DOI"/>
