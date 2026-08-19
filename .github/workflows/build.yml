@@ -38,7 +38,7 @@ jobs:
       - name: Fetch vendor assets
         run: ./build_app/shell/fetch_vendor.sh
       - name: Fix wrong pagination in 8th edition
-        run: ./build_app/python/fix_facs_1891.py
+        run: uv run ./build_app/python/fix_facs_1891.py
       - name: Generate Imprint
         run: ./build_app/shell/dl_imprint.sh
       - name: preprocess
@@ -54,13 +54,13 @@ jobs:
       - name: Generate JSON for the visualisations
         run: |
           mkdir -p html/data
-          uv ./build_app/python/generate_graphics_json.py
-          uv ./build_app/python/generate_network_json.py
-          uv ./build_app/python/generate_vmsnetwork_json.py
+          uv run ./build_app/python/generate_graphics_json.py
+          uv run ./build_app/python/generate_network_json.py
+          uv run ./build_app/python/generate_vmsnetwork_json.py
       - name: Preprocess data for Typesense
         run: ant -f build_app/ant/fixtures.xml 
       - name: Build Typesense Index
-        run: ./build_app/python/make_ts_index.py
+        run: uv run ./build_app/python/make_ts_index.py
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact
