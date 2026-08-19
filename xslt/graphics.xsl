@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                   
+                </div>   
 		<xsl:call-template name="html_footer_i18n"/> 
                 <xsl:if test="contains($doc_title, 'Chart')">
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
