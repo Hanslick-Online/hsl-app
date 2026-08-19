@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-    xmlns="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    version="2.0" exclude-result-prefixes="tei xsl xs">
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0" exclude-result-prefixes="tei xsl xs">
     <xsl:output encoding="UTF-8" media-type="text/html" method="xhtml" version="1.0" indent="yes" omit-xml-declaration="yes"/>
     <xsl:import href="./partials/html_navbar_i18n.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
@@ -32,36 +31,37 @@
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:call-template name="nav_bar_i18n"/>    
-                    
+                    <xsl:call-template name="nav_bar_i18n"/>
+
                     <div class="container-fluid" style="margin-top:1em;">
                         <div class="row">
                             <div class="col-md-12">
-                                   <div class="main">
+                                <div class="main">
+                                    <xsl:choose>
+                                        <xsl:when test="$is-vms-net">
+                                            <xsl:call-template name="vms_net_container"/>
+                                        </xsl:when>
+                                        <xsl:when test="contains($doc-title-lower, 'network') or contains($doc-title-lower, 'beziehungsgraph')">
+                                            <xsl:call-template name="net_container"/>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <xsl:if test="contains($doc_title, 'Chart')">
                                         <xsl:choose>
-                                            <xsl:when test="$is-vms-net">
-                                                <xsl:call-template name="vms_net_container"/>
+                                            <xsl:when test="contains($doc_title, 'VMS Chart')">
+                                                <xsl:call-template name="vms_chart_container"/>
                                             </xsl:when>
-                                            <xsl:when test="contains($doc-title-lower, 'network') or contains($doc-title-lower, 'beziehungsgraph')">
-                                                <xsl:call-template name="net_container"/>
-                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:call-template name="chart_container"/>
+                                            </xsl:otherwise>
                                         </xsl:choose>
-                                        <xsl:if test="contains($doc_title, 'Chart')">
-                                            <xsl:choose>
-                                                <xsl:when test="contains($doc_title, 'VMS Chart')">
-                                                    <xsl:call-template name="vms_chart_container"/>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                    <xsl:call-template name="chart_container"/>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
-                                        </xsl:if>
-                                    </div>
+                                    </xsl:if>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>   
-		<xsl:call-template name="html_footer_i18n"/> 
+                     <xsl:call-template name="html_footer_i18n"/>
+                </div>
+               
                 <xsl:if test="contains($doc_title, 'Chart')">
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
                     <xsl:choose>
