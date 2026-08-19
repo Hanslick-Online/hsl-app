@@ -32,14 +32,7 @@
             </head>
             <body class="page">
                 <div class="hfeed site" id="page">
-                    <xsl:choose>
-                        <xsl:when test="//tei:body[@xml:lang='de-AT']">
-                            <xsl:call-template name="nav_bar"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="nav_bar_en"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:call-template name="nav_bar_i18n"/>    
                     
                     <div class="container-fluid" style="margin-top:1em;">
                         <div class="row">
@@ -67,16 +60,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <xsl:choose>
-                        <xsl:when test="//tei:body[@xml:lang='de-AT']">
-                            <xsl:call-template name="html_footer"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="html_footer_en"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
+                   
+		<xsl:call-template name="html_footer_i18n"/> 
                 <xsl:if test="contains($doc_title, 'Chart')">
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
                     <xsl:choose>
