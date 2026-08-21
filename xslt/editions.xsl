@@ -103,11 +103,11 @@
                         </div>
                     </div>
                 </div>
-
-                <script type="text/javascript" src="js/run_editions.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
-                <script type="text/javascript" src="js/mark.js"></script>
-                <script type="text/javascript" src="js/osd.js"></script>
+                <script src="https://unpkg.com/de-micro-editor@0.3.1/dist/de-editor.min.js" />
+                <script type="text/javascript" src="js/run_editions.js" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" />
+                <script type="text/javascript" src="js/mark.js" />
+                <script type="text/javascript" src="js/osd.js" />
                 <script type="text/javascript">
                     document.addEventListener("DOMContentLoaded", function () {
                         if (document.cookie.indexOf("usageHintsDismissed=1") !== -1) return;
