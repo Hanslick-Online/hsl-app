@@ -112,15 +112,15 @@ function leafletDatatable(table, panesShow, panesHide) {
     });
 
     var objects = new L.GeoJSON.AJAX([`geo/${table}.geojson`], {onEachFeature:popUp});
-    // objects.on('data:loaded', function () {
-    //     markers.addLayer(objects);
-    //     mymap.addLayer(markers);
-    //     try {
-    //         mymap.fitBounds(markers.getBounds());
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // });
+    objects.on('data:loaded', function () {
+        markers.addLayer(objects);
+        mymap.addLayer(markers);
+        try {
+            mymap.fitBounds(markers.getBounds());
+        } catch (err) {
+            console.log(err);
+        }
+    });
                
     // variable id #tableOne must match table id in html
     var tableOne = $('#' + table)
@@ -161,10 +161,11 @@ function leafletDatatable(table, panesShow, panesHide) {
     });
 
     tableOne.on('search.dt', function() {
-        var value = $('.dataTables_filter input').val();
-        if (value.length != 0) {
-            markers.clearLayers();
-            getCoordinates();
+        markers.clearLayers();
+        var filteredCount = tableOne.rows({ search: 'applied' }).count();
+        if (filteredCount > 0) {
+            var filteredNodes = tableOne.rows({ search: 'applied' }).nodes();
+            getCoordinates(filteredNodes);
             mymap.addLayer(markers);
             try {
                 mymap.fitBounds(markers.getBounds());
@@ -172,7 +173,6 @@ function leafletDatatable(table, panesShow, panesHide) {
                 console.log(err);
             }
         } else {
-            markers.clearLayers();
             var objects = new L.GeoJSON.AJAX([`geo/${table}.geojson`], {onEachFeature:popUp});
             objects.on('data:loaded', function () {
                 markers.addLayer(objects);
@@ -188,7 +188,8 @@ function leafletDatatable(table, panesShow, panesHide) {
     
     tableOne.on('page.dt', function() {
         markers.clearLayers();
-        getCoordinates();
+        var pageNodes = tableOne.rows({ page: 'current' }).nodes();
+        getCoordinates(pageNodes);
         mymap.addLayer(markers);
         try {
             mymap.fitBounds(markers.getBounds());
@@ -221,7 +222,23 @@ function leafletDatatable(table, panesShow, panesHide) {
         });
     });
 
-    function getCoordinates() {      
+    function getCoordinates(rowNodes) {
+        // If rowNodes provided (DataTables nodes), use them; otherwise fall back to all .map-coordinates
+        if (rowNodes && rowNodes.length) {
+            // rowNodes can be a NodeList or array-like
+            Array.prototype.forEach.call(rowNodes, function(row) {
+                var node = row.querySelector ? row.querySelector('.map-coordinates') : null;
+                if (!node) return;
+                var lat = node.getAttribute('lat');
+                var long = node.getAttribute('long');
+                var id = node.getAttribute('id');
+                var country = node.getAttribute('data-country');
+                var place = `Placename: ${node.getAttribute('subtitle')}, ${country}<br/><a href="${id}.html">Read more</a>`;
+                markers.addLayer(L.marker([lat,long]).bindPopup(place));
+            });
+            return;
+        }
+
         document.body.querySelectorAll('.map-coordinates').forEach(function(node) {
             var lat = node.getAttribute('lat');
             var long = node.getAttribute('long');
@@ -229,7 +246,7 @@ function leafletDatatable(table, panesShow, panesHide) {
             var country = node.getAttribute('data-country');
             var place = `Placename: ${node.getAttribute('subtitle')}, ${country}<br/><a href="${id}.html">Read more</a>`;
             markers.addLayer(L.marker([lat,long]).bindPopup(place));
-        });       
+        });
     }
 
     function getPlaceCountCoords() {     
