@@ -310,9 +310,56 @@
     return label.toLowerCase();
   }
 
-  function buildSearchHref(entity, year) {
+  function romanToInt(value) {
+    const token = String(value || "").trim().toUpperCase();
+    if (!token) {
+      return null;
+    }
+
+    const map = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+    let total = 0;
+    let prev = 0;
+
+    for (let i = token.length - 1; i >= 0; i -= 1) {
+      const current = map[token[i]];
+      if (!current) {
+        return null;
+      }
+      if (current < prev) {
+        total -= current;
+      } else {
+        total += current;
+      }
+      prev = current;
+    }
+
+    return total > 0 ? total : null;
+  }
+
+  function buildChapterTerm(chapterLabel) {
+    const label = String(chapterLabel || "").trim();
+    if (!label) {
+      return "";
+    }
+
+    if (label.toLowerCase() === "vorwort") {
+      return "vorwort";
+    }
+
+    const number = romanToInt(label);
+    if (number) {
+      return `kapitel ${number}`;
+    }
+
+    return `kapitel ${label.toLowerCase()}`;
+  }
+
+  function buildSearchHref(entity, details) {
+    const { year, chapterLabel, isChapterMode } = details;
     const params = new URLSearchParams();
-    const query = buildQueryTerm(entity);
+    const entityQuery = buildQueryTerm(entity);
+    const chapterQuery = isChapterMode ? buildChapterTerm(chapterLabel) : "";
+    const query = [entityQuery, chapterQuery].filter(Boolean).join(" ");
     if (query) {
       params.set("hsl[query]", query);
     }
@@ -395,7 +442,11 @@
     const year = isChapter ? Number(point.dataset._year) : Number(point.parsed.x);
     const axisLabel = isChapter ? state.chapters[point.dataIndex] || "" : String(point.parsed.x);
     const value = Number.isFinite(point.parsed.y) ? point.parsed.y : 0;
-    const searchHref = buildSearchHref(entity, year);
+    const searchHref = buildSearchHref(entity, {
+      year,
+      chapterLabel: isChapter ? axisLabel : "",
+      isChapterMode: isChapter,
+    });
 
     tooltip.innerHTML = "";
 
