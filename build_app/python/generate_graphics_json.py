@@ -49,7 +49,7 @@ TRAKTAT_KIND_MAP = {
     "place": "place",
 }
 
-TRAKTAT_CHAPTER_ORDER = ["Vorwort", "I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
+TRAKTAT_CHAPTER_ORDER = ["Vorwort", "I", "II", "III", "IV", "V", "VI", "VII"]
 
 
 def text_content(node: ET.Element | None) -> str:

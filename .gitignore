@@ -7,6 +7,7 @@
 *.html
 /test
 
+framework
 html/*html
 html/c__*xml
 html/d__*xml
