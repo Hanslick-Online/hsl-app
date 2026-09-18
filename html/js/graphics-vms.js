@@ -1,6 +1,8 @@
 (() => {
   const MAX_ENTITIES = 5;
   const COLORS = ["#0b6e4f", "#c84c09", "#22577a", "#a4243b", "#5f0f40"];
+  const SEARCH_PAGE = "search.html";
+  const SEARCH_EDITION = "Treatise/Traktat";
 
   const state = {
     chart: null,
@@ -11,6 +13,8 @@
     optionMap: new Map(),
     selectedSeries: [],
     years: [],
+    tooltipHovered: false,
+    tooltipHideTimer: null,
   };
 
   function collectElements() {
@@ -271,9 +275,153 @@
         },
         plugins: {
           legend: { display: false },
+          tooltip: {
+            enabled: false,
+            external: (tooltipContext) => renderExternalTooltip(elements, tooltipContext),
+          },
         },
       },
     });
+  }
+
+  function getRefinementKey(kind) {
+    if (kind === "person") {
+      return "persons";
+    }
+    if (kind === "work") {
+      return "works";
+    }
+    return "places";
+  }
+
+  function buildQueryTerm(entity) {
+    const label = String(entity?.label || "").trim();
+    if (!label) {
+      return "";
+    }
+
+    if (entity.kind === "person") {
+      const parts = label.split(/\s+/).filter(Boolean);
+      if (parts.length) {
+        return parts[parts.length - 1].toLowerCase();
+      }
+    }
+
+    return label.toLowerCase();
+  }
+
+  function buildSearchHref(entity, year) {
+    const params = new URLSearchParams();
+    const query = buildQueryTerm(entity);
+    if (query) {
+      params.set("hsl[query]", query);
+    }
+    params.set("hsl[menu][edition]", SEARCH_EDITION);
+    params.set(`hsl[refinementList][${getRefinementKey(entity.kind)}][0]`, entity.label);
+
+    const yearNumber = Number(year);
+    if (Number.isFinite(yearNumber)) {
+      params.set("hsl[range][year]", `${yearNumber}:${yearNumber}`);
+    }
+
+    return `${SEARCH_PAGE}?${params.toString()}`;
+  }
+
+  function getOrCreateTooltipElement(elements) {
+    const parent = elements.canvas.parentElement;
+    if (!parent) {
+      return null;
+    }
+
+    let tooltip = parent.querySelector(".graphics-chart-tooltip");
+    if (!tooltip) {
+      tooltip = document.createElement("div");
+      tooltip.className = "graphics-chart-tooltip";
+      tooltip.addEventListener("mouseenter", () => {
+        state.tooltipHovered = true;
+        if (state.tooltipHideTimer) {
+          window.clearTimeout(state.tooltipHideTimer);
+          state.tooltipHideTimer = null;
+        }
+      });
+      tooltip.addEventListener("mouseleave", () => {
+        state.tooltipHovered = false;
+        tooltip.style.opacity = "0";
+      });
+      parent.appendChild(tooltip);
+    }
+
+    return tooltip;
+  }
+
+  function renderExternalTooltip(elements, context) {
+    const tooltip = getOrCreateTooltipElement(elements);
+    if (!tooltip) {
+      return;
+    }
+
+    const model = context.tooltip;
+    if (!model || model.opacity === 0 || !model.dataPoints || !model.dataPoints.length) {
+      if (state.tooltipHovered) {
+        return;
+      }
+
+      if (state.tooltipHideTimer) {
+        window.clearTimeout(state.tooltipHideTimer);
+      }
+
+      // Keep tooltip alive for a moment so users can move from point to link.
+      state.tooltipHideTimer = window.setTimeout(() => {
+        if (!state.tooltipHovered) {
+          tooltip.style.opacity = "0";
+        }
+      }, 250);
+      return;
+    }
+
+    if (state.tooltipHideTimer) {
+      window.clearTimeout(state.tooltipHideTimer);
+      state.tooltipHideTimer = null;
+    }
+
+    const point = model.dataPoints[0];
+    const entity = state.entities.get(point.dataset.entityId);
+    if (!entity) {
+      tooltip.style.opacity = "0";
+      return;
+    }
+
+    const isChapter = state.mode === "chapter";
+    const year = isChapter ? Number(point.dataset._year) : Number(point.parsed.x);
+    const axisLabel = isChapter ? state.chapters[point.dataIndex] || "" : String(point.parsed.x);
+    const value = Number.isFinite(point.parsed.y) ? point.parsed.y : 0;
+    const searchHref = buildSearchHref(entity, year);
+
+    tooltip.innerHTML = "";
+
+    const title = document.createElement("div");
+    title.className = "graphics-chart-tooltip__title";
+    title.textContent = `${entity.label} [${entity.type}]`;
+
+    const meta = document.createElement("div");
+    meta.className = "graphics-chart-tooltip__meta";
+    meta.textContent = isChapter ? `${point.dataset._editionLabel} - Kapitel ${axisLabel}: ${value}` : `Jahr ${axisLabel}: ${value}`;
+
+    const link = document.createElement("a");
+    link.className = "graphics-chart-tooltip__link";
+    link.href = searchHref;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Treffer dieser Auflage suchen";
+
+    tooltip.appendChild(title);
+    tooltip.appendChild(meta);
+    tooltip.appendChild(link);
+
+    const { offsetLeft, offsetTop } = context.chart.canvas;
+    tooltip.style.opacity = "1";
+    tooltip.style.left = `${offsetLeft + model.caretX + 14}px`;
+    tooltip.style.top = `${offsetTop + model.caretY + 14}px`;
   }
 
   function buildYearDataset(entity, color) {
@@ -284,6 +432,7 @@
 
     return {
       entityId: entity.id,
+      entityKind: entity.kind,
       label: `${entity.label} [${entity.type}]`,
       borderColor: color,
       backgroundColor: color,
@@ -303,6 +452,7 @@
 
     return {
       entityId: entity.id,
+      entityKind: entity.kind,
       label: `${entity.label} [${entity.type}] - ${edition ? `${edition} (${year})` : year}`,
       borderColor: color,
       backgroundColor: color,
@@ -312,6 +462,7 @@
       pointHoverRadius: 6,
       tension: 0.2,
       data: chapterData,
+      _year: Number(year),
       _editionLabel: edition ? `${edition} (${year})` : year,
     };
   }
