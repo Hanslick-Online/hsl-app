@@ -1,4 +1,5 @@
 (() => {
+  // Configuration and lookup tables shared by both chart views.
   const MAX_ENTITIES = 5;
   const COLORS = ["#0b6e4f", "#c84c09", "#22577a", "#a4243b", "#5f0f40"];
   const SEARCH_PAGE = "search.html";
@@ -6,6 +7,7 @@
   const ENTITY_TYPES = { person: "Person", work: "Werk", place: "Ort" };
   const REFINEMENT_KEYS = { person: "persons", work: "works", place: "places" };
 
+  // Mutable UI, chart, and parsed-data state for this page instance.
   const state = {
     chart: null,
     chapters: [],
@@ -20,6 +22,7 @@
   };
 
   function collectElements() {
+    // Gather required chart controls; abort initialization when markup is incomplete.
     const dataRoot = document.getElementById("graphics-data");
     const canvas = document.getElementById("graphics-chart");
     const personInput = document.getElementById("graphics-person-input");
@@ -56,20 +59,24 @@
   }
 
   function setStatus(elements, message, tone = "muted") {
+    // Replace the chart status message and its Bootstrap color.
     elements.status.textContent = message;
     elements.status.className = `graphics-status mt-3 small text-${tone}`;
   }
 
   function getMode(elements) {
+    // The button dataset is the DOM source of truth for the active view.
     const mode = elements.viewToggle.dataset.mode;
     return mode === "chapter" ? "chapter" : "year";
   }
 
   function isChapterMode(elements) {
+    // Keep chapter-mode tests consistent across controls and rendering.
     return getMode(elements) === "chapter";
   }
 
   function syncModeButton(elements) {
+    // Update the toggle label to describe the view it will open next.
     if (state.mode === "chapter") {
       elements.viewToggle.dataset.mode = "chapter";
       elements.viewToggle.textContent = "Auflagenansicht";
@@ -82,6 +89,7 @@
   }
 
   function ensureLegendContainer(elements) {
+    // Support chart markup that omits the optional legend container.
     let root = document.getElementById("graphics-legend");
     if (!root) {
       root = document.createElement("div");
@@ -93,6 +101,7 @@
   }
 
   function renderLegend(elements, datasets) {
+    // Render linked entity labels because the native Chart.js legend is disabled.
     const root = ensureLegendContainer(elements);
     root.innerHTML = "";
 
@@ -125,6 +134,7 @@
   }
 
   async function fetchData(source) {
+    // Fetch the generated chart payload and expose HTTP failures to initialization.
     const response = await fetch(source);
     if (!response.ok) {
       throw new Error(`Failed to load: ${response.status}`);
@@ -133,6 +143,7 @@
   }
 
   function appendOption(datalist, entity) {
+    // Populate a typed entity picker and retain its display-value lookup.
     if (!datalist) {
       return;
     }
@@ -148,8 +159,10 @@
   }
 
   function parseEntity(raw) {
+    // Convert one generated entity record into chart-ready lookup maps.
     const years = new Map();
 
+    // Normalize the generated JSON for quick year and chapter lookups.
     Object.entries(raw.years || {}).forEach(([year, values]) => {
       const edition = String(values.edition || "").trim();
       const total = Number(values.total || 0);
@@ -181,6 +194,7 @@
   }
 
   function applyData(elements, payload) {
+    // Reset derived state, parse the payload, and populate entity and edition pickers.
     state.chapters = Array.isArray(payload.chapters) ? payload.chapters : [];
     state.entities.clear();
     state.editionMap.clear();
@@ -227,6 +241,7 @@
   }
 
   function renderSelected(elements) {
+    // Show the active entity or entity-edition combinations with remove controls.
     elements.selected.innerHTML = "";
     state.selectedSeries.forEach((series) => {
       const entity = state.entities.get(series.entityId);
@@ -255,6 +270,7 @@
   }
 
   function createChart(elements) {
+    // Initialize one reusable Chart.js instance; updateChart replaces its data later.
     const context = elements.canvas.getContext("2d");
     state.chart = new Chart(context, {
       type: "line",
@@ -287,10 +303,12 @@
   }
 
   function getRefinementKey(kind) {
+    // Map chart entity kinds to their corresponding Typesense refinement fields.
     return REFINEMENT_KEYS[kind] || REFINEMENT_KEYS.place;
   }
 
   function buildQueryTerm(entity) {
+    // Use a person's surname for concise search queries; retain full labels for other kinds.
     const label = String(entity?.label || "").trim();
     if (!label) {
       return "";
@@ -307,6 +325,7 @@
   }
 
   function romanToInt(value) {
+    // Translate the chapter labels supplied as Roman numerals into search terms.
     const token = String(value || "").trim().toUpperCase();
     if (!token) {
       return null;
@@ -333,6 +352,7 @@
   }
 
   function buildChapterTerm(chapterLabel) {
+    // Match visible chapter headings to the wording used in indexed titles.
     const label = String(chapterLabel || "").trim();
     if (!label) {
       return "";
@@ -355,6 +375,7 @@
     const { year, chapterLabel, isChapterMode } = details;
     const params = new URLSearchParams();
     const entityQuery = buildQueryTerm(entity);
+    // Chapter view narrows the full-text query to the plotted chapter.
     const chapterQuery = isChapterMode ? buildChapterTerm(chapterLabel) : "";
     const query = [entityQuery, chapterQuery].filter(Boolean).join(" ");
     if (query) {
@@ -365,6 +386,7 @@
 
     const yearNumber = Number(year);
     if (Number.isFinite(yearNumber)) {
+      // One publication year identifies the edition represented by the point.
       params.set("hsl[range][year]", `${yearNumber}:${yearNumber}`);
     }
 
@@ -372,6 +394,7 @@
   }
 
   function clearTooltipHideTimer() {
+    // Cancel a pending delayed hide whenever tooltip visibility is restored.
     if (state.tooltipHideTimer) {
       window.clearTimeout(state.tooltipHideTimer);
       state.tooltipHideTimer = null;
@@ -379,6 +402,7 @@
   }
 
   function getOrCreateTooltipElement(elements) {
+    // Reuse one DOM tooltip so its link can receive pointer interaction.
     const parent = elements.canvas.parentElement;
     if (!parent) {
       return null;
@@ -389,6 +413,7 @@
       tooltip = document.createElement("div");
       tooltip.className = "graphics-chart-tooltip";
       tooltip.addEventListener("mouseenter", () => {
+        // Preserve the popup while its search link has focus under the pointer.
         state.tooltipHovered = true;
         clearTooltipHideTimer();
       });
@@ -403,6 +428,7 @@
   }
 
   function renderExternalTooltip(elements, context) {
+    // Replace the canvas-only Chart.js tooltip with an accessible, clickable DOM popup.
     const tooltip = getOrCreateTooltipElement(elements);
     if (!tooltip) {
       return;
@@ -472,6 +498,7 @@
   }
 
   function buildYearDataset(entity, color) {
+    // Build a single entity line spanning every known publication year.
     const data = state.years.map((year) => {
       const values = entity.years.get(String(year));
       return { x: year, y: values ? values.total : 0 };
@@ -483,6 +510,7 @@
   }
 
   function buildDataset(entity, color, data, extra) {
+    // Keep common Chart.js line styling consistent between both chart modes.
     return {
       entityId: entity.id,
       borderColor: color,
@@ -498,6 +526,7 @@
   }
 
   function buildChapterDataset(entity, editionKey, color) {
+    // Build one entity-edition line whose points are the chapter frequencies.
     const [year, edition] = editionKey.split("::");
     const values = entity.years.get(year);
     const chapterData = state.chapters.map((chapter) => (values && values.chapterCounts ? values.chapterCounts[chapter] || 0 : 0));
@@ -510,6 +539,7 @@
   }
 
   function updateChart(elements) {
+    // Rebuild datasets and axes after every selection or view-mode change.
     if (!state.chart) {
       createChart(elements);
     }
@@ -525,6 +555,7 @@
     const mode = state.mode;
 
     if (mode === "chapter") {
+      // Chapter series retain their edition key; year mode merges by entity.
       const datasets = state.selectedSeries
         .map((series, index) => {
           const entity = state.entities.get(series.entityId);
@@ -591,6 +622,7 @@
   }
 
   function addEntity(elements, input) {
+    // Validate and add a selected picker entry to the active chart series.
     const value = input.value.trim();
     const option = state.optionMap.get(value);
     const chapterMode = isChapterMode(elements);
@@ -636,6 +668,7 @@
   }
 
   async function init() {
+    // Load data once, then wire all picker, mode, and removal interactions.
     const elements = collectElements();
     if (!elements || !window.Chart) {
       return;
@@ -694,6 +727,7 @@
   }
 
   if (document.readyState === "loading") {
+    // Initialize after markup exists whether this script loads early or late.
     document.addEventListener("DOMContentLoaded", init, { once: true });
   } else {
     init();
