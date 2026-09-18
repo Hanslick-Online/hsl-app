@@ -3,6 +3,8 @@
   const COLORS = ["#0b6e4f", "#c84c09", "#22577a", "#a4243b", "#5f0f40"];
   const SEARCH_PAGE = "search.html";
   const SEARCH_EDITION = "Treatise/Traktat";
+  const ENTITY_TYPES = { person: "Person", work: "Werk", place: "Ort" };
+  const REFINEMENT_KEYS = { person: "persons", work: "works", place: "places" };
 
   const state = {
     chart: null,
@@ -172,7 +174,7 @@
     return {
       id: raw.id,
       kind: raw.kind,
-      type: raw.kind === "person" ? "Person" : raw.kind === "work" ? "Werk" : "Ort",
+      type: ENTITY_TYPES[raw.kind] || "Ort",
       label: raw.label,
       years,
     };
@@ -285,13 +287,7 @@
   }
 
   function getRefinementKey(kind) {
-    if (kind === "person") {
-      return "persons";
-    }
-    if (kind === "work") {
-      return "works";
-    }
-    return "places";
+    return REFINEMENT_KEYS[kind] || REFINEMENT_KEYS.place;
   }
 
   function buildQueryTerm(entity) {
@@ -354,6 +350,7 @@
     return `kapitel ${label.toLowerCase()}`;
   }
 
+  // Search links always constrain the entity and edition; chapter mode adds its heading term.
   function buildSearchHref(entity, details) {
     const { year, chapterLabel, isChapterMode } = details;
     const params = new URLSearchParams();
@@ -374,6 +371,13 @@
     return `${SEARCH_PAGE}?${params.toString()}`;
   }
 
+  function clearTooltipHideTimer() {
+    if (state.tooltipHideTimer) {
+      window.clearTimeout(state.tooltipHideTimer);
+      state.tooltipHideTimer = null;
+    }
+  }
+
   function getOrCreateTooltipElement(elements) {
     const parent = elements.canvas.parentElement;
     if (!parent) {
@@ -386,10 +390,7 @@
       tooltip.className = "graphics-chart-tooltip";
       tooltip.addEventListener("mouseenter", () => {
         state.tooltipHovered = true;
-        if (state.tooltipHideTimer) {
-          window.clearTimeout(state.tooltipHideTimer);
-          state.tooltipHideTimer = null;
-        }
+        clearTooltipHideTimer();
       });
       tooltip.addEventListener("mouseleave", () => {
         state.tooltipHovered = false;
@@ -413,12 +414,10 @@
         return;
       }
 
-      if (state.tooltipHideTimer) {
-        window.clearTimeout(state.tooltipHideTimer);
-      }
-
       // Keep tooltip alive for a moment so users can move from point to link.
+      clearTooltipHideTimer();
       state.tooltipHideTimer = window.setTimeout(() => {
+        state.tooltipHideTimer = null;
         if (!state.tooltipHovered) {
           tooltip.style.opacity = "0";
         }
@@ -426,10 +425,7 @@
       return;
     }
 
-    if (state.tooltipHideTimer) {
-      window.clearTimeout(state.tooltipHideTimer);
-      state.tooltipHideTimer = null;
-    }
+    clearTooltipHideTimer();
 
     const point = model.dataPoints[0];
     const entity = state.entities.get(point.dataset.entityId);
@@ -481,10 +477,14 @@
       return { x: year, y: values ? values.total : 0 };
     });
 
+    return buildDataset(entity, color, data, {
+      label: `${entity.label} [${entity.type}]`,
+    });
+  }
+
+  function buildDataset(entity, color, data, extra) {
     return {
       entityId: entity.id,
-      entityKind: entity.kind,
-      label: `${entity.label} [${entity.type}]`,
       borderColor: color,
       backgroundColor: color,
       pointBackgroundColor: color,
@@ -493,6 +493,7 @@
       pointHoverRadius: 6,
       tension: 0.2,
       data,
+      ...extra,
     };
   }
 
@@ -501,21 +502,11 @@
     const values = entity.years.get(year);
     const chapterData = state.chapters.map((chapter) => (values && values.chapterCounts ? values.chapterCounts[chapter] || 0 : 0));
 
-    return {
-      entityId: entity.id,
-      entityKind: entity.kind,
+    return buildDataset(entity, color, chapterData, {
       label: `${entity.label} [${entity.type}] - ${edition ? `${edition} (${year})` : year}`,
-      borderColor: color,
-      backgroundColor: color,
-      pointBackgroundColor: color,
-      borderWidth: 2,
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      tension: 0.2,
-      data: chapterData,
       _year: Number(year),
       _editionLabel: edition ? `${edition} (${year})` : year,
-    };
+    });
   }
 
   function updateChart(elements) {
