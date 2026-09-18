@@ -116,7 +116,14 @@ function leafletDatatable(table, panesShow, panesHide) {
         markers.addLayer(objects);
         mymap.addLayer(markers);
         try {
-            mymap.fitBounds(markers.getBounds());
+            var _bounds = markers.getBounds();
+            if (_bounds && _bounds.isValid && _bounds.isValid()) {
+                if (_bounds.getNorthEast().equals(_bounds.getSouthWest())) {
+                    mymap.setView(_bounds.getCenter(), 12);
+                } else {
+                    mymap.fitBounds(_bounds, { maxZoom: 12, padding: [50,50] });
+                }
+            }
         } catch (err) {
             console.log(err);
         }
@@ -168,7 +175,14 @@ function leafletDatatable(table, panesShow, panesHide) {
             getCoordinates(filteredNodes);
             mymap.addLayer(markers);
             try {
-                mymap.fitBounds(markers.getBounds());
+                var _bounds = markers.getBounds();
+                if (_bounds && _bounds.isValid && _bounds.isValid()) {
+                    if (_bounds.getNorthEast().equals(_bounds.getSouthWest())) {
+                        mymap.setView(_bounds.getCenter(), 12);
+                    } else {
+                        mymap.fitBounds(_bounds, { maxZoom: 12, padding: [50,50] });
+                    }
+                }
             } catch (err) {
                 console.log(err);
             }
@@ -178,7 +192,14 @@ function leafletDatatable(table, panesShow, panesHide) {
                 markers.addLayer(objects);
                 mymap.addLayer(markers);
                 try {
-                    mymap.fitBounds(markers.getBounds());
+                    var _bounds = markers.getBounds();
+                    if (_bounds && _bounds.isValid && _bounds.isValid()) {
+                        if (_bounds.getNorthEast().equals(_bounds.getSouthWest())) {
+                            mymap.setView(_bounds.getCenter(), 12);
+                        } else {
+                            mymap.fitBounds(_bounds, { maxZoom: 12, padding: [50,50] });
+                        }
+                    }
                 } catch (err) {
                     console.log(err);
                 }
@@ -191,11 +212,18 @@ function leafletDatatable(table, panesShow, panesHide) {
         var pageNodes = tableOne.rows({ page: 'current' }).nodes();
         getCoordinates(pageNodes);
         mymap.addLayer(markers);
-        try {
-            mymap.fitBounds(markers.getBounds());
-        } catch (err) {
-            console.log(err);
-        }
+            try {
+                var _bounds = markers.getBounds();
+                if (_bounds && _bounds.isValid && _bounds.isValid()) {
+                    if (_bounds.getNorthEast().equals(_bounds.getSouthWest())) {
+                        mymap.setView(_bounds.getCenter(), 12);
+                    } else {
+                        mymap.fitBounds(_bounds, { maxZoom: 12, padding: [50,50] });
+                    }
+                }
+            } catch (err) {
+                console.log(err);
+            }
     });
 
     var baseLayers = {
@@ -215,7 +243,14 @@ function leafletDatatable(table, panesShow, panesHide) {
             markers.addLayer(objects);
             mymap.addLayer(markers);
             try {
-                mymap.fitBounds(markers.getBounds());
+                var _bounds = markers.getBounds();
+                if (_bounds && _bounds.isValid && _bounds.isValid()) {
+                    if (_bounds.getNorthEast().equals(_bounds.getSouthWest())) {
+                        mymap.setView(_bounds.getCenter(), 12);
+                    } else {
+                        mymap.fitBounds(_bounds, { maxZoom: 12, padding: [50,50] });
+                    }
+                }
             } catch (err) {
                 console.log(err);
             }
