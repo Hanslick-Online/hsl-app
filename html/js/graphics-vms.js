@@ -43,6 +43,7 @@
     const chapterOrderWrap = document.getElementById("graphics-chapter-order-wrap");
     const chapterOrderList = document.getElementById("graphics-chapter-order-list");
     const chapterOrderReset = document.getElementById("graphics-chapter-order-reset");
+    const chapterOrderAnnounce = document.getElementById("graphics-chapter-order-announce");
 
     if (
       !dataRoot ||
@@ -54,7 +55,8 @@
       !editionWrap ||
       !chapterOrderWrap ||
       !chapterOrderList ||
-      !chapterOrderReset
+      !chapterOrderReset ||
+      !chapterOrderAnnounce
     ) {
       return null;
     }
@@ -70,6 +72,7 @@
       chapterOrderWrap,
       chapterOrderList,
       chapterOrderReset,
+      chapterOrderAnnounce,
       person: { input: personInput, button: personButton, datalist: personDatalist },
       work: { input: workInput, button: workButton, datalist: workDatalist },
       place: { input: placeInput, button: placeButton, datalist: placeDatalist },
@@ -557,8 +560,8 @@
     });
   }
 
-  function renderChapterOrder(elements) {
-    // Rebuild the reorderable chapter list from the current x-axis order.
+  function renderChapterOrder(elements, focusIndex) {
+    // Rebuild the reorderable chapter chip list from the current x-axis order.
     const list = elements.chapterOrderList;
     list.innerHTML = "";
 
@@ -566,7 +569,12 @@
       const item = document.createElement("li");
       item.className = "graphics-chapter-order-item";
       item.draggable = true;
+      item.tabIndex = 0;
       item.dataset.index = String(index);
+      item.setAttribute(
+        "aria-label",
+        `${chapter}, Position ${index + 1} von ${state.chapters.length}. Ziehen oder Pfeiltasten verwenden, um zu verschieben.`
+      );
 
       const grip = document.createElement("span");
       grip.className = "graphics-chapter-order-grip";
@@ -577,34 +585,15 @@
       label.className = "graphics-chapter-order-label";
       label.textContent = chapter;
 
-      const controls = document.createElement("span");
-      controls.className = "graphics-chapter-order-controls";
-
-      const upButton = document.createElement("button");
-      upButton.type = "button";
-      upButton.className = "graphics-chapter-order-move";
-      upButton.dataset.direction = "up";
-      upButton.dataset.index = String(index);
-      upButton.textContent = "▲";
-      upButton.setAttribute("aria-label", `${chapter} nach oben verschieben`);
-      upButton.disabled = index === 0;
-
-      const downButton = document.createElement("button");
-      downButton.type = "button";
-      downButton.className = "graphics-chapter-order-move";
-      downButton.dataset.direction = "down";
-      downButton.dataset.index = String(index);
-      downButton.textContent = "▼";
-      downButton.setAttribute("aria-label", `${chapter} nach unten verschieben`);
-      downButton.disabled = index === state.chapters.length - 1;
-
-      controls.appendChild(upButton);
-      controls.appendChild(downButton);
       item.appendChild(grip);
       item.appendChild(label);
-      item.appendChild(controls);
       list.appendChild(item);
     });
+
+    if (typeof focusIndex === "number") {
+      const target = list.children[focusIndex];
+      target?.focus();
+    }
   }
 
   function moveChapter(elements, fromIndex, toIndex) {
@@ -621,7 +610,8 @@
 
     const [chapter] = state.chapters.splice(fromIndex, 1);
     state.chapters.splice(toIndex, 0, chapter);
-    renderChapterOrder(elements);
+    renderChapterOrder(elements, toIndex);
+    elements.chapterOrderAnnounce.textContent = `${chapter} ist jetzt an Position ${toIndex + 1} von ${state.chapters.length}.`;
     if (isChapterMode(elements)) {
       updateChart(elements);
     }
@@ -812,15 +802,20 @@
       }
     });
 
-    elements.chapterOrderList.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-direction]");
-      if (!button) {
+    elements.chapterOrderList.addEventListener("keydown", (event) => {
+      const item = event.target.closest(".graphics-chapter-order-item");
+      if (!item) {
         return;
       }
 
-      const index = Number(button.dataset.index);
-      const delta = button.dataset.direction === "up" ? -1 : 1;
-      moveChapter(elements, index, index + delta);
+      const index = Number(item.dataset.index);
+      if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        event.preventDefault();
+        moveChapter(elements, index, index - 1);
+      } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        event.preventDefault();
+        moveChapter(elements, index, index + 1);
+      }
     });
 
     let dragIndex = null;
@@ -859,6 +854,7 @@
     elements.chapterOrderReset.addEventListener("click", () => {
       state.chapters = [...state.defaultChapterOrder];
       renderChapterOrder(elements);
+      elements.chapterOrderAnnounce.textContent = "Kapitelreihenfolge zurückgesetzt.";
       if (isChapterMode(elements)) {
         updateChart(elements);
       }
