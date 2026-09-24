@@ -63,6 +63,55 @@
                         padding: 0;
                     }
 
+                    .graphics-chapter-order-header {
+                        align-items: center;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.35rem;
+                    }
+
+                    .graphics-chapter-order-hint {
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .graphics-chapter-order-list {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.4rem;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .graphics-chapter-order-item {
+                        align-items: center;
+                        background: #eef1f4;
+                        border: 1px solid #d8dee5;
+                        border-radius: 999px;
+                        color: #33404d;
+                        cursor: grab;
+                        display: inline-flex;
+                        gap: 0.35rem;
+                        padding: 0.3rem 0.7rem;
+                        user-select: none;
+                    }
+
+                    .graphics-chapter-order-item:focus-visible {
+                        box-shadow: 0 0 0 0.2rem rgba(11, 110, 79, 0.3);
+                        outline: none;
+                    }
+
+                    .graphics-chapter-order-item.is-dragging {
+                        cursor: grabbing;
+                        opacity: 0.5;
+                    }
+
+                    .graphics-chapter-order-grip {
+                        color: #adb5bd;
+                        font-size: 0.85rem;
+                        letter-spacing: -0.1em;
+                    }
+
                     .graphics-corpus-list {
                         display: grid;
                         gap: 0.6rem;

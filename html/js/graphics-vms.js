@@ -17,6 +17,7 @@
     optionMap: new Map(),
     selectedSeries: [],
     years: [],
+    defaultChapterOrder: [],
     tooltipHovered: false,
     tooltipHideTimer: null,
   };
@@ -39,8 +40,24 @@
     const viewToggle = document.getElementById("graphics-view-toggle");
     const editionSelect = document.getElementById("graphics-edition-select");
     const editionWrap = document.getElementById("graphics-edition-wrap");
+    const chapterOrderWrap = document.getElementById("graphics-chapter-order-wrap");
+    const chapterOrderList = document.getElementById("graphics-chapter-order-list");
+    const chapterOrderReset = document.getElementById("graphics-chapter-order-reset");
+    const chapterOrderAnnounce = document.getElementById("graphics-chapter-order-announce");
 
-    if (!dataRoot || !canvas || !selected || !status || !viewToggle || !editionSelect || !editionWrap) {
+    if (
+      !dataRoot ||
+      !canvas ||
+      !selected ||
+      !status ||
+      !viewToggle ||
+      !editionSelect ||
+      !editionWrap ||
+      !chapterOrderWrap ||
+      !chapterOrderList ||
+      !chapterOrderReset ||
+      !chapterOrderAnnounce
+    ) {
       return null;
     }
 
@@ -52,6 +69,10 @@
       viewToggle,
       editionSelect,
       editionWrap,
+      chapterOrderWrap,
+      chapterOrderList,
+      chapterOrderReset,
+      chapterOrderAnnounce,
       person: { input: personInput, button: personButton, datalist: personDatalist },
       work: { input: workInput, button: workButton, datalist: workDatalist },
       place: { input: placeInput, button: placeButton, datalist: placeDatalist },
@@ -196,6 +217,7 @@
   function applyData(elements, payload) {
     // Reset derived state, parse the payload, and populate entity and edition pickers.
     state.chapters = Array.isArray(payload.chapters) ? payload.chapters : [];
+    state.defaultChapterOrder = [...state.chapters];
     state.entities.clear();
     state.editionMap.clear();
     state.optionMap.clear();
@@ -538,6 +560,63 @@
     });
   }
 
+  function renderChapterOrder(elements, focusIndex) {
+    // Rebuild the reorderable chapter chip list from the current x-axis order.
+    const list = elements.chapterOrderList;
+    list.innerHTML = "";
+
+    state.chapters.forEach((chapter, index) => {
+      const item = document.createElement("li");
+      item.className = "graphics-chapter-order-item";
+      item.draggable = true;
+      item.tabIndex = 0;
+      item.dataset.index = String(index);
+      item.setAttribute(
+        "aria-label",
+        `${chapter}, Position ${index + 1} von ${state.chapters.length}. Ziehen oder Pfeiltasten verwenden, um zu verschieben.`
+      );
+
+      const grip = document.createElement("span");
+      grip.className = "graphics-chapter-order-grip";
+      grip.setAttribute("aria-hidden", "true");
+      grip.textContent = "⠿";
+
+      const label = document.createElement("span");
+      label.className = "graphics-chapter-order-label";
+      label.textContent = chapter;
+
+      item.appendChild(grip);
+      item.appendChild(label);
+      list.appendChild(item);
+    });
+
+    if (typeof focusIndex === "number") {
+      const target = list.children[focusIndex];
+      target?.focus();
+    }
+  }
+
+  function moveChapter(elements, fromIndex, toIndex) {
+    // Reorder the shared chapters array; it drives both axis labels and dataset values.
+    if (
+      fromIndex === toIndex ||
+      fromIndex < 0 ||
+      toIndex < 0 ||
+      fromIndex >= state.chapters.length ||
+      toIndex >= state.chapters.length
+    ) {
+      return;
+    }
+
+    const [chapter] = state.chapters.splice(fromIndex, 1);
+    state.chapters.splice(toIndex, 0, chapter);
+    renderChapterOrder(elements, toIndex);
+    elements.chapterOrderAnnounce.textContent = `${chapter} ist jetzt an Position ${toIndex + 1} von ${state.chapters.length}.`;
+    if (isChapterMode(elements)) {
+      updateChart(elements);
+    }
+  }
+
   function updateChart(elements) {
     // Rebuild datasets and axes after every selection or view-mode change.
     if (!state.chart) {
@@ -681,6 +760,7 @@
 
     applyData(elements, payload);
     renderSelected(elements);
+    renderChapterOrder(elements);
 
     [elements.person, elements.work, elements.place].forEach((group) => {
       if (!group.input || !group.button) {
@@ -712,6 +792,7 @@
       syncModeButton(elements);
       const isChapter = isChapterMode(elements);
       elements.editionWrap.classList.toggle("d-none", !isChapter);
+      elements.chapterOrderWrap.classList.toggle("d-none", !isChapter);
       updateChart(elements);
     });
 
@@ -721,8 +802,67 @@
       }
     });
 
+    elements.chapterOrderList.addEventListener("keydown", (event) => {
+      const item = event.target.closest(".graphics-chapter-order-item");
+      if (!item) {
+        return;
+      }
+
+      const index = Number(item.dataset.index);
+      if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        event.preventDefault();
+        moveChapter(elements, index, index - 1);
+      } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        event.preventDefault();
+        moveChapter(elements, index, index + 1);
+      }
+    });
+
+    let dragIndex = null;
+    elements.chapterOrderList.addEventListener("dragstart", (event) => {
+      const item = event.target.closest(".graphics-chapter-order-item");
+      if (!item) {
+        return;
+      }
+
+      dragIndex = Number(item.dataset.index);
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", String(dragIndex));
+      item.classList.add("is-dragging");
+    });
+
+    elements.chapterOrderList.addEventListener("dragend", (event) => {
+      event.target.closest(".graphics-chapter-order-item")?.classList.remove("is-dragging");
+      dragIndex = null;
+    });
+
+    elements.chapterOrderList.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    });
+
+    elements.chapterOrderList.addEventListener("drop", (event) => {
+      event.preventDefault();
+      const item = event.target.closest(".graphics-chapter-order-item");
+      if (!item || dragIndex === null) {
+        return;
+      }
+
+      moveChapter(elements, dragIndex, Number(item.dataset.index));
+    });
+
+    elements.chapterOrderReset.addEventListener("click", () => {
+      state.chapters = [...state.defaultChapterOrder];
+      renderChapterOrder(elements);
+      elements.chapterOrderAnnounce.textContent = "Kapitelreihenfolge zurückgesetzt.";
+      if (isChapterMode(elements)) {
+        updateChart(elements);
+      }
+    });
+
     syncModeButton(elements);
     elements.editionWrap.classList.add("d-none");
+    elements.chapterOrderWrap.classList.add("d-none");
     updateChart(elements);
   }
 
