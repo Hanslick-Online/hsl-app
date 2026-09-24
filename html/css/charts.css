@@ -63,6 +63,65 @@
                         padding: 0;
                     }
 
+                    .graphics-chapter-order-header {
+                        align-items: center;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .graphics-chapter-order-list {
+                        display: grid;
+                        gap: 0.4rem;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .graphics-chapter-order-item {
+                        align-items: center;
+                        background: #f8f9fa;
+                        border: 1px solid #dee2e6;
+                        border-radius: 0.5rem;
+                        display: flex;
+                        gap: 0.5rem;
+                        padding: 0.35rem 0.5rem;
+                    }
+
+                    .graphics-chapter-order-item.is-dragging {
+                        opacity: 0.5;
+                    }
+
+                    .graphics-chapter-order-grip {
+                        color: #adb5bd;
+                        cursor: grab;
+                        font-size: 0.9rem;
+                        letter-spacing: -0.1em;
+                    }
+
+                    .graphics-chapter-order-label {
+                        flex: 1 1 auto;
+                    }
+
+                    .graphics-chapter-order-controls {
+                        display: inline-flex;
+                        gap: 0.15rem;
+                    }
+
+                    .graphics-chapter-order-move {
+                        background: transparent;
+                        border: 1px solid #dee2e6;
+                        border-radius: 0.35rem;
+                        color: #495057;
+                        font-size: 0.7rem;
+                        line-height: 1;
+                        padding: 0.2rem 0.4rem;
+                    }
+
+                    .graphics-chapter-order-move:disabled {
+                        opacity: 0.35;
+                    }
+
                     .graphics-corpus-list {
                         display: grid;
                         gap: 0.6rem;
