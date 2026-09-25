@@ -73,7 +73,6 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:if>
-                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>

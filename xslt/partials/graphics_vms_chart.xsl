@@ -27,6 +27,15 @@
                                     <label class="form-label" for="graphics-edition-select"><xsl:value-of select="local:text('Für den nächsten Eintrag (Kapitelansicht)', 'For next entry (chapter view)')"/></label>
                                     <select id="graphics-edition-select" class="form-select"></select>
                                 </div>
+                                <div id="graphics-chapter-order-wrap" class="d-none">
+                                    <div class="graphics-chapter-order-header">
+                                        <label class="form-label mb-0"><xsl:value-of select="local:text('Kapitelreihenfolge', 'Chapter order')"/></label>
+                                        <button id="graphics-chapter-order-reset" class="btn btn-sm btn-outline-secondary" type="button"><xsl:value-of select="local:text('Zurücksetzen', 'Reset')"/></button>
+                                    </div>
+                                    <p class="graphics-chapter-order-hint small text-muted"><xsl:value-of select="local:text('Ziehen oder Pfeiltasten verwenden, um die Kapitel neu anzuordnen.', 'Drag or use the arrow keys to reorder the chapters.')"/></p>
+                                    <ul id="graphics-chapter-order-list" class="graphics-chapter-order-list"></ul>
+                                    <div id="graphics-chapter-order-announce" class="visually-hidden" aria-live="polite"></div>
+                                </div>
                                 <div>
                                     <label class="form-label" for="graphics-person-input"><xsl:value-of select="local:text('Bis zu fünf Einträge hinzufügen', 'Add up to five entries')"/></label>
                                     <div class="graphics-add-row">
