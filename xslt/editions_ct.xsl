@@ -306,6 +306,11 @@
         <xsl:when test="@prev">
             <xsl:apply-templates/>
         </xsl:when>
+
+        <!-- Unlinked rs (no @ref yet, e.g. not annotated): still render the text -->
+        <xsl:otherwise>
+            <xsl:apply-templates/>
+        </xsl:otherwise>
     </xsl:choose>
     
     <!-- Handle trailing whitespace -->
