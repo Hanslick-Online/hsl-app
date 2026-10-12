@@ -35,6 +35,16 @@
                         flex: 1 1 auto;
                     }
 
+                    .graphics-work-add-row input {
+                        flex: 1 1 50%;
+                        min-width: 0;
+                    }
+
+                    .graphics-author-feedback:empty {
+                        display: none;
+                        margin-top: 0;
+                    }
+
                     .graphics-selected-list {
                         display: flex;
                         flex-wrap: wrap;

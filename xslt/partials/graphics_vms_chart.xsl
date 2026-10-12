@@ -42,10 +42,12 @@
                                         <input id="graphics-person-input" class="form-control" type="text" list="graphics-person-options" placeholder="{local:text('Person eingeben', 'Start typing a person')}"/>
                                         <button id="graphics-add-person" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
                                     </div>
-                                    <div class="graphics-add-row mt-2">
+                                    <div class="graphics-add-row graphics-work-add-row mt-2">
+                                        <input id="graphics-author-input" class="form-control" type="text" list="graphics-author-options" aria-describedby="graphics-author-feedback" placeholder="{local:text('Autor eingeben', 'Start typing an author')}"/>
                                         <input id="graphics-work-input" class="form-control" type="text" list="graphics-work-options" placeholder="{local:text('Werk eingeben', 'Start typing a work')}"/>
                                         <button id="graphics-add-work" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
                                     </div>
+                                    <div id="graphics-author-feedback" class="form-text small graphics-author-feedback" aria-live="polite"></div>
                                     <div class="graphics-add-row mt-2">
                                         <input id="graphics-place-input" class="form-control" type="text" list="graphics-place-options" placeholder="{local:text('Ort eingeben', 'Start typing a place')}"/>
                                         <button id="graphics-add-place" class="btn btn-primary" type="button"><xsl:value-of select="local:text('Hinzufügen', 'Add')"/></button>
@@ -68,10 +70,11 @@
             </div>
 
             <datalist id="graphics-person-options"></datalist>
+            <datalist id="graphics-author-options"></datalist>
             <datalist id="graphics-work-options"></datalist>
             <datalist id="graphics-place-options"></datalist>
 
-            <div id="graphics-data" class="d-none" data-source="data/graphics-chart-traktat-entities.json"></div>
+            <div id="graphics-data" class="d-none" data-source="data/graphics-chart-traktat-entities.json" data-type-works="{local:text('Werke', 'Works')}" data-author-matches="{local:text('Passende Werke: {count}', 'Matching works: {count}')}" data-author-select-suggestion="{local:text('Wählen Sie einen Autor aus der Vorschlagsliste aus.', 'Choose an author from the suggestion list.')}" data-author-no-matches="{local:text('Kein passender Autor gefunden.', 'No matching author found.')}"></div>
         </section>
     </xsl:template>
 </xsl:stylesheet>

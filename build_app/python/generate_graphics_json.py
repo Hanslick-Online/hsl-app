@@ -86,6 +86,15 @@ def entity_label(kind: str, node: ET.Element) -> str:
     return text_content(first(node, ".//tei:placeName[@type='main']", ".//tei:placeName"))
 
 
+def entity_author(node: ET.Element) -> str:
+    authors = dict.fromkeys(
+        text_content(author)
+        for author in node.findall("tei:author", NS)
+        if text_content(author)
+    )
+    return "; ".join(authors)
+
+
 def mentions_for_entity(node: ET.Element) -> dict[int, dict[str, int]]:
     # Distinct targets per year/corpus: mirrors XSLT count(distinct-values(@target)).
     buckets: dict[int, dict[str, set[str]]] = defaultdict(lambda: defaultdict(set))
@@ -189,7 +198,10 @@ def build_entity_catalog(person_root: ET.Element, work_root: ET.Element, place_r
             if not label:
                 continue
 
-            catalog[entity_id] = {"kind": kind, "label": label}
+            entity = {"kind": kind, "label": label}
+            if kind == "work":
+                entity["author"] = entity_author(node)
+            catalog[entity_id] = entity
 
     return catalog
 
@@ -250,6 +262,7 @@ def collect_traktat_entities(editions_dir: Path, catalog: dict[str, dict[str, st
                 "id": entity_id,
                 "kind": entity["kind"],
                 "label": entity["label"],
+                **({"author": entity["author"]} if entity["kind"] == "work" else {}),
                 "years": year_payload,
             }
         )
@@ -275,14 +288,15 @@ def collect_entities(kind: str, root: ET.Element) -> list[dict]:
         if not label:
             continue
 
-        entities.append(
-            {
-                "id": entity_id,
-                "kind": kind,
-                "label": label,
-                "years": {str(year): counts for year, counts in sorted(yearly_counts.items())},
-            }
-        )
+        entity = {
+            "id": entity_id,
+            "kind": kind,
+            "label": label,
+            "years": {str(year): counts for year, counts in sorted(yearly_counts.items())},
+        }
+        if kind == "work":
+            entity["author"] = entity_author(node)
+        entities.append(entity)
 
     return entities
 

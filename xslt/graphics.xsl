@@ -64,6 +64,7 @@
                
                 <xsl:if test="contains($doc_title, 'Chart')">
                     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+                    <script type="text/javascript" src="js/work-aliases.js"></script>
                     <xsl:choose>
                         <xsl:when test="contains($doc_title, 'VMS Chart')">
                             <script type="text/javascript" src="js/graphics-vms.js"></script>
