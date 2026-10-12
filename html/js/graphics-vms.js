@@ -9,13 +9,18 @@
 
   // Mutable UI, chart, and parsed-data state for this page instance.
   const state = {
+    authorWorkMap: new Map(),
     chart: null,
     chapters: [],
     entities: new Map(),
     editionMap: new Map(),
     mode: "year",
     optionMap: new Map(),
+    personOptions: [],
+    placeOptions: [],
     selectedSeries: [],
+    typeWorks: "Works",
+    workOptions: [],
     years: [],
     defaultChapterOrder: [],
     tooltipHovered: false,
@@ -30,6 +35,9 @@
     const personButton = document.getElementById("graphics-add-person");
     const personDatalist = document.getElementById("graphics-person-options");
     const workInput = document.getElementById("graphics-work-input");
+    const authorInput = document.getElementById("graphics-author-input");
+    const authorDatalist = document.getElementById("graphics-author-options");
+    const authorFeedback = document.getElementById("graphics-author-feedback");
     const workButton = document.getElementById("graphics-add-work");
     const workDatalist = document.getElementById("graphics-work-options");
     const placeInput = document.getElementById("graphics-place-input");
@@ -74,7 +82,17 @@
       chapterOrderReset,
       chapterOrderAnnounce,
       person: { input: personInput, button: personButton, datalist: personDatalist },
-      work: { input: workInput, button: workButton, datalist: workDatalist },
+      work: {
+        input: workInput,
+        authorInput,
+        authorDatalist,
+        authorFeedback,
+        authorMatchesMessage: dataRoot.dataset.authorMatches || "{count} works match this input.",
+        authorSelectSuggestionMessage: dataRoot.dataset.authorSelectSuggestion || "Choose an author from the suggestion list.",
+        authorNoMatchesMessage: dataRoot.dataset.authorNoMatches || "No works match this input.",
+        button: workButton,
+        datalist: workDatalist,
+      },
       place: { input: placeInput, button: placeButton, datalist: placeDatalist },
     };
   }
@@ -141,9 +159,11 @@
       swatch.className = "graphics-legend-swatch";
       swatch.style.backgroundColor = dataset.borderColor;
 
-      const link = document.createElement("a");
+      const link = document.createElement(dataset.isAuthorAggregate ? "span" : "a");
       link.className = "graphics-legend-link";
-      link.href = `${dataset.entityId}.html`;
+      if (!dataset.isAuthorAggregate) {
+        link.href = `${dataset.entityId}.html`;
+      }
       link.textContent = dataset.label;
 
       item.appendChild(swatch);
@@ -163,6 +183,14 @@
     return response.json();
   }
 
+  function authorSurnames(author) {
+    return author
+      .split(";")
+      .map((name) => name.trim().split(",")[0].trim())
+      .filter(Boolean)
+      .join("; ");
+  }
+
   function appendOption(datalist, entity) {
     // Populate a typed entity picker and retain its display-value lookup.
     if (!datalist) {
@@ -170,13 +198,104 @@
     }
 
     const option = document.createElement("option");
-    option.value = `${entity.label} (${entity.type}, ${entity.id})`;
+    option.dataset.entityId = entity.id;
+    option.dataset.displayLabel = entity.label;
+    const baseValue = entity.kind === "work"
+      ? (entity.author ? `${entity.label} (${authorSurnames(entity.author)})` : entity.label)
+      : entity.kind === "person"
+        ? entity.label
+        : `${entity.label} (${entity.type}, ${entity.id})`;
+    let value = baseValue;
+    let duplicate = 2;
+    while (state.optionMap.has(value)) {
+      value = `${baseValue} (${duplicate})`;
+      duplicate += 1;
+    }
+    option.value = value;
     datalist.appendChild(option);
+    if (entity.kind === "work") {
+      option.dataset.author = entity.author || "";
+      state.workOptions.push(option);
+    } else if (entity.kind === "person") {
+      state.personOptions.push(option);
+    } else if (entity.kind === "place") {
+      state.placeOptions.push(option);
+    }
 
-    state.optionMap.set(option.value, {
+    state.optionMap.set(value, {
       id: entity.id,
       label: entity.label,
+      kind: entity.kind,
+      author: entity.author || "",
     });
+  }
+
+  function filterWorkOptions(workGroup) {
+    const query = workGroup.authorInput?.value.trim() || "";
+    const author = state.authorWorkMap.get(query.toLocaleLowerCase());
+    const matches = state.workOptions.filter(
+      (option) => !query || (author && author.workIds.has(option.dataset.entityId))
+    );
+
+    if (workGroup.datalist) {
+      workGroup.datalist.innerHTML = "";
+      matches.forEach((option) => workGroup.datalist.appendChild(option));
+    }
+
+    if (!workGroup.authorInput || !workGroup.authorFeedback) {
+      return;
+    }
+    if (!query) {
+      workGroup.authorInput.classList.remove("is-valid", "is-invalid");
+      workGroup.authorInput.removeAttribute("aria-invalid");
+      workGroup.authorFeedback.className = "form-text small graphics-author-feedback";
+      workGroup.authorFeedback.textContent = "";
+      return;
+    }
+
+    const isValid = Boolean(author);
+    const hasSuggestion = isValid || Array.from(state.authorWorkMap.values()).some(
+      (candidate) => candidate.label.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+    );
+    workGroup.authorInput.classList.toggle("is-valid", isValid);
+    workGroup.authorInput.classList.toggle("is-invalid", !hasSuggestion);
+    workGroup.authorInput.setAttribute("aria-invalid", String(!hasSuggestion));
+    const message = isValid
+      ? workGroup.authorMatchesMessage.replace("{count}", String(matches.length))
+      : hasSuggestion
+        ? workGroup.authorSelectSuggestionMessage
+        : workGroup.authorNoMatchesMessage;
+    workGroup.authorFeedback.className = `form-text small graphics-author-feedback text-${isValid ? "success" : hasSuggestion ? "muted" : "danger"}`;
+    workGroup.authorFeedback.textContent = message;
+  }
+
+  function filterPersonOptions(personGroup) {
+    const query = personGroup.input?.value.trim().toLocaleLowerCase() || "";
+    const queryParts = query.split(/[\s,]+/).filter(Boolean);
+    const matches = state.personOptions.filter((option) => {
+      const nameParts = option.dataset.displayLabel
+        .toLocaleLowerCase()
+        .split(/[\s,]+/)
+        .filter(Boolean);
+      return queryParts.every((queryPart) =>
+        nameParts.some((namePart) => namePart.startsWith(queryPart))
+      );
+    });
+
+    if (personGroup.datalist) {
+      personGroup.datalist.replaceChildren(...matches);
+    }
+  }
+
+  function filterPlaceOptions(placeGroup) {
+    const query = placeGroup.input?.value.trim().toLocaleLowerCase() || "";
+    const matches = state.placeOptions.filter(
+      (option) => !query || option.dataset.displayLabel.toLocaleLowerCase().startsWith(query)
+    );
+
+    if (placeGroup.datalist) {
+      placeGroup.datalist.replaceChildren(...matches);
+    }
   }
 
   function parseEntity(raw) {
@@ -210,19 +329,25 @@
       kind: raw.kind,
       type: ENTITY_TYPES[raw.kind] || "Ort",
       label: raw.label,
+      author: raw.author || "",
       years,
     };
   }
 
   function applyData(elements, payload) {
     // Reset derived state, parse the payload, and populate entity and edition pickers.
+    state.typeWorks = elements.dataRoot.dataset.typeWorks || "Works";
     state.chapters = Array.isArray(payload.chapters) ? payload.chapters : [];
     state.defaultChapterOrder = [...state.chapters];
     state.entities.clear();
     state.editionMap.clear();
     state.optionMap.clear();
+    state.authorWorkMap.clear();
+    state.personOptions = [];
+    state.placeOptions = [];
+    state.workOptions = [];
 
-    [elements.person.datalist, elements.work.datalist, elements.place.datalist].forEach((d) => {
+    [elements.person.datalist, elements.work.datalist, elements.place.datalist, elements.work.authorDatalist].forEach((d) => {
       if (d) {
         d.innerHTML = "";
       }
@@ -232,6 +357,7 @@
       person: elements.person.datalist,
       work: elements.work.datalist,
       place: elements.place.datalist,
+      author: elements.work.authorDatalist,
     };
 
     (payload.entities || []).forEach((raw) => {
@@ -242,6 +368,27 @@
       state.entities.set(entity.id, entity);
       appendOption(datalistByKind[entity.kind], entity);
     });
+    Array.from(state.entities.values())
+      .filter((entity) => entity.kind === "work")
+      .forEach((work) => {
+        work.author.split(";").map((author) => author.trim()).filter(Boolean).forEach((author) => {
+          const key = author.toLocaleLowerCase();
+          if (!state.authorWorkMap.has(key)) {
+            state.authorWorkMap.set(key, { label: author, workIds: new Set() });
+          }
+          state.authorWorkMap.get(key).workIds.add(work.id);
+        });
+      });
+    if (elements.work.authorDatalist) {
+      Array.from(state.authorWorkMap.values())
+        .sort((left, right) => left.label.localeCompare(right.label))
+        .forEach((author) => {
+          const option = document.createElement("option");
+          option.value = author.label;
+          elements.work.authorDatalist.appendChild(option);
+        });
+    }
+    filterWorkOptions(elements.work);
 
     state.years = Array.from(
       new Set(
@@ -260,6 +407,43 @@
       option.textContent = edition.label;
       elements.editionSelect.appendChild(option);
     });
+  }
+
+  function createAuthorAggregate(query) {
+    const author = state.authorWorkMap.get(query.toLocaleLowerCase());
+    if (!author) {
+      return null;
+    }
+    const works = Array.from(author.workIds, (id) => state.entities.get(id)).filter(Boolean);
+
+    const years = new Map();
+    works.forEach((work) => {
+      work.years.forEach((values, year) => {
+        if (!years.has(year)) {
+          const chapterCounts = {};
+          state.chapters.forEach((chapter) => {
+            chapterCounts[chapter] = 0;
+          });
+          years.set(year, { edition: values.edition, total: 0, chapterCounts });
+        }
+        const aggregate = years.get(year);
+        aggregate.total += values.total;
+        state.chapters.forEach((chapter) => {
+          aggregate.chapterCounts[chapter] += values.chapterCounts[chapter] || 0;
+        });
+      });
+    });
+
+    const ids = works.map((work) => work.id).sort();
+    return {
+      id: `author-aggregate:${ids.join("|")}`,
+      kind: "work",
+      type: state.typeWorks,
+      label: author.label,
+      author: "",
+      years,
+      isAuthorAggregate: true,
+    };
   }
 
   function renderSelected(elements) {
@@ -486,7 +670,7 @@
     const year = isChapter ? Number(point.dataset._year) : Number(point.parsed.x);
     const axisLabel = isChapter ? state.chapters[point.dataIndex] || "" : String(point.parsed.x);
     const value = Number.isFinite(point.parsed.y) ? point.parsed.y : 0;
-    const searchHref = buildSearchHref(entity, {
+    const searchHref = entity.isAuthorAggregate ? null : buildSearchHref(entity, {
       year,
       chapterLabel: isChapter ? axisLabel : "",
       isChapterMode: isChapter,
@@ -502,16 +686,17 @@
     meta.className = "graphics-chart-tooltip__meta";
     meta.textContent = isChapter ? `${point.dataset._editionLabel} - Kapitel ${axisLabel}: ${value}` : `Jahr ${axisLabel}: ${value}`;
 
-    const link = document.createElement("a");
-    link.className = "graphics-chart-tooltip__link";
-    link.href = searchHref;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = "Treffer dieser Auflage suchen";
-
     tooltip.appendChild(title);
     tooltip.appendChild(meta);
-    tooltip.appendChild(link);
+    if (searchHref) {
+      const link = document.createElement("a");
+      link.className = "graphics-chart-tooltip__link";
+      link.href = searchHref;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Treffer dieser Auflage suchen";
+      tooltip.appendChild(link);
+    }
 
     const { offsetLeft, offsetTop } = context.chart.canvas;
     tooltip.style.opacity = "1";
@@ -535,6 +720,7 @@
     // Keep common Chart.js line styling consistent between both chart modes.
     return {
       entityId: entity.id,
+      isAuthorAggregate: entity.isAuthorAggregate || false,
       borderColor: color,
       backgroundColor: color,
       pointBackgroundColor: color,
@@ -703,11 +889,24 @@
   function addEntity(elements, input) {
     // Validate and add a selected picker entry to the active chart series.
     const value = input.value.trim();
-    const option = state.optionMap.get(value);
+    const isWorkInput = input === elements.work.input;
+    const authorQuery = isWorkInput ? elements.work.authorInput?.value.trim() || "" : "";
+    let option = state.optionMap.get(value);
+    let authorAggregate = null;
+    if (isWorkInput && !value && authorQuery) {
+      authorAggregate = createAuthorAggregate(authorQuery);
+      if (authorAggregate) {
+        option = { id: authorAggregate.id, label: authorAggregate.label };
+      }
+    }
     const chapterMode = isChapterMode(elements);
     const editionKey = elements.editionSelect.value;
 
-    if (!option) {
+    const author = state.authorWorkMap.get(authorQuery.toLocaleLowerCase());
+    const authorMatchesWork = authorAggregate || !isWorkInput || !authorQuery || (
+      option?.kind === "work" && author?.workIds.has(option.id)
+    );
+    if (!option || !authorMatchesWork) {
       setStatus(elements, "Wählen Sie vor dem Hinzufügen einen Eintrag aus der Vorschlagsliste aus.", "danger");
       return;
     }
@@ -721,12 +920,30 @@
     if (state.selectedSeries.some((series) => series.key === seriesKey)) {
       setStatus(elements, `${option.label} ist in dieser Kombination bereits ausgewählt.`, "warning");
       input.value = "";
+      if (input === elements.person.input) {
+        filterPersonOptions(elements.person);
+      } else if (input === elements.place.input) {
+        filterPlaceOptions(elements.place);
+      }
+      if (isWorkInput) {
+        elements.work.authorInput.value = "";
+        filterWorkOptions(elements.work);
+      }
       return;
     }
 
     if (!chapterMode && state.selectedSeries.some((series) => series.entityId === option.id)) {
       setStatus(elements, `${option.label} ist bereits ausgewählt.`, "warning");
       input.value = "";
+      if (input === elements.person.input) {
+        filterPersonOptions(elements.person);
+      } else if (input === elements.place.input) {
+        filterPlaceOptions(elements.place);
+      }
+      if (isWorkInput) {
+        elements.work.authorInput.value = "";
+        filterWorkOptions(elements.work);
+      }
       return;
     }
 
@@ -735,6 +952,9 @@
       return;
     }
 
+    if (authorAggregate) {
+      state.entities.set(authorAggregate.id, authorAggregate);
+    }
     state.selectedSeries.push({
       key: seriesKey,
       entityId: option.id,
@@ -742,6 +962,15 @@
     });
 
     input.value = "";
+    if (input === elements.person.input) {
+      filterPersonOptions(elements.person);
+    } else if (input === elements.place.input) {
+      filterPlaceOptions(elements.place);
+    }
+    if (isWorkInput) {
+      elements.work.authorInput.value = "";
+      filterWorkOptions(elements.work);
+    }
     renderSelected(elements);
     updateChart(elements);
   }
@@ -775,6 +1004,9 @@
         }
       });
     });
+    elements.person.input?.addEventListener("input", () => filterPersonOptions(elements.person));
+    elements.place.input?.addEventListener("input", () => filterPlaceOptions(elements.place));
+    elements.work.authorInput?.addEventListener("input", () => filterWorkOptions(elements.work));
 
     elements.selected.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-series-key]");

@@ -15,6 +15,9 @@
     errorDuplicate: "{label} is already selected.",
     errorInvalidEntity: "Choose an entity from the suggestion list before adding it.",
     errorMax: "You can compare up to {max} entities at once.",
+    authorMatches: "{count} works match this input.",
+    authorSelectSuggestion: "Choose an author from the suggestion list.",
+    authorNoMatches: "No works match this input.",
     removeAriaLabel: "Remove {label}",
     statusLoadError: "Chart data could not be loaded.",
     statusLoading: "Loading chart data...",
@@ -28,16 +31,21 @@
       person: "Person",
       place: "Place",
       work: "Work",
+      works: "Works",
     },
     tooltipYear: "Year {year}",
   };
 
   const state = {
     chart: null,
+    authorWorkMap: new Map(),
     entityCache: new Map(),
     i18n: DEFAULT_I18N,
     optionMap: new Map(),
+    personOptions: [],
+    placeOptions: [],
     selectedIds: [],
+    workOptions: [],
     years: [],
     zoomPlugin: null,
   };
@@ -209,6 +217,9 @@
       errorDuplicate: dataRoot.dataset.errorDuplicate || DEFAULT_I18N.errorDuplicate,
       errorInvalidEntity: dataRoot.dataset.errorInvalidEntity || DEFAULT_I18N.errorInvalidEntity,
       errorMax: dataRoot.dataset.errorMax || DEFAULT_I18N.errorMax,
+      authorMatches: dataRoot.dataset.authorMatches || DEFAULT_I18N.authorMatches,
+      authorSelectSuggestion: dataRoot.dataset.authorSelectSuggestion || DEFAULT_I18N.authorSelectSuggestion,
+      authorNoMatches: dataRoot.dataset.authorNoMatches || DEFAULT_I18N.authorNoMatches,
       removeAriaLabel: dataRoot.dataset.removeAriaLabel || DEFAULT_I18N.removeAriaLabel,
       statusLoadError: dataRoot.dataset.statusLoadError || DEFAULT_I18N.statusLoadError,
       statusLoading: dataRoot.dataset.statusLoading || DEFAULT_I18N.statusLoading,
@@ -222,6 +233,7 @@
         person: dataRoot.dataset.typePerson || DEFAULT_I18N.typeLabels.person,
         place: dataRoot.dataset.typePlace || DEFAULT_I18N.typeLabels.place,
         work: dataRoot.dataset.typeWork || DEFAULT_I18N.typeLabels.work,
+        works: dataRoot.dataset.typeWorks || DEFAULT_I18N.typeLabels.works,
       },
       tooltipYear: dataRoot.dataset.tooltipYear || DEFAULT_I18N.tooltipYear,
     };
@@ -246,6 +258,9 @@
     const personDatalist = document.getElementById("graphics-person-options");
 
     const workInput = document.getElementById("graphics-work-input");
+    const authorInput = document.getElementById("graphics-author-input");
+    const authorDatalist = document.getElementById("graphics-author-options");
+    const authorFeedback = document.getElementById("graphics-author-feedback");
     const workButton = document.getElementById("graphics-add-work");
     const workDatalist = document.getElementById("graphics-work-options");
 
@@ -262,7 +277,14 @@
       corpusCheckboxes,
       dataRoot,
       person: { input: personInput, button: personButton, datalist: personDatalist },
-      work: { input: workInput, button: workButton, datalist: workDatalist },
+      work: {
+        input: workInput,
+        authorInput,
+        authorDatalist,
+        authorFeedback,
+        button: workButton,
+        datalist: workDatalist,
+      },
       place: { input: placeInput, button: placeButton, datalist: placeDatalist },
       selected,
       status,
@@ -294,6 +316,14 @@
     return state.i18n.typeLabels[kind] || kind;
   }
 
+  function authorSurnames(author) {
+    return author
+      .split(";")
+      .map((name) => name.trim().split(",")[0].trim())
+      .filter(Boolean)
+      .join("; ");
+  }
+
   function appendOption(datalist, entity) {
     if (!datalist) {
       return;
@@ -304,15 +334,134 @@
     option.dataset.displayLabel = entity.label;
     option.dataset.entityKind = entity.kind;
     option.dataset.entityType = entity.type;
-    option.value = `${entity.label} (${entity.type}, ${entity.id})`;
+    const baseValue = entity.kind === "work"
+      ? (entity.author ? `${entity.label} (${authorSurnames(entity.author)})` : entity.label)
+      : entity.kind === "person"
+        ? entity.label
+        : `${entity.label} (${entity.type}, ${entity.id})`;
+    let value = baseValue;
+    let duplicate = 2;
+    while (state.optionMap.has(value)) {
+      value = `${baseValue} (${duplicate})`;
+      duplicate += 1;
+    }
+    option.value = value;
     option.textContent = entity.label;
     datalist.appendChild(option);
+    if (entity.kind === "work") {
+      option.dataset.author = entity.author || "";
+      state.workOptions.push(option);
+    } else if (entity.kind === "person") {
+      state.personOptions.push(option);
+    } else if (entity.kind === "place") {
+      state.placeOptions.push(option);
+    }
 
-    state.optionMap.set(option.value, {
+    state.optionMap.set(value, {
       id: entity.id,
       label: entity.label,
       type: entity.type,
+      kind: entity.kind,
+      author: entity.author || "",
     });
+  }
+
+  function filterWorkOptions(workGroup) {
+    const query = workGroup.authorInput?.value.trim() || "";
+    const author = state.authorWorkMap.get(query.toLocaleLowerCase());
+    const matches = state.workOptions.filter(
+      (option) => !query || (author && author.workIds.has(option.dataset.entityId))
+    );
+
+    if (workGroup.datalist) {
+      workGroup.datalist.innerHTML = "";
+      matches.forEach((option) => workGroup.datalist.appendChild(option));
+    }
+
+    if (!workGroup.authorInput || !workGroup.authorFeedback) {
+      return;
+    }
+    if (!query) {
+      workGroup.authorInput.classList.remove("is-valid", "is-invalid");
+      workGroup.authorInput.removeAttribute("aria-invalid");
+      workGroup.authorFeedback.className = "form-text small graphics-author-feedback";
+      workGroup.authorFeedback.textContent = "";
+      return;
+    }
+
+    const isValid = Boolean(author);
+    const hasSuggestion = isValid || Array.from(state.authorWorkMap.values()).some(
+      (candidate) => candidate.label.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+    );
+    workGroup.authorInput.classList.toggle("is-valid", isValid);
+    workGroup.authorInput.classList.toggle("is-invalid", !hasSuggestion);
+    workGroup.authorInput.setAttribute("aria-invalid", String(!hasSuggestion));
+    const message = isValid
+      ? formatMessage(state.i18n.authorMatches, { count: matches.length })
+      : hasSuggestion
+        ? state.i18n.authorSelectSuggestion
+        : state.i18n.authorNoMatches;
+    workGroup.authorFeedback.className = `form-text small graphics-author-feedback text-${isValid ? "success" : hasSuggestion ? "muted" : "danger"}`;
+    workGroup.authorFeedback.textContent = message;
+  }
+
+  function filterPersonOptions(personGroup) {
+    const query = personGroup.input?.value.trim().toLocaleLowerCase() || "";
+    const queryParts = query.split(/[\s,]+/).filter(Boolean);
+    const matches = state.personOptions.filter((option) => {
+      const nameParts = option.dataset.displayLabel
+        .toLocaleLowerCase()
+        .split(/[\s,]+/)
+        .filter(Boolean);
+      return queryParts.every((queryPart) =>
+        nameParts.some((namePart) => namePart.startsWith(queryPart))
+      );
+    });
+
+    if (personGroup.datalist) {
+      personGroup.datalist.replaceChildren(...matches);
+    }
+  }
+
+  function filterPlaceOptions(placeGroup) {
+    const query = placeGroup.input?.value.trim().toLocaleLowerCase() || "";
+    const matches = state.placeOptions.filter(
+      (option) => !query || option.dataset.displayLabel.toLocaleLowerCase().startsWith(query)
+    );
+
+    if (placeGroup.datalist) {
+      placeGroup.datalist.replaceChildren(...matches);
+    }
+  }
+
+  function createAuthorAggregate(query) {
+    const author = state.authorWorkMap.get(query.toLocaleLowerCase());
+    if (!author) {
+      return null;
+    }
+    const works = Array.from(author.workIds, (id) => state.entityCache.get(id)).filter(Boolean);
+
+    const years = new Map();
+    works.forEach((work) => {
+      work.years.forEach((counts, year) => {
+        if (!years.has(year)) {
+          years.set(year, { traktat: 0, critics: 0, vms: 0, documents: 0 });
+        }
+        const aggregate = years.get(year);
+        CORPUS_KEYS.forEach((corpus) => {
+          aggregate[corpus] += counts[corpus] || 0;
+        });
+      });
+    });
+
+    return {
+      id: `author-aggregate:${works.map((work) => work.id).sort().join("|")}`,
+      kind: "work",
+      label: author.label,
+      type: state.i18n.typeLabels.works,
+      years,
+      isAuthorAggregate: true,
+    };
   }
 
   function applyChartData(elements, payload) {
@@ -321,10 +470,15 @@
       person: elements.person.datalist,
       place: elements.place.datalist,
       work: elements.work.datalist,
+      author: elements.work.authorDatalist,
     };
 
     state.entityCache.clear();
     state.optionMap.clear();
+    state.personOptions = [];
+    state.placeOptions = [];
+    state.workOptions = [];
+    state.authorWorkMap.clear();
     Object.values(datalists).forEach((datalist) => {
       if (datalist) {
         datalist.innerHTML = "";
@@ -356,6 +510,7 @@
         id,
         kind,
         label,
+        author: rawEntity.author || "",
         type: entityTypeLabel(kind),
         years,
       };
@@ -363,6 +518,27 @@
       state.entityCache.set(id, entity);
       appendOption(datalists[kind], entity);
     });
+    Array.from(state.entityCache.values())
+      .filter((entity) => entity.kind === "work")
+      .forEach((work) => {
+        work.author.split(";").map((author) => author.trim()).filter(Boolean).forEach((author) => {
+          const key = author.toLocaleLowerCase();
+          if (!state.authorWorkMap.has(key)) {
+            state.authorWorkMap.set(key, { label: author, workIds: new Set() });
+          }
+          state.authorWorkMap.get(key).workIds.add(work.id);
+        });
+      });
+    if (elements.work.authorDatalist) {
+      Array.from(state.authorWorkMap.values())
+        .sort((left, right) => left.label.localeCompare(right.label))
+        .forEach((author) => {
+          const option = document.createElement("option");
+          option.value = author.label;
+          elements.work.authorDatalist.appendChild(option);
+        });
+    }
+    filterWorkOptions(elements.work);
 
     const minYear = Number(payload.min_year || 0);
     const maxYear = Number(payload.max_year || 0);
@@ -452,9 +628,11 @@
       swatch.className = "graphics-legend-swatch";
       swatch.style.backgroundColor = dataset.borderColor;
 
-      const link = document.createElement("a");
+      const link = document.createElement(dataset.isAuthorAggregate ? "span" : "a");
       link.className = "graphics-legend-link";
-      link.href = `${dataset.entityId}.html`;
+      if (!dataset.isAuthorAggregate) {
+        link.href = `${dataset.entityId}.html`;
+      }
       link.textContent = dataset.label;
 
       item.appendChild(swatch);
@@ -579,6 +757,7 @@
       borderWidth: 2,
       data,
       entityId: entity.id,
+      isAuthorAggregate: entity.isAuthorAggregate || false,
       label: `${entity.label} [${entity.type}]`,
       pointRadius: 4,
       pointHoverRadius: 6,
@@ -650,18 +829,43 @@
     );
   }
 
-  function addEntity(elements) {
-    const value = elements.input.value.trim();
-    const entry = state.optionMap.get(value);
+  function addEntityFromInput(elements, entityGroup) {
+    const isWork = entityGroup === elements.work;
+    const value = entityGroup.input.value.trim();
+    const authorQuery = isWork ? entityGroup.authorInput?.value.trim() || "" : "";
+    let entry = state.optionMap.get(value);
+    let isAuthorAggregate = false;
 
-    if (!entry) {
+    if (isWork && !value && authorQuery) {
+      const aggregate = createAuthorAggregate(authorQuery);
+      if (aggregate) {
+        state.entityCache.set(aggregate.id, aggregate);
+        entry = { id: aggregate.id, label: aggregate.label };
+        isAuthorAggregate = true;
+      }
+    }
+
+    const author = state.authorWorkMap.get(authorQuery.toLocaleLowerCase());
+    const authorMatchesWork = isAuthorAggregate || !isWork || !authorQuery || (
+      entry?.kind === "work" && author?.workIds.has(entry.id)
+    );
+    if (!entry || !authorMatchesWork) {
       setStatus(elements, state.i18n.errorInvalidEntity, "danger");
       return;
     }
 
     if (state.selectedIds.includes(entry.id)) {
       setStatus(elements, formatMessage(state.i18n.errorDuplicate, { label: entry.label }), "warning");
-      elements.input.value = "";
+      entityGroup.input.value = "";
+      if (entityGroup === elements.person) {
+        filterPersonOptions(entityGroup);
+      } else if (entityGroup === elements.place) {
+        filterPlaceOptions(entityGroup);
+      }
+      if (isWork) {
+        entityGroup.authorInput.value = "";
+        filterWorkOptions(entityGroup);
+      }
       return;
     }
 
@@ -671,7 +875,16 @@
     }
 
     state.selectedIds.push(entry.id);
-    elements.input.value = "";
+    entityGroup.input.value = "";
+    if (entityGroup === elements.person) {
+      filterPersonOptions(entityGroup);
+    } else if (entityGroup === elements.place) {
+      filterPlaceOptions(entityGroup);
+    }
+    if (isWork) {
+      entityGroup.authorInput.value = "";
+      filterWorkOptions(entityGroup);
+    }
     renderSelectedEntities(elements);
     updateChart(elements);
   }
@@ -723,45 +936,21 @@
     updateChart(elements);
     installDragZoom(elements);
 
-    // Helper function to add entity from a specific input
-    const addEntityFromInput = (input) => {
-      const value = input.value.trim();
-      const entry = state.optionMap.get(value);
-
-      if (!entry) {
-        setStatus(elements, state.i18n.errorInvalidEntity, "danger");
-        return;
-      }
-
-      if (state.selectedIds.includes(entry.id)) {
-        setStatus(elements, formatMessage(state.i18n.errorDuplicate, { label: entry.label }), "warning");
-        input.value = "";
-        return;
-      }
-
-      if (state.selectedIds.length >= MAX_ENTITIES) {
-        setStatus(elements, formatMessage(state.i18n.errorMax, { max: MAX_ENTITIES }), "warning");
-        return;
-      }
-
-      state.selectedIds.push(entry.id);
-      input.value = "";
-      renderSelectedEntities(elements);
-      updateChart(elements);
-    };
-
     // Attach listeners to all three entity type inputs and buttons
     [elements.person, elements.work, elements.place].forEach((entityGroup) => {
       if (entityGroup.button && entityGroup.input) {
-        entityGroup.button.addEventListener("click", () => addEntityFromInput(entityGroup.input));
+        entityGroup.button.addEventListener("click", () => addEntityFromInput(elements, entityGroup));
         entityGroup.input.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-            addEntityFromInput(entityGroup.input);
+            addEntityFromInput(elements, entityGroup);
           }
         });
       }
     });
+    elements.person.input?.addEventListener("input", () => filterPersonOptions(elements.person));
+    elements.place.input?.addEventListener("input", () => filterPlaceOptions(elements.place));
+    elements.work.authorInput?.addEventListener("input", () => filterWorkOptions(elements.work));
 
     elements.selected.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-entity-id]");
