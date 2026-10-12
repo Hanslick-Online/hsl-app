@@ -46,6 +46,7 @@
     placeOptions: [],
     selectedIds: [],
     workOptions: [],
+    workAliases: [],
     years: [],
     zoomPlugin: null,
   };
@@ -312,6 +313,20 @@
     });
   }
 
+  function ensureWorkAliases() {
+    if (window.HanslickWorkAliases) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = new URL("js/work-aliases.js", document.baseURI).href;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error("Failed to load work alias matching."));
+      document.head.appendChild(script);
+    });
+  }
+
   function entityTypeLabel(kind) {
     return state.i18n.typeLabels[kind] || kind;
   }
@@ -350,6 +365,8 @@
     datalist.appendChild(option);
     if (entity.kind === "work") {
       option.dataset.author = entity.author || "";
+      option.dataset.workTitle = entity.label;
+      option.dataset.workWithAuthor = baseValue;
       state.workOptions.push(option);
     } else if (entity.kind === "person") {
       state.personOptions.push(option);
@@ -367,10 +384,14 @@
   }
 
   function filterWorkOptions(workGroup) {
-    const query = workGroup.authorInput?.value.trim() || "";
-    const author = state.authorWorkMap.get(query.toLocaleLowerCase());
+    const authorQuery = workGroup.authorInput?.value.trim() || "";
+    const workQuery = workGroup.input?.value.trim() || "";
+    const author = state.authorWorkMap.get(authorQuery.toLocaleLowerCase());
+    updateWorkOptionValues(Boolean(author));
     const matches = state.workOptions.filter(
-      (option) => !query || (author && author.workIds.has(option.dataset.entityId))
+      (option) =>
+        (!authorQuery || (author && author.workIds.has(option.dataset.entityId))) &&
+        window.HanslickWorkAliases.matches(option.dataset.displayLabel, workQuery, state.workAliases)
     );
 
     if (workGroup.datalist) {
@@ -381,7 +402,7 @@
     if (!workGroup.authorInput || !workGroup.authorFeedback) {
       return;
     }
-    if (!query) {
+    if (!authorQuery) {
       workGroup.authorInput.classList.remove("is-valid", "is-invalid");
       workGroup.authorInput.removeAttribute("aria-invalid");
       workGroup.authorFeedback.className = "form-text small graphics-author-feedback";
@@ -391,7 +412,7 @@
 
     const isValid = Boolean(author);
     const hasSuggestion = isValid || Array.from(state.authorWorkMap.values()).some(
-      (candidate) => candidate.label.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+      (candidate) => candidate.label.toLocaleLowerCase().includes(authorQuery.toLocaleLowerCase())
     );
     workGroup.authorInput.classList.toggle("is-valid", isValid);
     workGroup.authorInput.classList.toggle("is-invalid", !hasSuggestion);
@@ -403,6 +424,30 @@
         : state.i18n.authorNoMatches;
     workGroup.authorFeedback.className = `form-text small graphics-author-feedback text-${isValid ? "success" : hasSuggestion ? "muted" : "danger"}`;
     workGroup.authorFeedback.textContent = message;
+  }
+
+  function updateWorkOptionValues(showAuthor) {
+    const entries = state.workOptions.map((option) => ({
+      option,
+      previousValue: option.value,
+      entity: state.optionMap.get(option.value),
+    }));
+    entries.forEach(({ previousValue }) => state.optionMap.delete(previousValue));
+
+    entries.forEach(({ option, entity }) => {
+      if (!entity) {
+        throw new Error(`Missing chart lookup for work ${option.dataset.entityId}.`);
+      }
+      const baseValue = showAuthor ? option.dataset.workTitle : option.dataset.workWithAuthor;
+      let value = baseValue;
+      let duplicate = 2;
+      while (state.optionMap.has(value)) {
+        value = `${baseValue} (${duplicate})`;
+        duplicate += 1;
+      }
+      option.value = value;
+      state.optionMap.set(value, entity);
+    });
   }
 
   function filterPersonOptions(personGroup) {
@@ -924,7 +969,12 @@
     const source = elements.dataRoot.dataset.source || "data/graphics-chart-data.json";
 
     try {
-      const payload = await fetchChartData(source);
+      await ensureWorkAliases();
+      const [payload, aliases] = await Promise.all([
+        fetchChartData(source),
+        window.HanslickWorkAliases.load(),
+      ]);
+      state.workAliases = aliases;
       applyChartData(elements, payload);
     } catch (error) {
       console.error(error);
@@ -950,6 +1000,7 @@
     });
     elements.person.input?.addEventListener("input", () => filterPersonOptions(elements.person));
     elements.place.input?.addEventListener("input", () => filterPlaceOptions(elements.place));
+    elements.work.input?.addEventListener("input", () => filterWorkOptions(elements.work));
     elements.work.authorInput?.addEventListener("input", () => filterWorkOptions(elements.work));
 
     elements.selected.addEventListener("click", (event) => {
