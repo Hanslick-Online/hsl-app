@@ -16,7 +16,7 @@
         <xsl:variable name="edition-num" select="normalize-space((/*/tei:teiHeader//tei:sourceDesc//tei:edition/@n)[1])"/>
         <xsl:variable name="show-english-pagebreak-toggle"
               select="starts-with($doc-id, 't__') and matches($edition-num, '^(0?7|0?8|10)$')"/>
-        <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart">
+        <div id="aot-navBarNavDropdown" class="navBarNavDropdown dropstart annotation-options">
             <!-- Your menu goes here -->
             <a title="Annotationen" data-title-de="Annotationen" data-title-en="Annotations" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" role="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -73,11 +73,5 @@
                 </xsl:if>
             </ul>                                                    
         </div>
-        <script type="text/javascript">
-            $('#aot-navBarNavDropdown .dropdown-menu .nav-item').click(function(e) {
-                e.stopPropagation();
-            });
-        </script>
-        
     </xsl:template>
 </xsl:stylesheet>

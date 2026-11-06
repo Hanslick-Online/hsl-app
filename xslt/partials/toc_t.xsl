@@ -72,11 +72,7 @@
                     </div>
                     
                     <xsl:call-template name="html_footer"/>
-                    <script>
-                        $(document).ready(function () {
-                            createDataTable('tocTable', [[5, 'asc']], 50);
-                        });
-                    </script>
+                    <script type="text/javascript" src="js/toc_t.js" />
                 </div>
                 <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-html5-2.0.0/cr-1.5.4/r-2.2.9/sp-1.4.0/datatables.min.js" /> -->
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" />
