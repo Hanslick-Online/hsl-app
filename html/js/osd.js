@@ -52,6 +52,7 @@ var element = document.getElementsByClassName('anchor-pb');
 //         element_json[el] = element[el].getAttribute("source");
 //     }
 // };
+//
 // sessionStorage.setItem("hsl-images", JSON.stringify(element_json));
 var tileSources = [];
 var img = element[0].getAttribute("source");
@@ -70,7 +71,7 @@ if (img.includes("api.digitale-sammlungen.de")) {
     
 }
 else {
-    var img = `${img}?format=iiif`;
+    var img = `${img}?format=webp`;
 }
 var imageURL = {
     type: 'image',
