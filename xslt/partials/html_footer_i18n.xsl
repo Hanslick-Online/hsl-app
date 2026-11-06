@@ -156,5 +156,6 @@
         <script src="js/navbar-autohide.js"></script>
         <script src="js/cookie-consent.js"></script>
         <script src="js/nav-show-hide.js"></script>
+        <script src="js/book-navigation.js"></script>
     </xsl:template>
 </xsl:stylesheet>

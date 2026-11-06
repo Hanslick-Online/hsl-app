@@ -138,16 +138,11 @@
                     </div>
 
                     <xsl:call-template name="html_footer_i18n"/>
-                    <script>
-                        $(document).ready(function () {
-                            var activeTable = window.hslSiteLang === 'en' ? 'tocTable-en' : 'tocTable-de';
-                            createDataTable(activeTable, [[5, 'asc']], 50, window.hslSiteLang);
-                        });
-                    </script>
+                    <script type="text/javascript" src="js/toc_table.js" />
                 </div>
                 <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/b-2.0.0/b-html5-2.0.0/cr-1.5.4/r-2.2.9/sp-1.4.0/datatables.min.js" /> -->
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" />
-                <script type="text/javascript" src="js/dt.js"></script>
+                <script type="text/javascript" src="js/dt.js" />
             </body>
         </html>
     </xsl:template>
