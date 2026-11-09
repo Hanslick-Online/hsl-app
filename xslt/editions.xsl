@@ -108,7 +108,7 @@
                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" />
                 <script type="text/javascript" src="js/mark.js" />
                 <script type="text/javascript" src="js/osd.js" />
-				<script type="text/javascript" src="js/usage_hints.js" />
+                <script type="text/javascript" src="js/usage_hints.js" />
             </body>
         </html>
     </xsl:template>
