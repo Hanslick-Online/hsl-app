@@ -52,29 +52,27 @@ var element = document.getElementsByClassName('anchor-pb');
 //         element_json[el] = element[el].getAttribute("source");
 //     }
 // };
+//
 // sessionStorage.setItem("hsl-images", JSON.stringify(element_json));
 var tileSources = [];
-var img = element[0].getAttribute("source");
-if (img.includes("api.digitale-sammlungen.de")) {
-    img = `${img}/full/full/0/default.jpg`;
-} else if (img.includes("hsl-nfp")) {
-    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
-} else if (img.includes("hsl-vms")) {
-    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
-    
-} else if (img.includes("hsl-doc")) {
-    if (img.endsWith(".jpg")) {
-    img = img.slice(0, -4); // removes the last 4 characters (".jpg")
-  };
-    img = `https://iiif.acdh.oeaw.ac.at/iiif/images/${img}.jp2/full/full/0/default.jpg`;
-    
-}
-else {
-    var img = `${img}?format=iiif`;
+function facsimileImageUrl(source) {
+    if (source.startsWith("https://id.acdh.oeaw.ac.at/")) {
+        return `https://arche-iiifimage.acdh.oeaw.ac.at/${encodeURIComponent(source)}/full/max/0/default.webp`;
+    }
+    if (source.includes("api.digitale-sammlungen.de")) {
+        return `${source}/full/full/0/default.jpg`;
+    }
+    if (source.includes("hsl-nfp") || source.includes("hsl-vms") || source.includes("hsl-doc")) {
+        if (source.includes("hsl-doc") && source.endsWith(".jpg")) {
+            source = source.slice(0, -4);
+        }
+        return `https://iiif.acdh.oeaw.ac.at/iiif/images/${source}.jp2/full/full/0/default.jpg`;
+    }
+    return `${source}?format=iiif`;
 }
 var imageURL = {
     type: 'image',
-    url: img
+    url: facsimileImageUrl(element[0].getAttribute("source"))
 };
 tileSources.push(imageURL);
 
@@ -178,23 +176,7 @@ function to trigger image load and remove events
 function loadNewImage(new_item) {
     if (new_item instanceof Element) {
         // source attribute hold image item id without url
-        var new_image = new_item.getAttribute("source");
-        if (new_image.includes("api.digitale-sammlungen.de")) {
-            new_image = `${new_image}/full/full/0/default.jpg`;
-        } else if (new_image.includes("hsl-nfp")) {
-            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
-        } else if (new_image.includes("hsl-vms")) {
-            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`;
-        } 
-        else if (new_image.includes("hsl-doc")) {
-            if (new_image.endsWith(".jpg")) {
-            new_image = new_image.slice(0, -4); // removes the last 4 characters (".jpg")
-            };
-            new_image = `https://iiif.acdh.oeaw.ac.at/iiif/images/${new_image}.jp2/full/full/0/default.jpg`; 
-            }
-        else {
-            var new_image = `${new_image}?format=iiif`;
-        }
+        var new_image = facsimileImageUrl(new_item.getAttribute("source"));
         var old_image = viewer.world.getItemAt(0);
         if (old_image) {
             // access osd viewer and add simple image and remove current image
