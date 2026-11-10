@@ -29,36 +29,36 @@
                     <full-size opt="edition-fullsize"></full-size>
                 </li>-->
                 <li class="dropdown-item">
-                    <image-switch opt="edition-switch"></image-switch>
+                    <image-switch opt="edition-switch" />
                 </li>
                 <li class="dropdown-item">
-                    <font-size opt="fs"></font-size>
+                    <font-size opt="fs"/>
                 </li>
                 <li class="dropdown-item">
-                    <font-family opt="ff"></font-family>
+                    <font-family opt="ff"/>
                 </li>
                 <li class="dropdown-item" style="border-top: 2px dashed lightgrey !important;">
-                    <annotation-slider opt="entities-features"></annotation-slider>
+                    <annotation-slider opt="entities-features"/>
                 </li>
                 <li class="dropdown-item">
-                    <annotation-slider opt="prs"></annotation-slider>
+                    <annotation-slider opt="prs"/>
                 </li>
                 <li class="dropdown-item">
-                    <annotation-slider opt="prsf"></annotation-slider>
+                    <annotation-slider opt="prsf"/>
                 </li>
                 <li class="dropdown-item">
-                    <annotation-slider opt="plc"></annotation-slider>
+                    <annotation-slider opt="plc"/>
                 </li>
                 <li class="dropdown-item">
-                    <annotation-slider opt="wrk"></annotation-slider>
+                    <annotation-slider opt="wrk"/>
                 </li>
                 <xsl:if test="$showSlider = 'true'">
                     <li class="dropdown-item text-muted">
-                        <annotation-slider opt="term"></annotation-slider>
+                        <annotation-slider opt="term"/>
                     </li>
                 </xsl:if>
                 <li class="dropdown-item">
-                    <annotation-slider opt="pbs"></annotation-slider>
+                    <annotation-slider opt="pbs"/>
                 </li>
                 <xsl:if test="$show-english-pagebreak-toggle">
                     <li class="dropdown-item">
@@ -66,7 +66,7 @@
                             <label>Seitenumbrueche der englischen Ausgabe / English-edition page breaks</label>
                             <label class="switch">
                                 <input title="Seitenumbrueche der englischen Ausgabe / English-edition page breaks" onclick="null" type="checkbox" id="pbs-en" data-target="annotation_slider" class="features-2" aot-type="false"/>
-                                <span id="pbs-en-slider" class="i-slider round"></span>
+                                <span id="pbs-en-slider" class="i-slider round"/>
                             </label>
                         </annotation-slider>
                     </li>
