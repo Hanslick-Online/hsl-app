@@ -148,6 +148,7 @@
         <fileset dir="${editions_ct}" includes="c__*.xml"/>
         <fileset dir="${editions_vms}" includes="v__*.xml"/>
         <fileset dir="${editions_doc}" includes="d__*.xml"/>
+        <fileset dir="${indices}" includes="listplace.xml,listperson.xml,listbibl.xml"/>
     </copy>
 
     <replace dir="${target}" value="">

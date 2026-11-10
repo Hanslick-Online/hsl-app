@@ -55,6 +55,18 @@
                     <div class="container-fluid">
                         <h1 data-lang="de" style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title"/></h1>
                         <h1 data-lang="en" hidden="hidden" style="text-align: center;margin: 2em auto;"><xsl:value-of select="$doc_title_en"/></h1>
+
+                        <xsl:variable name="xml_file" select="
+                            if (contains($doc_title, 'Personenregister')) then 'listperson.xml'
+                            else if (contains($doc_title, 'Ortsregister')) then 'listplace.xml'
+                            else 'listbibl.xml'"/>
+                         <div class="download-index-link">
+                                <a class="btn btn-link" href="{$xml_file}" download="{$xml_file}" title="Download {$xml_file}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z"></path>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"></path></svg>
+                                </a>
+                            </div>
                         
                         <xsl:if test="contains($doc_title, 'Ortsregister')">
                             <div id="tableReload-wrapper">
@@ -63,7 +75,7 @@
                                     <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                                 </svg>
                             </div>
-                            <div id="leaflet-map-one"></div>
+                            <div id="leaflet-map-one" />
                         </xsl:if>
                         
                         <xsl:apply-templates select="//tei:body"/>
