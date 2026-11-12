@@ -21,7 +21,6 @@
     selectedSeries: [],
     typeWorks: "Works",
     workOptions: [],
-    workAliases: [],
     years: [],
     defaultChapterOrder: [],
     tooltipHovered: false,
@@ -184,16 +183,16 @@
     return response.json();
   }
 
-  function ensureWorkAliases() {
-    if (window.HanslickWorkAliases) {
+  function ensureWorkTitleSearch() {
+    if (window.HanslickWorkTitleSearch) {
       return Promise.resolve();
     }
 
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
-      script.src = new URL("js/work-aliases.js", document.baseURI).href;
+      script.src = new URL("js/work-title-search.js", document.baseURI).href;
       script.onload = resolve;
-      script.onerror = () => reject(new Error("Failed to load work alias matching."));
+      script.onerror = () => reject(new Error("Failed to load work title search."));
       document.head.appendChild(script);
     });
   }
@@ -257,8 +256,8 @@
     if (selectedWork && workGroup.input) {
       workGroup.input.value = state.workOptions.find((option) => option.dataset.entityId === selectedWork.id).value;
     }
-    const { authors, matches } = window.HanslickWorkAliases.filterSuggestions(
-      workGroup, state.workOptions, state.authorWorkMap, state.workAliases, selectedWork
+    const { authors, matches } = window.HanslickWorkTitleSearch.filterSuggestions(
+      workGroup, state.workOptions, state.authorWorkMap, selectedWork
     );
 
     if (!workGroup.authorInput || !workGroup.authorFeedback) {
@@ -1022,11 +1021,8 @@
     const source = elements.dataRoot.dataset.source || "data/graphics-chart-traktat-entities.json";
     let payload;
     try {
-      await ensureWorkAliases();
-      [payload, state.workAliases] = await Promise.all([
-        fetchData(source),
-        window.HanslickWorkAliases.load(),
-      ]);
+      await ensureWorkTitleSearch();
+      payload = await fetchData(source);
     } catch (error) {
       console.error(error);
       setStatus(elements, "Diagrammdaten oder Werksaliase konnten nicht geladen werden.", "danger");
@@ -1044,6 +1040,29 @@
 
       group.button.addEventListener("click", () => addEntity(elements, group.input));
       group.input.addEventListener("keydown", (event) => {
+        if (group === elements.work) {
+          if (event.key === "ArrowDown" && !group.suggestions.classList.contains("d-none")) {
+            const firstSuggestion = group.suggestions.querySelector("button");
+            if (firstSuggestion) {
+              event.preventDefault();
+              firstSuggestion.focus();
+              return;
+            }
+          }
+          if (event.key === "Escape") {
+            group.suggestions.classList.add("d-none");
+            group.input.setAttribute("aria-expanded", "false");
+            return;
+          }
+          if (event.key === "Enter" && !state.optionMap.has(group.input.value.trim())) {
+            const firstSuggestion = group.suggestions.querySelector("button");
+            if (firstSuggestion) {
+              event.preventDefault();
+              firstSuggestion.click();
+              return;
+            }
+          }
+        }
         if (event.key === "Enter") {
           event.preventDefault();
           addEntity(elements, group.input);

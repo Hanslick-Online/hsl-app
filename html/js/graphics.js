@@ -46,7 +46,6 @@
     placeOptions: [],
     selectedIds: [],
     workOptions: [],
-    workAliases: [],
     years: [],
     zoomPlugin: null,
   };
@@ -313,16 +312,16 @@
     });
   }
 
-  function ensureWorkAliases() {
-    if (window.HanslickWorkAliases) {
+  function ensureWorkTitleSearch() {
+    if (window.HanslickWorkTitleSearch) {
       return Promise.resolve();
     }
 
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
-      script.src = new URL("js/work-aliases.js", document.baseURI).href;
+      script.src = new URL("js/work-title-search.js", document.baseURI).href;
       script.onload = resolve;
-      script.onerror = () => reject(new Error("Failed to load work alias matching."));
+      script.onerror = () => reject(new Error("Failed to load work title search."));
       document.head.appendChild(script);
     });
   }
@@ -393,8 +392,8 @@
     if (selectedWork && workGroup.input) {
       workGroup.input.value = state.workOptions.find((option) => option.dataset.entityId === selectedWork.id).value;
     }
-    const { authors, matches } = window.HanslickWorkAliases.filterSuggestions(
-      workGroup, state.workOptions, state.authorWorkMap, state.workAliases, selectedWork
+    const { authors, matches } = window.HanslickWorkTitleSearch.filterSuggestions(
+      workGroup, state.workOptions, state.authorWorkMap, selectedWork
     );
 
     if (!workGroup.authorInput || !workGroup.authorFeedback) {
@@ -959,12 +958,8 @@
     const source = elements.dataRoot.dataset.source || "data/graphics-chart-data.json";
 
     try {
-      await ensureWorkAliases();
-      const [payload, aliases] = await Promise.all([
-        fetchChartData(source),
-        window.HanslickWorkAliases.load(),
-      ]);
-      state.workAliases = aliases;
+      await ensureWorkTitleSearch();
+      const payload = await fetchChartData(source);
       applyChartData(elements, payload);
     } catch (error) {
       console.error(error);
@@ -981,6 +976,29 @@
       if (entityGroup.button && entityGroup.input) {
         entityGroup.button.addEventListener("click", () => addEntityFromInput(elements, entityGroup));
         entityGroup.input.addEventListener("keydown", (event) => {
+          if (entityGroup === elements.work) {
+            if (event.key === "ArrowDown" && !entityGroup.suggestions.classList.contains("d-none")) {
+              const firstSuggestion = entityGroup.suggestions.querySelector("button");
+              if (firstSuggestion) {
+                event.preventDefault();
+                firstSuggestion.focus();
+                return;
+              }
+            }
+            if (event.key === "Escape") {
+              entityGroup.suggestions.classList.add("d-none");
+              entityGroup.input.setAttribute("aria-expanded", "false");
+              return;
+            }
+            if (event.key === "Enter" && !state.optionMap.has(entityGroup.input.value.trim())) {
+              const firstSuggestion = entityGroup.suggestions.querySelector("button");
+              if (firstSuggestion) {
+                event.preventDefault();
+                firstSuggestion.click();
+                return;
+              }
+            }
+          }
           if (event.key === "Enter") {
             event.preventDefault();
             addEntityFromInput(elements, entityGroup);
