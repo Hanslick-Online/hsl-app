@@ -20,6 +20,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 import re
+from typing import NotRequired, TypedDict
 import xml.etree.ElementTree as ET
 
 NS = {"tei": "http://www.tei-c.org/ns/1.0"}
@@ -50,6 +51,13 @@ TRAKTAT_KIND_MAP = {
 }
 
 TRAKTAT_CHAPTER_ORDER = ["Vorwort", "I", "II", "III", "IV", "V", "VI", "VII"]
+
+
+class CatalogEntity(TypedDict):
+    kind: str
+    label: str
+    author: NotRequired[str]
+    alternative_titles: NotRequired[list[str]]
 
 
 def text_content(node: ET.Element | None) -> str:
@@ -93,6 +101,14 @@ def entity_author(node: ET.Element) -> str:
         if text_content(author)
     )
     return "; ".join(authors)
+
+
+def entity_alternative_titles(node: ET.Element) -> list[str]:
+    return list(dict.fromkeys(
+        title
+        for element in node.findall("tei:title[@type='alternative']", NS)
+        if (title := text_content(element))
+    ))
 
 
 def mentions_for_entity(node: ET.Element) -> dict[int, dict[str, int]]:
@@ -181,8 +197,8 @@ def chapter_bucket(div: ET.Element) -> str | None:
     return match.group(1).upper()
 
 
-def build_entity_catalog(person_root: ET.Element, work_root: ET.Element, place_root: ET.Element) -> dict[str, dict[str, str]]:
-    catalog: dict[str, dict[str, str]] = {}
+def build_entity_catalog(person_root: ET.Element, work_root: ET.Element, place_root: ET.Element) -> dict[str, CatalogEntity]:
+    catalog: dict[str, CatalogEntity] = {}
     for kind, root in (("person", person_root), ("work", work_root), ("place", place_root)):
         xpath = next(spec.xpath for spec in ENTITY_SPECS if spec.kind == kind)
         for node in root.findall(xpath, NS):
@@ -198,15 +214,16 @@ def build_entity_catalog(person_root: ET.Element, work_root: ET.Element, place_r
             if not label:
                 continue
 
-            entity = {"kind": kind, "label": label}
+            entity: CatalogEntity = {"kind": kind, "label": label}
             if kind == "work":
                 entity["author"] = entity_author(node)
+                entity["alternative_titles"] = entity_alternative_titles(node)
             catalog[entity_id] = entity
 
     return catalog
 
 
-def collect_traktat_entities(editions_dir: Path, catalog: dict[str, dict[str, str]]) -> list[dict]:
+def collect_traktat_entities(editions_dir: Path, catalog: dict[str, CatalogEntity]) -> list[dict]:
     year_meta: dict[str, str] = {}
     counts: dict[str, dict[str, dict[str, int]]] = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
 
@@ -262,7 +279,10 @@ def collect_traktat_entities(editions_dir: Path, catalog: dict[str, dict[str, st
                 "id": entity_id,
                 "kind": entity["kind"],
                 "label": entity["label"],
-                **({"author": entity["author"]} if entity["kind"] == "work" else {}),
+                **({
+                    "author": entity["author"],
+                    "alternative_titles": entity["alternative_titles"],
+                } if entity["kind"] == "work" else {}),
                 "years": year_payload,
             }
         )
@@ -296,6 +316,7 @@ def collect_entities(kind: str, root: ET.Element) -> list[dict]:
         }
         if kind == "work":
             entity["author"] = entity_author(node)
+            entity["alternative_titles"] = entity_alternative_titles(node)
         entities.append(entity)
 
     return entities
