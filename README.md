@@ -17,7 +17,9 @@ Enthält XSL Stylesheets für XML -> HTML Serialisierung.
 Die Chart-Seite verwendet externe Daten aus einer JSON-Datei statt eingebetteter Entity-Daten im HTML.
 
 - Generator-Skript: [build_app/python/generate_graphics_json.py](build_app/python/generate_graphics_json.py)
-- Ausgabe-Datei: [html/data/graphics-chart-data.json](html/data/graphics-chart-data.json)
+- Ausgabe-Dateien: [html/data/graphics-chart-data.json](html/data/graphics-chart-data.json) und [html/data/graphics-chart-traktat-entities.json](html/data/graphics-chart-traktat-entities.json)
+
+Beide Diagramme durchsuchen auch die Alternativtitel der Werke. Die Autorvorschläge werden anhand des eingegebenen oder ausgewählten Werks eingeschränkt.
 
 Manuell ausführen:
 
@@ -29,7 +31,7 @@ python3 build_app/python/generate_graphics_json.py \
 	--out html/data/graphics-chart-data.json
 ```
 
-Beim Ant-Build wird das Skript automatisch vor der Serialisierung von [data/meta/g_chart.xml](data/meta/g_chart.xml) ausgeführt.
+Der vollständige lokale Workflow und der GitHub-Pages-Build erzeugen beide JSON-Dateien nach der HTML-Serialisierung.
 
 ## Person Network JSON
 
@@ -66,4 +68,3 @@ python3 build_app/python/generate_vmsnetwork_json.py \
 	--traktat-editions-dir data/traktat/editions \
 	--out html/data/vms-network-data.json
 ```
-

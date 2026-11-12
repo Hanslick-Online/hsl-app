@@ -367,6 +367,7 @@
       option.dataset.author = entity.author || "";
       option.dataset.workTitle = entity.label;
       option.dataset.workWithAuthor = baseValue;
+      option.dataset.alternativeTitles = JSON.stringify(entity.alternativeTitles);
       state.workOptions.push(option);
     } else if (entity.kind === "person") {
       state.personOptions.push(option);
@@ -385,19 +386,16 @@
 
   function filterWorkOptions(workGroup) {
     const authorQuery = workGroup.authorInput?.value.trim() || "";
-    const workQuery = workGroup.input?.value.trim() || "";
+    const selected = state.optionMap.get(workGroup.input?.value.trim());
+    const selectedWork = selected?.kind === "work" ? selected : null;
     const author = state.authorWorkMap.get(authorQuery.toLocaleLowerCase());
     updateWorkOptionValues(Boolean(author));
-    const matches = state.workOptions.filter(
-      (option) =>
-        (!authorQuery || (author && author.workIds.has(option.dataset.entityId))) &&
-        window.HanslickWorkAliases.matches(option.dataset.displayLabel, workQuery, state.workAliases)
-    );
-
-    if (workGroup.datalist) {
-      workGroup.datalist.innerHTML = "";
-      matches.forEach((option) => workGroup.datalist.appendChild(option));
+    if (selectedWork && workGroup.input) {
+      workGroup.input.value = state.workOptions.find((option) => option.dataset.entityId === selectedWork.id).value;
     }
+    const { authors, matches } = window.HanslickWorkAliases.filterSuggestions(
+      workGroup, state.workOptions, state.authorWorkMap, state.workAliases, selectedWork
+    );
 
     if (!workGroup.authorInput || !workGroup.authorFeedback) {
       return;
@@ -410,8 +408,8 @@
       return;
     }
 
-    const isValid = Boolean(author);
-    const hasSuggestion = isValid || Array.from(state.authorWorkMap.values()).some(
+    const isValid = Boolean(author && authors.includes(author));
+    const hasSuggestion = isValid || authors.some(
       (candidate) => candidate.label.toLocaleLowerCase().includes(authorQuery.toLocaleLowerCase())
     );
     workGroup.authorInput.classList.toggle("is-valid", isValid);
@@ -556,6 +554,7 @@
         kind,
         label,
         author: rawEntity.author || "",
+        alternativeTitles: rawEntity.alternative_titles || [],
         type: entityTypeLabel(kind),
         years,
       };
@@ -574,15 +573,6 @@
           state.authorWorkMap.get(key).workIds.add(work.id);
         });
       });
-    if (elements.work.authorDatalist) {
-      Array.from(state.authorWorkMap.values())
-        .sort((left, right) => left.label.localeCompare(right.label))
-        .forEach((author) => {
-          const option = document.createElement("option");
-          option.value = author.label;
-          elements.work.authorDatalist.appendChild(option);
-        });
-    }
     filterWorkOptions(elements.work);
 
     const minYear = Number(payload.min_year || 0);
