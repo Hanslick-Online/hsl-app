@@ -12,7 +12,7 @@
     </doc>
     
     <xsl:template name="book-editions">
-        <div id="edtion-navBarNavDropdown" class="dropstart navBarNavDropdown">
+        <div id="edition-navBarNavDropdown" class="dropstart navBarNavDropdown">
             <!-- Your menu goes here -->
             <a title="Auflage" href="#" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" role="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16">
@@ -53,11 +53,5 @@
                 </xsl:for-each>
             </ul>                                                    
         </div>
-        <script type="text/javascript">
-            $('#edition-navBarNavDropdown .dropdown-menu .nav-item').click(function(e) {
-                e.stopPropagation();
-            });
-        </script>
-        
     </xsl:template>
 </xsl:stylesheet>

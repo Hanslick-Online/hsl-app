@@ -13,7 +13,7 @@
                     <div class="footer-widget col-lg-1 col-md-2 col-sm-2 col-xs-6 ml-auto text-center">
                         <div class="textwidget custom-html-widget">
                             <a href="https://www.oeaw.ac.at/acdh">
-                                <img src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg" class="image" alt="ACDH Logo" style="max-width: 100%; height: auto;" title="ACDH Logo"/>
+                                <img src="images/acdh_logo.svg" class="image" alt="ACDH Logo" style="max-width: 100%; height: auto;" title="ACDH Logo"/>
                             </a>
                         </div>
                     </div>
@@ -156,5 +156,6 @@
         <script src="js/navbar-autohide.js"></script>
         <script src="js/cookie-consent.js"></script>
         <script src="js/nav-show-hide.js"></script>
+        <script src="js/book-navigation.js"></script>
     </xsl:template>
 </xsl:stylesheet>
