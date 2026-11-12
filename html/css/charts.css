@@ -40,6 +40,15 @@
                         min-width: 0;
                     }
 
+                    .graphics-work-suggestions:not(.d-none) {
+                        max-height: 16rem;
+                        overflow-y: auto;
+                    }
+
+                    .graphics-work-suggestion {
+                        text-align: left;
+                    }
+
                     .graphics-author-feedback:empty {
                         display: none;
                         margin-top: 0;
