@@ -1,0 +1,16 @@
+{
+  "1": ["erste", "erster", "first", "prima", "primo", "1", "1.", "I", "I.", "1st", "1a", "1o", "1.a", "1.o"],
+  "2": ["zweite", "zweiter", "second", "seconda", "secondo", "2", "2.", "II", "II.", "2nd", "2a", "2o", "2.a", "2.o"],
+  "3": ["dritte", "dritter", "third", "terza", "terzo", "3", "3.", "III", "III.", "3rd", "3a", "3o", "3.a", "3.o"],
+  "4": ["vierte", "vierter", "fourth", "quarta", "quarto", "4", "4.", "IV", "IV.", "4th", "4a", "4o", "4.a", "4.o"],
+  "5": ["fünfte", "fünfter", "fifth", "quinta", "quinto", "5", "5.", "V", "V.", "5th", "5a", "5o", "5.a", "5.o"],
+  "6": ["sechste", "sechster", "sixth", "sesta", "sesto", "6", "6.", "VI", "VI.", "6th", "6a", "6o", "6.a", "6.o"],
+  "7": ["siebte", "siebter", "seventh", "settima", "settimo", "7", "7.", "VII", "VII.", "7th", "7a", "7o", "7.a", "7.o"],
+  "8": ["achte", "achter", "eighth", "ottava", "ottavo", "8", "8.", "VIII", "VIII.", "8th", "8a", "8o", "8.a", "8.o"],
+  "9": ["neunte", "neunter", "ninth", "nona", "nono", "9", "9.", "IX", "IX.", "9th", "9a", "9o", "9.a", "9.o"],
+  "10": ["zehnte", "zehnter", "tenth", "decima", "decimo", "10", "10.", "X", "X.", "10th", "10a", "10o", "10.a", "10.o"],
+  "11": ["elfte", "elfter", "eleventh", "undicesima", "undicesimo", "11", "11.", "XI", "XI.", "11th", "11a", "11o", "11.a", "11.o"],
+  "12": ["zwölfte", "zwölfter", "twelfth", "dodicesima", "dodicesimo", "12", "12.", "XII", "XII.", "12th", "12a", "12o", "12.a", "12.o"],
+  "symph": ["Symphonie", "Sinfonie", "Symphony", "Sinfonia"],
+  "werk": ["Werk", "work", "opus"]
+}

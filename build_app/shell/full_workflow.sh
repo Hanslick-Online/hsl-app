@@ -14,4 +14,5 @@ ant -f build_app/ant/preprocess.xml
 ./build_app/shell/denormalize.sh
 ant -f build_app/ant/fixtures.xml
 ant -f build_app/ant/build.xml
+python ./build_app/python/generate_graphics_json.py
 #python ./build_app/python/make_ts_index.py

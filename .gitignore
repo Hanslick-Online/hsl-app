@@ -7,6 +7,8 @@
 *.html
 /test
 
+hsl-data-vms-main
+framework
 html/*html
 html/c__*xml
 html/d__*xml
