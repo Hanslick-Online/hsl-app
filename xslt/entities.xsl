@@ -103,7 +103,7 @@
                                                         <xsl:call-template name="localized-text"><xsl:with-param name="de" select="'Lebensdaten'"/><xsl:with-param name="en" select="'Life dates'"/></xsl:call-template>
                                                     </th>
                                                     <td>
-                                                        <xsl:value-of select="./tei:birth"/>
+                                                        <xsl:value-of select="./tei:birth"/>–<xsl:value-of select="./tei:death/text()"/>
                                                     </td>
                                                 </tr>
                                                 </xsl:if>
