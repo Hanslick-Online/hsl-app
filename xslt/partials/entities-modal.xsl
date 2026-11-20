@@ -68,7 +68,7 @@
                                     <xsl:if test="./tei:birth/text()">
                                         <tr>
                                             <th>Lebensdaten</th>
-                                            <td><xsl:value-of select="./tei:birth/text()"/></td>
+                                            <td><xsl:value-of select="./tei:birth/text()"/>–<xsl:value-of select="./tei:death/text()"/></td>
                                         </tr>
                                     </xsl:if>
                                     <xsl:if test="./tei:occupation/text()">

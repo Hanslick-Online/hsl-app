@@ -185,7 +185,7 @@
                                     </xsl:choose>                                    
                                 </td>
                                 <td>
-                                    <xsl:value-of select="./tei:birth"/>
+                                    <xsl:value-of select="./tei:birth"/>––<xsl:value-of select="./tei:death/text()"/>
                                 </td>
                                 <td>
                                     <xsl:if test="./tei:occupation">
