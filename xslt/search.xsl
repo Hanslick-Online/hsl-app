@@ -32,33 +32,36 @@
                             <div class="search-panel__results">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div id="stats-container"></div>
+                                        <div id="stats-container" />
                                         <h4 data-lang="de" id="content">Volltextsuche</h4>
                                         <h4 data-lang="en" hidden="hidden" id="content-en">Full Text Search</h4>
-                                        <div id="searchbox"></div>
-                                        <div id="clear-refinements"></div>
+                                        <div id="searchbox" />
+                                        <div id="clear-refinements" />
                                         <h4 data-lang="de">Edition</h4>
                                         <h4 data-lang="en" hidden="hidden">Edition</h4>
-                                        <div id="menu-edition"></div>
+                                        <div id="menu-edition" />
                                         <h4 data-lang="de">Personen</h4>
                                         <h4 data-lang="en" hidden="hidden">Persons</h4>
-                                        <div id="refinement-list-persons"></div>
+                                        <div id="refinement-list-persons" />
                                         <h4 data-lang="de">Orte</h4>
                                         <h4 data-lang="en" hidden="hidden">Places</h4>
-                                        <div id="refinement-list-places"></div>
+                                        <div id="refinement-list-places" />
                                         <h4 data-lang="de">Werke</h4>
                                         <h4 data-lang="en" hidden="hidden">Works</h4>
-                                        <div id="refinement-list-works"></div>
+                                        <div id="refinement-list-works" />
                                         <h4 data-lang="de">Jahr</h4>
                                         <h4 data-lang="en" hidden="hidden">Date</h4>
-                                        <div id="range-input"></div>
+                                        <div id="range-input" />
+                                        <h4 data-lang="de">Sortierung</h4>
+                                        <h4 data-lang="en" hidden="hidden">Sorting</h4>
+                                        <div id="sort-by" />
                                     </div>
                                     <div class="col-md-8">
-                                        <div id="sort-by"></div>
-                                        <div id="current-refinements"></div>
-                                        <div id="pagination-top"></div>
-                                        <div id="hits"></div>
-                                        <div id="pagination-bottom"></div>
+                                        <div id="sort-by" />
+                                        <div id="current-refinements" />
+                                        <div id="pagination-top" />
+                                        <div id="hits" />
+                                        <div id="pagination-bottom" />
                                     </div>
                                 </div>
                             </div>

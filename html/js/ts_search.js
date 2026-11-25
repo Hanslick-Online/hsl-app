@@ -25,8 +25,10 @@ const searchText = {
     rangeSubmit: "Suchen",
     resetFilters: "Filter zurücksetzen",
     sortDefault: "Standard",
-    sortAsc: "Jahr (asc)",
-    sortDesc: "Jahr (desc)",
+    sortAsc: "Jahr (aufst.)",
+    sortDesc: "Jahr (abst.)",
+    sortRelevanceAsc: "Relevanz (aufst.)",
+    sortRelevanceDesc: "Relevanz (abst.)",
   },
   en: {
     empty: "No hits for <q>{{ query }}</q>",
@@ -55,6 +57,8 @@ const searchText = {
     sortDefault: "Default",
     sortAsc: "Year (asc)",
     sortDesc: "Year (desc)",
+    sortRelevanceAsc: "Relevance (asc)",
+    sortRelevanceDesc: "Relevance (desc)",
   },
 }[searchLang];
 
@@ -271,14 +275,24 @@ search.addWidgets([
     },
   }),
 
-  instantsearch.widgets.sortBy({
+  /* instantsearch.widgets.sortBy({
     container: "#sort-by",
     items: [
       { label: searchText.sortDefault, value: "hsl" },
       { label: searchText.sortAsc, value: "hsl/sort/date:asc" },
       { label: searchText.sortDesc, value: "hsl/sort/date:desc" },
     ],
-  }),
+  }), */
+
+  instantsearch.widgets.sortBy({
+  container: "#sort-by",
+  items: [
+     { label: searchText.sortRelevanceAsc, value: "hsl" },
+    { label: searchText.sortRelevanceDesc, value: "hsl" },
+    { label: searchText.sortAsc, value: "hsl/sort/date:asc" },
+    { label: searchText.sortDesc, value: "hsl/sort/date:desc" },
+  ],
+}),
 
   instantsearch.widgets.configure({
     hitsPerPage: 8,
